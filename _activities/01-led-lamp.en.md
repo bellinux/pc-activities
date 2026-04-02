@@ -1,6 +1,6 @@
 ---
 layout: activity
-title: "Light Up an LED"
+title: "Light Up a LED"
 image: src/01-led-lamp/01.lampara-led.svg
 video: src/videos/01_led_lamp.mp4
 video_title: "What will we do?"
@@ -50,6 +50,8 @@ teacher: |
   1.  Now that the key concepts are clear, it's time to get hands-on and bring that lamp to life! Prepare the students for the practical phase.
   2.  Ensure every student has a device ready and guide them through **the step-by-step process for creating their first prototype**, as detailed below.
   3.  **Note for the teacher:** Experiment with the activity before the class to anticipate any questions.
+
+  {{create}}
 
   ### **Closure (5-10 minutes) - Reflection and Final Challenge**
   1.  Fantastic work! Once the students have successfully lit up their lamps, it’s time to spark their curiosity further and reflect on what just happened.
