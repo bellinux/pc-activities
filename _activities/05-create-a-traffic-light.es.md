@@ -79,14 +79,14 @@ content_sections:
     content: |
       ### ¿Cómo hacemos que se repita por sí solo? ¡Usamos un bucle!
 
-      El bloque **"repetir por siempre"** es una herramienta fundamental en la programación. Este concepto, también conocido como el **Bucle Principal**, le dice a la computadora que repita todo el código que está dentro una y otra vez, hasta que el usuario detenga manualmente el programa.
+      El bloque **"repetir para siempre"** es una herramienta fundamental en la programación. Este concepto, también conocido como el **Bucle Principal**, le dice a la computadora que repita todo el código que está dentro una y otra vez, hasta que el usuario detenga manualmente el programa.
       ¡Al colocar nuestra secuencia de semáforo dentro de este bucle, podemos mantenerlo funcionando indefinidamente!
     media: "src/05-creating-a-traffic-light/a.trafficlight-seq2.es.svg"
   
   - title: "¡Manos a la obra!"
     type: "learn"
     content: |
-      Vamos a crear nuestro prototipo de semáforo colocando el código de colores y tiempos dentro del bucle **“repetir por siempre”**. Programaremos la luz para que esté en verde durante 6 segundos, en amarillo durante 1 segundo y en rojo durante 6 segundos, creando un ciclo realista.
+      Vamos a crear nuestro prototipo de semáforo colocando el código de colores y tiempos dentro del bucle **“repetir para siempre”**. Programaremos la luz para que esté en verde durante 6 segundos, en amarillo durante 1 segundo y en rojo durante 6 segundos, creando un ciclo realista.
     media: "src/a.working.svg"
 
   - id: "create"
@@ -106,7 +106,7 @@ content_sections:
     content: |
       Haz clic en el ícono de signo de interrogación para abrir los comentarios que explican el código.
 
-      El bloque "repetir por siempre" se encuentra en la categoría <category>Básico</category>.
+      El bloque "repetir para siempre" se encuentra en la categoría <category>Básico</category>.
     media: "[700]https://app.protobject.com/generate?a05-trafficlight&es&dynamic&-1"
 
   - id: "reflect"
