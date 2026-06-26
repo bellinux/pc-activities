@@ -4,7 +4,7 @@ COMPONENTES: BotónTáctil1=TouchButton, ReproductorSonido3=AudioPlayer, DibujoL
 
 AL INICIAR
   ESTABLECER var:toques = 0
-      ; // Inicia la variable "Toques" con valor inicial = 0.
+      ; // Inicia la variable "toques" con valor inicial = 0.
 
 REPETIR PARA SIEMPRE (bucle principal)
   SI
@@ -18,4 +18,4 @@ REPETIR PARA SIEMPRE (bucle principal)
 
 protobject_BotónTáctil1_change  property=pressed
   AÑADIR 1 A var:toques
-      ; // Aumenta en 1 el valor de la variable "Toques". Cada vez que se presione el botón la cantidad aumenta en 1, es decir la variable cuenta la cantidad de veces que se aprieta el botón.
+      ; // Aumenta en 1 el valor de la variable "toques". Cada vez que se presione el botón la cantidad aumenta en 1, es decir la variable cuenta la cantidad de veces que se aprieta el botón.

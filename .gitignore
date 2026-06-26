@@ -1,6 +1,13 @@
 # Configuración local de Claude Code / IDE (no publicar)
 .claude/
 
+# Dependencias y artefactos de Cloudflare Workers / wrangler
+node_modules/
+.wrangler/
+
+# Backups locales de .ptj (no publicar)
+protobject/backup/
+
 # Temporales del SO
 .DS_Store
 Thumbs.db
