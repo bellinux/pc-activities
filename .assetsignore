@@ -1,0 +1,8 @@
+# No publicar como assets del sitio (sintaxis tipo .gitignore)
+.git
+node_modules
+.wrangler
+.gitignore
+.assetsignore
+wrangler.toml
+CLAUDE.md
