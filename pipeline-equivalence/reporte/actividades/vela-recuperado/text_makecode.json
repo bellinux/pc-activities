@@ -1,0 +1,22 @@
+{
+    "platform": "MakeCode",
+    "image": "../../actividades/vela/microbit.png",
+    "extracted_text": [
+        "on start",
+        "  set flama to true",
+        "",
+        "on loud sound",
+        "  set flama to not flama",
+        "",
+        "forever",
+        "  if flama then",
+        "    show leds [flame pattern 1]",
+        "    plot x [pick random 1 to 3] y [0]",
+        "    pause (ms) 200",
+        "    show leds [flame pattern 2]",
+        "    plot x [0] y [4]",
+        "    pause (ms) 200",
+        "  else",
+        "    show leds [empty pattern]"
+    ]
+}

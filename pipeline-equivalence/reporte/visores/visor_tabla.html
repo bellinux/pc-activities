@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Visor de Tabla IR</title>
+    <style>
+        body { 
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: #fff; margin: 0; padding: 40px; color: #111; line-height: 1.6;
+        }
+        h2 { 
+            text-align: center; font-weight: 300; font-size: 2.2em; margin-bottom: 50px; color: #111; 
+        }
+        table { 
+            width: 90%; max-width: 1200px; margin: 20px auto; border-collapse: collapse; 
+        }
+        th, td { 
+            padding: 15px 20px; text-align: left; border: none; 
+        }
+        th { 
+            border-top: 2px solid #111; border-bottom: 1px solid #111; 
+            font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9em; color: #333; 
+        }
+        td { 
+            border-bottom: 1px solid #f0f0f0; 
+        }
+        tr:last-child td { 
+            border-bottom: 2px solid #111; 
+        }
+        tr:hover { 
+            background-color: #fafafa; 
+        }
+        .node-canonical { 
+            font-weight: bold; color: #111; font-family: monospace; 
+        }
+        .block-text { 
+            color: #555; 
+        }
+    </style>
+</head>
+<body>
+    <h2>Tabla de Equivalencia Ontológica (IR)</h2>
+    <table id="tabla">
+        <thead>
+            <tr>
+                <th>Nodo Canónico (IR)</th>
+                <th>Bloque A (Microbit)</th>
+                <th>Bloque B (Protobject)</th>
+            </tr>
+        </thead>
+        <tbody id="table-body">
+        </tbody>
+    </table>
+    <script>
+        function loadTable(file) {
+            fetch(file)
+                .then(r => r.json())
+                .then(data => {
+                    const tbody = document.getElementById('table-body');
+                    data.forEach(row => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td class="node-canonical">${row.canonical_node}</td>
+                            <td class="block-text">${row.makecode_block}</td>
+                            <td class="block-text">${row.protobject_block}</td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                })
+                .catch(e => console.error(e));
+        }
+        
+        const params = new URLSearchParams(window.location.search);
+        const actividad = params.get('actividad');
+        if (actividad) {
+            loadTable(`../actividades/${actividad}/tabla_ir.json`);
+        } else {
+            document.getElementById('table-body').innerHTML = "<tr><td colspan='3'>Falta ?actividad=</td></tr>";
+        }
+    </script>
+</body>
+</html>

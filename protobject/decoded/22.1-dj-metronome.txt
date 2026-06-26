@@ -1,0 +1,15 @@
+ACTIVIDAD: 22.1-dj-metronome
+CODE: metronomo-con-inclinacion
+COMPONENTES: Inclinación1=SmartphoneOrientation, BateríaMusical2=PlayDrum
+
+AL INICIAR
+  ESTABLECER var:ultimoBeat = 0
+
+REPETIR PARA SIEMPRE (bucle principal)
+  ESTABLECER var:bpm = (Inclinación1.leer(oriX) + 60)
+  ESTABLECER var:intervaloBeat = (60000 / var:bpm)
+  SI
+    [si ((protobject_milliseconds() - var:ultimoBeat) > var:intervaloBeat)]
+    BateríaMusical2_play_set_1  VAR=control_drum(VAR=1)
+        ; // Reproduce un tono específico, en este caso simulará la frecuencia de un metrónomo.
+    ESTABLECER var:ultimoBeat = protobject_milliseconds()

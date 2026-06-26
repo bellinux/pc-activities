@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Actividades de Pensamiento Computacional — Protobject ↔ micro:bit</title>
+<style>
+  :root{
+    --bg:#f6f7f9; --card:#ffffff; --ink:#1f2933; --muted:#64748b; --line:#e3e8ee;
+    --indigo:#4f46e5; --indigo-bg:#eef0fe;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.7;font-size:15px}
+  .wrap{max-width:940px;margin:0 auto;padding:36px 20px 90px}
+  header.hero{border-bottom:2px solid var(--ink);padding-bottom:22px;margin-bottom:8px}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--indigo)}
+  h1{font-size:30px;margin:6px 0 8px;letter-spacing:-.015em;line-height:1.2}
+  .lede{color:#475569;font-size:16px;max-width:680px}
+  .intro{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin:22px 0;color:#374151}
+  .intro b{color:var(--ink)}
+  h2{font-size:18px;margin:34px 0 6px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:10px 0}
+  a.cardlink{text-decoration:none;color:inherit;display:block}
+  .nav{background:var(--card);border:1px solid var(--line);border-left-width:5px;border-radius:12px;
+    padding:18px 20px;height:100%;transition:.16s;box-shadow:0 1px 2px rgba(16,24,40,.04)}
+  a.cardlink:hover .nav{transform:translateY(-2px);box-shadow:0 8px 22px rgba(16,24,40,.10);border-color:var(--indigo)}
+  .nav.c1{border-left-color:#4f46e5}
+  .nav.c2{border-left-color:#1f7a45}
+  .nav.c3{border-left-color:#e0992a}
+  .nav.c4{border-left-color:#0e7490}
+  .nav .ic{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+  .c1 .ic{background:#eef0fe;color:#4f46e5}
+  .c2 .ic{background:#e9f6ee;color:#1f7a45}
+  .c3 .ic{background:#fdf2e2;color:#b06f12}
+  .c4 .ic{background:#e4f4f8;color:#0e7490}
+  .nav h3{margin:0 0 5px;font-size:17px}
+  .nav p{margin:0;font-size:13.5px;color:var(--muted);line-height:1.55}
+  .nav .go{margin-top:10px;font-size:12.5px;font-weight:600;color:var(--indigo)}
+  .c2 .go{color:#1f7a45}.c3 .go{color:#b06f12}.c4 .go{color:#0e7490}
+  table.org{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px;background:var(--card);
+    border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  table.org td{padding:8px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  table.org tr:last-child td{border-bottom:none}
+  td.path{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;color:#334155;white-space:nowrap;width:1%}
+  code{font-family:ui-monospace,Menlo,Consolas,monospace;background:#eef2f7;border:1px solid #e0e7ef;border-radius:5px;padding:0 5px;font-size:12.5px}
+  .note{font-size:12.5px;color:var(--muted);background:#fff8ec;border:1px solid #f3e2b3;border-radius:8px;padding:10px 14px;margin:14px 0}
+  footer{margin-top:36px;color:var(--muted);font-size:12px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">Proyecto Fondecyt · Pensamiento Computacional · PUC Chile</div>
+    <h1>Actividades en Protobject — y su equivalencia con micro:bit</h1>
+    <p class="lede">Una progresión didáctica de <b>17 actividades</b> para aprender a programar con bloques desde el celular (Protobject), pensada para estudiantes en Chile, con un sistema para verificar que cada actividad es <b>equivalente</b> a su versión en micro:bit.</p>
+  </header>
+
+  <div class="intro">
+    Este sitio reúne cuatro piezas: el <b>visor</b> para explorar las actividades, la <b>planificación</b> que explica el porqué del orden, el <b>reporte de calidad</b> de los textos y el código, y la <b>pipeline de equivalencia</b> que compara científicamente la versión Protobject con la de micro:bit. Empieza por donde quieras.
+  </div>
+
+  <h2>¿Por dónde empezar?</h2>
+  <div class="grid">
+
+    <a class="cardlink" href="engine.html">
+      <div class="nav c1">
+        <div class="ic"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg></div>
+        <h3>Visor de actividades</h3>
+        <p>Explora las 17 actividades: descripción para estudiantes y docentes, el código Blockly real, descarga <code>.ptj</code>/<code>.hex</code> y abre el proyecto en Protobject.</p>
+        <div class="go">Abrir el visor →</div>
+      </div>
+    </a>
+
+    <a class="cardlink" href="planificacion.html">
+      <div class="nav c2">
+        <div class="ic"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg></div>
+        <h3>Planificación · rationale</h3>
+        <p>El <em>porqué</em> del orden: la lógica pedagógica de la progresión (5 fases, 17 proyectos). Un documento vivo que se itera junto con las actividades — ningún orden “gana”.</p>
+        <div class="go">Ver la planificación →</div>
+      </div>
+    </a>
+
+    <a class="cardlink" href="report.html">
+      <div class="nav c3">
+        <div class="ic"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
+        <h3>Reporte de calidad</h3>
+        <p>Análisis verificado: coherencia entre el <b>texto</b> y el <b>código</b>, redacción en <b>español de Chile</b>, secuencia. Cada código de actividad enlaza al punto en el visor.</p>
+        <div class="go">Ver el reporte →</div>
+      </div>
+    </a>
+
+    <a class="cardlink" href="pipeline-equivalence/index.html">
+      <div class="nav c4">
+        <div class="ic"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg></div>
+        <h3>Equivalencia Protobject ↔ micro:bit</h3>
+        <p>Verificación científica de que la versión en Protobject y la de micro:bit son “el mismo programa”: AST, grafo de dependencias (PDG) y métricas. <em>En construcción.</em></p>
+        <div class="go">Abrir la pipeline →</div>
+      </div>
+    </a>
+
+  </div>
+
+  <h2>Organización del proyecto</h2>
+  <table class="org">
+    <tr><td class="path">index.html</td><td>Esta página de inicio.</td></tr>
+    <tr><td class="path">engine.html</td><td>El <b>visor</b> de actividades (renderiza los <code>.md</code>, muestra el código y permite abrir/descargar en Protobject).</td></tr>
+    <tr><td class="path">planificacion.html</td><td>El rationale de la progresión (5 fases, 17 proyectos) — documento vivo, HTML autónomo.</td></tr>
+    <tr><td class="path">report.html</td><td>El reporte de calidad (texto↔código, redacción es-CL, secuencia), con enlaces al visor.</td></tr>
+    <tr><td class="path">_activities/</td><td>Las 17 fichas de actividad en español (<code>.es.md</code>) más las base trilingües.</td></tr>
+    <tr><td class="path">src/ · microbit/</td><td>Imágenes y videos por actividad · firmware <code>.hex</code> para micro:bit.</td></tr>
+    <tr><td class="path">protobject/</td><td>Código Blockly real decodificado (<code>.ptj</code>/<code>.xml</code> + pseudocódigo) y el decodificador.</td></tr>
+    <tr><td class="path">pipeline-equivalence/</td><td>El sistema de análisis de equivalencia (dashboard, guía, reporte “Vela”, ensayo teórico y scripts de AST/PDG).</td></tr>
+  </table>
+
+  <div class="note">
+    <b>Servir el sitio localmente.</b> Desde la carpeta raíz: <code>python -m http.server 8000</code> y abre <code>http://localhost:8000/</code>. La pipeline de equivalencia usa su propio entorno (puerto 8080) para correr sus scripts de Python, pero sus páginas se ven igual desde aquí.
+  </div>
+
+  <footer>Protobject · Pensamiento Computacional · análisis local del proyecto.</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+[
+    {"canonical_node": "ProgramStartEvent", "makecode_block": "on start", "protobject_block": "when the program starts"},
+    {"canonical_node": "SuddenNoiseEvent", "makecode_block": "on loud sound", "protobject_block": "when NivelRuido2 sudden increase"},
+    {"canonical_node": "SetVariable", "makecode_block": "set flama to true", "protobject_block": "set flama to true"},
+    {"canonical_node": "ToggleVariable", "makecode_block": "set flama to not flama", "protobject_block": "set flama to not flama"},
+    {"canonical_node": "InfiniteLoop", "makecode_block": "forever", "protobject_block": "repeat forever"},
+    {"canonical_node": "ConditionalBranch", "makecode_block": "if flama then / else", "protobject_block": "if flama do / else"},
+    {"canonical_node": "DrawImage", "makecode_block": "show leds [any pattern/empty]", "protobject_block": "draw [any pattern/empty] with colour [red] on DibujoLED1"},
+    {"canonical_node": "RandomInteger", "makecode_block": "pick random 1 to 3", "protobject_block": "random integer from 3 to 5"},
+    {"canonical_node": "PlotPoint", "makecode_block": "plot x [...] y [...]", "protobject_block": "draw on x [...] y [...] with colour [red] on DibujoLED1"},
+    {"canonical_node": "Delay", "makecode_block": "pause (ms) 200", "protobject_block": "delay of 200 milliseconds"}
+]

@@ -1,22 +1,25 @@
 
 <!DOCTYPE html>
-<html lang="it">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Protobject Activities Viewer</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Visor de Actividades — Protobject</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- js-yaml per il parsing del Frontmatter YAML -->
+    <!-- js-yaml para el parseo del Frontmatter YAML -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
     
-    <!-- Marked.js per convertire Markdown in HTML -->
+    <!-- Marked.js para convertir Markdown en HTML -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
     <style>
-        /* Stili per il rendering del testo Markdown */
+        /* Estilos para el renderizado del texto Markdown */
         .markdown-body h1 { font-size: 1.875rem; font-weight: 800; margin-top: 1.5em; margin-bottom: 0.75em; color: #111827; }
         .markdown-body h2 { font-size: 1.5rem; font-weight: 700; margin-top: 1.5em; margin-bottom: 0.75em; color: #1f2937; }
         .markdown-body h3 { font-size: 1.25rem; font-weight: 700; margin-top: 1.2em; margin-bottom: 0.5em; color: #374151; }
@@ -27,56 +30,59 @@
         .markdown-body em { font-style: italic; }
         .markdown-body blockquote { border-left: 4px solid #e5e7eb; padding-left: 1rem; color: #6b7280; font-style: italic; margin-bottom: 1rem; background: #f9fafb; padding-top: 0.5rem; padding-bottom: 0.5rem;}
         
-        /* Nasconde la scrollbar ma mantiene lo scroll */
+        /* Oculta la barra de desplazamiento pero mantiene el scroll */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* Stile Modal per scorrimento interno fluido */
+        /* Estilo Modal para desplazamiento interno fluido */
         .modal-content-scroll { max-height: calc(100vh - 120px); overflow-y: auto; }
+
+        /* Resaltado del texto abierto desde un deep-link del reporte */
+        mark.hl { background:#fde047; color:inherit; border-radius:3px; padding:0 .12em; box-shadow:0 0 0 .12em #fde047; animation: hlPulse 1.4s ease-in-out 3; }
+        @keyframes hlPulse { 0%,100%{ box-shadow:0 0 0 .12em #fde047; } 50%{ box-shadow:0 0 0 .32em #f59e0b; } }
     </style>
 </head>
 <body class="bg-gray-50 h-screen w-screen overflow-hidden flex font-sans text-gray-900 relative">
 
-    <!-- SIDEBAR SINISTRA (30%) -->
+    <!-- BARRA LATERAL IZQUIERDA (30%) -->
     <aside class="w-[30%] min-w-[300px] max-w-[400px] bg-white border-r border-gray-200 flex flex-col h-full shadow-sm z-10 relative">
         <div class="p-6 border-b border-gray-200 bg-gray-50">
             <h1 class="text-2xl font-extrabold text-indigo-600 flex items-center gap-2">
                 <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                 Protobject
             </h1>
-            <p class="text-xs text-gray-500 mt-1 uppercase tracking-wider font-semibold">Activity Editor & Viewer</p>
-            
-            <div class="mt-4">
-                <label for="langSelect" class="block text-sm font-medium text-gray-700 mb-1">Lingua / Language / Idioma</label>
-                <select id="langSelect" class="w-full border-gray-300 border rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white">
-                    <option value="it" selected>Italiano</option>
-                    <option value="en">English</option>
-                    <option value="es">Español</option>
-                </select>
+            <p class="text-xs text-gray-500 mt-1 uppercase tracking-wider font-semibold">Editor y Visor de Actividades</p>
+
+            <div class="mt-2 flex flex-wrap gap-1.5 text-xs">
+                <a href="index.html" class="px-2 py-1 rounded-md bg-white border border-gray-200 text-gray-600 hover:bg-indigo-50 hover:border-indigo-200 hover:text-indigo-700 transition-colors">← Inicio</a>
+                <a href="planificacion.html" class="px-2 py-1 rounded-md bg-white border border-gray-200 text-gray-600 hover:bg-indigo-50 hover:border-indigo-200 hover:text-indigo-700 transition-colors">Planificación</a>
+                <a href="report.html" class="px-2 py-1 rounded-md bg-white border border-gray-200 text-gray-600 hover:bg-indigo-50 hover:border-indigo-200 hover:text-indigo-700 transition-colors">Reporte</a>
             </div>
+
+            <p id="filterCount" class="mt-3 text-xs text-gray-400 font-medium"></p>
         </div>
 
         <div class="flex-1 overflow-y-auto no-scrollbar p-3" id="menuList">
-            <!-- Popolato via JS -->
+            <!-- Poblado vía JS -->
         </div>
     </aside>
 
-    <!-- AREA CONTENUTO DESTRA (70%) -->
+    <!-- ÁREA DE CONTENIDO DERECHA (70%) -->
     <main class="flex-1 h-full overflow-y-auto bg-white relative no-scrollbar" id="mainContent">
         <div class="flex h-full items-center justify-center text-gray-400 flex-col">
             <svg class="w-16 h-16 mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
-            <p class="text-lg font-medium">Seleziona un'attività dal menu per iniziare</p>
+            <p class="text-lg font-medium">Selecciona una actividad del menú para empezar</p>
         </div>
     </main>
 
-    <!-- MODAL GUIDA PROFESSORE -->
+    <!-- MODAL GUÍA PROFESOR -->
     <div id="teacherModal" class="fixed inset-0 z-50 hidden">
         <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm transition-opacity" onclick="closeModal('teacherModal')"></div>
         <div class="absolute inset-4 md:inset-10 lg:inset-x-32 xl:inset-x-64 bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden transform transition-all border border-gray-200">
             <div class="px-6 py-4 border-b border-gray-200 bg-amber-50 flex justify-between items-center">
                 <h2 class="text-xl font-bold text-amber-800 flex items-center gap-2">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                    Guida per il Professore
+                    Guía para el Profesor
                 </h2>
                 <button onclick="closeModal('teacherModal')" class="text-gray-400 hover:text-gray-700 bg-white hover:bg-gray-100 rounded-full p-2 transition-colors border border-transparent hover:border-gray-200">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -86,14 +92,14 @@
         </div>
     </div>
 
-    <!-- MODAL INFO TECNICHE -->
+    <!-- MODAL INFO TÉCNICA -->
     <div id="infoModal" class="fixed inset-0 z-50 hidden">
         <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm transition-opacity" onclick="closeModal('infoModal')"></div>
         <div class="absolute inset-4 md:inset-10 lg:inset-x-64 xl:inset-x-96 bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden transform transition-all border border-gray-200">
             <div class="px-6 py-4 border-b border-gray-200 bg-gray-100 flex justify-between items-center">
                 <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
                     <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
-                    Info Tecniche (YAML)
+                    Info Técnica (YAML)
                 </h2>
                 <button onclick="closeModal('infoModal')" class="text-gray-400 hover:text-gray-700 bg-white hover:bg-gray-200 rounded-full p-2 transition-colors">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -103,56 +109,86 @@
         </div>
     </div>
 
-    <!-- MOTORE JAVASCRIPT -->
+    <!-- MOTOR JAVASCRIPT -->
     <script>
-        const activities = [
-            "01-led-lamp", 
-			"02-light-signal", 
-            "02.1-xylophone",
-            "02.2-music-visualizer",
-			"03-play-happyb", 
-            "03.1-led-xylophone",
-			"04-play-happyb-light",
-            "04.1-heart-beat",
-            "05-create-a-traffic-light", 
-			"06-traffic-light-with-flashing-yellow-light",
-            "07-stopwatch", 
-			"08-anti-theft-alarm",
-            "09-turn-on-the-light", "10-alarm-with-a-switch", "11-manual-people-counter",
-            "12-volume-control-with-a-potentiometer", "13-lamp-with-variable-intensity",
-            "14-colors-on-the-screen", "14.1-ticklish-robot", "14.2-my-robot-friend-heart", 
-            "15-tilt-sensor", "16-fall-detector", "16.1-cookie-thief-alarm", "16.2-sunflower-alarm-clock",
-            "16.3-bat-in-the-dark", "16.4-robot-activation-challenge","16.5-magic-clap-switch", "17-noise-visualizer", 
-            "17.1-magic-birthday-candle", "18-regular-polygons", "19-lighthouse-with-a-switch", 
-            "19.1-digital-hot-potato", "20-light-button-panel", "21-safe-box-with-alarm", "21.1-cinematic-power-on",
-            "22-presentation-pointer", "22.1-dj-metronome", "22.2-applause-battle", "22.3-dont-spill-liquid-game"
-        ];
+        // ===== Índice de actividades (17) — modificar activities.json para reordenar =====
+        let ACT = [];           // slugs ordenados (desde activities.json)
+        const META = {};        // slug -> { title, missing }
+        const LANG = 'es';
 
         let currentActivity = null;
         let currentActivityData = null;
 
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', async () => {
+            document.getElementById('menuList').innerHTML = `
+                <div class="flex items-center justify-center py-10 text-gray-400">
+                    <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-indigo-600"></div>
+                </div>`;
+            await loadIndex();
             renderMenu();
-            document.getElementById('langSelect').addEventListener('change', () => {
-                if(currentActivity) loadActivity(currentActivity);
-            });
+            openDeepLinkFromHash();
+            window.addEventListener('hashchange', openDeepLinkFromHash);
         });
+
+        // Carga el índice ordenado (activities.json) y el título REAL del frontmatter de cada .md
+        async function loadIndex() {
+            try {
+                const r = await fetch('activities.json', { cache: 'no-store' });
+                const j = await r.json();
+                ACT = Array.isArray(j) ? j : (j.activities || []);
+            } catch (e) {
+                ACT = [];
+            }
+            await Promise.all(ACT.map(async (slug) => {
+                try {
+                    const resp = await fetch(`_activities/${slug}.${LANG}.md`, { cache: 'no-store' });
+                    if (!resp.ok) { META[slug] = { title: prettifySlug(slug), missing: true }; return; }
+                    let t = await resp.text();
+                    t = t.replace(/^﻿/, '').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+                    META[slug] = { title: extractTitle(t) || prettifySlug(slug) };
+                } catch (e) {
+                    META[slug] = { title: prettifySlug(slug), missing: true };
+                }
+            }));
+        }
+
+        // Extrae el campo `title:` del frontmatter YAML
+        function extractTitle(md) {
+            const m = md.match(/^---\n([\s\S]*?)\n---/);
+            if (!m) return null;
+            const tm = m[1].match(/^[ \t]*title:[ \t]*(.+)$/m);
+            return tm ? tm[1].trim().replace(/^["']|["']$/g, '') : null;
+        }
+
+        function prettifySlug(slug) {
+            return slug.replace(/^[0-9.\-]+\-/, '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+        }
 
         function renderMenu() {
             const menuList = document.getElementById('menuList');
             menuList.innerHTML = '';
 
-            activities.forEach((activity) => {
-                const displayName = activity.replace(/^[0-9\.\-]+\-/, '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-                const numberMatch = activity.match(/^[0-9\.]+/);
-                const number = numberMatch ? numberMatch[0] : '';
+            const countEl = document.getElementById('filterCount');
+            if (countEl) countEl.textContent = `${ACT.length} actividades`;
+
+            if (ACT.length === 0) {
+                menuList.innerHTML = `<p class="text-sm text-gray-400 italic text-center py-10 px-4">No se pudo cargar <code>activities.json</code>.</p>`;
+                return;
+            }
+
+            ACT.forEach((slug, i) => {
+                const num = i + 1;
+                const meta = META[slug] || { title: prettifySlug(slug) };
 
                 const btn = document.createElement('button');
                 btn.className = `w-full text-left px-4 py-3 mb-2 rounded-lg transition-all duration-200 border text-sm font-medium flex items-center gap-3
                                  hover:bg-indigo-50 hover:border-indigo-200 border-transparent text-gray-700`;
-                btn.id = `btn-${activity}`;
-                btn.innerHTML = `<span class="bg-gray-100 text-gray-500 px-2 py-1 rounded text-xs font-bold w-10 text-center shrink-0">${number}</span> <span class="truncate">${displayName}</span>`;
-                
+                btn.id = `btn-${slug}`;
+                btn.title = `_activities/${slug}.${LANG}.md`;
+                btn.innerHTML = `<span class="bg-indigo-100 text-indigo-700 px-2 py-1 rounded text-xs font-bold w-8 text-center shrink-0">${num}</span>
+                                 <span class="truncate flex-1">${escapeHtml(meta.title)}</span>`
+                                 + (meta.missing ? ` <span class="text-[0.6rem] font-bold px-1 rounded bg-red-100 text-red-600 shrink-0" title="archivo no encontrado">!</span>` : '');
+
                 btn.onclick = () => {
                     document.querySelectorAll('#menuList button').forEach(b => {
                         b.classList.remove('bg-indigo-50', 'border-indigo-200', 'text-indigo-700', 'shadow-sm');
@@ -160,9 +196,9 @@
                     });
                     btn.classList.remove('border-transparent');
                     btn.classList.add('bg-indigo-50', 'border-indigo-200', 'text-indigo-700', 'shadow-sm');
-                    
-                    currentActivity = activity;
-                    loadActivity(activity);
+
+                    currentActivity = slug;
+                    loadActivity(slug);
                 };
                 menuList.appendChild(btn);
             });
@@ -211,27 +247,27 @@
                     <iframe src="${url}" style="height: ${height}; width: 100%; border: none;" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>`;
             }
-            return `<div class="bg-red-50 text-red-500 p-4 rounded text-sm font-mono break-all border border-red-200">Formato Media sconosciuto: ${url}</div>`;
+            return `<div class="bg-red-50 text-red-500 p-4 rounded text-sm font-mono break-all border border-red-200">Formato de medio desconocido: ${url}</div>`;
         }
 
         // ============================================================
-        // DOWNLOAD CODICE (Protobject .ptj  +  Micro:bit .hex)
+        // DESCARGA DEL CÓDIGO (Protobject .ptj  +  Micro:bit .hex)
         // ============================================================
 
-        // Estrae il codice attività da una stringa media.
-        // Es: "[600]https://app.protobject.com/generate?a02-timing&es&dynamic&-1" -> "a02-timing"
+        // Extrae el código de actividad desde una cadena media.
+        // Ej: "[600]https://app.protobject.com/generate?a02-timing&es&dynamic&-1" -> "a02-timing"
         function extractActivityCode(rawMediaString) {
             if (!rawMediaString) return null;
             let url = rawMediaString.trim();
-            // rimuove l'eventuale prefisso [altezza]
+            // elimina el eventual prefijo [altura]
             const heightMatch = url.match(/^\[(\d+)\](.*)/);
             if (heightMatch) url = heightMatch[2].trim();
-            // prende tutto ciò che sta tra "generate?" e il primo "&"
+            // toma todo lo que está entre "generate?" y el primer "&"
             const codeMatch = url.match(/generate\?([^&]+)/);
             return codeMatch ? codeMatch[1].trim() : null;
         }
 
-        // Cerca il codice attività in tutti i campi media della sezione
+        // Busca el código de actividad en todos los campos media de la sección
         function getActivityCodeFromSection(sec) {
             const candidates = [];
             if (sec.media) {
@@ -247,20 +283,20 @@
             return null;
         }
 
-        // Genera l'HTML dei due link di download (localizzati)
+        // Genera el HTML de los dos enlaces de descarga (localizados)
         function renderDownloadButtons(code, lang) {
             const labels = {
-                it: { title: "Scarica il codice", p: "Scarica Protobject", m: "Scarica Micro:bit" },
-                en: { title: "Download the code",  p: "Download Protobject", m: "Download Micro:bit" },
-                es: { title: "Descargar el código", p: "Descargar Protobject", m: "Descargar Micro:bit" }
+                es: { title: "Descargar el código", p: "Descargar Protobject", m: "Descargar Micro:bit", o: "Abrir en Protobject" }
             };
-            const L = labels[lang] || labels.it;
+            const L = labels[lang] || labels.es;
 
             const t = Date.now(); // anti-cache
             const ptjUrl = `https://codetutorials.protobject.com/${code}.ptj?${t}`;
             const hexUrl = `https://bellinux.github.io/pc-activities/microbit/${code}.hex?${t}`;
+            const openUrl = `https://app.protobject.com/main?app/${code}`;
 
             const dlIcon = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>`;
+            const openIcon = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>`;
 
             return `
             <div class="mt-4 pt-4 border-t border-gray-100">
@@ -273,10 +309,13 @@
                         ${dlIcon} ${L.m} <span class="opacity-70 text-xs font-mono">.hex</span>
                     </a>
                 </div>
+                <a href="${openUrl}" target="_blank" rel="noopener" class="mt-3 w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2.5 px-4 rounded-lg shadow-sm transition-colors flex items-center justify-center gap-2 text-sm">
+                    ${openIcon} ${L.o} <span class="opacity-70 text-xs font-mono">↗</span>
+                </a>
             </div>`;
         }
 
-        // Sistema di Rendering Errori
+        // Sistema de Renderizado de Errores
         function renderError(title, message, isCode = false) {
             const contentArea = document.getElementById('mainContent');
             contentArea.innerHTML = `
@@ -291,8 +330,9 @@
                 </div>`;
         }
 
-        async function loadActivity(baseName) {
-            const lang = document.getElementById('langSelect').value;
+        async function loadActivity(baseName, highlightQuery) {
+            const lang = LANG;
+
             const contentArea = document.getElementById('mainContent');
             
             contentArea.innerHTML = `
@@ -311,11 +351,14 @@
                     throw new Error(`HTTP Error: ${response.status}`);
                 }
                 fileText = await response.text();
+                // Normaliza los finales de línea de Windows (CRLF) y elimina un eventual BOM,
+                // de lo contrario la regex del frontmatter (^---\n) no encuentra los delimitadores.
+                fileText = fileText.replace(/^﻿/, '').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
             } catch (error) {
                 if(error.message === 'FILE_NOT_FOUND') {
-                    renderError("File Non Trovato (404)", `Il file <b>${fileName}</b> non esiste nella cartella <code>_activities/</code>.`);
+                    renderError("Archivo no encontrado (404)", `El archivo <b>${fileName}</b> no existe en la carpeta <code>_activities/</code>.`);
                 } else {
-                    renderError("Errore di Connessione", `Impossibile caricare il file: ${error.message}`);
+                    renderError("Error de conexión", `No se pudo cargar el archivo: ${error.message}`);
                 }
                 return;
             }
@@ -326,14 +369,15 @@
                 if (!match) throw new Error('DELIMITERS_MISSING');
                 
                 currentActivityData = jsyaml.load(match[1]);
-                renderStudentView(currentActivityData, contentArea);
+                renderStudentView(currentActivityData, contentArea, fileName);
+                if (highlightQuery) setTimeout(() => applyHighlight(highlightQuery), 60);
 
             } catch (error) {
                 if(error.message === 'DELIMITERS_MISSING') {
-                    renderError("Struttura File non valida", `Il file <b>${fileName}</b> non inizia con l'intestazione YAML. Assicurati che i dati inizino e finiscano con <code>---</code>`);
+                    renderError("Estructura de archivo no válida", `El archivo <b>${fileName}</b> no comienza con el encabezado YAML. Asegúrate de que los datos comiencen y terminen con <code>---</code>`);
                 } else {
-                    // Errore di js-yaml (errore di sintassi, indentazione, ecc.)
-                    renderError("Errore di Sintassi YAML", error.message, true);
+                    // Error de js-yaml (error de sintaxis, indentación, etc.)
+                    renderError("Error de sintaxis YAML", error.message, true);
                 }
             }
         }
@@ -341,7 +385,7 @@
         function generateSectionsHTML(sections, isForTeacher = false) {
             if(!sections || sections.length === 0) return '';
 
-            const lang = document.getElementById('langSelect').value;
+            const lang = 'es';
             
             let html = `<div class="flex flex-col gap-6 ${isForTeacher ? 'my-4 border-l-4 border-amber-300 pl-4' : 'mt-8'}">`;
             
@@ -353,7 +397,7 @@
                     html += `<h4 class="text-xl font-bold text-gray-800 mb-5 flex items-center gap-3 border-b border-gray-100 pb-3">${iconHtml} ${sec.title}</h4>`;
                 }
 
-                html += `<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">`;
+                html += `<div class="flex flex-col gap-6 items-stretch">`;
                 
                 html += `<div class="space-y-4">`;
                 if(sec.heading_text) {
@@ -379,7 +423,7 @@
                 }
                 html += `</div>`; 
 
-                html += `<div class="space-y-4 lg:pl-6 lg:border-l border-gray-100 h-full flex flex-col justify-center">`;
+                html += `<div class="space-y-4">`;
                 
                 if(sec.media) {
                     let mediaArr = Array.isArray(sec.media) ? sec.media : [sec.media];
@@ -388,7 +432,7 @@
                     });
                 }
 
-                // BOTTONI DI DOWNLOAD: solo per le sezioni "code-composition"
+                // BOTONES DE DESCARGA: solo para las secciones "code-composition"
                 if(sec.type && sec.type.toLowerCase() === 'code-composition') {
                     const code = getActivityCodeFromSection(sec);
                     if(code) {
@@ -413,17 +457,17 @@
             return html;
         }
 
-        // MAIN VIEW: Renderizza l'attività per lo Studente
-        function renderStudentView(data, container) {
+        // MAIN VIEW: Renderiza la actividad para el Estudiante
+        function renderStudentView(data, container, fileName) {
             let html = `<div class="max-w-5xl mx-auto p-8 pb-24">`;
 
-            // HEADER (con bottoni a destra)
+            // HEADER (con botones a la derecha)
             html += `<header class="mb-10 relative">`;
             
-            // Bottoni (Guida e Info) in assoluto in alto a destra
+            // Botones (Guía e Info) en posición absoluta arriba a la derecha
             html += `
             <div class="absolute right-0 top-0 flex gap-2 z-10">
-                <button onclick="openInfoModal()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-300 font-semibold py-2 px-3 rounded-lg shadow-sm transition-colors flex items-center gap-2 text-sm" title="Mostra Info Tecniche / YAML">
+                <button onclick="openInfoModal()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-300 font-semibold py-2 px-3 rounded-lg shadow-sm transition-colors flex items-center gap-2 text-sm" title="Mostrar Info Técnica / YAML">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
                     Info
                 </button>`;
@@ -432,12 +476,12 @@
                 html += `
                 <button onclick="openTeacherModal()" class="bg-amber-100 hover:bg-amber-200 text-amber-800 border border-amber-300 font-bold py-2 px-4 rounded-lg shadow-sm transition-colors flex items-center gap-2 text-sm">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                    Guida Professore
+                    Guía del Profesor
                 </button>`;
             }
-            html += `</div>`; // Fine bottoni
+            html += `</div>`; // Fin de botones
 
-            // Badges (evitano l'area dei bottoni)
+            // Badges (evitan el área de los botones)
             html += `<div class="flex flex-wrap gap-2 mb-4 pr-64">`;
             if (data.level) html += `<span class="bg-slate-800 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Level ${data.level}</span>`;
             if (data.computational_topics) {
@@ -448,13 +492,14 @@
             }
             html += `</div>`;
 
-            // Titolo
-            html += `<h1 class="text-4xl font-extrabold text-gray-900 mb-4 tracking-tight w-3/4 leading-tight">${data.title || 'Senza Titolo'}</h1>`;
+            // Título
+            html += `<h1 class="text-4xl font-extrabold text-gray-900 mb-2 tracking-tight w-3/4 leading-tight">${data.title || 'Sin título'}</h1>`;
+            if (fileName) html += `<div class="mb-6"><span class="inline-flex items-center gap-1.5 text-xs font-mono text-gray-500 bg-gray-100 border border-gray-200 rounded px-2 py-1" title="Archivo Markdown de esta actividad"><svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>_activities/${escapeHtml(fileName)}</span></div>`;
             
-            // Descrizione
+            // Descripción
             if (data.description) html += `<p class="text-xl text-gray-500 leading-relaxed font-light mb-6">${data.description}</p>`;
             
-            // RENDER IMMAGINE COPERTINA (SEMPRE COME <IMG>)
+            // RENDER IMAGEN PORTADA (SIEMPRE COMO <IMG>)
             if (data.image) {
                 html += `
                 <div class="w-full bg-white rounded-xl border border-gray-200 shadow-sm p-2 mb-6 flex justify-center">
@@ -462,7 +507,7 @@
                 </div>`;
             }
 
-            // RENDER VIDEO SOTTO ALL'IMMAGINE SE PRESENTE
+            // RENDER VIDEO DEBAJO DE LA IMAGEN SI ESTÁ PRESENTE
             if (data.video) {
                 html += `<div class="mb-8">`;
                 if(data.video_title) html += `<h3 class="text-sm font-bold text-gray-400 uppercase tracking-wider mb-2 ml-1">${data.video_title}</h3>`;
@@ -471,7 +516,7 @@
 
             html += `</header>`;
 
-            // INTRODUZIONE
+            // INTRODUCCIÓN
             if (data.introduction) {
                 html += `
                 <div class="bg-indigo-50 border border-indigo-100 p-8 rounded-2xl shadow-sm mb-12">
@@ -479,18 +524,18 @@
                 </div>`;
             }
 
-            // FLUSSO DELL'ATTIVITÀ (Tutte le content_sections)
+            // FLUJO DE LA ACTIVIDAD (Todas las content_sections)
             if (data.content_sections && data.content_sections.length > 0) {
                 html += generateSectionsHTML(data.content_sections, false);
             } else {
-                html += `<p class="text-gray-400 italic">Nessun contenuto definito in content_sections.</p>`;
+                html += `<p class="text-gray-400 italic">Ningún contenido definido en content_sections.</p>`;
             }
 
             html += `</div>`;
             container.innerHTML = html;
         }
 
-        // GESTIONE MODALS
+        // GESTIÓN DE MODALES
         function openTeacherModal() {
             if(!currentActivityData || !currentActivityData.teacher) return;
             const content = document.getElementById('teacherModalContent');
@@ -515,7 +560,7 @@
                 if(matchedSections.length > 0) {
                     injectionHtml = generateSectionsHTML(matchedSections, true); 
                 } else {
-                    injectionHtml = `<div class="p-3 bg-red-50 text-red-500 text-sm italic border border-red-200 rounded">Attenzione: nessuna sezione trovata per il tag {{${ph.type}}}</div>`;
+                    injectionHtml = `<div class="p-3 bg-red-50 text-red-500 text-sm italic border border-red-200 rounded">Atención: no se encontró ninguna sección para la etiqueta {{${ph.type}}}</div>`;
                 }
 
                 teacherHtml = teacherHtml.replace(`<p>${ph.token}</p>`, injectionHtml); 
@@ -530,13 +575,13 @@
             if(!currentActivityData) return;
             const content = document.getElementById('infoModalContent');
             
-            // Proprietà principali da non mostrare nella tabella compatta
+            // Propiedades principales que no se muestran en la tabla compacta
             const skipKeys = ['title', 'description', 'introduction', 'teacher', 'content_sections', 'tags', 'computational_topics', 'general_topics', 'image', 'video'];
 
             let html = `
                 <table class="w-full text-left text-sm whitespace-nowrap">
                     <thead class="uppercase tracking-wider border-b border-gray-200 bg-gray-50 text-gray-500 text-xs">
-                        <tr><th scope="col" class="px-6 py-3 font-semibold">Tag YAML</th><th scope="col" class="px-6 py-3 font-semibold">Valore</th></tr>
+                        <tr><th scope="col" class="px-6 py-3 font-semibold">Tag YAML</th><th scope="col" class="px-6 py-3 font-semibold">Valor</th></tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100">`;
 
@@ -561,6 +606,147 @@
 
         function closeModal(modalId) {
             document.getElementById(modalId).classList.add('hidden');
+        }
+
+        // ============================================================
+        // DEEP-LINK + RESALTADO (apertura desde report.html)
+        // ============================================================
+
+        // Elimina los resaltados anteriores dentro de `root`.
+        function clearHighlights(root) {
+            (root || document).querySelectorAll('mark.hl').forEach(m => {
+                const parent = m.parentNode;
+                if (!parent) return;
+                parent.replaceChild(document.createTextNode(m.textContent), m);
+                parent.normalize();
+            });
+        }
+
+        // Busca `query` en el texto de `container` (ignora las etiquetas, normaliza los espacios),
+        // envuelve la primera coincidencia en <mark class="hl"> y la retorna (o null).
+        function highlightInContainer(container, query) {
+            if (!container || !query) return null;
+            const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null);
+            const map = []; let full = ''; let node;
+            while (node = walker.nextNode()) {
+                const txt = node.nodeValue;
+                for (let i = 0; i < txt.length; i++) map.push({ node: node, off: i });
+                full += txt;
+            }
+            // cadena normalizada (espacios colapsados) + mapa hacia `full`
+            let norm = ''; const n2f = []; let prevSpace = false;
+            for (let i = 0; i < full.length; i++) {
+                const c = full[i];
+                if (/\s/.test(c)) { if (!prevSpace) { norm += ' '; n2f.push(i); prevSpace = true; } }
+                else { norm += c; n2f.push(i); prevSpace = false; }
+            }
+            const nq = query.replace(/\s+/g, ' ').trim();
+            if (nq.length < 3) return null;
+            const idx = norm.toLowerCase().indexOf(nq.toLowerCase());
+            if (idx < 0) return null;
+            const startFull = n2f[idx];
+            const endFull = n2f[idx + nq.length - 1] + 1;
+            // agrupa el intervalo por nodo de texto
+            const segs = []; let cur = null;
+            for (let i = startFull; i < endFull; i++) {
+                const m = map[i];
+                if (cur && cur.node === m.node) cur.to = m.off + 1;
+                else { if (cur) segs.push(cur); cur = { node: m.node, from: m.off, to: m.off + 1 }; }
+            }
+            if (cur) segs.push(cur);
+            let first = null;
+            // del último al primero así los offsets se mantienen válidos
+            segs.slice().reverse().forEach(seg => {
+                try {
+                    const r = document.createRange();
+                    r.setStart(seg.node, seg.from);
+                    r.setEnd(seg.node, seg.to);
+                    const mark = document.createElement('mark');
+                    mark.className = 'hl';
+                    r.surroundContents(mark);
+                    first = mark;
+                } catch (e) {}
+            });
+            return first;
+        }
+
+        // Resalta en la vista estudiante; si no encuentra, prueba en la guía docente (modal);
+        // si tampoco está ahí, el punto está en el CÓDIGO (bloques) → muestra un aviso.
+        function applyHighlight(query) {
+            if (!query) return;
+            removeCodeNotice();
+            clearHighlights(document.getElementById('mainContent'));
+            let mark = highlightInContainer(document.getElementById('mainContent'), query);
+            if (mark) { mark.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+            if (currentActivityData && currentActivityData.teacher) {
+                openTeacherModal();
+                mark = highlightInContainer(document.getElementById('teacherModalContent'), query);
+                if (mark) { mark.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+                closeModal('teacherModal');
+            }
+            showCodeNotice(query);
+        }
+
+        function escapeHtml(s) {
+            return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        function removeCodeNotice() {
+            const n = document.getElementById('codeNotice');
+            if (n) n.remove();
+        }
+
+        // El texto no está en el .md (está en un comentario de los bloques): muestra un aviso al lado
+        // a la sección del código e invita a verificarlo en los bloques (Abrir en Protobject).
+        function showCodeNotice(query) {
+            const main = document.getElementById('mainContent');
+            if (!main) return;
+            removeCodeNotice();
+            const openBtn = main.querySelector('a[href*="app.protobject.com/main"]');
+            const iframe = main.querySelector('iframe[src*="protobject.com/generate"]');
+            const target = openBtn || iframe;
+            const section = target ? target.closest('div.bg-white.rounded-xl') : null;
+
+            const notice = document.createElement('div');
+            notice.id = 'codeNotice';
+            notice.className = 'mb-6 bg-amber-50 border-l-4 border-amber-400 rounded-r-lg p-4 flex items-start gap-3 shadow-sm';
+            notice.innerHTML = `
+                <svg class="w-6 h-6 text-amber-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                <div class="text-sm text-amber-900">
+                    <p class="font-bold mb-1">Este detalle está en el código (los bloques), no en el texto</p>
+                    <p>No aparece en el texto de esta actividad, así que el punto a revisar está en los <b>bloques de programación</b>. Ábrelo en Protobject (botón más abajo) y verifícalo en el bloque correspondiente.</p>
+                    <p class="mt-2 text-amber-800">Texto a verificar: <span class="font-mono bg-amber-100 px-1.5 py-0.5 rounded break-all">${escapeHtml(query)}</span></p>
+                </div>`;
+
+            if (section && section.parentNode) {
+                section.parentNode.insertBefore(notice, section);
+            } else {
+                const wrap = main.querySelector('.max-w-5xl') || main;
+                wrap.insertBefore(notice, wrap.firstChild);
+            }
+            setTimeout(() => notice.scrollIntoView({ behavior: 'smooth', block: 'center' }), 60);
+        }
+
+        // Abre la actividad indicada en el hash (#a=<slug>&q=<texto>&l=<lang>) y la resalta.
+        function openDeepLinkFromHash() {
+            const h = location.hash.replace(/^#/, '');
+            if (!h) return;
+            const params = new URLSearchParams(h);
+            const slug = params.get('a');
+            if (!slug || ACT.indexOf(slug) < 0) return;
+            const q = params.get('q') || '';
+            currentActivity = slug;
+            const btn = document.getElementById('btn-' + slug);
+            if (btn) {
+                document.querySelectorAll('#menuList button').forEach(b => {
+                    b.classList.remove('bg-indigo-50', 'border-indigo-200', 'text-indigo-700', 'shadow-sm');
+                    b.classList.add('border-transparent');
+                });
+                btn.classList.remove('border-transparent');
+                btn.classList.add('bg-indigo-50', 'border-indigo-200', 'text-indigo-700', 'shadow-sm');
+                btn.scrollIntoView({ block: 'nearest' });
+            }
+            loadActivity(slug, q);
         }
     </script>
 </body>

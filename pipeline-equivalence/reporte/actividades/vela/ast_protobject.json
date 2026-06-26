@@ -1,0 +1,58 @@
+{
+    "platform": "Protobject",
+    "ast": {
+        "blocks": [
+            {
+                "type": "Event",
+                "label": "when the program starts",
+                "children": [
+                    { "type": "Assignment", "label": "set flama to true", "children": [] }
+                ]
+            },
+            {
+                "type": "Event_Interrupt",
+                "label": "when NivelRuido2 sudden increase",
+                "children": [
+                    { "type": "State_Toggle", "label": "set flama to not flama", "children": [] }
+                ]
+            },
+            {
+                "type": "Loop",
+                "label": "repeat forever",
+                "children": [
+                    {
+                        "type": "Conditional",
+                        "label": "if flama",
+                        "children": [
+                            {
+                                "type": "Branch_True",
+                                "label": "do",
+                                "children": [
+                                    { "type": "Action", "label": "draw cuadro negro with colour rojo on DibujoLED1", "children": [] },
+                                    {
+                                        "type": "Action",
+                                        "label": "draw on x (random) y 2 with colour rojo on DibujoLED1",
+                                        "children": [
+                                            { "type": "Action", "label": "random integer from 3 to 5", "children": [] }
+                                        ]
+                                    },
+                                    { "type": "Action", "label": "delay of 200 milliseconds", "children": [] },
+                                    { "type": "Action", "label": "draw cuadro negro with colour rojo on DibujoLED1", "children": [] },
+                                    { "type": "Action", "label": "draw on x 4 y 2 with colour rojo on DibujoLED1", "children": [] },
+                                    { "type": "Action", "label": "delay of 200 milliseconds", "children": [] }
+                                ]
+                            },
+                            {
+                                "type": "Branch_False",
+                                "label": "else",
+                                "children": [
+                                    { "type": "Action", "label": "draw cuadro blanco with colour rojo on DibujoLED1", "children": [] }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

@@ -1,0 +1,30 @@
+ACTIVIDAD: 14.2-my-robot-friend-heart
+CODE: corazon-variables-eventos
+COMPONENTES: DibujoLED1=MatrixDraw, BateríaMusical2=PlayDrum, Inclinación3=SmartphoneOrientation
+
+REPETIR PARA SIEMPRE (bucle principal)
+  DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=0,1,0,0,0,1,0,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,0,0,1,1,1,0,0,0,0,0,1,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
+  BateríaMusical2_play_set_1  VAR=control_drum(VAR=1)
+  ESPERAR  ms  VAR=var:latidoGrande
+      ; // Se utiliza la variable "latidoGrande" para cambiar la velocidad de latido dependiendo de la posición del dispositivo.
+  BateríaMusical2_play_set_1  VAR=control_drum(VAR=1)
+  REPETIR 4 VECES
+    DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,1,1,1,1,0,0,1,1,1,1,1,0,0,0,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
+    ESPERAR  ms  VAR=var:latidoPequeño
+        ; // Se utiliza la variable "latidoPequeño" para cambiar la velocidad de latido del corazón chico dependiendo de la posición del dispositivo.
+    DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,0,1,0,1,0,0,1,0,0,0,1,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
+    ESPERAR  ms  VAR=var:latidoPequeño
+
+AL INICIAR
+  ESTABLECER var:latidoGrande = 500
+  ESTABLECER var:latidoPequeño = 150
+
+protobject_Inclinación3_change  property=side
+    ; // Este bloque detecta el momento en cambia la posición del dispositivo, cuando lo hace se editan las variables "latidoGrande" y "latidoPequeño". Dependiendo de la posición la velocidad de latido aumentará o disminuirán (Los tiempos son más largos, es decir las variables toman valores grandes).  En este bloque específico la velocidad de latidos aumentara.
+  ESTABLECER var:latidoGrande = 250
+  ESTABLECER var:latidoPequeño = 80
+
+protobject_Inclinación3_change  property=faceUp
+    ; // Este bloque detecta el momento en cambia la posición del dispositivo, cuando lo hace se editan las variables "latidoGrande" y "latidoPequeño". Dependiendo de la posición la velocidad de latido aumentará (Los tiempos son más largos, es decir las variables toman valores grandes).  En este bloque específico la velocidad de latidos se reducirá.
+  ESTABLECER var:latidoGrande = 500
+  ESTABLECER var:latidoPequeño = 150

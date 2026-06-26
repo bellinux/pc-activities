@@ -1,0 +1,10 @@
+ACTIVIDAD: 02.1-xylophone
+CODE: xilofono-inclinacion
+COMPONENTES: TecladoMusical1=PlayKeyboard, Inclinación2=SmartphoneOrientation
+
+REPETIR PARA SIEMPRE (bucle principal)
+    ; // Bucle principal, repite infinitamente la secuencia porgramada dentro de este bloque.
+  TecladoMusical1_play_set_2  VAR=(Inclinación2.leer(oriY) + 60)
+      ; // Este bloque recibe un número entre 0 y 150 y transforma este valor a un sonido, mientras más pequeño el número más grave el sonido, por el contrario si el número es grande el sonido será agudo.
+  ESPERAR  ms  VAR=100
+      ; // Retraso de 0.1 segundos para poder hacer diferentes sonidos en un corto periodo de tiempo.

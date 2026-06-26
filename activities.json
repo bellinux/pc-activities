@@ -1,0 +1,22 @@
+{
+  "_comment": "Índice ordenado de las 17 actividades. El orden de esta lista = el orden (y los números 1..17) en el visor. Para reordenar, mueve las líneas. El número de cada actividad se deriva de su posición; el slug es el id estable (lo usan los enlaces del reporte y los deep-links).",
+  "activities": [
+    "02.1-xylophone",
+    "02.2-music-visualizer",
+    "03.1-led-xylophone",
+    "04.1-heart-beat",
+    "14.1-ticklish-robot",
+    "14.2-my-robot-friend-heart",
+    "16.1-cookie-thief-alarm",
+    "16.2-sunflower-alarm-clock",
+    "16.3-bat-in-the-dark",
+    "16.4-robot-activation-challenge",
+    "16.5-magic-clap-switch",
+    "17.1-magic-birthday-candle",
+    "19.1-digital-hot-potato",
+    "21.1-cinematic-power-on",
+    "22.1-dj-metronome",
+    "22.2-applause-battle",
+    "22.3-dont-spill-liquid-game"
+  ]
+}

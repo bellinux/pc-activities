@@ -1,0 +1,22 @@
+ACTIVIDAD: 17.1-magic-birthday-candle
+CODE: flama-vela-con-soplo
+COMPONENTES: DibujoLED1=MatrixDraw, NivelRuido2=NoiseLevel
+
+REPETIR PARA SIEMPRE (bucle principal)
+  SI
+    [si var:flama]
+    DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,1,1,0,0,0,0,1,1,1,0,0,0,0,1,1,1,0,0,0,0,1,1,1,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
+    DibujoLED1_drawOnXY_set_2  VAR=aleatorio(3..5)  VAR2=2  VAR3=colour_picker(COLOUR=#ff0000)
+        ; // La posición de los leds está dado por 2 números que los llamaremos X e Y. El número X representará la posición de un led en posición horizontal. Es decir la posición en una fila.   Por otro lado el número Y representa la altura de un led, es decir su posición en una columna.  Por ejemplo, el led de la esquina superior izquierda tiene posición X = 1 e Y =1, mientra que la esquina inferior derecha tiene posición X= 7 e Y = 7. Siendo X posición para los lados e Y posición arriba o abajo.
+    ESPERAR  ms  VAR=200
+    DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,1,1,0,0,0,0,1,1,1,0,0,0,0,1,1,1,0,0,0,0,1,1,1,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
+    DibujoLED1_drawOnXY_set_2  VAR=4  VAR2=2  VAR3=colour_picker(COLOUR=#ff0000)
+    ESPERAR  ms  VAR=200
+    [sino]
+    DibujoLED1_clear_set_4
+
+AL INICIAR
+  ESTABLECER var:flama = TRUE
+
+protobject_NivelRuido2_change  property=suddenIncrease
+  ESTABLECER var:flama = no(var:flama)

@@ -1,0 +1,17 @@
+ACTIVIDAD: 16.1-cookie-thief-alarm
+CODE: alarma-caja-galletas
+COMPONENTES: Inclinación1=SmartphoneOrientation, DibujoLED2=MatrixDraw, ReproductorSonido3=AudioPlayer
+
+AL INICIAR
+  DibujoLED2_background_set_3  VAR=colour_picker(COLOUR=#000000)
+  DibujoLED2_clear_set_4
+
+REPETIR PARA SIEMPRE (bucle principal)
+  SI
+      ; // Este es un bloque condicional, ¿Qué quiere decir esto? Es un bloque que se ejecuta o no dependiendo de una condición que nosotros propongamos. En este caso la condición es que la inclinación debe ser superior a cierto valor, al superarse el valor la condición se cumple y por lo tanto se ejecutan todas las instrucciones en el interior de nuestro bloque condicional.
+    [si (Inclinación1.leer(oriX) > 20)]
+    DibujoLED2_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,1,0,0,1,1,0,0,0,1,0,1,0,0,0,0,0,0,1,0,0,0,0,1,0,1,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#2277aa)
+    ReproductorSonido3_play_set_2  VAR=sounds_list(VAR=fireAlarm.mp3)
+    ESPERAR  s  VAR=6
+    DibujoLED2_clear_set_4
+    ReproductorSonido3_stop_set_3

@@ -1,0 +1,20 @@
+ACTIVIDAD: 14.1-ticklish-robot
+CODE: robot-risa-simpatica-al-ruido
+COMPONENTES: NivelRuido1=NoiseLevel, DibujoLED2=MatrixDraw, ReproductorSonido3=AudioPlayer
+
+AL INICIAR
+  DibujoLED2_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
+  DibujoLED2_background_set_3  VAR=colour_picker(COLOUR=#000000)
+
+protobject_NivelRuido1_change  property=suddenIncrease
+    ; // Cuando el micrófono del dispositivo detecta un sonido fuerte, se ejecutarán las instrucciones dentro del bloque.
+  ReproductorSonido3_play_set_2  VAR=sounds_list(VAR=creatureLaugh.mp3)
+      ; // Reproduce un sonido predeterminado.
+  REPETIR 8 VECES
+    DibujoLED2_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
+    ESPERAR  ms  VAR=400
+    DibujoLED2_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
+    ESPERAR  ms  VAR=400
+  ReproductorSonido3_stop_set_3
+      ; // En caso de que el sonido reproducido al inicio dure más que el bloque anterior, este bloque fuerza a detenerlo para evitar que suene cuando no debería sonar.
+  DibujoLED2_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)

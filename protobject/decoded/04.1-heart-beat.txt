@@ -1,0 +1,17 @@
+ACTIVIDAD: 04.1-heart-beat
+CODE: corazon-forever-loop
+COMPONENTES: DibujoLED1=MatrixDraw, BateríaMusical2=PlayDrum
+
+REPETIR PARA SIEMPRE (bucle principal)
+    ; // Este bloque se encarga de ejecutar infinitamente la secuencia que tiene dentro.
+  DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=0,1,0,0,0,1,0,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,0,0,1,1,1,0,0,0,0,0,1,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
+  BateríaMusical2_play_set_1  VAR=control_drum(VAR=1)
+  ESPERAR  ms  VAR=300
+      ; // Este tipo de bloque permite esperar una cantidad de tiempo personalizada antes de ejecutar la siguiente orden.
+  BateríaMusical2_play_set_1  VAR=control_drum(VAR=1)
+  REPETIR 4 VECES
+      ; // Este bloque es como el bloque "repetir para siempre" solo que permite personalizar la cantidad de veces que se tiene que repetir.
+    DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,1,1,1,1,0,0,1,1,1,1,1,0,0,0,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
+    ESPERAR  ms  VAR=100
+    DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,0,1,0,1,0,0,1,0,0,0,1,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
+    ESPERAR  ms  VAR=100

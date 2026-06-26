@@ -1,0 +1,16 @@
+ACTIVIDAD: 16.2-sunflower-alarm-clock
+CODE: despertador-por-la-manana
+COMPONENTES: IntensidadLuz1=LightIntensity, ReproductorSonido3=AudioPlayer, DibujoLED2=MatrixDraw
+
+AL INICIAR
+  DibujoLED2_background_set_3  VAR=colour_picker(COLOUR=#000000)
+
+REPETIR PARA SIEMPRE (bucle principal)
+  SI
+      ; // Este bloque es un condicional extendido, en la actividad anterior teníamos un bloque que ejecutaba su contenido si se cumple la condición, en este caso se extiende el bloque condicional y se le da la instrucción de que si se cumple la condición se ejecuta la primera parte del bloque, pero si no se cumple se ejecuta otra parte diferente.   En la actividad anterior si no se cumplía la condición no pasaba nada más que no ejecutar lo de dentro, en este caso si no se cumple se ejecuta una serie de instrucciones específicas.
+    [si (IntensidadLuz1.leer(lightIntensity) > 50)]
+    ReproductorSonido3_play_set_2  VAR=sounds_list(VAR=shortMelody.mp3)
+    DibujoLED2_draw_set_1  VAR=drawleds(btmMatrix=1,0,0,1,0,0,1,0,1,0,1,0,1,0,0,0,1,1,1,0,0,1,1,1,1,1,1,1,0,0,1,1,1,0,0,0,1,0,1,0,1,0,1,0,0,1,0,0,1)  VAR2=colour_picker(COLOUR=#ff0000)
+    [sino]
+    ReproductorSonido3_stop_set_3
+    DibujoLED2_clear_set_4

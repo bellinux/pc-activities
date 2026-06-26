@@ -1,0 +1,18 @@
+ACTIVIDAD: 16.3-bat-in-the-dark
+CODE: luces-de-fiesta-al-oscurecer
+COMPONENTES: DibujoLED1=MatrixDraw, IntensidadLuz2=LightIntensity
+
+REPETIR PARA SIEMPRE (bucle principal)
+  SI
+      ; // Bloque condicional con 2 caminos. Si se cumple la condición que en este caso es que haya oscuridad, se ejecuta una animación de una luz.  Pero por el otro camino, si es que se está en un espacio luminoso los leds no mostrarán nada, es decir se mantendrán apagados.
+    [si (IntensidadLuz2.leer(lightIntensity) < 30)]
+    DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
+    ESPERAR  ms  VAR=200
+    DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,1,0,1,0,1,0,0,0,1,1,1,0,0,0,1,1,1,1,1,0,0,0,1,1,1,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
+    ESPERAR  ms  VAR=200
+    DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=1,0,0,1,0,0,1,0,1,0,1,0,1,0,0,0,1,1,1,0,0,1,1,1,1,1,1,1,0,0,1,1,1,0,0,0,1,0,1,0,1,0,1,0,0,1,0,0,1)  VAR2=colour_picker(COLOUR=#ff0000)
+    ESPERAR  ms  VAR=200
+    DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,1,0,1,0,1,0,0,0,1,1,1,0,0,0,1,1,1,1,1,0,0,0,1,1,1,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
+    ESPERAR  ms  VAR=200
+    [sino]
+    DibujoLED1_clear_set_4

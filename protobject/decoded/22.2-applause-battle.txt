@@ -1,0 +1,27 @@
+ACTIVIDAD: 22.2-applause-battle
+CODE: aplausometro-tiempo-aplausos
+COMPONENTES: NivelRuido1=NoiseLevel, DibujarEscribir2=InteractiveWriteDraw
+
+AL INICIAR
+  DibujarEscribir2_setSize_set_4  VAR=40
+  ESTABLECER var:inicio = 0
+  ESTABLECER var:activo = TRUE
+
+REPETIR PARA SIEMPRE (bucle principal)
+  DibujarEscribir2_clear_set_1
+  SI
+    [si (var:inicio > 0)]
+    DibujarEscribir2_writeText_set_11  VAR=((protobject_milliseconds() - var:inicio) / 1000)
+        ; // Muestra la cantidad de segundos en los que persiste un sonido, en este caso mediremos cuanto es la duración de una cantidad de aplausos.
+    SI
+        ; // Si los aplausos se detienen termina el temporizador y finaliza la medición.
+      [si (NivelRuido1.leer(noise) < 5)]
+      ESTABLECER var:inicio = 0
+      ESTABLECER var:activo = FALSE
+      ESPERAR  s  VAR=5
+      ESTABLECER var:activo = TRUE
+
+protobject_NivelRuido1_change  property=suddenIncrease
+  SI
+    [si var:activo]
+    ESTABLECER var:inicio = protobject_milliseconds()

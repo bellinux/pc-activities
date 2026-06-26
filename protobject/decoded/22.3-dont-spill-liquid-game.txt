@@ -1,0 +1,23 @@
+ACTIVIDAD: 22.3-dont-spill-liquid-game
+CODE: nivel-con-ruido
+COMPONENTES: Inclinación1=SmartphoneOrientation, DibujoLED2=MatrixDraw, TecladoMusical3=PlayKeyboard
+
+REPETIR PARA SIEMPRE (bucle principal)
+  DibujoLED2_draw_set_1  VAR=drawleds(btmMatrix=1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)  VAR2=colour_picker(COLOUR=#ffffff)
+  SI
+    [si (((Inclinación1.leer(oriX) > -2) AND (Inclinación1.leer(oriX) < 2)) AND ((Inclinación1.leer(oriY) > -2) AND (Inclinación1.leer(oriY) < 2)))]
+    DibujoLED2_drawOnXY_set_2  VAR=(4 + (-1 * Inclinación1.leer(oriX)))  VAR2=(4 + Inclinación1.leer(oriY))  VAR3=colour_picker(COLOUR=#33cc00)
+    SI
+      [si var:sonidoFijo]
+      TecladoMusical3_play_set_1  VAR=control_note(VAR=60)
+      ESTABLECER var:sonidoFijo = FALSE
+    [sino]
+    DibujoLED2_drawOnXY_set_2  VAR=math_constrain(VALUE=(4 + (-1 * Inclinación1.leer(oriX))) LOW=1 HIGH=7)  VAR2=math_constrain(VALUE=(4 + Inclinación1.leer(oriY)) LOW=1 HIGH=7)  VAR3=colour_picker(COLOUR=#ff4444)
+    ESTABLECER var:sonidoFijo = TRUE
+    TecladoMusical3_stop_set_3
+    ESPERAR  ms  VAR=100
+    TecladoMusical3_play_set_1  VAR=control_note(VAR=79)
+
+AL INICIAR
+  DibujoLED2_background_set_3  VAR=colour_picker(COLOUR=#000000)
+  ESTABLECER var:sonidoFijo = TRUE

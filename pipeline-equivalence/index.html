@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard de Equivalencia - Localhost</title>
+    <style>
+        body { font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #fff; color: #111; margin: 0; padding: 40px; line-height: 1.6; }
+        h1 { color: #111; text-align: center; font-weight: 300; font-size: 2.5em; margin-bottom: 10px; }
+        h2.activity-title { font-weight: 400; font-size: 1.8em; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 40px; margin-bottom: 30px; }
+        h3 { font-weight: 600; font-size: 1.2em; margin-bottom: 15px; color: #222; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .grid { display: flex; gap: 40px; margin-top: 20px; }
+        .column { flex: 1; padding-right: 20px; }
+        .column-right { flex: 1; padding-left: 20px; border-left: 1px dashed #ccc; }
+        .btn { display: inline-block; padding: 0; background: none; color: #3498db; text-decoration: none; font-size: 1em; margin-bottom: 10px; }
+        .btn:hover { text-decoration: underline; }
+        .metrics { margin-top: 10px; font-size: 1.1em; }
+        .metrics-success { color: #1e8449; }
+        .metrics-error { color: #c0392b; }
+        .images { display: flex; gap: 40px; justify-content: center; margin-top: 40px; }
+        .images > div { flex: 1; text-align: center; }
+        .images > div:first-child { border-right: 1px dashed #ccc; padding-right: 20px; }
+        .images > div:last-child { padding-left: 20px; }
+        .images img { max-width: 100%; height: auto; }
+        code { background: none; font-family: monospace; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Dashboard Algorítmico de Equivalencia</h1>
+    <p style="text-align: center; color: #666; margin-bottom: 50px;">Ejecuta <code>python -m http.server 8080</code> en esta carpeta para habilitar los fetch locales.</p>
+
+    <!-- ACTIVIDAD: VELA -->
+    <div id="act-vela">
+        <h2 class="activity-title">Actividad: Vela Interactiva</h2>
+        
+        <div class="grid">
+            <div class="column">
+                <h3>Vistas Analíticas (Lado a Lado)</h3>
+                <p>Fuentes extraídas y árboles lógicos:</p>
+                <a class="btn" href="reporte/visores/visor_extraccion.html?actividad=vela" target="_blank">🔍 Ver Extracción de Texto (Microbit vs Protobject)</a><br>
+                <a class="btn" href="reporte/visores/visor_ast.html?actividad=vela" target="_blank">📄 Comparar ASTs (Microbit vs Protobject)</a><br>
+                <a class="btn" href="reporte/visores/visor_tabla.html?actividad=vela" target="_blank">📊 Ver Ontología (Tabla IR)</a><br>
+                <a class="btn" href="reporte/visores/visor_pdg.html?actividad=vela" target="_blank">🕸️ Comparar Nodos PDG (Interactivos)</a>
+            </div>
+
+            <div class="column-right">
+                <h3>Resultados Algorítmicos (NetworkX)</h3>
+                <p>Cálculo de isomorfismo estructural:</p>
+                <div class="metrics" id="metrics-vela">Cargando métricas...</div>
+                <script>
+                    fetch('reporte/actividades/vela/metricas.json')
+                        .then(res => res.json())
+                        .then(data => {
+                            const success = data.isomorphic ? 'metrics-success' : 'metrics-error';
+                            document.getElementById('metrics-vela').innerHTML = `
+                                <div>Isomorfismo (VF2): <span class="${success}">${data.isomorphic}</span></div>
+                                <div>Graph Edit Distance: <strong>${data.graph_edit_distance}</strong></div>
+                                <div style="margin-top: 10px; color: #555;">Nodos (Microbit / Protobject): ${data.nodes_G1} / ${data.nodes_G2}</div>
+                                <div style="color: #555;">Aristas (Microbit / Protobject): ${data.edges_G1} / ${data.edges_G2}</div>
+                            `;
+                        })
+                        .catch(err => document.getElementById('metrics-vela').innerText = "Error cargando metricas.json");
+                </script>
+            </div>
+        </div>
+
+        <div style="margin-top: 60px;">
+            <h3 style="text-align: center;">Grafos Program Dependence Graph (Graphviz)</h3>
+            <div class="images">
+                <div>
+                    <strong style="display:block; margin-bottom: 20px;">Microbit</strong>
+                    <img src="reporte/actividades/vela/pdg_makecode.svg" alt="PDG Microbit">
+                </div>
+                <div>
+                    <strong style="display:block; margin-bottom: 20px;">Protobject</strong>
+                    <img src="reporte/actividades/vela/pdg_protobject.svg" alt="PDG Protobject">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

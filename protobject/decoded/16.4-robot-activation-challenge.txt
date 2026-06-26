@@ -1,0 +1,21 @@
+ACTIVIDAD: 16.4-robot-activation-challenge
+CODE: juego-toques
+COMPONENTES: BotónTáctil1=TouchButton, ReproductorSonido3=AudioPlayer, DibujoLED11=MatrixDraw
+
+AL INICIAR
+  ESTABLECER var:toques = 0
+      ; // Inicia la variable "Toques" con valor inicial = 0.
+
+REPETIR PARA SIEMPRE (bucle principal)
+  SI
+    [si (var:toques < 7)]
+    CONTAR CON i DE 0 A 6 PASO 1
+      DibujoLED11_drawOnXY_set_2  VAR=var:i  VAR2=(8 - var:toques)  VAR3=colour_picker(COLOUR=#ff4444)
+    [sino]
+    DibujoLED11_clear_set_4
+    DibujoLED11_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,1,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,1,1,1,1,1,0)  VAR2=colour_picker(COLOUR=#ff0000)
+    ReproductorSonido3_play_set_2  VAR=sounds_list(VAR=shortMelody.mp3)
+
+protobject_BotónTáctil1_change  property=pressed
+  AÑADIR 1 A var:toques
+      ; // Aumenta en 1 el valor de la variable "Toques". Cada vez que se presione el botón la cantidad aumenta en 1, es decir la variable cuenta la cantidad de veces que se aprieta el botón.

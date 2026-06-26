@@ -1,0 +1,10 @@
+ACTIVIDAD: 03.1-led-xylophone
+CODE: xilofono-inclinacion-con-nota-led
+COMPONENTES: TecladoMusical1=PlayKeyboard, Inclinación2=SmartphoneOrientation, DibujoLED4=MatrixDraw
+
+REPETIR PARA SIEMPRE (bucle principal)
+  DibujoLED4_clear_set_4
+  DibujoLED4_drawOnXY_set_2  VAR=4  VAR2=(4 + math_round(OP=ROUND NUM=(Inclinación2.leer(oriY) / 15)))  VAR3=colour_picker(COLOUR=#ff4444)
+      ; // Dibuja un punto dependiendo de la cantidad de inclinación. Mientras más inclinado, más a los extremos aparecerá el punto.
+  TecladoMusical1_play_set_2  VAR=(Inclinación2.leer(oriY) + 60)
+  ESPERAR  ms  VAR=100

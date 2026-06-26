@@ -1,0 +1,20 @@
+{
+    "platform": "Protobject",
+    "extracted_text": [
+        "when the program starts",
+        "  set flama to true",
+        "when NivelRuido2 sudden increase",
+        "  set flama to not flama",
+        "repeat forever",
+        "  if flama",
+        "  do",
+        "    draw [cuadro negro] with colour [rojo] on DibujoLED1",
+        "    draw on x (random integer from 3 to 5) y 2 with colour [rojo] on DibujoLED1",
+        "    delay of 200 milliseconds",
+        "    draw [cuadro negro] with colour [rojo] on DibujoLED1",
+        "    draw on x 4 y 2 with colour [rojo] on DibujoLED1",
+        "    delay of 200 milliseconds",
+        "  else",
+        "    draw [cuadro blanco] with colour [rojo] on DibujoLED1"
+    ]
+}

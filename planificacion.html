@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Planificación de actividades — rationale de la progresión</title>
+<style>
+  :root{
+    --bg:#f6f7f9; --card:#ffffff; --ink:#1f2933; --muted:#64748b; --line:#e3e8ee;
+    --p1:#4f46e5; --p2:#0e7490; --p3:#1f7a45; --p4:#b06f12; --p5:#9333ea;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.65;font-size:15px}
+  .topbar{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);padding:10px 20px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .topbar a{font-size:13px;text-decoration:none;color:#334155;background:#eef2f7;border:1px solid #d7dee8;
+    border-radius:8px;padding:6px 12px;transition:.15s}
+  .topbar a:hover{background:#dbe7f5;border-color:#3b73b9;color:#1d4e89}
+  .topbar .sp{flex:1}
+  .topbar .tt{font-weight:600;color:var(--muted);font-size:13px}
+  .wrap{max-width:880px;margin:0 auto;padding:30px 20px 90px}
+  h1{font-size:28px;margin:0 0 6px;letter-spacing:-.01em}
+  .sub{color:var(--muted);font-size:15px;max-width:640px}
+  .banner{background:#fff8ec;border:1px solid #f3e2b3;border-radius:12px;padding:16px 20px;margin:20px 0;color:#6b5413;font-size:14px}
+  .banner b{color:#5a440f}
+  h2.phase{font-size:20px;margin:36px 0 4px;display:flex;align-items:center;gap:10px}
+  h2.phase .pill{font-size:12px;font-weight:700;color:#fff;border-radius:999px;padding:3px 11px;letter-spacing:.02em}
+  .phase-sub{color:var(--muted);font-size:14px;margin:0 0 8px}
+  .ph1 .pill{background:var(--p1)} .ph2 .pill{background:var(--p2)} .ph3 .pill{background:var(--p3)} .ph4 .pill{background:var(--p4)} .ph5 .pill{background:var(--p5)}
+  .map{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0 6px}
+  .mcard{background:var(--card);border:1px solid var(--line);border-top-width:4px;border-radius:10px;padding:10px 12px;font-size:12.5px}
+  .mcard b{display:block;font-size:13px;margin-bottom:2px;color:var(--ink)}
+  .mcard.m1{border-top-color:var(--p1)} .mcard.m2{border-top-color:var(--p2)} .mcard.m3{border-top-color:var(--p3)} .mcard.m4{border-top-color:var(--p4)} .mcard.m5{border-top-color:var(--p5)}
+  .proj{background:var(--card);border:1px solid var(--line);border-left-width:5px;border-radius:12px;
+    padding:16px 18px;margin:14px 0;box-shadow:0 1px 2px rgba(16,24,40,.04)}
+  .ph1 .proj,.proj.b1{border-left-color:var(--p1)} .ph2 .proj{border-left-color:var(--p2)} .ph3 .proj{border-left-color:var(--p3)} .ph4 .proj{border-left-color:var(--p4)} .ph5 .proj{border-left-color:var(--p5)}
+  .proj h3{margin:0 0 6px;font-size:17px;display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+  .pn{font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:700;font-size:13px;background:#eef2f7;border:1px solid #d7dee8;border-radius:6px;padding:1px 8px;color:#334155}
+  .concept{font-size:13px;color:#475569;margin:0 0 10px}
+  .concept b{color:var(--ink)}
+  .proj p{margin:.4em 0;font-size:14px;color:#374151}
+  .proj p .lab{font-weight:700;color:#334155}
+  details.algo{margin-top:10px;border-top:1px dashed var(--line);padding-top:8px}
+  details.algo summary{cursor:pointer;font-size:12.5px;font-weight:600;color:#475569;list-style:none}
+  details.algo summary::-webkit-details-marker{display:none}
+  details.algo summary::before{content:"▸ ";color:#94a3b8}
+  details.algo[open] summary::before{content:"▾ "}
+  details.algo ol{margin:8px 0 2px;padding:10px 14px 10px 30px;background:#f8fafc;border:1px solid var(--line);border-radius:8px;font-size:13px;line-height:1.7}
+  details.algo li{color:#374151}
+  code{font-family:ui-monospace,Menlo,Consolas,monospace;background:#eef2f7;border:1px solid #e0e7ef;border-radius:5px;padding:0 5px;font-size:12px}
+  footer{margin-top:34px;color:var(--muted);font-size:12px;text-align:center}
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <a href="index.html">← Inicio</a>
+    <a href="engine.html">▶ Abrir el visor</a>
+    <a href="report.html">Reporte</a>
+    <span class="sp"></span>
+    <span class="tt">Rationale de la progresión</span>
+  </div>
+
+  <div class="wrap">
+    <h1>Plan de lecciones progresivo de pensamiento computacional</h1>
+    <p class="sub">El <em>porqué</em> del orden de las actividades: cómo cada paso se apoya en el anterior, desde el primer “hola mundo” animado hasta los proyectos de síntesis.</p>
+
+    <div class="banner">
+      <b>Esto es una iteración, no una verdad fija.</b> Ni este orden “pedagógico” ni el orden numérico de las fichas “ganan”: conviven y evolucionan juntos. Si cambia una actividad, cambia también esta progresión. Los <b>algoritmos describen la intención</b> de cada proyecto, no el código literal (que puede diferir).
+    </div>
+
+    <div class="map">
+      <div class="mcard m1"><b>Fase 1</b>Fundamentos: secuencias y bucles → animaciones simples.</div>
+      <div class="mcard m2"><b>Fase 2</b>Mundo real: “mapear” un sensor a una salida.</div>
+      <div class="mcard m3"><b>Fase 3</b>Reacción y memoria: eventos + variables.</div>
+      <div class="mcard m4"><b>Fase 4</b>Decisiones: condicionales (if / if-else / AND).</div>
+      <div class="mcard m5"><b>Fase 5</b>Avanzado: bucles for/while y síntesis.</div>
+    </div>
+
+    <!-- FASE 1 -->
+    <section class="ph1">
+      <h2 class="phase"><span class="pill">Fase 1</span> Fundamentos — Secuencias y Bucles</h2>
+      <p class="phase-sub">Las bases absolutas: enseñar a seguir instrucciones en orden (secuencia) y a repetirlas (bucles).</p>
+
+      <div class="proj">
+        <h3><span class="pn">P1</span> El Llavero de Corazón Luminoso</h3>
+        <div class="concept">Concepto: <b>Secuencia · Bucle infinito (main_loop) · Bucles anidados (repeat)</b></div>
+        <p><span class="lab">Motivación.</span> Es el “Hola Mundo” de la animación y la personalización. En vez de un concepto abstracto, crea un objeto físico y atractivo (un llavero, un adorno para la mochila) que conecta el código con la creatividad y con un objeto de uso diario. Es el punto de partida ideal: una sola salida, sin entrada ni mapeo.</p>
+        <p><span class="lab">Cómo funciona.</span> El programa entra en un bucle infinito. Dentro, una secuencia: muestra un corazón grande, emite dos sonidos de latido y luego entra en un bucle pequeño que se repite 4 veces para una animación de vibración rápida.</p>
+        <details class="algo"><summary>Algoritmo</summary><ol>
+          <li>Iniciar bucle infinito (main_loop).</li>
+          <li>Dibujar imagen de “corazón grande”.</li>
+          <li>Reproducir sonido de tambor.</li>
+          <li>Esperar 300 ms.</li>
+          <li>Reproducir sonido de tambor.</li>
+          <li>Iniciar bucle repeat (4 veces).</li>
+          <li>Dibujar “corazón pequeño 1” · esperar 100 ms.</li>
+          <li>Dibujar “corazón pequeño 2” · esperar 100 ms.</li>
+          <li>Fin del bucle repeat.</li>
+          <li>Volver al paso 1.</li>
+        </ol></details>
+      </div>
+    </section>
+
+    <!-- FASE 2 -->
+    <section class="ph2">
+      <h2 class="phase"><span class="pill">Fase 2</span> Conectar con el Mundo Real — Mapeo Directo</h2>
+      <p class="phase-sub">Programas que reaccionan al instante, “traduciendo” los datos de un sensor en sonido o imagen.</p>
+
+      <div class="proj">
+        <h3><span class="pn">P2</span> El Xilófono Mágico Inclinable</h3>
+        <div class="concept">Concepto: <b>Mapeo Directo (Entrada → Salida)</b></div>
+        <p><span class="lab">Motivación.</span> Introduce la interactividad musical: una conexión intuitiva entre el gesto (inclinar) y el resultado (sonido). Sienta las bases para los siguientes proyectos.</p>
+        <p><span class="lab">Cómo funciona.</span> En un bucle infinito, lee el valor de la inclinación y lo suma a una nota base; la nota resultante suena al instante.</p>
+        <details class="algo"><summary>Algoritmo</summary><ol>
+          <li>Iniciar bucle infinito.</li>
+          <li>Leer la inclinación Y (oriY).</li>
+          <li><code>notaFinal = 60 + oriY</code>.</li>
+          <li>Reproducir la notaFinal · esperar 100 ms.</li>
+          <li>Volver al paso 1.</li>
+        </ol></details>
+      </div>
+
+      <div class="proj">
+        <h3><span class="pn">P3</span> El Xilófono del Futuro (con LEDs)</h3>
+        <div class="concept">Concepto: <b>Mapeo a múltiples salidas</b></div>
+        <p><span class="lab">Motivación.</span> Evolución directa del anterior: un único input (inclinación) controla varias salidas a la vez (sonido y luz), para un feedback más rico.</p>
+        <p><span class="lab">Cómo funciona.</span> El valor de la inclinación se usa para dos cálculos: la nota musical y la posición de un píxel en la matriz LED.</p>
+        <details class="algo"><summary>Algoritmo</summary><ol>
+          <li>Iniciar bucle infinito · limpiar la pantalla.</li>
+          <li>Leer oriY · <code>valorNota = redondear(oriY/5)</code>.</li>
+          <li><code>notaFinal = 60 + valorNota</code>.</li>
+          <li><code>posicionLedY = 4 + valorNota</code>.</li>
+          <li>Reproducir notaFinal · encender LED en (X=4, Y=posicionLedY).</li>
+          <li>Esperar 100 ms · volver al paso 1.</li>
+        </ol></details>
+      </div>
+
+      <div class="proj">
+        <h3><span class="pn">P4</span> El Visualizador de Música</h3>
+        <div class="concept">Concepto: <b>Generalización del mapeo</b></div>
+        <p><span class="lab">Motivación.</span> Consolida la idea mostrando que cualquier sensor puede mapearse a cualquier salida: aquí, el <b>ruido</b> se transforma en <b>color</b>. Refuerza que es un principio universal.</p>
+        <p><span class="lab">Cómo funciona.</span> Lee continuamente el nivel de ruido y lo usa como componente rojo de un color RGB; ese color ilumina toda la pantalla.</p>
+        <details class="algo"><summary>Algoritmo</summary><ol>
+          <li>Iniciar bucle infinito.</li>
+          <li>Leer el ruido (noise).</li>
+          <li><code>colorDinamico = Color(R=noise, G=0, B=0)</code>.</li>
+          <li>Pintar toda la pantalla con colorDinamico · volver al paso 1.</li>
+        </ol></details>
+      </div>
+    </section>
+
+    <!-- FASE 3 -->
+    <section class="ph3">
+      <h2 class="phase"><span class="pill">Fase 3</span> Reacción y Memoria — ¡El poder de los eventos!</h2>
+      <p class="phase-sub">Primero el evento como simple “disparador”; luego, combinado con variables, para darle “memoria” al programa.</p>
+
+      <div class="proj">
+        <h3><span class="pn">P5</span> El Robot Cosquilloso</h3>
+        <div class="concept">Concepto: <b>Eventos puros como “triggers”</b></div>
+        <p><span class="lab">Motivación.</span> Los eventos en su forma más simple: una causa (ruido) dispara un efecto (secuencia de risa), sin guardar estado. Primer contacto para darle vida al robot.</p>
+        <p><span class="lab">Cómo funciona.</span> Está inactivo con una cara estática. Cuando detecta un aumento súbito de ruido (una palmada), reproduce una risa y anima la boca; al terminar, vuelve a su estado inicial.</p>
+        <details class="algo"><summary>Algoritmo</summary><ol>
+          <li>Al iniciar: dibujar cara estática.</li>
+          <li>Cuando ocurra un “aumento súbito de ruido”:</li>
+          <li>Reproducir “sonido de risa”.</li>
+          <li>Bucle repeat (8 veces): animar boca (abrir, esperar, cerrar, esperar).</li>
+          <li>Detener sonido y volver a dibujar la cara estática.</li>
+        </ol></details>
+      </div>
+
+      <div class="proj">
+        <h3><span class="pn">P6</span> ¡El Desafío de Activación del Robot!</h3>
+        <div class="concept">Concepto: <b>Eventos que modifican una variable contadora</b></div>
+        <p><span class="lab">Motivación.</span> Introduce las variables con un juego competitivo y temático. Tras hacerle cosquillas, el robot necesita energía: ¿quién es el primero en cargarlo tocando la pantalla? Es la forma perfecta de entender cómo una variable “cuenta”.</p>
+        <p><span class="lab">Cómo funciona.</span> Una variable <code>energia</code> empieza en 0. Cada vez que ocurre el evento “pantalla presionada”, se incrementa en 1 y se muestra el nuevo valor.</p>
+        <details class="algo"><summary>Algoritmo</summary><ol>
+          <li>Al iniciar: <code>energia = 0</code>.</li>
+          <li>Cuando ocurra el evento “pantalla presionada”:</li>
+          <li><code>energia = energia + 1</code>.</li>
+          <li>Escribir el valor de <code>energia</code> en la pantalla.</li>
+        </ol></details>
+      </div>
+
+      <div class="proj">
+        <h3><span class="pn">P7</span> El Corazón de Mi Robot Amigo</h3>
+        <div class="concept">Concepto: <b>Eventos que modifican una variable de estado</b></div>
+        <p><span class="lab">Motivación.</span> Con el robot ya “cargado”, se desbloquea una función avanzada: cambiar su comportamiento fundamental (su “estado de ánimo”, representado por el latido) en respuesta a la interacción.</p>
+        <p><span class="lab">Cómo funciona.</span> El bucle principal hace latir un corazón a una velocidad definida por las variables <code>latidoGrande</code> y <code>latidoPequeño</code>. Dos eventos (inclinar de lado o boca arriba) cambian esos valores, alterando el comportamiento del bucle.</p>
+        <details class="algo"><summary>Algoritmo</summary><ol>
+          <li>Al iniciar: <code>latidoGrande = 500</code>, <code>latidoPequeño = 150</code>.</li>
+          <li>En bucle infinito: animar el corazón usando esos valores.</li>
+          <li>Cuando “de lado”: <code>latidoGrande = 250</code>, <code>latidoPequeño = 80</code>.</li>
+          <li>Cuando “boca arriba”: <code>latidoGrande = 500</code>, <code>latidoPequeño = 150</code>.</li>
+        </ol></details>
+      </div>
+    </section>
+
+    <!-- FASE 4 -->
+    <section class="ph4">
+      <h2 class="phase"><span class="pill">Fase 4</span> Tomando Decisiones — Condicionales</h2>
+      <p class="phase-sub">Que el programa lea su “memoria” (variables) y decida qué camino tomar.</p>
+
+      <div class="proj">
+        <h3><span class="pn">P8</span> ¡Alarma: El Ladrón de Galletas Secreto!</h3>
+        <div class="concept">Concepto: <b>El condicional <code>if</code> simple</b></div>
+        <p><span class="lab">Motivación.</span> La introducción más suave a la lógica condicional, en un escenario divertido: proteger un tesoro.</p>
+        <p><span class="lab">Cómo funciona.</span> Comprueba continuamente si la “tapa” se inclina más allá de un ángulo. Si la condición es verdadera, activa una secuencia de alarma con luz y sonido.</p>
+        <details class="algo"><summary>Algoritmo</summary><ol>
+          <li>Iniciar bucle infinito.</li>
+          <li>SI <code>inclinacionX &gt; 20</code> ENTONCES: ejecutar secuencia de alarma (luz, sonido, espera, apagar).</li>
+          <li>Volver al paso 1.</li>
+        </ol></details>
+      </div>
+
+      <div class="proj">
+        <h3><span class="pn">P9</span> El Despertador de Girasol</h3>
+        <div class="concept">Concepto: <b>El condicional <code>if-else</code></b></div>
+        <p><span class="lab">Motivación.</span> Manejar dos caminos excluyentes (luz vs. oscuridad), con una metáfora visual y positiva.</p>
+        <p><span class="lab">Cómo funciona.</span> Revisa el nivel de luz. Si supera un umbral (hay luz), reproduce una melodía y dibuja un sol; de lo contrario (oscuro), apaga todo.</p>
+        <details class="algo"><summary>Algoritmo</summary><ol>
+          <li>Iniciar bucle infinito.</li>
+          <li>SI <code>intensidadLuz &gt; 50</code>: reproducir melodía y dibujar sol.</li>
+          <li>SINO: detener melodía y apagar LEDs.</li>
+          <li>Volver al paso 1.</li>
+        </ol></details>
+      </div>
+
+      <div class="proj">
+        <h3><span class="pn">P10</span> Luces de Fiesta en la Oscuridad</h3>
+        <div class="concept">Concepto: <b>Refuerzo del <code>if-else</code></b></div>
+        <p><span class="lab">Motivación.</span> Consolida aplicando la misma estructura con la condición invertida: demuestra la versatilidad de la lógica condicional.</p>
+        <p><span class="lab">Cómo funciona.</span> Es lo opuesto al despertador: si hay poca luz (oscuro), animación de fiesta; de lo contrario, apaga.</p>
+        <details class="algo"><summary>Algoritmo</summary><ol>
+          <li>Iniciar bucle infinito.</li>
+          <li>SI <code>intensidadLuz &lt; 30</code>: ejecutar animación de luces.</li>
+          <li>SINO: apagar LEDs.</li>
+          <li>Volver al paso 1.</li>
+        </ol></details>
+      </div>
+
+      <div class="proj">
+        <h3><span class="pn">P11</span> La Vela Mágica de Cumpleaños</h3>
+        <div class="concept">Concepto: <b><code>if-else</code> basado en un estado cambiante</b></div>
+        <p><span class="lab">Motivación.</span> El ciclo completo de la programación interactiva: un evento (soplo) modifica una variable de estado, y un condicional lee esa variable para decidir qué hacer.</p>
+        <p><span class="lab">Cómo funciona.</span> Una variable <code>flama</code> controla si la vela está encendida. Un evento de ruido (soplo) invierte su valor. El bucle usa un <code>if-else</code> para mostrar la llama o dejar la pantalla apagada.</p>
+        <details class="algo"><summary>Algoritmo</summary><ol>
+          <li>Al iniciar: <code>flama = VERDADERO</code>.</li>
+          <li>Cuando “aumento súbito de ruido”: <code>flama = no flama</code>.</li>
+          <li>En bucle infinito: SI <code>flama</code> es VERDADERO → mostrar animación de la llama; SINO → apagar LEDs.</li>
+        </ol></details>
+      </div>
+
+      <div class="proj">
+        <h3><span class="pn">P12</span> ¡No Derrames el Líquido! — El Juego de Pulso</h3>
+        <div class="concept">Concepto: <b>Condicionales compuestas (AND)</b></div>
+        <p><span class="lab">Motivación.</span> Introduce los operadores lógicos de forma tangible: mantener el equilibrio exige cumplir varias condiciones a la vez.</p>
+        <p><span class="lab">Cómo funciona.</span> En cada ciclo verifica si la inclinación en X <b>e</b> Y están dentro de un rango seguro. Solo si ambas se cumplen, el indicador es verde; si una falla, se pone rojo y suena una alarma.</p>
+        <details class="algo"><summary>Algoritmo</summary><ol>
+          <li>Iniciar bucle infinito · leer <code>inclinacionX</code> e <code>inclinacionY</code>.</li>
+          <li>SI <code>(-2 &lt; X &lt; 2)</code> Y <code>(-2 &lt; Y &lt; 2)</code>: punto VERDE + sonido “agradable”.</li>
+          <li>SINO: punto ROJO + sonido “de alarma”.</li>
+          <li>Volver al paso 1.</li>
+        </ol></details>
+      </div>
+    </section>
+
+    <!-- FASE 5 -->
+    <section class="ph5">
+      <h2 class="phase"><span class="pill">Fase 5</span> Estructuras Avanzadas y Síntesis</h2>
+      <p class="phase-sub">Los últimos tipos de bucles (for y while) e integrar todo en proyectos completos.</p>
+
+      <div class="proj">
+        <h3><span class="pn">P13</span> El Interruptor Mágico de Aplausos</h3>
+        <div class="concept">Concepto: <b>Síntesis de evento, variable y condicional</b></div>
+        <p><span class="lab">Motivación.</span> Un proyecto de repaso que encapsula la lógica central (evento → variable → condicional) en una aplicación práctica y casi mágica.</p>
+        <p><span class="lab">Cómo funciona.</span> Versión limpia de la vela: un evento de ruido cambia el estado de una variable booleana; inmediatamente, un <code>if-else</code> la lee para encender o apagar todos los LEDs.</p>
+        <details class="algo"><summary>Algoritmo</summary><ol>
+          <li>Al iniciar: <code>estado = FALSO</code>.</li>
+          <li>Cuando “aumento súbito de ruido”: <code>estado = no estado</code>.</li>
+          <li>SI <code>estado</code> es VERDADERO → encender todos los LEDs; SINO → apagarlos.</li>
+        </ol></details>
+      </div>
+
+      <div class="proj">
+        <h3><span class="pn">P14</span> El Encendido y Apagado Cinematográfico</h3>
+        <div class="concept">Concepto: <b>Bucles <code>for</code></b></div>
+        <p><span class="lab">Motivación.</span> Introduce el <code>for</code> donde es perfecto: recorrer todos los píxeles de la pantalla para una animación de encendido/apagado gradual.</p>
+        <p><span class="lab">Cómo funciona.</span> Se basa en el proyecto anterior, pero en vez de encender de golpe usa <code>for</code> anidados para recorrer la matriz píxel por píxel (efecto “barrido”).</p>
+        <details class="algo"><summary>Algoritmo</summary><ol>
+          <li>(Lógica de evento y variable <code>estado</code> igual que P13.)</li>
+          <li>SI <code>estado</code> es VERDADERO → PARA <code>columna</code> 1..7: PARA <code>fila</code> 1..7: encender LED (columna, fila) y esperar.</li>
+          <li>SINO → ejecutar los <code>for</code> en orden inverso para apagar.</li>
+        </ol></details>
+      </div>
+
+      <div class="proj">
+        <h3><span class="pn">P15</span> La Papa Explosiva Digital</h3>
+        <div class="concept">Concepto: <b>Bucles <code>while</code></b></div>
+        <p><span class="lab">Motivación.</span> Repeticiones donde no se sabe de antemano cuántas serán. El temporizador aleatorio del juego es el ejemplo perfecto para el <code>while</code>.</p>
+        <p><span class="lab">Cómo funciona.</span> Al presionar la pantalla se genera un tiempo aleatorio. Un <code>while</code> sigue activo mientras el tiempo sea mayor que cero, descontando un segundo por iteración. Al llegar a 0, el juego “explota”.</p>
+        <details class="algo"><summary>Algoritmo</summary><ol>
+          <li>Cuando “pantalla presionada”: <code>tiempo = aleatorio(5..15)</code> · reproducir música.</li>
+          <li>MIENTRAS <code>tiempo &gt; 0</code>: <code>tiempo = tiempo - 1</code>, esperar 1 segundo.</li>
+          <li>Detener música y mostrar fin del juego.</li>
+        </ol></details>
+      </div>
+
+      <div class="proj">
+        <h3><span class="pn">P16</span> El Metrónomo de DJ</h3>
+        <div class="concept">Concepto: <b>Síntesis avanzada (cálculos y tiempo)</b></div>
+        <p><span class="lab">Motivación.</span> Integra mapeo de sensores, cálculos matemáticos, gestión de variables y una condición compleja basada en el tiempo, para crear una herramienta útil.</p>
+        <p><span class="lab">Cómo funciona.</span> Lee la inclinación para calcular los BPM; a partir de ellos, el intervalo entre latidos. En un bucle, comprueba si pasó suficiente tiempo desde el último latido para generar el siguiente.</p>
+        <details class="algo"><summary>Algoritmo</summary><ol>
+          <li>Al iniciar: <code>ultimoLatido = 0</code>.</li>
+          <li>En bucle infinito: calcular <code>bpm</code> desde la inclinación · <code>intervalo = 60000 / bpm</code>.</li>
+          <li>SI <code>(tiempoActual - ultimoLatido) &gt; intervalo</code>: reproducir sonido y <code>ultimoLatido = tiempoActual</code>.</li>
+          <li>Mostrar <code>bpm</code> · volver al paso 2.</li>
+        </ol></details>
+      </div>
+
+      <div class="proj">
+        <h3><span class="pn">P17</span> La Batalla de Aplausos</h3>
+        <div class="concept">Concepto: <b>Síntesis avanzada (gestión de estado compleja)</b></div>
+        <p><span class="lab">Motivación.</span> Requiere una gestión cuidadosa del estado a través de varias fases (esperando, activo, terminado) para un juego competitivo.</p>
+        <p><span class="lab">Cómo funciona.</span> Espera un ruido fuerte para empezar a contar el tiempo. Mientras el ruido se mantenga sobre un umbral, el cronómetro avanza. Si cesa, el juego se detiene, muestra el tiempo final y espera unos segundos antes de poder reiniciarse.</p>
+        <details class="algo"><summary>Algoritmo</summary><ol>
+          <li>Al iniciar: <code>inicio = 0</code>, <code>activo = VERDADERO</code>.</li>
+          <li>En bucle infinito: SI <code>activo</code> Y <code>nivelDeRuido &gt; umbral</code>: si <code>inicio == 0</code> → <code>inicio = tiempoActual</code>; mostrar <code>tiempoActual - inicio</code>.</li>
+          <li>SINO SI <code>inicio &gt; 0</code>: <code>activo = FALSO</code>, mostrar tiempo final, esperar 5 s, luego <code>inicio = 0</code> y <code>activo = VERDADERO</code>.</li>
+          <li>Volver al paso 2.</li>
+        </ol></details>
+      </div>
+    </section>
+
+    <footer>Rationale de la progresión · documento vivo, se itera junto con las actividades.</footer>
+  </div>
+</body>
+</html>

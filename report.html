@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Reporte de problemas — pc-activities (actividades en español)</title>
+<style>
+  :root{
+    --bg:#f6f7f9; --card:#ffffff; --ink:#1f2933; --muted:#64748b; --line:#e3e8ee;
+    --alta-bg:#fdecec; --alta-ink:#a3271f; --alta-bd:#f0b4af;
+    --media-bg:#fef3e2; --media-ink:#9a5b06; --media-bd:#f3d09a;
+    --bassa-bg:#fdfae3; --bassa-ink:#7a6206; --bassa-bd:#ece2a3;
+    --cont-bg:#eef2f7; --cont-ink:#475569; --cont-bd:#cdd6e2;
+    --ok-bg:#e9f6ee; --ok-ink:#1f7a45; --ok-bd:#bce3cb;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6;font-size:15px}
+  .wrap{max-width:920px;margin:0 auto;padding:32px 20px 80px}
+  header.top{border-bottom:2px solid var(--ink);padding-bottom:18px;margin-bottom:8px}
+  h1{font-size:26px;margin:0 0 4px;letter-spacing:-.01em}
+  .sub{color:var(--muted);font-size:14px}
+  .meta{color:var(--muted);font-size:12.5px;margin-top:10px}
+  h2{font-size:20px;margin:38px 0 4px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+  h2 .lead{color:var(--muted);font-weight:400;font-size:14px;display:block;margin-top:2px}
+  .method{background:#eef4fb;border:1px solid #cfe0f3;border-radius:10px;padding:14px 18px;margin:18px 0;font-size:13.5px;color:#2c4a6b}
+  .stats{display:flex;flex-wrap:wrap;gap:12px;margin:18px 0}
+  .stat{flex:1 1 150px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+  .stat .n{font-size:24px;font-weight:700}
+  .stat .l{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+  .card{background:var(--card);border:1px solid var(--line);border-left-width:5px;border-radius:10px;
+    padding:16px 18px;margin:16px 0;box-shadow:0 1px 2px rgba(16,24,40,.04)}
+  .card.alta{border-left-color:#d9534f}
+  .card.media{border-left-color:#e0992a}
+  .card.bassa{border-left-color:#cdbb2e}
+  .card.conteso{border-left-color:#7d8aa0}
+  .card h3{margin:0 0 8px;font-size:16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .tag{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-weight:700;font-size:13px;
+    background:#eef2f7;border:1px solid #d7dee8;border-radius:6px;padding:1px 7px;color:#334155}
+  .badge{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+    border-radius:999px;padding:2px 10px;border:1px solid}
+  .b-alta{background:var(--alta-bg);color:var(--alta-ink);border-color:var(--alta-bd)}
+  .b-media{background:var(--media-bg);color:var(--media-ink);border-color:var(--media-bd)}
+  .b-bassa{background:var(--bassa-bg);color:var(--bassa-ink);border-color:var(--bassa-bd)}
+  .b-conteso{background:var(--cont-bg);color:var(--cont-ink);border-color:var(--cont-bd)}
+  .b-ok{background:var(--ok-bg);color:var(--ok-ink);border-color:var(--ok-bd)}
+  .q{border-radius:8px;padding:10px 13px;margin:9px 0;font-size:13.5px}
+  .q .lab{display:block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px;opacity:.8}
+  .q-md{background:#fffbeb;border:1px solid #f3e2b3;border-left:3px solid #e0992a;color:#6b5413;font-style:italic}
+  .q-code{background:#0f172a;border:1px solid #1e293b;color:#e2e8f0;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-style:normal;font-size:13px;white-space:pre-wrap}
+  .q-code .lab{color:#94a3b8}
+  .why{font-size:13.5px;color:#374151;margin-top:8px}
+  .why b{color:var(--ink)}
+  .ref{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;color:var(--muted)}
+  a.ref{color:#2563a8;text-decoration:none;border-bottom:1px dotted #9bb6d6}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px;background:var(--card);
+    border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:#f1f5f9;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;color:#475569}
+  tr:last-child td{border-bottom:none}
+  code{font-family:ui-monospace,Menlo,Consolas,monospace;background:#eef2f7;border:1px solid #e0e7ef;
+    border-radius:5px;padding:0 5px;font-size:12.5px}
+  .rej{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:13.5px}
+  .rej b{color:#1f7a45}
+  .bottom{background:#0f172a;color:#e2e8f0;border-radius:12px;padding:20px 24px;margin-top:28px}
+  .bottom h2{color:#fff;border-color:#334155;margin-top:0}
+  .bottom a{color:#7db8ff}
+  .next{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+  .next .opt{flex:1 1 240px;background:#1e293b;border:1px solid #334155;border-radius:8px;padding:12px 14px;font-size:13px}
+  .next .opt b{color:#fff}
+  footer{margin-top:34px;color:var(--muted);font-size:12px;text-align:center}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;margin:6px 0 0;font-size:12px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  a.taglink{text-decoration:none;cursor:pointer;white-space:nowrap}
+  a.taglink:hover .tag{background:#dbe7f5;border-color:#3b73b9;color:#1d4e89}
+  a.taglink::after{content:"\2197";font-size:9px;color:var(--muted);margin-left:1px;vertical-align:super}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <h1>Reporte de problemas — <em>pc-activities</em></h1>
+    <div class="sub">Progresión didáctica de las 17 actividades exclusivamente en español · análisis anclado al código Blockly real</div>
+    <div class="meta">Generado el 25/06/2026 · 17 actividades · 17 programas <code>.ptj</code> decodificados · análisis local</div>
+  </header>
+
+  <div class="method">
+    <b>Cómo leer este reporte.</b> Cada observación texto↔código incluye la <b>cita textual de la ficha</b> y el <b>dato exacto del código decodificado</b>.
+    Los candidatos fueron encontrados por un revisor estricto y luego filtrados por un <b>verificador escéptico independiente</b> (por defecto: rechazada hasta probarse):
+    <b>10 candidatos → 9 confirmados, 1 descartado</b>. Los defectos internos del código (§B) y los hechos de secuencia (§C) se verificaron directamente con <code>grep</code>/lectura del código, no por agentes.
+    <br><b>Cada código de actividad es un enlace ↗</b>: abre la actividad en el visor y resalta el punto correspondiente.
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">17</div><div class="l">Actividades</div></div>
+    <div class="stat"><div class="n">8</div><div class="l">Errores texto↔código (§A)</div></div>
+    <div class="stat"><div class="n">22</div><div class="l">Correcciones .md aplicadas (§F)</div></div>
+    <div class="stat"><div class="n">65</div><div class="l">Confirmados en la ronda profunda</div></div>
+  </div>
+  <div class="legend">
+    <span><i class="dot" style="background:#d9534f"></i> alta</span>
+    <span><i class="dot" style="background:#e0992a"></i> media</span>
+    <span><i class="dot" style="background:#cdbb2e"></i> baja</span>
+    <span><i class="dot" style="background:#7d8aa0"></i> en disputa</span>
+  </div>
+
+  <h2>A · Errores texto↔código confirmados
+    <span class="lead">El estudiante o el docente sería engañado de hecho.</span>
+  </h2>
+
+  <div class="card alta">
+    <h3><span class="tag">03.1</span> El concepto central de la actividad es falso <span class="badge b-alta">alta</span></h3>
+    <div class="q q-md"><span class="lab">La ficha dice — code-composition</span>«el valor de la <code>inclinación Y</code> se lee una vez, se divide por 15… y luego ese <b>mismo resultado</b> se usa en dos lugares: …la <code>posición Y</code> del LED y …la <code>nota musical</code>. ¡Esta reutilización es lo que garantiza la sincronización perfecta!»</div>
+    <div class="q q-code"><span class="lab">El código hace</span>LED  = 4 + round(oriY / 15)
+nota = oriY + 60        ← el sensor se lee DOS veces, la nota NO se divide</div>
+    <div class="why"><b>Por qué es un error:</b> no existe ningún “mismo resultado” reutilizado: el sensor se lee dos veces y la nota usa el valor crudo. La “sincronización perfecta” —que es <b>el objetivo didáctico de la actividad</b>— no existe. El error se propaga en 3 puntos: la card <i>“División Mágica”</i>, el code-composition, y la reflexión <i>“¿qué pasaría si quitáramos el bloque de división?”</i> (quitarla cambia solo el LED, no la nota).
+    <div style="margin-top:6px"><a class="ref" href="_activities/03.1-led-xylophone.es.md">_activities/03.1-led-xylophone.es.md</a> <span class="ref">· líneas 83, 102, 113</span></div></div>
+  </div>
+
+  <div class="card media">
+    <h3><span class="tag">16.4</span> Nombre de variable <b>y</b> objetivo equivocados en el guion del docente <span class="badge b-media">media</span></h3>
+    <div class="q q-md"><span class="lab">La ficha dice — guía docente (Inicio)</span>«Crearemos una variable llamada <b>'energía'</b>… competiremos para ver quién puede cargarla <b>hasta 50</b>…»</div>
+    <div class="q q-code"><span class="lab">El código hace</span>ESTABLECER var:toques = 0     ← la variable se llama "toques", no "energía"
+SI (var:toques &lt; 7) …       ← el robot se activa en 7, no en 50</div>
+    <div class="why"><b>Por qué es un error:</b> en la misma frase del guion hay <b>dos datos concretos equivocados</b> — el nombre de la variable (<code>energía</code> en vez de <code>toques</code>) y el objetivo del juego (<i>“cargarla hasta 50”</i> mientras el código se completa en <b>7</b>, <code>var:toques &lt; 7</code>). El code-composition usa correctamente <code>toques</code> y 7, así que la ficha es incoherente consigo misma: un docente que lee el Inicio anunciaría a la clase un nombre y una meta que el prototipo no tiene.
+    <div style="margin-top:6px"><a class="ref" href="_activities/16.4-robot-activation-challenge.es.md">_activities/16.4-robot-activation-challenge.es.md</a> <span class="ref">· línea 49</span></div></div>
+  </div>
+
+  <div class="card media">
+    <h3><span class="tag">02.2</span> El mecanismo de color prometido ≠ el real (y la ficha se auto-contradice) <span class="badge b-media">media</span></h3>
+    <div class="q q-md"><span class="lab">La ficha dice — learn</span>«…lo conectaremos directamente al valor de intensidad del <b>color Rojo</b>. Dejaremos el Verde y el Azul en cero.» (→ pantalla roja)</div>
+    <div class="q q-code"><span class="lab">El código hace</span>color_light(LEVEL = NivelRuido.leer(noise))   ← varía el BRILLO, ningún canal R/G/B</div>
+    <div class="why"><b>Por qué es un error:</b> el código no asigna ningún canal rojo/verde/azul; usa un solo parámetro de intensidad. La misma ficha, en el code-composition, lo admite (<i>“variando la intensidad del brillo”</i>): dos descripciones en conflicto en el mismo archivo.
+    <div style="margin-top:6px"><a class="ref" href="_activities/02.2-music-visualizer.es.md">_activities/02.2-music-visualizer.es.md</a> <span class="ref">· líneas 83–84</span></div></div>
+  </div>
+
+  <div class="card media">
+    <h3><span class="tag">16.5</span> El adverbio “solo” es falso <span class="badge b-media">media</span></h3>
+    <div class="q q-md"><span class="lab">La ficha dice</span>«<code>Al iniciar</code> <b>solo</b> prepara la variable <code>estado</code>.»</div>
+    <div class="q q-code"><span class="lab">El código hace</span>AL INICIAR:
+  ESTABLECER var:estado = FALSE
+  DibujoLED.background = #000000      ← segunda acción: apaga el fondo</div>
+    <div class="why"><b>Por qué es un error:</b> <code>AL INICIAR</code> hace <b>dos</b> cosas, no una; el estudiante que sigue el bloque se pierde el apagado inicial.
+    <div style="margin-top:6px"><a class="ref" href="_activities/16.5-magic-clap-switch.es.md">_activities/16.5-magic-clap-switch.es.md</a> <span class="ref">· línea 101</span></div></div>
+  </div>
+
+  <div class="card bassa">
+    <h3><span class="tag">16.3</span> “Duerme en la pantalla” pero la pantalla queda vacía <span class="badge b-bassa">baja</span></h3>
+    <div class="q q-md"><span class="lab">La ficha dice — rama SINO</span>«El murciélago se queda quieto o "duerme" <b>en la pantalla</b>.»</div>
+    <div class="q q-code"><span class="lab">El código hace</span>[sino]  DibujoLED.clear()      ← matriz apagada: ningún murciélago visible</div>
+    <div class="why"><b>Por qué es un error:</b> “en la pantalla” promete una figura quieta en la pantalla; el código borra todo y deja el display vacío.
+    <div style="margin-top:6px"><a class="ref" href="_activities/16.3-bat-in-the-dark.es.md">_activities/16.3-bat-in-the-dark.es.md</a> <span class="ref">· línea 90</span></div></div>
+  </div>
+
+  <div class="card conteso">
+    <h3><span class="tag">22.1</span> <code>ultimoLatido</code> (texto) vs <code>ultimoBeat</code> (código) <span class="badge b-conteso">en disputa</span></h3>
+    <div class="q q-md"><span class="lab">La ficha dice — learn / cierre docente</span>«…actualizar <code>ultimoLatido</code> al <code>tiempoActual</code>…»</div>
+    <div class="q q-code"><span class="lab">El código hace</span>ESTABLECER var:ultimoBeat = milliseconds()   ← la variable real es "ultimoBeat"</div>
+    <div class="why"><b>Caso límite — decides tú.</b> Los dos verificadores se dividieron: uno lo confirma (en el texto <code>ultimoLatido</code> va en backtick como una variable, pero en el código no existe); el otro lo rechaza (es un patrón <i>intencional</i>: nombre conceptual en la narración, identificador real en el code-composition — igual con <code>tiempoActual</code>/<code>intervalo</code>). Error si quieres que los nombres coincidan; opción legítima si es bilingüe a propósito.
+    <div style="margin-top:6px"><a class="ref" href="_activities/22.1-dj-metronome.es.md">_activities/22.1-dj-metronome.es.md</a> <span class="ref">· líneas 59, 87</span></div></div>
+  </div>
+
+  <h2>B · Defectos internos del código
+    <span class="lead">Verificados directamente con <code>grep</code> sobre el código decodificado.</span>
+  </h2>
+
+  <div class="card bassa">
+    <h3><span class="tag">19.1</span> Componente muerto <span class="badge b-bassa">baja</span></h3>
+    <div class="why"><code>DibujoLED4 = MatrixDraw</code> está declarado en los componentes pero <b>nunca se usa</b> en el código.</div>
+  </div>
+
+  <div class="card media">
+    <h3><span class="tag">21.1</span> Tres descuidos en el código <span class="badge b-media">media</span></h3>
+    <div class="why">
+      • La variable del ciclo es <code>lineas</code>, pero los comentarios dicen <i>«una variable llamada "filas"»</i>.<br>
+      • Los comentarios de la rama descendente (<code>CONTAR CON … DE 7 A 1</code>) son <b>copia-pega</b> de la ascendente: <i>«asigna valores desde 1 hasta 7 en aumentos de 1»</i>.<br>
+      • Los comentarios dicen <i>«se ejecuta <b>5 veces</b>…»</i> pero luego concluyen 7×7 = 49 (el “5” es un residuo erróneo).
+    </div>
+  </div>
+
+  <div class="card media">
+    <h3><span class="tag">14.2</span> Comentario auto-contradictorio y clonado <span class="badge b-media">media</span></h3>
+    <div class="q q-code"><span class="lab">Comentario en el código (idéntico en ambos eventos)</span>«la velocidad de latidos aumentará (Los tiempos son más largos,
+ es decir las variables toman valores grandes)»</div>
+    <div class="why"><b>Por qué es un error:</b> tiempos más largos / valores más grandes = latido más <b>lento</b>, lo opuesto de “aumentará”; y el mismo texto está pegado tanto en el bloque que <b>acelera</b> como en el que <b>frena</b>.</div>
+  </div>
+
+  <div class="card bassa">
+    <h3><span class="tag">16.3</span> Link/slug del proyecto fuera de tema <span class="badge b-bassa">baja</span></h3>
+    <div class="q q-code"><span class="lab">En el .md y en el .ptj</span>generate?luces-de-fiesta-al-oscurecer   ← "luces de fiesta", reusado para la actividad "murciélago"</div>
+    <div class="why">El programa sí dibuja un murciélago, pero el slug/link es el de otro proyecto (“luces de fiesta”), residuo de la reutilización.</div>
+  </div>
+
+  <h2>C · Secuencia didáctica
+    <span class="lead">Observaciones — dominio del autor, <b>confianza baja</b>. Los conteos son hechos; la lectura pedagógica no (aquí ya me equivoqué y corregí).</span>
+  </h2>
+
+  <div class="method" style="background:#eef6f1;border-color:#bcdfcd;color:#1f5b3f">
+    <b>La lógica de entrada prevista — el “corazón que late” (04.1) debería ser la 1ª actividad.</b>
+    Hoy <code>04.1</code> está en 4º lugar, después del xilófono; pero fue pensada como <b>primera lección</b>, y es el punto de entrada natural porque tiene <b>un solo output</b> (sin entrada ni mapeo) y construye la lógica base, paso a paso, en unos 10 minutos:
+    <ol style="margin:8px 0 0 20px;padding:0;line-height:1.7">
+      <li>qué es un <b>comando</b> → dibujar un corazón (1 comando);</li>
+      <li>dos comandos con una <b>pausa</b> → corazón abierto / corazón cerrado = una pequeña animación (secuencia + retraso);</li>
+      <li>“¿y si queremos que se repita?” → el <b>bucle principal</b> (<code>repetir para siempre</code>);</li>
+      <li>“¿y si queremos más animaciones adentro?” → <b>repeticiones dentro del bucle</b> (anidamiento).</li>
+    </ol>
+    <div style="margin-top:8px">Con la lógica bien explicada, un principiante llega tranquilamente hasta el bucle principal en la primera clase. Recién <b>después</b> conviene el <b>xilófono simple</b> (<code>02.1</code>), que es <b>más complejo</b>: combina <b>entrada + salida + mapeo</b>. El corazón, en cambio, es <b>salida pura</b>; luego se le agrega el <b>sonido del latido</b> (2 salidas), un paso lineal y fácil de entender. Por eso el orden actual (xilófono 1º, corazón 4º) <b>invierte la dificultad real</b> para quien recién empieza: se arranca con lo más complejo (input + mapeo) en vez de con lo más simple (una sola salida).</div>
+  </div>
+
+  <table>
+    <thead><tr><th>Aspecto</th><th>Dónde</th><th>Lección</th><th>Evaluación</th></tr></thead>
+    <tbody>
+      <tr><td><code>repetir N veces</code> (un número)</td><td>04.1</td><td>04.1 (también anidamiento)</td><td>✓ trivial, bien ubicado</td></tr>
+      <tr><td><code>contar con</code> (el “for”)</td><td>usado 16.4 · explicado 21.1</td><td>21.1 (lección completa)</td><td>⚠️ lección <b>fuera de orden</b>: usado en 16.4 antes de explicarse; ver §G</td></tr>
+      <tr><td><code>repetir mientras</code> (el “while”)</td><td>19.1</td><td>19.1</td><td>enseñado donde se usa, pero asume el <code>contar con</code> ya conocido (ver §G)</td></tr>
+      <tr><td>bloque tiempo (<code>ESPERAR</code>)</td><td><b>02.1</b>, luego en 12/17</td><td><b>ninguna</b></td><td>🔴 nunca se introduce en las 17 — e introducirlo es importante</td></tr>
+      <tr><td>variables</td><td>14.2 (de estado)</td><td>14.2 y 16.4 (contador)</td><td>el uso más abstracto (estado) precede al básico (contador) — por evaluar</td></tr>
+      <tr><td>toggle <code>no(...)</code></td><td>16.5, 17.1</td><td>16.5 + 17.1</td><td>par casi redundante — por evaluar</td></tr>
+    </tbody>
+  </table>
+  <div class="why" style="color:var(--muted)"><b>Corrección (en bloques, y con los nombres correctos).</b> El <code>repetir N veces</code> (un número, 04.1) es trivial y está bien ubicado. Dos nudos reales, evaluados <b>solo sobre las 17</b>: <b>(a)</b> el bloque <b>tiempo</b> (<code>ESPERAR</code>) se usa desde 02.1 en 12/17 actividades pero <b>nunca se introduce</b> con una lección → vacío importante (introducir el tiempo es fundamental); <b>(b)</b> el <b><code>contar con</code></b> se usa en 16.4 pero su lección real llega recién en <b>21.1</b> (y 19.1 ya lo da por conocido) → <b>lección fuera de orden</b>: en su primera aparición aún no está explicado. Terminología: los materiales dicen <code>for</code>/<code>while</code>, pero los bloques reales son <code>contar con</code> y <code>repetir mientras</code>.</div>
+
+  <h2>D · Transparencia — qué <em>no</em> es un error
+    <span class="lead">Para reconstruir confianza: lo que se descartó y por qué.</span>
+  </h2>
+  <div class="rej"><b>02.1 — ningún error.</b> “Mapeo directo” es coherente con el código, la constante 60 está explicada, “acelerómetro” es una simplificación legítima para Grados 3-12. Era un falso positivo de la primera ronda.</div>
+  <div class="rej"><b>En general — descartado.</b> Casi todas las “divergencias” de la primera ronda (el código hace animaciones, colores, bitmaps no descritos en el texto) <b>no son errores</b>: son andamiaje normal en actividades con código provisto. Por eso el filtro estricto redujo ~50 señalamientos inflados a <b>8 reales</b>.</div>
+  <div class="rej"><b>14.2 “estado durmiente” — removido.</b> Un corazón “durmiente” late <b>lento</b>, no se detiene: el código sí tiene ese estado (latido lento 500/150) frente al “activo” (rápido 250/80). La señal asumía erróneamente que “durmiente” = corazón detenido. Falso positivo.</div>
+
+  <h2>E · Coherencia interna — profundización
+    <span class="lead">Nuevos problemas sutiles confirmados (además de §A/§B). Ronda profunda: 95 candidatos → 65 confirmados, 30 rechazados.</span>
+  </h2>
+
+  <div class="card media">
+    <h3><span class="tag">03.1</span> El guion docente dice “izquierda y derecha”, pero la luz se mueve en vertical <span class="badge b-media">media</span></h3>
+    <div class="q q-md"><span class="lab">La ficha dice — guía docente</span>«¿Cómo podríamos hacer que una luz en la pantalla se mueva <b>a izquierda y derecha</b> siguiendo la melodía que tocamos con la inclinación?»</div>
+    <div class="q q-code"><span class="lab">El código hace</span>drawOnXY( X = 4 ,  Y = 4 + round(oriY/15) )   ← X FIJA, varía la Y → el punto va arriba/abajo, no izquierda/derecha</div>
+    <div class="why"><b>Por qué es un error:</b> en <code>drawOnXY</code> el primer argumento es X, el segundo Y. Aquí X es constante (4) y Y depende de la inclinación: movimiento <b>vertical</b>. Un docente que anuncia un movimiento horizontal es desmentido por la pantalla (y por el Desafío, que usa el eje X como eje fijo de duplicación).</div>
+  </div>
+
+  <div class="card media">
+    <h3><span class="tag">03.1</span> La card “La División Mágica” dice que la división escala también la nota — pero la nota no se divide <span class="badge b-media">media</span></h3>
+    <div class="q q-md"><span class="lab">La ficha dice — learn</span>«…la <b>división</b>… reducir el rango de números del sensor para que encaje perfectamente <b>tanto en nuestra pantalla como en nuestra escala musical</b>.»</div>
+    <div class="q q-code"><span class="lab">El código hace</span>nota = oriY + 60        ← ninguna división: el “rango musical” NO se reduce</div>
+    <div class="why"><b>Por qué es un error:</b> es una card <i>distinta</i> de la ya señalada en §A1, y enseña una justificación matemática falsa para la nota. Es un segundo punto del mismo defecto de fondo de 03.1.</div>
+  </div>
+
+  <div class="card media">
+    <h3><span class="tag">14.2</span> El comentario del bloque <code>faceUp</code> se auto-contradice <span class="badge b-media">media</span></h3>
+    <div class="q q-code"><span class="lab">Comentario en el código (bloque faceUp, que FRENA)</span>«…la velocidad de latido <b>aumentará</b> (Los tiempos son más largos…). En este bloque específico la velocidad de latidos <b>se reducirá</b>.»</div>
+    <div class="why"><b>Por qué es un error:</b> “aumentará” y “se reducirá” referidos a la misma acción; y <code>faceUp</code> pone 500/150 (es decir, frena). Solo “se reducirá” es coherente. Copia-pega mal adaptado del bloque gemelo.</div>
+  </div>
+
+  <div class="card bassa">
+    <h3><span class="tag">16.1</span> Glosa en inglés equivocada: “Si… Sino…” explicado como “(If…Else if…)” <span class="badge b-bassa">baja</span></h3>
+    <div class="q q-md"><span class="lab">La ficha dice — reflect</span>«…en el próximo proyecto con el bloque 'Si... Sino...'! <b>(If…Else if…)</b>»</div>
+    <div class="why"><b>Por qué es un error:</b> el bloque es un <code>if/else</code>, pero la glosa dice <code>else-if</code> (cadena de condiciones), un constructo distinto — y contradice la frase anterior, que describe la simple rama “falsa”.</div>
+  </div>
+
+  <div class="why" style="color:var(--muted);margin-top:6px">Confirmados también, pero <b>ya en §A/§B</b> (aquí con la cita exacta): 19.1 <code>DibujoLED4</code> declarado en el encabezado pero el paso “create” dice <i>“Necesitaremos 2 componentes”</i> (§B1); los tres comentarios erróneos de 21.1 (§B2); el comentario contradictorio de 14.2 (§B3). <b>En disputa</b> (un verificador confirma, otro rechaza): 22.1 <code>ultimoLatido</code> vs <code>ultimoBeat</code>.</div>
+
+  <h2>F · Redacción — español de Chile
+    <span class="lead">Los <b>22 hallazgos que estaban en el texto del <code>.md</code> ya fueron corregidos</b>. Abajo quedan solo los que están en el <b>código</b> (comentarios de los bloques), para corregir a mano en Protobject, más algunas decisiones.</span>
+  </h2>
+
+  <div class="method" style="background:#e9f6ee;border-color:#bce3cb;color:#1f5b3f">
+    <b>✓ Ya corregido en el <code>.md</code> (22 items).</b> Localización chilena: <code>patata→papa</code> (19.1), <code>bombilla→ampolleta</code> y <code>Puzzle→Rompecabezas</code> (16.5), dispositivo unificado en <code>celular</code> (02.1, 04.1, 16.2). Tildes/gramática/mayúsculas: <code>líneas</code>, <code>LEDs</code>, <code>BotónTáctil</code>, <code>reaccione</code>, <code>que ocurre</code>, <code>les dices</code>, <code>con una propiedad</code>, signos <code>¡…!</code>, <code>de la Tierra</code>, <code>60.000</code>, <code>¡Pon a prueba…!</code>, etc.
+  </div>
+
+  <div class="method" style="background:#fdecec;border-color:#f0b4af;color:#a3271f">
+    <b>Terminología de los bloques (decisión pendiente, no se tocó):</b> los materiales enseñan los ciclos con el nombre en inglés — <code>bucle "for"</code> (21.1: 17 veces; 19.1: 5 veces) y <code>bucle "while"</code> — mientras que los <b>bloques reales</b> se llaman <b><code>contar con</code></b> y <b><code>repetir mientras</code></b>. Cambiarlo es una decisión de diseño (no un typo), por eso se deja.
+  </div>
+
+  <div class="why" style="color:var(--muted);margin-bottom:6px">Lo de abajo está en los <b>comentarios del código Blockly</b> (no en el <code>.md</code>): se corrige a mano en Protobject.</div>
+
+  <table>
+    <thead><tr><th>Act.</th><th>Tipo</th><th>Incorrecto → correcto (en el código)</th><th>Sev</th></tr></thead>
+    <tbody>
+      <tr><td><span class="tag">02.1</span></td><td>errata</td><td><code style="color:#a3271f">secuencia porgramada</code> → <code style="color:#1f7a45">programada</code></td><td>alta</td></tr>
+      <tr><td><span class="tag">14.2</span></td><td>gramática</td><td><code style="color:#a3271f">el momento en cambia la posición</code> → <code style="color:#1f7a45">en que cambia</code></td><td>media</td></tr>
+      <tr><td><span class="tag">14.2</span></td><td>concordancia</td><td><code style="color:#a3271f">aumentará o <b>disminuirán</b></code> → <code style="color:#1f7a45">disminuirá</code></td><td>media</td></tr>
+      <tr><td><span class="tag">14.2</span></td><td>tilde</td><td><code style="color:#a3271f">aumentara</code> → <code style="color:#1f7a45">aumentará</code></td><td>media</td></tr>
+      <tr><td><span class="tag">16.4</span></td><td>mayúsculas</td><td>comentario <code style="color:#a3271f">"Toques"</code> → <code style="color:#1f7a45">"toques"</code> (×2)</td><td>baja</td></tr>
+      <tr><td><span class="tag">17.1</span></td><td>concordancia</td><td><code style="color:#a3271f">la posición… está <b>dado</b></code> → <code style="color:#1f7a45">está dada</code></td><td>media</td></tr>
+      <tr><td><span class="tag">17.1</span></td><td>errata</td><td><code style="color:#a3271f">mientra que</code> → <code style="color:#1f7a45">mientras que</code></td><td>baja</td></tr>
+      <tr><td><span class="tag">21.1</span></td><td>comentario</td><td><code style="color:#a3271f">variable llamada "filas"</code> → <code style="color:#1f7a45">"lineas"</code> (es el nombre real)</td><td>media</td></tr>
+      <tr><td><span class="tag">21.1</span></td><td>comentario</td><td>rama descendente: <code style="color:#a3271f">desde 1 hasta 7 en aumentos de 1</code> → describe el sentido opuesto (cuenta 7→1)</td><td>media</td></tr>
+      <tr><td><span class="tag">21.1</span></td><td>números</td><td><code style="color:#a3271f">se ejecuta 5 veces</code> → <code style="color:#1f7a45">7 veces</code> (luego dice 7×7=49)</td><td>media</td></tr>
+      <tr><td><span class="tag">21.1</span></td><td>errata</td><td><code style="color:#a3271f">de"dibuja en x..."</code> → <code style="color:#1f7a45">de "dibuja en x..."</code> (espacio)</td><td>baja</td></tr>
+      <tr><td><span class="tag">22.2</span></td><td>tilde</td><td><code style="color:#a3271f">mediremos cuanto es</code> → <code style="color:#1f7a45">cuánto</code> (interrogativo indirecto)</td><td>baja</td></tr>
+    </tbody>
+  </table>
+
+  <div class="why" style="color:var(--muted)"><b>Decisiones (no erratas claras), se dejan:</b> <code>16.1</code> “Si… <b>Sino</b>…” es el nombre del bloque if/else; <code>16.4</code> variable <code>energía</code> vs <code>toques</code> (§A2, decidir el nombre); <code>17.1</code> <code>flama ↔ llama</code> (también es el nombre de la variable <code>flama</code>); <code>22.1</code> <code>ultimoLatido</code> vs <code>ultimoBeat</code> (§A6, contestado).</div>
+
+  <h2>G · Referencias a otras actividades
+    <span class="lead"><b>Ninguna actividad debería citar a otra</b> (la progresión está en el orden). Aquí <b>todas</b> las referencias. <b style="color:#a3271f">En rojo las incorrectas</b> (apuntan a una actividad que aún no ha ocurrido, o afirman algo falso): hay que arreglarlas igual. Las demás son correctas — quitarlas es una decisión de estilo (autocontención). Ya limpias: solo <code>04.1</code> y <code>22.3</code>.</span>
+  </h2>
+
+  <div class="why" style="color:var(--muted);margin-bottom:8px">Leyenda de referencia: <b>←</b> hacia atrás · <b>→</b> hacia adelante · <b>◆</b> nombra un proyecto · <b>≡</b> todo el recorrido. Filas <span style="background:#fdecec;color:#a3271f;padding:0 5px;border-radius:3px">rojas = incorrectas</span> (6).</div>
+
+  <table>
+    <thead><tr><th>Act.</th><th>Secc.</th><th>Cita</th><th>Remite a</th><th>Estado</th></tr></thead>
+    <tbody>
+      <tr><td><span class="tag">02.1</span></td><td>Desafío</td><td><i>«El siguiente paso es hacer que una luz se mueva…»</i></td><td>→ 03.1</td><td style="color:var(--muted)">✓ correcto</td></tr>
+      <tr style="background:#fdecec"><td><span class="tag">02.2</span></td><td>teacher</td><td><i>«…relacionado la inclinación con notas musicales y a la posición de un LED»</i></td><td>← 02.1/03.1</td><td style="color:#a3271f"><b>Incorrecto:</b> la posición del LED es 03.1, que viene <b>después</b> de 02.2 (aquí aún no ha pasado)</td></tr>
+      <tr><td><span class="tag">03.1</span></td><td>teacher</td><td><i>«modificarán su proyecto de xilófono anterior»</i></td><td>← 02.1</td><td style="color:var(--muted)">✓ correcto</td></tr>
+      <tr><td><span class="tag">03.1</span></td><td>reflect</td><td><i>«…y el xilófono anterior?»</i></td><td>← 02.1</td><td style="color:var(--muted)">✓ correcto</td></tr>
+      <tr><td><span class="tag">14.1</span></td><td>learn</td><td><i>«Hasta ahora, hemos usado un bucle "repetir para siempre"…»</i></td><td>← prev.</td><td style="color:var(--muted)">✓ correcto</td></tr>
+      <tr><td><span class="tag">14.1</span></td><td>reflect</td><td><i>«…más "reactivo" que los anteriores»</i></td><td>← prev.</td><td style="color:var(--muted)">✓ correcto</td></tr>
+      <tr><td><span class="tag">16.1</span></td><td>Desafío</td><td><i>«…en el próximo proyecto con el bloque "Si... Sino..."»</i></td><td>→ 16.2</td><td style="color:var(--muted)">✓ correcto (16.2 es la siguiente)</td></tr>
+      <tr><td><span class="tag">16.2</span></td><td>teacher</td><td><i>«…Nuestra alarma para galletas tenía un Plan A…»</i></td><td>← 16.1 ◆</td><td style="color:var(--muted)">✓ correcto</td></tr>
+      <tr><td><span class="tag">16.3</span></td><td>teacher/learn/reflect</td><td><i>«…del Despertador de Girasol»</i>, <i>«espejo de la del girasol»</i>, <i>«lo contrario al Girasol»</i> + otras 4 (líneas 47,48,49,55)</td><td>← 16.2 ◆</td><td style="color:var(--muted)">✓ correctas (16.2 es anterior) — pero son <b>7</b></td></tr>
+      <tr><td><span class="tag">16.4</span></td><td>teacher</td><td><i>«…la actividad anterior: "Nuestro robot cosquilloso…"»</i> · <i>«El robot cosquilloso reaccionaba…»</i></td><td>← 14.1 ◆</td><td style="color:var(--muted)">✓ correcto</td></tr>
+      <tr><td><span class="tag">16.4</span></td><td>teacher</td><td><i>«anticipar la próxima lección»</i></td><td>→ siguiente</td><td style="color:var(--muted)">✓ correcto (vago)</td></tr>
+      <tr style="background:#fdecec"><td><span class="tag">16.5</span></td><td>reflect</td><td><i>«Compara este código con el de la "Vela Mágica"»</i></td><td>◆ 17.1</td><td style="color:#a3271f"><b>Incorrecto:</b> la "Vela Mágica" (17.1) viene <b>después</b> de 16.5</td></tr>
+      <tr style="background:#fdecec"><td><span class="tag">16.5</span></td><td>Desafío</td><td><i>«…el bucle "for", que veremos en la próxima misión!»</i></td><td>→</td><td style="color:#a3271f"><b>Incorrecto:</b> la siguiente (17.1) <b>no</b> tiene el for; está en 21.1</td></tr>
+      <tr><td><span class="tag">16.5</span></td><td>teacher/descr.</td><td><i>«…proyectos anteriores»</i> · <i>«Consolida todo lo que has aprendido…»</i></td><td>← prev.</td><td style="color:var(--muted)">✓ correcto (genérico)</td></tr>
+      <tr><td><span class="tag">17.1</span></td><td>teacher</td><td><i>«…las lecciones anteriores: eventos, variables… condicionales»</i></td><td>← prev.</td><td style="color:var(--muted)">✓ correcto</td></tr>
+      <tr style="background:#fdecec"><td><span class="tag">19.1</span></td><td>teacher</td><td><i>«Hemos aprendido el bucle "for"…»</i></td><td>←</td><td style="color:#a3271f"><b>Incorrecto:</b> la lección del <code>contar con</code> está en 21.1 (<b>después</b>); aquí solo se usó (16.4), no se enseñó</td></tr>
+      <tr><td><span class="tag">21.1</span></td><td>create/teacher</td><td><i>«…"Interruptor Mágico de Aplausos"»</i> · <i>«…su código anterior»</i></td><td>← 16.5 ◆</td><td style="color:var(--muted)">✓ correcto (16.5 es anterior)</td></tr>
+      <tr style="background:#fdecec"><td><span class="tag">21.1</span></td><td>Desafío</td><td><i>«…en el juego de "la papa caliente"… ¡Prepárate para el siguiente desafío!»</i></td><td>◆ 19.1 →</td><td style="color:#a3271f"><b>Incorrecto:</b> la papa caliente (19.1) es <b>anterior</b>, no "el siguiente"</td></tr>
+      <tr><td><span class="tag">22.1</span></td><td>teacher/intro</td><td><i>«Hemos usado el bloque "esperar"…»</i> · <i>«Has dominado las piezas…»</i></td><td>← prev.</td><td style="color:var(--muted)">✓ correcto</td></tr>
+      <tr style="background:#fdecec"><td><span class="tag">22.2</span></td><td>descr./reflect</td><td><i>«…este desafío final»</i> · <i>«Has completado todos los desafíos…»</i></td><td>≡ recorrido</td><td style="color:#a3271f"><b>Incorrecto:</b> <b>22.3 viene después</b>, así que no es el final</td></tr>
+    </tbody>
+  </table>
+
+  <div class="why" style="color:var(--muted)"><b>Las 6 en rojo</b> son referencias <b>rotas</b> (apuntan hacia adelante como si ya hubiera pasado, o afirman algo falso) → hay que corregirlas o quitarlas igual. Las otras ~14 son referencias correctas: quitarlas o dejarlas es decisión de estilo (autocontención). Nota aparte: <code>22.3</code> también está mal ubicada (después del final de 22.2) y el <code>contar con</code> es una lección fuera de orden (§C).</div>
+
+  <div class="bottom">
+    <h2>En síntesis</h2>
+    <p>Las actividades son <b>en su mayoría coherentes en el código</b>. Los defectos reales se concentran en tres frentes: <b>03.1</b> sigue siendo la única rota en su núcleo didáctico (prioridad #1, §A1 + §E); la <b>redacción</b> es el frente más cargado — <b>49 hallazgos</b> entre erratas (<code>porgramada</code>), gramática y sobre todo <b>localización chilena</b> (<code>papa</code> no <code>patata</code>, <code>ampolleta</code> no <code>bombilla</code>, <code>celular</code> uniforme); la <b>secuencia</b> en bloques es sana, con dos nudos: el bloque <b>tiempo</b> <b>nunca se introduce</b> (y debería), y la lección del <b><code>contar con</code></b> (21.1) llega <b>después</b> de su primer uso (16.4); y sobre todo la regla de que <b>ninguna actividad debe citar a otras</b>: hoy hay ~25 referencias (§G), solo <code>04.1</code> y <code>22.3</code> están limpias. Además una <b>terminología</b> por unificar (<code>contar con</code>/<code>repetir mientras</code>, no <code>for</code>/<code>while</code>), los nombres de variable (16.4, 22.1) y los descuidos de comentario (14.2, 21.1).</p>
+    <div class="next">
+      <div class="opt"><b>1 · Corregir</b> los defectos uno por uno, partiendo de 03.1 (texto + código).</div>
+      <div class="opt"><b>2 · Secuencia</b> — pensar primero cómo reordenar/llenar los vacíos de currículo.</div>
+      <div class="opt"><b>3 · Hoja de correcciones</b> — propuesta escrita (texto nuevo + código) por cada ítem, para aprobar antes de tocar los archivos.</div>
+    </div>
+  </div>
+
+  <footer>Reporte generado localmente sobre el análisis de pc-activities · las citas remiten a los archivos en <code>_activities/</code> y al código decodificado en <code>ptj/decoded/</code>.</footer>
+
+</div>
+
+<script>
+(function(){
+  var TAG2SLUG={"02.1":"02.1-xylophone","02.2":"02.2-music-visualizer","03.1":"03.1-led-xylophone","04.1":"04.1-heart-beat","14.1":"14.1-ticklish-robot","14.2":"14.2-my-robot-friend-heart","16.1":"16.1-cookie-thief-alarm","16.2":"16.2-sunflower-alarm-clock","16.3":"16.3-bat-in-the-dark","16.4":"16.4-robot-activation-challenge","16.5":"16.5-magic-clap-switch","17.1":"17.1-magic-birthday-candle","19.1":"19.1-digital-hot-potato","21.1":"21.1-cinematic-power-on","22.1":"22.1-dj-metronome","22.2":"22.2-applause-battle","22.3":"22.3-dont-spill-liquid-game"};
+  function clean(s){
+    if(!s) return '';
+    s=s.replace(/[«»]/g,'').trim();
+    if(s.indexOf('…')>=0){ s=s.split('…').map(function(x){return x.trim();}).sort(function(a,b){return b.length-a.length;})[0]||''; }
+    s=s.replace(/^[\s"'“”¿¡.,;:()]+|[\s"'“”.,;:()]+$/g,'').trim();
+    if(s.length>90){ var cut=s.slice(0,90); var sp=cut.lastIndexOf(' '); s=(sp>30?cut.slice(0,sp):cut); }
+    return s;
+  }
+  function snippetFor(cont){
+    if(!cont) return '';
+    var m=(cont.textContent||'').match(/«([^»]+)»/);
+    if(m){ var c=clean(m[1]); if(c.length>=4) return c; }
+    var red=cont.querySelector('code[style*="a3271f"]');
+    if(red){ var c2=clean(red.textContent); if(c2.length>=3) return c2; }
+    return '';
+  }
+  document.querySelectorAll('.tag').forEach(function(tag){
+    if(tag.closest('a.taglink')) return;
+    var mm=(tag.textContent||'').match(/\d+\.\d+/);
+    if(!mm) return;
+    var slug=TAG2SLUG[mm[0]];
+    if(!slug) return;
+    var cont=tag.closest('.card')||tag.closest('tr');
+    var q=cont?snippetFor(cont):'';
+    var href='engine.html#a='+encodeURIComponent(slug);
+    if(q) href+='&q='+encodeURIComponent(q);
+    var a=document.createElement('a');
+    a.href=href; a.target='_blank'; a.rel='noopener'; a.className='taglink';
+    a.title='Abrir la actividad'+(q?' y resaltar el punto':'');
+    tag.parentNode.insertBefore(a,tag);
+    a.appendChild(tag);
+  });
+})();
+</script>
+</body>
+</html>

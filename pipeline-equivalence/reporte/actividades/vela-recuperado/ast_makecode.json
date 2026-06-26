@@ -1,0 +1,75 @@
+{
+    "platform": "MakeCode",
+    "activity": "Vela Interactiva",
+    "ast": {
+        "type": "Program",
+        "blocks": [
+            {
+                "type": "Event",
+                "label": "on start",
+                "children": [
+                    {
+                        "type": "Assignment",
+                        "label": "set flama to true"
+                    }
+                ]
+            },
+            {
+                "type": "Event_Interrupt",
+                "label": "on loud sound",
+                "children": [
+                    {
+                        "type": "State_Toggle",
+                        "label": "set flama to not flama"
+                    }
+                ]
+            },
+            {
+                "type": "Loop",
+                "label": "forever",
+                "children": [
+                    {
+                        "type": "Conditional",
+                        "label": "if flama then",
+                        "children": [
+                            {
+                                "type": "Action",
+                                "label": "show leds [flame pattern 1]"
+                            },
+                            {
+                                "type": "Action",
+                                "label": "plot x [pick random 1 to 3] y [0]"
+                            },
+                            {
+                                "type": "Action",
+                                "label": "pause (ms) 200"
+                            },
+                            {
+                                "type": "Action",
+                                "label": "show leds [flame pattern 2]"
+                            },
+                            {
+                                "type": "Action",
+                                "label": "plot x [0] y [4]"
+                            },
+                            {
+                                "type": "Action",
+                                "label": "pause (ms) 200"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Conditional",
+                        "label": "else",
+                        "children": [
+                            {
+                                "type": "Action",
+                                "label": "show leds [empty pattern]"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

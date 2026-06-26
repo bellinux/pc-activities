@@ -1,0 +1,21 @@
+ACTIVIDAD: 19.1-digital-hot-potato
+CODE: papas-caliente-juego
+COMPONENTES: ReproductorSonido3=AudioPlayer, BotónTáctil3=TouchButton, DibujoLED4=MatrixDraw
+
+AL INICIAR
+  ESTABLECER var:pausado = TRUE
+
+protobject_BotónTáctil3_change  property=pressed
+  SI
+    [si var:pausado]
+    ESTABLECER var:pausado = FALSE
+    ESTABLECER var:tiempo = aleatorio(5..15)
+    ReproductorSonido3_play_set_2  VAR=sounds_list(VAR=movingTrain.mp3)
+    MIENTRAS (WHILE) (var:tiempo > 0)
+        ; // Temporizador con tiempo inicial aleatorio, valor entre 5 y 15.
+      AÑADIR -1 A var:tiempo
+      ESPERAR  s  VAR=1
+    ReproductorSonido3_play_set_2  VAR=sounds_list(VAR=creatureLaugh.mp3)
+    ESPERAR  s  VAR=4
+    ReproductorSonido3_stop_set_3
+    ESTABLECER var:pausado = TRUE

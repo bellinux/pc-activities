@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Visor Comparativo de AST</title>
+    <style>
+        body { 
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: #fff; 
+            color: #111; padding: 40px; margin: 0; line-height: 1.6; min-height: 100vh;
+            position: relative;
+        }
+        
+        /* Typography Hierarchy */
+        h1 { text-align: center; font-weight: 300; font-size: 2.2em; margin-bottom: 50px; color: #111; }
+        h2.platform-title { font-weight: 400; font-size: 1.8em; margin: 0; text-align: center; color: #333; }
+        h3.section-subtitle { font-weight: 600; font-size: 1.1em; color: #777; margin: 20px 0 15px 0; text-transform: uppercase; letter-spacing: 1px; }
+        
+        /* Layout */
+        .row { display: flex; width: 100%; max-width: 100%; margin: 0; box-sizing: border-box; }
+        .col { flex: 1; min-width: 0; padding-right: 40px; padding-left: 20px; }
+        .col-right { flex: 1; min-width: 0; padding-left: 40px; padding-right: 20px; }
+        
+        .center-line {
+            position: absolute;
+            top: 130px;
+            bottom: 40px;
+            left: 50%;
+            border-left: 1px dashed #ccc;
+            z-index: -1;
+        }
+        
+        /* Imágenes */
+        .images-row { margin-bottom: 20px; align-items: flex-start; }
+        .source-image { width: 100%; height: auto; display: block; margin: 0 auto; }
+
+        /* Estilos de Bloques AST (Mantenidos coloridos/con bordes como solicitado) */
+        .block { margin: 8px 0; padding: 12px 15px; border-radius: 8px; color: white; font-weight: 600; box-shadow: inset 0 -3px rgba(0,0,0,0.15); border: 1px solid rgba(0,0,0,0.1); }
+        .block-children { margin-left: 25px; padding-left: 15px; border-left: 2px dashed rgba(0,0,0,0.1); margin-top: 10px; }
+        
+        /* Colores por tipo */
+        .type-Event, .type-Event_Interrupt { background-color: #f39c12; }
+        .type-Loop { background-color: #2980b9; }
+        .type-Conditional { background-color: #27ae60; }
+        .type-Branch_True, .type-Branch_False { background-color: #2ecc71; margin-top: 5px; }
+        .type-Action, .type-Assignment, .type-State_Toggle { background-color: #8e44ad; }
+        .type-Program { background-color: #34495e; }
+
+        .block-label { font-size: 1.1em; display: flex; align-items: center; }
+        .block-type { font-size: 0.7em; background: rgba(0,0,0,0.2); padding: 2px 6px; border-radius: 4px; margin-right: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: white;}
+    </style>
+</head>
+<body>
+    <h1>Comparación Visual de ASTs</h1>
+    <div class="center-line"></div>
+    
+    <!-- Títulos de Plataforma -->
+    <div class="row">
+        <div class="col"><h2 class="platform-title" id="title1">Cargando...</h2></div>
+        <div class="col-right"><h2 class="platform-title" id="title2">Cargando...</h2></div>
+    </div>
+
+    <!-- Sottotitoli BLOCKS -->
+    <div class="row">
+        <div class="col"><h3 class="section-subtitle">Blocks</h3></div>
+        <div class="col-right"><h3 class="section-subtitle">Blocks</h3></div>
+    </div>
+
+    <!-- Imágenes -->
+    <div class="row images-row">
+        <div class="col" id="img1"></div>
+        <div class="col-right" id="img2"></div>
+    </div>
+
+    <!-- Sottotitoli AST -->
+    <div class="row">
+        <div class="col"><h3 class="section-subtitle">AST</h3></div>
+        <div class="col-right"><h3 class="section-subtitle">AST</h3></div>
+    </div>
+
+    <!-- Contenido AST -->
+    <div class="row">
+        <div class="col" id="ast1"></div>
+        <div class="col-right" id="ast2"></div>
+    </div>
+
+    <script>
+        function renderBlock(block) {
+            const div = document.createElement('div');
+            div.className = `block type-${block.type}`;
+            
+            const labelDiv = document.createElement('div');
+            labelDiv.className = 'block-label';
+            labelDiv.innerHTML = `<span class="block-type">${block.type}</span> ${block.label || block.type}`;
+            div.appendChild(labelDiv);
+
+            if (block.children && block.children.length > 0) {
+                const childrenDiv = document.createElement('div');
+                childrenDiv.className = 'block-children';
+                block.children.forEach(child => {
+                    childrenDiv.appendChild(renderBlock(child));
+                });
+                div.appendChild(childrenDiv);
+            }
+            return div;
+        }
+
+        function loadASTData(fileUrl, titleId, imgContainerId, astContainerId, imageFileName, actividad) {
+            const title = document.getElementById(titleId);
+            const imgContainer = document.getElementById(imgContainerId);
+            const astContainer = document.getElementById(astContainerId);
+
+            if(!fileUrl) return;
+
+            fetch(fileUrl)
+                .then(r => r.json())
+                .then(data => {
+                    let platformName = data.platform || 'Plataforma';
+                    if (platformName === 'MakeCode') platformName = 'Microbit';
+
+                    title.innerText = platformName;
+                    imgContainer.innerHTML = `<img src="../../actividades/${actividad}/${imageFileName}" class="source-image" alt="Source Image">`;
+                    
+                    if (data.ast && data.ast.blocks) {
+                        data.ast.blocks.forEach(block => {
+                            astContainer.appendChild(renderBlock(block));
+                        });
+                    } else {
+                        astContainer.innerHTML = '<p>No se encontraron bloques en la raíz del AST.</p>';
+                    }
+                })
+                .catch(e => {
+                    astContainer.innerHTML = `<p style="color:red">Error cargando ${fileUrl}: ${e}</p>`;
+                });
+        }
+
+        const params = new URLSearchParams(window.location.search);
+        const actividad = params.get('actividad');
+        if (actividad) {
+            loadASTData(`../actividades/${actividad}/ast_makecode.json`, 'title1', 'img1', 'ast1', 'microbit.png', actividad);
+            loadASTData(`../actividades/${actividad}/ast_protobject.json`, 'title2', 'img2', 'ast2', 'protobject.png', actividad);
+        } else {
+            document.querySelector('.row').innerHTML = "<p>Falta parámetro ?actividad=</p>";
+        }
+    </script>
+</body>
+</html>

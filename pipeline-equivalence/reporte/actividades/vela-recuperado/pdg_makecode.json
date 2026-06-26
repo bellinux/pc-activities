@@ -1,0 +1,42 @@
+{
+    "platform": "MakeCode",
+    "nodes": [
+        {"id": "n0", "kind": "ProgramStartEvent", "seq": 0, "in_loop": false},
+        {"id": "n1", "kind": "SetVariable", "seq": 1, "in_loop": false},
+        {"id": "n2", "kind": "SuddenNoiseEvent", "seq": 0, "in_loop": false},
+        {"id": "n3", "kind": "ToggleVariable", "seq": 1, "in_loop": false},
+        {"id": "n4", "kind": "ConditionalBranch", "seq": 2, "in_loop": true},
+        {"id": "n5", "kind": "DrawImage", "seq": 3, "in_loop": true},
+        {"id": "n6", "kind": "RandomInteger", "seq": 3, "in_loop": true},
+        {"id": "n7", "kind": "PlotPoint", "seq": 4, "in_loop": true},
+        {"id": "n8", "kind": "Delay", "seq": 5, "in_loop": true},
+        {"id": "n9", "kind": "DrawImage", "seq": 6, "in_loop": true},
+        {"id": "n10", "kind": "PlotPoint", "seq": 7, "in_loop": true},
+        {"id": "n11", "kind": "Delay", "seq": 8, "in_loop": true},
+        {"id": "n13", "kind": "DrawImage", "seq": 10, "in_loop": true}
+    ],
+    "edges": [
+        {"source": "n0", "target": "n1", "type": "control", "var": ""},
+        {"source": "n2", "target": "n3", "type": "control", "var": ""},
+        {"source": "n1", "target": "n4", "type": "data", "var": "flama"},
+        {"source": "n3", "target": "n4", "type": "data", "var": "flama"},
+        
+        {"source": "n4", "target": "n5", "type": "control", "var": "true"},
+        {"source": "n5", "target": "n6", "type": "control", "var": "seq"},
+        {"source": "n6", "target": "n7", "type": "control", "var": "seq"},
+        {"source": "n7", "target": "n8", "type": "control", "var": "seq"},
+        {"source": "n8", "target": "n9", "type": "control", "var": "seq"},
+        {"source": "n9", "target": "n10", "type": "control", "var": "seq"},
+        {"source": "n10", "target": "n11", "type": "control", "var": "seq"},
+        
+        {"source": "n4", "target": "n13", "type": "control", "var": "false"},
+        
+        {"source": "n6", "target": "n7", "type": "data", "var": "x"},
+        {"source": "n5", "target": "n7", "type": "side_effect", "var": "display"},
+        {"source": "n7", "target": "n8", "type": "side_effect", "var": "display"},
+        {"source": "n8", "target": "n9", "type": "side_effect", "var": "time"},
+        {"source": "n10", "target": "n11", "type": "side_effect", "var": "display"},
+        {"source": "n11", "target": "n4", "type": "control", "var": "loop_back"},
+        {"source": "n13", "target": "n4", "type": "control", "var": "loop_back"}
+    ]
+}

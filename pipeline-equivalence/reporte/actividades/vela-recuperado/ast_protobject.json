@@ -1,0 +1,75 @@
+{
+    "platform": "Protobject",
+    "activity": "Vela Interactiva",
+    "ast": {
+        "type": "Program",
+        "blocks": [
+            {
+                "type": "Event",
+                "label": "when the program starts",
+                "children": [
+                    {
+                        "type": "Assignment",
+                        "label": "set flama to true"
+                    }
+                ]
+            },
+            {
+                "type": "Event_Interrupt",
+                "label": "when NivelRuido2 sudden increase",
+                "children": [
+                    {
+                        "type": "State_Toggle",
+                        "label": "set flama to not flama"
+                    }
+                ]
+            },
+            {
+                "type": "Loop",
+                "label": "repeat forever",
+                "children": [
+                    {
+                        "type": "Conditional",
+                        "label": "if flama do",
+                        "children": [
+                            {
+                                "type": "Action",
+                                "label": "draw [flame pattern 1] with colour [red] on DibujoLED1"
+                            },
+                            {
+                                "type": "Action",
+                                "label": "draw on x [random integer from 3 to 5] y [2] with colour [red] on DibujoLED1"
+                            },
+                            {
+                                "type": "Action",
+                                "label": "delay of 200 milliseconds"
+                            },
+                            {
+                                "type": "Action",
+                                "label": "draw [flame pattern 2] with colour [red] on DibujoLED1"
+                            },
+                            {
+                                "type": "Action",
+                                "label": "draw on x [4] y [2] with colour [red] on DibujoLED1"
+                            },
+                            {
+                                "type": "Action",
+                                "label": "delay of 200 milliseconds"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Conditional",
+                        "label": "else",
+                        "children": [
+                            {
+                                "type": "Action",
+                                "label": "draw [empty pattern] with colour [red] on DibujoLED1"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

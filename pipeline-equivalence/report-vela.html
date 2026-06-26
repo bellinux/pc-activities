@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Report di Confronto — Análisis "Vela" (ricostruito vs recuperato)</title>
+<style>
+    :root{
+        --ink:#1A1612; --ink-soft:#4A3F33; --paper:#FBF6EB;
+        --burgundy:#8B2418; --ochre:#B8843A; --moss:#5A6B3B; --slate:#34495e;
+        --line:#e7e2d6;
+    }
+    *{box-sizing:border-box;}
+    body{
+        font-family:'Inter','Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+        background:#fff; color:#1f1b16; margin:0; padding:48px 24px; line-height:1.65;
+        max-width:1080px; margin:0 auto;
+    }
+    h1{font-weight:300; font-size:2.4em; margin:0 0 6px; border-bottom:2px solid var(--ink); padding-bottom:14px;}
+    .sub{color:#7a7064; font-size:1.05em; margin:0 0 36px;}
+    h2{font-weight:500; font-size:1.6em; margin:54px 0 14px; color:#241f19; border-left:5px solid var(--burgundy); padding-left:12px;}
+    h3{font-weight:600; font-size:1.15em; margin:30px 0 10px; color:#3a332b;}
+    p,li{font-size:1.04em; color:#3d362e;}
+    code{font-family:'Consolas','Courier New',monospace; background:#f3f1ea; padding:2px 6px; border-radius:4px; font-size:0.9em; color:#8B2418;}
+    a{color:var(--burgundy);}
+
+    /* Badges */
+    .badge{display:inline-block; font-size:0.72em; font-weight:700; letter-spacing:.6px; text-transform:uppercase;
+        padding:3px 9px; border-radius:20px; color:#fff; vertical-align:middle;}
+    .b-sost{background:var(--burgundy);}
+    .b-forma{background:var(--ochre);}
+    .b-inv{background:var(--moss);}
+
+    /* Verdict box */
+    .verdict{background:var(--paper); border:1px solid var(--line); border-left:6px solid var(--slate);
+        border-radius:10px; padding:22px 26px; margin:10px 0 14px;}
+    .verdict h3{margin-top:0; color:var(--slate);}
+    .kpis{display:flex; flex-wrap:wrap; gap:14px; margin-top:16px;}
+    .kpi{flex:1; min-width:150px; background:#fff; border:1px solid var(--line); border-radius:8px; padding:12px 14px;}
+    .kpi .n{font-size:1.5em; font-weight:600; color:var(--ink);}
+    .kpi .l{font-size:.82em; color:#857a6c; text-transform:uppercase; letter-spacing:.5px;}
+
+    /* Tables */
+    table{width:100%; border-collapse:collapse; margin:18px 0; font-size:.98em;}
+    th,td{padding:11px 14px; text-align:left; vertical-align:top; border-bottom:1px solid #efece4;}
+    th{border-top:2px solid var(--ink); border-bottom:1px solid var(--ink); font-size:.8em; text-transform:uppercase; letter-spacing:.7px; color:#4a4239;}
+    tr:last-child td{border-bottom:2px solid var(--ink);}
+    td.col-mine{background:#fbfaf6;}
+    .mono{font-family:'Consolas','Courier New',monospace; font-size:.86em;}
+    .tag-mine{color:var(--slate); font-weight:600;}
+    .tag-rec{color:var(--burgundy); font-weight:600;}
+
+    /* Side by side code */
+    .duo{display:flex; gap:18px; margin:14px 0;}
+    .duo > div{flex:1; min-width:0;}
+    .duo h4{margin:0 0 6px; font-size:.86em; text-transform:uppercase; letter-spacing:.6px;}
+    .duo h4.mine{color:var(--slate);} .duo h4.rec{color:var(--burgundy);}
+    pre{background:#1d1a16; color:#ece5d6; padding:14px 16px; border-radius:8px; overflow-x:auto;
+        font-family:'Consolas','Courier New',monospace; font-size:.8em; line-height:1.5; margin:0;}
+    pre .c{color:#9aa37a;} pre .k{color:#d99a6c;} pre .v{color:#c97f72;}
+
+    .note{background:#fef9e7; border-left:4px solid var(--ochre); padding:14px 18px; margin:18px 0; font-size:.98em; color:#6e5c20;}
+    .good{background:#f1f5ec; border-left:4px solid var(--moss); padding:14px 18px; margin:18px 0; color:#46532f;}
+    ul.tight li{margin:4px 0;}
+    .legend{font-size:.9em; color:#7a7064; margin:6px 0 0;}
+    footer{margin-top:60px; padding-top:18px; border-top:1px solid var(--line); color:#9b9183; font-size:.85em;}
+</style>
+</head>
+<body>
+
+<h1>Report di Confronto — Análisis “Vela”</h1>
+<p class="sub">Confronto tra l’analisi <span class="tag-mine">ricostruita</span> (<code>reporte/actividades/vela/</code>) e l’analisi <span class="tag-rec">originale recuperata</span> (<code>reporte/actividades/vela-recuperado/</code>). Generato il 2026-06-08.</p>
+
+<div class="verdict">
+    <h3>Verdetto in sintesi</h3>
+    <p>Le due analisi giungono alla <strong>identica conclusione scientifica</strong>: i due programmi (Microbit/MakeCode e Protobject) sono <strong>strutturalmente equivalenti</strong> — entrambe producono <code>isomorphic: true</code> e <code>graph_edit_distance: 0.0</code>, sullo stesso vocabolario di <strong>13 nodi</strong> e 9 <em>kind</em> canonici. La pipeline, i visori e gli schemi JSON sono soddisfatti da entrambe.</p>
+    <p>La <strong>differenza è una sola di sostanza</strong>: il <em>modello di flusso di controllo</em> del PDG. L’originale costruisce un grafo <strong>operazionale ciclico</strong> (catena sequenziale <code>seq</code> + archi di ritorno <code>loop_back</code> → 19 archi); la ricostruzione costruisce un grafo <strong>di pura dipendenza di controllo, aciclico</strong> (fan-out predicato→istruzione → 17 archi). Tutto il resto sono <strong>differenze di forma</strong> (campi extra, notazione, etichette, modellazione AST), nessuna delle quali altera il risultato né rompe i lettori.</p>
+    <div class="kpis">
+        <div class="kpi"><div class="n">1</div><div class="l">Diff. sostanziale</div></div>
+        <div class="kpi"><div class="n">~9</div><div class="l">Diff. di forma</div></div>
+        <div class="kpi"><div class="n">13 = 13</div><div class="l">Nodi (identici)</div></div>
+        <div class="kpi"><div class="n">17 ≠ 19</div><div class="l">Archi PDG</div></div>
+        <div class="kpi"><div class="n">true = true</div><div class="l">Isomorfismo</div></div>
+    </div>
+</div>
+
+<p class="legend">Legenda classificazione:
+    <span class="badge b-sost">Sostanziale</span> cambia il modello/risultato analitico ·
+    <span class="badge b-forma">Forma</span> stile, notazione o metadati ·
+    <span class="badge b-inv">Invariato</span> coincide.
+</p>
+
+<h2>1 · Quadro generale per artefatto</h2>
+<table>
+    <thead><tr><th>Artefatto</th><th>Esito</th><th>Sintesi della differenza</th></tr></thead>
+    <tbody>
+        <tr><td><code>text_*.json</code></td><td><span class="badge b-forma">Forma</span></td><td>L’originale aggiunge il campo <code>image</code>, righe vuote di separazione, notazione a parentesi quadre e <strong>nomi dei pattern LED</strong> (<code>flame/empty</code>). Stesso programma estratto.</td></tr>
+        <tr><td><code>ast_*.json</code></td><td><span class="badge b-forma">Forma</span></td><td>Stessa struttura logica. Differiscono: campo <code>activity</code>, radice <code>type:"Program"</code>, e soprattutto la <strong>modellazione del ramo <code>else</code></strong> e dell’espressione <code>random</code>.</td></tr>
+        <tr><td><code>tabla_ir.json</code></td><td><span class="badge b-forma">Forma</span></td><td>Stesse 10 corrispondenze. Cambiano l’<strong>ordine</strong> e il nome canonico del ciclo (<code>InfiniteLoop</code> vs <code>LoopForever</code>).</td></tr>
+        <tr><td><code>pdg_*.json</code></td><td><span class="badge b-sost">Sostanziale</span></td><td><strong>Stesso insieme di 13 nodi</strong>, ma diversa topologia degli archi: <strong>19 vs 17</strong>, modello di controllo sequenziale+ciclico vs fan-out aciclico.</td></tr>
+        <tr><td><code>metricas.json</code></td><td><span class="badge b-inv">Invariato*</span></td><td>Conclusione identica (iso=true, GED=0, 13/13 nodi). Cambia solo il conteggio archi (19/19 vs 17/17), conseguenza diretta del PDG.</td></tr>
+    </tbody>
+</table>
+
+<!-- ============ TEXT ============ -->
+<h2>2 · Estrazione del testo <span class="badge b-forma">Forma</span></h2>
+<p>Entrambe estraggono lo stesso programma, riga per riga, con indentazione a 2 spazi. Le differenze sono di metadati e notazione.</p>
+<table>
+    <thead><tr><th>Aspetto</th><th class="tag-rec">Originale (recuperado)</th><th class="tag-mine col-mine">Ricostruito (vela)</th></tr></thead>
+    <tbody>
+        <tr><td>Chiavi</td><td class="mono">platform, <strong>image</strong>, extracted_text</td><td class="mono col-mine">platform, extracted_text</td></tr>
+        <tr><td>Righe (makecode)</td><td>16 (con righe vuote separatrici)</td><td class="col-mine">14 (senza separatori)</td></tr>
+        <tr><td>Notazione parametri</td><td class="mono">plot x <strong>[</strong>pick random 1 to 3<strong>]</strong> y <strong>[</strong>0<strong>]</strong></td><td class="mono col-mine">plot x <strong>(</strong>pick random 1 to 3<strong>)</strong> y 0</td></tr>
+        <tr><td>Pattern LED</td><td class="mono">show leds <strong>[flame pattern 1]</strong> … <strong>[empty pattern]</strong></td><td class="mono col-mine">show leds <em>(generico, indistinto)</em></td></tr>
+        <tr><td>Blocco <code>if</code> Protobject</td><td class="mono">if flama do <em>(una riga)</em></td><td class="mono col-mine">if flama / do <em>(due righe)</em></td></tr>
+        <tr><td>Lingua etichette</td><td>inglese: <code>[red]</code></td><td class="col-mine">misto: <code>[rojo]</code>, <code>[cuadro negro]</code></td></tr>
+    </tbody>
+</table>
+<p><strong>Motivazione.</strong> Il campo <code>image</code> è metadato documentale: il visore <code>visor_extraccion.html</code> <em>non</em> lo legge (compone il percorso dell’immagine da sé), quindi è inerte ma utile alla tracciabilità. La scelta più rilevante è la <strong>nomenclatura dei pattern</strong>: l’originale distingue <code>flame pattern 1/2</code> da <code>empty pattern</code>, restando più fedele all’immagine (le matrici LED del ramo <code>then</code> sono accese “a fiamma”, quella dell’<code>else</code> è spenta). La mia versione aveva appiattito i tre <code>show leds</code> di MakeCode in un’unica dicitura: <span class="tag-rec">su questo punto l’originale è più fedele</span>.</p>
+
+<!-- ============ AST ============ -->
+<h2>3 · Albero sintattico (AST) <span class="badge b-forma">Forma</span></h2>
+<p>Stessa gerarchia logica (Event → Loop → Conditional → azioni). Le differenze sono di schema e di stile di modellazione; entrambe rispettano <code>data.ast.blocks[]</code> con <code>type/label/children</code> e tutti i <code>type</code> hanno la classe CSS corrispondente nel visore.</p>
+<table>
+    <thead><tr><th>Aspetto</th><th class="tag-rec">Originale</th><th class="tag-mine col-mine">Ricostruito</th></tr></thead>
+    <tbody>
+        <tr><td>Chiavi radice</td><td class="mono">platform, <strong>activity</strong>, ast</td><td class="mono col-mine">platform, ast</td></tr>
+        <tr><td>Radice AST</td><td class="mono">ast.<strong>type:"Program"</strong> + blocks</td><td class="mono col-mine">ast.blocks (senza type)</td></tr>
+        <tr><td>Ramo <code>else</code></td><td>secondo nodo <code>Conditional</code> (label “else”)</td><td class="col-mine">wrapper <code>Branch_True</code> + <code>Branch_False</code></td></tr>
+        <tr><td>Espressione <code>random</code></td><td>inline nell’etichetta del <code>plot</code></td><td class="col-mine">nodo figlio <code>Action</code> annidato</td></tr>
+        <tr><td><code>children</code> vuoti</td><td>omessi sulle foglie</td><td class="col-mine">presenti come <code>[]</code></td></tr>
+        <tr><td>Totale blocchi resi</td><td>14</td><td class="col-mine">16</td></tr>
+    </tbody>
+</table>
+<div class="duo">
+  <div>
+    <h4 class="rec">Originale — else come Conditional fratello</h4>
+<pre><span class="k">Loop</span> "forever"
+  <span class="k">Conditional</span> "if flama then"
+    Action × 6
+  <span class="k">Conditional</span> "else"
+    Action × 1</pre>
+  </div>
+  <div>
+    <h4 class="mine">Ricostruito — rami Branch_True/False</h4>
+<pre><span class="k">Loop</span> "forever"
+  <span class="k">Conditional</span> "if flama"
+    <span class="k">Branch_True</span> "then"
+      Action × 6  (random annidato)
+    <span class="k">Branch_False</span> "else"
+      Action × 1</pre>
+  </div>
+</div>
+<p><strong>Motivazione.</strong> Sono due convenzioni entrambe valide. L’originale è più <em>piatto</em> e riusa <code>Conditional</code> anche per l’<code>else</code> (semplice, ma “else” non è propriamente un condizionale). La mia versione usa i tipi <code>Branch_True/Branch_False</code> — che <em>esistono apposta</em> nel CSS di <code>visor_ast.html</code> — e annida <code>random</code> come figlio per rispecchiarne la dipendenza dati: più verboso ma semanticamente più esplicito. Nessuna delle due rompe il rendering.</p>
+
+<!-- ============ TABLA IR ============ -->
+<h2>4 · Tabella ontologica IR <span class="badge b-forma">Forma</span></h2>
+<p>Identiche nelle 10 corrispondenze di blocco. Differenze puramente redazionali:</p>
+<table>
+    <thead><tr><th>Aspetto</th><th class="tag-rec">Originale</th><th class="tag-mine col-mine">Ricostruito</th></tr></thead>
+    <tbody>
+        <tr><td>Nome canonico del ciclo</td><td class="mono">InfiniteLoop</td><td class="mono col-mine">LoopForever</td></tr>
+        <tr><td>Ordine righe</td><td>Start, <strong>Noise, Set</strong>, Toggle, …</td><td class="col-mine">Start, <strong>Set, Noise</strong>, Toggle, …</td></tr>
+        <tr><td>Descrizione DrawImage</td><td class="mono">show leds [any pattern/empty]</td><td class="mono col-mine">show leds</td></tr>
+    </tbody>
+</table>
+<p><strong>Motivazione.</strong> L’originale raggruppa prima i due eventi (Start, Noise) e poi le due assegnazioni; la mia versione accoppia ciascun evento col proprio effetto (Start→Set, Noise→Toggle). Pura leggibilità. Il nome <code>InfiniteLoop</code>/<code>LoopForever</code> è sinonimico.</p>
+<div class="good"><strong>Convergenza importante.</strong> <em>Entrambe</em> le versioni inseriscono una riga per il ciclo nella tabella IR pur <em>non</em> avendo un nodo-ciclo dedicato nel PDG. Ciò conferma che trattare il ciclo come concetto ontologico ma rappresentarlo strutturalmente nel grafo è una scelta voluta dell’impianto originale, non un mio errore.</p></div>
+
+<!-- ============ PDG ============ -->
+<h2>5 · Program Dependence Graph <span class="badge b-sost">Sostanziale</span></h2>
+<p>Qui sta l’unica divergenza di sostanza. <strong>I nodi coincidono perfettamente</strong> (13 nodi, stessi 9 <em>kind</em> con identiche molteplicità: DrawImage×3, PlotPoint×2, Delay×2, e 7 singoli). Cambia il modo di collegare gli archi.</p>
+<table>
+    <thead><tr><th>Metrica archi</th><th class="tag-rec">Originale</th><th class="tag-mine col-mine">Ricostruito</th></tr></thead>
+    <tbody>
+        <tr><td>Totale archi</td><td><strong>19</strong></td><td class="col-mine"><strong>17</strong></td></tr>
+        <tr><td>control</td><td>12</td><td class="col-mine">10</td></tr>
+        <tr><td>data</td><td>3</td><td class="col-mine">4</td></tr>
+        <tr><td>side_effect</td><td>4</td><td class="col-mine">3</td></tr>
+        <tr><td>Etichette <code>var</code> usate</td><td class="mono">true, false, flama, x, display, <strong>seq, loop_back, time</strong></td><td class="mono col-mine">true, false, flama, x, display</td></tr>
+        <tr><td>Grafo</td><td><strong>Ciclico</strong> (archi <code>loop_back</code> → n4)</td><td class="col-mine"><strong>Aciclico</strong></td></tr>
+        <tr><td>ID nodi</td><td class="mono">n0…n11, n13 (n12 mancante)</td><td class="mono col-mine">n1…n13 (contigui)</td></tr>
+        <tr><td><code>seq</code></td><td>locale per gestore, con salti</td><td class="col-mine">globale 1…13</td></tr>
+    </tbody>
+</table>
+
+<h3>5.1 · Le due filosofie a confronto</h3>
+<div class="duo">
+  <div>
+    <h4 class="rec">Originale — PDG operazionale (CFG-aumentato)</h4>
+<pre><span class="c"># catena di esecuzione</span>
+n4 ─<span class="k">control:true</span>→ n5
+n5 ─<span class="k">control:seq</span>→ n6 ─<span class="k">seq</span>→ n7 → n8
+n8 ─<span class="k">seq</span>→ n9 → n10 → n11
+n4 ─<span class="k">control:false</span>→ n13
+<span class="c"># chiusura del ciclo</span>
+n11 ─<span class="k">control:loop_back</span>→ n4
+n13 ─<span class="k">control:loop_back</span>→ n4
+<span class="c"># dati & effetti</span>
+n6 ─<span class="k">data:x</span>→ n7
+n5 ─<span class="k">side_effect:display</span>→ n7
+n7 ─<span class="k">side_effect:display</span>→ n8
+n8 ─<span class="k">side_effect:time</span>→ n9
+n10 ─<span class="k">side_effect:display</span>→ n11</pre>
+  </div>
+  <div>
+    <h4 class="mine">Ricostruito — PDG di dipendenza di controllo</h4>
+<pre><span class="c"># controllo: predicato → istruzioni</span>
+n5 ─<span class="k">control:true</span>→ n6,n7,n8,n9,n10,n11,n12
+n5 ─<span class="k">control:false</span>→ n13
+n1 ─<span class="k">control</span>→ n2   n3 ─<span class="k">control</span>→ n4
+<span class="c"># dati (def→uso di flama, x)</span>
+n2 ─<span class="k">data:flama</span>→ n4,n5
+n4 ─<span class="k">data:flama</span>→ n5
+n7 ─<span class="k">data:x</span>→ n8
+<span class="c"># effetti sul display</span>
+n6 → n8 → n10 → n11  <span class="k">(side_effect:display)</span>
+<span class="c"># nessun arco di ritorno: grafo aciclico</span></pre>
+  </div>
+</div>
+<p class="legend">N.B. la numerazione dei nodi differisce (l’originale usa n0-base con un salto); le frecce qui sono allineate al ruolo del nodo, non all’ID.</p>
+
+<h3>5.2 · Interpretazione e motivazione</h3>
+<ul class="tight">
+    <li><strong>Originale = vicino al Control Flow Graph.</strong> Gli archi <code>control:seq</code> codificano l’<em>ordine di esecuzione</em> reale e gli archi <code>loop_back</code> chiudono esplicitamente l’iterazione del <code>forever</code>, rendendo il grafo <strong>ciclico</strong>. Aggiunge anche una risorsa temporale (<code>side_effect:time</code>) sui <code>delay</code>. È più <em>operativo/leggibile come traccia di esecuzione</em> e — punto a suo favore — collega il concetto <code>InfiniteLoop</code> della tabella IR a una struttura concreta nel grafo (gli archi di ritorno).</li>
+    <li><strong>Ricostruito = vicino al PDG formale</strong> (Ferrante–Ottenstein–Warren). La dipendenza di controllo va dal <em>predicato</em> alle istruzioni che esso governa (fan-out <code>true</code>/<code>false</code>), <strong>senza</strong> archi sequenziali né di ritorno: l’ordine emerge dalle dipendenze dati/effetti. È più aderente alla definizione canonica di PDG, ma rappresenta il ciclo solo come <em>scope</em> (<code>in_loop</code> → cluster “alcance de control”).</li>
+    <li><strong>Dipendenze dati.</strong> Ho aggiunto l’arco <code>SetVariable → ToggleVariable</code> (la prima inversione legge il valore impostato all’avvio): più completo sul def-uso di <code>flama</code>. L’originale lo omette, trattando i due gestori di evento come più indipendenti.</li>
+    <li><strong>Effetti collaterali.</strong> L’originale concatena <em>plot→delay</em> e introduce <code>time</code>; io concateno la catena dei soli scrittori del display (<em>draw→plot→draw→plot</em>). Granularità diversa, intento simile (ordinare le scritture sulla matrice).</li>
+</ul>
+<div class="note"><strong>Sono entrambi “corretti”?</strong> Sì: appartengono a due scuole diverse di rappresentazione delle dipendenze. L’originale privilegia la <em>fedeltà all’esecuzione</em> (CFG + dati + tempo + ciclo esplicito); la ricostruzione privilegia la <em>purezza teorica del PDG</em> (sola dipendenza di controllo/dati, grafo aciclico). La differenza di +2 archi nasce interamente da <code>loop_back</code>×2 più la diversa contabilità di data/side_effect.</p></div>
+
+<!-- ============ METRICAS ============ -->
+<h2>6 · Metriche finali <span class="badge b-inv">Conclusione invariata</span></h2>
+<table>
+    <thead><tr><th>Metrica</th><th class="tag-rec">Originale</th><th class="tag-mine col-mine">Ricostruito</th></tr></thead>
+    <tbody>
+        <tr><td><code>isomorphic</code></td><td>true</td><td class="col-mine">true</td></tr>
+        <tr><td><code>graph_edit_distance</code></td><td>0.0</td><td class="col-mine">0.0</td></tr>
+        <tr><td>nodi (G1/G2)</td><td>13 / 13</td><td class="col-mine">13 / 13</td></tr>
+        <tr><td>archi (G1/G2)</td><td>19 / 19</td><td class="col-mine">17 / 17</td></tr>
+    </tbody>
+</table>
+<p><strong>Motivazione.</strong> In <em>entrambe</em> le versioni i due PDG di piattaforma (MakeCode e Protobject) sono costruiti identici fra loro — l’equivalenza è dunque <em>by design</em> e il VF2 restituisce <code>true</code> con GED 0. Il valore degli archi (19 vs 17) <strong>non</strong> indica disaccordo fra le analisi: misura solo quanti archi contiene ciascun modello di PDG. La tesi dimostrata — “stesso programma, due piattaforme, grafi delle dipendenze isomorfi” — è la stessa.</p>
+
+<!-- ============ CONCLUSIONE ============ -->
+<h2>7 · Conclusione</h2>
+<p>Le due analisi sono <strong>scientificamente concordanti e ampiamente compatibili</strong>. Coincidono su: testo estratto, gerarchia AST, ontologia IR (10 corrispondenze), insieme dei 13 nodi del PDG e risultato finale (isomorfismo, GED 0). Divergono in modo <strong>sostanziale su un solo punto</strong> — la filosofia di costruzione degli archi del PDG — e per il resto su <strong>forma</strong> (metadati, notazione, etichette, micro-scelte di modellazione AST).</p>
+<p>Indicazioni operative, se si vuole una versione unica:</p>
+<ul class="tight">
+    <li>Adottare dall’<span class="tag-rec">originale</span>: i <strong>nomi dei pattern LED</strong> (più fedeli all’immagine), il campo <code>image</code> e gli archi <code>loop_back</code> (rendono il ciclo esplicito anche nel PDG, in linea con la riga IR del ciclo).</li>
+    <li>Adottare dalla <span class="tag-mine">ricostruzione</span>: i tipi AST <code>Branch_True/False</code> (vocabolario previsto dal visore) e l’arco dati <code>Set→Toggle</code> (def-uso completo).</li>
+    <li>Decidere consapevolmente <em>una</em> filosofia di PDG — operazionale (CFG+loop_back) <strong>oppure</strong> formale (dipendenza pura) — e applicarla a entrambe le piattaforme per mantenere l’isomorfismo.</li>
+</ul>
+
+<footer>
+    Report generato confrontando <code>reporte/actividades/vela/</code> e <code>reporte/actividades/vela-recuperado/</code>.
+    Tutti i conteggi (archi, nodi, blocchi, righe) sono stati estratti programmaticamente dai JSON, non stimati a vista.
+</footer>
+
+</body>
+</html>

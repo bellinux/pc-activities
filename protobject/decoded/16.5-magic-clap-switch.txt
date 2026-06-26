@@ -1,0 +1,15 @@
+ACTIVIDAD: 16.5-magic-clap-switch
+CODE: luz-encendida-al-ruido
+COMPONENTES: NivelRuido1=NoiseLevel, DibujoLED2=MatrixDraw
+
+AL INICIAR
+  ESTABLECER var:estado = FALSE
+  DibujoLED2_background_set_3  VAR=colour_picker(COLOUR=#000000)
+
+protobject_NivelRuido1_change  property=suddenIncrease
+  ESTABLECER var:estado = no(var:estado)
+  SI
+    [si var:estado]
+    DibujoLED2_draw_set_1  VAR=drawleds(btmMatrix=1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)  VAR2=colour_picker(COLOUR=#ff0000)
+    [sino]
+    DibujoLED2_clear_set_4

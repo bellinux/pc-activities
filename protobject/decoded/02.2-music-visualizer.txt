@@ -1,0 +1,6 @@
+ACTIVIDAD: 02.2-music-visualizer
+CODE: luci-discoteca-ruido
+COMPONENTES: NivelRuido1=NoiseLevel, DibujoLED2=MatrixDraw
+
+REPETIR PARA SIEMPRE (bucle principal)
+  DibujoLED2_draw_set_1  VAR=drawleds(btmMatrix=0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0)  VAR2=color_light(LEVEL=NivelRuido1.leer(noise))

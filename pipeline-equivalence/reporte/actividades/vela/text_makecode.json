@@ -1,0 +1,19 @@
+{
+    "platform": "MakeCode",
+    "extracted_text": [
+        "on start",
+        "  set flama to true",
+        "on loud sound",
+        "  set flama to not flama",
+        "forever",
+        "  if flama then",
+        "    show leds",
+        "    plot x (pick random 1 to 3) y 0",
+        "    pause (ms) 200",
+        "    show leds",
+        "    plot x 0 y 4",
+        "    pause (ms) 200",
+        "  else",
+        "    show leds"
+    ]
+}

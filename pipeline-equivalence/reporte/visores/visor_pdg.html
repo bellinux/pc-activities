@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Visor Comparativo de PDG</title>
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <style>
+        body { font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #fff; color: #111; margin: 0; padding: 40px; box-sizing: border-box; line-height: 1.6; }
+        h2 { color: #111; text-align: center; font-weight: 300; margin-bottom: 20px; font-size: 2em; }
+        
+        .legend { text-align: center; margin-bottom: 40px; font-size: 1.1em; padding: 10px; border-bottom: 1px solid #eee; margin-bottom: 30px; }
+        .legend span { margin: 0 15px; padding: 3px 8px; font-weight: 500; font-family: monospace; font-size: 0.9em; }
+
+        .split-container { display: flex; gap: 40px; width: 100%; max-width: 100%; margin: 0; box-sizing: border-box; }
+        .graph-wrapper { flex: 1; display: flex; flex-direction: column; padding-right: 20px; }
+        .graph-wrapper-right { flex: 1; display: flex; flex-direction: column; padding-left: 20px; border-left: 1px dashed #ccc; }
+        
+        .network-container { width: 100%; height: 75vh; outline: none; }
+        .meta-info { margin-bottom: 15px; text-align: center; font-size: 1.4em; color: #333; font-weight: 400; }
+    </style>
+</head>
+<body>
+    <h2>Comparación Interactiva de PDGs (Lado a Lado)</h2>
+    <div class="legend">
+        <strong>Leyenda de Nodos:</strong>
+        <span style="color: #3498db; border-left: 3px solid #3498db;">Dentro del Loop</span>
+        <span style="color: #e67e22; border-left: 3px solid #e67e22;">Fuera del Loop</span>
+    </div>
+    
+    <div class="split-container">
+        <div class="graph-wrapper">
+            <div class="meta-info" id="meta1"><span style="color:#777;">Cargando...</span></div>
+            <div id="network1" class="network-container"></div>
+        </div>
+        <div class="graph-wrapper-right">
+            <div class="meta-info" id="meta2"><span style="color:#777;">Cargando...</span></div>
+            <div id="network2" class="network-container"></div>
+        </div>
+    </div>
+
+    <script>
+        function loadPDG(fileUrl, metaId, containerId) {
+            const container = document.getElementById(containerId);
+            const meta = document.getElementById(metaId);
+
+            if (!fileUrl) {
+                container.innerHTML = "<p style='text-align:center;'>Falta el parámetro del archivo.</p>";
+                meta.innerHTML = "";
+                return;
+            }
+
+            fetch(fileUrl)
+                .then(r => r.json())
+                .then(data => {
+                    let platformName = data.platform || 'Plataforma';
+                    if (platformName === 'MakeCode') platformName = 'Microbit';
+
+                    meta.innerHTML = `${platformName}`;
+
+                    const nodes = new vis.DataSet(data.nodes.map(n => {
+                        let borderColor = '#ccc';
+                        if(n.in_loop) { borderColor = '#3498db'; }
+                        else { borderColor = '#e67e22'; }
+                        
+                        return {
+                            id: n.id,
+                            label: `[${n.seq}] ${n.kind}`,
+                            color: { background: '#fff', border: borderColor },
+                            font: { color: '#111', face: 'monospace' },
+                            shape: 'box',
+                            borderWidth: 2,
+                            margin: 10
+                        };
+                    }));
+
+                    const edges = new vis.DataSet(data.edges.map(e => {
+                        let dashes = false;
+                        let color = '#999';
+                        if(e.type === 'side_effect') { dashes = true; color = '#27ae60'; }
+                        
+                        return {
+                            from: e.source,
+                            to: e.target,
+                            label: e.var,
+                            arrows: 'to',
+                            dashes: dashes,
+                            color: { color: color },
+                            font: { align: 'middle', face: 'monospace', color: color }
+                        };
+                    }));
+
+                    const graphData = { nodes: nodes, edges: edges };
+                    const options = {
+                        layout: {
+                            hierarchical: {
+                                direction: 'UD',
+                                nodeSpacing: 180,
+                                levelSeparation: 120,
+                                blockShifting: true,
+                                edgeMinimization: true,
+                                parentCentralization: true
+                            }
+                        },
+                        physics: false
+                    };
+
+                    new vis.Network(container, graphData, options);
+                })
+                .catch(e => {
+                    container.innerHTML = `<p style="color:red; text-align:center;">Error: ${e}</p>`;
+                });
+        }
+
+        const params = new URLSearchParams(window.location.search);
+        const actividad = params.get('actividad');
+        if (actividad) {
+            loadPDG(`../actividades/${actividad}/pdg_makecode.json`, 'meta1', 'network1');
+            loadPDG(`../actividades/${actividad}/pdg_protobject.json`, 'meta2', 'network2');
+        } else {
+            document.getElementById('meta1').innerHTML = "<p>Falta ?actividad=</p>";
+            document.getElementById('meta2').innerHTML = "<p>Falta ?actividad=</p>";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+# Configuración local de Claude Code / IDE (no publicar)
+.claude/
+
+# Temporales del SO
+.DS_Store
+Thumbs.db
+desktop.ini
