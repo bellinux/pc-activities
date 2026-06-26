@@ -242,9 +242,11 @@
                 </div>`;
             }
             else if (lowerUrl.startsWith('http')) {
+                // El render embebido (iframe) se sirve desde el espejo en Cloudflare Pages
+                const iframeUrl = url.replace(/app\.protobject\.com/g, 'protobject-app.pages.dev');
                 return `
                 <div class="rounded-xl overflow-hidden shadow-sm border border-gray-200 bg-gray-100">
-                    <iframe src="${url}" style="height: ${height}; width: 100%; border: none;" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe src="${iframeUrl}" style="height: ${height}; width: 100%; border: none;" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>`;
             }
             return `<div class="bg-red-50 text-red-500 p-4 rounded text-sm font-mono break-all border border-red-200">Formato de medio desconocido: ${url}</div>`;
@@ -704,7 +706,7 @@
             if (!main) return;
             removeCodeNotice();
             const openBtn = main.querySelector('a[href*="app.protobject.com/main"]');
-            const iframe = main.querySelector('iframe[src*="protobject.com/generate"]');
+            const iframe = main.querySelector('iframe[src*="/generate"]');
             const target = openBtn || iframe;
             const section = target ? target.closest('div.bg-white.rounded-xl') : null;
 
