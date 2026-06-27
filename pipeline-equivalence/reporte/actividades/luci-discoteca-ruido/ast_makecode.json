@@ -3,21 +3,21 @@
     "ast": {
         "blocks": [
             {
-                "type": "Event",
-                "label": "al iniciar",
-                "children": [
-                    { "type": "Action", "label": "mostrar LEDs", "children": [] }
-                ]
-            },
-            {
                 "type": "Loop",
                 "label": "para siempre",
                 "children": [
+                    { "type": "Action", "label": "borrar la pantalla", "children": [] },
                     {
                         "type": "Action",
-                        "label": "ajustar brillo ◻",
+                        "label": "graficar x ◻ y 2",
                         "children": [
-                            { "type": "Sensor", "label": "nivel de sonido", "children": [] }
+                            {
+                                "type": "Operator",
+                                "label": "◻ ÷ 60",
+                                "children": [
+                                    { "type": "Sensor", "label": "nivel de sonido", "children": [] }
+                                ]
+                            }
                         ]
                     }
                 ]

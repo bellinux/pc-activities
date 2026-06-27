@@ -2,6 +2,7 @@
     "platform": "Protobject",
     "extracted_text": [
         "repetir para siempre:",
-        "  dibuja con color (claro al (ruido in NivelRuido1) %) en DibujoLED2"
+        "  borrar dibujo en LEDDraw1",
+        "  dibuja en x ((ruido in NoiseLevel2) ÷ 15) y 4 con color #ff4444 en LEDDraw1"
     ]
 }

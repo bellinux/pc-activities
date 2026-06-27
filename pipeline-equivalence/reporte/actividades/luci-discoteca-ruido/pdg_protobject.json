@@ -3,22 +3,29 @@
     "nodes": [
         {
             "id": "n1",
-            "kind": "ReadSoundLevel",
+            "kind": "ClearDisplay",
             "seq": 1,
             "in_loop": true,
             "resId": 1
         },
         {
             "id": "n2",
-            "kind": "NoiseToColour",
+            "kind": "ReadSoundLevel",
             "seq": 2,
             "in_loop": true,
             "resId": 1
         },
         {
             "id": "n3",
-            "kind": "DisplaySoundLevel",
+            "kind": "Arithmetic",
             "seq": 3,
+            "in_loop": true,
+            "op": "÷"
+        },
+        {
+            "id": "n4",
+            "kind": "PlotPoint",
+            "seq": 4,
             "in_loop": true,
             "resId": 1
         }
@@ -26,15 +33,27 @@
     "edges": [
         {
             "source": "n1",
-            "target": "n2",
-            "type": "data",
-            "var": "sound_1"
+            "target": "n4",
+            "type": "control",
+            "var": ""
         },
         {
             "source": "n2",
             "target": "n3",
             "type": "data",
-            "var": "colour"
+            "var": "sound_1"
+        },
+        {
+            "source": "n3",
+            "target": "n4",
+            "type": "data",
+            "var": "value"
+        },
+        {
+            "source": "n1",
+            "target": "n4",
+            "type": "side_effect",
+            "var": "display"
         }
     ]
 }

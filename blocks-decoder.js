@@ -100,6 +100,12 @@
   const PB_CAT = { DibujoLED: "matrixDraw", "Inclinación": "smartphoneOrientation", ReproductorSonido: "audioPlayer",
     "BateríaMusical": "playDrum", NivelRuido: "noiseLevel", TecladoMusical: "playKeyboard",
     IntensidadLuz: "lightIntensity", "BotónTáctil": "touchButton", DibujarEscribir: "interactiveTurtleDraw" };
+  // Categoría por TIPO de componente (robusto: independiente del nombre/idioma del prefijo).
+  const PB_TYPE = { MatrixDraw: "matrixDraw", NoiseLevel: "noiseLevel", AudioPlayer: "audioPlayer",
+    TouchButton: "touchButton", SmartphoneOrientation: "smartphoneOrientation", PlayDrum: "playDrum",
+    PlayKeyboard: "playKeyboard", LightIntensity: "lightIntensity", InteractiveWriteDraw: "interactiveTurtleDraw" };
+  let _comps = {};   // name -> type (del JSON de componentes del .ptj en curso)
+  const pbCat = d => (_comps[d.comp] && PB_TYPE[_comps[d.comp]]) || PB_CAT[d.base];
   function midiNote(n) {
     n = parseInt(n, 10); if (isNaN(n)) return String(n);
     const names = ["do", "do#", "re", "re#", "mi", "fa", "fa#", "sol", "sol#", "la", "la#", "si"];
@@ -143,7 +149,7 @@
     if (t === "control_note") return midiNote(f.VAR);
     if (t === "control_drum") return ({ "0": L.CUST.music.drumBass, "1": L.CUST.music.drumTom, "2": L.CUST.music.drumHi }[f.VAR]) || ("tambor " + f.VAR);
     if (t && t.startsWith("protobject_") && t.endsWith("_get")) {
-      const d = pbDev(t), loc = L.DEV[PB_CAT[d.base]] || {}, prop = f.property || "";
+      const d = pbDev(t), loc = L.DEV[pbCat(d)] || {}, prop = f.property || "";
       const pk = ({ lightIntensity: "light" })[prop] || prop;
       return par((loc[pk] || loc[prop] || prop) + " in " + d.comp);
     }
@@ -151,7 +157,7 @@
   }
 
   function pbDevBody(comp, base, action, fields, values, L) {
-    const cat = PB_CAT[base], d = L.DEV[cat] || {}, E = k => pbExpr(values[k], L);
+    const cat = pbCat({ comp, base }), d = L.DEV[cat] || {}, E = k => pbExpr(values[k], L);
     const enC = (d.onTxt || d.inTxt || "en") + " " + comp;
     if (cat === "matrixDraw") {
       if (action === "drawOnXY") return d.drawOn + " " + E("VAR") + " " + d.yTxt + " " + E("VAR2") + " " + d.withColour + " " + E("VAR3") + " " + enC;
@@ -204,7 +210,7 @@
         block = n; continue;
       }
       else if (t && t.startsWith("protobject_") && t.endsWith("_change")) {
-        const d = pbDev(t), ev = (L.DEV[PB_CAT[d.base]] || {})[(f.property || "") + "Ev"] || f.property;
+        const d = pbDev(t), ev = (L.DEV[pbCat(d)] || {})[(f.property || "") + "Ev"] || f.property;
         head = C.events.on + " " + d.comp + " " + ev;
       }
       else if (t && t.startsWith("protobject_")) {
@@ -226,7 +232,9 @@
   function renderProtobject(ptjText, L, opts) {
     const O = { comments: true, leds: true, ...(opts || {}) };
     const inner = JSON.parse(ptjText.trim().slice(ptjText.indexOf("(") + 1, ptjText.lastIndexOf(")")));
-    const xml = inner.slice(inner.indexOf("\n") + 1);
+    const nl0 = inner.indexOf("\n");
+    try { _comps = {}; JSON.parse(inner.slice(0, nl0)).forEach(c => { _comps[c.name] = c.type; }); } catch (e) { _comps = {}; }
+    const xml = inner.slice(nl0 + 1);
     const root = parseXml(xml), out = ["FUENTE: Protobject (bloques, etiquetas oficiales es)", ""];
     for (const ch of root.children) if (["block", "shadow"].includes(TAG(ch))) { pbRenderBlock(ch, 0, out, L, O); out.push(""); }
     return out.join("\n");

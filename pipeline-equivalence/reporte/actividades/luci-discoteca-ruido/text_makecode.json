@@ -1,9 +1,8 @@
 {
     "platform": "MakeCode",
     "extracted_text": [
-        "al iniciar:",
-        "  mostrar LEDs",
         "para siempre:",
-        "  ajustar brillo (nivel de sonido)"
+        "  borrar la pantalla",
+        "  graficar x ((nivel de sonido) ÷ 60) y 2"
     ]
 }

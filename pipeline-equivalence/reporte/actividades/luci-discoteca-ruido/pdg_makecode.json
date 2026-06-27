@@ -3,27 +3,28 @@
     "nodes": [
         {
             "id": "n1",
-            "kind": "ProgramStartEvent",
+            "kind": "ClearDisplay",
             "seq": 1,
-            "in_loop": false
-        },
-        {
-            "id": "n2",
-            "kind": "DrawImage",
-            "seq": 2,
-            "in_loop": false,
-            "resId": 1
-        },
-        {
-            "id": "n3",
-            "kind": "ReadSoundLevel",
-            "seq": 3,
             "in_loop": true,
             "resId": 1
         },
         {
+            "id": "n2",
+            "kind": "ReadSoundLevel",
+            "seq": 2,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n3",
+            "kind": "Arithmetic",
+            "seq": 3,
+            "in_loop": true,
+            "op": "÷"
+        },
+        {
             "id": "n4",
-            "kind": "DisplaySoundLevel",
+            "kind": "PlotPoint",
             "seq": 4,
             "in_loop": true,
             "resId": 1
@@ -32,18 +33,24 @@
     "edges": [
         {
             "source": "n1",
-            "target": "n2",
+            "target": "n4",
             "type": "control",
             "var": ""
+        },
+        {
+            "source": "n2",
+            "target": "n3",
+            "type": "data",
+            "var": "sound_1"
         },
         {
             "source": "n3",
             "target": "n4",
             "type": "data",
-            "var": "sound_1"
+            "var": "value"
         },
         {
-            "source": "n2",
+            "source": "n1",
             "target": "n4",
             "type": "side_effect",
             "var": "display"

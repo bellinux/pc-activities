@@ -167,14 +167,14 @@ if (IS_FULL) {
     if (!blocking.length) { approved = true; break }
     ontology = await agent(revisePrompt(ontology, blocking, inventory), { label: `ontology:revise:r${round}`, phase: 'Ontología', agentType: 'general-purpose', schema: ONTOLOGY_SCHEMA })
   }
-  await agent(writeOntologyPrompt(ontology), { label: 'ontology:write', phase: 'Ontología', agentType: 'general-purpose' })
-  log(`Ontología final: ${ontology.nodes.length} nodos, consenso=${approved} (rondas=${round})`)
+  if (ontology) { await agent(writeOntologyPrompt(ontology), { label: 'ontology:write', phase: 'Ontología', agentType: 'general-purpose' }); log(`Ontología final: ${ontology.nodes.length} nodos, consenso=${approved} (rondas=${round})`) }
 } else {
   // Re-run PARCIAL: usar la ontología vigente SIN reconstruirla (no se sobreescribe).
   ontology = await agent(`Lee el archivo ${ONT_PATH} (cwd = raíz del proyecto) y devuélvelo TAL CUAL como { nodes:[ {canonical_node, makecode_block, protobject_block, category, note} ] }. NO modifiques, NO reconstruyas, NO escribas nada.`, { label: 'ontology:load', phase: 'Ontología', agentType: 'general-purpose', schema: ONTOLOGY_SCHEMA })
   approved = true
   log(`Ontología vigente cargada sin reconstruir (re-run parcial): ${ontology ? ontology.nodes.length : 0} nodos`)
 }
+if (!ontology) { log('Ontología no disponible (¿límite de sesión?). Se omite la fase PDG.'); return { procesadas: TARGET.map(a => a.code), asts: astResults.length, ontology_nodes: 0, ontology_consensus: false, ontology_rounds: round, pdgs: 0, pdg_summary: [] } }
 
 phase('PDG')
 const pdgResults = (await parallel(TARGET.map(a => () =>

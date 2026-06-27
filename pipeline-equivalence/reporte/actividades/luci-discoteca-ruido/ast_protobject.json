@@ -6,15 +6,16 @@
                 "type": "Loop",
                 "label": "repetir para siempre",
                 "children": [
+                    { "type": "Action", "label": "borrar dibujo en LEDDraw1", "children": [] },
                     {
                         "type": "Action",
-                        "label": "dibuja con color ◻ en DibujoLED2",
+                        "label": "dibuja en x ◻ y 4 con color #ff4444 en LEDDraw1",
                         "children": [
                             {
                                 "type": "Operator",
-                                "label": "claro al ◻ %",
+                                "label": "◻ ÷ 15",
                                 "children": [
-                                    { "type": "Sensor", "label": "ruido in NivelRuido1", "children": [] }
+                                    { "type": "Sensor", "label": "ruido in NoiseLevel2", "children": [] }
                                 ]
                             }
                         ]
