@@ -100,7 +100,7 @@
 
   <div class="stats">
     <div class="stat"><div class="n">17</div><div class="l">Actividades</div></div>
-    <div class="stat"><div class="n">8</div><div class="l">Errores texto↔código (§A)</div></div>
+    <div class="stat"><div class="n">7</div><div class="l">Errores texto↔código (§A)</div></div>
     <div class="stat"><div class="n">22</div><div class="l">Correcciones .md aplicadas (§F)</div></div>
     <div class="stat"><div class="n">65</div><div class="l">Confirmados en la ronda profunda</div></div>
   </div>
@@ -131,14 +131,6 @@ nota = oriY + 60        ← el sensor se lee DOS veces, la nota NO se divide</di
 SI (var:toques &lt; 7) …       ← el robot se activa en 7, no en 50</div>
     <div class="why"><b>Por qué es un error:</b> en la misma frase del guion hay <b>dos datos concretos equivocados</b> — el nombre de la variable (<code>energía</code> en vez de <code>toques</code>) y el objetivo del juego (<i>“cargarla hasta 50”</i> mientras el código se completa en <b>7</b>, <code>var:toques &lt; 7</code>). El code-composition usa correctamente <code>toques</code> y 7, así que la ficha es incoherente consigo misma: un docente que lee el Inicio anunciaría a la clase un nombre y una meta que el prototipo no tiene.
     <div style="margin-top:6px"><a class="ref" href="_activities/16.4-robot-activation-challenge.es.md">_activities/16.4-robot-activation-challenge.es.md</a> <span class="ref">· línea 49</span></div></div>
-  </div>
-
-  <div class="card media">
-    <h3><span class="tag">02.2</span> El mecanismo de color prometido ≠ el real (y la ficha se auto-contradice) <span class="badge b-media">media</span></h3>
-    <div class="q q-md"><span class="lab">La ficha dice — learn</span>«…lo conectaremos directamente al valor de intensidad del <b>color Rojo</b>. Dejaremos el Verde y el Azul en cero.» (→ pantalla roja)</div>
-    <div class="q q-code"><span class="lab">El código hace</span>color_light(LEVEL = NivelRuido.leer(noise))   ← varía el BRILLO, ningún canal R/G/B</div>
-    <div class="why"><b>Por qué es un error:</b> el código no asigna ningún canal rojo/verde/azul; usa un solo parámetro de intensidad. La misma ficha, en el code-composition, lo admite (<i>“variando la intensidad del brillo”</i>): dos descripciones en conflicto en el mismo archivo.
-    <div style="margin-top:6px"><a class="ref" href="_activities/02.2-music-visualizer.es.md">_activities/02.2-music-visualizer.es.md</a> <span class="ref">· líneas 83–84</span></div></div>
   </div>
 
   <div class="card media">
@@ -231,7 +223,7 @@ SI (var:toques &lt; 7) …       ← el robot se activa en 7, no en 50</div>
     <span class="lead">Para reconstruir confianza: lo que se descartó y por qué.</span>
   </h2>
   <div class="rej"><b>02.1 — ningún error.</b> “Mapeo directo” es coherente con el código, la constante 60 está explicada, “acelerómetro” es una simplificación legítima para Grados 3-12. Era un falso positivo de la primera ronda.</div>
-  <div class="rej"><b>En general — descartado.</b> Casi todas las “divergencias” de la primera ronda (el código hace animaciones, colores, bitmaps no descritos en el texto) <b>no son errores</b>: son andamiaje normal en actividades con código provisto. Por eso el filtro estricto redujo ~50 señalamientos inflados a <b>8 reales</b>.</div>
+  <div class="rej"><b>En general — descartado.</b> Casi todas las “divergencias” de la primera ronda (el código hace animaciones, colores, bitmaps no descritos en el texto) <b>no son errores</b>: son andamiaje normal en actividades con código provisto. Por eso el filtro estricto redujo ~50 señalamientos inflados a <b>7 reales</b>.</div>
   <div class="rej"><b>14.2 “estado durmiente” — removido.</b> Un corazón “durmiente” late <b>lento</b>, no se detiene: el código sí tiene ese estado (latido lento 500/150) frente al “activo” (rápido 250/80). La señal asumía erróneamente que “durmiente” = corazón detenido. Falso positivo.</div>
 
   <h2>E · Coherencia interna — profundización
