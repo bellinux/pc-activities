@@ -1,0 +1,17 @@
+{
+    "platform": "Protobject",
+    "extracted_text": [
+        "repetir para siempre:",
+        "  si ((luminosidad in IntensidadLuz2) < 30):",
+        "    dibuja con color #ff0000 en DibujoLED1",
+        "    retraso de 200 milisegundos",
+        "    dibuja con color #ff0000 en DibujoLED1",
+        "    retraso de 200 milisegundos",
+        "    dibuja con color #ff0000 en DibujoLED1",
+        "    retraso de 200 milisegundos",
+        "    dibuja con color #ff0000 en DibujoLED1",
+        "    retraso de 200 milisegundos",
+        "  sino:",
+        "    borrar dibujo en DibujoLED1"
+    ]
+}

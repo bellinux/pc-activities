@@ -1,0 +1,136 @@
+{
+    "platform": "MakeCode",
+    "nodes": [
+        {
+            "id": "n1",
+            "kind": "ClearDisplay",
+            "seq": 1,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n2",
+            "kind": "ReadTilt",
+            "seq": 2,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n3",
+            "kind": "Arithmetic",
+            "seq": 3,
+            "in_loop": true,
+            "op": "÷"
+        },
+        {
+            "id": "n4",
+            "kind": "Arithmetic",
+            "seq": 4,
+            "in_loop": true,
+            "op": "round"
+        },
+        {
+            "id": "n5",
+            "kind": "Arithmetic",
+            "seq": 5,
+            "in_loop": true,
+            "op": "+"
+        },
+        {
+            "id": "n6",
+            "kind": "PlotPoint",
+            "seq": 6,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n7",
+            "kind": "ReadTilt",
+            "seq": 7,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n8",
+            "kind": "Arithmetic",
+            "seq": 8,
+            "in_loop": true,
+            "op": "+"
+        },
+        {
+            "id": "n9",
+            "kind": "PlayTone",
+            "seq": 9,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n10",
+            "kind": "Delay",
+            "seq": 10,
+            "in_loop": true
+        }
+    ],
+    "edges": [
+        {
+            "source": "n1",
+            "target": "n6",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n6",
+            "target": "n9",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n9",
+            "target": "n10",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n2",
+            "target": "n3",
+            "type": "data",
+            "var": "tilt_1"
+        },
+        {
+            "source": "n3",
+            "target": "n4",
+            "type": "data",
+            "var": "value"
+        },
+        {
+            "source": "n4",
+            "target": "n5",
+            "type": "data",
+            "var": "value"
+        },
+        {
+            "source": "n5",
+            "target": "n6",
+            "type": "data",
+            "var": "value"
+        },
+        {
+            "source": "n7",
+            "target": "n8",
+            "type": "data",
+            "var": "tilt_1"
+        },
+        {
+            "source": "n8",
+            "target": "n9",
+            "type": "data",
+            "var": "pitch"
+        },
+        {
+            "source": "n1",
+            "target": "n6",
+            "type": "side_effect",
+            "var": "display"
+        }
+    ]
+}

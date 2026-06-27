@@ -1,0 +1,21 @@
+ACTIVIDAD: 21.1-cinematic-power-on
+FUENTE: Protobject (bloques, etiquetas oficiales es)
+
+cuando NivelRuido1 detecta aumento repentino:
+  establecer estado a no (estado)
+  si estado:
+    contar con columnas desde 1 hasta 7 de a 1:   // Este bloque crea una variable llamada "columnas". Luego asigna valores desde 1 hasta 7 en aumentos de 1 y cada vez que toma un nuevo valor se ejecutará lo de dentro.  Es decir inicia con columnas = 1, luego ejecuta lo de dentro y al terminar ahora columnas = 2 y se vuelve a ejecutar todo. Una vez columnas = 7 se ejecuta lo de dentro y pasa al siguiente bloque de instrucciones que no esté dentro, en este caso pasa al bloque "dibuja en x..."
+      contar con lineas desde 1 hasta 7 de a 1:   // Este bloque crea una variable llamada "lineas". Luego asigna valores desde 1 hasta 7 en aumentos de 1 y cada vez que toma un nuevo valor se ejecutará lo de dentro.  Es decir inicia con lineas = 1, luego ejecuta lo de dentro y al terminar ahora lineas = 2 y se vuelve a ejecutar todo. Una vez lineas = 7 se ejecuta lo de dentro y pasa al siguiente bloque de instrucciones que no esté dentro, en este caso pasa al bloque dibuja en x...  Se puede analizar que por cada vez que el valor de "columnas" cambia, se ejecuta 7 veces el bloque donde cambia fila y como columnas cambia 7 veces, el bloque de "dibuja en x..." se ejecuta 7x7 = 49 veces, que corresponde a la cantidad total de leds.
+        dibuja en x lineas y columnas con color #ff4444 en DibujoLED2
+        retraso de 10 milisegundos
+    dibuja en x 1 y 1 con color #ff4444 en DibujoLED2
+  sino:
+    contar con columnas desde 7 hasta 1 de a 1:   // Este bloque crea una variable llamada "columnas". Luego asigna valores desde 1 hasta 7 en aumentos de 1 y cada vez que toma un nuevo valor se ejecutará lo de dentro.  Es decir inicia con columnas = 1, luego ejecuta lo de dentro y al terminar ahora columnas = 2 y se vuelve a ejecutar todo. Una vez columnas = 7 se ejecuta lo de dentro y pasa al siguiente bloque de instrucciones que no esté dentro, en este caso pasa al bloque "dibuja en x..."
+      contar con lineas desde 7 hasta 1 de a 1:   // Este bloque crea una variable llamada "lineas". Luego asigna valores desde 1 hasta 7 en aumentos de 1 y cada vez que toma un nuevo valor se ejecutará lo de dentro.  Es decir inicia con lineas = 1, luego ejecuta lo de dentro y al terminar ahora lineas = 2 y se vuelve a ejecutar todo. Una vez lineas = 7 se ejecuta lo de dentro y pasa al siguiente bloque de instrucciones que no esté dentro, en este caso pasa al bloque dibuja en x...  Se puede analizar que por cada vez que el valor de "columnas" cambia, se ejecuta 7 veces el bloque donde cambia fila y como columnas cambia 7 veces, el bloque de "dibuja en x..." se ejecuta 7x7 = 49 veces, que corresponde a la cantidad total de leds.
+        dibuja en x lineas y columnas con color #000000 en DibujoLED2
+        retraso de 10 milisegundos
+
+al iniciar el programa:
+  establecer estado a falso
+  establecer color de fondo a #000000 en DibujoLED2
+  borrar dibujo en DibujoLED2

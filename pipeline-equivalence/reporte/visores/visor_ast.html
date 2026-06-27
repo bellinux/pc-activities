@@ -2,145 +2,110 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Visor Comparativo de AST</title>
+    <title>Visor de Código y AST</title>
     <style>
-        body { 
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background: #fff; 
-            color: #111; padding: 40px; margin: 0; line-height: 1.6; min-height: 100vh;
-            position: relative;
-        }
-        
-        /* Typography Hierarchy */
-        h1 { text-align: center; font-weight: 300; font-size: 2.2em; margin-bottom: 50px; color: #111; }
+        body { font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #fff; color: #111; padding: 40px; margin: 0; line-height: 1.6; min-height: 100vh; position: relative; }
+        h1 { text-align: center; font-weight: 300; font-size: 2.2em; margin-bottom: 8px; color: #111; }
+        .top-sub { text-align: center; color: #888; margin: 0 0 40px 0; }
         h2.platform-title { font-weight: 400; font-size: 1.8em; margin: 0; text-align: center; color: #333; }
-        h3.section-subtitle { font-weight: 600; font-size: 1.1em; color: #777; margin: 20px 0 15px 0; text-transform: uppercase; letter-spacing: 1px; }
-        
-        /* Layout */
-        .row { display: flex; width: 100%; max-width: 100%; margin: 0; box-sizing: border-box; }
+        h3.section-subtitle { font-weight: 600; font-size: 1.05em; color: #777; margin: 22px 0 12px 0; text-transform: uppercase; letter-spacing: 1px; }
+
+        .row { display: flex; width: 100%; box-sizing: border-box; }
         .col { flex: 1; min-width: 0; padding-right: 40px; padding-left: 20px; }
         .col-right { flex: 1; min-width: 0; padding-left: 40px; padding-right: 20px; }
-        
-        .center-line {
-            position: absolute;
-            top: 130px;
-            bottom: 40px;
-            left: 50%;
-            border-left: 1px dashed #ccc;
-            z-index: -1;
-        }
-        
-        /* Imágenes */
-        .images-row { margin-bottom: 20px; align-items: flex-start; }
-        .source-image { width: 100%; height: auto; display: block; margin: 0 auto; }
+        .center-line { position: absolute; top: 130px; bottom: 40px; left: 50%; border-left: 1px dashed #ccc; z-index: -1; }
 
-        /* Estilos de Bloques AST (Mantenidos coloridos/con bordes como solicitado) */
+        .src { text-align: center; margin: 6px 0 0 0; }
+        .srclink { display: inline-block; font-family: 'Consolas','Courier New',monospace; font-size: 0.9em; color: #2980b9; text-decoration: none; border: 1px solid #aed3ea; border-radius: 6px; padding: 5px 12px; background: #f3f9fd; }
+        .srclink:hover { background: #e6f3fb; }
+
+        /* Texto extraído (estructura, monospace, indentación preservada) */
+        pre.code { background: #fbfbfd; border: 1px solid #eee; border-radius: 8px; padding: 14px 16px; font-family: 'Consolas','Courier New',monospace; font-size: 13px; color: #2c3e50; white-space: pre; overflow-x: auto; margin: 0; }
+
+        /* Bloques AST coloridos */
         .block { margin: 8px 0; padding: 12px 15px; border-radius: 8px; color: white; font-weight: 600; box-shadow: inset 0 -3px rgba(0,0,0,0.15); border: 1px solid rgba(0,0,0,0.1); }
         .block-children { margin-left: 25px; padding-left: 15px; border-left: 2px dashed rgba(0,0,0,0.1); margin-top: 10px; }
-        
-        /* Colores por tipo */
         .type-Event, .type-Event_Interrupt { background-color: #f39c12; }
         .type-Loop { background-color: #2980b9; }
         .type-Conditional { background-color: #27ae60; }
         .type-Branch_True, .type-Branch_False { background-color: #2ecc71; margin-top: 5px; }
         .type-Action, .type-Assignment, .type-State_Toggle { background-color: #8e44ad; }
         .type-Program { background-color: #34495e; }
-
+        .type-Operator { background-color: #16a085; }
+        .type-Sensor { background-color: #d35400; }
         .block-label { font-size: 1.1em; display: flex; align-items: center; }
-        .block-type { font-size: 0.7em; background: rgba(0,0,0,0.2); padding: 2px 6px; border-radius: 4px; margin-right: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: white;}
+        .block-type { font-size: 0.7em; background: rgba(0,0,0,0.2); padding: 2px 6px; border-radius: 4px; margin-right: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: white; }
     </style>
 </head>
 <body>
-    <h1>Comparación Visual de ASTs</h1>
+    <h1>Código extraído y AST</h1>
+    <p class="top-sub" id="top-sub"></p>
     <div class="center-line"></div>
-    
-    <!-- Títulos de Plataforma -->
+
     <div class="row">
-        <div class="col"><h2 class="platform-title" id="title1">Cargando...</h2></div>
-        <div class="col-right"><h2 class="platform-title" id="title2">Cargando...</h2></div>
+        <div class="col"><h2 class="platform-title" id="title1">Cargando…</h2><div class="src" id="src1"></div></div>
+        <div class="col-right"><h2 class="platform-title" id="title2">Cargando…</h2><div class="src" id="src2"></div></div>
     </div>
 
-    <!-- Sottotitoli BLOCKS -->
     <div class="row">
-        <div class="col"><h3 class="section-subtitle">Blocks</h3></div>
-        <div class="col-right"><h3 class="section-subtitle">Blocks</h3></div>
+        <div class="col"><h3 class="section-subtitle">Código (texto extraído)</h3></div>
+        <div class="col-right"><h3 class="section-subtitle">Código (texto extraído)</h3></div>
+    </div>
+    <div class="row">
+        <div class="col"><pre class="code" id="text1"></pre></div>
+        <div class="col-right"><pre class="code" id="text2"></pre></div>
     </div>
 
-    <!-- Imágenes -->
-    <div class="row images-row">
-        <div class="col" id="img1"></div>
-        <div class="col-right" id="img2"></div>
-    </div>
-
-    <!-- Sottotitoli AST -->
     <div class="row">
         <div class="col"><h3 class="section-subtitle">AST</h3></div>
         <div class="col-right"><h3 class="section-subtitle">AST</h3></div>
     </div>
-
-    <!-- Contenido AST -->
     <div class="row">
         <div class="col" id="ast1"></div>
         <div class="col-right" id="ast2"></div>
     </div>
 
     <script>
+        const params = new URLSearchParams(window.location.search);
+        const act = params.get('actividad');
+        const esc = s => (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
         function renderBlock(block) {
             const div = document.createElement('div');
             div.className = `block type-${block.type}`;
-            
             const labelDiv = document.createElement('div');
             labelDiv.className = 'block-label';
-            labelDiv.innerHTML = `<span class="block-type">${block.type}</span> ${block.label || block.type}`;
+            labelDiv.innerHTML = `<span class="block-type">${esc(block.type)}</span> ${esc(block.label || block.type)}`;
             div.appendChild(labelDiv);
-
             if (block.children && block.children.length > 0) {
                 const childrenDiv = document.createElement('div');
                 childrenDiv.className = 'block-children';
-                block.children.forEach(child => {
-                    childrenDiv.appendChild(renderBlock(child));
-                });
+                block.children.forEach(child => childrenDiv.appendChild(renderBlock(child)));
                 div.appendChild(childrenDiv);
             }
             return div;
         }
 
-        function loadASTData(fileUrl, titleId, imgContainerId, astContainerId, imageFileName, actividad) {
-            const title = document.getElementById(titleId);
-            const imgContainer = document.getElementById(imgContainerId);
-            const astContainer = document.getElementById(astContainerId);
-
-            if(!fileUrl) return;
-
-            fetch(fileUrl)
-                .then(r => r.json())
-                .then(data => {
-                    let platformName = data.platform || 'Plataforma';
-                    if (platformName === 'MakeCode') platformName = 'Microbit';
-
-                    title.innerText = platformName;
-                    imgContainer.innerHTML = `<img src="../../actividades/${actividad}/${imageFileName}" class="source-image" alt="Source Image">`;
-                    
-                    if (data.ast && data.ast.blocks) {
-                        data.ast.blocks.forEach(block => {
-                            astContainer.appendChild(renderBlock(block));
-                        });
-                    } else {
-                        astContainer.innerHTML = '<p>No se encontraron bloques en la raíz del AST.</p>';
-                    }
-                })
-                .catch(e => {
-                    astContainer.innerHTML = `<p style="color:red">Error cargando ${fileUrl}: ${e}</p>`;
-                });
+        async function loadCol(plat, srcUrl, srcLabel, ids) {
+            const txt = await fetch(`../actividades/${act}/text_${plat}.json`, { cache: 'no-store' }).then(r => r.ok ? r.json() : null).catch(() => null);
+            const ast = await fetch(`../actividades/${act}/ast_${plat}.json`, { cache: 'no-store' }).then(r => r.ok ? r.json() : null).catch(() => null);
+            let name = (txt && txt.platform) || (ast && ast.platform) || plat;
+            if (name === 'MakeCode') name = 'Microbit';
+            document.getElementById(ids.title).textContent = name;
+            document.getElementById(ids.src).innerHTML = `<a class="srclink" href="${srcUrl}" target="_blank">⬇ ${esc(srcLabel)}</a>`;
+            document.getElementById(ids.text).textContent = (txt && txt.extracted_text && txt.extracted_text.length) ? txt.extracted_text.join('\n') : '(sin texto extraído)';
+            const astC = document.getElementById(ids.ast);
+            astC.innerHTML = '';
+            if (ast && ast.ast && ast.ast.blocks) ast.ast.blocks.forEach(b => astC.appendChild(renderBlock(b)));
+            else astC.innerHTML = '<p style="color:#999">(sin AST)</p>';
         }
 
-        const params = new URLSearchParams(window.location.search);
-        const actividad = params.get('actividad');
-        if (actividad) {
-            loadASTData(`../actividades/${actividad}/ast_makecode.json`, 'title1', 'img1', 'ast1', 'microbit.png', actividad);
-            loadASTData(`../actividades/${actividad}/ast_protobject.json`, 'title2', 'img2', 'ast2', 'protobject.png', actividad);
+        if (act) {
+            document.getElementById('top-sub').innerHTML = `Actividad: <strong>${esc(act)}</strong>`;
+            loadCol('makecode', `https://fond.protobject.com/microbit/${act}.hex`, `${act}.hex`, { title: 'title1', src: 'src1', text: 'text1', ast: 'ast1' });
+            loadCol('protobject', `https://fond.protobject.com/protobject/equivalent-${act}.ptj`, `equivalent-${act}.ptj`, { title: 'title2', src: 'src2', text: 'text2', ast: 'ast2' });
         } else {
-            document.querySelector('.row').innerHTML = "<p>Falta parámetro ?actividad=</p>";
+            document.getElementById('top-sub').textContent = 'Falta parámetro ?actividad=';
         }
     </script>
 </body>

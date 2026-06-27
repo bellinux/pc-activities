@@ -1,0 +1,19 @@
+ACTIVIDAD: 22.2-applause-battle
+FUENTE: micro:bit / MakeCode 8.0.18 — "aplausometro-tiempo-aplausos"  (etiquetas oficiales es-ES)
+
+para siempre:
+  si (inicio > 0) entonces:
+    mostrar número ((tiempo de ejecución (ms) − inicio) ÷ 1000)   // Muestra la cantidad de segundos en los que persiste un sonido, en este caso mediremos cuanto es la duración de una cantidad de aplausos.
+    si (nivel de sonido < 5) entonces:   // Si los aplausos se detienen termina el temporizador y finaliza la medición.
+      fijar inicio a 0
+      fijar activo a falso
+      pausa (ms) 5000
+      fijar activo a verdadero
+
+al iniciar:
+  fijar inicio a 0
+  fijar activo a verdadero
+
+al detectar el sonido alto:
+  si activo entonces:
+    fijar inicio a tiempo de ejecución (ms)

@@ -1,0 +1,198 @@
+{
+    "platform": "MakeCode",
+    "nodes": [
+        {
+            "id": "n1",
+            "kind": "ProgramStartEvent",
+            "seq": 1,
+            "in_loop": false
+        },
+        {
+            "id": "n2",
+            "kind": "SetVariable",
+            "seq": 2,
+            "in_loop": false
+        },
+        {
+            "id": "n3",
+            "kind": "SuddenNoiseEvent",
+            "seq": 3,
+            "in_loop": false
+        },
+        {
+            "id": "n4",
+            "kind": "ToggleVariable",
+            "seq": 4,
+            "in_loop": false
+        },
+        {
+            "id": "n5",
+            "kind": "ConditionalBranch",
+            "seq": 5,
+            "in_loop": true
+        },
+        {
+            "id": "n6",
+            "kind": "DrawImage",
+            "seq": 6,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n7",
+            "kind": "RandomInteger",
+            "seq": 7,
+            "in_loop": true
+        },
+        {
+            "id": "n8",
+            "kind": "PlotPoint",
+            "seq": 8,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n9",
+            "kind": "Delay",
+            "seq": 9,
+            "in_loop": true
+        },
+        {
+            "id": "n10",
+            "kind": "DrawImage",
+            "seq": 10,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n11",
+            "kind": "PlotPoint",
+            "seq": 11,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n12",
+            "kind": "Delay",
+            "seq": 12,
+            "in_loop": true
+        },
+        {
+            "id": "n13",
+            "kind": "DrawImage",
+            "seq": 13,
+            "in_loop": true,
+            "resId": 1
+        }
+    ],
+    "edges": [
+        {
+            "source": "n1",
+            "target": "n2",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n3",
+            "target": "n4",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n5",
+            "target": "n6",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n5",
+            "target": "n7",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n5",
+            "target": "n8",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n5",
+            "target": "n9",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n5",
+            "target": "n10",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n5",
+            "target": "n11",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n5",
+            "target": "n12",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n5",
+            "target": "n13",
+            "type": "control",
+            "var": "false"
+        },
+        {
+            "source": "n2",
+            "target": "n4",
+            "type": "data",
+            "var": "flama"
+        },
+        {
+            "source": "n2",
+            "target": "n5",
+            "type": "data",
+            "var": "flama"
+        },
+        {
+            "source": "n4",
+            "target": "n5",
+            "type": "data",
+            "var": "flama"
+        },
+        {
+            "source": "n7",
+            "target": "n8",
+            "type": "data",
+            "var": "value"
+        },
+        {
+            "source": "n6",
+            "target": "n8",
+            "type": "side_effect",
+            "var": "display"
+        },
+        {
+            "source": "n8",
+            "target": "n10",
+            "type": "side_effect",
+            "var": "display"
+        },
+        {
+            "source": "n10",
+            "target": "n11",
+            "type": "side_effect",
+            "var": "display"
+        },
+        {
+            "source": "n11",
+            "target": "n13",
+            "type": "side_effect",
+            "var": "display"
+        }
+    ]
+}

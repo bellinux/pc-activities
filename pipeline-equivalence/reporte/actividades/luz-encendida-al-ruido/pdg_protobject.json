@@ -1,0 +1,125 @@
+{
+    "platform": "Protobject",
+    "nodes": [
+        {
+            "id": "n1",
+            "kind": "ProgramStartEvent",
+            "seq": 1,
+            "in_loop": false
+        },
+        {
+            "id": "n2",
+            "kind": "SetVariable",
+            "seq": 2,
+            "in_loop": false
+        },
+        {
+            "id": "n3",
+            "kind": "SetBackgroundColor",
+            "seq": 3,
+            "in_loop": false,
+            "resId": 1
+        },
+        {
+            "id": "n4",
+            "kind": "SuddenNoiseEvent",
+            "seq": 4,
+            "in_loop": false,
+            "resId": 1
+        },
+        {
+            "id": "n5",
+            "kind": "ToggleVariable",
+            "seq": 5,
+            "in_loop": false
+        },
+        {
+            "id": "n6",
+            "kind": "ConditionalBranch",
+            "seq": 6,
+            "in_loop": false
+        },
+        {
+            "id": "n7",
+            "kind": "DrawImage",
+            "seq": 7,
+            "in_loop": false,
+            "resId": 1
+        },
+        {
+            "id": "n8",
+            "kind": "ClearDisplay",
+            "seq": 8,
+            "in_loop": false,
+            "resId": 1
+        }
+    ],
+    "edges": [
+        {
+            "source": "n1",
+            "target": "n2",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n2",
+            "target": "n3",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n4",
+            "target": "n5",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n5",
+            "target": "n6",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n6",
+            "target": "n7",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n6",
+            "target": "n8",
+            "type": "control",
+            "var": "false"
+        },
+        {
+            "source": "n2",
+            "target": "n5",
+            "type": "data",
+            "var": "estado"
+        },
+        {
+            "source": "n2",
+            "target": "n6",
+            "type": "data",
+            "var": "estado"
+        },
+        {
+            "source": "n5",
+            "target": "n6",
+            "type": "data",
+            "var": "estado"
+        },
+        {
+            "source": "n3",
+            "target": "n7",
+            "type": "side_effect",
+            "var": "display"
+        },
+        {
+            "source": "n7",
+            "target": "n8",
+            "type": "side_effect",
+            "var": "display"
+        }
+    ]
+}

@@ -1,0 +1,58 @@
+{
+    "platform": "Protobject",
+    "ast": {
+        "blocks": [
+            {
+                "type": "Event",
+                "label": "al iniciar el programa",
+                "children": [
+                    { "type": "Assignment", "label": "establecer flama a verdadero", "children": [] }
+                ]
+            },
+            {
+                "type": "Event_Interrupt",
+                "label": "cuando NivelRuido2 detecta aumento repentino",
+                "children": [
+                    { "type": "State_Toggle", "label": "establecer flama a (no flama)", "children": [] }
+                ]
+            },
+            {
+                "type": "Loop",
+                "label": "repetir para siempre",
+                "children": [
+                    {
+                        "type": "Conditional",
+                        "label": "si flama",
+                        "children": [
+                            {
+                                "type": "Branch_True",
+                                "label": "si",
+                                "children": [
+                                    { "type": "Action", "label": "dibuja con color #ff0000 en DibujoLED1", "children": [] },
+                                    {
+                                        "type": "Action",
+                                        "label": "dibuja en x ◻ y 2 con color #ff0000 en DibujoLED1",
+                                        "children": [
+                                            { "type": "Action", "label": "entero aleatorio de 3 a 5", "children": [] }
+                                        ]
+                                    },
+                                    { "type": "Action", "label": "retraso de 200 milisegundos", "children": [] },
+                                    { "type": "Action", "label": "dibuja con color #ff0000 en DibujoLED1", "children": [] },
+                                    { "type": "Action", "label": "dibuja en x 4 y 2 con color #ff0000 en DibujoLED1", "children": [] },
+                                    { "type": "Action", "label": "retraso de 200 milisegundos", "children": [] }
+                                ]
+                            },
+                            {
+                                "type": "Branch_False",
+                                "label": "sino",
+                                "children": [
+                                    { "type": "Action", "label": "borrar dibujo en DibujoLED1", "children": [] }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

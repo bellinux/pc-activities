@@ -1,0 +1,58 @@
+{
+    "platform": "Protobject",
+    "nodes": [
+        {
+            "id": "n1",
+            "kind": "ReadTilt",
+            "seq": 1,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n2",
+            "kind": "Arithmetic",
+            "seq": 2,
+            "in_loop": true,
+            "op": "+"
+        },
+        {
+            "id": "n3",
+            "kind": "PlayTone",
+            "seq": 3,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n4",
+            "kind": "Delay",
+            "seq": 4,
+            "in_loop": true
+        }
+    ],
+    "edges": [
+        {
+            "source": "n1",
+            "target": "n2",
+            "type": "data",
+            "var": "tilt_1"
+        },
+        {
+            "source": "n2",
+            "target": "n3",
+            "type": "data",
+            "var": "pitch"
+        },
+        {
+            "source": "n3",
+            "target": "n4",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n3",
+            "target": "n4",
+            "type": "side_effect",
+            "var": "sound"
+        }
+    ]
+}

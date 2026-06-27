@@ -8,6 +8,10 @@ node_modules/
 # Backups locales de .ptj (no publicar)
 protobject/backup/
 
+# Cachés de Python
+__pycache__/
+*.pyc
+
 # Temporales del SO
 .DS_Store
 Thumbs.db

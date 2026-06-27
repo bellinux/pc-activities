@@ -1,0 +1,38 @@
+digraph PDG_MakeCode {
+	bgcolor="#FBF6EB" nodesep=0.45 pad=0.3 rankdir=TB ranksep=0.55
+	node [color="#1A1612" fontname=Arial fontsize=11 margin="0.16,0.09" penwidth=1.5 shape=box style="rounded,filled"]
+	edge [color="#4A3F33" fontcolor="#8B2418" fontname=Arial fontsize=10 penwidth=1.3]
+	n1 [label="1   ProgramStartEvent" fillcolor="#34495e" fontcolor="#FBF6EB"]
+	n2 [label="2   SetVariable" fillcolor="#8B2418" fontcolor="#FBF6EB"]
+	n3 [label="3   SuddenNoiseEvent" fillcolor="#34495e" fontcolor="#FBF6EB"]
+	n4 [label="4   ToggleVariable" fillcolor="#8B2418" fontcolor="#FBF6EB"]
+	subgraph cluster_loop {
+		bgcolor="#FBF6EB" color="#8B2418" fontname=Arial fontsize=11 label=<<b >loop</b><br/><font color="#8B2418" point-size="9">alcance de control</font>> labeljust=l labelloc=t margin=18 penwidth=1.8 style="dashed,rounded"
+		n5 [label="5   ConditionalBranch" fillcolor="#B8843A" fontcolor="#FBF6EB"]
+		n6 [label="6   DrawImage" fillcolor="#5A6B3B" fontcolor="#FBF6EB"]
+		n7 [label="7   RandomInteger" fillcolor="#5A6B3B" fontcolor="#FBF6EB"]
+		n8 [label="8   PlotPoint" fillcolor="#5A6B3B" fontcolor="#FBF6EB"]
+		n9 [label="9   Delay" fillcolor="#4A3F33" fontcolor="#FBF6EB"]
+		n10 [label="10   DrawImage" fillcolor="#5A6B3B" fontcolor="#FBF6EB"]
+		n11 [label="11   PlotPoint" fillcolor="#5A6B3B" fontcolor="#FBF6EB"]
+		n12 [label="12   Delay" fillcolor="#4A3F33" fontcolor="#FBF6EB"]
+		n13 [label="13   DrawImage" fillcolor="#5A6B3B" fontcolor="#FBF6EB"]
+	}
+	n1 -> n2 [label="" color="#8B2418" penwidth=2.0 style=solid]
+	n2 -> n4 [label=" flama " color="#4A3F33"]
+	n2 -> n5 [label=" flama " color="#4A3F33"]
+	n3 -> n4 [label="" color="#8B2418" penwidth=2.0 style=solid]
+	n4 -> n5 [label=" flama " color="#4A3F33"]
+	n5 -> n6 [label=" true " color="#8B2418" penwidth=2.0 style=solid]
+	n5 -> n7 [label=" true " color="#8B2418" penwidth=2.0 style=solid]
+	n5 -> n8 [label=" true " color="#8B2418" penwidth=2.0 style=solid]
+	n5 -> n9 [label=" true " color="#8B2418" penwidth=2.0 style=solid]
+	n5 -> n10 [label=" true " color="#8B2418" penwidth=2.0 style=solid]
+	n5 -> n11 [label=" true " color="#8B2418" penwidth=2.0 style=solid]
+	n5 -> n12 [label=" true " color="#8B2418" penwidth=2.0 style=solid]
+	n5 -> n13 [label=" false " color="#8B2418" penwidth=2.0 style=solid]
+	n6 -> n8 [label=" display " color="#5A6B3B" constraint=false fontcolor="#5A6B3B" style=dashed]
+	n7 -> n8 [label=" x " color="#4A3F33"]
+	n8 -> n10 [label=" display " color="#5A6B3B" constraint=false fontcolor="#5A6B3B" style=dashed]
+	n10 -> n11 [label=" display " color="#5A6B3B" constraint=false fontcolor="#5A6B3B" style=dashed]
+}

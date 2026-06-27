@@ -1,0 +1,17 @@
+{
+    "platform": "MakeCode",
+    "extracted_text": [
+        "para siempre:",
+        "  si ((nivel de luz) < 75) entonces:",
+        "    mostrar LEDs",
+        "    pausa (ms) 100",
+        "    mostrar LEDs",
+        "    pausa (ms) 100",
+        "    mostrar LEDs",
+        "    pausa (ms) 100",
+        "    mostrar LEDs",
+        "    pausa (ms) 100",
+        "  si no:",
+        "    mostrar LEDs"
+    ]
+}

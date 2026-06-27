@@ -1,0 +1,169 @@
+{
+    "platform": "Protobject",
+    "ast": {
+        "blocks": [
+            {
+                "type": "Loop",
+                "label": "repetir para siempre",
+                "children": [
+                    { "type": "Action", "label": "dibuja con color #ffffff en DibujoLED2", "children": [] },
+                    {
+                        "type": "Conditional",
+                        "label": "si ◻",
+                        "children": [
+                            {
+                                "type": "Operator",
+                                "label": "◻ y ◻",
+                                "children": [
+                                    {
+                                        "type": "Operator",
+                                        "label": "◻ y ◻",
+                                        "children": [
+                                            {
+                                                "type": "Operator",
+                                                "label": "◻ > -2",
+                                                "children": [
+                                                    { "type": "Sensor", "label": "x in Inclinación1", "children": [] }
+                                                ]
+                                            },
+                                            {
+                                                "type": "Operator",
+                                                "label": "◻ < 2",
+                                                "children": [
+                                                    { "type": "Sensor", "label": "x in Inclinación1", "children": [] }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Operator",
+                                        "label": "◻ y ◻",
+                                        "children": [
+                                            {
+                                                "type": "Operator",
+                                                "label": "◻ > -2",
+                                                "children": [
+                                                    { "type": "Sensor", "label": "y in Inclinación1", "children": [] }
+                                                ]
+                                            },
+                                            {
+                                                "type": "Operator",
+                                                "label": "◻ < 2",
+                                                "children": [
+                                                    { "type": "Sensor", "label": "y in Inclinación1", "children": [] }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Branch_True",
+                                "label": "do",
+                                "children": [
+                                    {
+                                        "type": "Action",
+                                        "label": "dibuja en x ◻ y ◻ con color #33cc00 en DibujoLED2",
+                                        "children": [
+                                            {
+                                                "type": "Operator",
+                                                "label": "4 + ◻",
+                                                "children": [
+                                                    {
+                                                        "type": "Operator",
+                                                        "label": "-1 × ◻",
+                                                        "children": [
+                                                            { "type": "Sensor", "label": "x in Inclinación1", "children": [] }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "Operator",
+                                                "label": "4 + ◻",
+                                                "children": [
+                                                    { "type": "Sensor", "label": "y in Inclinación1", "children": [] }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Conditional",
+                                        "label": "si ◻",
+                                        "children": [
+                                            { "type": "Sensor", "label": "sonidoFijo", "children": [] },
+                                            {
+                                                "type": "Branch_True",
+                                                "label": "do",
+                                                "children": [
+                                                    { "type": "Action", "label": "tocar nota do4 en TecladoMusical3", "children": [] },
+                                                    { "type": "Assignment", "label": "establecer sonidoFijo a falso", "children": [] }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Branch_False",
+                                "label": "sino",
+                                "children": [
+                                    {
+                                        "type": "Action",
+                                        "label": "dibuja en x ◻ y ◻ con color #ff4444 en DibujoLED2",
+                                        "children": [
+                                            {
+                                                "type": "Operator",
+                                                "label": "limitar ◻ entre 1 y 7",
+                                                "children": [
+                                                    {
+                                                        "type": "Operator",
+                                                        "label": "4 + ◻",
+                                                        "children": [
+                                                            {
+                                                                "type": "Operator",
+                                                                "label": "-1 × ◻",
+                                                                "children": [
+                                                                    { "type": "Sensor", "label": "x in Inclinación1", "children": [] }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "Operator",
+                                                "label": "limitar ◻ entre 1 y 7",
+                                                "children": [
+                                                    {
+                                                        "type": "Operator",
+                                                        "label": "4 + ◻",
+                                                        "children": [
+                                                            { "type": "Sensor", "label": "y in Inclinación1", "children": [] }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    { "type": "Assignment", "label": "establecer sonidoFijo a verdadero", "children": [] },
+                                    { "type": "Action", "label": "detener en TecladoMusical3", "children": [] },
+                                    { "type": "Action", "label": "retraso de 100 milisegundos", "children": [] },
+                                    { "type": "Action", "label": "tocar nota sol5 en TecladoMusical3", "children": [] }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "Event",
+                "label": "al iniciar el programa",
+                "children": [
+                    { "type": "Action", "label": "establecer color de fondo a #000000 en DibujoLED2", "children": [] },
+                    { "type": "Assignment", "label": "establecer sonidoFijo a verdadero", "children": [] }
+                ]
+            }
+        ]
+    }
+}

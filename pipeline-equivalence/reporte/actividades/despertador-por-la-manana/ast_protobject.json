@@ -1,0 +1,49 @@
+{
+    "platform": "Protobject",
+    "ast": {
+        "blocks": [
+            {
+                "type": "Event",
+                "label": "al iniciar el programa",
+                "children": [
+                    { "type": "Action", "label": "establecer color de fondo a #000000 en DibujoLED2", "children": [] }
+                ]
+            },
+            {
+                "type": "Loop",
+                "label": "repetir para siempre",
+                "children": [
+                    {
+                        "type": "Conditional",
+                        "label": "si ◻",
+                        "children": [
+                            {
+                                "type": "Operator",
+                                "label": "◻ > 50",
+                                "children": [
+                                    { "type": "Sensor", "label": "luminosidad in IntensidadLuz1", "children": [] }
+                                ]
+                            },
+                            {
+                                "type": "Branch_True",
+                                "label": "si",
+                                "children": [
+                                    { "type": "Action", "label": "reproducir sonido 'celebración final' en ReproductorSonido3", "children": [] },
+                                    { "type": "Action", "label": "dibuja con color #ff0000 en DibujoLED2", "children": [] }
+                                ]
+                            },
+                            {
+                                "type": "Branch_False",
+                                "label": "sino",
+                                "children": [
+                                    { "type": "Action", "label": "detener sonido de ReproductorSonido3", "children": [] },
+                                    { "type": "Action", "label": "borrar dibujo en DibujoLED2", "children": [] }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

@@ -1,0 +1,40 @@
+ACTIVIDAD: 16.3-bat-in-the-dark
+FUENTE: micro:bit / MakeCode 8.0.18 — "luces-de-fiesta-al-oscurecer"  (etiquetas oficiales es-ES)
+
+para siempre:
+  si (nivel de luz < 75) entonces:   // Bloque condicional con 2 caminos. Si se cumple la condición que en este caso es que haya oscuridad, se ejecuta una animación de una luz.  Pero por el otro camino, si es que se está en un espacio luminoso los leds no mostrarán nada, es decir se mantendrán apagados.
+    mostrar LEDs:
+        . . . . .
+        . . . . .
+        . . # . .
+        . . . . .
+        . . . . .
+    pausa (ms) 100
+    mostrar LEDs:
+        . . . . .
+        . # . # .
+        . . # . .
+        . # . # .
+        . . . . .
+    pausa (ms) 100
+    mostrar LEDs:
+        # . # . #
+        . # # # .
+        # # # # #
+        . # # # .
+        # . # . #
+    pausa (ms) 100
+    mostrar LEDs:
+        . . . . .
+        . . # . .
+        . # # # .
+        . . # . .
+        . . . . .
+    pausa (ms) 100
+  si no:
+    mostrar LEDs:
+        . . . . .
+        . . . . .
+        . . . . .
+        . . . . .
+        . . . . .

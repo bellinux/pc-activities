@@ -1,0 +1,19 @@
+{
+    "platform": "MakeCode",
+    "extracted_text": [
+        "para siempre:",
+        "  si flama entonces:",
+        "    mostrar LEDs",
+        "    graficar x (escoger al azar de 1 a 3) y 0",
+        "    pausa (ms) 200",
+        "    mostrar LEDs",
+        "    graficar x 2 y 0",
+        "    pausa (ms) 200",
+        "  si no:",
+        "    mostrar LEDs",
+        "al iniciar:",
+        "  fijar flama a verdadero",
+        "al detectar el sonido alto:",
+        "  fijar flama a (no flama)"
+    ]
+}

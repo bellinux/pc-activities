@@ -1,0 +1,27 @@
+ACTIVIDAD: 22.3-dont-spill-liquid-game
+FUENTE: Protobject (bloques, etiquetas oficiales es)
+
+repetir para siempre:
+  dibuja con color #ffffff en DibujoLED2:
+      #######
+      #######
+      #######
+      #######
+      #######
+      #######
+      #######
+  si (((x in Inclinación1 > -2) y (x in Inclinación1 < 2)) y ((y in Inclinación1 > -2) y (y in Inclinación1 < 2))):
+    dibuja en x (4 + (-1 × x in Inclinación1)) y (4 + y in Inclinación1) con color #33cc00 en DibujoLED2
+    si sonidoFijo:
+      tocar nota do4 en TecladoMusical3
+      establecer sonidoFijo a falso
+  sino:
+    dibuja en x limitar (4 + (-1 × x in Inclinación1)) entre 1 y 7 y limitar (4 + y in Inclinación1) entre 1 y 7 con color #ff4444 en DibujoLED2
+    establecer sonidoFijo a verdadero
+    detener en TecladoMusical3
+    retraso de 100 milisegundos
+    tocar nota sol5 en TecladoMusical3
+
+al iniciar el programa:
+  establecer color de fondo a #000000 en DibujoLED2
+  establecer sonidoFijo a verdadero

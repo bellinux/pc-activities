@@ -1,0 +1,16 @@
+{
+    "platform": "MakeCode",
+    "extracted_text": [
+        "al iniciar:",
+        "  mostrar LEDs",
+        "al detectar el sonido alto:",
+        "  reproduce (nyan) en segundo plano",
+        "  repetir 8 veces:",
+        "    mostrar LEDs",
+        "    pausa (ms) 100",
+        "    mostrar LEDs",
+        "    pausa (ms) 100",
+        "  detener la melodía todos",
+        "  mostrar LEDs"
+    ]
+}

@@ -1,0 +1,23 @@
+{
+    "platform": "MakeCode",
+    "extracted_text": [
+        "al iniciar:",
+        "  fijar sonidoFijo a verdadero",
+        "para siempre:",
+        "  serial escribir valor \"x\" = (redondeo ((aceleración (mg) x) ÷ 250))",
+        "  borrar la pantalla",
+        "  si ((((redondeo ((aceleración (mg) x) ÷ 250)) > -2) y ((redondeo ((aceleración (mg) x) ÷ 250)) < 2)) y (((redondeo ((aceleración (mg) y) ÷ 250)) > -2) y ((redondeo ((aceleración (mg) y) ÷ 250)) < 2))) entonces:",
+        "    graficar x (2 + (redondeo ((aceleración (mg) x) ÷ 250))) y (2 + (redondeo ((aceleración (mg) y) ÷ 250)))",
+        "    si sonidoFijo entonces:",
+        "      reproduce secuencia (tono Fa3 durante (1/8 pulso)) en modo en segundo plano",
+        "      pausa (ms) 1000",
+        "      fijar sonidoFijo a falso",
+        "  si no:",
+        "    graficar x (2 + (redondeo ((aceleración (mg) x) ÷ 250))) y (2 + (redondeo ((aceleración (mg) y) ÷ 250)))",
+        "    fijar sonidoFijo a verdadero",
+        "    detener la melodía todos",
+        "    pausa (ms) 100",
+        "    reproduce secuencia (tono Re5 durante (1/8 pulso)) en modo en segundo plano",
+        "restringir 0 entre 0 y 0"
+    ]
+}

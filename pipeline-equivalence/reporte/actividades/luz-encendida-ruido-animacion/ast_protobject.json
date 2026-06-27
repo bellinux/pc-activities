@@ -1,0 +1,70 @@
+{
+    "platform": "Protobject",
+    "ast": {
+        "blocks": [
+            {
+                "type": "Event_Interrupt",
+                "label": "cuando NivelRuido1 detecta aumento repentino",
+                "children": [
+                    { "type": "State_Toggle", "label": "establecer estado a no (estado)", "children": [] },
+                    {
+                        "type": "Conditional",
+                        "label": "si estado",
+                        "children": [
+                            {
+                                "type": "Branch_True",
+                                "label": "si",
+                                "children": [
+                                    {
+                                        "type": "Loop",
+                                        "label": "contar con columnas desde 1 hasta 7 de a 1",
+                                        "children": [
+                                            {
+                                                "type": "Loop",
+                                                "label": "contar con lineas desde 1 hasta 7 de a 1",
+                                                "children": [
+                                                    { "type": "Action", "label": "dibuja en x lineas y columnas con color #ff4444 en DibujoLED2", "children": [] },
+                                                    { "type": "Action", "label": "retraso de 10 milisegundos", "children": [] }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    { "type": "Action", "label": "dibuja en x 1 y 1 con color #ff4444 en DibujoLED2", "children": [] }
+                                ]
+                            },
+                            {
+                                "type": "Branch_False",
+                                "label": "sino",
+                                "children": [
+                                    {
+                                        "type": "Loop",
+                                        "label": "contar con columnas desde 7 hasta 1 de a 1",
+                                        "children": [
+                                            {
+                                                "type": "Loop",
+                                                "label": "contar con lineas desde 7 hasta 1 de a 1",
+                                                "children": [
+                                                    { "type": "Action", "label": "dibuja en x lineas y columnas con color #000000 en DibujoLED2", "children": [] },
+                                                    { "type": "Action", "label": "retraso de 10 milisegundos", "children": [] }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "Event",
+                "label": "al iniciar el programa",
+                "children": [
+                    { "type": "Assignment", "label": "establecer estado a falso", "children": [] },
+                    { "type": "Action", "label": "establecer color de fondo a #000000 en DibujoLED2", "children": [] },
+                    { "type": "Action", "label": "borrar dibujo en DibujoLED2", "children": [] }
+                ]
+            }
+        ]
+    }
+}

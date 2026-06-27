@@ -1,0 +1,176 @@
+{
+    "platform": "MakeCode",
+    "nodes": [
+        {
+            "id": "n1",
+            "kind": "ReadLightLevel",
+            "seq": 1,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n2",
+            "kind": "Comparison",
+            "seq": 2,
+            "in_loop": true,
+            "op": "<"
+        },
+        {
+            "id": "n3",
+            "kind": "ConditionalBranch",
+            "seq": 3,
+            "in_loop": true
+        },
+        {
+            "id": "n4",
+            "kind": "DrawImage",
+            "seq": 4,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n5",
+            "kind": "Delay",
+            "seq": 5,
+            "in_loop": true
+        },
+        {
+            "id": "n6",
+            "kind": "DrawImage",
+            "seq": 6,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n7",
+            "kind": "Delay",
+            "seq": 7,
+            "in_loop": true
+        },
+        {
+            "id": "n8",
+            "kind": "DrawImage",
+            "seq": 8,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n9",
+            "kind": "Delay",
+            "seq": 9,
+            "in_loop": true
+        },
+        {
+            "id": "n10",
+            "kind": "DrawImage",
+            "seq": 10,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n11",
+            "kind": "Delay",
+            "seq": 11,
+            "in_loop": true
+        },
+        {
+            "id": "n12",
+            "kind": "DrawImage",
+            "seq": 12,
+            "in_loop": true,
+            "resId": 1
+        }
+    ],
+    "edges": [
+        {
+            "source": "n3",
+            "target": "n4",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n3",
+            "target": "n5",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n3",
+            "target": "n6",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n3",
+            "target": "n7",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n3",
+            "target": "n8",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n3",
+            "target": "n9",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n3",
+            "target": "n10",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n3",
+            "target": "n11",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n3",
+            "target": "n12",
+            "type": "control",
+            "var": "false"
+        },
+        {
+            "source": "n1",
+            "target": "n2",
+            "type": "data",
+            "var": "light_1"
+        },
+        {
+            "source": "n2",
+            "target": "n3",
+            "type": "data",
+            "var": "condition"
+        },
+        {
+            "source": "n4",
+            "target": "n6",
+            "type": "side_effect",
+            "var": "display"
+        },
+        {
+            "source": "n6",
+            "target": "n8",
+            "type": "side_effect",
+            "var": "display"
+        },
+        {
+            "source": "n8",
+            "target": "n10",
+            "type": "side_effect",
+            "var": "display"
+        },
+        {
+            "source": "n10",
+            "target": "n12",
+            "type": "side_effect",
+            "var": "display"
+        }
+    ]
+}

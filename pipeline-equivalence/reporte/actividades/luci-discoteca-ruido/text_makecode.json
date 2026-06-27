@@ -1,0 +1,9 @@
+{
+    "platform": "MakeCode",
+    "extracted_text": [
+        "al iniciar:",
+        "  mostrar LEDs",
+        "para siempre:",
+        "  ajustar brillo (nivel de sonido)"
+    ]
+}

@@ -1,0 +1,17 @@
+ACTIVIDAD: 19.1-digital-hot-potato
+FUENTE: micro:bit / MakeCode 8.0.18 — "papas-caliente-juego"  (etiquetas oficiales es-ES)
+
+al iniciar:
+  fijar pausado a verdadero
+
+al tocar el logotipo:
+  si pausado entonces:
+    fijar pausado a falso
+    fijar tiempo a escoger al azar de 5 a 15
+    reproduce baddy bucle en segundo plano
+    mientras (tiempo > 0):   // Temporizador con tiempo inicial aleatorio, valor entre 5 y 15.
+      cambiar tiempo por -1
+      pausa (ms) 1000
+    para todos los sonidos
+    reproduce wawawawaa en segundo plano
+    fijar pausado a verdadero

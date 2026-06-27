@@ -1,0 +1,40 @@
+ACTIVIDAD: 14.2-my-robot-friend-heart
+FUENTE: micro:bit / MakeCode 8.0.18 — "corazon-variables-eventos"  (etiquetas oficiales es-ES)
+
+para siempre:
+  mostrar LEDs:
+      . # . # .
+      # # # # #
+      # # # # #
+      . # # # .
+      . . # . .
+  reproduce secuencia tono Re5 durante 1/8 pulso en modo en segundo plano
+  pausa (ms) latidoGrande   // Se utiliza la variable "latidoGrande" para cambiar la velocidad de latido del corazón grande dependiendo de la posición del dispositivo.
+  reproduce secuencia tono Re5 durante 1/8 pulso en modo en segundo plano
+  repetir 4 veces:
+    mostrar LEDs:
+        . # . # .
+        # . # . #
+        # . . . #
+        . # . # .
+        . . # . .
+    pausa (ms) latidoPequeño   // Se utiliza la variable "latidoPequeño" para cambiar la velocidad de latido del corazón chico dependiendo de la posición del dispositivo.
+    mostrar LEDs:
+        . . . . .
+        . # . # .
+        . # # # .
+        . . # . .
+        . . . . .
+    pausa (ms) latidoPequeño
+
+al iniciar:
+  fijar latidoPequeño a 250
+  fijar latidoGrande a 500
+
+si pantalla hacia arriba:   // Este bloque detecta el momento en cambia la posición del dispositivo, cuando lo hace se editan las variables "latidoGrande" y "latidoPequeño". Dependiendo de la posición la velocidad de latido aumentará (Los tiempos son más largos, es decir las variables toman valores grandes).  En este bloque específico la velocidad de latidos se reducirá.
+  fijar latidoPequeño a 250
+  fijar latidoGrande a 500
+
+si logotipo hacia arriba:   // Este bloque detecta el momento en cambia la posición del dispositivo, cuando lo hace se editan las variables "latidoGrande" y "latidoPequeño". Dependiendo de la posición la velocidad de latido aumentará (Los tiempos son más largos, es decir las variables toman valores grandes).  En este bloque específico la velocidad de latidos aumentará.
+  fijar latidoPequeño a 10
+  fijar latidoGrande a 100

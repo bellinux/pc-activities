@@ -1,0 +1,34 @@
+ACTIVIDAD: 04.1-heart-beat
+FUENTE: Protobject (bloques, etiquetas oficiales es)
+
+repetir para siempre:   // Este bloque se encarga de ejecutar infinitamente la secuencia que tiene dentro.
+  dibuja con color #ff0000 en DibujoLED1:
+      .#...#.
+      ###.###
+      #######
+      #######
+      .#####.
+      ..###..
+      ...#...
+  toca nota tom en BateríaMusical2
+  retraso de 300 milisegundos   // Este tipo de bloque permite esperar una cantidad de tiempo personalizada antes de ejecutar la siguiente orden.
+  toca nota tom en BateríaMusical2
+  repetir 4 veces:   // Este bloque es como el bloque "repetir para siempre" solo que permite personalizar la cantidad de veces que se tiene que repetir.
+    dibuja con color #ff0000 en DibujoLED1:
+        .......
+        ..#.#..
+        .#####.
+        .#####.
+        ..###..
+        ...#...
+        .......
+    retraso de 100 milisegundos
+    dibuja con color #ff0000 en DibujoLED1:
+        .......
+        ..#.#..
+        .#.#.#.
+        .#...#.
+        ..#.#..
+        ...#...
+        .......
+    retraso de 100 milisegundos

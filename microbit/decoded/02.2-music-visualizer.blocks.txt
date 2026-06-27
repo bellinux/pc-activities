@@ -1,0 +1,13 @@
+ACTIVIDAD: 02.2-music-visualizer
+FUENTE: micro:bit / MakeCode 8.0.18 — "luci-discoteca-ruido"  (etiquetas oficiales es-ES)
+
+al iniciar:
+  mostrar LEDs:
+      # . # . #
+      . # . # .
+      # . # . #
+      . # . # .
+      # . # . #
+
+para siempre:
+  ajustar brillo nivel de sonido   // Este bloque ajusta el nivel de brillo de los leds. Toma valores entre 0 y 255, donde 0 es el silencio absoluto y 255 es ruido máximo.

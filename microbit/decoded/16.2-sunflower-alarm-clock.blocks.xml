@@ -1,0 +1,21 @@
+<xml xmlns="https://developers.google.com/blockly/xml"><variables></variables><block type="device_forever" x="342" y="20"><statement name="HANDLER"><block type="controls_if"><mutation else="1"></mutation><comment pinned="false" h="382.10621643066406" w="374.539306640625">Este bloque es un condicional extendido, en la actividad anterior teníamos un bloque que ejecutaba su contenido si se cumple la condición, en este caso se extiende el bloque condicional y se le da la instrucción de que si se cumple la condición se ejecuta la primera parte del bloque, pero si no se cumple se ejecuta otra parte diferente. 
+
+En la actividad anterior si no se cumplía la condición no pasaba nada más que no ejecutar lo de dentro, en este caso si no se cumple se ejecuta una serie de instrucciones específicas.</comment><data>{"commentRefs":[],"fieldData":{"~commentOffsetX":"16","~commentOffsetY":"16"}}</data><value name="IF0"><shadow type="logic_boolean"><field name="BOOL">TRUE</field></shadow><block type="logic_compare"><field name="OP">GT</field><value name="A"><shadow type="math_number" disabled-reasons="pxt_automatic_disabled"><field name="NUM">0</field></shadow><block type="device_get_light_level"></block></value><value name="B"><shadow type="math_number"><field name="NUM">100</field></shadow></value></block></value><statement name="DO0"><block type="music_playable_play_default_bkg"><field name="playbackMode">music.PlaybackMode.LoopingInBackground</field><value name="toPlay"><shadow type="device_builtin_melody_playable"><field name="melody">Melodies.Dadadadum</field></shadow><block type="device_builtin_melody_playable"><field name="melody">Melodies.Prelude</field></block></value><next><block type="device_show_leds"><field name="LEDS">`
+        # . # . # 
+        . # # # . 
+        # # # # # 
+        . # # # . 
+        # . # . #
+        `</field></block></next></block></statement><statement name="ELSE"><block type="music_stop_all_sounds"><next><block type="device_show_leds"><field name="LEDS">`
+        . . . . . 
+        . . . . . 
+        . . . . . 
+        . . . . . 
+        . . . . .
+        `</field></block></next></block></statement></block></statement></block><block type="pxt-on-start" x="38" y="53"><statement name="HANDLER"><block type="device_show_leds"><field name="LEDS">`
+        . . . . . 
+        . . . . . 
+        . . . . . 
+        . . . . . 
+        . . . . .
+        `</field></block></statement></block></xml>

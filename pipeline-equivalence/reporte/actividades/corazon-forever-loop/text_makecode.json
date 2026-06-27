@@ -1,0 +1,15 @@
+{
+    "platform": "MakeCode",
+    "extracted_text": [
+        "para siempre:",
+        "  mostrar LEDs",
+        "  reproduce secuencia (tono Re5 durante (1/8 pulso)) en modo en segundo plano",
+        "  pausa (ms) 300",
+        "  reproduce secuencia (tono Re5 durante (1/8 pulso)) en modo en segundo plano",
+        "  repetir 4 veces:",
+        "    mostrar LEDs",
+        "    pausa (ms) 10",
+        "    mostrar LEDs",
+        "    pausa (ms) 10"
+    ]
+}

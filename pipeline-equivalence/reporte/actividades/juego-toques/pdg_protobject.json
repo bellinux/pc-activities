@@ -1,0 +1,193 @@
+{
+    "platform": "Protobject",
+    "nodes": [
+        {
+            "id": "n1",
+            "kind": "ProgramStartEvent",
+            "seq": 1,
+            "in_loop": false
+        },
+        {
+            "id": "n2",
+            "kind": "SetVariable",
+            "seq": 2,
+            "in_loop": false
+        },
+        {
+            "id": "n3",
+            "kind": "ConditionalBranch",
+            "seq": 3,
+            "in_loop": true
+        },
+        {
+            "id": "n4",
+            "kind": "Comparison",
+            "seq": 4,
+            "in_loop": true
+        },
+        {
+            "id": "n5",
+            "kind": "ForRange",
+            "seq": 5,
+            "in_loop": true
+        },
+        {
+            "id": "n6",
+            "kind": "PlotPoint",
+            "seq": 6,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n7",
+            "kind": "Arithmetic",
+            "seq": 7,
+            "in_loop": true,
+            "op": "-"
+        },
+        {
+            "id": "n8",
+            "kind": "ClearDisplay",
+            "seq": 8,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n9",
+            "kind": "DrawImage",
+            "seq": 9,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n10",
+            "kind": "PlaySound",
+            "seq": 10,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n11",
+            "kind": "OnTouchEvent",
+            "seq": 11,
+            "in_loop": false,
+            "resId": 1
+        },
+        {
+            "id": "n12",
+            "kind": "ChangeVariableBy",
+            "seq": 12,
+            "in_loop": false
+        }
+    ],
+    "edges": [
+        {
+            "source": "n1",
+            "target": "n2",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n3",
+            "target": "n5",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n5",
+            "target": "n6",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n3",
+            "target": "n8",
+            "type": "control",
+            "var": "false"
+        },
+        {
+            "source": "n3",
+            "target": "n9",
+            "type": "control",
+            "var": "false"
+        },
+        {
+            "source": "n3",
+            "target": "n10",
+            "type": "control",
+            "var": "false"
+        },
+        {
+            "source": "n8",
+            "target": "n9",
+            "type": "control",
+            "var": "false"
+        },
+        {
+            "source": "n9",
+            "target": "n10",
+            "type": "control",
+            "var": "false"
+        },
+        {
+            "source": "n4",
+            "target": "n3",
+            "type": "data",
+            "var": "condicion"
+        },
+        {
+            "source": "n5",
+            "target": "n6",
+            "type": "data",
+            "var": "value"
+        },
+        {
+            "source": "n7",
+            "target": "n6",
+            "type": "data",
+            "var": "value"
+        },
+        {
+            "source": "n2",
+            "target": "n4",
+            "type": "data",
+            "var": "toques"
+        },
+        {
+            "source": "n12",
+            "target": "n4",
+            "type": "data",
+            "var": "toques"
+        },
+        {
+            "source": "n2",
+            "target": "n7",
+            "type": "data",
+            "var": "toques"
+        },
+        {
+            "source": "n12",
+            "target": "n7",
+            "type": "data",
+            "var": "toques"
+        },
+        {
+            "source": "n2",
+            "target": "n12",
+            "type": "data",
+            "var": "toques"
+        },
+        {
+            "source": "n6",
+            "target": "n8",
+            "type": "side_effect",
+            "var": "display"
+        },
+        {
+            "source": "n8",
+            "target": "n9",
+            "type": "side_effect",
+            "var": "display"
+        }
+    ]
+}

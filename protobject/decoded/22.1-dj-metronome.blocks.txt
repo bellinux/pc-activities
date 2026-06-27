@@ -1,0 +1,12 @@
+ACTIVIDAD: 22.1-dj-metronome
+FUENTE: Protobject (bloques, etiquetas oficiales es)
+
+al iniciar el programa:
+  establecer ultimoBeat a 0
+
+repetir para siempre:
+  establecer bpm a (x in Inclinación1 + 60)
+  establecer intervaloBeat a (60000 ÷ bpm)
+  si ((milisegundos − ultimoBeat) > intervaloBeat):
+    toca nota tom en BateríaMusical2   // Reproduce un tono específico, en este caso simulará la frecuencia de un metrónomo.
+    establecer ultimoBeat a milisegundos

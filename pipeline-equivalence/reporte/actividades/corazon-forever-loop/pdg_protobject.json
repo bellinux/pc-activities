@@ -1,0 +1,120 @@
+{
+    "platform": "Protobject",
+    "nodes": [
+        {
+            "id": "n1",
+            "kind": "DrawImage",
+            "seq": 1,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n2",
+            "kind": "PlayDrum",
+            "seq": 2,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n3",
+            "kind": "Delay",
+            "seq": 3,
+            "in_loop": true
+        },
+        {
+            "id": "n4",
+            "kind": "PlayDrum",
+            "seq": 4,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n5",
+            "kind": "DrawImage",
+            "seq": 5,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n6",
+            "kind": "Delay",
+            "seq": 6,
+            "in_loop": true
+        },
+        {
+            "id": "n7",
+            "kind": "DrawImage",
+            "seq": 7,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n8",
+            "kind": "Delay",
+            "seq": 8,
+            "in_loop": true
+        }
+    ],
+    "edges": [
+        {
+            "source": "n1",
+            "target": "n2",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n2",
+            "target": "n3",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n3",
+            "target": "n4",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n4",
+            "target": "n5",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n5",
+            "target": "n6",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n6",
+            "target": "n7",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n7",
+            "target": "n8",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n1",
+            "target": "n5",
+            "type": "side_effect",
+            "var": "display"
+        },
+        {
+            "source": "n5",
+            "target": "n7",
+            "type": "side_effect",
+            "var": "display"
+        },
+        {
+            "source": "n2",
+            "target": "n4",
+            "type": "side_effect",
+            "var": "sound"
+        }
+    ]
+}

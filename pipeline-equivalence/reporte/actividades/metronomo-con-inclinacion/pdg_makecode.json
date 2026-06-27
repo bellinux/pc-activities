@@ -1,0 +1,181 @@
+{
+    "platform": "MakeCode",
+    "nodes": [
+        {
+            "id": "n1",
+            "kind": "ProgramStartEvent",
+            "seq": 1,
+            "in_loop": false
+        },
+        {
+            "id": "n2",
+            "kind": "SetVariable",
+            "seq": 2,
+            "in_loop": false
+        },
+        {
+            "id": "n3",
+            "kind": "ReadTilt",
+            "seq": 3,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n4",
+            "kind": "Arithmetic",
+            "seq": 4,
+            "in_loop": true,
+            "op": "+"
+        },
+        {
+            "id": "n5",
+            "kind": "SetVariable",
+            "seq": 5,
+            "in_loop": true
+        },
+        {
+            "id": "n6",
+            "kind": "Arithmetic",
+            "seq": 6,
+            "in_loop": true,
+            "op": "+"
+        },
+        {
+            "id": "n7",
+            "kind": "SetVariable",
+            "seq": 7,
+            "in_loop": true
+        },
+        {
+            "id": "n8",
+            "kind": "ReadRuntimeMillis",
+            "seq": 8,
+            "in_loop": true
+        },
+        {
+            "id": "n9",
+            "kind": "Arithmetic",
+            "seq": 9,
+            "in_loop": true,
+            "op": "-"
+        },
+        {
+            "id": "n10",
+            "kind": "Comparison",
+            "seq": 10,
+            "in_loop": true,
+            "op": ">"
+        },
+        {
+            "id": "n11",
+            "kind": "ConditionalBranch",
+            "seq": 11,
+            "in_loop": true
+        },
+        {
+            "id": "n12",
+            "kind": "PlayTone",
+            "seq": 12,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n13",
+            "kind": "ReadRuntimeMillis",
+            "seq": 13,
+            "in_loop": true
+        },
+        {
+            "id": "n14",
+            "kind": "SetVariable",
+            "seq": 14,
+            "in_loop": true
+        }
+    ],
+    "edges": [
+        {
+            "source": "n1",
+            "target": "n2",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n5",
+            "target": "n7",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n7",
+            "target": "n11",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n11",
+            "target": "n12",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n11",
+            "target": "n14",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n3",
+            "target": "n4",
+            "type": "data",
+            "var": "tilt_1"
+        },
+        {
+            "source": "n4",
+            "target": "n5",
+            "type": "data",
+            "var": "bpm"
+        },
+        {
+            "source": "n5",
+            "target": "n6",
+            "type": "data",
+            "var": "bpm"
+        },
+        {
+            "source": "n6",
+            "target": "n7",
+            "type": "data",
+            "var": "ultimobeat"
+        },
+        {
+            "source": "n7",
+            "target": "n9",
+            "type": "data",
+            "var": "ultimobeat"
+        },
+        {
+            "source": "n8",
+            "target": "n9",
+            "type": "data",
+            "var": "time_1"
+        },
+        {
+            "source": "n9",
+            "target": "n10",
+            "type": "data",
+            "var": "delta"
+        },
+        {
+            "source": "n13",
+            "target": "n14",
+            "type": "data",
+            "var": "time_1"
+        },
+        {
+            "source": "n12",
+            "target": "n12",
+            "type": "side_effect",
+            "var": "sound"
+        }
+    ]
+}

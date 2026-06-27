@@ -1,0 +1,7 @@
+<xml xmlns="https://developers.google.com/blockly/xml"><variables></variables><block type="pxt-on-start" x="67" y="111"><statement name="HANDLER"><block type="device_show_leds"><field name="LEDS">`
+        # . # . # 
+        . # . # . 
+        # . # . # 
+        . # . # . 
+        # . # . #
+        `</field></block></statement></block><block type="device_forever" x="291" y="112"><statement name="HANDLER"><block type="device_set_brightness"><comment pinned="false" h="243.55557250976562" w="243.55548095703125">Este bloque ajusta el nivel de brillo de los leds. Toma valores entre 0 y 255, donde 0 es el silencio absoluto y 255 es ruido máximo.</comment><data>{"commentRefs":[],"fieldData":{"~commentOffsetX":"16","~commentOffsetY":"16"}}</data><value name="value"><shadow type="math_number_minmax"><mutation min="0" max="255" label="Value" precision="0"></mutation><field name="SLIDER">255</field></shadow><block type="device_get_sound_level"><comment pinned="false" h="156.44442749023438" w="213.33331298828125">Este bloque utiliza el micrófono del dispositivo, un sonido muy fuerte será representado con un valor de 255 mientras que el silencio absoluto será representado con un valor de 0.</comment><data>{"commentRefs":[],"fieldData":{"~commentOffsetX":"16","~commentOffsetY":"16"}}</data></block></value></block></statement></block></xml>

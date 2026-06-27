@@ -1,0 +1,53 @@
+{
+    "platform": "Protobject",
+    "ast": {
+        "blocks": [
+            {
+                "type": "Loop",
+                "label": "repetir para siempre",
+                "children": [
+                    { "type": "Action", "label": "borrar dibujo en DibujoLED4", "children": [] },
+                    {
+                        "type": "Action",
+                        "label": "dibuja en x 4 y ◻ con color #ff4444 en DibujoLED4",
+                        "children": [
+                            {
+                                "type": "Operator",
+                                "label": "4 + ◻",
+                                "children": [
+                                    {
+                                        "type": "Operator",
+                                        "label": "redondear ◻",
+                                        "children": [
+                                            {
+                                                "type": "Operator",
+                                                "label": "◻ ÷ 15",
+                                                "children": [
+                                                    { "type": "Sensor", "label": "y in Inclinación2", "children": [] }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Action",
+                        "label": "tocar nota número ◻ en TecladoMusical1",
+                        "children": [
+                            {
+                                "type": "Operator",
+                                "label": "◻ + 60",
+                                "children": [
+                                    { "type": "Sensor", "label": "y in Inclinación2", "children": [] }
+                                ]
+                            }
+                        ]
+                    },
+                    { "type": "Action", "label": "retraso de 100 milisegundos", "children": [] }
+                ]
+            }
+        ]
+    }
+}

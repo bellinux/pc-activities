@@ -1,0 +1,24 @@
+{
+    "platform": "Protobject",
+    "extracted_text": [
+        "repetir para siempre:",
+        "  dibuja con color #ff0000 en DibujoLED1",
+        "  toca nota tom en BateríaMusical2",
+        "  retraso de latidoGrande milisegundos",
+        "  toca nota tom en BateríaMusical2",
+        "  repetir 4 veces:",
+        "    dibuja con color #ff0000 en DibujoLED1",
+        "    retraso de latidoPequeño milisegundos",
+        "    dibuja con color #ff0000 en DibujoLED1",
+        "    retraso de latidoPequeño milisegundos",
+        "al iniciar el programa:",
+        "  establecer latidoGrande a 500",
+        "  establecer latidoPequeño a 150",
+        "cuando Inclinación3 hacie un borde:",
+        "  establecer latidoGrande a 250",
+        "  establecer latidoPequeño a 80",
+        "cuando Inclinación3 hacia arriba:",
+        "  establecer latidoGrande a 500",
+        "  establecer latidoPequeño a 150"
+    ]
+}

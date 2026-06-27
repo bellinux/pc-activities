@@ -1,0 +1,11 @@
+{
+    "platform": "MakeCode",
+    "extracted_text": [
+        "al iniciar:",
+        "  fijar Toques a 0",
+        "al tocar el logotipo:",
+        "  cambiar Toques por 1",
+        "para siempre:",
+        "  mostrar número Toques"
+    ]
+}

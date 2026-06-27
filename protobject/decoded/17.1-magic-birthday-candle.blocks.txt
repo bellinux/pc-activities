@@ -1,0 +1,33 @@
+ACTIVIDAD: 17.1-magic-birthday-candle
+FUENTE: Protobject (bloques, etiquetas oficiales es)
+
+repetir para siempre:
+  si flama:
+    dibuja con color #ff0000 en DibujoLED1:
+        .......
+        .......
+        ..###..
+        ..###..
+        ..###..
+        ..###..
+        ..###..
+    dibuja en x entero aleatorio de 3 a 5 y 2 con color #ff0000 en DibujoLED1   // La posición de los leds está dada por 2 números que los llamaremos X e Y. El número X representará la posición de un led en posición horizontal. Es decir la posición en una fila.   Por otro lado el número Y representa la altura de un led, es decir su posición en una columna.  Por ejemplo, el led de la esquina superior izquierda tiene posición X = 1 e Y =1, mientras que la esquina inferior derecha tiene posición X= 7 e Y = 7. Siendo X posición para los lados e Y posición arriba o abajo.
+    retraso de 200 milisegundos
+    dibuja con color #ff0000 en DibujoLED1:
+        .......
+        .......
+        ..###..
+        ..###..
+        ..###..
+        ..###..
+        ..###..
+    dibuja en x 4 y 2 con color #ff0000 en DibujoLED1
+    retraso de 200 milisegundos
+  sino:
+    borrar dibujo en DibujoLED1
+
+al iniciar el programa:
+  establecer flama a verdadero
+
+cuando NivelRuido2 detecta aumento repentino:
+  establecer flama a no (flama)

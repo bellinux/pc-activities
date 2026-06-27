@@ -1,0 +1,28 @@
+{
+    "platform": "MakeCode",
+    "ast": {
+        "blocks": [
+            {
+                "type": "Event",
+                "label": "al iniciar",
+                "children": [
+                    { "type": "Assignment", "label": "fijar Toques a 0", "children": [] }
+                ]
+            },
+            {
+                "type": "Event_Interrupt",
+                "label": "al tocar el logotipo",
+                "children": [
+                    { "type": "Assignment", "label": "cambiar Toques por 1", "children": [] }
+                ]
+            },
+            {
+                "type": "Loop",
+                "label": "para siempre",
+                "children": [
+                    { "type": "Action", "label": "mostrar número Toques", "children": [] }
+                ]
+            }
+        ]
+    }
+}

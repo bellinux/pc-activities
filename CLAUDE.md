@@ -43,7 +43,8 @@ Repo originariamente clonato da `github.com/bellinux/pc-activities` e poi riorga
 | `_activities/` | I `.md` delle attività: 17 `.es.md` solo-spagnolo (le ufficiali) + 22 base trilingui (`.es/.en/.it`, **ORFANE**, non referenziate). Tutti CRLF. |
 | `src/` · `microbit/` | Immagini/video per attività · firmware `.hex` per micro:bit. |
 | `protobject/` | Codice Blockly reale. `equivalent-<code>.ptj` (root, ufficiali) + `decode_ptj.py`; `raw/` solo `.xml`; `decoded/` `.txt`. Vedi §6. |
-| `pipeline-equivalence/` | Sistema di analisi equivalenza Protobject↔micro:bit via **AST + PDG + metriche** (Python). **ANCORA in italiano**, lavoro **rinviato**. |
+| `blocks-decoder.js` · `decode.js` | **Decoder a blocchi ISOMORFO** (browser + Node) dei `.ptj`/`.hex` → testo a blocchi con etichette ufficiali es. Lo usa l'engine ("Ver bloques en vivo") **e** la pipeline (estrazione). `gen-text-json.js` genera i `text_*.json`. `lib/lzma_worker.min.js` per i `.hex`. Sostituisce i `decode_*.py` (riservati alla pipeline). |
+| `pipeline-equivalence/` | **Pipeline di equivalenza Protobject↔micro:bit** (AST + PDG + metriche). Estrazione **deterministica** (decoder JS) → astrazione **LLM** (AST → **ontologia canonica COMUNE** `reporte/tabla_ontologica.json` → PDG) → calcolo **Python** (env conda `pdg-vela`). Dashboard **dinamico** `index.html` (legge `actividades.json`). **Per rieseguirla quando cambiano attività: segui `pipeline-equivalence/prompt.md`.** |
 | `readme.txt` | Del clone originale. |
 
 ---
@@ -133,7 +134,7 @@ python decode_ptj.py 02.1-xylophone   # solo alcuni (per slug)
 
 ## 8. TODO / decisioni aperte
 
-- **`pipeline-equivalence/`**: tradurre IT→ES e portare avanti il lavoro scientifico (equivalenza AST+PDG). Rinviato.
+- **`pipeline-equivalence/`**: pipeline **ESEGUITA** per le 17 (estrazione JS deterministica → AST → **ontologia comune** verificata avversarialmente → PDG → metriche Python). **Per rieseguirla quando cambiano attività → segui `pipeline-equivalence/prompt.md`** (workflow `reporte/scripts/pipeline_llm.js` + `run_all.py` env `pdg-vela`). Aperto: rivedere anomalie GED (es. `corazon-variables-eventos` GED=18 = ordine di init di variabili indipendenti, fedele ma penalizzato dalla metrica); tradurre IT→ES i testi residui.
 - **Decisioni di redazione NON auto-applicate** (l'utente è indeciso, non toccare senza ok): `16.1` "Sino" (nome blocco),
   `16.4` energía/toques, `17.1` flama/llama, `22.1` ultimoLatido, terminologia `for`/`while` → `contar con`/`repetir mientras`.
 - **§F**: ~12 correzioni che stanno nei **commenti del CODICE** (blocchi), da fare a mano in Protobject (l'utente).

@@ -1,0 +1,13 @@
+{
+    "platform": "Protobject",
+    "extracted_text": [
+        "al iniciar el programa:",
+        "  establecer ultimoBeat a 0",
+        "repetir para siempre:",
+        "  establecer bpm a ((x in Inclinación1) + 60)",
+        "  establecer intervaloBeat a (60000 ÷ bpm)",
+        "  si ((milisegundos − ultimoBeat) > intervaloBeat):",
+        "    toca nota tom en BateríaMusical2",
+        "    establecer ultimoBeat a milisegundos"
+    ]
+}

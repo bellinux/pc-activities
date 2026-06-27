@@ -1,0 +1,104 @@
+[
+  {
+    "num": 1,
+    "code": "xilofono-inclinacion",
+    "slug": "02.1-xylophone",
+    "title": "El Xilófono Mágico Inclinable"
+  },
+  {
+    "num": 2,
+    "code": "luci-discoteca-ruido",
+    "slug": "02.2-music-visualizer",
+    "title": "El Visualizador de Música"
+  },
+  {
+    "num": 3,
+    "code": "xilofono-inclinacion-con-nota-led",
+    "slug": "03.1-led-xylophone",
+    "title": "El Xilófono del Futuro (con LEDs)"
+  },
+  {
+    "num": 4,
+    "code": "corazon-forever-loop",
+    "slug": "04.1-heart-beat",
+    "title": "El Llavero de Corazón Luminoso"
+  },
+  {
+    "num": 5,
+    "code": "robot-risa-simpatica-al-ruido",
+    "slug": "14.1-ticklish-robot",
+    "title": "El Robot Cosquilloso"
+  },
+  {
+    "num": 6,
+    "code": "corazon-variables-eventos",
+    "slug": "14.2-my-robot-friend-heart",
+    "title": "El Corazón de Mi Robot Amigo"
+  },
+  {
+    "num": 7,
+    "code": "alarma-caja-galletas",
+    "slug": "16.1-cookie-thief-alarm",
+    "title": "¡Alarma: El Ladrón de Galletas!"
+  },
+  {
+    "num": 8,
+    "code": "despertador-por-la-manana",
+    "slug": "16.2-sunflower-alarm-clock",
+    "title": "El Despertador de Girasol"
+  },
+  {
+    "num": 9,
+    "code": "luces-de-fiesta-al-oscurecer",
+    "slug": "16.3-bat-in-the-dark",
+    "title": "El Vuelo del Murciélago Nocturno"
+  },
+  {
+    "num": 10,
+    "code": "juego-toques",
+    "slug": "16.4-robot-activation-challenge",
+    "title": "¡El Desafío de Activación del Robot!"
+  },
+  {
+    "num": 11,
+    "code": "luz-encendida-al-ruido",
+    "slug": "16.5-magic-clap-switch",
+    "title": "El Interruptor Mágico de Aplausos"
+  },
+  {
+    "num": 12,
+    "code": "flama-vela-con-soplo",
+    "slug": "17.1-magic-birthday-candle",
+    "title": "La Vela Mágica de Cumpleaños"
+  },
+  {
+    "num": 13,
+    "code": "papas-caliente-juego",
+    "slug": "19.1-digital-hot-potato",
+    "title": "La Papa Explosiva Digital"
+  },
+  {
+    "num": 14,
+    "code": "luz-encendida-ruido-animacion",
+    "slug": "21.1-cinematic-power-on",
+    "title": "El Encendido Cinematográfico"
+  },
+  {
+    "num": 15,
+    "code": "metronomo-con-inclinacion",
+    "slug": "22.1-dj-metronome",
+    "title": "El Metrónomo de DJ"
+  },
+  {
+    "num": 16,
+    "code": "aplausometro-tiempo-aplausos",
+    "slug": "22.2-applause-battle",
+    "title": "La Batalla de Aplausos"
+  },
+  {
+    "num": 17,
+    "code": "nivel-con-ruido",
+    "slug": "22.3-dont-spill-liquid-game",
+    "title": "¡No Derrames el Líquido! - El Juego de Pulso"
+  }
+]

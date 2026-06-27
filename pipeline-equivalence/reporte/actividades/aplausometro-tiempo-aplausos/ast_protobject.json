@@ -1,0 +1,91 @@
+{
+    "platform": "Protobject",
+    "ast": {
+        "blocks": [
+            {
+                "type": "Event",
+                "label": "al iniciar el programa",
+                "children": [
+                    { "type": "Action", "label": "establecer tamaño 40 en DibujarEscribir2", "children": [] },
+                    { "type": "Assignment", "label": "establecer inicio a 0", "children": [] },
+                    { "type": "Assignment", "label": "establecer activo a verdadero", "children": [] }
+                ]
+            },
+            {
+                "type": "Loop",
+                "label": "repetir para siempre",
+                "children": [
+                    { "type": "Action", "label": "limpiar en DibujarEscribir2", "children": [] },
+                    {
+                        "type": "Conditional",
+                        "label": "si ◻",
+                        "children": [
+                            { "type": "Operator", "label": "inicio > 0", "children": [] },
+                            {
+                                "type": "Branch_True",
+                                "label": "entonces",
+                                "children": [
+                                    {
+                                        "type": "Action",
+                                        "label": "escribir ◻ en DibujarEscribir2",
+                                        "children": [
+                                            {
+                                                "type": "Operator",
+                                                "label": "◻ ÷ 1000",
+                                                "children": [
+                                                    { "type": "Operator", "label": "milisegundos − inicio", "children": [] }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Conditional",
+                                        "label": "si ◻",
+                                        "children": [
+                                            {
+                                                "type": "Operator",
+                                                "label": "◻ < 5",
+                                                "children": [
+                                                    { "type": "Sensor", "label": "ruido in NivelRuido1", "children": [] }
+                                                ]
+                                            },
+                                            {
+                                                "type": "Branch_True",
+                                                "label": "entonces",
+                                                "children": [
+                                                    { "type": "Assignment", "label": "establecer inicio a 0", "children": [] },
+                                                    { "type": "Assignment", "label": "establecer activo a falso", "children": [] },
+                                                    { "type": "Action", "label": "retraso de 5 segundos", "children": [] },
+                                                    { "type": "Assignment", "label": "establecer activo a verdadero", "children": [] }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "Event_Interrupt",
+                "label": "cuando NivelRuido1 detecta aumento repentino",
+                "children": [
+                    {
+                        "type": "Conditional",
+                        "label": "si activo",
+                        "children": [
+                            {
+                                "type": "Branch_True",
+                                "label": "entonces",
+                                "children": [
+                                    { "type": "Assignment", "label": "establecer inicio a milisegundos", "children": [] }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

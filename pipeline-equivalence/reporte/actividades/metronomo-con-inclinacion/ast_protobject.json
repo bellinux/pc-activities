@@ -1,0 +1,73 @@
+{
+    "platform": "Protobject",
+    "ast": {
+        "blocks": [
+            {
+                "type": "Event",
+                "label": "al iniciar el programa",
+                "children": [
+                    { "type": "Assignment", "label": "establecer ultimoBeat a 0", "children": [] }
+                ]
+            },
+            {
+                "type": "Loop",
+                "label": "repetir para siempre",
+                "children": [
+                    {
+                        "type": "Assignment",
+                        "label": "establecer bpm a ◻",
+                        "children": [
+                            {
+                                "type": "Operator",
+                                "label": "◻ + 60",
+                                "children": [
+                                    { "type": "Sensor", "label": "x in Inclinación1", "children": [] }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Assignment",
+                        "label": "establecer intervaloBeat a ◻",
+                        "children": [
+                            { "type": "Operator", "label": "60000 ÷ bpm", "children": [] }
+                        ]
+                    },
+                    {
+                        "type": "Conditional",
+                        "label": "si ◻",
+                        "children": [
+                            {
+                                "type": "Operator",
+                                "label": "◻ > intervaloBeat",
+                                "children": [
+                                    {
+                                        "type": "Operator",
+                                        "label": "◻ − ultimoBeat",
+                                        "children": [
+                                            { "type": "Sensor", "label": "milisegundos", "children": [] }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Branch_True",
+                                "label": "hacer",
+                                "children": [
+                                    { "type": "Action", "label": "toca nota tom en BateríaMusical2", "children": [] },
+                                    {
+                                        "type": "Assignment",
+                                        "label": "establecer ultimoBeat a ◻",
+                                        "children": [
+                                            { "type": "Sensor", "label": "milisegundos", "children": [] }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

@@ -1,0 +1,106 @@
+{
+    "platform": "MakeCode",
+    "nodes": [
+        {
+            "id": "n1",
+            "kind": "ProgramStartEvent",
+            "seq": 1,
+            "in_loop": false
+        },
+        {
+            "id": "n2",
+            "kind": "SetVariable",
+            "seq": 2,
+            "in_loop": false
+        },
+        {
+            "id": "n3",
+            "kind": "SuddenNoiseEvent",
+            "seq": 3,
+            "in_loop": false,
+            "resId": 1
+        },
+        {
+            "id": "n4",
+            "kind": "ToggleVariable",
+            "seq": 4,
+            "in_loop": false
+        },
+        {
+            "id": "n5",
+            "kind": "ConditionalBranch",
+            "seq": 5,
+            "in_loop": false
+        },
+        {
+            "id": "n6",
+            "kind": "DrawImage",
+            "seq": 6,
+            "in_loop": false,
+            "resId": 1
+        },
+        {
+            "id": "n7",
+            "kind": "DrawImage",
+            "seq": 7,
+            "in_loop": false,
+            "resId": 1
+        }
+    ],
+    "edges": [
+        {
+            "source": "n1",
+            "target": "n2",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n3",
+            "target": "n4",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n4",
+            "target": "n5",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n5",
+            "target": "n6",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n5",
+            "target": "n7",
+            "type": "control",
+            "var": "false"
+        },
+        {
+            "source": "n2",
+            "target": "n4",
+            "type": "data",
+            "var": "estado"
+        },
+        {
+            "source": "n2",
+            "target": "n5",
+            "type": "data",
+            "var": "estado"
+        },
+        {
+            "source": "n4",
+            "target": "n5",
+            "type": "data",
+            "var": "estado"
+        },
+        {
+            "source": "n6",
+            "target": "n7",
+            "type": "side_effect",
+            "var": "display"
+        }
+    ]
+}

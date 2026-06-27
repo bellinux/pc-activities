@@ -27,12 +27,46 @@ def build_graph_from_json(json_data: dict) -> nx.MultiDiGraph:
     G = nx.MultiDiGraph(name=f"PDG_{json_data.get('platform', 'Unknown')}")
     
     for node in json_data.get('nodes', []):
-        G.add_node(node['id'], kind=node['kind'], seq=node['seq'], in_loop=node['in_loop'])
+        G.add_node(node['id'], kind=node['kind'], seq=node['seq'], in_loop=node['in_loop'],
+                   op=node.get('op'), resId=node.get('resId'))
         
     for edge in json_data.get('edges', []):
         G.add_edge(edge['source'], edge['target'], type=edge['type'], var=edge['var'])
-        
+
     return G
+
+
+# --- Canonicalización determinista de la 'var' de las aristas de DATOS --------
+# La var es plumbing: el eje (x/y), el encoding del pitch (frequency/nota) y los
+# nombres intermedios (value/a/b) no deben distinguir plataformas. Se reescribe a
+# una forma canónica reproducible:
+#   valor de un sensor  -> "<sensor>_<resId>"  (p.ej. "tilt_1"; "tilt_2" si hay un 2º eje distinto)
+#   altura de un tono   -> "pitch"             (no "frequency"/"nota")
+#   intermedio genérico -> "value"
+#   variable de usuario -> su nombre en minúsculas
+SENSOR_CANON = {'ReadTilt': 'tilt', 'ReadSoundLevel': 'sound',
+                'ReadLightLevel': 'light', 'ReadRuntimeMillis': 'time'}
+PITCH_LABELS = {'frequency', 'freq', 'hz', 'nota', 'note', 'tono', 'tone', 'pitch'}
+GENERIC_LABELS = {'x', 'y', 'z', 'eje', 'axis', 'value', 'val', 'a', 'b', 'c',
+                  'result', 'res', 'n', 'num', 'index', 'i', 'arg', 'operand', ''}
+
+
+def normalize_pdg(pdg: dict) -> dict:
+    nodes = {n['id']: n for n in pdg.get('nodes', [])}
+    for e in pdg.get('edges', []):
+        if e.get('type') != 'data':
+            continue
+        src = nodes.get(e.get('source'), {})
+        raw = (e.get('var') or '').strip().lower()
+        if src.get('kind') in SENSOR_CANON:
+            e['var'] = "%s_%s" % (SENSOR_CANON[src['kind']], src.get('resId') or 1)
+        elif raw in PITCH_LABELS:
+            e['var'] = 'pitch'
+        elif raw in GENERIC_LABELS:
+            e['var'] = 'value'
+        else:
+            e['var'] = raw
+    return pdg
 
 def render_pdg(G: nx.MultiDiGraph, output_path: str) -> str:
     dot = graphviz.Digraph(name=G.graph['name'])
@@ -48,7 +82,7 @@ def render_pdg(G: nx.MultiDiGraph, output_path: str) -> str:
     out_loop = [(n, a) for n, a in G.nodes(data=True) if not a.get('in_loop', True)]
     for node_id, attrs in out_loop:
         style = NODE_STYLES.get(attrs['kind'], DEFAULT_NODE_STYLE)
-        label = f"{attrs.get('seq', '')}   {attrs['kind']}"
+        label = f"{attrs.get('seq', '')}   {attrs['kind']}" + (f" [{attrs['op']}]" if attrs.get('op') else "") + (f" #{attrs['resId']}" if attrs.get('resId') else "")
         dot.node(node_id, label=label, **style)
 
     in_loop = [(n, a) for n, a in G.nodes(data=True) if a.get('in_loop', True)]
@@ -62,7 +96,7 @@ def render_pdg(G: nx.MultiDiGraph, output_path: str) -> str:
         )
         for node_id, attrs in in_loop:
             style = NODE_STYLES.get(attrs['kind'], DEFAULT_NODE_STYLE)
-            label = f"{attrs.get('seq', '')}   {attrs['kind']}"
+            label = f"{attrs.get('seq', '')}   {attrs['kind']}" + (f" [{attrs['op']}]" if attrs.get('op') else "") + (f" #{attrs['resId']}" if attrs.get('resId') else "")
             c.node(node_id, label=label, **style)
 
     for u, v, edge_attrs in G.edges(data=True):
@@ -77,9 +111,17 @@ def render_pdg(G: nx.MultiDiGraph, output_path: str) -> str:
     return dot.render(output_path, format='svg', cleanup=True)
 
 def node_match(node_a, node_b):
-    return node_a['kind'] == node_b['kind']
+    # Equivalencia "módulo plumbing": además del kind canónico, comparamos el
+    # operador aritmético (op: "+","-","×","÷","round"… — la CONSTANTE se ignora) y
+    # la identidad canónica del recurso físico (resId: índice del eje/dispositivo
+    # distinto, por orden de aparición — la etiqueta x/y o el nombre se ignoran).
+    return (node_a['kind'] == node_b['kind']
+            and node_a.get('op') == node_b.get('op')
+            and node_a.get('resId') == node_b.get('resId'))
 
 def _edge_signature(attrs):
+    # La 'var' ya viene canonicalizada por normalize_pdg (tilt_1 / pitch / value /
+    # nombre-de-variable), así que es reproducible y se puede comparar tal cual.
     return (attrs['type'], attrs.get('var', ''))
 
 def edge_match_multi(edges_a, edges_b):

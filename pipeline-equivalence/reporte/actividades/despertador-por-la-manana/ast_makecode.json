@@ -1,0 +1,49 @@
+{
+    "platform": "MakeCode",
+    "ast": {
+        "blocks": [
+            {
+                "type": "Loop",
+                "label": "para siempre",
+                "children": [
+                    {
+                        "type": "Conditional",
+                        "label": "si ◻ entonces",
+                        "children": [
+                            {
+                                "type": "Operator",
+                                "label": "◻ > 100",
+                                "children": [
+                                    { "type": "Sensor", "label": "nivel de luz", "children": [] }
+                                ]
+                            },
+                            {
+                                "type": "Branch_True",
+                                "label": "entonces",
+                                "children": [
+                                    { "type": "Action", "label": "reproduce (preludio) bucle en segundo plano", "children": [] },
+                                    { "type": "Action", "label": "mostrar LEDs", "children": [] }
+                                ]
+                            },
+                            {
+                                "type": "Branch_False",
+                                "label": "si no",
+                                "children": [
+                                    { "type": "Action", "label": "para todos los sonidos", "children": [] },
+                                    { "type": "Action", "label": "mostrar LEDs", "children": [] }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "Event",
+                "label": "al iniciar",
+                "children": [
+                    { "type": "Action", "label": "mostrar LEDs", "children": [] }
+                ]
+            }
+        ]
+    }
+}

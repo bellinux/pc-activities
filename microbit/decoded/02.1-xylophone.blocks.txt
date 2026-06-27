@@ -1,0 +1,6 @@
+ACTIVIDAD: 02.1-xylophone
+FUENTE: micro:bit / MakeCode 8.0.18 — "Xilófono-Inclinación"  (etiquetas oficiales es-ES)
+
+para siempre:   // Bucle principal, repite infinitamente la secuencia porgramada dentro de este bloque.
+  tono de timbre (Hz) (aceleración (mg) x + 1000)   // Este bloque recibe un número entre 0 y 1000 y transforma este valor a un sonido, mientras más pequeño el número más grave el sonido, por el contrario si el número es grande el sonido será agudo.
+  pausa (ms) 100   // Retraso de 0.1 segundos para poder hacer diferentes sonidos en un corto periodo de tiempo.

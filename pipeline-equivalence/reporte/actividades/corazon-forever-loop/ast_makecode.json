@@ -1,0 +1,27 @@
+{
+    "platform": "MakeCode",
+    "ast": {
+        "blocks": [
+            {
+                "type": "Loop",
+                "label": "para siempre",
+                "children": [
+                    { "type": "Action", "label": "mostrar LEDs", "children": [] },
+                    { "type": "Action", "label": "reproduce secuencia (tono Re5 durante (1/8 pulso)) en modo en segundo plano", "children": [] },
+                    { "type": "Action", "label": "pausa (ms) 300", "children": [] },
+                    { "type": "Action", "label": "reproduce secuencia (tono Re5 durante (1/8 pulso)) en modo en segundo plano", "children": [] },
+                    {
+                        "type": "Loop",
+                        "label": "repetir 4 veces",
+                        "children": [
+                            { "type": "Action", "label": "mostrar LEDs", "children": [] },
+                            { "type": "Action", "label": "pausa (ms) 10", "children": [] },
+                            { "type": "Action", "label": "mostrar LEDs", "children": [] },
+                            { "type": "Action", "label": "pausa (ms) 10", "children": [] }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

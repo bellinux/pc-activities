@@ -1,0 +1,54 @@
+{
+    "platform": "Protobject",
+    "ast": {
+        "blocks": [
+            {
+                "type": "Event",
+                "label": "al iniciar el programa",
+                "children": [
+                    { "type": "Assignment", "label": "establecer pausado a verdadero", "children": [] }
+                ]
+            },
+            {
+                "type": "Event_Interrupt",
+                "label": "cuando BotónTáctil3 es tocado",
+                "children": [
+                    {
+                        "type": "Conditional",
+                        "label": "si pausado",
+                        "children": [
+                            {
+                                "type": "Branch_True",
+                                "label": "hacer",
+                                "children": [
+                                    { "type": "Assignment", "label": "establecer pausado a falso", "children": [] },
+                                    {
+                                        "type": "Assignment",
+                                        "label": "establecer tiempo a ◻",
+                                        "children": [
+                                            { "type": "Action", "label": "entero aleatorio de 5 a 15", "children": [] }
+                                        ]
+                                    },
+                                    { "type": "Action", "label": "reproducir sonido 'progreso' en ReproductorSonido3", "children": [] },
+                                    {
+                                        "type": "Loop",
+                                        "label": "repetir mientras ◻",
+                                        "children": [
+                                            { "type": "Operator", "label": "tiempo > 0", "children": [] },
+                                            { "type": "Assignment", "label": "añadir -1 a tiempo", "children": [] },
+                                            { "type": "Action", "label": "retraso de 1 segundos", "children": [] }
+                                        ]
+                                    },
+                                    { "type": "Action", "label": "reproducir sonido 'reacción divertida' en ReproductorSonido3", "children": [] },
+                                    { "type": "Action", "label": "retraso de 4 segundos", "children": [] },
+                                    { "type": "Action", "label": "detener sonido de ReproductorSonido3", "children": [] },
+                                    { "type": "Assignment", "label": "establecer pausado a verdadero", "children": [] }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

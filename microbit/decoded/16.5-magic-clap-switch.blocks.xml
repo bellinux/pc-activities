@@ -1,0 +1,19 @@
+<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="qv~,8m4/W9Uqz8hCre,N">estado</variable></variables><block type="pxt-on-start" x="0" y="0"><statement name="HANDLER"><block type="variables_set"><field name="VAR" id="qv~,8m4/W9Uqz8hCre,N">estado</field><value name="VALUE"><shadow type="math_number"><field name="NUM">0</field></shadow><block type="logic_boolean"><field name="BOOL">FALSE</field></block></value></block></statement></block><block type="input_on_sound" x="380" y="7"><field name="sound">DetectedSound.Loud</field><statement name="HANDLER"><block type="variables_set"><field name="VAR" id="qv~,8m4/W9Uqz8hCre,N">estado</field><value name="VALUE"><shadow type="math_number"><field name="NUM">0</field></shadow><block type="logic_negate"><comment pinned="false" h="398" w="422">Este bloque "niega" o "contradice" lo de dentro.
+
+En este caso nuestra variable "estado" puede tomar valores verdadero o falso. 
+
+Si es que al detectar un sonido alto la variable estado es verdadero, al negar se transoforma en algo falso, ya que algo falso es lo mismo decir que algo es no verdadero.
+
+Y por otro lado si la varibale estado es falso, algo no faslo es algo verdadero, por lo que la variable "estado" va a ir cambiando entre vardadero y falso al detectar cada sonido fuerte.</comment><data>{"commentRefs":[],"fieldData":{"~commentOffsetX":"78.76847442709538","~commentOffsetY":"119.00489244200926"}}</data><value name="BOOL"><block type="variables_get"><field name="VAR" id="qv~,8m4/W9Uqz8hCre,N">estado</field></block></value></block></value><next><block type="controls_if"><mutation else="1"></mutation><value name="IF0"><shadow type="logic_boolean"><field name="BOOL">TRUE</field></shadow><block type="variables_get"><field name="VAR" id="qv~,8m4/W9Uqz8hCre,N">estado</field></block></value><statement name="DO0"><block type="device_show_leds"><field name="LEDS">`
+        # # # # # 
+        # # # # # 
+        # # # # # 
+        # # # # # 
+        # # # # #
+        `</field></block></statement><statement name="ELSE"><block type="device_show_leds"><field name="LEDS">`
+        . . . . . 
+        . . . . . 
+        . . . . . 
+        . . . . . 
+        . . . . .
+        `</field></block></statement></block></next></block></statement></block></xml>

@@ -1,0 +1,33 @@
+{
+    "platform": "MakeCode",
+    "ast": {
+        "blocks": [
+            {
+                "type": "Event",
+                "label": "al iniciar",
+                "children": [
+                    { "type": "Action", "label": "mostrar LEDs", "children": [] }
+                ]
+            },
+            {
+                "type": "Event_Interrupt",
+                "label": "al detectar el sonido alto",
+                "children": [
+                    { "type": "Action", "label": "reproduce (nyan) en segundo plano", "children": [] },
+                    {
+                        "type": "Loop",
+                        "label": "repetir 8 veces",
+                        "children": [
+                            { "type": "Action", "label": "mostrar LEDs", "children": [] },
+                            { "type": "Action", "label": "pausa (ms) 100", "children": [] },
+                            { "type": "Action", "label": "mostrar LEDs", "children": [] },
+                            { "type": "Action", "label": "pausa (ms) 100", "children": [] }
+                        ]
+                    },
+                    { "type": "Action", "label": "detener la melodía todos", "children": [] },
+                    { "type": "Action", "label": "mostrar LEDs", "children": [] }
+                ]
+            }
+        ]
+    }
+}

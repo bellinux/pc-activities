@@ -1,0 +1,73 @@
+{
+    "platform": "MakeCode",
+    "ast": {
+        "blocks": [
+            {
+                "type": "Loop",
+                "label": "para siempre",
+                "children": [
+                    {
+                        "type": "Assignment",
+                        "label": "fijar bpm a ◻",
+                        "children": [
+                            {
+                                "type": "Operator",
+                                "label": "◻ + 600",
+                                "children": [
+                                    { "type": "Sensor", "label": "aceleración (mg) x", "children": [] }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Assignment",
+                        "label": "fijar ultimoBeat a ◻",
+                        "children": [
+                            { "type": "Operator", "label": "600000 + bpm", "children": [] }
+                        ]
+                    },
+                    {
+                        "type": "Conditional",
+                        "label": "si ◻ entonces",
+                        "children": [
+                            {
+                                "type": "Operator",
+                                "label": "◻ > intervaloBeat",
+                                "children": [
+                                    {
+                                        "type": "Operator",
+                                        "label": "◻ − ultimoBeat",
+                                        "children": [
+                                            { "type": "Sensor", "label": "tiempo de ejecución (ms)", "children": [] }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Branch_True",
+                                "label": "entonces",
+                                "children": [
+                                    { "type": "Action", "label": "reproduce secuencia (tono La#3 durante (1/4 pulso)) en modo hasta que termine", "children": [] },
+                                    {
+                                        "type": "Assignment",
+                                        "label": "fijar ultimoBeat a ◻",
+                                        "children": [
+                                            { "type": "Sensor", "label": "tiempo de ejecución (ms)", "children": [] }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "Event",
+                "label": "al iniciar",
+                "children": [
+                    { "type": "Assignment", "label": "fijar ultimoBeat a 0", "children": [] }
+                ]
+            }
+        ]
+    }
+}

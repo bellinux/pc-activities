@@ -1,0 +1,19 @@
+{
+    "platform": "MakeCode",
+    "extracted_text": [
+        "para siempre:",
+        "  si (inicio > 0) entonces:",
+        "    mostrar número (((tiempo de ejecución (ms)) − inicio) ÷ 1000)",
+        "    si ((nivel de sonido) < 5) entonces:",
+        "      fijar inicio a 0",
+        "      fijar activo a falso",
+        "      pausa (ms) 5000",
+        "      fijar activo a verdadero",
+        "al iniciar:",
+        "  fijar inicio a 0",
+        "  fijar activo a verdadero",
+        "al detectar el sonido alto:",
+        "  si activo entonces:",
+        "    fijar inicio a (tiempo de ejecución (ms))"
+    ]
+}

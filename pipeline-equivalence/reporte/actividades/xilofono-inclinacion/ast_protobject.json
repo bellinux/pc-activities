@@ -1,0 +1,35 @@
+{
+    "platform": "Protobject",
+    "ast": {
+        "blocks": [
+            {
+                "type": "Loop",
+                "label": "repetir para siempre",
+                "children": [
+                    {
+                        "type": "Action",
+                        "label": "tocar nota número ◻ en TecladoMusical1",
+                        "children": [
+                            {
+                                "type": "Operator",
+                                "label": "◻ + 60",
+                                "children": [
+                                    {
+                                        "type": "Sensor",
+                                        "label": "y in Inclinación2",
+                                        "children": []
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Action",
+                        "label": "retraso de 100 milisegundos",
+                        "children": []
+                    }
+                ]
+            }
+        ]
+    }
+}

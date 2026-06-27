@@ -4,193 +4,107 @@
     <meta charset="UTF-8">
     <title>Guía de Análisis de Equivalencia</title>
     <style>
-        body { 
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background: #fff; 
-            color: #111; 
-            padding: 40px; 
-            margin: 0; 
-            line-height: 1.6; 
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        h1 { 
-            font-weight: 300; 
-            font-size: 2.5em; 
-            margin-bottom: 40px; 
-            color: #111; 
-            border-bottom: 2px solid #111;
-            padding-bottom: 10px;
-        }
-        h2 { 
-            font-weight: 400; 
-            font-size: 1.8em; 
-            margin-top: 50px; 
-            margin-bottom: 20px; 
-            color: #222; 
-        }
-        h3 { 
-            font-weight: 600; 
-            font-size: 1.2em; 
-            color: #333; 
-            margin-top: 30px;
-            border-left: 3px solid #bdc3c7;
-            padding-left: 10px;
-        }
-        p, li { 
-            font-size: 1.1em; 
-            color: #444; 
-        }
-        ul, ol { 
-            margin-bottom: 20px; 
-        }
-        li { 
-            margin-bottom: 10px; 
-        }
-        code { 
-            font-family: 'Consolas', 'Courier New', monospace; 
-            background: #f4f6f9; 
-            padding: 2px 6px; 
-            border-radius: 4px; 
-            font-size: 0.95em;
-            color: #d35400;
-        }
-        .code-block {
-            background: #f8f9fa;
-            padding: 15px;
-            border-left: 3px solid #111;
-            font-family: 'Consolas', 'Courier New', monospace;
-            overflow-x: auto;
-            color: #2c3e50;
-            margin-top: 10px;
-            margin-bottom: 20px;
-        }
-        .note {
-            background: #fef9e7;
-            padding: 15px;
-            border-left: 3px solid #f1c40f;
-            margin: 20px 0;
-            font-size: 1em;
-            color: #7d6608;
-            font-style: italic;
-        }
-        .important-agent-note {
-            background: #e8f4f8;
-            padding: 20px;
-            border-radius: 8px;
-            border: 2px solid #3498db;
-            margin: 30px 0;
-        }
-        .important-agent-note h3 {
-            margin-top: 0;
-            color: #2980b9;
-            border-left: none;
-            padding-left: 0;
-        }
+        body { font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #fff; color: #111; padding: 40px; margin: 0 auto; line-height: 1.6; max-width: 900px; }
+        h1 { font-weight: 300; font-size: 2.5em; margin-bottom: 40px; color: #111; border-bottom: 2px solid #111; padding-bottom: 10px; }
+        h2 { font-weight: 400; font-size: 1.8em; margin-top: 50px; margin-bottom: 20px; color: #222; }
+        h3 { font-weight: 600; font-size: 1.2em; color: #333; margin-top: 30px; border-left: 3px solid #bdc3c7; padding-left: 10px; }
+        p, li { font-size: 1.1em; color: #444; }
+        ul, ol { margin-bottom: 20px; }
+        li { margin-bottom: 10px; }
+        code { font-family: 'Consolas', 'Courier New', monospace; background: #f4f6f9; padding: 2px 6px; border-radius: 4px; font-size: 0.95em; color: #d35400; }
+        .code-block { background: #f8f9fa; padding: 15px; border-left: 3px solid #111; font-family: 'Consolas', 'Courier New', monospace; overflow-x: auto; color: #2c3e50; margin: 10px 0 20px 0; }
+        .note { background: #fef9e7; padding: 15px; border-left: 3px solid #f1c40f; margin: 20px 0; font-size: 1em; color: #7d6608; font-style: italic; }
+        .auto { background: #eafaf1; padding: 15px; border-left: 3px solid #27ae60; margin: 20px 0; font-size: 1em; color: #1e6b3a; }
+        .important-agent-note { background: #e8f4f8; padding: 20px; border-radius: 8px; border: 2px solid #3498db; margin: 30px 0; }
+        .important-agent-note h3 { margin-top: 0; color: #2980b9; border-left: none; padding-left: 0; }
+        .tag-auto { display:inline-block; font-size:0.75em; background:#27ae60; color:#fff; border-radius:4px; padding:1px 7px; vertical-align:middle; }
+        .tag-llm { display:inline-block; font-size:0.75em; background:#8e44ad; color:#fff; border-radius:4px; padding:1px 7px; vertical-align:middle; }
     </style>
 </head>
 <body>
 
     <h1>Guía de Análisis de Equivalencia (Microbit vs Protobject)</h1>
-    
-    <p>Este documento explica paso a paso cómo un humano o un agente autónomo puede agregar una nueva actividad al sistema y generar automáticamente todo el análisis comparativo, desde la extracción de texto hasta la generación de grafos y métricas algorítmicas.</p>
-    <p>El sistema es determinístico en su ejecución (scripts de Python), pero depende de un <strong>LLM (Large Language Model)</strong> para la fase de abstracción semántica inicial (creación de los JSONs).</p>
 
-    <div class="important-agent-note">
-        <h3>🤖 ATENCIÓN AGENTE / HUMANO: ¡ESTUDIA LOS EJEMPLOS!</h3>
-        <p>Antes de generar cualquier JSON, <strong>ES OBLIGATORIO</strong> que revises cómo están estructurados los JSONs de la actividad de ejemplo que ya existe en el sistema.</p>
-        <p>Abre la carpeta <code>reporte/actividades/vela/</code> y analiza detenidamente la estructura, llaves y jerarquías de:</p>
-        <ul>
-            <li><code>text_makecode.json</code> / <code>text_protobject.json</code> (Fíjate en cómo se cuenta la indentación).</li>
-            <li><code>ast_makecode.json</code> / <code>ast_protobject.json</code> (Fíjate en el árbol jerárquico <code>children</code>).</li>
-            <li><code>pdg_makecode.json</code> / <code>pdg_protobject.json</code> (Fíjate en las listas de <code>nodes</code> y <code>edges</code>).</li>
-            <li><code>tabla_ir.json</code> (Fíjate en el mapeo ontológico cruzado).</li>
-        </ul>
-        <p><strong>Deberás replicar exactamente este mismo esquema y nombres de llaves</strong> para la nueva actividad, o de lo contrario el pipeline de Python y los visores fallarán catastróficamente.</p>
-    </div>
+    <p>Este documento explica cómo se agrega una actividad al sistema y se genera todo el análisis comparativo: desde la extracción del código hasta los grafos y las métricas algorítmicas.</p>
 
-    <h2>Flujo de Trabajo (Workflow)</h2>
-    <p>Sigue estos pasos en estricto orden para agregar una nueva actividad (ej. <code>mi_actividad</code>):</p>
-
-    <h3>Paso 1: Preparar el Entorno</h3>
-    <ol>
-        <li>Dirígete a la carpeta <code>reporte/actividades/</code>.</li>
-        <li>Crea una nueva carpeta con el nombre de tu actividad (por ejemplo: <code>reporte/actividades/mi_actividad</code>).</li>
-        <li>Guarda dentro de esta carpeta las dos imágenes originales del código:
-            <ul>
-                <li><code>microbit.png</code> (El código fuente en MakeCode/Microbit)</li>
-                <li><code>protobject.png</code> (El código fuente en Protobject)</li>
-            </ul>
-        </li>
-    </ol>
-
-    <h3>Paso 2: Extracción de Texto (LLM)</h3>
-    <p>Usa el LLM para leer el texto de las imágenes. Pide al modelo que genere un JSON extrayendo línea por línea (preservando la indentación mediante espacios).</p>
-    <ol>
-        <li>Crea <code>text_makecode.json</code> extrayendo el texto de <code>microbit.png</code>.</li>
-        <li>Crea <code>text_protobject.json</code> extrayendo el texto de <code>protobject.png</code>.</li>
-    </ol>
-    <div class="note">Nota: La estructura del JSON debe contener un arreglo de strings bajo la clave <code>"extracted_text"</code>.</div>
-
-    <h3>Paso 3: Generación del Árbol de Sintaxis Abstracta - AST (LLM)</h3>
-    <p>Proporciona los textos extraídos al LLM y pide que genere la estructura lógica jerárquica (AST).</p>
-    <ol>
-        <li>Crea <code>ast_makecode.json</code> basado en el texto de Microbit.</li>
-        <li>Crea <code>ast_protobject.json</code> basado en el texto de Protobject.</li>
-    </ol>
-    <div class="note">Nota: La estructura debe incluir anidamiento mediante la propiedad <code>"children"</code>.</div>
-
-    <h3>Paso 4: Generación del Grafo de Dependencia - PDG (LLM)</h3>
-    <p>Pide al LLM que analice los ASTs y determine las dependencias de control y de datos (edges) entre los diferentes nodos, construyendo así el Program Dependence Graph.</p>
-    <ol>
-        <li>Crea <code>pdg_makecode.json</code>.</li>
-        <li>Crea <code>pdg_protobject.json</code>.</li>
-    </ol>
-    <div class="note">Nota: Debe contener una lista de <code>"nodes"</code> (con IDs) y <code>"edges"</code> (origen, destino, tipo).</div>
-
-    <h3>Paso 5: Generación de Tabla Ontológica IR (LLM)</h3>
-    <p>Usa el LLM para mapear la equivalencia conceptual entre los bloques de ambas plataformas.</p>
-    <ol>
-        <li>Crea <code>tabla_ir.json</code> en la misma carpeta. Este JSON debe tener un arreglo de objetos que relacionen un <code>"canonical_node"</code> con el <code>"makecode_block"</code> y el <code>"protobject_block"</code>.</li>
-    </ol>
-
-    <hr style="margin: 40px 0; border: none; border-bottom: 1px solid #eee;">
-
-    <h3>Paso 6: Ejecución del Pipeline Algorítmico (Python)</h3>
-    <p>Una vez que todos los JSONs han sido generados, el resto del proceso matemático es automático.</p>
-    <ol>
-        <li>Abre tu terminal.</li>
-        <li>Navega a la carpeta de scripts: <code>cd reporte/scripts/</code></li>
-        <li>Ejecuta el pipeline pasando el nombre de la carpeta que creaste en el Paso 1:</li>
-    </ol>
-    <div class="code-block">python run_pipeline.py mi_actividad</div>
-    <p><strong>¿Qué hace este script?</strong></p>
+    <p>El pipeline tiene tres tipos de paso:</p>
     <ul>
-        <li>Lee los archivos <code>pdg_makecode.json</code> y <code>pdg_protobject.json</code>.</li>
-        <li>Construye grafos matemáticos usando NetworkX.</li>
-        <li>Exporta los grafos visuales en formato vectorial: <code>pdg_makecode.svg</code> y <code>pdg_protobject.svg</code> (usando Graphviz).</li>
-        <li>Calcula métricas topológicas (Graph Edit Distance e Isomorfismo VF2).</li>
-        <li>Guarda los resultados automáticamente en <code>metricas.json</code>.</li>
+        <li><span class="tag-auto">DETERMINÍSTICO</span> Extracción del código a texto — <strong>ahora la hace un decodificador en JavaScript</strong> (Node), directamente desde los archivos fuente <code>.ptj</code> / <code>.hex</code>. Reproducible, sin intervención humana.</li>
+        <li><span class="tag-llm">LLM</span> Abstracción semántica (AST → <strong>Tabla IR canónica</strong> → PDG) — la realiza el modelo (agente), replicando el esquema del ejemplo <code>vela</code>.</li>
+        <li><span class="tag-auto">DETERMINÍSTICO</span> Cálculo matemático (grafos SVG + métricas) — script de Python con NetworkX y Graphviz.</li>
     </ul>
 
-    <hr style="margin: 40px 0; border: none; border-bottom: 1px solid #eee;">
+    <div class="note">
+        <strong>Cambio importante:</strong> la extracción <strong>YA NO usa imágenes</strong> (<code>microbit.png</code> / <code>protobject.png</code>) ni un LLM que las "lea". El texto se extrae de forma <strong>determinística y reproducible</strong> de los <code>.ptj</code>/<code>.hex</code> con <code>blocks-decoder.js</code> — el mismo decodificador que usa el visor "Ver bloques en vivo". Si cambias una fuente, basta regenerar.
+    </div>
 
-    <h3>Paso 7: Actualizar el Dashboard Principal (index.html)</h3>
-    <p>Para que los resultados sean visibles en la plataforma web:</p>
+    <div class="important-agent-note">
+        <h3>🤖 AGENTE: estudia el ejemplo antes de abstraer</h3>
+        <p>Para los pasos <span class="tag-llm">LLM</span> (AST, PDG, Tabla IR) <strong>es obligatorio</strong> replicar exactamente el esquema y los nombres de llaves del ejemplo en <code>reporte/actividades/vela/</code>:</p>
+        <ul>
+            <li><code>ast_makecode.json</code> / <code>ast_protobject.json</code> — árbol jerárquico con <code>children</code>.</li>
+            <li><code>tabla_ir.json</code> — <strong>ontología canónica</strong>: mapeo <code>canonical_node</code> ↔ <code>makecode_block</code> ↔ <code>protobject_block</code>. Define el vocabulario.</li>
+            <li><code>pdg_makecode.json</code> / <code>pdg_protobject.json</code> — <code>nodes</code> (<code>id</code>, <code>kind</code>, <code>seq</code>, <code>in_loop</code>) y <code>edges</code> (<code>source</code>, <code>target</code>, <code>type</code> ∈ control/data/side_effect, <code>var</code>). <strong>El <code>kind</code> de cada nodo ES el <code>canonical_node</code> de la Tabla IR.</strong></li>
+        </ul>
+        <p><strong>Regla clave de la abstracción:</strong> a operaciones <em>semánticamente equivalentes</em> en ambas plataformas se les asigna el <strong>mismo</strong> <code>kind</code> canónico. Pero se representa cada programa <strong>tal cual es</strong>: si difieren, los grafos difieren (y la métrica lo refleja). No se fuerza la equivalencia.</p>
+    </div>
+
+    <h2>Flujo de Trabajo</h2>
+
+    <h3>Paso 1: La actividad ya existe (sin imágenes) <span class="tag-auto">DETERMINÍSTICO</span></h3>
+    <p>Las 17 actividades ya están definidas en <code>pipeline-equivalence/actividades.json</code> (orden, code, título). Sus fuentes están en la raíz del proyecto:</p>
+    <ul>
+        <li><code>protobject/equivalent-&lt;code&gt;.ptj</code></li>
+        <li><code>microbit/&lt;code&gt;.hex</code></li>
+    </ul>
+    <p>El nombre de la carpeta de cada actividad en <code>reporte/actividades/</code> es su <code>code</code> (ej. <code>juego-toques</code>).</p>
+
+    <h3>Paso 2: Extracción de texto <span class="tag-auto">DETERMINÍSTICO (Node)</span></h3>
+    <p>Genera <code>text_makecode.json</code> y <code>text_protobject.json</code> para las 17 actividades con un solo comando (desde la raíz del proyecto):</p>
+    <div class="code-block">node gen-text-json.js</div>
+    <p>Para una sola actividad puedes usar el decodificador directamente:</p>
+    <div class="code-block">node decode.js protobject/equivalent-juego-toques.ptj
+node decode.js microbit/juego-toques.hex</div>
+    <div class="note">El JSON tiene un arreglo de strings bajo <code>"extracted_text"</code> (modo "solo estructura": sin comentarios, LEDs colapsados), preservando la indentación con espacios.</div>
+
+    <h3>Paso 3: AST — Árbol de Sintaxis Abstracta <span class="tag-llm">LLM</span></h3>
+    <p>A partir de los textos extraídos, genera la estructura jerárquica de cada plataforma (todavía con etiquetas propias de cada una):</p>
     <ol>
-        <li>Abre el archivo raíz <code>index.html</code>.</li>
-        <li>Busca el bloque HTML de una actividad existente (por ejemplo, el bloque <code>&lt;div id="act-vela"&gt; ... &lt;/div&gt;</code>).</li>
-        <li>Copia y pega todo ese bloque justo debajo.</li>
-        <li>Reemplaza todas las apariciones de la palabra <code>vela</code> por el nombre de tu nueva carpeta (ej. <code>mi_actividad</code>).</li>
-        <li>Guarda el archivo.</li>
+        <li>Crea <code>ast_makecode.json</code> y <code>ast_protobject.json</code> con anidamiento <code>children</code> (ver <code>vela</code>).</li>
     </ol>
 
-    <h3>Paso 8: Visualización y Verificación final</h3>
+    <h3>Paso 4: Tabla Ontológica IR — vocabulario canónico <span class="tag-llm">LLM</span></h3>
+    <p>Antes del grafo hay que fijar el <strong>vocabulario canónico</strong>: a qué concepto común (<code>canonical_node</code>) corresponde cada bloque de cada plataforma. A operaciones semánticamente equivalentes se les asigna el mismo <code>canonical_node</code>.</p>
     <ol>
-        <li>Asegúrate de tener el servidor web corriendo desde la raíz del proyecto:</li>
+        <li>Crea <code>tabla_ir.json</code>: arreglo de objetos <code>canonical_node</code> / <code>makecode_block</code> / <code>protobject_block</code>.</li>
+    </ol>
+    <div class="note">Este es el <strong>puente semántico</strong> entre las dos plataformas: define los nombres canónicos que usará el PDG. Por eso va <strong>antes</strong> del grafo.</div>
+
+    <h3>Paso 5: PDG — Grafo de Dependencia (sobre el IR canónico) <span class="tag-llm">LLM</span></h3>
+    <p>Construye el grafo de dependencias <strong>usando el vocabulario de la Tabla IR</strong>: el <code>kind</code> de cada nodo <strong>es</strong> el <code>canonical_node</code> correspondiente. Las aristas son las dependencias de control, de datos y de efecto colateral. Así, dos programas equivalentes producen grafos isomorfos.</p>
+    <ol>
+        <li>Crea <code>pdg_makecode.json</code> y <code>pdg_protobject.json</code> (<code>nodes</code> con <code>kind</code> canónico + <code>edges</code> control/data/side_effect).</li>
+    </ol>
+
+    <hr style="margin: 40px 0; border: none; border-bottom: 1px solid #eee;">
+
+    <h3>Paso 6: Pipeline Algorítmico <span class="tag-auto">DETERMINÍSTICO (Python)</span></h3>
+    <p>Con todos los JSON generados, el cálculo es automático:</p>
+    <div class="code-block">cd pipeline-equivalence/reporte/scripts/
+python run_pipeline.py juego-toques</div>
+    <p>Lee <code>pdg_makecode.json</code> y <code>pdg_protobject.json</code>, construye los grafos con NetworkX, exporta <code>pdg_makecode.svg</code> / <code>pdg_protobject.svg</code> con Graphviz, calcula Graph Edit Distance e Isomorfismo (VF2) y guarda <code>metricas.json</code>.</p>
+    <div class="note">Requisito: el ejecutable <strong>Graphviz <code>dot</code></strong> debe estar en el PATH (para el render SVG). Las métricas también se guardan aunque falte.</div>
+
+    <h3>Paso 7: Dashboard <span class="tag-auto">AUTOMÁTICO</span></h3>
+    <div class="auto">
+        El dashboard <code>index.html</code> es ahora <strong>dinámico</strong>: lee <code>actividades.json</code> y construye solo la lista ordenada de las 17 actividades. <strong>Ya NO se copia/pega HTML</strong>. Si reordenas o agregas actividades, regenera el índice con <code>node gen-actividades-json.js</code>. Mientras una actividad no tenga <code>metricas.json</code>, se muestra como "Pendiente" (la extracción de texto ya funciona). <code>vela</code> queda como ejemplo hardcodeado de referencia.
+    </div>
+
+    <h3>Paso 8: Visualización y verificación</h3>
+    <ol>
+        <li>Levanta el servidor desde <code>pipeline-equivalence/</code>:</li>
         <div class="code-block">python -m http.server 8080</div>
-        <li>Abre <a href="http://localhost:8080">http://localhost:8080</a> en tu navegador.</li>
-        <li>Haz clic en los diferentes visores (Extracción, AST, Tabla IR y PDG Interactivo) para la nueva actividad y verifica que todo se renderice correctamente.</li>
+        <li>Abre <a href="http://localhost:8080">http://localhost:8080</a> y revisa los visores (Extracción, AST, Tabla IR, PDG) de cada actividad.</li>
     </ol>
 
 </body>

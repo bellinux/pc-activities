@@ -1,0 +1,13 @@
+{
+    "platform": "MakeCode",
+    "extracted_text": [
+        "al iniciar:",
+        "  fijar estado a falso",
+        "al detectar el sonido alto:",
+        "  fijar estado a (no estado)",
+        "  si estado entonces:",
+        "    mostrar LEDs",
+        "  si no:",
+        "    mostrar LEDs"
+    ]
+}

@@ -1,0 +1,322 @@
+{
+    "platform": "Protobject",
+    "nodes": [
+        {
+            "id": "n1",
+            "kind": "ProgramStartEvent",
+            "seq": 1,
+            "in_loop": false
+        },
+        {
+            "id": "n2",
+            "kind": "SetTextSize",
+            "seq": 2,
+            "in_loop": false,
+            "resId": 1
+        },
+        {
+            "id": "n3",
+            "kind": "SetVariable",
+            "seq": 3,
+            "in_loop": false
+        },
+        {
+            "id": "n4",
+            "kind": "SetVariable",
+            "seq": 4,
+            "in_loop": false
+        },
+        {
+            "id": "n5",
+            "kind": "ClearTextDisplay",
+            "seq": 5,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n6",
+            "kind": "Comparison",
+            "seq": 6,
+            "in_loop": true,
+            "op": ">"
+        },
+        {
+            "id": "n7",
+            "kind": "ConditionalBranch",
+            "seq": 7,
+            "in_loop": true
+        },
+        {
+            "id": "n8",
+            "kind": "ReadRuntimeMillis",
+            "seq": 8,
+            "in_loop": true
+        },
+        {
+            "id": "n9",
+            "kind": "Arithmetic",
+            "seq": 9,
+            "in_loop": true,
+            "op": "-"
+        },
+        {
+            "id": "n10",
+            "kind": "Arithmetic",
+            "seq": 10,
+            "in_loop": true,
+            "op": "÷"
+        },
+        {
+            "id": "n11",
+            "kind": "ShowNumber",
+            "seq": 11,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n12",
+            "kind": "ReadSoundLevel",
+            "seq": 12,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n13",
+            "kind": "Comparison",
+            "seq": 13,
+            "in_loop": true,
+            "op": "<"
+        },
+        {
+            "id": "n14",
+            "kind": "ConditionalBranch",
+            "seq": 14,
+            "in_loop": true
+        },
+        {
+            "id": "n15",
+            "kind": "SetVariable",
+            "seq": 15,
+            "in_loop": true
+        },
+        {
+            "id": "n16",
+            "kind": "SetVariable",
+            "seq": 16,
+            "in_loop": true
+        },
+        {
+            "id": "n17",
+            "kind": "Delay",
+            "seq": 17,
+            "in_loop": true
+        },
+        {
+            "id": "n18",
+            "kind": "SetVariable",
+            "seq": 18,
+            "in_loop": true
+        },
+        {
+            "id": "n19",
+            "kind": "SuddenNoiseEvent",
+            "seq": 19,
+            "in_loop": false,
+            "resId": 1
+        },
+        {
+            "id": "n20",
+            "kind": "ConditionalBranch",
+            "seq": 20,
+            "in_loop": false
+        },
+        {
+            "id": "n21",
+            "kind": "ReadRuntimeMillis",
+            "seq": 21,
+            "in_loop": false
+        },
+        {
+            "id": "n22",
+            "kind": "SetVariable",
+            "seq": 22,
+            "in_loop": false
+        }
+    ],
+    "edges": [
+        {
+            "source": "n1",
+            "target": "n2",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n2",
+            "target": "n3",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n3",
+            "target": "n4",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n5",
+            "target": "n7",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n7",
+            "target": "n11",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n11",
+            "target": "n14",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n14",
+            "target": "n15",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n15",
+            "target": "n16",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n16",
+            "target": "n17",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n17",
+            "target": "n18",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n19",
+            "target": "n20",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n20",
+            "target": "n22",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n6",
+            "target": "n7",
+            "type": "data",
+            "var": "condition"
+        },
+        {
+            "source": "n13",
+            "target": "n14",
+            "type": "data",
+            "var": "condition"
+        },
+        {
+            "source": "n8",
+            "target": "n9",
+            "type": "data",
+            "var": "time_1"
+        },
+        {
+            "source": "n9",
+            "target": "n10",
+            "type": "data",
+            "var": "left"
+        },
+        {
+            "source": "n10",
+            "target": "n11",
+            "type": "data",
+            "var": "value"
+        },
+        {
+            "source": "n12",
+            "target": "n13",
+            "type": "data",
+            "var": "sound_1"
+        },
+        {
+            "source": "n21",
+            "target": "n22",
+            "type": "data",
+            "var": "time_1"
+        },
+        {
+            "source": "n3",
+            "target": "n6",
+            "type": "data",
+            "var": "inicio"
+        },
+        {
+            "source": "n3",
+            "target": "n9",
+            "type": "data",
+            "var": "inicio"
+        },
+        {
+            "source": "n15",
+            "target": "n6",
+            "type": "data",
+            "var": "inicio"
+        },
+        {
+            "source": "n15",
+            "target": "n9",
+            "type": "data",
+            "var": "inicio"
+        },
+        {
+            "source": "n22",
+            "target": "n6",
+            "type": "data",
+            "var": "inicio"
+        },
+        {
+            "source": "n22",
+            "target": "n9",
+            "type": "data",
+            "var": "inicio"
+        },
+        {
+            "source": "n4",
+            "target": "n20",
+            "type": "data",
+            "var": "activo"
+        },
+        {
+            "source": "n16",
+            "target": "n20",
+            "type": "data",
+            "var": "activo"
+        },
+        {
+            "source": "n18",
+            "target": "n20",
+            "type": "data",
+            "var": "activo"
+        },
+        {
+            "source": "n5",
+            "target": "n11",
+            "type": "side_effect",
+            "var": "display"
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+ACTIVIDAD: 17.1-magic-birthday-candle
+FUENTE: micro:bit / MakeCode 8.0.18 — "flama-vela-con-soplo arreglo"  (etiquetas oficiales es-ES)
+
+para siempre:
+  si flama entonces:
+    mostrar LEDs:
+        . . . . .
+        . # # # .
+        . # # # .
+        . # # # .
+        . # # # .
+    graficar x escoger al azar de 1 a 3 y 0   // La posición de los leds está dado por 2 números que los llamaremos X e Y. El número X representará la posición de un led en posición horizontal. Es decir la posición en una fila.   Por otro lado el número Y representa la altura de un led, es decir su posición en una columna.  Por ejemplo, el led de la esquina superior izquierda tiene posición X = 0 e Y = 0, mientra que la esquina inferior derecha tiene posición X= 4 e Y = 4. Siendo X posición para los lados e Y posición arriba o abajo.
+    pausa (ms) 200
+    mostrar LEDs:
+        . . . . .
+        . # # # .
+        . # # # .
+        . # # # .
+        . # # # .
+    graficar x 2 y 0
+    pausa (ms) 200
+  si no:
+    mostrar LEDs:
+        . . . . .
+        . . . . .
+        . . . . .
+        . . . . .
+        . . . . .
+
+al iniciar:
+  fijar flama a verdadero
+
+al detectar el sonido alto:
+  fijar flama a no(flama)

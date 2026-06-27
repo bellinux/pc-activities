@@ -1,0 +1,28 @@
+ACTIVIDAD: 04.1-heart-beat
+FUENTE: micro:bit / MakeCode 8.0.16 — "corazon-forever-loop"  (etiquetas oficiales es-ES)
+
+para siempre:   // Este bloque se encarga de ejecutar infinitamente la secuencia que tiene dentro.
+  mostrar LEDs:
+      . # . # .
+      # # # # #
+      # # # # #
+      . # # # .
+      . . # . .
+  reproduce secuencia tono Re5 durante 1/8 pulso en modo en segundo plano
+  pausa (ms) 300   // Este tipo de bloque permite esperar una cantidad de tiempo personalizada antes de ejecutar la siguiente orden.
+  reproduce secuencia tono Re5 durante 1/8 pulso en modo en segundo plano
+  repetir 4 veces:   // Este bloque es como el bloque "repetir para siempre" solo que permite personalizar la cantidad de veces que se tiene que repetir.
+    mostrar LEDs:
+        . # . # .
+        # . # . #
+        # . . . #
+        . # . # .
+        . . # . .
+    pausa (ms) 10
+    mostrar LEDs:
+        . . . . .
+        . # . # .
+        . # # # .
+        . . # . .
+        . . . . .
+    pausa (ms) 10

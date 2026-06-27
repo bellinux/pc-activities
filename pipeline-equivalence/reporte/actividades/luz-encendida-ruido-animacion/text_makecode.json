@@ -1,0 +1,20 @@
+{
+    "platform": "MakeCode",
+    "extracted_text": [
+        "al detectar el sonido alto:",
+        "  fijar estado a (no estado)",
+        "  si estado entonces:",
+        "    para columnas de 0 a 4:",
+        "      para filas de 0 a 4:",
+        "        graficar x filas y columnas",
+        "        pausa (ms) 20",
+        "    graficar x 0 y 0",
+        "  si no:",
+        "    para columnas de 0 a 4:",
+        "      para filas de 0 a 4:",
+        "        ocultar x filas y columnas",
+        "        pausa (ms) 20",
+        "al iniciar:",
+        "  fijar estado a falso"
+    ]
+}

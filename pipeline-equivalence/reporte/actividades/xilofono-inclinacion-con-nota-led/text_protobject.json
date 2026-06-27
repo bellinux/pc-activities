@@ -1,0 +1,10 @@
+{
+    "platform": "Protobject",
+    "extracted_text": [
+        "repetir para siempre:",
+        "  borrar dibujo en DibujoLED4",
+        "  dibuja en x 4 y (4 + (redondear ((y in Inclinación2) ÷ 15))) con color #ff4444 en DibujoLED4",
+        "  tocar nota número ((y in Inclinación2) + 60) en TecladoMusical1",
+        "  retraso de 100 milisegundos"
+    ]
+}

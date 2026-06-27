@@ -1,0 +1,17 @@
+{
+    "platform": "Protobject",
+    "extracted_text": [
+        "al iniciar el programa:",
+        "  dibuja con color #ff0000 en DibujoLED2",
+        "  establecer color de fondo a #000000 en DibujoLED2",
+        "cuando NivelRuido1 detecta aumento repentino:",
+        "  reproducir sonido 'reacción divertida' en ReproductorSonido3",
+        "  repetir 8 veces:",
+        "    dibuja con color #ff0000 en DibujoLED2",
+        "    retraso de 400 milisegundos",
+        "    dibuja con color #ff0000 en DibujoLED2",
+        "    retraso de 400 milisegundos",
+        "  detener sonido de ReproductorSonido3",
+        "  dibuja con color #ff0000 en DibujoLED2"
+    ]
+}

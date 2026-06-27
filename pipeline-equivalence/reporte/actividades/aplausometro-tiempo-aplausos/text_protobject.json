@@ -1,0 +1,21 @@
+{
+    "platform": "Protobject",
+    "extracted_text": [
+        "al iniciar el programa:",
+        "  establecer tamaño 40 en DibujarEscribir2",
+        "  establecer inicio a 0",
+        "  establecer activo a verdadero",
+        "repetir para siempre:",
+        "  limpiar en DibujarEscribir2",
+        "  si (inicio > 0):",
+        "    escribir ((milisegundos − inicio) ÷ 1000) en DibujarEscribir2",
+        "    si ((ruido in NivelRuido1) < 5):",
+        "      establecer inicio a 0",
+        "      establecer activo a falso",
+        "      retraso de 5 segundos",
+        "      establecer activo a verdadero",
+        "cuando NivelRuido1 detecta aumento repentino:",
+        "  si activo:",
+        "    establecer inicio a milisegundos"
+    ]
+}

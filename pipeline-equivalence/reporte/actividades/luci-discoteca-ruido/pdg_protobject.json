@@ -1,0 +1,40 @@
+{
+    "platform": "Protobject",
+    "nodes": [
+        {
+            "id": "n1",
+            "kind": "ReadSoundLevel",
+            "seq": 1,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n2",
+            "kind": "NoiseToColour",
+            "seq": 2,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n3",
+            "kind": "DisplaySoundLevel",
+            "seq": 3,
+            "in_loop": true,
+            "resId": 1
+        }
+    ],
+    "edges": [
+        {
+            "source": "n1",
+            "target": "n2",
+            "type": "data",
+            "var": "sound_1"
+        },
+        {
+            "source": "n2",
+            "target": "n3",
+            "type": "data",
+            "var": "colour"
+        }
+    ]
+}

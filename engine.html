@@ -18,6 +18,11 @@
     <!-- Marked.js para convertir Markdown en HTML -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
+    <!-- LZMA (bundleada, MISMA lib que Node): descomprime el código MakeCode de los .hex -->
+    <script src="lib/lzma_worker.min.js"></script>
+    <!-- Decodificador de bloques EN VIVO desde .ptj / .hex (sin Python) -->
+    <script src="blocks-decoder.js"></script>
+
     <style>
         /* Estilos para el renderizado del texto Markdown */
         .markdown-body h1 { font-size: 1.875rem; font-weight: 800; margin-top: 1.5em; margin-bottom: 0.75em; color: #111827; }
@@ -40,6 +45,23 @@
         /* Resaltado del texto abierto desde un deep-link del reporte */
         mark.hl { background:#fde047; color:inherit; border-radius:3px; padding:0 .12em; box-shadow:0 0 0 .12em #fde047; animation: hlPulse 1.4s ease-in-out 3; }
         @keyframes hlPulse { 0%,100%{ box-shadow:0 0 0 .12em #fde047; } 50%{ box-shadow:0 0 0 .32em #f59e0b; } }
+
+        /* Ventana flotante: visor del texto de bloques extraído */
+        .bw { position:fixed; z-index:60; top:72px; left:120px; width:620px; height:460px; background:#fff;
+              border:1px solid #cbd5e1; border-radius:12px; box-shadow:0 16px 48px rgba(16,24,40,.28);
+              display:none; flex-direction:column; resize:both; overflow:hidden; min-width:340px; min-height:170px; }
+        .bw.open { display:flex; }
+        .bw-head { cursor:move; padding:8px 10px 8px 14px; display:flex; justify-content:space-between; align-items:center;
+                   color:#fff; border-radius:12px 12px 0 0; user-select:none; }
+        .bw-head.ptj { background:#4f46e5; } .bw-head.mb { background:#374151; }
+        .bw-title { font-weight:600; font-size:13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .bw-btns { display:flex; gap:2px; flex-shrink:0; }
+        .bw-btns button { background:transparent; border:none; color:#fff; cursor:pointer; font-size:15px; line-height:1;
+                          width:26px; height:26px; border-radius:6px; }
+        .bw-btns button:hover { background:rgba(255,255,255,.22); }
+        .bw-body { margin:0; padding:12px 14px; overflow:auto; flex:1; white-space:pre; tab-size:2;
+                   font-family:ui-monospace,Menlo,Consolas,"Courier New",monospace; font-size:12.5px; line-height:1.55;
+                   color:#1f2933; background:#fbfcfe; }
     </style>
 </head>
 <body class="bg-gray-50 h-screen w-screen overflow-hidden flex font-sans text-gray-900 relative">
@@ -107,6 +129,18 @@
             </div>
             <div id="infoModalContent" class="p-0 modal-content-scroll bg-white"></div>
         </div>
+    </div>
+
+    <!-- VENTANA FLOTANTE: visor del texto de bloques extraído -->
+    <div id="blocksWin" class="bw">
+        <div class="bw-head ptj" id="bwHead">
+            <span class="bw-title" id="bwTitle">Bloques</span>
+            <div class="bw-btns">
+                <button type="button" onclick="bwMax()" title="Maximizar / restaurar">⛶</button>
+                <button type="button" onclick="bwClose()" title="Cerrar">✕</button>
+            </div>
+        </div>
+        <pre class="bw-body" id="bwBody"></pre>
     </div>
 
     <!-- MOTOR JAVASCRIPT -->
@@ -301,22 +335,94 @@
             const dlIcon = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>`;
             const openIcon = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>`;
 
+            const viewIcon = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h10M4 14h16M4 18h10"></path></svg>`;
+            const eqIcon = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path></svg>`;
+            const eqUrl = `pipeline-equivalence/index.html#act-${hexCode}`;
             return `
             <div class="mt-4 pt-4 border-t border-gray-100">
                 <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">${L.title}</p>
                 <div class="flex flex-col sm:flex-row gap-3">
-                    <a href="${ptjUrl}" download="${code}.ptj" target="_blank" rel="noopener" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 px-4 rounded-lg shadow-sm transition-colors flex items-center justify-center gap-2 text-sm">
-                        ${dlIcon} ${L.p} <span class="opacity-70 text-xs font-mono">.ptj</span>
-                    </a>
-                    <a href="${hexUrl}" download="${code}.hex" target="_blank" rel="noopener" class="flex-1 bg-gray-800 hover:bg-gray-900 text-white font-semibold py-2.5 px-4 rounded-lg shadow-sm transition-colors flex items-center justify-center gap-2 text-sm">
-                        ${dlIcon} ${L.m} <span class="opacity-70 text-xs font-mono">.hex</span>
-                    </a>
+                    <div class="flex-1 flex flex-col gap-2">
+                        <a href="${ptjUrl}" download="${code}.ptj" target="_blank" rel="noopener" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 px-4 rounded-lg shadow-sm transition-colors flex items-center justify-center gap-2 text-sm">
+                            ${dlIcon} ${L.p} <span class="opacity-70 text-xs font-mono">.ptj</span>
+                        </a>
+                        <button type="button" onclick="openBlocksViewer('protobject','${code}')" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-medium py-2 px-4 rounded-lg border border-indigo-200 transition-colors flex items-center justify-center gap-2 text-sm">
+                            ${viewIcon} Ver bloques <span class="opacity-60 text-xs">en vivo</span>
+                        </button>
+                    </div>
+                    <div class="flex-1 flex flex-col gap-2">
+                        <a href="${hexUrl}" download="${code}.hex" target="_blank" rel="noopener" class="bg-gray-800 hover:bg-gray-900 text-white font-semibold py-2.5 px-4 rounded-lg shadow-sm transition-colors flex items-center justify-center gap-2 text-sm">
+                            ${dlIcon} ${L.m} <span class="opacity-70 text-xs font-mono">.hex</span>
+                        </a>
+                        <button type="button" onclick="openBlocksViewer('microbit','${code}')" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-lg border border-gray-300 transition-colors flex items-center justify-center gap-2 text-sm">
+                            ${viewIcon} Ver bloques <span class="opacity-60 text-xs">en vivo</span>
+                        </button>
+                    </div>
                 </div>
                 <a href="${openUrl}" target="_blank" rel="noopener" class="mt-3 w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2.5 px-4 rounded-lg shadow-sm transition-colors flex items-center justify-center gap-2 text-sm">
                     ${openIcon} ${L.o} <span class="opacity-70 text-xs font-mono">↗</span>
                 </a>
+                <a href="${eqUrl}" target="_blank" rel="noopener" class="mt-2 w-full bg-violet-600 hover:bg-violet-700 text-white font-semibold py-2.5 px-4 rounded-lg shadow-sm transition-colors flex items-center justify-center gap-2 text-sm">
+                    ${eqIcon} Verificación de equivalencia <span class="opacity-70 text-xs font-mono">↗</span>
+                </a>
             </div>`;
         }
+
+        // ===== Visor flotante del texto de bloques extraído (decoded/<slug>.blocks.txt) =====
+        let _bwMaxed = null;
+        // Decodifica EN VIVO el .ptj/.hex (sin Python): garantiza que el código mostrado
+        // coincide siempre con el archivo fuente actual.
+        async function openBlocksViewer(platform, code) {
+            const slug = currentActivity;
+            const win = document.getElementById('blocksWin');
+            const head = document.getElementById('bwHead');
+            const isMb = platform === 'microbit';
+            const label = isMb ? 'micro:bit' : 'Protobject';
+            head.classList.toggle('mb', isMb);
+            head.classList.toggle('ptj', !isMb);
+            document.getElementById('bwTitle').textContent = 'Bloques · ' + label + '  —  ' + (slug || code);
+            const body = document.getElementById('bwBody');
+            body.textContent = 'Decodificando en vivo…';
+            win.classList.add('open');
+            try {
+                let txt;
+                if (isMb) {
+                    const hexCode = code.replace(/^equivalent-/, '');
+                    const hex = await fetch('microbit/' + hexCode + '.hex', { cache: 'no-store' }).then(r => { if (!r.ok) throw new Error('no se encontró microbit/' + hexCode + '.hex'); return r.text(); });
+                    txt = await BlocksDecoder.microbit(hex);
+                } else {
+                    const ptj = await fetch('protobject/' + code + '.ptj', { cache: 'no-store' }).then(r => { if (!r.ok) throw new Error('no se encontró protobject/' + code + '.ptj'); return r.text(); });
+                    txt = await BlocksDecoder.protobject(ptj);
+                }
+                body.textContent = 'ACTIVIDAD: ' + (slug || code) + '\n' + txt;
+            } catch (e) {
+                body.textContent = 'No se pudo decodificar en vivo:\n  ' + (e && e.message ? e.message : e);
+            }
+        }
+        function bwClose() { document.getElementById('blocksWin').classList.remove('open'); }
+        function bwMax() {
+            const win = document.getElementById('blocksWin');
+            if (_bwMaxed) { Object.assign(win.style, _bwMaxed); _bwMaxed = null; }
+            else {
+                _bwMaxed = { top: win.style.top, left: win.style.left, width: win.style.width, height: win.style.height };
+                Object.assign(win.style, { top: '10px', left: '10px', width: 'calc(100vw - 20px)', height: 'calc(100vh - 20px)' });
+            }
+        }
+        (function bwDrag() {
+            const head = document.getElementById('bwHead'), win = document.getElementById('blocksWin');
+            if (!head) return;
+            let dx = 0, dy = 0, dragging = false;
+            head.addEventListener('mousedown', e => {
+                if (e.target.closest('button')) return;
+                dragging = true; dx = e.clientX - win.offsetLeft; dy = e.clientY - win.offsetTop; e.preventDefault();
+            });
+            document.addEventListener('mousemove', e => {
+                if (!dragging) return;
+                win.style.left = (e.clientX - dx) + 'px';
+                win.style.top = Math.max(0, e.clientY - dy) + 'px';
+            });
+            document.addEventListener('mouseup', () => { dragging = false; });
+        })();
 
         // Sistema de Renderizado de Errores
         function renderError(title, message, isCode = false) {

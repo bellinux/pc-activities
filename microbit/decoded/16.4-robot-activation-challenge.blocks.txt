@@ -1,0 +1,11 @@
+ACTIVIDAD: 16.4-robot-activation-challenge
+FUENTE: micro:bit / MakeCode 8.0.18 — "juego-toques"  (etiquetas oficiales es-ES)
+
+al iniciar:
+  fijar Toques a 0   // Inicia la variable "Toques" con valor inicial = 0.
+
+al tocar el logotipo:
+  cambiar Toques por 1   // Aumenta en 1 el valor de la variable "Toques". Cada vez que se presione el botón la cantidad aumenta en 1, es decir la variable cuenta la cantidad de veces que se aprieta el botón.
+
+para siempre:
+  mostrar número Toques   // Muestra en pantalla el valor actual de la varibale "Toques", es decir el número que tiene "guardado".

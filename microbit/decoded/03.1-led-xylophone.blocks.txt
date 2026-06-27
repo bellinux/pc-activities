@@ -1,0 +1,8 @@
+ACTIVIDAD: 03.1-led-xylophone
+FUENTE: micro:bit / MakeCode 8.0.18 — "xilofono-inclinacion-con-nota-led"  (etiquetas oficiales es-ES)
+
+para siempre:
+  borrar la pantalla
+  graficar x (2 + redondeo((aceleración (mg) x ÷ 350))) y 2   // Dibuja un punto dependiendo de la cantidad de inclinación. Mientras más inclinado, más a los extremos aparecerá el punto.
+  tono de timbre (Hz) (aceleración (mg) x + 1000)
+  pausa (ms) 100

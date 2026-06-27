@@ -1,0 +1,41 @@
+{
+    "platform": "MakeCode",
+    "ast": {
+        "blocks": [
+            {
+                "type": "Event",
+                "label": "al iniciar",
+                "children": [
+                    { "type": "Assignment", "label": "fijar estado a falso", "children": [] }
+                ]
+            },
+            {
+                "type": "Event_Interrupt",
+                "label": "al detectar el sonido alto",
+                "children": [
+                    { "type": "State_Toggle", "label": "fijar estado a (no estado)", "children": [] },
+                    {
+                        "type": "Conditional",
+                        "label": "si estado entonces",
+                        "children": [
+                            {
+                                "type": "Branch_True",
+                                "label": "entonces",
+                                "children": [
+                                    { "type": "Action", "label": "mostrar LEDs", "children": [] }
+                                ]
+                            },
+                            {
+                                "type": "Branch_False",
+                                "label": "si no",
+                                "children": [
+                                    { "type": "Action", "label": "mostrar LEDs", "children": [] }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

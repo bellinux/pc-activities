@@ -1,0 +1,269 @@
+{
+    "platform": "Protobject",
+    "nodes": [
+        {
+            "id": "n1",
+            "kind": "ProgramStartEvent",
+            "seq": 1,
+            "in_loop": false
+        },
+        {
+            "id": "n2",
+            "kind": "SetVariable",
+            "seq": 2,
+            "in_loop": false
+        },
+        {
+            "id": "n3",
+            "kind": "OnTouchEvent",
+            "seq": 3,
+            "in_loop": false,
+            "resId": 1
+        },
+        {
+            "id": "n4",
+            "kind": "ConditionalBranch",
+            "seq": 4,
+            "in_loop": false
+        },
+        {
+            "id": "n5",
+            "kind": "SetVariable",
+            "seq": 5,
+            "in_loop": false
+        },
+        {
+            "id": "n6",
+            "kind": "RandomInteger",
+            "seq": 6,
+            "in_loop": false
+        },
+        {
+            "id": "n7",
+            "kind": "SetVariable",
+            "seq": 7,
+            "in_loop": false
+        },
+        {
+            "id": "n8",
+            "kind": "PlaySound",
+            "seq": 8,
+            "in_loop": false,
+            "resId": 1
+        },
+        {
+            "id": "n9",
+            "kind": "Comparison",
+            "seq": 9,
+            "in_loop": true
+        },
+        {
+            "id": "n10",
+            "kind": "ChangeVariableBy",
+            "seq": 10,
+            "in_loop": true
+        },
+        {
+            "id": "n11",
+            "kind": "Delay",
+            "seq": 11,
+            "in_loop": true
+        },
+        {
+            "id": "n12",
+            "kind": "PlaySound",
+            "seq": 12,
+            "in_loop": false,
+            "resId": 1
+        },
+        {
+            "id": "n13",
+            "kind": "Delay",
+            "seq": 13,
+            "in_loop": false
+        },
+        {
+            "id": "n14",
+            "kind": "StopSound",
+            "seq": 14,
+            "in_loop": false,
+            "resId": 1
+        },
+        {
+            "id": "n15",
+            "kind": "SetVariable",
+            "seq": 15,
+            "in_loop": false
+        }
+    ],
+    "edges": [
+        {
+            "source": "n1",
+            "target": "n2",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n3",
+            "target": "n4",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n4",
+            "target": "n5",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n4",
+            "target": "n7",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n4",
+            "target": "n8",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n4",
+            "target": "n10",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n4",
+            "target": "n11",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n4",
+            "target": "n12",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n4",
+            "target": "n13",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n4",
+            "target": "n14",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n4",
+            "target": "n15",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n5",
+            "target": "n7",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n7",
+            "target": "n8",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n8",
+            "target": "n10",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n10",
+            "target": "n11",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n12",
+            "target": "n13",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n13",
+            "target": "n14",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n14",
+            "target": "n15",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n2",
+            "target": "n4",
+            "type": "data",
+            "var": "pausado"
+        },
+        {
+            "source": "n5",
+            "target": "n15",
+            "type": "data",
+            "var": "pausado"
+        },
+        {
+            "source": "n6",
+            "target": "n7",
+            "type": "data",
+            "var": "tiempo"
+        },
+        {
+            "source": "n7",
+            "target": "n9",
+            "type": "data",
+            "var": "tiempo"
+        },
+        {
+            "source": "n7",
+            "target": "n10",
+            "type": "data",
+            "var": "tiempo"
+        },
+        {
+            "source": "n9",
+            "target": "n10",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n9",
+            "target": "n11",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n10",
+            "target": "n9",
+            "type": "data",
+            "var": "tiempo"
+        },
+        {
+            "source": "n8",
+            "target": "n12",
+            "type": "side_effect",
+            "var": "sound"
+        },
+        {
+            "source": "n12",
+            "target": "n14",
+            "type": "side_effect",
+            "var": "sound"
+        }
+    ]
+}

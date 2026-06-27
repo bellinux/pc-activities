@@ -1,0 +1,127 @@
+{
+    "platform": "MakeCode",
+    "nodes": [
+        {
+            "id": "n1",
+            "kind": "ProgramStartEvent",
+            "seq": 1,
+            "in_loop": false
+        },
+        {
+            "id": "n2",
+            "kind": "DrawImage",
+            "seq": 2,
+            "in_loop": false,
+            "resId": 1
+        },
+        {
+            "id": "n3",
+            "kind": "ReadLightLevel",
+            "seq": 3,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n4",
+            "kind": "Comparison",
+            "seq": 4,
+            "in_loop": true
+        },
+        {
+            "id": "n5",
+            "kind": "ConditionalBranch",
+            "seq": 5,
+            "in_loop": true
+        },
+        {
+            "id": "n6",
+            "kind": "PlaySound",
+            "seq": 6,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n7",
+            "kind": "DrawImage",
+            "seq": 7,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n8",
+            "kind": "StopSound",
+            "seq": 8,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n9",
+            "kind": "DrawImage",
+            "seq": 9,
+            "in_loop": true,
+            "resId": 1
+        }
+    ],
+    "edges": [
+        {
+            "source": "n1",
+            "target": "n2",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n5",
+            "target": "n6",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n5",
+            "target": "n7",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n5",
+            "target": "n8",
+            "type": "control",
+            "var": "false"
+        },
+        {
+            "source": "n5",
+            "target": "n9",
+            "type": "control",
+            "var": "false"
+        },
+        {
+            "source": "n3",
+            "target": "n4",
+            "type": "data",
+            "var": "light_1"
+        },
+        {
+            "source": "n4",
+            "target": "n5",
+            "type": "data",
+            "var": "condition"
+        },
+        {
+            "source": "n2",
+            "target": "n7",
+            "type": "side_effect",
+            "var": "display"
+        },
+        {
+            "source": "n7",
+            "target": "n9",
+            "type": "side_effect",
+            "var": "display"
+        },
+        {
+            "source": "n6",
+            "target": "n8",
+            "type": "side_effect",
+            "var": "sound"
+        }
+    ]
+}

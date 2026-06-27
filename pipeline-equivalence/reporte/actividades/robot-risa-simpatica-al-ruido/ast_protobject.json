@@ -1,0 +1,34 @@
+{
+    "platform": "Protobject",
+    "ast": {
+        "blocks": [
+            {
+                "type": "Event",
+                "label": "al iniciar el programa",
+                "children": [
+                    { "type": "Action", "label": "dibuja con color #ff0000 en DibujoLED2", "children": [] },
+                    { "type": "Action", "label": "establecer color de fondo a #000000 en DibujoLED2", "children": [] }
+                ]
+            },
+            {
+                "type": "Event_Interrupt",
+                "label": "cuando NivelRuido1 detecta aumento repentino",
+                "children": [
+                    { "type": "Action", "label": "reproducir sonido 'reacción divertida' en ReproductorSonido3", "children": [] },
+                    {
+                        "type": "Loop",
+                        "label": "repetir 8 veces",
+                        "children": [
+                            { "type": "Action", "label": "dibuja con color #ff0000 en DibujoLED2", "children": [] },
+                            { "type": "Action", "label": "retraso de 400 milisegundos", "children": [] },
+                            { "type": "Action", "label": "dibuja con color #ff0000 en DibujoLED2", "children": [] },
+                            { "type": "Action", "label": "retraso de 400 milisegundos", "children": [] }
+                        ]
+                    },
+                    { "type": "Action", "label": "detener sonido de ReproductorSonido3", "children": [] },
+                    { "type": "Action", "label": "dibuja con color #ff0000 en DibujoLED2", "children": [] }
+                ]
+            }
+        ]
+    }
+}

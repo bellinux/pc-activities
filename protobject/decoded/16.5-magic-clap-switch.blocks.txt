@@ -1,0 +1,20 @@
+ACTIVIDAD: 16.5-magic-clap-switch
+FUENTE: Protobject (bloques, etiquetas oficiales es)
+
+al iniciar el programa:
+  establecer estado a falso
+  establecer color de fondo a #000000 en DibujoLED2
+
+cuando NivelRuido1 detecta aumento repentino:
+  establecer estado a no (estado)
+  si estado:
+    dibuja con color #ff0000 en DibujoLED2:
+        #######
+        #######
+        #######
+        #######
+        #######
+        #######
+        #######
+  sino:
+    borrar dibujo en DibujoLED2

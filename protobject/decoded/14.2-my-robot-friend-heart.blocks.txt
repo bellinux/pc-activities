@@ -1,0 +1,46 @@
+ACTIVIDAD: 14.2-my-robot-friend-heart
+FUENTE: Protobject (bloques, etiquetas oficiales es)
+
+repetir para siempre:
+  dibuja con color #ff0000 en DibujoLED1:
+      .#...#.
+      ###.###
+      #######
+      #######
+      .#####.
+      ..###..
+      ...#...
+  toca nota tom en BateríaMusical2
+  retraso de latidoGrande milisegundos   // Se utiliza la variable "latidoGrande" para cambiar la velocidad de latido dependiendo de la posición del dispositivo.
+  toca nota tom en BateríaMusical2
+  repetir 4 veces:
+    dibuja con color #ff0000 en DibujoLED1:
+        .......
+        ..#.#..
+        .#####.
+        .#####.
+        ..###..
+        ...#...
+        .......
+    retraso de latidoPequeño milisegundos   // Se utiliza la variable "latidoPequeño" para cambiar la velocidad de latido del corazón chico dependiendo de la posición del dispositivo.
+    dibuja con color #ff0000 en DibujoLED1:
+        .......
+        ..#.#..
+        .#.#.#.
+        .#...#.
+        ..#.#..
+        ...#...
+        .......
+    retraso de latidoPequeño milisegundos
+
+al iniciar el programa:
+  establecer latidoGrande a 500
+  establecer latidoPequeño a 150
+
+cuando Inclinación3 hacie un borde:   // Este bloque detecta el momento en que cambia la posición del dispositivo, cuando lo hace se editan las variables "latidoGrande" y "latidoPequeño". Dependiendo de la posición la velocidad de latido aumentará o disminuirá (Los tiempos son más largos, es decir las variables toman valores grandes).  En este bloque específico la velocidad de latidos aumentará.
+  establecer latidoGrande a 250
+  establecer latidoPequeño a 80
+
+cuando Inclinación3 hacia arriba:   // Este bloque detecta el momento en que cambia la posición del dispositivo, cuando lo hace se editan las variables "latidoGrande" y "latidoPequeño". Dependiendo de la posición la velocidad de latido aumentará (Los tiempos son más largos, es decir las variables toman valores grandes).  En este bloque específico la velocidad de latidos se reducirá.
+  establecer latidoGrande a 500
+  establecer latidoPequeño a 150

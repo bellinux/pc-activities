@@ -1,0 +1,24 @@
+{
+    "platform": "MakeCode",
+    "extracted_text": [
+        "para siempre:",
+        "  mostrar LEDs",
+        "  reproduce secuencia (tono Re5 durante (1/8 pulso)) en modo en segundo plano",
+        "  pausa (ms) latidoGrande",
+        "  reproduce secuencia (tono Re5 durante (1/8 pulso)) en modo en segundo plano",
+        "  repetir 4 veces:",
+        "    mostrar LEDs",
+        "    pausa (ms) latidoPequeño",
+        "    mostrar LEDs",
+        "    pausa (ms) latidoPequeño",
+        "al iniciar:",
+        "  fijar latidoPequeño a 250",
+        "  fijar latidoGrande a 500",
+        "si pantalla hacia arriba:",
+        "  fijar latidoPequeño a 250",
+        "  fijar latidoGrande a 500",
+        "si logotipo hacia arriba:",
+        "  fijar latidoPequeño a 10",
+        "  fijar latidoGrande a 100"
+    ]
+}

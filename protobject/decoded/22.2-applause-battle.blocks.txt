@@ -1,0 +1,21 @@
+ACTIVIDAD: 22.2-applause-battle
+FUENTE: Protobject (bloques, etiquetas oficiales es)
+
+al iniciar el programa:
+  establecer tamaño 40 en DibujarEscribir2
+  establecer inicio a 0
+  establecer activo a verdadero
+
+repetir para siempre:
+  limpiar en DibujarEscribir2
+  si (inicio > 0):
+    escribir ((milisegundos − inicio) ÷ 1000) en DibujarEscribir2   // Muestra la cantidad de segundos en los que persiste un sonido, en este caso mediremos cuánto es la duración de una cantidad de aplausos.
+    si (ruido in NivelRuido1 < 5):   // Si los aplausos se detienen termina el temporizador y finaliza la medición.
+      establecer inicio a 0
+      establecer activo a falso
+      retraso de 5 segundos
+      establecer activo a verdadero
+
+cuando NivelRuido1 detecta aumento repentino:
+  si activo:
+    establecer inicio a milisegundos

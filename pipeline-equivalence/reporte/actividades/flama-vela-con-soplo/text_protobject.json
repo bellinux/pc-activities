@@ -1,0 +1,19 @@
+{
+    "platform": "Protobject",
+    "extracted_text": [
+        "repetir para siempre:",
+        "  si flama:",
+        "    dibuja con color #ff0000 en DibujoLED1",
+        "    dibuja en x (entero aleatorio de 3 a 5) y 2 con color #ff0000 en DibujoLED1",
+        "    retraso de 200 milisegundos",
+        "    dibuja con color #ff0000 en DibujoLED1",
+        "    dibuja en x 4 y 2 con color #ff0000 en DibujoLED1",
+        "    retraso de 200 milisegundos",
+        "  sino:",
+        "    borrar dibujo en DibujoLED1",
+        "al iniciar el programa:",
+        "  establecer flama a verdadero",
+        "cuando NivelRuido2 detecta aumento repentino:",
+        "  establecer flama a (no flama)"
+    ]
+}

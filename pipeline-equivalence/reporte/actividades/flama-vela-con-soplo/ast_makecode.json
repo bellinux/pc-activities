@@ -1,0 +1,58 @@
+{
+    "platform": "MakeCode",
+    "ast": {
+        "blocks": [
+            {
+                "type": "Event",
+                "label": "al iniciar",
+                "children": [
+                    { "type": "Assignment", "label": "fijar flama a verdadero", "children": [] }
+                ]
+            },
+            {
+                "type": "Event_Interrupt",
+                "label": "al detectar el sonido alto",
+                "children": [
+                    { "type": "State_Toggle", "label": "fijar flama a (no flama)", "children": [] }
+                ]
+            },
+            {
+                "type": "Loop",
+                "label": "para siempre",
+                "children": [
+                    {
+                        "type": "Conditional",
+                        "label": "si flama entonces",
+                        "children": [
+                            {
+                                "type": "Branch_True",
+                                "label": "entonces",
+                                "children": [
+                                    { "type": "Action", "label": "mostrar LEDs", "children": [] },
+                                    {
+                                        "type": "Action",
+                                        "label": "graficar x ◻ y 0",
+                                        "children": [
+                                            { "type": "Action", "label": "escoger al azar de 1 a 3", "children": [] }
+                                        ]
+                                    },
+                                    { "type": "Action", "label": "pausa (ms) 200", "children": [] },
+                                    { "type": "Action", "label": "mostrar LEDs", "children": [] },
+                                    { "type": "Action", "label": "graficar x 2 y 0", "children": [] },
+                                    { "type": "Action", "label": "pausa (ms) 200", "children": [] }
+                                ]
+                            },
+                            {
+                                "type": "Branch_False",
+                                "label": "si no",
+                                "children": [
+                                    { "type": "Action", "label": "mostrar LEDs", "children": [] }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

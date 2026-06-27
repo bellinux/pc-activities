@@ -1,0 +1,20 @@
+ACTIVIDAD: 16.2-sunflower-alarm-clock
+FUENTE: Protobject (bloques, etiquetas oficiales es)
+
+al iniciar el programa:
+  establecer color de fondo a #000000 en DibujoLED2
+
+repetir para siempre:
+  si (luminosidad in IntensidadLuz1 > 50):   // Este bloque es un condicional extendido, en la actividad anterior teníamos un bloque que ejecutaba su contenido si se cumple la condición, en este caso se extiende el bloque condicional y se le da la instrucción de que si se cumple la condición se ejecuta la primera parte del bloque, pero si no se cumple se ejecuta otra parte diferente.   En la actividad anterior si no se cumplía la condición no pasaba nada más que no ejecutar lo de dentro, en este caso si no se cumple se ejecuta una serie de instrucciones específicas.
+    reproducir sonido 'celebración final' en ReproductorSonido3
+    dibuja con color #ff0000 en DibujoLED2:
+        #..#..#
+        .#.#.#.
+        ..###..
+        #######
+        ..###..
+        .#.#.#.
+        #..#..#
+  sino:
+    detener sonido de ReproductorSonido3
+    borrar dibujo en DibujoLED2

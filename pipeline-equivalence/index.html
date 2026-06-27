@@ -9,6 +9,8 @@
         h2.activity-title { font-weight: 400; font-size: 1.8em; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 40px; margin-bottom: 30px; }
         h3 { font-weight: 600; font-size: 1.2em; margin-bottom: 15px; color: #222; }
         .container { max-width: 1200px; margin: 0 auto; }
+        .section-head { text-align: center; font-weight: 300; font-size: 1.6em; color: #111; margin: 40px 0 0 0; }
+        .section-sub { text-align: center; color: #888; margin: 4px 0 0 0; }
         .grid { display: flex; gap: 40px; margin-top: 20px; }
         .column { flex: 1; padding-right: 20px; }
         .column-right { flex: 1; padding-left: 20px; border-left: 1px dashed #ccc; }
@@ -23,65 +25,116 @@
         .images > div:last-child { padding-left: 20px; }
         .images img { max-width: 100%; height: auto; }
         code { background: none; font-family: monospace; }
+        .act-code { font-size: 0.55em; color: #aaa; font-weight: 400; }
+        .pendiente { color: #999; font-style: italic; }
+        .sep { border: none; border-top: 1px solid #eee; margin: 50px 0; }
+        .actividad { scroll-margin-top: 16px; border-radius: 8px; }
+        .actividad.focus-flash { animation: flashbg 2.6s ease-out; }
+        @keyframes flashbg { 0%, 12% { background: #f1e6fb; box-shadow: 0 0 0 8px #f1e6fb; } 100% { background: transparent; box-shadow: 0 0 0 8px transparent; } }
     </style>
 </head>
 <body>
 
 <div class="container">
     <h1>Dashboard Algorítmico de Equivalencia</h1>
-    <p style="text-align: center; color: #666; margin-bottom: 50px;">Ejecuta <code>python -m http.server 8080</code> en esta carpeta para habilitar los fetch locales.</p>
+    <p style="text-align: center; color: #666; margin-bottom: 30px;">Ejecuta <code>python -m http.server 8080</code> en esta carpeta para habilitar los fetch locales.</p>
 
-    <!-- ACTIVIDAD: VELA -->
-    <div id="act-vela">
-        <h2 class="activity-title">Actividad: Vela Interactiva</h2>
-        
-        <div class="grid">
-            <div class="column">
-                <h3>Vistas Analíticas (Lado a Lado)</h3>
-                <p>Fuentes extraídas y árboles lógicos:</p>
-                <a class="btn" href="reporte/visores/visor_extraccion.html?actividad=vela" target="_blank">🔍 Ver Extracción de Texto (Microbit vs Protobject)</a><br>
-                <a class="btn" href="reporte/visores/visor_ast.html?actividad=vela" target="_blank">📄 Comparar ASTs (Microbit vs Protobject)</a><br>
-                <a class="btn" href="reporte/visores/visor_tabla.html?actividad=vela" target="_blank">📊 Ver Ontología (Tabla IR)</a><br>
-                <a class="btn" href="reporte/visores/visor_pdg.html?actividad=vela" target="_blank">🕸️ Comparar Nodos PDG (Interactivos)</a>
-            </div>
-
-            <div class="column-right">
-                <h3>Resultados Algorítmicos (NetworkX)</h3>
-                <p>Cálculo de isomorfismo estructural:</p>
-                <div class="metrics" id="metrics-vela">Cargando métricas...</div>
-                <script>
-                    fetch('reporte/actividades/vela/metricas.json')
-                        .then(res => res.json())
-                        .then(data => {
-                            const success = data.isomorphic ? 'metrics-success' : 'metrics-error';
-                            document.getElementById('metrics-vela').innerHTML = `
-                                <div>Isomorfismo (VF2): <span class="${success}">${data.isomorphic}</span></div>
-                                <div>Graph Edit Distance: <strong>${data.graph_edit_distance}</strong></div>
-                                <div style="margin-top: 10px; color: #555;">Nodos (Microbit / Protobject): ${data.nodes_G1} / ${data.nodes_G2}</div>
-                                <div style="color: #555;">Aristas (Microbit / Protobject): ${data.edges_G1} / ${data.edges_G2}</div>
-                            `;
-                        })
-                        .catch(err => document.getElementById('metrics-vela').innerText = "Error cargando metricas.json");
-                </script>
-            </div>
-        </div>
-
-        <div style="margin-top: 60px;">
-            <h3 style="text-align: center;">Grafos Program Dependence Graph (Graphviz)</h3>
-            <div class="images">
-                <div>
-                    <strong style="display:block; margin-bottom: 20px;">Microbit</strong>
-                    <img src="reporte/actividades/vela/pdg_makecode.svg" alt="PDG Microbit">
-                </div>
-                <div>
-                    <strong style="display:block; margin-bottom: 20px;">Protobject</strong>
-                    <img src="reporte/actividades/vela/pdg_protobject.svg" alt="PDG Protobject">
-                </div>
-            </div>
-        </div>
+    <!-- ONTOLOGÍA CANÓNICA COMÚN (a las 17) -->
+    <div style="max-width:780px;margin:0 auto 30px auto;background:#f5eefb;border:1px solid #d9c2ee;border-radius:8px;padding:18px 24px;">
+        <h3 style="margin:0 0 6px 0;color:#8e44ad;border:none;padding:0;">🧩 Ontología canónica común</h3>
+        <p style="margin:0;color:#4a3f55;font-size:1.05em;">El vocabulario de <code>canonical_node</code> (el <code>kind</code> de cada nodo PDG) es <strong>el mismo para las 17 actividades</strong>: define a qué concepto común corresponde cada bloque de MakeCode y de Protobject. Los PDG se construyen sobre este IR canónico.</p>
+        <p style="margin:10px 0 0 0;"><a href="reporte/visores/visor_ontologia.html" target="_blank" style="color:#8e44ad;font-weight:600;text-decoration:none;">🔗 Ver la ontología canónica común <span id="ont-count"></span> →</a></p>
     </div>
 
+    <!-- ============================================================= -->
+    <!-- TODAS LAS ACTIVIDADES: dinámico desde actividades.json          -->
+    <!-- ============================================================= -->
+    <p class="section-head">Las 17 actividades</p>
+    <p class="section-sub" id="dyn-sub">Generadas dinámicamente desde <code>actividades.json</code>.</p>
+    <div id="actividades-dinamicas" style="margin-top:30px;"></div>
+
 </div>
+
+<script>
+    function metricsHtml(d) {
+        const ok = d.isomorphic ? 'metrics-success' : 'metrics-error';
+        return `<div>Isomorfismo (VF2): <span class="${ok}">${d.isomorphic}</span></div>
+            <div>Graph Edit Distance: <strong>${d.graph_edit_distance}</strong></div>
+            <div style="margin-top:10px;color:#555;">Nodos (Microbit / Protobject): ${d.nodes_G1} / ${d.nodes_G2}</div>
+            <div style="color:#555;">Aristas (Microbit / Protobject): ${d.edges_G1} / ${d.edges_G2}</div>`;
+    }
+
+    function activityBlock(a) {
+        const c = a.code;
+        return `
+        <div class="actividad" id="act-${c}">
+            <h2 class="activity-title">${a.num}. ${a.title} <span class="act-code">${c}</span></h2>
+            <div class="grid">
+                <div class="column">
+                    <h3>Vistas Analíticas (Lado a Lado)</h3>
+                    <p>Código extraído, AST, ontología y grafos:</p>
+                    <a class="btn" href="reporte/visores/visor_ast.html?actividad=${c}" target="_blank">📄 Ver código extraído + AST (Microbit vs Protobject)</a><br>
+                    <a class="btn" href="reporte/visores/visor_tabla.html?actividad=${c}" target="_blank">📊 Ver Tabla IR (ontología común, resaltada)</a><br>
+                    <a class="btn" href="reporte/visores/visor_pdg.html?actividad=${c}" target="_blank">🕸️ Comparar Nodos PDG (Interactivos)</a>
+                </div>
+                <div class="column-right">
+                    <h3>Resultados Algorítmicos (NetworkX)</h3>
+                    <p>Cálculo de isomorfismo estructural:</p>
+                    <div class="metrics" id="metrics-${c}">Cargando…</div>
+                </div>
+            </div>
+            <div style="margin-top:50px;">
+                <h3 style="text-align:center;">Grafos Program Dependence Graph (Graphviz)</h3>
+                <div class="images" id="imgs-${c}" style="justify-content:center;">Cargando…</div>
+            </div>
+        </div>`;
+    }
+
+    // metricas.json hace de "puerta": si existe, el pipeline corrió -> mostramos
+    // métricas + PDG; si no, solo está disponible la extracción de texto.
+    function loadActivity(c) {
+        fetch(`reporte/actividades/${c}/metricas.json`)
+            .then(r => { if (!r.ok) throw 0; return r.json(); })
+            .then(d => {
+                document.getElementById('metrics-' + c).innerHTML = metricsHtml(d);
+                document.getElementById('imgs-' + c).innerHTML = `
+                    <div><strong style="display:block;margin-bottom:20px;">Microbit</strong><img src="reporte/actividades/${c}/pdg_makecode.svg" alt="PDG Microbit"></div>
+                    <div><strong style="display:block;margin-bottom:20px;">Protobject</strong><img src="reporte/actividades/${c}/pdg_protobject.svg" alt="PDG Protobject"></div>`;
+            })
+            .catch(() => {
+                document.getElementById('metrics-' + c).innerHTML = '<span class="pendiente">Pendiente — pipeline aún no ejecutado (de momento solo extracción de texto).</span>';
+                document.getElementById('imgs-' + c).innerHTML = '<span class="pendiente">Grafos pendientes.</span>';
+            });
+    }
+
+    fetch('reporte/tabla_ontologica.json', { cache: 'no-store' })
+        .then(r => r.json())
+        .then(d => { document.getElementById('ont-count').textContent = '(' + d.nodes.length + ' conceptos)'; })
+        .catch(() => {});
+
+    fetch('actividades.json')
+        .then(r => r.json())
+        .then(list => {
+            document.getElementById('dyn-sub').innerHTML = `${list.length} actividades, ordenadas. Generadas desde <code>actividades.json</code>.`;
+            document.getElementById('actividades-dinamicas').innerHTML = list.map(activityBlock).join('<hr class="sep">');
+            list.forEach(a => loadActivity(a.code));
+            // Las actividades son dinámicas y los SVG cargan después (reflow): si la URL trae
+            // #act-<code> (p.ej. desde el engine), reposiciónate varias veces hasta que asiente.
+            if (location.hash && location.hash.length > 1) {
+                const el = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+                if (el) {
+                    el.classList.add('focus-flash');
+                    let n = 0;
+                    const tick = () => { el.scrollIntoView({ behavior: n === 0 ? 'auto' : 'smooth', block: 'start' }); if (++n < 7) setTimeout(tick, 500); };
+                    tick();
+                    setTimeout(() => el.classList.remove('focus-flash'), 3500);
+                }
+            }
+        })
+        .catch(() => {
+            document.getElementById('actividades-dinamicas').innerHTML = '<p class="metrics-error">No se pudo cargar actividades.json (¿está el servidor sirviendo esta carpeta?).</p>';
+        });
+</script>
 
 </body>
 </html>

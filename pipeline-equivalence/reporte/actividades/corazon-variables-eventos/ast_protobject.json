@@ -1,0 +1,51 @@
+{
+    "platform": "Protobject",
+    "ast": {
+        "blocks": [
+            {
+                "type": "Loop",
+                "label": "repetir para siempre",
+                "children": [
+                    { "type": "Action", "label": "dibuja con color #ff0000 en DibujoLED1", "children": [] },
+                    { "type": "Action", "label": "toca nota tom en BateríaMusical2", "children": [] },
+                    { "type": "Action", "label": "retraso de latidoGrande milisegundos", "children": [] },
+                    { "type": "Action", "label": "toca nota tom en BateríaMusical2", "children": [] },
+                    {
+                        "type": "Loop",
+                        "label": "repetir 4 veces",
+                        "children": [
+                            { "type": "Action", "label": "dibuja con color #ff0000 en DibujoLED1", "children": [] },
+                            { "type": "Action", "label": "retraso de latidoPequeño milisegundos", "children": [] },
+                            { "type": "Action", "label": "dibuja con color #ff0000 en DibujoLED1", "children": [] },
+                            { "type": "Action", "label": "retraso de latidoPequeño milisegundos", "children": [] }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "Event",
+                "label": "al iniciar el programa",
+                "children": [
+                    { "type": "Assignment", "label": "establecer latidoGrande a 500", "children": [] },
+                    { "type": "Assignment", "label": "establecer latidoPequeño a 150", "children": [] }
+                ]
+            },
+            {
+                "type": "Event_Interrupt",
+                "label": "cuando Inclinación3 hacie un borde",
+                "children": [
+                    { "type": "Assignment", "label": "establecer latidoGrande a 250", "children": [] },
+                    { "type": "Assignment", "label": "establecer latidoPequeño a 80", "children": [] }
+                ]
+            },
+            {
+                "type": "Event_Interrupt",
+                "label": "cuando Inclinación3 hacia arriba",
+                "children": [
+                    { "type": "Assignment", "label": "establecer latidoGrande a 500", "children": [] },
+                    { "type": "Assignment", "label": "establecer latidoPequeño a 150", "children": [] }
+                ]
+            }
+        ]
+    }
+}

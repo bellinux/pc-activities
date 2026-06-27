@@ -1,0 +1,139 @@
+{
+    "platform": "Protobject",
+    "nodes": [
+        {
+            "id": "n1",
+            "kind": "ProgramStartEvent",
+            "seq": 1,
+            "in_loop": false
+        },
+        {
+            "id": "n2",
+            "kind": "ClearDisplay",
+            "seq": 2,
+            "in_loop": false,
+            "resId": 1
+        },
+        {
+            "id": "n3",
+            "kind": "ReadTilt",
+            "seq": 3,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n4",
+            "kind": "Comparison",
+            "seq": 4,
+            "in_loop": true
+        },
+        {
+            "id": "n5",
+            "kind": "ConditionalBranch",
+            "seq": 5,
+            "in_loop": true
+        },
+        {
+            "id": "n6",
+            "kind": "DrawImage",
+            "seq": 6,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n7",
+            "kind": "PlaySound",
+            "seq": 7,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n8",
+            "kind": "Delay",
+            "seq": 8,
+            "in_loop": true
+        },
+        {
+            "id": "n9",
+            "kind": "ClearDisplay",
+            "seq": 9,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n10",
+            "kind": "StopSound",
+            "seq": 10,
+            "in_loop": true,
+            "resId": 1
+        }
+    ],
+    "edges": [
+        {
+            "source": "n1",
+            "target": "n2",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n3",
+            "target": "n4",
+            "type": "data",
+            "var": "tilt_1"
+        },
+        {
+            "source": "n4",
+            "target": "n5",
+            "type": "data",
+            "var": "condition"
+        },
+        {
+            "source": "n5",
+            "target": "n6",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n5",
+            "target": "n7",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n5",
+            "target": "n8",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n5",
+            "target": "n9",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n5",
+            "target": "n10",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n2",
+            "target": "n6",
+            "type": "side_effect",
+            "var": "display"
+        },
+        {
+            "source": "n6",
+            "target": "n9",
+            "type": "side_effect",
+            "var": "display"
+        },
+        {
+            "source": "n7",
+            "target": "n10",
+            "type": "side_effect",
+            "var": "sound"
+        }
+    ]
+}

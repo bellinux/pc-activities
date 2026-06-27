@@ -1,0 +1,21 @@
+ACTIVIDAD: 16.1-cookie-thief-alarm
+FUENTE: Protobject (bloques, etiquetas oficiales es)
+
+al iniciar el programa:
+  establecer color de fondo a #000000 en DibujoLED2
+  borrar dibujo en DibujoLED2
+
+repetir para siempre:
+  si (x in Inclinación1 > 20):   // Este es un bloque condicional, ¿Qué quiere decir esto? Es un bloque que se ejecuta o no dependiendo de una condición que nosotros propongamos. En este caso la condición es que la inclinación debe ser superior a cierto valor, al superarse el valor la condición se cumple y por lo tanto se ejecutan todas las instrucciones en el interior de nuestro bloque condicional.
+    dibuja con color #2277aa en DibujoLED2:
+        .......
+        .#..##.
+        ..#.#..
+        ....#..
+        ..#.#..
+        .#..##.
+        .......
+    reproducir sonido 'emergencia' en ReproductorSonido3
+    retraso de 6 segundos
+    borrar dibujo en DibujoLED2
+    detener sonido de ReproductorSonido3

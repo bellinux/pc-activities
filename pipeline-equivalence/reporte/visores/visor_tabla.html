@@ -4,79 +4,80 @@
     <meta charset="UTF-8">
     <title>Visor de Tabla IR</title>
     <style>
-        body { 
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background: #fff; margin: 0; padding: 40px; color: #111; line-height: 1.6;
-        }
-        h2 { 
-            text-align: center; font-weight: 300; font-size: 2.2em; margin-bottom: 50px; color: #111; 
-        }
-        table { 
-            width: 90%; max-width: 1200px; margin: 20px auto; border-collapse: collapse; 
-        }
-        th, td { 
-            padding: 15px 20px; text-align: left; border: none; 
-        }
-        th { 
-            border-top: 2px solid #111; border-bottom: 1px solid #111; 
-            font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9em; color: #333; 
-        }
-        td { 
-            border-bottom: 1px solid #f0f0f0; 
-        }
-        tr:last-child td { 
-            border-bottom: 2px solid #111; 
-        }
-        tr:hover { 
-            background-color: #fafafa; 
-        }
-        .node-canonical { 
-            font-weight: bold; color: #111; font-family: monospace; 
-        }
-        .block-text { 
-            color: #555; 
-        }
+        body { font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #fff; margin: 0; padding: 40px; color: #111; line-height: 1.6; }
+        h2 { text-align: center; font-weight: 300; font-size: 2.2em; margin-bottom: 6px; color: #111; }
+        .sub { text-align: center; color: #777; margin: 0 auto 14px auto; }
+        .legend { text-align: center; color: #555; margin-bottom: 26px; font-size: 0.95em; }
+        .legend .swatch { display: inline-block; width: 14px; height: 14px; border-radius: 3px; background: #d7f3e3; border: 1px solid #27ae60; vertical-align: -2px; margin-right: 4px; }
+        table { width: 92%; max-width: 1200px; margin: 0 auto; border-collapse: collapse; }
+        th, td { padding: 11px 18px; text-align: left; }
+        th { border-top: 2px solid #111; border-bottom: 1px solid #111; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 0.82em; color: #333; }
+        td { border-bottom: 1px solid #f0f0f0; }
+        tr:last-child td { border-bottom: 2px solid #111; }
+        .node-canonical { font-weight: bold; font-family: monospace; }
+        .block-text { color: #555; font-family: 'Consolas','Courier New',monospace; font-size: 0.9em; }
+        /* Fila USADA en esta actividad: misma posición, solo resaltada en verde */
+        tr.used { background: #eafaf1; }
+        tr.used td { border-bottom-color: #cdeedd; }
+        tr.used td:first-child { box-shadow: inset 4px 0 0 #27ae60; }
+        tr.used .node-canonical { color: #1e7a46; }
+        tr.used .check { color: #27ae60; font-weight: 700; }
+        /* Fila NO usada: misma posición, atenuada (sigue visible: es la misma tabla) */
+        tr.unused { color: #b9b9b9; }
+        tr.unused .node-canonical { color: #b9b9b9; font-weight: normal; }
+        tr.unused .block-text { color: #cfcfcf; }
+        .col-use { width: 30px; text-align: center; }
     </style>
 </head>
 <body>
     <h2>Tabla de Equivalencia Ontológica (IR)</h2>
+    <p class="sub" id="sub">Cargando…</p>
+    <p class="legend"><span class="swatch"></span> resaltado = concepto usado en esta actividad. Es la <strong>misma tabla única</strong> para todas; solo cambia qué filas se iluminan.</p>
     <table id="tabla">
         <thead>
             <tr>
+                <th class="col-use"></th>
                 <th>Nodo Canónico (IR)</th>
                 <th>Bloque A (Microbit)</th>
                 <th>Bloque B (Protobject)</th>
             </tr>
         </thead>
-        <tbody id="table-body">
-        </tbody>
+        <tbody id="table-body"></tbody>
     </table>
     <script>
-        function loadTable(file) {
-            fetch(file)
-                .then(r => r.json())
-                .then(data => {
-                    const tbody = document.getElementById('table-body');
-                    data.forEach(row => {
-                        const tr = document.createElement('tr');
-                        tr.innerHTML = `
-                            <td class="node-canonical">${row.canonical_node}</td>
-                            <td class="block-text">${row.makecode_block}</td>
-                            <td class="block-text">${row.protobject_block}</td>
-                        `;
-                        tbody.appendChild(tr);
-                    });
-                })
-                .catch(e => console.error(e));
-        }
-        
         const params = new URLSearchParams(window.location.search);
         const actividad = params.get('actividad');
-        if (actividad) {
-            loadTable(`../actividades/${actividad}/tabla_ir.json`);
-        } else {
-            document.getElementById('table-body').innerHTML = "<tr><td colspan='3'>Falta ?actividad=</td></tr>";
+        const esc = s => (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+        async function kindsUsados(act) {
+            const set = new Set();
+            for (const plat of ['pdg_makecode.json', 'pdg_protobject.json']) {
+                try {
+                    const pdg = await fetch(`../actividades/${act}/${plat}`, { cache: 'no-store' }).then(r => r.ok ? r.json() : null);
+                    if (pdg && pdg.nodes) pdg.nodes.forEach(n => set.add(n.kind));
+                } catch (e) {}
+            }
+            return set;
         }
+
+        async function render() {
+            if (!actividad) { document.getElementById('sub').textContent = 'Falta ?actividad='; return; }
+            const ont = await fetch('../tabla_ontologica.json', { cache: 'no-store' }).then(r => r.json());
+            const usados = await kindsUsados(actividad);
+            const nUsados = ont.nodes.filter(n => usados.has(n.canonical_node)).length;
+            document.getElementById('sub').innerHTML = `Actividad: <strong>${esc(actividad)}</strong> — usa <strong>${nUsados}</strong> de ${ont.nodes.length} conceptos canónicos`;
+            // MISMO orden global; solo se resaltan las filas usadas (sin reordenar).
+            document.getElementById('table-body').innerHTML = ont.nodes.map(n => {
+                const used = usados.has(n.canonical_node);
+                return `<tr class="${used ? 'used' : 'unused'}">
+                    <td class="col-use">${used ? '<span class="check">✓</span>' : ''}</td>
+                    <td class="node-canonical">${esc(n.canonical_node)}</td>
+                    <td class="block-text">${n.makecode_block ? esc(n.makecode_block) : '—'}</td>
+                    <td class="block-text">${n.protobject_block ? esc(n.protobject_block) : '—'}</td>
+                </tr>`;
+            }).join('');
+        }
+        render().catch(e => { document.getElementById('sub').textContent = 'Error: ' + e.message; });
     </script>
 </body>
 </html>

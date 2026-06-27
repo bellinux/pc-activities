@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ontología Canónica Común</title>
+    <style>
+        body { font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #fff; color: #111; padding: 40px; margin: 0; line-height: 1.55; }
+        h1 { font-weight: 300; font-size: 2.2em; text-align: center; margin-bottom: 6px; }
+        .sub { text-align: center; color: #777; margin: 0 auto 30px auto; max-width: 800px; }
+        .wrap { max-width: 1200px; margin: 0 auto; }
+        table { border-collapse: collapse; width: 100%; font-size: 0.92em; }
+        th, td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid #eee; }
+        th { position: sticky; top: 0; background: #fafafa; border-bottom: 2px solid #ddd; font-weight: 600; color: #333; }
+        td.canon { font-family: 'Consolas','Courier New',monospace; font-weight: 600; color: #8e44ad; white-space: nowrap; }
+        td.cat { color: #2980b9; font-size: 0.9em; }
+        td.block { font-family: 'Consolas','Courier New',monospace; color: #2c3e50; font-size: 0.88em; }
+        td.note { color: #666; font-size: 0.86em; max-width: 460px; }
+        tr:hover { background: #fcfbfe; }
+        .empty { color: #c0392b; font-style: italic; }
+        .pill { display:inline-block; background:#f3e9fb; color:#8e44ad; border-radius:10px; padding:1px 9px; font-size:0.8em; }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <h1>Ontología Canónica Común</h1>
+        <p class="sub" id="sub">Cargando…</p>
+        <table>
+            <thead>
+                <tr><th>canonical_node</th><th>categoría</th><th>makecode_block</th><th>protobject_block</th><th>nota</th></tr>
+            </thead>
+            <tbody id="rows"></tbody>
+        </table>
+    </div>
+    <script>
+        fetch('../tabla_ontologica.json', { cache: 'no-store' })
+            .then(r => r.json())
+            .then(d => {
+                document.getElementById('sub').innerHTML = (d.descripcion || '') + ' &nbsp; <span class="pill">' + d.nodes.length + ' conceptos · común a las 17 actividades</span>';
+                const esc = s => (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                document.getElementById('rows').innerHTML = d.nodes.map(n => `
+                    <tr>
+                        <td class="canon">${esc(n.canonical_node)}</td>
+                        <td class="cat">${esc(n.category)}</td>
+                        <td class="block">${n.makecode_block ? esc(n.makecode_block) : '<span class="empty">—</span>'}</td>
+                        <td class="block">${n.protobject_block ? esc(n.protobject_block) : '<span class="empty">—</span>'}</td>
+                        <td class="note">${esc(n.note)}</td>
+                    </tr>`).join('');
+            })
+            .catch(e => { document.getElementById('sub').innerHTML = '<span class="empty">No se pudo cargar ../tabla_ontologica.json</span>'; });
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+    "platform": "Protobject",
+    "ast": {
+        "blocks": [
+            {
+                "type": "Loop",
+                "label": "repetir para siempre",
+                "children": [
+                    {
+                        "type": "Action",
+                        "label": "dibuja con color ◻ en DibujoLED2",
+                        "children": [
+                            {
+                                "type": "Operator",
+                                "label": "claro al ◻ %",
+                                "children": [
+                                    { "type": "Sensor", "label": "ruido in NivelRuido1", "children": [] }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

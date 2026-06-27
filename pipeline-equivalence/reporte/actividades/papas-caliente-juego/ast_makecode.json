@@ -1,0 +1,53 @@
+{
+    "platform": "MakeCode",
+    "ast": {
+        "blocks": [
+            {
+                "type": "Event",
+                "label": "al iniciar",
+                "children": [
+                    { "type": "Assignment", "label": "fijar pausado a verdadero", "children": [] }
+                ]
+            },
+            {
+                "type": "Event_Interrupt",
+                "label": "al tocar el logotipo",
+                "children": [
+                    {
+                        "type": "Conditional",
+                        "label": "si pausado entonces",
+                        "children": [
+                            {
+                                "type": "Branch_True",
+                                "label": "entonces",
+                                "children": [
+                                    { "type": "Assignment", "label": "fijar pausado a falso", "children": [] },
+                                    {
+                                        "type": "Assignment",
+                                        "label": "fijar tiempo a ◻",
+                                        "children": [
+                                            { "type": "Action", "label": "escoger al azar de 5 a 15", "children": [] }
+                                        ]
+                                    },
+                                    { "type": "Action", "label": "reproduce baddy bucle en segundo plano", "children": [] },
+                                    {
+                                        "type": "Loop",
+                                        "label": "mientras ◻",
+                                        "children": [
+                                            { "type": "Operator", "label": "tiempo > 0", "children": [] },
+                                            { "type": "Assignment", "label": "cambiar tiempo por -1", "children": [] },
+                                            { "type": "Action", "label": "pausa (ms) 1000", "children": [] }
+                                        ]
+                                    },
+                                    { "type": "Action", "label": "para todos los sonidos", "children": [] },
+                                    { "type": "Action", "label": "reproduce wawawawaa en segundo plano", "children": [] },
+                                    { "type": "Assignment", "label": "fijar pausado a verdadero", "children": [] }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

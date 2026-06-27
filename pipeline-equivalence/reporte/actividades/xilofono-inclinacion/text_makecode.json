@@ -1,0 +1,8 @@
+{
+    "platform": "MakeCode",
+    "extracted_text": [
+        "para siempre:",
+        "  tono de timbre (Hz) ((aceleración (mg) x) + 1000)",
+        "  pausa (ms) 100"
+    ]
+}

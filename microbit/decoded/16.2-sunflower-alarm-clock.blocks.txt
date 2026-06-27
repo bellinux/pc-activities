@@ -1,0 +1,28 @@
+ACTIVIDAD: 16.2-sunflower-alarm-clock
+FUENTE: micro:bit / MakeCode 8.0.18 — "despertador-por-la-manana"  (etiquetas oficiales es-ES)
+
+para siempre:
+  si (nivel de luz > 100) entonces:   // Este bloque es un condicional extendido, en la actividad anterior teníamos un bloque que ejecutaba su contenido si se cumple la condición, en este caso se extiende el bloque condicional y se le da la instrucción de que si se cumple la condición se ejecuta la primera parte del bloque, pero si no se cumple se ejecuta otra parte diferente.   En la actividad anterior si no se cumplía la condición no pasaba nada más que no ejecutar lo de dentro, en este caso si no se cumple se ejecuta una serie de instrucciones específicas.
+    reproduce preludio bucle en segundo plano
+    mostrar LEDs:
+        # . # . #
+        . # # # .
+        # # # # #
+        . # # # .
+        # . # . #
+  si no:
+    para todos los sonidos
+    mostrar LEDs:
+        . . . . .
+        . . . . .
+        . . . . .
+        . . . . .
+        . . . . .
+
+al iniciar:
+  mostrar LEDs:
+      . . . . .
+      . . . . .
+      . . . . .
+      . . . . .
+      . . . . .

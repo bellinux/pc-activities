@@ -1,0 +1,27 @@
+{
+    "platform": "Protobject",
+    "ast": {
+        "blocks": [
+            {
+                "type": "Loop",
+                "label": "repetir para siempre",
+                "children": [
+                    { "type": "Action", "label": "dibuja con color #ff0000 en DibujoLED1", "children": [] },
+                    { "type": "Action", "label": "toca nota tom en BateríaMusical2", "children": [] },
+                    { "type": "Action", "label": "retraso de 300 milisegundos", "children": [] },
+                    { "type": "Action", "label": "toca nota tom en BateríaMusical2", "children": [] },
+                    {
+                        "type": "Loop",
+                        "label": "repetir 4 veces",
+                        "children": [
+                            { "type": "Action", "label": "dibuja con color #ff0000 en DibujoLED1", "children": [] },
+                            { "type": "Action", "label": "retraso de 100 milisegundos", "children": [] },
+                            { "type": "Action", "label": "dibuja con color #ff0000 en DibujoLED1", "children": [] },
+                            { "type": "Action", "label": "retraso de 100 milisegundos", "children": [] }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

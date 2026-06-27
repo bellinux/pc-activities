@@ -1,0 +1,47 @@
+{
+    "platform": "MakeCode",
+    "ast": {
+        "blocks": [
+            {
+                "type": "Loop",
+                "label": "para siempre",
+                "children": [
+                    {
+                        "type": "Conditional",
+                        "label": "si ◻ entonces",
+                        "children": [
+                            {
+                                "type": "Operator",
+                                "label": "◻ < 75",
+                                "children": [
+                                    { "type": "Sensor", "label": "nivel de luz", "children": [] }
+                                ]
+                            },
+                            {
+                                "type": "Branch_True",
+                                "label": "entonces",
+                                "children": [
+                                    { "type": "Action", "label": "mostrar LEDs", "children": [] },
+                                    { "type": "Action", "label": "pausa (ms) 100", "children": [] },
+                                    { "type": "Action", "label": "mostrar LEDs", "children": [] },
+                                    { "type": "Action", "label": "pausa (ms) 100", "children": [] },
+                                    { "type": "Action", "label": "mostrar LEDs", "children": [] },
+                                    { "type": "Action", "label": "pausa (ms) 100", "children": [] },
+                                    { "type": "Action", "label": "mostrar LEDs", "children": [] },
+                                    { "type": "Action", "label": "pausa (ms) 100", "children": [] }
+                                ]
+                            },
+                            {
+                                "type": "Branch_False",
+                                "label": "si no",
+                                "children": [
+                                    { "type": "Action", "label": "mostrar LEDs", "children": [] }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

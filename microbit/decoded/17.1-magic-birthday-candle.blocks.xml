@@ -1,0 +1,26 @@
+<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="J(LHr/R{f4Q`C~y1~bwL">flama</variable></variables><block type="device_forever" x="396" y="-26"><statement name="HANDLER"><block type="controls_if"><mutation else="1"></mutation><value name="IF0"><shadow type="logic_boolean"><field name="BOOL">TRUE</field></shadow><block type="variables_get"><field name="VAR" id="J(LHr/R{f4Q`C~y1~bwL">flama</field></block></value><statement name="DO0"><block type="device_show_leds"><field name="LEDS">`
+        . . . . . 
+        . # # # . 
+        . # # # . 
+        . # # # . 
+        . # # # .
+        `</field><next><block type="device_plot"><comment pinned="false" h="421" w="506">La posición de los leds está dado por 2 números que los llamaremos X e Y.
+El número X representará la posición de un led en posición horizontal. Es decir la posición en una fila. 
+
+Por otro lado el número Y representa la altura de un led, es decir su posición en una columna.
+
+Por ejemplo, el led de la esquina superior izquierda tiene posición X = 0 e Y = 0, mientra que la esquina inferior derecha tiene posición X= 4 e Y = 4.
+Siendo X posición para los lados e Y posición arriba o abajo.</comment><data>{"commentRefs":[],"fieldData":{"~commentOffsetX":"16","~commentOffsetY":"16"}}</data><value name="x"><shadow type="math_number_minmax"><mutation min="0" max="4" label="X" precision="1"></mutation><field name="SLIDER">0</field></shadow><block type="device_random"><comment pinned="false" h="509" w="496">Este bloque escoge un número al azar entre 1 y 3 inclusive. 
+Es decir es como si tuvieras un dado de 3 lados en los que te puede salir el número 1, 2 o 3. Cada vez que se llama o ejecuta este bloque es como si se lanzara un nuevo dado. Por esto es posible que cada vez que se ejecuta un ciclo la posición del fuego puede ser diferente al de la vez anterior, pero también existe la posibilidad de que se escoja el mismo número 3 o 4 veces seguidas.</comment><data>{"commentRefs":[],"fieldData":{"~commentOffsetX":"57.845690548508514","~commentOffsetY":"24.047252905149094"}}</data><value name="min"><shadow type="math_number"><field name="NUM">1</field></shadow></value><value name="limit"><shadow type="math_number"><field name="NUM">3</field></shadow></value></block></value><value name="y"><shadow type="math_number_minmax"><mutation min="0" max="4" label="Y" precision="1"></mutation><field name="SLIDER">0</field></shadow></value><next><block type="device_pause"><value name="pause"><shadow type="timePicker"><field name="ms">200</field></shadow></value><next><block type="device_show_leds"><field name="LEDS">`
+        . . . . . 
+        . # # # . 
+        . # # # . 
+        . # # # . 
+        . # # # .
+        `</field><next><block type="device_plot"><value name="x"><shadow type="math_number_minmax"><mutation min="0" max="4" label="X" precision="1"></mutation><field name="SLIDER">2</field></shadow></value><value name="y"><shadow type="math_number_minmax"><mutation min="0" max="4" label="Y" precision="1"></mutation><field name="SLIDER">0</field></shadow></value><next><block type="device_pause"><value name="pause"><shadow type="timePicker"><field name="ms">200</field></shadow></value></block></next></block></next></block></next></block></next></block></next></block></statement><statement name="ELSE"><block type="device_show_leds"><field name="LEDS">`
+        . . . . . 
+        . . . . . 
+        . . . . . 
+        . . . . . 
+        . . . . .
+        `</field></block></statement></block></statement></block><block type="pxt-on-start" x="0" y="0"><statement name="HANDLER"><block type="variables_set"><field name="VAR" id="J(LHr/R{f4Q`C~y1~bwL">flama</field><value name="VALUE"><shadow type="math_number"><field name="NUM">0</field></shadow><block type="logic_boolean"><field name="BOOL">TRUE</field></block></value></block></statement></block><block type="input_on_sound" x="0" y="190"><field name="sound">DetectedSound.Loud</field><statement name="HANDLER"><block type="variables_set"><field name="VAR" id="J(LHr/R{f4Q`C~y1~bwL">flama</field><value name="VALUE"><shadow type="math_number"><field name="NUM">0</field></shadow><block type="logic_negate"><value name="BOOL"><block type="variables_get"><field name="VAR" id="J(LHr/R{f4Q`C~y1~bwL">flama</field></block></value></block></value></block></statement></block></xml>

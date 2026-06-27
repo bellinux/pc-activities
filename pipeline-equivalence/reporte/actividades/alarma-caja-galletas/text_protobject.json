@@ -1,0 +1,15 @@
+{
+    "platform": "Protobject",
+    "extracted_text": [
+        "al iniciar el programa:",
+        "  establecer color de fondo a #000000 en DibujoLED2",
+        "  borrar dibujo en DibujoLED2",
+        "repetir para siempre:",
+        "  si ((x in Inclinación1) > 20):",
+        "    dibuja con color #2277aa en DibujoLED2",
+        "    reproducir sonido 'emergencia' en ReproductorSonido3",
+        "    retraso de 6 segundos",
+        "    borrar dibujo en DibujoLED2",
+        "    detener sonido de ReproductorSonido3"
+    ]
+}

@@ -1,0 +1,266 @@
+{
+    "platform": "MakeCode",
+    "nodes": [
+        {
+            "id": "n1",
+            "kind": "ProgramStartEvent",
+            "seq": 1,
+            "in_loop": false
+        },
+        {
+            "id": "n2",
+            "kind": "SetVariable",
+            "seq": 2,
+            "in_loop": false
+        },
+        {
+            "id": "n3",
+            "kind": "SetVariable",
+            "seq": 3,
+            "in_loop": false
+        },
+        {
+            "id": "n4",
+            "kind": "OnTiltGestureEvent",
+            "seq": 4,
+            "in_loop": false,
+            "resId": 1
+        },
+        {
+            "id": "n5",
+            "kind": "SetVariable",
+            "seq": 5,
+            "in_loop": false
+        },
+        {
+            "id": "n6",
+            "kind": "SetVariable",
+            "seq": 6,
+            "in_loop": false
+        },
+        {
+            "id": "n7",
+            "kind": "OnTiltGestureEvent",
+            "seq": 7,
+            "in_loop": false,
+            "resId": 1
+        },
+        {
+            "id": "n8",
+            "kind": "SetVariable",
+            "seq": 8,
+            "in_loop": false
+        },
+        {
+            "id": "n9",
+            "kind": "SetVariable",
+            "seq": 9,
+            "in_loop": false
+        },
+        {
+            "id": "n10",
+            "kind": "DrawImage",
+            "seq": 10,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n11",
+            "kind": "PlayTone",
+            "seq": 11,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n12",
+            "kind": "Delay",
+            "seq": 12,
+            "in_loop": true
+        },
+        {
+            "id": "n13",
+            "kind": "PlayTone",
+            "seq": 13,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n14",
+            "kind": "DrawImage",
+            "seq": 14,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n15",
+            "kind": "Delay",
+            "seq": 15,
+            "in_loop": true
+        },
+        {
+            "id": "n16",
+            "kind": "DrawImage",
+            "seq": 16,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n17",
+            "kind": "Delay",
+            "seq": 17,
+            "in_loop": true
+        }
+    ],
+    "edges": [
+        {
+            "source": "n1",
+            "target": "n2",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n2",
+            "target": "n3",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n4",
+            "target": "n5",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n5",
+            "target": "n6",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n7",
+            "target": "n8",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n8",
+            "target": "n9",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n10",
+            "target": "n11",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n11",
+            "target": "n12",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n12",
+            "target": "n13",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n13",
+            "target": "n14",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n14",
+            "target": "n15",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n15",
+            "target": "n16",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n16",
+            "target": "n17",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n3",
+            "target": "n12",
+            "type": "data",
+            "var": "latidogrande"
+        },
+        {
+            "source": "n6",
+            "target": "n12",
+            "type": "data",
+            "var": "latidogrande"
+        },
+        {
+            "source": "n9",
+            "target": "n12",
+            "type": "data",
+            "var": "latidogrande"
+        },
+        {
+            "source": "n2",
+            "target": "n15",
+            "type": "data",
+            "var": "latidopequeño"
+        },
+        {
+            "source": "n2",
+            "target": "n17",
+            "type": "data",
+            "var": "latidopequeño"
+        },
+        {
+            "source": "n5",
+            "target": "n15",
+            "type": "data",
+            "var": "latidopequeño"
+        },
+        {
+            "source": "n5",
+            "target": "n17",
+            "type": "data",
+            "var": "latidopequeño"
+        },
+        {
+            "source": "n8",
+            "target": "n15",
+            "type": "data",
+            "var": "latidopequeño"
+        },
+        {
+            "source": "n8",
+            "target": "n17",
+            "type": "data",
+            "var": "latidopequeño"
+        },
+        {
+            "source": "n10",
+            "target": "n14",
+            "type": "side_effect",
+            "var": "display"
+        },
+        {
+            "source": "n14",
+            "target": "n16",
+            "type": "side_effect",
+            "var": "display"
+        },
+        {
+            "source": "n11",
+            "target": "n13",
+            "type": "side_effect",
+            "var": "sound"
+        }
+    ]
+}

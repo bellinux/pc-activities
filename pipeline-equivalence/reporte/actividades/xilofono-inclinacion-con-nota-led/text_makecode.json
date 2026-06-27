@@ -1,0 +1,10 @@
+{
+    "platform": "MakeCode",
+    "extracted_text": [
+        "para siempre:",
+        "  borrar la pantalla",
+        "  graficar x (2 + (redondeo ((aceleración (mg) x) ÷ 350))) y 2",
+        "  tono de timbre (Hz) ((aceleración (mg) x) + 1000)",
+        "  pausa (ms) 100"
+    ]
+}

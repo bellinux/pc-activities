@@ -1,0 +1,25 @@
+<xml xmlns="https://developers.google.com/blockly/xml"><variables></variables><block type="pxt-on-start" x="-20" y="-25"><statement name="HANDLER"><block type="device_show_leds"><field name="LEDS">`
+        . # . # . 
+        . . . . . 
+        . . . . . 
+        # . . . # 
+        . # # # .
+        `</field></block></statement></block><block type="input_on_sound" x="249" y="-34"><field name="sound">DetectedSound.Loud</field><comment pinned="false" h="197.99501037597656" w="304.74053955078125">Cuando el micrófono del dispositivo detecta un sonido fuerte, se ejecutarán las instrucciones dentro del bloque.</comment><data>{"commentRefs":[],"fieldData":{"~commentOffsetX":"16","~commentOffsetY":"16"}}</data><statement name="HANDLER"><block type="music_playable_play_default_bkg"><field name="playbackMode">music.PlaybackMode.InBackground</field><comment pinned="false" h="80" w="160">Reproduce un sonido predeterminado.</comment><data>{"commentRefs":[],"fieldData":{"~commentOffsetX":"16","~commentOffsetY":"16"}}</data><value name="toPlay"><shadow type="device_builtin_melody_playable"><field name="melody">Melodies.Nyan</field></shadow></value><next><block type="controls_repeat_ext"><value name="TIMES"><shadow type="math_whole_number"><field name="NUM">8</field></shadow></value><statement name="DO"><block type="device_show_leds"><field name="LEDS">`
+        . # . # . 
+        . . . . . 
+        # . . . # 
+        . # # # . 
+        . . . . .
+        `</field><next><block type="device_pause"><value name="pause"><shadow type="timePicker"><field name="ms">100</field></shadow></value><next><block type="device_show_leds"><field name="LEDS">`
+        . # . # . 
+        . . . . . 
+        . . . . . 
+        # . . . # 
+        . # # # .
+        `</field><next><block type="device_pause"><value name="pause"><shadow type="timePicker"><field name="ms">100</field></shadow></value></block></next></block></next></block></next></block></statement><next><block type="device_stop_melody"><field name="options">MelodyStopOptions.All</field><comment pinned="false" h="182.26226806640625" w="333.05938720703125">En caso de que el sonido reproducido al inicio dure más que el bloque anterior, este bloque fuerza a detenerlo para evitar que continue sonado cuando no debería.</comment><data>{"commentRefs":[],"fieldData":{"~commentOffsetX":"16","~commentOffsetY":"16"}}</data><next><block type="device_show_leds"><field name="LEDS">`
+        . # . # . 
+        . . . . . 
+        # . . . # 
+        . # # # . 
+        . . . . .
+        `</field></block></next></block></next></block></next></block></statement></block></xml>

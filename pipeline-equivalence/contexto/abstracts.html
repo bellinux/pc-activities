@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dos líneas de investigación · Abstracts y racional</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,30;0,9..144,300..900,100;1,9..144,300..900,30&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F4EDDF;
+    --paper-deep: #ECE3CF;
+    --ink: #1A1612;
+    --ink-soft: #4A3F33;
+    --burgundy: #8B2418;
+    --burgundy-deep: #5C1810;
+    --ochre: #B8843A;
+    --moss: #5A6B3B;
+    --rule: #C9B896;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; background: var(--paper); }
+
+  body {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 19px;
+    line-height: 1.65;
+    color: var(--ink);
+    background:
+      radial-gradient(at 0% 0%, rgba(184,132,58,0.08) 0%, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(139,36,24,0.06) 0%, transparent 50%),
+      var(--paper);
+    background-attachment: fixed;
+    min-height: 100vh;
+    padding: 0 1.25rem;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(139,36,24,0.015) 1px, transparent 2px),
+      radial-gradient(circle at 60% 70%, rgba(26,22,18,0.02) 1px, transparent 2px),
+      radial-gradient(circle at 80% 20%, rgba(184,132,58,0.02) 1px, transparent 2px);
+    background-size: 3px 3px, 5px 5px, 7px 7px;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.7;
+  }
+
+  .article {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 5rem 0 6rem 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* masthead */
+  .masthead {
+    border-top: 3px double var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 1rem 0 0.6rem 0;
+    margin-bottom: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .masthead .vol { font-weight: 700; color: var(--burgundy); }
+
+  /* title */
+  .title-block { margin-bottom: 4rem; }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--burgundy);
+    margin-bottom: 2rem;
+    display: inline-block;
+    border-bottom: 1px solid var(--burgundy);
+    padding-bottom: 4px;
+  }
+  h1.title {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 300;
+    font-style: italic;
+    font-variation-settings: 'opsz' 144, 'SOFT' 30;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin-bottom: 2rem;
+  }
+  h1.title .em {
+    font-weight: 600;
+    font-style: normal;
+    color: var(--burgundy);
+  }
+  .deck {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 400;
+    font-size: 1.3rem;
+    line-height: 1.4;
+    color: var(--ink-soft);
+    max-width: 32em;
+    padding-left: 1.25rem;
+    border-left: 2px solid var(--ochre);
+  }
+  .byline {
+    margin-top: 2.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  /* sections */
+  .section { margin-top: 5rem; }
+  .section-marker {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: var(--burgundy);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .section-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+  h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-variation-settings: 'opsz' 72, 'SOFT' 30;
+    font-size: clamp(1.8rem, 3.8vw, 2.4rem);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+  h2 .it {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--burgundy);
+  }
+  h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-top: 2rem;
+    margin-bottom: 0.8rem;
+    color: var(--ink);
+  }
+  h3::before {
+    content: '§ ';
+    color: var(--ochre);
+    font-weight: 400;
+  }
+
+  /* body */
+  p {
+    margin-bottom: 1.2rem;
+    text-wrap: pretty;
+    hyphens: auto;
+  }
+  em { font-style: italic; }
+  strong { font-weight: 700; color: var(--ink); }
+
+  a {
+    color: var(--burgundy);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  /* abstract card */
+  .abstract-card {
+    background: var(--paper-deep);
+    border-left: 5px solid var(--burgundy);
+    padding: 2rem 2rem 1.5rem 2rem;
+    margin: 2rem -0.5rem 3rem -0.5rem;
+    position: relative;
+  }
+  .abstract-card::before {
+    content: 'ABSTRACT';
+    position: absolute;
+    top: -0.6rem;
+    left: 1.5rem;
+    background: var(--paper);
+    padding: 0 0.6rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    font-weight: 700;
+    color: var(--burgundy);
+  }
+  .abstract-card .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--ink-soft);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+  }
+  .abstract-card .working-title {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--burgundy-deep);
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+  }
+  .abstract-card p {
+    font-size: 1.02rem;
+    line-height: 1.6;
+    color: var(--ink);
+    margin-bottom: 0;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  /* annotation */
+  .annotation {
+    background: rgba(184,132,58,0.1);
+    border-left: 3px solid var(--ochre);
+    padding: 1rem 1.2rem;
+    margin: 2rem 0;
+    font-size: 0.94rem;
+    color: var(--ink-soft);
+  }
+  .annotation .tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ochre);
+    margin-bottom: 0.4rem;
+    font-weight: 700;
+  }
+  .annotation p { margin-bottom: 0.7rem; }
+  .annotation p:last-child { margin-bottom: 0; }
+
+  /* lists */
+  ul, ol { margin: 1rem 0 1.5rem 1.5rem; }
+  li { margin-bottom: 0.5rem; }
+
+  /* pull quote */
+  .pullquote {
+    margin: 3rem -1rem;
+    padding: 2rem 2rem 2rem 2.5rem;
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.45rem;
+    line-height: 1.35;
+    color: var(--burgundy-deep);
+    border-left: 4px solid var(--burgundy);
+    background: rgba(139,36,24,0.04);
+    position: relative;
+  }
+  .pullquote::before {
+    content: '"';
+    position: absolute;
+    top: -0.5rem;
+    left: 0.5rem;
+    font-size: 4rem;
+    color: var(--burgundy);
+    opacity: 0.3;
+    font-family: 'Fraunces', serif;
+  }
+
+  /* diagram */
+  .diagram-wrap {
+    background: #FBF6EB;
+    border: 1px solid var(--rule);
+    padding: 2rem 1rem;
+    margin: 2.5rem -0.5rem;
+    text-align: center;
+  }
+  .diagram-caption {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-top: 0.8rem;
+  }
+
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.88em;
+    background: rgba(184,132,58,0.15);
+    padding: 0.1em 0.35em;
+    border-radius: 2px;
+    color: var(--burgundy-deep);
+  }
+
+  /* venue chips */
+  .venues {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0;
+  }
+  .venue-chip {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    background: rgba(90,107,59,0.15);
+    border: 1px solid var(--moss);
+    color: var(--moss);
+    padding: 0.25rem 0.6rem;
+    border-radius: 3px;
+    font-weight: 700;
+  }
+
+  /* footer */
+  .colofon {
+    margin-top: 6rem;
+    padding-top: 2rem;
+    border-top: 3px double var(--ink);
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    line-height: 1.8;
+  }
+  .colofon .ornament {
+    font-size: 1.5rem;
+    color: var(--burgundy);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.5em;
+  }
+
+  @media (max-width: 640px) {
+    body { font-size: 17px; }
+    .article { padding: 3rem 0 4rem 0; }
+    .section { margin-top: 3.5rem; }
+    .deck { font-size: 1.1rem; }
+    .abstract-card {
+      padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+      margin: 2rem -0.5rem 2.5rem -0.5rem;
+    }
+    .abstract-card p { font-size: 0.97rem; }
+    .pullquote {
+      font-size: 1.15rem;
+      margin: 2rem -0.5rem;
+      padding: 1.5rem 1.2rem;
+    }
+  }
+</style>
+</head>
+<body>
+<article class="article">
+
+  <header class="masthead">
+    <span class="vol">Programa de investigación</span>
+    <span>Dos abstracts · un racional</span>
+    <span>2026</span>
+  </header>
+
+  <section class="title-block">
+    <span class="eyebrow">Documento de planificación</span>
+    <h1 class="title">Dos líneas, <span class="em">una pregunta</span></h1>
+    <p class="deck">Dos publicaciones derivadas del método de comparación de PDG: la equivalencia algorítmica como técnica generalizable, y la equivalencia experiencial entre plataformas tangibles como problema bien planteado.</p>
+    <p class="byline">Documento autónomo &nbsp;·&nbsp; Pensado como guía para preparar dos manuscritos relacionados</p>
+  </section>
+
+  <section class="section">
+    <div class="section-marker">
+      <span class="section-num">§ 01</span>
+      <span class="section-rule"></span>
+      <span class="section-num">PUNTO DE PARTIDA</span>
+    </div>
+    <h2>El método como <span class="it">semilla</span> de un programa</h2>
+
+    <p>El trabajo previo &mdash;el cuaderno sobre cuándo dos programas son el mismo programa&mdash; construye un método humano-IA para decidir si dos programas en plataformas distintas son <em>algorítmicamente equivalentes</em>. La pipeline es: una experta humana define la ontología de mapeo entre los vocabularios de bloques de las dos plataformas; la IA construye los <em>Program Dependence Graphs</em> normalizados, los compara vía isomorfismo VF2 e <em>graph edit distance</em>, y devuelve un veredicto reproducible.</p>
+
+    <p>Ese método, mirado con un poco de distancia, es la base de dos publicaciones distintas. La primera la formaliza, la valida con expertos y la presenta como contribución metodológica general. La segunda toma el método como <em>building block</em> y añade una segunda capa que aborda una pregunta que el método original deja explícitamente fuera: la <em>equivalencia experiencial</em> entre plataformas físicas distintas.</p>
+
+    <p>Lo que sigue son los dos abstracts &mdash;cada uno autocontenido, listo para ser refinado en manuscrito completo&mdash; y un racional que explicita cómo se sostienen mutuamente y por qué no son un único trabajo.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-marker">
+      <span class="section-num">§ 02</span>
+      <span class="section-rule"></span>
+      <span class="section-num">PRIMER ABSTRACT</span>
+    </div>
+    <h2>Equivalencia <span class="it">algorítmica</span> vía colaboración humano-IA</h2>
+
+    <div class="abstract-card">
+      <div class="label">Título tentativo</div>
+      <div class="working-title">Towards human&ndash;AI collaborative assessment of algorithmic equivalence in block-based programming across heterogeneous platforms</div>
+
+      <p>La proliferación de plataformas de programación por bloques destinadas a la enseñanza &mdash;cada una con su propio vocabulario sintáctico, sus paletas de bloques y sus convenciones de presentación&mdash; plantea un problema metodológico recurrente para docentes e investigadores: determinar si dos actividades implementadas en plataformas distintas son <em>algorítmicamente</em> equivalentes. Las técnicas clásicas de comparación de código (AST diff, métricas de complejidad) son insuficientes porque están atadas al dialecto de la plataforma y no abstraen la estructura computacional subyacente. Proponemos un método de colaboración humano&ndash;IA estructurado en dos fases. En la primera, una experta humana construye, asistida por un modelo de lenguaje, una <em>ontología de mapeo</em> que traduce los bloques de cada plataforma a una representación intermedia (IR) canónica. En la segunda, la IA aplica automáticamente esta ontología para construir el Program Dependence Graph (PDG) de cada actividad, calcula el isomorfismo de grafos vía VF2 y la Graph Edit Distance para cuantificar diferencias menores, y clasifica cada par como equivalente, equivalente módulo plumbing de plataforma, variante, o diferente. Validamos el método sobre un corpus de N actividades implementadas en dos plataformas y comparamos los veredictos automáticos con un panel de expertos. El método produce clasificaciones reproducibles, documentadas en una pipeline ejecutable, y desplaza el trabajo manual hacia la construcción única de la ontología &mdash;reutilizable a lo largo de cursos enteros. Discutimos el grado de acuerdo humano&ndash;IA y los casos de divergencia como fuentes de información sobre los límites del enfoque puramente estructural.</p>
+    </div>
+
+    <h3>Contribuciones principales</h3>
+    <ul>
+      <li>Un protocolo reproducible de transcripción y normalización vía IR de programas a bloques heterogéneos.</li>
+      <li>Una pipeline ejecutable (<code>NetworkX</code> + <code>Graphviz</code>) que aplica VF2 y GED para producir un perfil de equivalencia algorítmica entre pares de actividades.</li>
+      <li>Un protocolo de validación humano-IA con panel de expertos, que examina dónde el método coincide con el juicio experto y dónde diverge.</li>
+      <li>Una discusión epistemológica sobre los límites de la equivalencia puramente estructural &mdash;que prepara el terreno para el segundo abstract.</li>
+    </ul>
+
+    <h3>Venues posibles</h3>
+    <div class="venues">
+      <span class="venue-chip">SIGCSE</span>
+      <span class="venue-chip">ICER</span>
+      <span class="venue-chip">Koli Calling</span>
+      <span class="venue-chip">ICPC</span>
+      <span class="venue-chip">SANER</span>
+    </div>
+    <p>El énfasis define el venue: si el manuscrito carga sobre la metodología educativa, va a un venue de <em>computing education research</em> (SIGCSE, ICER, Koli Calling). Si carga sobre la técnica de comparación de PDG y la colaboración con IA, va a uno de <em>program comprehension</em> (ICPC, SANER). La doble inscripción es legítima &mdash;el trabajo realmente vive en la intersección.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-marker">
+      <span class="section-num">§ 03</span>
+      <span class="section-rule"></span>
+      <span class="section-num">SEGUNDO ABSTRACT</span>
+    </div>
+    <h2>Equivalencia <span class="it">experiencial</span> entre dos plataformas tangibles</h2>
+
+    <div class="abstract-card">
+      <div class="label">Título tentativo</div>
+      <div class="working-title">Beyond identical algorithms: assessing experiential equivalence between two tangible computing platforms with shared learning objectives</div>
+
+      <p>Cuando dos plataformas tangibles de aprendizaje &mdash;por ejemplo, dos placas educativas con sensores integrados&mdash; soportan actividades con objetivos curriculares similares, la equivalencia algorítmica entre las actividades resulta necesaria pero todavía insuficiente para concluir que las experiencias de aprendizaje son intercambiables. Dos placas pueden ejecutar el mismo algoritmo y producir resultados funcionalmente equivalentes, pero diferir sustancialmente en la <em>experiencia física</em> que ofrecen al estudiante: la sensibilidad de los acelerómetros condiciona el gesto requerido para activarlos, la luminosidad y resolución de las matrices LED determinan la legibilidad del retorno visual, la geometría de la placa y de su carcasa condiciona cómo se sostiene y se manipula, el timbre del altavoz integrado afecta el tipo de respuesta sonora que el estudiante percibe como significativa, y la fabricación del soporte físico (cartón, encastres, fijaciones) introduce un componente artesanal cuyo carácter cambia con las características de cada placa. Proponemos un marco de evaluación de doble capa. La primera capa aplica el método humano-IA del trabajo precedente para establecer la equivalencia algorítmica entre las dos versiones de cada actividad. La segunda capa &mdash;la contribución original de este trabajo&mdash; introduce un protocolo de evaluación experiencial donde un panel de expertos en educación tangible e interacción humano-computadora puntúa cada par de actividades sobre una rúbrica de cinco dimensiones: gestualidad requerida (amplitud, fuerza y precisión del movimiento), fidelidad del retorno sensorial (visual, sonoro, háptico), ergonomía de manipulación, materialidad del soporte construido por el estudiante, y similitud estética percibida. La combinación de las dos capas produce un <em>perfil de equivalencia bidimensional</em>: dos actividades pueden ser algorítmicamente idénticas pero experiencialmente divergentes, o viceversa. Aplicamos el marco a un corpus de actividades implementadas en dos plataformas tangibles distintas con objetivos pedagógicos análogos, y mostramos que las divergencias experienciales se concentran en dimensiones específicas según el tipo de actividad. Discutimos las implicaciones para el diseño de currículos transferibles entre dispositivos tangibles, y argumentamos que tratar la equivalencia como puramente algorítmica oscurece decisiones pedagógicas que el hardware materializa de formas distintas.</p>
+    </div>
+
+    <h3>Contribuciones principales</h3>
+    <ul>
+      <li>Una rúbrica de cinco dimensiones para evaluar la equivalencia experiencial entre plataformas tangibles comparables.</li>
+      <li>Un protocolo de panel experto (selección, calibración, agregación de juicios) replicable en otros corpus.</li>
+      <li>El concepto operativo de <em>perfil de equivalencia bidimensional</em>: equivalencia como par <code>(algorítmica, experiencial)</code>, no como veredicto único.</li>
+      <li>Un argumento sustantivo sobre por qué el hardware materializa decisiones pedagógicas implícitas, y por qué transferir currículos entre plataformas tangibles requiere atender ambas capas.</li>
+    </ul>
+
+    <h3>Venues posibles</h3>
+    <div class="venues">
+      <span class="venue-chip">TEI</span>
+      <span class="venue-chip">IDC</span>
+      <span class="venue-chip">CHI · EduTech</span>
+    </div>
+    <p>Estos venues tienen una sensibilidad explícita para el <em>tangible learning</em> y la <em>embodied interaction</em>. La comunidad TEI en particular acepta naturalmente trabajos que problematizan la materialidad del aprendizaje &mdash;el ángulo central de este abstract.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-marker">
+      <span class="section-num">§ 04</span>
+      <span class="section-rule"></span>
+      <span class="section-num">RACIONAL</span>
+    </div>
+    <h2>Cómo los dos trabajos <span class="it">se sostienen</span> mutuamente</h2>
+
+    <p>Los dos trabajos forman una secuencia natural y no son un único trabajo dividido en dos &mdash;cada uno aborda una pregunta diferente, con métodos, comunidades de revisión y artefactos de validación distintos.</p>
+
+    <h3>El primero asienta el suelo</h3>
+    <p>El primer trabajo resuelve un problema metodológico bien delimitado: la equivalencia estructural entre programas a bloques en plataformas heterogéneas. Su contribución técnica es clara &mdash;el método humano-IA basado en ontología de mapeo + PDG + VF2 + GED, con una pipeline ejecutable reproducible. Su valor está en ser <em>generalizable</em>: cualquier comparación de programas educativos entre plataformas distintas puede usar el método, independientemente de qué sean materialmente las plataformas. Tangibles, virtuales, mixtas: el método responde a la pregunta estructural en todos los casos.</p>
+
+    <h3>El segundo expone una limitación intencional del primero</h3>
+    <p>Por construcción, el primer trabajo no dice nada sobre la dimensión experiencial. No es un descuido: es una limitación honesta del enfoque. Cuando se comparan dos plataformas con modalidades sensoriales idénticas &mdash;ambas tangibles, ambas con sensores integrados y displays físicos&mdash;, la pregunta «¿las experiencias son equivalentes?» se vuelve <em>investigable empíricamente</em>, porque existe un terreno común de comparación: los mismos gestos, el mismo tipo de retroalimentación, la misma categoría de objeto manipulado. Lo que cambia entre las dos plataformas son los detalles &mdash;sensibilidad, ergonomía, materialidad, estética&mdash; y justamente esos detalles pueden hacer una diferencia pedagógica importante.</p>
+
+    <div class="pullquote">
+      La equivalencia, lo descubrimos al estudiarla, no es una propiedad única &mdash;es multidimensional. Cada dimensión exige métodos, comunidades de revisión y artefactos de validación distintos.
+    </div>
+
+    <h3>La conexión narrativa</h3>
+    <p>El primer abstract captura rigurosamente una dimensión de la equivalencia (la algorítmica). El segundo muestra que cuando las plataformas son <em>conmensurables</em> en términos materiales &mdash;ambas físicas, ambas con la misma categoría de affordances corporales&mdash;, la dimensión experiencial se vuelve medible con la misma seriedad metodológica que la primera. La pregunta «¿dos plataformas tangibles ofrecen la misma experiencia de aprendizaje?» no es una pregunta retórica: tiene respuesta posible, y este segundo trabajo propone un instrumento para responderla.</p>
+
+    <p>Juntos, los dos trabajos componen el argumento de que <em>diseñar currículos transferibles entre dispositivos tangibles requiere un perfil de equivalencia bidimensional</em>, no un veredicto único. Esta línea argumentativa es lo que justifica que sean dos trabajos separados, y no uno solo dividido artificialmente.</p>
+
+    <h3>Una nota epistemológica importante</h3>
+    <p>El marco del segundo abstract evita explícitamente pronunciarse sobre la equivalencia entre <em>modalidades sensoriales distintas</em> (tangible vs virtual, pantalla vs objeto físico). Existen trabajos en la literatura que intentan medir esta equivalencia trans-modal, pero el riesgo metodológico es alto: se termina midiendo el <em>grado de sustituibilidad</em> entre modalidades, que es una pregunta diferente &mdash;y probablemente mucho más difícil&mdash; que medir la equivalencia interna a una misma modalidad.</p>
+
+    <p>Concentrándose en <em>tangible vs tangible</em>, el segundo trabajo obtiene una pregunta bien planteada con un protocolo de evaluación factible. Evita el escollo de la conmensurabilidad trans-modal: ambas plataformas comparadas comparten ya la categoría de «artefacto físico con sensores y displays manipulable manualmente», y por tanto las cinco dimensiones de la rúbrica (gestualidad, retorno sensorial, ergonomía, materialidad, estética) son aplicables a ambas con el mismo sentido. Esta delimitación cuidadosa es parte de la contribución metodológica &mdash;y un punto explícito de discusión en la sección de limitaciones del manuscrito.</p>
+
+    <h3>Una nota táctica sobre la publicación</h3>
+    <p>Si la publicación del primer abstract precede temporalmente a la del segundo (recomendado), el segundo trabajo puede citar al primero como <em>building block</em> explícito en su sección de método. Esto refuerza la coherencia del programa de investigación y deja una huella clara de progresión &mdash;útil para una tesis donde los dos capítulos centrales son precisamente estos.</p>
+
+    <p>La situación inversa &mdash;publicar el segundo antes que el primero&mdash; es viable pero menos económica: el segundo trabajo tendría que recapitular el método algorítmico en su sección de métodos, lo cual aumenta la extensión del manuscrito y reduce el espacio disponible para la contribución original (la capa experiencial). La secuencia natural es: primero el método, después la extensión.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-marker">
+      <span class="section-num">§ 05</span>
+      <span class="section-rule"></span>
+      <span class="section-num">SÍNTESIS</span>
+    </div>
+    <h2>Lo que ambos trabajos <span class="it">comparten</span></h2>
+
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg" style="width: 100%; max-width: 580px; height: auto;">
+        <defs>
+          <style>
+            .box { fill: #FBF6EB; stroke: #1A1612; stroke-width: 1.5; }
+            .box-burgundy { fill: #8B2418; stroke: #5C1810; stroke-width: 1.5; }
+            .box-moss { fill: #5A6B3B; stroke: #1A1612; stroke-width: 1.5; }
+            .box-ochre { fill: #B8843A; stroke: #1A1612; stroke-width: 1.5; }
+            .label-dark { font-family: 'JetBrains Mono', monospace; font-size: 11px; fill: #1A1612; }
+            .label-light { font-family: 'JetBrains Mono', monospace; font-size: 11px; fill: #FBF6EB; font-weight: 700; }
+            .label-small { font-family: 'JetBrains Mono', monospace; font-size: 9px; fill: #4A3F33; letter-spacing: 0.1em; }
+            .arrow { stroke: #4A3F33; stroke-width: 1.5; fill: none; }
+            .arrow-burgundy { stroke: #8B2418; stroke-width: 1.5; fill: none; }
+          </style>
+          <marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L0,6 L9,3 z" fill="#4A3F33"/>
+          </marker>
+          <marker id="arr-b" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L0,6 L9,3 z" fill="#8B2418"/>
+          </marker>
+        </defs>
+
+        <!-- Method box (shared core) -->
+        <rect class="box-ochre" x="200" y="20" width="200" height="50" rx="4"/>
+        <text class="label-light" x="300" y="40" text-anchor="middle">Método humano-IA</text>
+        <text class="label-light" x="300" y="55" text-anchor="middle" font-size="10">Ontología + PDG + VF2 + GED</text>
+
+        <!-- Arrow down splitting -->
+        <line class="arrow" x1="300" y1="75" x2="300" y2="105" marker-end="url(#arr)"/>
+
+        <!-- Splitting node -->
+        <text class="label-small" x="300" y="125" text-anchor="middle">SE USA EN</text>
+
+        <!-- Two arrows splitting -->
+        <line class="arrow" x1="300" y1="135" x2="150" y2="170" marker-end="url(#arr)"/>
+        <line class="arrow" x1="300" y1="135" x2="450" y2="170" marker-end="url(#arr)"/>
+
+        <!-- Abstract 1 box -->
+        <rect class="box-burgundy" x="50" y="180" width="220" height="80" rx="4"/>
+        <text class="label-light" x="160" y="202" text-anchor="middle" font-size="10">ABSTRACT 1</text>
+        <text class="label-light" x="160" y="220" text-anchor="middle">Equivalencia</text>
+        <text class="label-light" x="160" y="234" text-anchor="middle">algorítmica</text>
+        <text class="label-light" x="160" y="252" text-anchor="middle" font-size="9">como contribución principal</text>
+
+        <!-- Abstract 2 box -->
+        <rect class="box-moss" x="330" y="180" width="220" height="80" rx="4"/>
+        <text class="label-light" x="440" y="202" text-anchor="middle" font-size="10">ABSTRACT 2</text>
+        <text class="label-light" x="440" y="220" text-anchor="middle">Equivalencia algorítmica</text>
+        <text class="label-light" x="440" y="234" text-anchor="middle">+ experiencial</text>
+        <text class="label-light" x="440" y="252" text-anchor="middle" font-size="9">como capa de doble nivel</text>
+
+        <!-- Citation arrow from 1 to 2 -->
+        <path class="arrow-burgundy" d="M 270,220 Q 300,160 330,220" marker-end="url(#arr-b)"/>
+        <text class="label-small" x="300" y="170" text-anchor="middle" fill="#8B2418">CITA</text>
+      </svg>
+      <p class="diagram-caption">Figura 1 &mdash; El método central (caja ocre) es <em>building block</em> compartido. El primer trabajo lo formaliza; el segundo lo cita y añade una capa.</p>
+    </div>
+
+    <p>El método central &mdash;ontología + PDG + VF2 + GED&mdash; es el núcleo técnico compartido. El primer trabajo lo presenta como contribución principal y lo valida con panel experto. El segundo trabajo lo asume como dado (citando al primero) y construye encima una rúbrica de evaluación experiencial.</p>
+
+    <p>Visto en conjunto, el programa de investigación responde a una pregunta más amplia que ningún trabajo individual puede atacar por sí solo: <em>¿qué significa, en términos operativos, decir que dos actividades educativas implementadas en plataformas distintas son equivalentes?</em> La respuesta no es un veredicto único, es un perfil &mdash;y este programa propone tanto el método para construir el perfil como la rúbrica para interpretarlo.</p>
+  </section>
+
+  <footer class="colofon">
+    <div class="ornament">❖ ❖ ❖</div>
+    <div>FIN DEL DOCUMENTO DE PLANIFICACIÓN</div>
+    <div>Tipografías: Fraunces · Newsreader · JetBrains Mono</div>
+    <div>Documento autónomo &mdash; HTML único</div>
+  </footer>
+
+</article>
+</body>
+</html>

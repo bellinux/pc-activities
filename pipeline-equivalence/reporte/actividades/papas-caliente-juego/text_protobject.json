@@ -1,0 +1,19 @@
+{
+    "platform": "Protobject",
+    "extracted_text": [
+        "al iniciar el programa:",
+        "  establecer pausado a verdadero",
+        "cuando BotónTáctil3 es tocado:",
+        "  si pausado:",
+        "    establecer pausado a falso",
+        "    establecer tiempo a (entero aleatorio de 5 a 15)",
+        "    reproducir sonido 'progreso' en ReproductorSonido3",
+        "    repetir mientras (tiempo > 0):",
+        "      añadir -1 a tiempo",
+        "      retraso de 1 segundos",
+        "    reproducir sonido 'reacción divertida' en ReproductorSonido3",
+        "    retraso de 4 segundos",
+        "    detener sonido de ReproductorSonido3",
+        "    establecer pausado a verdadero"
+    ]
+}

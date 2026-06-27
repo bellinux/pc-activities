@@ -1,0 +1,24 @@
+ACTIVIDAD: 16.4-robot-activation-challenge
+FUENTE: Protobject (bloques, etiquetas oficiales es)
+
+al iniciar el programa:
+  establecer toques a 0   // Inicia la variable "toques" con valor inicial = 0.
+
+repetir para siempre:
+  si (toques < 7):
+    contar con i desde 0 hasta 6 de a 1:
+      dibuja en x i y (8 − toques) con color #ff4444 en DibujoLED11
+  sino:
+    borrar dibujo en DibujoLED11
+    dibuja con color #ff0000 en DibujoLED11:
+        .......
+        .#...#.
+        .#...#.
+        .#...#.
+        .......
+        #.....#
+        .#####.
+    reproducir sonido 'celebración final' en ReproductorSonido3
+
+cuando BotónTáctil1 es tocado:
+  añadir 1 a toques   // Aumenta en 1 el valor de la variable "toques". Cada vez que se presione el botón la cantidad aumenta en 1, es decir la variable cuenta la cantidad de veces que se aprieta el botón.

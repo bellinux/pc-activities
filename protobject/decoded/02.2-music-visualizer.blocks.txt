@@ -1,0 +1,12 @@
+ACTIVIDAD: 02.2-music-visualizer
+FUENTE: Protobject (bloques, etiquetas oficiales es)
+
+repetir para siempre:
+  dibuja con color claro al ruido in NivelRuido1 en DibujoLED2:
+      .#.#.#.
+      #.#.#.#
+      .#.#.#.
+      #.#.#.#
+      .#.#.#.
+      #.#.#.#
+      .#.#.#.
