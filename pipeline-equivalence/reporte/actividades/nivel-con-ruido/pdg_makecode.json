@@ -254,7 +254,7 @@
         },
         {
             "id": "n38",
-            "kind": "PlayTone",
+            "kind": "EmitSound",
             "seq": 38,
             "in_loop": true,
             "resId": 1
@@ -355,7 +355,7 @@
         },
         {
             "id": "n53",
-            "kind": "PlayTone",
+            "kind": "EmitSound",
             "seq": 53,
             "in_loop": true,
             "resId": 1

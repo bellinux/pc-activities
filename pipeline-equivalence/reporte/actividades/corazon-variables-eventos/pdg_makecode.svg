@@ -61,14 +61,14 @@
 <!-- n17 -->
 <g id="node17" class="node">
 <title>n17</title>
-<path fill="#4a3f33" stroke="#1a1612" stroke-width="1.5" d="M508.89,-62C508.89,-62 461.11,-62 461.11,-62 455.11,-62 449.11,-56 449.11,-50 449.11,-50 449.11,-38 449.11,-38 449.11,-32 455.11,-26 461.11,-26 461.11,-26 508.89,-26 508.89,-26 514.89,-26 520.89,-32 520.89,-38 520.89,-38 520.89,-50 520.89,-50 520.89,-56 514.89,-62 508.89,-62"/>
-<text xml:space="preserve" text-anchor="middle" x="485" y="-40.3" font-family="Arial" font-size="11.00" fill="#fbf6eb">17 &#160;&#160;Delay</text>
+<path fill="#4a3f33" stroke="#1a1612" stroke-width="1.5" d="M516.89,-62C516.89,-62 469.11,-62 469.11,-62 463.11,-62 457.11,-56 457.11,-50 457.11,-50 457.11,-38 457.11,-38 457.11,-32 463.11,-26 469.11,-26 469.11,-26 516.89,-26 516.89,-26 522.89,-26 528.89,-32 528.89,-38 528.89,-38 528.89,-50 528.89,-50 528.89,-56 522.89,-62 516.89,-62"/>
+<text xml:space="preserve" text-anchor="middle" x="493" y="-40.3" font-family="Arial" font-size="11.00" fill="#fbf6eb">17 &#160;&#160;Delay</text>
 </g>
 <!-- n2&#45;&gt;n17 -->
 <g id="edge4" class="edge">
 <title>n2&#45;&gt;n17</title>
-<path fill="none" stroke="#4a3f33" stroke-width="1.3" d="M844.09,-597.49C872.23,-558.03 936,-458.24 936,-364 936,-364 936,-364 936,-120 936,-79.51 649.53,-55.92 533.21,-48.01"/>
-<polygon fill="#4a3f33" stroke="#4a3f33" stroke-width="1.3" points="533.7,-44.54 523.49,-47.36 533.23,-51.52 533.7,-44.54"/>
+<path fill="none" stroke="#4a3f33" stroke-width="1.3" d="M844.09,-597.49C872.23,-558.03 936,-458.24 936,-364 936,-364 936,-364 936,-120 936,-80.35 656.51,-56.37 541.52,-48.18"/>
+<polygon fill="#4a3f33" stroke="#4a3f33" stroke-width="1.3" points="541.81,-44.69 531.59,-47.49 541.32,-51.68 541.81,-44.69"/>
 <text xml:space="preserve" text-anchor="middle" x="969" y="-315.5" font-family="Arial" font-size="10.00" fill="#8b2418"> latidopequeño </text>
 </g>
 <!-- n12 -->
@@ -124,8 +124,8 @@
 <!-- n5&#45;&gt;n17 -->
 <g id="edge9" class="edge">
 <title>n5&#45;&gt;n17</title>
-<path fill="none" stroke="#4a3f33" stroke-width="1.3" d="M1013.6,-597.43C1025.34,-583.12 1039,-561.79 1039,-540 1039,-540 1039,-540 1039,-120 1039,-69.18 668.12,-51.31 533.27,-46.5"/>
-<polygon fill="#4a3f33" stroke="#4a3f33" stroke-width="1.3" points="533.43,-43 523.32,-46.15 533.19,-50 533.43,-43"/>
+<path fill="none" stroke="#4a3f33" stroke-width="1.3" d="M1013.6,-597.43C1025.34,-583.12 1039,-561.79 1039,-540 1039,-540 1039,-540 1039,-120 1039,-69.95 674.32,-51.62 541.04,-46.58"/>
+<polygon fill="#4a3f33" stroke="#4a3f33" stroke-width="1.3" points="541.34,-43.09 531.21,-46.22 541.08,-50.09 541.34,-43.09"/>
 <text xml:space="preserve" text-anchor="middle" x="1072" y="-315.5" font-family="Arial" font-size="10.00" fill="#8b2418"> latidopequeño </text>
 </g>
 <!-- n6&#45;&gt;n12 -->
@@ -138,8 +138,8 @@
 <!-- n7 -->
 <g id="node7" class="node">
 <title>n7</title>
-<path fill="#fbf6eb" stroke="#1a1612" stroke-width="1.5" d="M149.39,-745C149.39,-745 26.61,-745 26.61,-745 20.61,-745 14.61,-739 14.61,-733 14.61,-733 14.61,-721 14.61,-721 14.61,-715 20.61,-709 26.61,-709 26.61,-709 149.39,-709 149.39,-709 155.39,-709 161.39,-715 161.39,-721 161.39,-721 161.39,-733 161.39,-733 161.39,-739 155.39,-745 149.39,-745"/>
-<text xml:space="preserve" text-anchor="middle" x="88" y="-723.3" font-family="Arial" font-size="11.00" fill="#1a1612">7 &#160;&#160;OnTiltGestureEvent #1</text>
+<path fill="#fbf6eb" stroke="#1a1612" stroke-width="1.5" d="M137.77,-745C137.77,-745 38.23,-745 38.23,-745 32.23,-745 26.23,-739 26.23,-733 26.23,-733 26.23,-721 26.23,-721 26.23,-715 32.23,-709 38.23,-709 38.23,-709 137.77,-709 137.77,-709 143.77,-709 149.77,-715 149.77,-721 149.77,-721 149.77,-733 149.77,-733 149.77,-739 143.77,-745 137.77,-745"/>
+<text xml:space="preserve" text-anchor="middle" x="88" y="-723.3" font-family="Arial" font-size="11.00" fill="#1a1612">7 &#160;&#160;OnTouchEvent #1</text>
 </g>
 <!-- n8 -->
 <g id="node8" class="node">
@@ -175,16 +175,16 @@
 <!-- n8&#45;&gt;n17 -->
 <g id="edge14" class="edge">
 <title>n8&#45;&gt;n17</title>
-<path fill="none" stroke="#4a3f33" stroke-width="1.3" d="M45.03,-597.34C22.69,-585.03 0,-566.1 0,-540 0,-540 0,-540 0,-120 0,-76.09 314.46,-54.27 436.97,-47.43"/>
-<polygon fill="#4a3f33" stroke="#4a3f33" stroke-width="1.3" points="436.79,-50.95 446.58,-46.9 436.41,-43.96 436.79,-50.95"/>
+<path fill="none" stroke="#4a3f33" stroke-width="1.3" d="M45.03,-597.34C22.69,-585.03 0,-566.1 0,-540 0,-540 0,-540 0,-120 0,-75.28 321.15,-53.89 445.05,-47.3"/>
+<polygon fill="#4a3f33" stroke="#4a3f33" stroke-width="1.3" points="444.98,-50.81 454.78,-46.8 444.62,-43.82 444.98,-50.81"/>
 <text xml:space="preserve" text-anchor="middle" x="33" y="-315.5" font-family="Arial" font-size="10.00" fill="#8b2418"> latidopequeño </text>
 </g>
 <!-- n9&#45;&gt;n12 -->
 <g id="edge15" class="edge">
 <title>n9&#45;&gt;n12</title>
-<path fill="none" stroke="#4a3f33" stroke-width="1.3" d="M204.12,-520.3C215.41,-510.67 229.91,-498.75 243.5,-489 249.6,-484.62 256.21,-480.21 262.74,-476.03"/>
-<polygon fill="#4a3f33" stroke="#4a3f33" stroke-width="1.3" points="264.56,-479.01 271.17,-470.73 260.84,-473.09 264.56,-479.01"/>
-<text xml:space="preserve" text-anchor="middle" x="272.75" y="-491.5" font-family="Arial" font-size="10.00" fill="#8b2418"> latidogrande </text>
+<path fill="none" stroke="#4a3f33" stroke-width="1.3" d="M204.94,-520.45C216.65,-510.86 231.63,-498.95 245.5,-489 251.51,-484.69 258.01,-480.28 264.39,-476.08"/>
+<polygon fill="#4a3f33" stroke="#4a3f33" stroke-width="1.3" points="266.11,-479.14 272.6,-470.77 262.3,-473.26 266.11,-479.14"/>
+<text xml:space="preserve" text-anchor="middle" x="274.75" y="-491.5" font-family="Arial" font-size="10.00" fill="#8b2418"> latidogrande </text>
 </g>
 <!-- n10 -->
 <g id="node10" class="node">
@@ -195,89 +195,89 @@
 <!-- n11 -->
 <g id="node11" class="node">
 <title>n11</title>
-<path fill="#fbf6eb" stroke="#1a1612" stroke-width="1.5" d="M357.27,-557C357.27,-557 278.73,-557 278.73,-557 272.73,-557 266.73,-551 266.73,-545 266.73,-545 266.73,-533 266.73,-533 266.73,-527 272.73,-521 278.73,-521 278.73,-521 357.27,-521 357.27,-521 363.27,-521 369.27,-527 369.27,-533 369.27,-533 369.27,-545 369.27,-545 369.27,-551 363.27,-557 357.27,-557"/>
-<text xml:space="preserve" text-anchor="middle" x="318" y="-535.3" font-family="Arial" font-size="11.00" fill="#1a1612">11 &#160;&#160;PlayTone #1</text>
+<path fill="#fbf6eb" stroke="#1a1612" stroke-width="1.5" d="M367.77,-557C367.77,-557 280.23,-557 280.23,-557 274.23,-557 268.23,-551 268.23,-545 268.23,-545 268.23,-533 268.23,-533 268.23,-527 274.23,-521 280.23,-521 280.23,-521 367.77,-521 367.77,-521 373.77,-521 379.77,-527 379.77,-533 379.77,-533 379.77,-545 379.77,-545 379.77,-551 373.77,-557 367.77,-557"/>
+<text xml:space="preserve" text-anchor="middle" x="324" y="-535.3" font-family="Arial" font-size="11.00" fill="#1a1612">11 &#160;&#160;EmitSound #1</text>
 </g>
 <!-- n10&#45;&gt;n11 -->
 <g id="edge16" class="edge">
 <title>n10&#45;&gt;n11</title>
-<path fill="none" stroke="#8b2418" stroke-width="2" d="M323.38,-597.6C322.62,-589.52 321.7,-579.67 320.84,-570.42"/>
-<polygon fill="#8b2418" stroke="#8b2418" stroke-width="2" points="324.33,-570.21 319.92,-560.57 317.36,-570.86 324.33,-570.21"/>
+<path fill="none" stroke="#8b2418" stroke-width="2" d="M324.77,-597.6C324.66,-589.52 324.53,-579.67 324.41,-570.42"/>
+<polygon fill="#8b2418" stroke="#8b2418" stroke-width="2" points="327.91,-570.54 324.27,-560.59 320.91,-570.63 327.91,-570.54"/>
 </g>
 <!-- n14 -->
 <g id="node14" class="node">
 <title>n14</title>
-<path fill="#5a6b3b" stroke="#1a1612" stroke-width="1.5" d="M407.64,-293C407.64,-293 316.36,-293 316.36,-293 310.36,-293 304.36,-287 304.36,-281 304.36,-281 304.36,-269 304.36,-269 304.36,-263 310.36,-257 316.36,-257 316.36,-257 407.64,-257 407.64,-257 413.64,-257 419.64,-263 419.64,-269 419.64,-269 419.64,-281 419.64,-281 419.64,-287 413.64,-293 407.64,-293"/>
-<text xml:space="preserve" text-anchor="middle" x="362" y="-271.3" font-family="Arial" font-size="11.00" fill="#fbf6eb">14 &#160;&#160;DrawImage #1</text>
+<path fill="#5a6b3b" stroke="#1a1612" stroke-width="1.5" d="M426.64,-293C426.64,-293 335.36,-293 335.36,-293 329.36,-293 323.36,-287 323.36,-281 323.36,-281 323.36,-269 323.36,-269 323.36,-263 329.36,-257 335.36,-257 335.36,-257 426.64,-257 426.64,-257 432.64,-257 438.64,-263 438.64,-269 438.64,-269 438.64,-281 438.64,-281 438.64,-287 432.64,-293 426.64,-293"/>
+<text xml:space="preserve" text-anchor="middle" x="381" y="-271.3" font-family="Arial" font-size="11.00" fill="#fbf6eb">14 &#160;&#160;DrawImage #1</text>
 </g>
 <!-- n10&#45;&gt;n14 -->
 <g id="edge17" class="edge">
 <title>n10&#45;&gt;n14</title>
-<path fill="none" stroke="#5a6b3b" stroke-width="1.3" stroke-dasharray="5,2" d="M349.86,-597.39C362.46,-587.09 376.79,-572.98 385,-557 421.02,-486.88 402.98,-459.73 407,-381 407.81,-365.02 411.56,-360.34 407,-345 402.51,-329.9 393.55,-315.02 384.8,-302.96"/>
-<polygon fill="#5a6b3b" stroke="#5a6b3b" stroke-width="1.3" points="387.66,-300.94 378.8,-295.12 382.1,-305.19 387.66,-300.94"/>
-<text xml:space="preserve" text-anchor="middle" x="426.42" y="-447.5" font-family="Arial" font-size="10.00" fill="#5a6b3b"> display </text>
+<path fill="none" stroke="#5a6b3b" stroke-width="1.3" stroke-dasharray="5,2" d="M355.72,-597.28C370.24,-587.31 386.43,-573.53 396,-557 435.71,-488.38 418.53,-460.01 425,-381 426.3,-365.05 429.48,-360.36 425,-345 420.62,-329.98 411.86,-315.11 403.3,-303.04"/>
+<polygon fill="#5a6b3b" stroke="#5a6b3b" stroke-width="1.3" points="406.23,-301.11 397.44,-295.2 400.62,-305.3 406.23,-301.11"/>
+<text xml:space="preserve" text-anchor="middle" x="441.83" y="-447.5" font-family="Arial" font-size="10.00" fill="#5a6b3b"> display </text>
 </g>
 <!-- n11&#45;&gt;n12 -->
 <g id="edge18" class="edge">
 <title>n11&#45;&gt;n12</title>
-<path fill="none" stroke="#8b2418" stroke-width="2" d="M314.96,-520.6C313.05,-509.6 310.51,-495.08 308.27,-482.24"/>
-<polygon fill="#8b2418" stroke="#8b2418" stroke-width="2" points="311.77,-481.9 306.6,-472.65 304.87,-483.11 311.77,-481.9"/>
+<path fill="none" stroke="#8b2418" stroke-width="2" d="M319.75,-520.6C317.06,-509.6 313.52,-495.08 310.38,-482.24"/>
+<polygon fill="#8b2418" stroke="#8b2418" stroke-width="2" points="313.81,-481.5 308.03,-472.61 307.01,-483.16 313.81,-481.5"/>
 </g>
 <!-- n13 -->
 <g id="node13" class="node">
 <title>n13</title>
-<path fill="#fbf6eb" stroke="#1a1612" stroke-width="1.5" d="M378.64,-381C378.64,-381 299.36,-381 299.36,-381 293.36,-381 287.36,-375 287.36,-369 287.36,-369 287.36,-357 287.36,-357 287.36,-351 293.36,-345 299.36,-345 299.36,-345 378.64,-345 378.64,-345 384.64,-345 390.64,-351 390.64,-357 390.64,-357 390.64,-369 390.64,-369 390.64,-375 384.64,-381 378.64,-381"/>
-<text xml:space="preserve" text-anchor="middle" x="339" y="-359.3" font-family="Arial" font-size="11.00" fill="#1a1612">13 &#160;&#160;PlayTone #1</text>
+<path fill="#fbf6eb" stroke="#1a1612" stroke-width="1.5" d="M397.14,-381C397.14,-381 308.86,-381 308.86,-381 302.86,-381 296.86,-375 296.86,-369 296.86,-369 296.86,-357 296.86,-357 296.86,-351 302.86,-345 308.86,-345 308.86,-345 397.14,-345 397.14,-345 403.14,-345 409.14,-351 409.14,-357 409.14,-357 409.14,-369 409.14,-369 409.14,-375 403.14,-381 397.14,-381"/>
+<text xml:space="preserve" text-anchor="middle" x="353" y="-359.3" font-family="Arial" font-size="11.00" fill="#1a1612">13 &#160;&#160;EmitSound #1</text>
 </g>
 <!-- n11&#45;&gt;n13 -->
 <g id="edge19" class="edge">
 <title>n11&#45;&gt;n13</title>
-<path fill="none" stroke="#5a6b3b" stroke-width="1.3" stroke-dasharray="5,2" d="M330.68,-520.27C339.43,-506.9 350.3,-487.72 355,-469 361.38,-443.62 355.76,-414.1 349.5,-392.84"/>
-<polygon fill="#5a6b3b" stroke="#5a6b3b" stroke-width="1.3" points="352.9,-392 346.52,-383.54 346.23,-394.13 352.9,-392"/>
-<text xml:space="preserve" text-anchor="middle" x="373.93" y="-447.5" font-family="Arial" font-size="10.00" fill="#5a6b3b"> sound </text>
+<path fill="none" stroke="#5a6b3b" stroke-width="1.3" stroke-dasharray="5,2" d="M334.49,-520.27C341.85,-506.74 351.06,-487.36 355,-469 360.37,-443.93 359.24,-414.72 357.13,-393.49"/>
+<polygon fill="#5a6b3b" stroke="#5a6b3b" stroke-width="1.3" points="360.62,-393.19 356,-383.65 353.66,-393.99 360.62,-393.19"/>
+<text xml:space="preserve" text-anchor="middle" x="374.92" y="-447.5" font-family="Arial" font-size="10.00" fill="#5a6b3b"> sound </text>
 </g>
 <!-- n12&#45;&gt;n13 -->
 <g id="edge20" class="edge">
 <title>n12&#45;&gt;n13</title>
-<path fill="none" stroke="#8b2418" stroke-width="2" d="M310.29,-432.6C314.99,-421.36 321.22,-406.47 326.68,-393.43"/>
-<polygon fill="#8b2418" stroke="#8b2418" stroke-width="2" points="329.8,-395.04 330.43,-384.46 323.34,-392.34 329.8,-395.04"/>
+<path fill="none" stroke="#8b2418" stroke-width="2" d="M313.12,-432.6C319.78,-421.13 328.67,-405.85 336.36,-392.62"/>
+<polygon fill="#8b2418" stroke="#8b2418" stroke-width="2" points="339.2,-394.69 341.2,-384.29 333.15,-391.18 339.2,-394.69"/>
 </g>
 <!-- n13&#45;&gt;n14 -->
 <g id="edge21" class="edge">
 <title>n13&#45;&gt;n14</title>
-<path fill="none" stroke="#8b2418" stroke-width="2" d="M343.65,-344.6C346.6,-333.6 350.48,-319.08 353.91,-306.24"/>
-<polygon fill="#8b2418" stroke="#8b2418" stroke-width="2" points="357.29,-307.16 356.49,-296.6 350.53,-305.35 357.29,-307.16"/>
+<path fill="none" stroke="#8b2418" stroke-width="2" d="M358.67,-344.6C362.29,-333.48 367.07,-318.77 371.29,-305.83"/>
+<polygon fill="#8b2418" stroke="#8b2418" stroke-width="2" points="374.54,-307.14 374.31,-296.55 367.88,-304.98 374.54,-307.14"/>
 </g>
 <!-- n14&#45;&gt;n15 -->
 <g id="edge22" class="edge">
 <title>n14&#45;&gt;n15</title>
-<path fill="none" stroke="#8b2418" stroke-width="2" d="M370.58,-256.6C374.75,-248.15 379.88,-237.75 384.63,-228.13"/>
-<polygon fill="#8b2418" stroke="#8b2418" stroke-width="2" points="387.71,-229.79 389,-219.28 381.43,-226.69 387.71,-229.79"/>
+<path fill="none" stroke="#8b2418" stroke-width="2" d="M385.17,-256.6C387.14,-248.43 389.53,-238.44 391.78,-229.09"/>
+<polygon fill="#8b2418" stroke="#8b2418" stroke-width="2" points="395.15,-230.04 394.08,-219.5 388.34,-228.41 395.15,-230.04"/>
 </g>
 <!-- n16 -->
 <g id="node16" class="node">
 <title>n16</title>
-<path fill="#5a6b3b" stroke="#1a1612" stroke-width="1.5" d="M487.64,-139C487.64,-139 396.36,-139 396.36,-139 390.36,-139 384.36,-133 384.36,-127 384.36,-127 384.36,-115 384.36,-115 384.36,-109 390.36,-103 396.36,-103 396.36,-103 487.64,-103 487.64,-103 493.64,-103 499.64,-109 499.64,-115 499.64,-115 499.64,-127 499.64,-127 499.64,-133 493.64,-139 487.64,-139"/>
-<text xml:space="preserve" text-anchor="middle" x="442" y="-117.3" font-family="Arial" font-size="11.00" fill="#fbf6eb">16 &#160;&#160;DrawImage #1</text>
+<path fill="#5a6b3b" stroke="#1a1612" stroke-width="1.5" d="M482.64,-139C482.64,-139 391.36,-139 391.36,-139 385.36,-139 379.36,-133 379.36,-127 379.36,-127 379.36,-115 379.36,-115 379.36,-109 385.36,-103 391.36,-103 391.36,-103 482.64,-103 482.64,-103 488.64,-103 494.64,-109 494.64,-115 494.64,-115 494.64,-127 494.64,-127 494.64,-133 488.64,-139 482.64,-139"/>
+<text xml:space="preserve" text-anchor="middle" x="437" y="-117.3" font-family="Arial" font-size="11.00" fill="#fbf6eb">16 &#160;&#160;DrawImage #1</text>
 </g>
 <!-- n14&#45;&gt;n16 -->
 <g id="edge23" class="edge">
 <title>n14&#45;&gt;n16</title>
-<path fill="none" stroke="#5a6b3b" stroke-width="1.3" stroke-dasharray="5,2" d="M406.39,-256.33C423.54,-247.05 441.33,-233.84 451,-216 461.8,-196.07 458.31,-170.24 452.81,-150.7"/>
-<polygon fill="#5a6b3b" stroke="#5a6b3b" stroke-width="1.3" points="456.2,-149.8 449.83,-141.33 449.53,-151.92 456.2,-149.8"/>
-<text xml:space="preserve" text-anchor="middle" x="476.41" y="-194.5" font-family="Arial" font-size="10.00" fill="#5a6b3b"> display </text>
+<path fill="none" stroke="#5a6b3b" stroke-width="1.3" stroke-dasharray="5,2" d="M413.19,-256.3C427.59,-246.49 443.08,-232.85 451,-216 460.65,-195.47 455.9,-169.89 449.43,-150.59"/>
+<polygon fill="#5a6b3b" stroke="#5a6b3b" stroke-width="1.3" points="452.75,-149.49 445.98,-141.34 446.19,-151.93 452.75,-149.49"/>
+<text xml:space="preserve" text-anchor="middle" x="474.86" y="-194.5" font-family="Arial" font-size="10.00" fill="#5a6b3b"> display </text>
 </g>
 <!-- n15&#45;&gt;n16 -->
 <g id="edge24" class="edge">
 <title>n15&#45;&gt;n16</title>
-<path fill="none" stroke="#8b2418" stroke-width="2" d="M408.97,-179.6C413.88,-171.05 419.92,-160.52 425.48,-150.81"/>
-<polygon fill="#8b2418" stroke="#8b2418" stroke-width="2" points="428.49,-152.6 430.43,-142.19 422.42,-149.12 428.49,-152.6"/>
+<path fill="none" stroke="#8b2418" stroke-width="2" d="M407.81,-179.6C412.1,-171.15 417.37,-160.75 422.24,-151.13"/>
+<polygon fill="#8b2418" stroke="#8b2418" stroke-width="2" points="425.34,-152.76 426.73,-142.26 419.09,-149.6 425.34,-152.76"/>
 </g>
 <!-- n16&#45;&gt;n17 -->
 <g id="edge25" class="edge">
 <title>n16&#45;&gt;n17</title>
-<path fill="none" stroke="#8b2418" stroke-width="2" d="M451.97,-102.6C456.88,-94.05 462.92,-83.52 468.48,-73.81"/>
-<polygon fill="#8b2418" stroke="#8b2418" stroke-width="2" points="471.49,-75.6 473.43,-65.19 465.42,-72.12 471.49,-75.6"/>
+<path fill="none" stroke="#8b2418" stroke-width="2" d="M449.99,-102.6C456.58,-93.77 464.76,-82.82 472.2,-72.85"/>
+<polygon fill="#8b2418" stroke="#8b2418" stroke-width="2" points="474.9,-75.09 478.08,-64.99 469.29,-70.9 474.9,-75.09"/>
 </g>
 </g>
 </svg>

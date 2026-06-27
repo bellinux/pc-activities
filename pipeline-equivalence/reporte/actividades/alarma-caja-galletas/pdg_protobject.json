@@ -9,61 +9,68 @@
         },
         {
             "id": "n2",
-            "kind": "ClearDisplay",
+            "kind": "SetBackgroundColor",
             "seq": 2,
             "in_loop": false,
             "resId": 1
         },
         {
             "id": "n3",
-            "kind": "ReadTilt",
+            "kind": "ClearDisplay",
             "seq": 3,
-            "in_loop": true,
+            "in_loop": false,
             "resId": 1
         },
         {
             "id": "n4",
-            "kind": "Comparison",
+            "kind": "ReadTilt",
             "seq": 4,
-            "in_loop": true
+            "in_loop": true,
+            "resId": 1
         },
         {
             "id": "n5",
-            "kind": "ConditionalBranch",
+            "kind": "Comparison",
             "seq": 5,
             "in_loop": true
         },
         {
             "id": "n6",
-            "kind": "DrawImage",
+            "kind": "ConditionalBranch",
             "seq": 6,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n7",
-            "kind": "PlaySound",
+            "kind": "DrawImage",
             "seq": 7,
             "in_loop": true,
             "resId": 1
         },
         {
             "id": "n8",
-            "kind": "Delay",
+            "kind": "PlaySound",
             "seq": 8,
-            "in_loop": true
-        },
-        {
-            "id": "n9",
-            "kind": "ClearDisplay",
-            "seq": 9,
             "in_loop": true,
             "resId": 1
         },
         {
+            "id": "n9",
+            "kind": "Delay",
+            "seq": 9,
+            "in_loop": true
+        },
+        {
             "id": "n10",
-            "kind": "StopSound",
+            "kind": "ClearDisplay",
             "seq": 10,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n11",
+            "kind": "StopSound",
+            "seq": 11,
             "in_loop": true,
             "resId": 1
         }
@@ -76,62 +83,74 @@
             "var": ""
         },
         {
-            "source": "n3",
-            "target": "n4",
-            "type": "data",
-            "var": "tilt_1"
+            "source": "n2",
+            "target": "n3",
+            "type": "control",
+            "var": ""
         },
         {
             "source": "n4",
             "target": "n5",
             "type": "data",
-            "var": "condition"
+            "var": "tilt_1"
         },
         {
             "source": "n5",
             "target": "n6",
-            "type": "control",
-            "var": "true"
+            "type": "data",
+            "var": "condition"
         },
         {
-            "source": "n5",
+            "source": "n6",
             "target": "n7",
             "type": "control",
             "var": "true"
         },
         {
-            "source": "n5",
+            "source": "n6",
             "target": "n8",
             "type": "control",
             "var": "true"
         },
         {
-            "source": "n5",
+            "source": "n6",
             "target": "n9",
             "type": "control",
             "var": "true"
         },
         {
-            "source": "n5",
+            "source": "n6",
             "target": "n10",
             "type": "control",
             "var": "true"
         },
         {
+            "source": "n6",
+            "target": "n11",
+            "type": "control",
+            "var": "true"
+        },
+        {
             "source": "n2",
-            "target": "n6",
+            "target": "n3",
             "type": "side_effect",
             "var": "display"
         },
         {
-            "source": "n6",
-            "target": "n9",
+            "source": "n3",
+            "target": "n7",
             "type": "side_effect",
             "var": "display"
         },
         {
             "source": "n7",
             "target": "n10",
+            "type": "side_effect",
+            "var": "display"
+        },
+        {
+            "source": "n8",
+            "target": "n11",
             "type": "side_effect",
             "var": "sound"
         }

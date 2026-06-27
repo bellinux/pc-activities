@@ -84,7 +84,12 @@ SEMILLA: lee la ontología vigente ${ONT_PATH} (si existe) y MANTÉN ESTABLES su
 INVENTARIO agregado de operaciones reales (alineaciones makecode↔protobject por actividad):
 ${JSON.stringify(inv)}
 Reglas: misma operación semántica => UN solo canonical_node (PascalCase, estable). makecode_block/protobject_block = forma representativa genérica; si una plataforma no tiene equivalente, anótalo en "note". category = event/variable/control/display/sound/sensor/math/timing/debug. Documenta divergencias reales en "note" (no fuerces equivalencias falsas).
-Los canonical_node son AGNÓSTICOS al eje (ReadTilt, no ReadTiltX/Y), a la instancia de dispositivo (DrawImage, no DrawImageLED2) y al encoding del pitch ("PlayTone" cubre frequency en Hz y nota MIDI — son el mismo concepto). La aritmética es UN solo nodo "Arithmetic" (el operador concreto va en el atributo "op" del PDG, no en el canonical_node).
+Los canonical_node son AGNÓSTICOS al eje (ReadTilt, no ReadTiltX/Y), a la instancia de dispositivo (DrawImage, no DrawImageLED2) y al encoding del pitch (Hz y nota MIDI son el mismo concepto). La aritmética es UN solo nodo "Arithmetic" (el operador concreto va en el atributo "op" del PDG, no en el canonical_node).
+SONIDO — CAMBIO DELIBERADO (aplícalo AUNQUE rompa la estabilidad; elimina "PlayDrum"): distingue el sonido POR INTENCIÓN, y escribe en cada nodo una NOTA clara del "cuándo":
+ • "PlayTone" — SOLO cuando la ALTURA (pitch) es el punto: controlada/variable (p.ej. xilófono, el pitch sale de la inclinación). note: "Usar cuando la altura del sonido ES el objetivo (pitch controlado/variable); Hz y nota MIDI son el mismo concepto. NO para sonidos genéricos."
+ • "EmitSound" — sonido GENÉRICO a evento, con timbre/altura INCIDENTALES (un latido, un bip, una percusión, o un tono de altura FIJA usado como señal). Aquí colapsa el antiguo PlayDrum. note: "Usar cuando solo importa que SUENE algo en un evento (latido/bip/percusión/feedback); la altura y el timbre son incidentales. En micro:bit no existe 'drum': usa un tono — da igual."
+ • "PlaySound" — clip/melodía PREGRABADO con nombre (alarma, risa, 'celebración final'); se mantiene. note: "Sonido/melodía con nombre, pregrabado."
+ Criterio PlayTone vs EmitSound: pitch CALCULADO/VARIABLE → PlayTone; pitch FIJO o incidental → EmitSound.
 DEVUELVE: { nodes:[ {canonical_node, makecode_block, protobject_block, category, note?} ] } cubriendo TODO el inventario. NO escribas archivos aún.`
 
 const reviewPrompt = (ont, inv, lens) => `Eres REVISOR ADVERSARIAL (lente "${lens}") de la ontología canónica común. Por defecto BUSCA problemas; aprueba solo si está bien.
@@ -120,6 +125,7 @@ REGLAS DURAS DE NORMALIZACIÓN (el PDG compara "módulo plumbing de plataforma" 
   (C) UNIFICAR encoding: frequency (Hz) y nota (MIDI) son el MISMO concepto → kind "PlayTone" en ambas plataformas; el encoding es plumbing.
   (D) ARITMÉTICA = opción B (operador SÍ, constante NO): cada operación aritmética/redondeo es un nodo kind "Arithmetic" con campo "op" ∈ {"+","-","×","÷","round","constrain"}; las CONSTANTES numéricas se DESCARTAN (no son nodos ni operandos). Así "+1000" ≡ "+60" (ambos op="+") pero "×" ≠ "+".
   (E) La "var" de las aristas "data" se canonicaliza después automáticamente (valor de sensor → "tilt_1"/"sound_1"… con su resId; altura de tono → "pitch", no frequency/nota; intermedio → "value"; variable de usuario → su nombre). Puedes poner nombres razonables; el motor (normalize_pdg) los normaliza igual.
+  (F) SONIDO por INTENCIÓN (no por dispositivo ni timbre): kind "PlayTone" SOLO si el pitch es controlado/variable (xilófono); "EmitSound" si es un sonido genérico a evento (latido/bip/percusión/tono de altura fija como señal — el antiguo "drum" va AQUÍ); "PlaySound" si es un clip/melodía con nombre. Criterio: pitch calculado/variable → PlayTone; pitch fijo o incidental → EmitSound. NO uses "PlayDrum".
 FIDELIDAD: tras la normalización, si los programas siguen difiriendo, los grafos DEBEN diferir (no fuerces isomorfismo).
 - NOTA: la tabla de equivalencia per-actividad ya NO se escribe (tabla_ir.json quedó deprecado); la vista por actividad resalta la ontología común. NO escribas tabla_ir.json.
 DEVUELVE: { code:"${a.code}", written:true, nodes_mb, nodes_pb, kinds_used:[...] }.`

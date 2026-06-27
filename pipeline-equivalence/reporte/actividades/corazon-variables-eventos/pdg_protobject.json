@@ -66,7 +66,7 @@
         },
         {
             "id": "n11",
-            "kind": "PlayDrum",
+            "kind": "EmitSound",
             "seq": 11,
             "in_loop": true,
             "resId": 1
@@ -79,7 +79,7 @@
         },
         {
             "id": "n13",
-            "kind": "PlayDrum",
+            "kind": "EmitSound",
             "seq": 13,
             "in_loop": true,
             "resId": 1

@@ -55,7 +55,8 @@
             "id": "n9",
             "kind": "Comparison",
             "seq": 9,
-            "in_loop": true
+            "in_loop": true,
+            "op": ">"
         },
         {
             "id": "n10",
@@ -129,6 +130,12 @@
         },
         {
             "source": "n4",
+            "target": "n9",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n4",
             "target": "n10",
             "type": "control",
             "var": "true"
@@ -177,9 +184,15 @@
         },
         {
             "source": "n8",
-            "target": "n10",
+            "target": "n9",
             "type": "control",
             "var": ""
+        },
+        {
+            "source": "n9",
+            "target": "n10",
+            "type": "control",
+            "var": "true"
         },
         {
             "source": "n10",
@@ -213,7 +226,13 @@
         },
         {
             "source": "n5",
-            "target": "n15",
+            "target": "n4",
+            "type": "data",
+            "var": "pausado"
+        },
+        {
+            "source": "n15",
+            "target": "n4",
             "type": "data",
             "var": "pausado"
         },
@@ -221,7 +240,7 @@
             "source": "n6",
             "target": "n7",
             "type": "data",
-            "var": "tiempo"
+            "var": "value"
         },
         {
             "source": "n7",
@@ -234,24 +253,24 @@
             "target": "n10",
             "type": "data",
             "var": "tiempo"
-        },
-        {
-            "source": "n9",
-            "target": "n10",
-            "type": "control",
-            "var": "true"
-        },
-        {
-            "source": "n9",
-            "target": "n11",
-            "type": "control",
-            "var": "true"
         },
         {
             "source": "n10",
             "target": "n9",
             "type": "data",
             "var": "tiempo"
+        },
+        {
+            "source": "n10",
+            "target": "n10",
+            "type": "data",
+            "var": "tiempo"
+        },
+        {
+            "source": "n9",
+            "target": "n10",
+            "type": "data",
+            "var": "condition"
         },
         {
             "source": "n8",

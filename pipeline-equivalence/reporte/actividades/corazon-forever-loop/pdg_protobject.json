@@ -10,7 +10,7 @@
         },
         {
             "id": "n2",
-            "kind": "PlayDrum",
+            "kind": "EmitSound",
             "seq": 2,
             "in_loop": true,
             "resId": 1
@@ -23,7 +23,7 @@
         },
         {
             "id": "n4",
-            "kind": "PlayDrum",
+            "kind": "EmitSound",
             "seq": 4,
             "in_loop": true,
             "resId": 1

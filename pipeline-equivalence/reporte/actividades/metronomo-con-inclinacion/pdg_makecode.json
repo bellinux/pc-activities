@@ -63,8 +63,7 @@
             "id": "n10",
             "kind": "Comparison",
             "seq": 10,
-            "in_loop": true,
-            "op": ">"
+            "in_loop": true
         },
         {
             "id": "n11",
@@ -74,7 +73,7 @@
         },
         {
             "id": "n12",
-            "kind": "PlayTone",
+            "kind": "EmitSound",
             "seq": 12,
             "in_loop": true,
             "resId": 1
@@ -145,13 +144,13 @@
             "source": "n6",
             "target": "n7",
             "type": "data",
-            "var": "ultimobeat"
+            "var": "intervalobeat"
         },
         {
             "source": "n7",
-            "target": "n9",
+            "target": "n10",
             "type": "data",
-            "var": "ultimobeat"
+            "var": "intervalobeat"
         },
         {
             "source": "n8",
@@ -160,22 +159,34 @@
             "var": "time_1"
         },
         {
+            "source": "n2",
+            "target": "n9",
+            "type": "data",
+            "var": "ultimobeat"
+        },
+        {
+            "source": "n14",
+            "target": "n9",
+            "type": "data",
+            "var": "ultimobeat"
+        },
+        {
             "source": "n9",
             "target": "n10",
             "type": "data",
             "var": "delta"
         },
         {
+            "source": "n10",
+            "target": "n11",
+            "type": "data",
+            "var": "value"
+        },
+        {
             "source": "n13",
             "target": "n14",
             "type": "data",
             "var": "time_1"
-        },
-        {
-            "source": "n12",
-            "target": "n12",
-            "type": "side_effect",
-            "var": "sound"
         }
     ]
 }

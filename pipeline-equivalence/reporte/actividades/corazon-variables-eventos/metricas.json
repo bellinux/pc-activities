@@ -1,6 +1,6 @@
 {
     "isomorphic": false,
-    "graph_edit_distance": 20.0,
+    "graph_edit_distance": 19.0,
     "nodes_G1": 17,
     "nodes_G2": 17,
     "edges_G1": 25,

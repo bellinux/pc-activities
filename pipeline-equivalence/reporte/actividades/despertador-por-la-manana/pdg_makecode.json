@@ -25,7 +25,8 @@
             "id": "n4",
             "kind": "Comparison",
             "seq": 4,
-            "in_loop": true
+            "in_loop": true,
+            "op": ">"
         },
         {
             "id": "n5",
