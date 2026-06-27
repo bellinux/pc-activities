@@ -48,6 +48,20 @@ const DIR = c => `pipeline-equivalence/reporte/actividades/${c}`
 const REF = 'pipeline-equivalence/vela-analisis/vela'   // esquema gold de referencia
 const ONT_PATH = 'pipeline-equivalence/reporte/tabla_ontologica.json'
 
+// Reglas de equivalencia (curadas, fuente de verdad). Se escriben SIEMPRE en la
+// ontología (sobreviven a los re-runs). Si cambian las reglas, edítalas aquí.
+const REGLAS = {
+  veredicto: "Dos actividades son equivalentes si lo son sus PROGRAMAS «a menos del plumbing de plataforma»: se comparan los grafos de dependencias (PDG) normalizados, coincidiendo el kind canónico, el operador aritmético, la identidad del recurso físico y la topología (def→uso).",
+  reglas: [
+    { clave: "El COLOR se ignora", detalle: "La matriz LED de Protobject tiene color; micro:bit no. Sin análogo → se descarta." },
+    { clave: "Los NOMBRES de dispositivo no importan", detalle: "DibujoLED1/2, TecladoMusical1, Inclinación2… son instancias: cuenta la FUNCIÓN, no el nombre (micro:bit tiene una sola de cada tipo)." },
+    { clave: "Los EJES x/y son indiferentes", detalle: "Leer la inclinación en x o en y es la misma operación física; se renombran por orden de aparición (tilt_1, tilt_2…). PERO usar 2 ejes distintos ≠ usar 1 solo (eso sí es una diferencia real). Igual para 2 dispositivos distintos del mismo tipo." },
+    { clave: "Hz y nota = mismo pitch", detalle: "frequency (Hz) y nota (MIDI) son dos codificaciones de la misma altura; no distinguen." },
+    { clave: "Sonido por INTENCIÓN", detalle: "PlayTone = pitch controlado/variable (xilófono); EmitSound = sonido genérico a evento (latido, bip, percusión; el «drum» va aquí); PlaySound = clip/melodía con nombre. No se distingue por timbre ni dispositivo." },
+    { clave: "Aritmética: operador sí, constante no", detalle: "Cuenta la operación (+, −, ×, ÷, round), no el número. Así «+1000» ≡ «+60» (ajuste de escala), pero «×» ≠ «+» (sensibilidad distinta)." }
+  ]
+}
+
 const AST_SCHEMA = { type: 'object', additionalProperties: false, required: ['code', 'written', 'operations'],
   properties: { code: { type: 'string' }, written: { type: 'boolean' },
     operations: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['meaning', 'makecode_label', 'protobject_label'],
@@ -107,7 +121,7 @@ INVENTARIO: ${JSON.stringify(inv)}
 DEVUELVE la ontología corregida COMPLETA ({ nodes:[...] }).`
 
 const writeOntologyPrompt = ont => `Escribe (cwd = raíz del proyecto) el archivo ${ONT_PATH} con contenido EXACTO (JSON, indent 4):
-${JSON.stringify({ descripcion: 'Ontología canónica común a las 17 actividades. El campo kind de cada nodo PDG es uno de estos canonical_node.', nodes: ont.nodes }, null, 4)}
+${JSON.stringify({ descripcion: 'Ontología canónica común a las 17 actividades. El campo kind de cada nodo PDG es uno de estos canonical_node.', reglas_de_equivalencia: REGLAS, nodes: ont.nodes }, null, 4)}
 Confirma que quedó escrito.`
 
 const pdgPrompt = (a, ont) => `Eres el agente PDG del pipeline de equivalencia, actividad "${a.code}" (${a.title}). cwd = raíz del proyecto.

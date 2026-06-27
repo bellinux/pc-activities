@@ -1,5 +1,16 @@
 {
     "descripcion": "Ontología canónica común a las 17 actividades. El campo kind de cada nodo PDG es uno de estos canonical_node.",
+    "reglas_de_equivalencia": {
+        "veredicto": "Dos actividades son equivalentes si lo son sus PROGRAMAS «a menos del plumbing de plataforma»: se comparan los grafos de dependencias (PDG) normalizados, coincidiendo el kind canónico, el operador aritmético, la identidad del recurso físico y la topología (def→uso).",
+        "reglas": [
+            { "clave": "El COLOR se ignora", "detalle": "La matriz LED de Protobject tiene color; micro:bit no. Sin análogo → se descarta." },
+            { "clave": "Los NOMBRES de dispositivo no importan", "detalle": "DibujoLED1/2, TecladoMusical1, Inclinación2… son instancias: cuenta la FUNCIÓN, no el nombre (micro:bit tiene una sola de cada tipo)." },
+            { "clave": "Los EJES x/y son indiferentes", "detalle": "Leer la inclinación en x o en y es la misma operación física; se renombran por orden de aparición (tilt_1, tilt_2…). PERO usar 2 ejes distintos ≠ usar 1 solo (eso sí es una diferencia real). Igual para 2 dispositivos distintos del mismo tipo." },
+            { "clave": "Hz y nota = mismo pitch", "detalle": "frequency (Hz) y nota (MIDI) son dos codificaciones de la misma altura; no distinguen." },
+            { "clave": "Sonido por INTENCIÓN", "detalle": "PlayTone = pitch controlado/variable (xilófono); EmitSound = sonido genérico a evento (latido, bip, percusión; el «drum» va aquí); PlaySound = clip/melodía con nombre. No se distingue por timbre ni dispositivo." },
+            { "clave": "Aritmética: operador sí, constante no", "detalle": "Cuenta la operación (+, −, ×, ÷, round), no el número. Así «+1000» ≡ «+60» (ajuste de escala), pero «×» ≠ «+» (sensibilidad distinta)." }
+        ]
+    },
     "nodes": [
         {
             "canonical_node": "ProgramStartEvent",

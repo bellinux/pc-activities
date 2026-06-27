@@ -39,6 +39,9 @@
     <h1>Dashboard Algorítmico de Equivalencia</h1>
     <p style="text-align: center; color: #666; margin-bottom: 30px;">Ejecuta <code>python -m http.server 8080</code> en esta carpeta para habilitar los fetch locales.</p>
 
+    <!-- REGLAS DE EQUIVALENCIA (leídas de la ontología; fuente única) -->
+    <div id="reglas-box" style="max-width:820px;margin:0 auto 26px auto;background:#f4f9f0;border:1px solid #cfe6bf;border-left:5px solid #5a6b3b;border-radius:8px;padding:18px 24px;"></div>
+
     <!-- ONTOLOGÍA CANÓNICA COMÚN (a las 17) -->
     <div style="max-width:780px;margin:0 auto 30px auto;background:#f5eefb;border:1px solid #d9c2ee;border-radius:8px;padding:18px 24px;">
         <h3 style="margin:0 0 6px 0;color:#8e44ad;border:none;padding:0;">🧩 Ontología canónica común</h3>
@@ -109,7 +112,18 @@
 
     fetch('reporte/tabla_ontologica.json', { cache: 'no-store' })
         .then(r => r.json())
-        .then(d => { document.getElementById('ont-count').textContent = '(' + d.nodes.length + ' conceptos)'; })
+        .then(d => {
+            document.getElementById('ont-count').textContent = '(' + d.nodes.length + ' conceptos)';
+            const R = d.reglas_de_equivalencia, box = document.getElementById('reglas-box');
+            const esc = s => (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            if (R && box) {
+                box.innerHTML = '<h3 style="margin:0 0 8px 0;color:#5a6b3b;border:none;padding:0;">⚖️ Reglas de equivalencia <span style="font-weight:400;font-size:0.7em;color:#8aa06a;">(módulo plumbing de plataforma)</span></h3>'
+                    + '<p style="margin:0 0 12px 0;color:#3f4a33;font-size:1.02em;">' + esc(R.veredicto) + '</p>'
+                    + '<ul style="margin:0;padding-left:1.1em;color:#444;font-size:0.95em;line-height:1.5;">'
+                    + (R.reglas || []).map(x => '<li style="margin-bottom:6px;"><strong>' + esc(x.clave) + '.</strong> ' + esc(x.detalle) + '</li>').join('')
+                    + '</ul>';
+            }
+        })
         .catch(() => {});
 
     fetch('actividades.json')
