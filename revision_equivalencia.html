@@ -154,6 +154,7 @@
     <div class="num">03.1</div>
     <h3>Music Visualizer</h3>
     <p class="lead">En este caso la actividad es equivalente en estructura algorítimica, pero no lo era en funcionamiento al 100%, dado que había un problema, donde al no haber ruido, el led no aparecía en pantalla (Esto en protobject), mientras que en Microbit, al no haber ruido, el LED se mostraba en la posición de más a la izquierda. Arreglé la versión de protobject para que funcione de la misma manera, añadiendo un "+ 1" a la posición X, lo cual no cambia la equivalencia, ya que lo importante es que su lógica y funcionamiento sean iguales.</p>
+    <p class="lead"><b>Recordar:</b> para que no difiera la equivalencia, es importante ver la posibilidad de que los leds empiecen a contar desde el 0 hasta el 6, parecido a microbit, de esta forma no tendremos que agregar el "+ 1".</p>
     <div class="cols">
       <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>
         <ul>
@@ -173,7 +174,7 @@
   <div class="card c5" id="a141">
     <div class="num">14.1</div>
     <h3>Ticklish Robot</h3>
-    <p class="lead">No hubo necesidad de cambios, ya son equivalentes lógica y funcionalmente, la única diferencia es que se utilizan distintos sonidos, lo cual no afecta.</p>
+    <p class="lead">Quitamos el bloque de "cambiar color de fondo" ya que es redundante y sin él sigue funcionando de la misma forma, con esto, ya son equivalentes lógica y funcionalmente, la única diferencia es que se utilizan distintos sonidos, lo cual no afecta.</p>
     <div class="cols">
       <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>
         <ul>
@@ -195,7 +196,7 @@
   <div class="card c1" id="a161">
     <div class="num">16.1</div>
     <h3>Cookie Thief Alarm</h3>
-    <p class="lead">Sin cambios, ambos funcionan lógicamente igual, la diferencia es que en Protobject se utiliza el bloque "Al iniciar el programa" para limpiar el dibujo led, pero como en microbit no es necesario, no afecta.</p>
+    <p class="lead">Realizamos cambios en la actividad de protobject, donde quitamos el bloque "al iniciar el programa", ya que no afectaba en nada a la funcionalidad y era redundante, con esto fuera, ahora son equivalentes.</p>
     <div class="cols">
       <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>
         <ul>
@@ -217,7 +218,7 @@
   <div class="card c2" id="a162">
     <div class="num">16.2</div>
     <h3>Sunflower Alarm Clock</h3>
-    <p class="lead">Sin cambios, solo se diferencian en que en protobject se detecta la luz desde la cámara trasera (al usar un teléfono celular), a diferencia de microbit, que con la placa se detecta desde arriba, a pesar de ello, no causa problemas ya que funciona de la misma manera.</p>
+    <p class="lead">Quitamos los bloques "al iniciar el programa" en ambos proyectos, mientras que en microbit para borrar la pantalla utilizamos "clear screen" tal y como en Protobject, por lo que quedó equivalente, solo se diferencian en que en protobject se detecta la luz desde la cámara trasera (al usar un teléfono celular), a diferencia de microbit, que con la placa se detecta desde arriba, a pesar de ello, no causa problemas ya que funciona de la misma manera.</p>
     <div class="cols">
       <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>
         <ul>
@@ -310,7 +311,9 @@
   <div class="card c2" id="a167">
     <div class="num">16.7</div>
     <h3>Don't Spill Liquid Game</h3>
-    <p class="lead">No requiere cambios, la única diferencia es que en microbit se define la variable "x" aparte y se redondea, pero es lo mismo que si se usara dentro de los condicionales como en protobject, además, el redondeo se realiza para escalar la variable.</p>
+    <p class="lead">Es un poco distinto en funcionalidad. La nota en protobject se mantiene, mientras que en microbit se toca por cada segundo. Además de eso, la lógica de las LEDs es distinta en protobject ya que actualmente usa colores para mostrar los rangos y toca ruido todo el rato (distintos para diferenciar si el líquido está dentro de los parámetros), mientras que microbit no cambia de color (por razones obvias) y solo toca ruido al salirse de los parámetros.
+      Además de esto, quitamos el bloque "establecer color de fondo" de protobject ya que era redundante y no se utiliza en microbit, junto con cambiar el bloque "dibujar pantalla con color" por un "clear screen".
+    </p>
     <div class="cols">
       <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>
         <ul>
@@ -332,7 +335,7 @@
   <div class="card c3" id="a171">
     <div class="num">17.1</div>
     <h3>Magic Clap Switch</h3>
-    <p class="lead">Sin cambios, misma estructura, lógica y funcionamiento, varía en cierto uso de bloques, pero son cambios menores para el uso de cada sistema.</p>
+    <p class="lead">Quitamos el bloque "establecer color de fondo a negro" en protobject, dado que en microbit esto no se realiza. Además, cambiamos el bloque de "mostrar LEDs (vacíos)" en microbit por un "clear screen" como en protobject, de esta forma queda equivalente, aunque en principio se ve de color blanco.</p>
     <div class="cols">
       <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>
         <ul>
@@ -352,7 +355,7 @@
   <div class="card c4" id="a172">
     <div class="num">17.2</div>
     <h3>Cinematic Power On</h3>
-    <p class="lead">Había solo una diferencia; en protobject para apagar la luz gradualmente, se contaba al revés, o sea, de 7 a 1, mientras que en microbit, se contaba de la misma forma que en el bucle anterior, por esto, decidí hacer que en protobject se cuente desde 1 a 7 igual que en el primer bucle, y que de esa forma los bucles queden exactamente iguales. En cuanto a lo demás, no hay diferencias.</p>
+    <p class="lead">Quitamos los bloques de "borrar dibujo en LED" y "establecer color de fondo" en el bloque "al iniciar el programa" de protobject ya que microbit no los usa, aunque es por esto que al principio la pantalla queda blanca como en la actividad anterior, además, en protobject para apagar la luz gradualmente, se contaba al revés, o sea, de 7 a 1, mientras que en microbit, se contaba de la misma forma que en el bucle anterior, por esto, decidí hacer que en protobject se cuente desde 1 a 7 igual que en el primer bucle, y que de esa forma los bucles queden exactamente iguales. En cuanto a lo demás, no hay diferencias.</p>
     <p style="color:#374151;margin:0"><b>Componentes:</b> se utilizan los mismos que en la actividad anterior.</p>
   </div>
 
