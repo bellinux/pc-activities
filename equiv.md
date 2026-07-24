@@ -161,127 +161,120 @@ implementaciones de Protobject y Microbit para cada actividad.
 ## 16.5 - My Robot Friend Heart
 
 ### Equivalencia general
--
+    No hubo cambios, ya que ambas versiones de la actividad utilizan la misma lógica y secuencia, lo distinto es que en Protobject se detecta la inclinación como tal, mientras que en Microbit se hace esto verificando la orientación de la pantalla y del logo, lo cual termina funcionando de la misma forma.
 
 ### Componentes
 
 **Protobject**
-- 
+    - DibujoLED (Para mostrar latidos)
+    - BateriaMusical (Para hacer sonar los latidos en base a la inclinación)
+    - Inclinacion (Input para determinar la velocidad de latidos)
+
 
 **Microbit**
-- 
-
-### Comentarios
--
+Los componentes se utilizan para lo mismo que en protobject:
+    - PantallaLED utilizada tal cual como dibujo led
+    - Music utilizado como la bateria musical de protobject
+    - Orientación del logo y de la pantalla como inclinación de protobject
 
 ---
 
 ## 16.6 - Magic Birthday Candle
 
 ### Equivalencia general
--
+    Sin cambios, ya es equivalente.
 
 ### Componentes
 
 **Protobject**
-- 
+    - DibujoLED (para mostrar la vela)
+    - NivelRuido (Para Apagar/Encender la vela)
 
 **Microbit**
-- 
-
-### Comentarios
--
+    - Pantalla LED (para lo mismo que dibujoled)
+    - Ruido Fuerte como input (misma función que nivel ruido)
 
 ---
 
 ## 16.7 - Don't Spill Liquid Game
 
 ### Equivalencia general
--
+    No requiere cambios, la única diferencia es que en microbit se define la variable "x" aparte y se redondea, pero es lo mismo que si se usara dentro de los condicionales como en protobject, además, el redondeo se realiza para escalar la variable. 
 
 ### Componentes
 
 **Protobject**
-- 
+    - Inclinación (Para verificar si está nivelado el dispositivo o no)
+    - DibujoLED (Para mostrar la dirección del nivel)
+    - TecladoMusical (Para indicar qué tan desnivelado está el dispositivo)
 
 **Microbit**
-- 
-
-### Comentarios
--
+    - Acceleration como Inclinación, termina funcionando de la misma forma
+    - Pantalla Led para mostrar la dirección del nivel tal y como dibujo led
+    - Music para lo mismo que teclado musical
 
 ---
 
 ## 17.1 - Magic Clap Switch
 
 ### Equivalencia general
--
+    Sin cambios, misma estructura, lógica y funcionamiento, varía en cierto uso de bloques, pero son cambios menores para el uso de cada sistema.
 
 ### Componentes
 
 **Protobject**
-- 
+    - NivelRuido (Para detectar aumento repentino y hacer switch de la luz)
+    - DibujoLED (Para mostrar la luz)
 
 **Microbit**
-- 
-
-### Comentarios
--
+    - Ruido fuerte como input para lo mismo que NivelRuido
+    - Pantalla LED Con la misma función que DibujoLED
 
 ---
 
 ## 17.2 - Cinematic Power On
 
 ### Equivalencia general
--
+    Había solo una diferencia; En protobject para apagar la luz gradualmente, se contaba al revés, o sea, de 7 a 1, mientras que en microbit, se contaba de la misma forma que en el bucle anterior, por esto, decidí hacer que en protobject se cuente desde 1 a 7 igual que en el primer bucle, y que de esa forma los bucles queden exactamente iguales. En cuanto a lo demás, no hay diferencias.
 
 ### Componentes
 
-**Protobject**
-- 
-
-**Microbit**
-- 
-
-### Comentarios
--
+Se utilizan los mismos que en la actividad anterior.
 
 ---
 
 ## 19.1 - Digital Hot Potato
 
 ### Equivalencia general
--
+    Sin cambios, ya son equivalentes.
 
 ### Componentes
 
 **Protobject**
-- 
+    - ReproductorSonido (Para indicar cuándo se está en juego y cuándo se pierde)
+    - BotónTáctil (Para iniciar nueva ronda)
 
 **Microbit**
-- 
-
-### Comentarios
--
+    - Music (para lo mismo que reproductor sonido)
+    - Logo como input para funcionar como BotonTactil
 
 ---
 
 ## 22.1 - DJ Metronome
 
 ### Equivalencia general
--
+    Arreglé la versión de microbit ya que no funcionaba (debido a que intervaloBeat no estaba definido) y por lo tanto, no era equivalente en funcionamiento ni lógica a protobject, ahora que lo arreglé, funcionan de la misma forma.
 
 ### Componentes
 
 **Protobject**
-- 
+    - Inclinación (Para calcular los bpm)
+    - BateriaMusical (Para hacer el sonido de pulso)
 
 **Microbit**
-- 
-
-### Comentarios
--
-
+    - Acceleration para utilizarlo como inclinación como en protobject
+    - Music como bateria musical
+    
 ---
 
 ## 22.2 - Applause Battle
