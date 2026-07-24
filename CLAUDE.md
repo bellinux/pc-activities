@@ -56,25 +56,25 @@ Repo originariamente clonato da `github.com/bellinux/pc-activities` e poi riorga
 
 | # | slug | code (Protobject) | título real (dal `.md`) |
 |--:|---|---|---|
-| 1 | `02.1-xylophone` | `xilofono-inclinacion` | El Xilófono Mágico Inclinable |
-| 2 | `02.2-music-visualizer` | `luci-discoteca-ruido` | El Visualizador de Música |
-| 3 | `03.1-led-xylophone` | `xilofono-inclinacion-con-nota-led` | El Xilófono del Futuro (con LEDs) |
-| 4 | `04.1-heart-beat` | `corazon-forever-loop` | El Llavero de Corazón Luminoso |
+| 1 | `02.1-heart-beat` | `corazon-forever-loop` | El Llavero de Corazón Luminoso |
+| 2 | `02.2-xylophone` | `xilofono-inclinacion` | El Xilófono Mágico Inclinable |
+| 3 | `02.3-led-xylophone` | `xilofono-inclinacion-con-nota-led` | El Xilófono del Futuro (con LEDs) |
+| 4 | `03.1-music-visualizer` | `luci-discoteca-ruido` | El Visualizador de Música |
 | 5 | `14.1-ticklish-robot` | `robot-risa-simpatica-al-ruido` | El Robot Cosquilloso |
-| 6 | `14.2-my-robot-friend-heart` | `corazon-variables-eventos` | El Corazón de Mi Robot Amigo |
-| 7 | `16.1-cookie-thief-alarm` | `alarma-caja-galletas` | ¡Alarma: El Ladrón de Galletas! |
-| 8 | `16.2-sunflower-alarm-clock` | `despertador-por-la-manana` | El Despertador de Girasol |
-| 9 | `16.3-bat-in-the-dark` | `luces-de-fiesta-al-oscurecer` | El Vuelo del Murciélago Nocturno |
-| 10 | `16.4-robot-activation-challenge` | `juego-toques` | ¡El Desafío de Activación del Robot! |
-| 11 | `16.5-magic-clap-switch` | `luz-encendida-al-ruido` | El Interruptor Mágico de Aplausos |
-| 12 | `17.1-magic-birthday-candle` | `flama-vela-con-soplo` | La Vela Mágica de Cumpleaños |
-| 13 | `19.1-digital-hot-potato` | `papas-caliente-juego` | La Papa Explosiva Digital |
-| 14 | `21.1-cinematic-power-on` | `luz-encendida-ruido-animacion` | El Encendido Cinematográfico |
-| 15 | `22.1-dj-metronome` | `metronomo-con-inclinacion` | El Metrónomo de DJ |
-| 16 | `22.2-applause-battle` | `aplausometro-tiempo-aplausos` | La Batalla de Aplausos |
-| 17 | `22.3-dont-spill-liquid-game` | `nivel-con-ruido` | ¡No Derrames el Líquido! - El Juego de Pulso |
+| 6 | `16.1-cookie-thief-alarm` | `alarma-caja-galletas` | ¡Alarma: El Ladrón de Galletas! |
+| 7 | `16.2-sunflower-alarm-clock` | `despertador-por-la-manana` | El Despertador de Girasol |
+| 8 | `16.3-bat-in-the-dark` | `luces-de-fiesta-al-oscurecer` | El Vuelo del Murciélago Nocturno |
+| 9 | `16.4-robot-activation-challenge` | `juego-toques` | ¡El Desafío de Activación del Robot! |
+| 10 | `16.5-my-robot-friend-heart` | `corazon-variables-eventos` | El Corazón de Mi Robot Amigo |
+| 11 | `16.6-magic-birthday-candle` | `flama-vela-con-soplo` | La Vela Mágica de Cumpleaños |
+| 12 | `16.7-dont-spill-liquid-game` | `nivel-con-ruido` | ¡No Derrames el Líquido! - El Juego de Pulso |
+| 13 | `17.1-magic-clap-switch` | `luz-encendida-al-ruido` | El Interruptor Mágico de Aplausos |
+| 14 | `17.2-cinematic-power-on` | `luz-encendida-ruido-animacion` | El Encendido Cinematográfico |
+| 15 | `19.1-digital-hot-potato` | `papas-caliente-juego` | La Papa Explosiva Digital |
+| 16 | `22.1-dj-metronome` | `metronomo-con-inclinacion` | El Metrónomo de DJ |
+| 17 | `22.2-applause-battle` | `aplausometro-tiempo-aplausos` | La Batalla de Aplausos |
 
-**Logica di entrata (insight dell'autore):** `04.1-heart-beat` era progettata come PRIMA lezione (un solo output,
+**Logica di entrata (insight dell'autore):** `02.1-heart-beat` era progettata come PRIMA lezione (un solo output,
 costruisce la logica base in ~10 min); oggi è 4ª. Documentato in §C del report e in `planificacion.html`.
 NON riordinare senza che l'utente lo chieda.
 
@@ -88,7 +88,7 @@ python -m http.server 8000      # → http://localhost:8000/
 
 # Decoder Protobject (offline, dalla cartella protobject/)
 python decode_ptj.py            # tutti i 17
-python decode_ptj.py 02.1-xylophone   # solo alcuni (per slug)
+python decode_ptj.py 02.2-xylophone   # solo alcuni (per slug)
 ```
 
 - La `pipeline-equivalence/` usa un proprio env miniconda (`pdg-vela`, porta 8080) per i suoi script Python.
@@ -136,7 +136,7 @@ python decode_ptj.py 02.1-xylophone   # solo alcuni (per slug)
 
 - **`pipeline-equivalence/`**: pipeline **ESEGUITA** per le 17 (estrazione JS deterministica → AST → **ontologia comune** verificata avversarialmente → PDG → metriche Python). **Per rieseguirla quando cambiano attività → segui `pipeline-equivalence/prompt.md`** (workflow `reporte/scripts/pipeline_llm.js` + `run_all.py` env `pdg-vela`). Aperto: rivedere anomalie GED (es. `corazon-variables-eventos` GED=18 = ordine di init di variabili indipendenti, fedele ma penalizzato dalla metrica); tradurre IT→ES i testi residui.
 - **Decisioni di redazione NON auto-applicate** (l'utente è indeciso, non toccare senza ok): `16.1` "Sino" (nome blocco),
-  `16.4` energía/toques, `17.1` flama/llama, `22.1` ultimoLatido, terminologia `for`/`while` → `contar con`/`repetir mientras`.
+  `16.4` energía/toques, `16.6` flama/llama, `22.1` ultimoLatido, terminologia `for`/`while` → `contar con`/`repetir mientras`.
 - **§F**: ~12 correzioni che stanno nei **commenti del CODICE** (blocchi), da fare a mano in Protobject (l'utente).
 - **Bug noti non risolti** (scelta dell'utente): teacher-modal `PLACEHOLDER_0` (marked converte `__PLACEHOLDER_0__`
   in grassetto rompendo l'iniezione di `{{learn}}` in `openTeacherModal`).

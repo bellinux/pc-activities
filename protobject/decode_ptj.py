@@ -4,23 +4,23 @@ import xml.etree.ElementTree as ET
 
 # (slug, code) nell'ordine della sequenza didattica
 ACTS = [
-    ("02.1-xylophone", "xilofono-inclinacion"),
-    ("02.2-music-visualizer", "luci-discoteca-ruido"),
-    ("03.1-led-xylophone", "xilofono-inclinacion-con-nota-led"),
-    ("04.1-heart-beat", "corazon-forever-loop"),
+    ("02.1-heart-beat", "corazon-forever-loop"),
+    ("02.2-xylophone", "xilofono-inclinacion"),
+    ("02.3-led-xylophone", "xilofono-inclinacion-con-nota-led"),
+    ("03.1-music-visualizer", "luci-discoteca-ruido"),
     ("14.1-ticklish-robot", "robot-risa-simpatica-al-ruido"),
-    ("14.2-my-robot-friend-heart", "corazon-variables-eventos"),
     ("16.1-cookie-thief-alarm", "alarma-caja-galletas"),
     ("16.2-sunflower-alarm-clock", "despertador-por-la-manana"),
     ("16.3-bat-in-the-dark", "luces-de-fiesta-al-oscurecer"),
     ("16.4-robot-activation-challenge", "juego-toques"),
-    ("16.5-magic-clap-switch", "luz-encendida-al-ruido"),
-    ("17.1-magic-birthday-candle", "flama-vela-con-soplo"),
+    ("16.5-my-robot-friend-heart", "corazon-variables-eventos"),
+    ("16.6-magic-birthday-candle", "flama-vela-con-soplo"),
+    ("16.7-dont-spill-liquid-game", "nivel-con-ruido"),
+    ("17.1-magic-clap-switch", "luz-encendida-al-ruido"),
+    ("17.2-cinematic-power-on", "luz-encendida-ruido-animacion"),
     ("19.1-digital-hot-potato", "papas-caliente-juego"),
-    ("21.1-cinematic-power-on", "luz-encendida-ruido-animacion"),
     ("22.1-dj-metronome", "metronomo-con-inclinacion"),
-    ("22.2-applause-battle", "aplausometro-tiempo-aplausos"),
-    ("22.3-dont-spill-liquid-game", "nivel-con-ruido"),
+    ("22.2-applause-battle", "aplausometro-tiempo-aplausos")
 ]
 
 BASE = os.path.dirname(os.path.abspath(__file__))
