@@ -1,650 +1,427 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Equivalencia entre Protobject y Microbit</title>
-    <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 0 20px;
-            line-height: 1.6;
-            background: #f5f5f5;
-            color: #222;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Equivalencia entre Protobject y Microbit</title>
+<style>
+  :root{
+    --bg:#f6f7f9; --card:#ffffff; --ink:#1f2933; --muted:#64748b; --line:#e3e8ee;
+    --indigo:#4f46e5; --indigo-bg:#eef0fe;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.7;font-size:15px}
+  .wrap{max-width:940px;margin:0 auto;padding:36px 20px 90px}
+  header.hero{border-bottom:2px solid var(--ink);padding-bottom:22px;margin-bottom:8px}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--indigo)}
+  h1{font-size:30px;margin:6px 0 8px;letter-spacing:-.015em;line-height:1.2}
+  .lede{color:#475569;font-size:16px;max-width:680px}
+  .intro{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin:22px 0;color:#374151}
+  .intro b{color:var(--ink)}
+  h2.section-title{font-size:18px;margin:34px 0 6px}
 
-        h1 {
-            text-align: center;
-            border-bottom: 3px solid #333;
-            padding-bottom: 10px;
-        }
+  .toc{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 30px}
+  .toc a{text-decoration:none;font-size:12.5px;font-weight:600;color:var(--indigo);
+    background:var(--indigo-bg);border:1px solid #dfe1fb;border-radius:999px;padding:5px 12px}
+  .toc a:hover{background:#e2e4fd}
 
-        section {
-            background: white;
-            margin: 30px 0;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 6px rgba(0,0,0,.1);
-        }
+  .card{background:var(--card);border:1px solid var(--line);border-left-width:5px;border-radius:12px;
+    padding:22px 24px;margin:16px 0;box-shadow:0 1px 2px rgba(16,24,40,.04);scroll-margin-top:20px}
+  .card h3{margin:0 0 4px;font-size:18px}
+  .card .num{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .card .lead{margin:10px 0 16px;color:#374151}
+  .card .lead b{color:var(--ink)}
 
-        h2 {
-            border-bottom: 2px solid #ddd;
-            padding-bottom: 8px;
-        }
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media (max-width:640px){.cols{grid-template-columns:1fr}}
+  .col{border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:#fbfbfd}
+  .col h4{margin:0 0 8px;font-size:13px;display:flex;align-items:center;gap:8px}
+  .col .ic{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex:none;font-weight:700;font-size:11px}
+  .col ul{margin:0;padding-left:18px;font-size:13.5px;color:#374151}
+  .col li{margin:4px 0}
 
-        h3 {
-            margin-top: 20px;
-            color: #444;
-        }
+  .c1{border-left-color:#4f46e5}.c1 .col.pb .ic{background:#eef0fe;color:#4f46e5}
+  .c2{border-left-color:#1f7a45}.c2 .col.pb .ic{background:#e9f6ee;color:#1f7a45}
+  .c3{border-left-color:#e0992a}.c3 .col.pb .ic{background:#fdf2e2;color:#b06f12}
+  .c4{border-left-color:#0e7490}.c4 .col.pb .ic{background:#e4f4f8;color:#0e7490}
+  .c5{border-left-color:#8B2418}.c5 .col.pb .ic{background:#f6e9e7;color:#8B2418}
+  .col.mb .ic{background:#eef2f7;color:#475569}
 
-        .comment-box {
-            min-height: 70px;
-            border: 1px solid #bbb;
-            border-radius: 6px;
-            margin-top: 8px;
-            padding: 10px;
-            background: #fafafa;
-        }
-
-        ul {
-            margin-top: 8px;
-        }
-
-        li {
-            margin: 6px 0;
-        }
-    </style>
+  .note{font-size:12.5px;color:var(--muted);background:#fff8ec;border:1px solid #f3e2b3;border-radius:8px;padding:10px 14px;margin:14px 0}
+  code{font-family:ui-monospace,Menlo,Consolas,monospace;background:#eef2f7;border:1px solid #e0e7ef;border-radius:5px;padding:0 5px;font-size:12.5px}
+  footer{margin-top:36px;color:var(--muted);font-size:12px;text-align:center}
+</style>
 </head>
 <body>
+<div class="wrap">
 
-<h1>Equivalencia entre Protobject y Microbit</h1>
+  <header class="hero">
+    <div class="eyebrow">Pensamiento Computacional</div>
+    <h1>Equivalencia entre Protobject y Microbit</h1>
+    <p class="lede">Registro de observaciones sobre la equivalencia entre las implementaciones de <b>Protobject</b> y <b>micro:bit</b> para cada actividad: qué componentes se usan de cada lado y si hubo que ajustar algo para que ambas versiones funcionen igual.</p>
+  </header>
 
-<p>
-Documento para registrar observaciones sobre la equivalencia entre las
-implementaciones de Protobject y Microbit para cada actividad.
-</p>
+  <div class="intro">
+    Cada ficha describe una actividad, explica en qué se parecen (o en qué se tuvieron que arreglar) las dos versiones, y lista los componentes equivalentes de <b>Protobject</b> y de <b>micro:bit</b> lado a lado.
+  </div>
 
-<section>
-<h2>02.1 - Heart Beat</h2>
+  <h2 class="section-title">Actividades</h2>
+  <div class="toc">
+    <a href="#a021">02.1 Heart Beat</a>
+    <a href="#a022">02.2 Xylophone</a>
+    <a href="#a023">02.3 LED Xylophone</a>
+    <a href="#a031">03.1 Music Visualizer</a>
+    <a href="#a141">14.1 Ticklish Robot</a>
+    <a href="#a161">16.1 Cookie Thief Alarm</a>
+    <a href="#a162">16.2 Sunflower Alarm Clock</a>
+    <a href="#a163">16.3 Bat in the Dark</a>
+    <a href="#a164">16.4 Robot Activation Challenge</a>
+    <a href="#a165">16.5 My Robot Friend Heart</a>
+    <a href="#a166">16.6 Magic Birthday Candle</a>
+    <a href="#a167">16.7 Don't Spill Liquid Game</a>
+    <a href="#a171">17.1 Magic Clap Switch</a>
+    <a href="#a172">17.2 Cinematic Power On</a>
+    <a href="#a191">19.1 Digital Hot Potato</a>
+    <a href="#a221">22.1 DJ Metronome</a>
+    <a href="#a222">22.2 Scream Battle</a>
+  </div>
 
-<h3>Equivalencia general</h3>
-<div class="comment-box">
-    Los .ptj y .hex utilizan directamente los mismos elementos para su funcionamiento, la estructura es exactamente igual y el funcionamiento también. Por lo tanto, son equivalentes.
+  <div class="card c1" id="a021">
+    <div class="num">02.1</div>
+    <h3>Heart Beat</h3>
+    <p class="lead">Los .ptj y .hex utilizan directamente los mismos elementos para su funcionamiento, la estructura es exactamente igual y el funcionamiento también. Por lo tanto, son <b>equivalentes</b>.</p>
+    <div class="cols">
+      <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>
+        <ul>
+          <li>DibujoLED (Para mostrar el corazón)</li>
+          <li>BateríaMusical (Para los latidos)</li>
+        </ul>
+      </div>
+      <div class="col mb"><h4><span class="ic">M</span>Microbit</h4>
+        <ul>
+          <li>Pantalla LED (Para mostrar el corazón)</li>
+          <li>Music (Para los latidos)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card c2" id="a022">
+    <div class="num">02.2</div>
+    <h3>Xylophone</h3>
+    <p class="lead">La estructura y funcionamiento son los mismos, la única diferencia es que en protobject se debe escalar con un valor distinto la inclinación para obtener el sonido de la nota musical, lo cual no es un problema.</p>
+    <div class="cols">
+      <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>
+        <ul>
+          <li>TecladoMusical (Para hacer sonar las notas musicales)</li>
+          <li>Inclinación (Para detectar la inclinación del dispositivo)</li>
+        </ul>
+      </div>
+      <div class="col mb"><h4><span class="ic">M</span>Microbit</h4>
+        <ul>
+          <li>Music (Utilizando ring tone para el sonido)</li>
+          <li>Acceleration (El movimiento de la placa)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card c3" id="a023">
+    <div class="num">02.3</div>
+    <h3>LED Xylophone</h3>
+    <p class="lead">Ocurre lo mismo que con Xylophone, donde nuevamente la estructura y funcionamiento es exactamente igual (la única diferencia es que en celular, la actividad está hecha para que este sea utilizado en horizontal, pero las coordenadas utilizadas es en base a la posición vertical del teléfono, al final esto no da problemas ya que funciona de igual forma que en microbit al utilizarlo en horizontal), también se escalan de manera distinta ciertos valores, pero como mencioné, es necesario ya que cada sistema es distinto.</p>
+    <div class="cols">
+      <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>
+        <ul>
+          <li>TecladoMusical (Para hacer sonar las notas musicales)</li>
+          <li>Inclinación (Para detectar la inclinación del dispositivo)</li>
+          <li>DibujoLED (Para mostrar la posición del led respecto a la inclinación)</li>
+        </ul>
+      </div>
+      <div class="col mb"><h4><span class="ic">M</span>Microbit</h4>
+        <ul>
+          <li>Music (Utilizando ring tone para el sonido)</li>
+          <li>Acceleration (El movimiento de la placa)</li>
+          <li>Pantalla LED (También para mostrar la posición del led respecto a la inclinación de la placa)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card c4" id="a031">
+    <div class="num">03.1</div>
+    <h3>Music Visualizer</h3>
+    <p class="lead">En este caso la actividad es equivalente en estructura algorítimica, pero no lo era en funcionamiento al 100%, dado que había un problema, donde al no haber ruido, el led no aparecía en pantalla (Esto en protobject), mientras que en Microbit, al no haber ruido, el LED se mostraba en la posición de más a la izquierda. Arreglé la versión de protobject para que funcione de la misma manera, añadiendo un "+ 1" a la posición X, lo cual no cambia la equivalencia, ya que lo importante es que su lógica y funcionamiento sean iguales.</p>
+    <div class="cols">
+      <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>
+        <ul>
+          <li>DibujoLED (Para mostrar la posición del led respecto al ruido)</li>
+          <li>NivelRuido (Para recibir el ruido como entrada)</li>
+        </ul>
+      </div>
+      <div class="col mb"><h4><span class="ic">M</span>Microbit</h4>
+        <ul>
+          <li>Pantalla LED (Se utilizan para exactamente lo mismo)</li>
+          <li>SoundLevel</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card c5" id="a141">
+    <div class="num">14.1</div>
+    <h3>Ticklish Robot</h3>
+    <p class="lead">No hubo necesidad de cambios, ya son equivalentes lógica y funcionalmente, la única diferencia es que se utilizan distintos sonidos, lo cual no afecta.</p>
+    <div class="cols">
+      <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>
+        <ul>
+          <li>NivelRuido (Para detectar aumento de ruido repentino)</li>
+          <li>DibujoLED (Para animar la cara al aumentar el ruido)</li>
+          <li>ReproductorSonido (Para reproducir un sonido al aumentar el ruido)</li>
+        </ul>
+      </div>
+      <div class="col mb"><h4><span class="ic">M</span>Microbit</h4>
+        <ul>
+          <li>Input de sonido (Para el nivel de ruido)</li>
+          <li>Pantalla LED (Como el dibujo led)</li>
+          <li>Music (Como reproductor de sonido)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card c1" id="a161">
+    <div class="num">16.1</div>
+    <h3>Cookie Thief Alarm</h3>
+    <p class="lead">Sin cambios, ambos funcionan lógicamente igual, la diferencia es que en Protobject se utiliza el bloque "Al iniciar el programa" para limpiar el dibujo led, pero como en microbit no es necesario, no afecta.</p>
+    <div class="cols">
+      <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>
+        <ul>
+          <li>Inclinación (Para detectar si se abrió la caja)</li>
+          <li>DibujoLED (Para mostrar la cara de alerta al abrir la caja)</li>
+          <li>ReproductorSonido (Para hacer sonar la alarma)</li>
+        </ul>
+      </div>
+      <div class="col mb"><h4><span class="ic">M</span>Microbit</h4>
+        <ul>
+          <li>Acceleration (Equivalente a inclinación en este contexto)</li>
+          <li>Pantalla Led (equivalente a DibujoLed)</li>
+          <li>Music (Como reproductor de sonido)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card c2" id="a162">
+    <div class="num">16.2</div>
+    <h3>Sunflower Alarm Clock</h3>
+    <p class="lead">Sin cambios, solo se diferencian en que en protobject se detecta la luz desde la cámara trasera (al usar un teléfono celular), a diferencia de microbit, que con la placa se detecta desde arriba, a pesar de ello, no causa problemas ya que funciona de la misma manera.</p>
+    <div class="cols">
+      <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>
+        <ul>
+          <li>IntensidadLuz (Para detectar nivel de luz)</li>
+          <li>ReproductorSonido (Para colocar música al superar nivel de luz)</li>
+          <li>DibujoLED (Para mostrar girasol al haber luz)</li>
+        </ul>
+      </div>
+      <div class="col mb"><h4><span class="ic">M</span>Microbit</h4>
+        <ul>
+          <li>LightLevel (Se utiliza igual que IntensidadLuz)</li>
+          <li>Music (Como reproductor sonido)</li>
+          <li>Pantalla LED (Mismo uso que DibujoLED)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card c3" id="a163">
+    <div class="num">16.3</div>
+    <h3>Bat in the Dark</h3>
+    <p class="lead">Exactamente igual que con el caso anterior, no hay diferencias.</p>
+    <p style="color:#374151;margin:0"><b>Componentes:</b> se utilizan los mismos que en la actividad anterior, pero sin Music y ReproductorSonido.</p>
+  </div>
+
+  <div class="card c4" id="a164">
+    <div class="num">16.4</div>
+    <h3>Robot Activation Challenge</h3>
+    <p class="lead">La actividad en protobject era distinta a la de microbit, por lo que me aseguré de hacer que ambas tengan la misma estructura, lógica y funcionamiento, de modo que ahora sí son equivalentes. Se utilizan distintos valores máximos de energía para la activación dados los tamaños de las pantallas leds de cada dispositivo, pero no afecta.</p>
+    <div class="cols">
+      <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>
+        <ul>
+          <li>BotónTáctil (Para aumentar energía)</li>
+          <li>ReproductorSonido (Para colocar música al activar el robot)</li>
+          <li>DibujoLED (Para mostrar cara del robot al activar)</li>
+        </ul>
+      </div>
+      <div class="col mb"><h4><span class="ic">M</span>Microbit</h4>
+        <ul>
+          <li>Botón del logo (Como botón táctil)</li>
+          <li>Music (como reproductor de sonido)</li>
+          <li>Pantalla led (como el dibujo led)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card c5" id="a165">
+    <div class="num">16.5</div>
+    <h3>My Robot Friend Heart</h3>
+    <p class="lead">No hubo cambios, ya que ambas versiones de la actividad utilizan la misma lógica y secuencia, lo distinto es que en Protobject se detecta la inclinación como tal, mientras que en Microbit se hace esto verificando la orientación de la pantalla y del logo, lo cual termina funcionando de la misma forma.</p>
+    <div class="cols">
+      <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>
+        <ul>
+          <li>DibujoLED (Para mostrar latidos)</li>
+          <li>BateriaMusical (Para hacer sonar los latidos en base a la inclinación)</li>
+          <li>Inclinacion (Input para determinar la velocidad de latidos)</li>
+        </ul>
+      </div>
+      <div class="col mb"><h4><span class="ic">M</span>Microbit</h4>
+        <ul>
+          <li>PantallaLED utilizada tal cual como dibujo led</li>
+          <li>Music utilizado como la bateria musical de protobject</li>
+          <li>Orientación del logo y de la pantalla como inclinación de protobject</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card c1" id="a166">
+    <div class="num">16.6</div>
+    <h3>Magic Birthday Candle</h3>
+    <p class="lead">Sin cambios, ya es equivalente.</p>
+    <div class="cols">
+      <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>
+        <ul>
+          <li>DibujoLED (para mostrar la vela)</li>
+          <li>NivelRuido (Para Apagar/Encender la vela)</li>
+        </ul>
+      </div>
+      <div class="col mb"><h4><span class="ic">M</span>Microbit</h4>
+        <ul>
+          <li>Pantalla LED (para lo mismo que dibujoled)</li>
+          <li>Ruido Fuerte como input (misma función que nivel ruido)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card c2" id="a167">
+    <div class="num">16.7</div>
+    <h3>Don't Spill Liquid Game</h3>
+    <p class="lead">No requiere cambios, la única diferencia es que en microbit se define la variable "x" aparte y se redondea, pero es lo mismo que si se usara dentro de los condicionales como en protobject, además, el redondeo se realiza para escalar la variable.</p>
+    <div class="cols">
+      <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>
+        <ul>
+          <li>Inclinación (Para verificar si está nivelado el dispositivo o no)</li>
+          <li>DibujoLED (Para mostrar la dirección del nivel)</li>
+          <li>TecladoMusical (Para indicar qué tan desnivelado está el dispositivo)</li>
+        </ul>
+      </div>
+      <div class="col mb"><h4><span class="ic">M</span>Microbit</h4>
+        <ul>
+          <li>Acceleration como Inclinación, termina funcionando de la misma forma</li>
+          <li>Pantalla Led para mostrar la dirección del nivel tal y como dibujo led</li>
+          <li>Music para lo mismo que teclado musical</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card c3" id="a171">
+    <div class="num">17.1</div>
+    <h3>Magic Clap Switch</h3>
+    <p class="lead">Sin cambios, misma estructura, lógica y funcionamiento, varía en cierto uso de bloques, pero son cambios menores para el uso de cada sistema.</p>
+    <div class="cols">
+      <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>
+        <ul>
+          <li>NivelRuido (Para detectar aumento repentino y hacer switch de la luz)</li>
+          <li>DibujoLED (Para mostrar la luz)</li>
+        </ul>
+      </div>
+      <div class="col mb"><h4><span class="ic">M</span>Microbit</h4>
+        <ul>
+          <li>Ruido fuerte como input para lo mismo que NivelRuido</li>
+          <li>Pantalla LED Con la misma función que DibujoLED</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card c4" id="a172">
+    <div class="num">17.2</div>
+    <h3>Cinematic Power On</h3>
+    <p class="lead">Había solo una diferencia; en protobject para apagar la luz gradualmente, se contaba al revés, o sea, de 7 a 1, mientras que en microbit, se contaba de la misma forma que en el bucle anterior, por esto, decidí hacer que en protobject se cuente desde 1 a 7 igual que en el primer bucle, y que de esa forma los bucles queden exactamente iguales. En cuanto a lo demás, no hay diferencias.</p>
+    <p style="color:#374151;margin:0"><b>Componentes:</b> se utilizan los mismos que en la actividad anterior.</p>
+  </div>
+
+  <div class="card c5" id="a191">
+    <div class="num">19.1</div>
+    <h3>Digital Hot Potato</h3>
+    <p class="lead">Sin cambios, ya son equivalentes.</p>
+    <div class="cols">
+      <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>
+        <ul>
+          <li>ReproductorSonido (Para indicar cuándo se está en juego y cuándo se pierde)</li>
+          <li>BotónTáctil (Para iniciar nueva ronda)</li>
+        </ul>
+      </div>
+      <div class="col mb"><h4><span class="ic">M</span>Microbit</h4>
+        <ul>
+          <li>Music (para lo mismo que reproductor sonido)</li>
+          <li>Logo como input para funcionar como BotonTactil</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card c1" id="a221">
+    <div class="num">22.1</div>
+    <h3>DJ Metronome</h3>
+    <p class="lead">Arreglé la versión de microbit ya que no funcionaba (debido a que intervaloBeat no estaba definido) y por lo tanto, no era equivalente en funcionamiento ni lógica a protobject, ahora que lo arreglé, funcionan de la misma forma.</p>
+    <div class="cols">
+      <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>
+        <ul>
+          <li>Inclinación (Para calcular los bpm)</li>
+          <li>BateriaMusical (Para hacer el sonido de pulso)</li>
+        </ul>
+      </div>
+      <div class="col mb"><h4><span class="ic">M</span>Microbit</h4>
+        <ul>
+          <li>Acceleration para utilizarlo como inclinación como en protobject</li>
+          <li>Music como bateria musical</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card c2" id="a222">
+    <div class="num">22.2</div>
+    <h3>Scream Battle</h3>
+    <p class="lead">Arreglé la versión de protobject ya que no cargaba en el visualizador. A pesar de que microbit muestra los dígitos de forma distinta que protobject, son equivalentes ya que eso es algo que depende meramente del sistema y no del algoritmo (microbit muestra números en la pantalla LED y protobject en DibujarEscribir), además de eso, para que se asemeje más la forma de visualización del tiempo de microbit a protobject, hice que el tiempo no se pueda mostrar en decimales para que se vea de forma directa y no hayan saltos gigantezcos entre los números al tardar tanto en mostrar toda la animación. Con este arreglo, la actividad queda mucho más parecida en el lado funcional.</p>
+    <div class="cols">
+      <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>
+        <ul>
+          <li>NivelRuido (para detectar el ruido constante)</li>
+          <li>DibujarEscribir (para mostrar el tiempo del grito)</li>
+        </ul>
+      </div>
+      <div class="col mb"><h4><span class="ic">M</span>Microbit</h4>
+        <ul>
+          <li>Ruido fuerte como input, hace lo mismo que NivelRuido</li>
+          <li>Pantalla Led para mostrar el tiempo del grito</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>Nota:</b> "Equivalente" significa que la lógica, la estructura del programa y el comportamiento observable son los mismos entre Protobject y micro:bit, aunque cada plataforma use bloques o sensores distintos para lograrlo.
+  </div>
+
+  <footer>Protobject ↔ micro:bit · Registro de equivalencias por actividad.</footer>
+
 </div>
-
-<h3>Componentes</h3>
-<ul>
-<li>Protobject:
-    <ol>- DibujoLED (Para mostrar el corazón)</ol> 
-    <ol>- BateríaMusical (Para los latidos)</ol> 
-</li>
-<li>Microbit:
-    <ol>- Pantalla LED (Para mostrar el corazón)</ol> 
-    <ol>- Music (Para los latidos)</ol> 
-</li>
-</ul>
-
-<section>
-<h2>02.2 - Xylophone</h2>
-
-<h3>Equivalencia general</h3>
-<div class="comment-box"></div>
-
-<h3>Sensores / Entradas</h3>
-<ul>
-<li>Protobject:</li>
-<li>Microbit:</li>
-<li>Comentarios:</li>
-</ul>
-<div class="comment-box"></div>
-
-<h3>Actuadores / Salidas</h3>
-<ul>
-<li>Protobject:</li>
-<li>Microbit:</li>
-<li>Comentarios:</li>
-</ul>
-<div class="comment-box"></div>
-
-<h3>Lógica del programa</h3>
-<div class="comment-box"></div>
-
-<h3>Diferencias encontradas</h3>
-<div class="comment-box"></div>
-
-<h3>Adaptaciones necesarias</h3>
-<div class="comment-box"></div>
-
-<h3>Observaciones adicionales</h3>
-<div class="comment-box"></div>
-</section>
-
-<section>
-<h2>02.3 - LED Xylophone</h2>
-
-<h3>Equivalencia general</h3>
-<div class="comment-box"></div>
-
-<h3>Sensores / Entradas</h3>
-<ul>
-<li>Protobject:</li>
-<li>Microbit:</li>
-<li>Comentarios:</li>
-</ul>
-<div class="comment-box"></div>
-
-<h3>Actuadores / Salidas</h3>
-<ul>
-<li>Protobject:</li>
-<li>Microbit:</li>
-<li>Comentarios:</li>
-</ul>
-<div class="comment-box"></div>
-
-<h3>Lógica del programa</h3>
-<div class="comment-box"></div>
-
-<h3>Diferencias encontradas</h3>
-<div class="comment-box"></div>
-
-<h3>Adaptaciones necesarias</h3>
-<div class="comment-box"></div>
-
-<h3>Observaciones adicionales</h3>
-<div class="comment-box"></div>
-</section>
-
-<section>
-<h2>03.1 - Music Visualizer</h2>
-
-<h3>Equivalencia general</h3>
-<div class="comment-box"></div>
-
-<h3>Sensores / Entradas</h3>
-<ul>
-<li>Protobject:</li>
-<li>Microbit:</li>
-<li>Comentarios:</li>
-</ul>
-<div class="comment-box"></div>
-
-<h3>Actuadores / Salidas</h3>
-<ul>
-<li>Protobject:</li>
-<li>Microbit:</li>
-<li>Comentarios:</li>
-</ul>
-<div class="comment-box"></div>
-
-<h3>Lógica del programa</h3>
-<div class="comment-box"></div>
-
-<h3>Diferencias encontradas</h3>
-<div class="comment-box"></div>
-
-<h3>Adaptaciones necesarias</h3>
-<div class="comment-box"></div>
-
-<h3>Observaciones adicionales</h3>
-<div class="comment-box"></div>
-</section>
-
-<section>
-<h2>14.1 - Ticklish Robot</h2>
-
-<h3>Equivalencia general</h3>
-<div class="comment-box"></div>
-
-<h3>Sensores / Entradas</h3>
-<ul>
-<li>Protobject:</li>
-<li>Microbit:</li>
-<li>Comentarios:</li>
-</ul>
-<div class="comment-box"></div>
-
-<h3>Actuadores / Salidas</h3>
-<ul>
-<li>Protobject:</li>
-<li>Microbit:</li>
-<li>Comentarios:</li>
-</ul>
-<div class="comment-box"></div>
-
-<h3>Lógica del programa</h3>
-<div class="comment-box"></div>
-
-<h3>Diferencias encontradas</h3>
-<div class="comment-box"></div>
-
-<h3>Adaptaciones necesarias</h3>
-<div class="comment-box"></div>
-
-<h3>Observaciones adicionales</h3>
-<div class="comment-box"></div>
-</section>
-
-<section>
-<h2>16.1 - Cookie Thief Alarm</h2>
-
-<h3>Equivalencia general</h3>
-<div class="comment-box"></div>
-
-<h3>Sensores / Entradas</h3>
-<ul>
-<li>Protobject:</li>
-<li>Microbit:</li>
-<li>Comentarios:</li>
-</ul>
-<div class="comment-box"></div>
-
-<h3>Actuadores / Salidas</h3>
-<ul>
-<li>Protobject:</li>
-<li>Microbit:</li>
-<li>Comentarios:</li>
-</ul>
-<div class="comment-box"></div>
-
-<h3>Lógica del programa</h3>
-<div class="comment-box"></div>
-
-<h3>Diferencias encontradas</h3>
-<div class="comment-box"></div>
-
-<h3>Adaptaciones necesarias</h3>
-<div class="comment-box"></div>
-
-<h3>Observaciones adicionales</h3>
-<div class="comment-box"></div>
-</section>
-
-<section>
-<h2>16.2 - Sunflower Alarm Clock</h2>
-
-<h3>Equivalencia general</h3>
-<div class="comment-box"></div>
-
-<h3>Sensores / Entradas</h3>
-<ul>
-<li>Protobject:</li>
-<li>Microbit:</li>
-<li>Comentarios:</li>
-</ul>
-<div class="comment-box"></div>
-
-<h3>Actuadores / Salidas</h3>
-<ul>
-<li>Protobject:</li>
-<li>Microbit:</li>
-<li>Comentarios:</li>
-</ul>
-<div class="comment-box"></div>
-
-<h3>Lógica del programa</h3>
-<div class="comment-box"></div>
-
-<h3>Diferencias encontradas</h3>
-<div class="comment-box"></div>
-
-<h3>Adaptaciones necesarias</h3>
-<div class="comment-box"></div>
-
-<h3>Observaciones adicionales</h3>
-<div class="comment-box"></div>
-</section>
-
-<section>
-<h2>16.3 - Bat in the Dark</h2>
-
-<h3>Equivalencia general</h3>
-<div class="comment-box"></div>
-
-<h3>Sensores / Entradas</h3>
-<ul>
-<li>Protobject:</li>
-<li>Microbit:</li>
-<li>Comentarios:</li>
-</ul>
-<div class="comment-box"></div>
-
-<h3>Actuadores / Salidas</h3>
-<ul>
-<li>Protobject:</li>
-<li>Microbit:</li>
-<li>Comentarios:</li>
-</ul>
-<div class="comment-box"></div>
-
-<h3>Lógica del programa</h3>
-<div class="comment-box"></div>
-
-<h3>Diferencias encontradas</h3>
-<div class="comment-box"></div>
-
-<h3>Adaptaciones necesarias</h3>
-<div class="comment-box"></div>
-
-<h3>Observaciones adicionales</h3>
-<div class="comment-box"></div>
-</section>
-
-<section>
-<h2>16.4 - Robot Activation Challenge</h2>
-
-<h3>Equivalencia general</h3>
-<div class="comment-box"></div>
-
-<h3>Sensores / Entradas</h3>
-<ul>
-<li>Protobject:</li>
-<li>Microbit:</li>
-<li>Comentarios:</li>
-</ul>
-<div class="comment-box"></div>
-
-<h3>Actuadores / Salidas</h3>
-<ul>
-<li>Protobject:</li>
-<li>Microbit:</li>
-<li>Comentarios:</li>
-</ul>
-<div class="comment-box"></div>
-
-<h3>Lógica del programa</h3>
-<div class="comment-box"></div>
-
-<h3>Diferencias encontradas</h3>
-<div class="comment-box"></div>
-
-<h3>Adaptaciones necesarias</h3>
-<div class="comment-box"></div>
-
-<h3>Observaciones adicionales</h3>
-<div class="comment-box"></div>
-</section>
-
-<section>
-<h2>16.5 - My Robot Friend Heart</h2>
-
-<h3>Equivalencia general</h3>
-<div class="comment-box"></div>
-
-<h3>Sensores / Entradas</h3>
-<ul>
-<li>Protobject:</li>
-<li>Microbit:</li>
-<li>Comentarios:</li>
-</ul>
-<div class="comment-box"></div>
-
-<h3>Actuadores / Salidas</h3>
-<ul>
-<li>Protobject:</li>
-<li>Microbit:</li>
-<li>Comentarios:</li>
-</ul>
-<div class="comment-box"></div>
-
-<h3>Lógica del programa</h3>
-<div class="comment-box"></div>
-
-<h3>Diferencias encontradas</h3>
-<div class="comment-box"></div>
-
-<h3>Adaptaciones necesarias</h3>
-<div class="comment-box"></div>
-
-<h3>Observaciones adicionales</h3>
-<div class="comment-box"></div>
-</section>
-
-<section>
-<h2>16.6 - Magic Birthday Candle</h2>
-
-<h3>Equivalencia general</h3>
-<div class="comment-box"></div>
-
-<h3>Sensores / Entradas</h3>
-<ul>
-<li>Protobject:</li>
-<li>Microbit:</li>
-<li>Comentarios:</li>
-</ul>
-<div class="comment-box"></div>
-
-<h3>Actuadores / Salidas</h3>
-<ul>
-<li>Protobject:</li>
-<li>Microbit:</li>
-<li>Comentarios:</li>
-</ul>
-<div class="comment-box"></div>
-
-<h3>Lógica del programa</h3>
-<div class="comment-box"></div>
-
-<h3>Diferencias encontradas</h3>
-<div class="comment-box"></div>
-
-<h3>Adaptaciones necesarias</h3>
-<div class="comment-box"></div>
-
-<h3>Observaciones adicionales</h3>
-<div class="comment-box"></div>
-</section>
-
-<section>
-<h2>16.7 - Don't Spill Liquid Game</h2>
-
-<h3>Equivalencia general</h3>
-<div class="comment-box"></div>
-
-<h3>Sensores / Entradas</h3>
-<ul>
-<li>Protobject:</li>
-<li>Microbit:</li>
-<li>Comentarios:</li>
-</ul>
-<div class="comment-box"></div>
-
-<h3>Actuadores / Salidas</h3>
-<ul>
-<li>Protobject:</li>
-<li>Microbit:</li>
-<li>Comentarios:</li>
-</ul>
-<div class="comment-box"></div>
-
-<h3>Lógica del programa</h3>
-<div class="comment-box"></div>
-
-<h3>Diferencias encontradas</h3>
-<div class="comment-box"></div>
-
-<h3>Adaptaciones necesarias</h3>
-<div class="comment-box"></div>
-
-<h3>Observaciones adicionales</h3>
-<div class="comment-box"></div>
-</section>
-
-<section>
-<h2>17.1 - Magic Clap Switch</h2>
-
-<h3>Equivalencia general</h3>
-<div class="comment-box"></div>
-
-<h3>Sensores / Entradas</h3>
-<ul>
-<li>Protobject:</li>
-<li>Microbit:</li>
-<li>Comentarios:</li>
-</ul>
-<div class="comment-box"></div>
-
-<h3>Actuadores / Salidas</h3>
-<ul>
-<li>Protobject:</li>
-<li>Microbit:</li>
-<li>Comentarios:</li>
-</ul>
-<div class="comment-box"></div>
-
-<h3>Lógica del programa</h3>
-<div class="comment-box"></div>
-
-<h3>Diferencias encontradas</h3>
-<div class="comment-box"></div>
-
-<h3>Adaptaciones necesarias</h3>
-<div class="comment-box"></div>
-
-<h3>Observaciones adicionales</h3>
-<div class="comment-box"></div>
-</section>
-
-<section>
-<h2>17.2 - Cinematic Power On</h2>
-
-<h3>Equivalencia general</h3>
-<div class="comment-box"></div>
-
-<h3>Sensores / Entradas</h3>
-<ul>
-<li>Protobject:</li>
-<li>Microbit:</li>
-<li>Comentarios:</li>
-</ul>
-<div class="comment-box"></div>
-
-<h3>Actuadores / Salidas</h3>
-<ul>
-<li>Protobject:</li>
-<li>Microbit:</li>
-<li>Comentarios:</li>
-</ul>
-<div class="comment-box"></div>
-
-<h3>Lógica del programa</h3>
-<div class="comment-box"></div>
-
-<h3>Diferencias encontradas</h3>
-<div class="comment-box"></div>
-
-<h3>Adaptaciones necesarias</h3>
-<div class="comment-box"></div>
-
-<h3>Observaciones adicionales</h3>
-<div class="comment-box"></div>
-</section>
-
-<section>
-<h2>19.1 - Digital Hot Potato</h2>
-
-<h3>Equivalencia general</h3>
-<div class="comment-box"></div>
-
-<h3>Sensores / Entradas</h3>
-<ul>
-<li>Protobject:</li>
-<li>Microbit:</li>
-<li>Comentarios:</li>
-</ul>
-<div class="comment-box"></div>
-
-<h3>Actuadores / Salidas</h3>
-<ul>
-<li>Protobject:</li>
-<li>Microbit:</li>
-<li>Comentarios:</li>
-</ul>
-<div class="comment-box"></div>
-
-<h3>Lógica del programa</h3>
-<div class="comment-box"></div>
-
-<h3>Diferencias encontradas</h3>
-<div class="comment-box"></div>
-
-<h3>Adaptaciones necesarias</h3>
-<div class="comment-box"></div>
-
-<h3>Observaciones adicionales</h3>
-<div class="comment-box"></div>
-</section>
-
-<section>
-<h2>22.1 - DJ Metronome</h2>
-
-<h3>Equivalencia general</h3>
-<div class="comment-box"></div>
-
-<h3>Sensores / Entradas</h3>
-<ul>
-<li>Protobject:</li>
-<li>Microbit:</li>
-<li>Comentarios:</li>
-</ul>
-<div class="comment-box"></div>
-
-<h3>Actuadores / Salidas</h3>
-<ul>
-<li>Protobject:</li>
-<li>Microbit:</li>
-<li>Comentarios:</li>
-</ul>
-<div class="comment-box"></div>
-
-<h3>Lógica del programa</h3>
-<div class="comment-box"></div>
-
-<h3>Diferencias encontradas</h3>
-<div class="comment-box"></div>
-
-<h3>Adaptaciones necesarias</h3>
-<div class="comment-box"></div>
-
-<h3>Observaciones adicionales</h3>
-<div class="comment-box"></div>
-</section>
-
-<section>
-<h2>22.2 - Applause Battle</h2>
-
-<h3>Equivalencia general</h3>
-<div class="comment-box"></div>
-
-<h3>Sensores / Entradas</h3>
-<ul>
-<li>Protobject:</li>
-<li>Microbit:</li>
-<li>Comentarios:</li>
-</ul>
-<div class="comment-box"></div>
-
-<h3>Actuadores / Salidas</h3>
-<ul>
-<li>Protobject:</li>
-<li>Microbit:</li>
-<li>Comentarios:</li>
-</ul>
-<div class="comment-box"></div>
-
-<h3>Lógica del programa</h3>
-<div class="comment-box"></div>
-
-<h3>Diferencias encontradas</h3>
-<div class="comment-box"></div>
-
-<h3>Adaptaciones necesarias</h3>
-<div class="comment-box"></div>
-
-<h3>Observaciones adicionales</h3>
-<div class="comment-box"></div>
-</section>
-
 </body>
 </html>

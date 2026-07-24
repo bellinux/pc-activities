@@ -1,5 +1,5 @@
-ACTIVIDAD: 22.2-applause-battle
-CODE: aplausometro-tiempo-aplausos
+ACTIVIDAD: 22.2-scream-battle
+CODE: gritometro-tiempo-gritos
 COMPONENTES: NivelRuido1=NoiseLevel, DibujarEscribir2=InteractiveWriteDraw
 
 AL INICIAR
@@ -12,9 +12,9 @@ REPETIR PARA SIEMPRE (bucle principal)
   SI
     [si (var:inicio > 0)]
     DibujarEscribir2_writeText_set_11  VAR=((protobject_milliseconds() - var:inicio) / 1000)
-        ; // Muestra la cantidad de segundos en los que persiste un sonido, en este caso mediremos cuánto es la duración de una cantidad de aplausos.
+        ; // Muestra la cantidad de segundos en los que persiste un sonido, en este caso mediremos cuánto es la duración de un grito.
     SI
-        ; // Si los aplausos se detienen termina el temporizador y finaliza la medición.
+        ; // Si los gritos se detienen termina el temporizador y finaliza la medición.
       [si (NivelRuido1.leer(noise) < 5)]
       ESTABLECER var:inicio = 0
       ESTABLECER var:activo = FALSE

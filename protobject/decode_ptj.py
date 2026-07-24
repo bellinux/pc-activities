@@ -20,7 +20,7 @@ ACTS = [
     ("17.2-cinematic-power-on", "luz-encendida-ruido-animacion"),
     ("19.1-digital-hot-potato", "papas-caliente-juego"),
     ("22.1-dj-metronome", "metronomo-con-inclinacion"),
-    ("22.2-applause-battle", "aplausometro-tiempo-aplausos")
+    ("22.2-scream-battle", "gritometro-tiempo-gritos")
 ]
 
 BASE = os.path.dirname(os.path.abspath(__file__))

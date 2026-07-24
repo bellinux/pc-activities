@@ -277,18 +277,18 @@ Se utilizan los mismos que en la actividad anterior.
     
 ---
 
-## 22.2 - Applause Battle
+## 22.2 - Scream Battle
 
 ### Equivalencia general
--
+    Arreglé la versión de protobject ya que no cargaba en el visualizador. 
+    A pesar de que microbit muestra los digitos de forma distinta que protobject, son equivalentes ya que eso es algo que depende meramente del sistema y no del algoritmo (microbit muestra números en la pantalla LED y protobject en DibujarEscribir), además de eso, para que se asemeje más la forma de visualización del tiempo de microbit a protobject, hice que el tiempo no se pueda mostrar en decimales para que se vea de forma directa y no hayan saltos gigantezcos entre los números al tardar tanto en mostrar todo la animación. Con este arreglo, la actividad queda mucho más parecida en el lado funcional. 
 
 ### Componentes
 
 **Protobject**
-- 
+    - NivelRuido (para detectar el ruido constante)
+    - DibujarEscribir (para mostrar el tiempo del grito)
 
 **Microbit**
-- 
-
-### Comentarios
--
+    - Ruido fuerte como input, hace lo mismo que NivelRuido
+    - Pantalla Led para mostrar el tiempo del grito

@@ -72,7 +72,7 @@ Repo originariamente clonato da `github.com/bellinux/pc-activities` e poi riorga
 | 14 | `17.2-cinematic-power-on` | `luz-encendida-ruido-animacion` | El Encendido Cinematográfico |
 | 15 | `19.1-digital-hot-potato` | `papas-caliente-juego` | La Papa Explosiva Digital |
 | 16 | `22.1-dj-metronome` | `metronomo-con-inclinacion` | El Metrónomo de DJ |
-| 17 | `22.2-applause-battle` | `aplausometro-tiempo-aplausos` | La Batalla de Aplausos |
+| 17 | `22.2-scream-battle` | `gritometro-tiempo-gritos` | La Batalla de Gritos |
 
 **Logica di entrata (insight dell'autore):** `02.1-heart-beat` era progettata come PRIMA lezione (un solo output,
 costruisce la logica base in ~10 min); oggi è 4ª. Documentato in §C del report e in `planificacion.html`.

@@ -70,7 +70,7 @@
     "code": "nivel-con-ruido",
     "slug": "16.7-dont-spill-liquid-game",
     "title": "¡No Derrames el Líquido! - El Juego de Pulso"
-  }
+  },
   {
     "num": 13,
     "code": "luz-encendida-al-ruido",
@@ -97,8 +97,8 @@
   },
   {
     "num": 17,
-    "code": "aplausometro-tiempo-aplausos",
-    "slug": "22.2-applause-battle",
-    "title": "La Batalla de Aplausos"
+    "code": "gritometro-tiempo-gritos",
+    "slug": "22.2-scream-battle",
+    "title": "La Batalla de Gritos"
   }
 ]

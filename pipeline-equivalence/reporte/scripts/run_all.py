@@ -14,12 +14,12 @@ BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))   # .../repor
 ACTS_DIR = os.path.join(BASE, 'actividades')
 
 CODES = [
-    'xilofono-inclinacion', 'luci-discoteca-ruido', 'xilofono-inclinacion-con-nota-led',
-    'corazon-forever-loop', 'robot-risa-simpatica-al-ruido', 'corazon-variables-eventos',
-    'alarma-caja-galletas', 'despertador-por-la-manana', 'luces-de-fiesta-al-oscurecer',
-    'juego-toques', 'luz-encendida-al-ruido', 'flama-vela-con-soplo', 'papas-caliente-juego',
-    'luz-encendida-ruido-animacion', 'metronomo-con-inclinacion', 'aplausometro-tiempo-aplausos',
-    'nivel-con-ruido',
+    'corazon-forever-loop', 'xilofono-inclinacion', 'xilofono-inclinacion-con-nota-led',
+    'luci-discoteca-ruido', 'robot-risa-simpatica-al-ruido', 'alarma-caja-galletas',
+    'despertador-por-la-manana', 'luces-de-fiesta-al-oscurecer', 'juego-toques',
+    'corazon-variables-eventos', 'flama-vela-con-soplo', 'nivel-con-ruido',
+    'luz-encendida-al-ruido', 'luz-encendida-ruido-animacion', 'papas-caliente-juego',
+    'metronomo-con-inclinacion', 'gritometro-tiempo-gritos',
 ]
 
 

@@ -17,14 +17,14 @@
             "makecode_block": "on start",
             "protobject_block": "when the program starts",
             "category": "event",
-            "note": "De vela (estable). Cubre 'al iniciar'/'al iniciar el programa'. DIVERGENCIA DE PRESENCIA: en luci-discoteca-ruido el 'al iniciar' solo existe en MakeCode (en Protobject la inicializacion es implicita); en alarma-caja-galletas el 'al iniciar el programa' solo existe en Protobject (en MakeCode no hay bloque de inicio explicito). Tambien arranca robot-risa, corazon-variables-eventos, despertador, juego-toques, luz-encendida-al-ruido, flama-vela, luz-encendida-ruido-animacion, papas-caliente, metronomo, aplausometro, nivel-con-ruido."
+            "note": "De vela (estable). Cubre 'al iniciar'/'al iniciar el programa'. DIVERGENCIA DE PRESENCIA: en luci-discoteca-ruido el 'al iniciar' solo existe en MakeCode (en Protobject la inicializacion es implicita); en alarma-caja-galletas el 'al iniciar el programa' solo existe en Protobject (en MakeCode no hay bloque de inicio explicito). Tambien arranca robot-risa, corazon-variables-eventos, despertador, juego-toques, luz-encendida-al-ruido, flama-vela, luz-encendida-ruido-animacion, papas-caliente, metronomo, gritometro, nivel-con-ruido."
         },
         {
             "canonical_node": "SuddenNoiseEvent",
             "makecode_block": "on loud sound",
             "protobject_block": "when NivelRuido sudden increase",
             "category": "event",
-            "note": "De vela (estable). Evento de interrupcion por sonido fuerte ('al detectar el sonido alto' / 'cuando NivelRuidoN detecta aumento repentino'). En el codigo decodificado el bloque Protobject es 'protobject_NivelRuidoN_change property=suddenIncrease'. Unifica suggested_kind Event_Interrupt/OnLoudSound (subtipo ruido). Cubre robot-risa, luz-encendida-al-ruido, flama-vela (NivelRuido2), luz-encendida-ruido-animacion, aplausometro."
+            "note": "De vela (estable). Evento de interrupcion por sonido fuerte ('al detectar el sonido alto' / 'cuando NivelRuidoN detecta aumento repentino'). En el codigo decodificado el bloque Protobject es 'protobject_NivelRuidoN_change property=suddenIncrease'. Unifica suggested_kind Event_Interrupt/OnLoudSound (subtipo ruido). Cubre robot-risa, luz-encendida-al-ruido, flama-vela (NivelRuido2), luz-encendida-ruido-animacion, gritometro."
         },
         {
             "canonical_node": "OnTouchEvent",
@@ -73,7 +73,7 @@
             "makecode_block": "if condition then ... else",
             "protobject_block": "if condition do ... else",
             "category": "control",
-            "note": "De vela (estable). Condicional if/else completo. Unifica Conditional/If/IfThenElse. Las ramas Branch_True (then/do/si/hacer) y Branch_False (si no/sino/else) del inventario son partes internas de este nodo, NO nodos separados. Cubre condicionales simples (alarma, despertador, luces-de-fiesta, juego-toques, luz-encendida-al-ruido, flama, papas-caliente, aplausometro, metronomo), anidados (nivel-con-ruido: sonidoFijo dentro de nivelado; aplausometro: activo dentro del evento) y de comparacion compuesta (nivel-con-ruido rango -2..2 con AND). El operador AND que une las comparaciones SI tiene nodo propio (LogicalAnd); este contiene la condicion pero NO absorbe el AND: un walk del arbol mapea logic_operation a LogicalAnd y las comparaciones a Comparison."
+            "note": "De vela (estable). Condicional if/else completo. Unifica Conditional/If/IfThenElse. Las ramas Branch_True (then/do/si/hacer) y Branch_False (si no/sino/else) del inventario son partes internas de este nodo, NO nodos separados. Cubre condicionales simples (alarma, despertador, luces-de-fiesta, juego-toques, luz-encendida-al-ruido, flama, papas-caliente, gritometro, metronomo), anidados (nivel-con-ruido: sonidoFijo dentro de nivelado; gritometro: activo dentro del evento) y de comparacion compuesta (nivel-con-ruido rango -2..2 con AND). El operador AND que une las comparaciones SI tiene nodo propio (LogicalAnd); este contiene la condicion pero NO absorbe el AND: un walk del arbol mapea logic_operation a LogicalAnd y las comparaciones a Comparison."
         },
         {
             "canonical_node": "SetVariable",
@@ -150,21 +150,21 @@
             "makecode_block": "show number value",
             "protobject_block": "write value on DibujarEscribir",
             "category": "display",
-            "note": "De vela (estable). Mostrar/escribir un valor numerico en pantalla ('mostrar número X' / 'escribir X en DibujarEscribirN', bloque DibujarEscribirN_writeText_set). En juego-toques el 'mostrar número Toques' solo existe en MakeCode (en Protobject la barra de progreso se dibuja con ForRange+PlotPoint: divergencia de mecanismo de la misma intencion). En aplausometro el 'escribir ((milisegundos − inicio) ÷ 1000)' tiene equivalente en ambas plataformas."
+            "note": "De vela (estable). Mostrar/escribir un valor numerico en pantalla ('mostrar número X' / 'escribir X en DibujarEscribirN', bloque DibujarEscribirN_writeText_set). En juego-toques el 'mostrar número Toques' solo existe en MakeCode (en Protobject la barra de progreso se dibuja con ForRange+PlotPoint: divergencia de mecanismo de la misma intencion). En gritometro el 'escribir ((milisegundos − inicio) ÷ 1000)' tiene equivalente en ambas plataformas."
         },
         {
             "canonical_node": "SetTextSize",
             "makecode_block": "",
             "protobject_block": "set size N on DibujarEscribir",
             "category": "display",
-            "note": "De vela (estable). Configurar el tamaño de fuente del display de texto. SOLO Protobject ('establecer tamaño N en DibujarEscribirN', bloque DibujarEscribirN_setSize_set); sin equivalente en MakeCode. aplausometro-tiempo-aplausos (tamaño 40 en DibujarEscribir2). Unifica ConfigureDisplay."
+            "note": "De vela (estable). Configurar el tamaño de fuente del display de texto. SOLO Protobject ('establecer tamaño N en DibujarEscribirN', bloque DibujarEscribirN_setSize_set); sin equivalente en MakeCode. gritometro-tiempo-aplausos (tamaño 40 en DibujarEscribir2). Unifica ConfigureDisplay."
         },
         {
             "canonical_node": "ClearTextDisplay",
             "makecode_block": "",
             "protobject_block": "clear on DibujarEscribir",
             "category": "display",
-            "note": "De vela (estable). Limpiar/borrar el display de TEXTO (DibujarEscribir) antes de reescribir el numero. SOLO Protobject ('limpiar en DibujarEscribirN', bloque DibujarEscribirN_clear_set, decoded/22.2 lin.11); sin equivalente en MakeCode. aplausometro-tiempo-aplausos. DISCRIMINADOR DE DISPOSITIVO frente a ClearDisplay: este nodo opera sobre el display de TEXTO (DibujarEscribir); ClearDisplay sobre la MATRIZ LED (DibujoLED). El inventario reutiliza el MISMO suggested_kind para ambas: desambiguar SIEMPRE por el dispositivo destino."
+            "note": "De vela (estable). Limpiar/borrar el display de TEXTO (DibujarEscribir) antes de reescribir el numero. SOLO Protobject ('limpiar en DibujarEscribirN', bloque DibujarEscribirN_clear_set, decoded/22.2 lin.11); sin equivalente en MakeCode. gritometro-tiempo-aplausos. DISCRIMINADOR DE DISPOSITIVO frente a ClearDisplay: este nodo opera sobre el display de TEXTO (DibujarEscribir); ClearDisplay sobre la MATRIZ LED (DibujoLED). El inventario reutiliza el MISMO suggested_kind para ambas: desambiguar SIEMPRE por el dispositivo destino."
         },
         {
             "canonical_node": "PlayTone",
@@ -213,14 +213,14 @@
             "makecode_block": "sound level",
             "protobject_block": "ruido in NivelRuido",
             "category": "sensor",
-            "note": "De vela (estable). Leer el nivel INSTANTANEO de sonido del microfono ('nivel de sonido' / 'ruido in NivelRuidon', bloque NivelRuidon.leer(noise)). DISTINTO de SuddenNoiseEvent (evento de interrupcion por aumento repentino): este es la lectura por sondeo del valor. luci-discoteca-ruido (alimenta DisplaySoundLevel; es el argumento del operador NoiseToColour/color_light), aplausometro (umbral < 5)."
+            "note": "De vela (estable). Leer el nivel INSTANTANEO de sonido del microfono ('nivel de sonido' / 'ruido in NivelRuidon', bloque NivelRuidon.leer(noise)). DISTINTO de SuddenNoiseEvent (evento de interrupcion por aumento repentino): este es la lectura por sondeo del valor. luci-discoteca-ruido (alimenta DisplaySoundLevel; es el argumento del operador NoiseToColour/color_light), gritometro (umbral < 5)."
         },
         {
             "canonical_node": "ReadRuntimeMillis",
             "makecode_block": "running time (ms)",
             "protobject_block": "milliseconds",
             "category": "sensor",
-            "note": "De vela (estable). Leer el tiempo transcurrido desde el arranque en milisegundos ('tiempo de ejecución (ms)' / 'milisegundos', bloque protobject_milliseconds()). Unifica TimeRead/RuntimeMillis. metronomo (intervalo entre beats: milisegundos − ultimoBeat), aplausometro (cronometro: milisegundos − inicio). Equivalencia 1:1 limpia entre plataformas."
+            "note": "De vela (estable). Leer el tiempo transcurrido desde el arranque en milisegundos ('tiempo de ejecución (ms)' / 'milisegundos', bloque protobject_milliseconds()). Unifica TimeRead/RuntimeMillis. metronomo (intervalo entre beats: milisegundos − ultimoBeat), gritometro (cronometro: milisegundos − inicio). Equivalencia 1:1 limpia entre plataformas."
         },
         {
             "canonical_node": "RandomInteger",
@@ -234,14 +234,14 @@
             "makecode_block": "a + b / a - b / a ÷ b / a × b",
             "protobject_block": "a + b / a - b / a ÷ b / a × b",
             "category": "math",
-            "note": "De vela (estable). Operacion aritmetica UNICA (el operador concreto va en el atributo 'op' del PDG, no en el canonical_node). Cubre el desplazamiento de mapeo del xilofono (+1000 ↔ +60), divisiones de escala (÷350/÷250/÷15), el calculo de bpm/intervalo del metronomo (◻+60 y 60000÷bpm), la resta/division del aplausometro ((milisegundos − inicio) ÷ 1000), la resta del metronomo/aplausometro (◻ − ultimoBeat/inicio), '8 − toques' (juego-toques) y la negacion de coordenada de nivel-con-ruido (-1 × x). Es el lado 'Operator' de los composites Assignment+Operator/Conditional+Operator del inventario. El operador logico AND NO es Arithmetic (ver LogicalAnd); el operador color_light tampoco (ver NoiseToColour)."
+            "note": "De vela (estable). Operacion aritmetica UNICA (el operador concreto va en el atributo 'op' del PDG, no en el canonical_node). Cubre el desplazamiento de mapeo del xilofono (+1000 ↔ +60), divisiones de escala (÷350/÷250/÷15), el calculo de bpm/intervalo del metronomo (◻+60 y 60000÷bpm), la resta/division del gritometro ((milisegundos − inicio) ÷ 1000), la resta del metronomo/gritometro (◻ − ultimoBeat/inicio), '8 − toques' (juego-toques) y la negacion de coordenada de nivel-con-ruido (-1 × x). Es el lado 'Operator' de los composites Assignment+Operator/Conditional+Operator del inventario. El operador logico AND NO es Arithmetic (ver LogicalAnd); el operador color_light tampoco (ver NoiseToColour)."
         },
         {
             "canonical_node": "Comparison",
             "makecode_block": "a > b / a < b",
             "protobject_block": "a > b / a < b",
             "category": "math",
-            "note": "De vela (estable). Comparacion numerica (mayor que / menor que) usada en condicionales. Cubre alarma-galletas (>400 / >20), despertador (>100 / >50), luces-de-fiesta (<75 / <30), juego-toques (toques<7), papas-caliente (tiempo>0), metronomo (delta>intervaloBeat), aplausometro (inicio>0, ruido<5) y los rangos compuestos de nivel-con-ruido (cuatro comparaciones individuales >-2 / <2 en X e Y). El AND logico que COMBINA esas comparaciones tiene canonical_node propio (LogicalAnd). Este nodo cubre SOLO cada comparacion individual; LogicalAnd cubre los logic_operation que las unen; ConditionalBranch es el contenedor."
+            "note": "De vela (estable). Comparacion numerica (mayor que / menor que) usada en condicionales. Cubre alarma-galletas (>400 / >20), despertador (>100 / >50), luces-de-fiesta (<75 / <30), juego-toques (toques<7), papas-caliente (tiempo>0), metronomo (delta>intervaloBeat), gritometro (inicio>0, ruido<5) y los rangos compuestos de nivel-con-ruido (cuatro comparaciones individuales >-2 / <2 en X e Y). El AND logico que COMBINA esas comparaciones tiene canonical_node propio (LogicalAnd). Este nodo cubre SOLO cada comparacion individual; LogicalAnd cubre los logic_operation que las unen; ConditionalBranch es el contenedor."
         },
         {
             "canonical_node": "LogicalAnd",
@@ -269,7 +269,7 @@
             "makecode_block": "pause (ms) N",
             "protobject_block": "delay of N milliseconds",
             "category": "timing",
-            "note": "De vela (estable). Pausa temporizada ('pausa (ms) N' / 'retraso de N milisegundos|segundos', bloque ESPERAR ms|s VAR=N). Unifica Pause/Delay. Los valores de N divergen frecuentemente entre plataformas (corazon parpadeo 10 vs 100; robot-risa 100 vs 400; luces-de-fiesta 100 vs 200; alarma 6000 vs '6 segundos'; aplausometro 5000 vs '5 segundos'; luz-encendida-ruido-animacion 20 vs 10). DIVERGENCIA DE PRESENCIA: en papas-caliente hay una pausa de 4 segundos solo en Protobject; en nivel-con-ruido una pausa de 1000 ms solo en MakeCode (tras el sonido nivelado). Misma operacion, constantes/presencia divergentes."
+            "note": "De vela (estable). Pausa temporizada ('pausa (ms) N' / 'retraso de N milisegundos|segundos', bloque ESPERAR ms|s VAR=N). Unifica Pause/Delay. Los valores de N divergen frecuentemente entre plataformas (corazon parpadeo 10 vs 100; robot-risa 100 vs 400; luces-de-fiesta 100 vs 200; alarma 6000 vs '6 segundos'; gritometro 5000 vs '5 segundos'; luz-encendida-ruido-animacion 20 vs 10). DIVERGENCIA DE PRESENCIA: en papas-caliente hay una pausa de 4 segundos solo en Protobject; en nivel-con-ruido una pausa de 1000 ms solo en MakeCode (tras el sonido nivelado). Misma operacion, constantes/presencia divergentes."
         },
         {
             "canonical_node": "SerialWrite",

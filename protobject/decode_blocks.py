@@ -28,7 +28,7 @@ ACTS = {"02.1-heart-beat":"corazon-forever-loop", "02.2-xylophone":"xilofono-inc
  "16.6-magic-birthday-candle":"flama-vela-con-soplo", "16.7-dont-spill-liquid-game":"nivel-con-ruido", 
  "17.1-magic-clap-switch":"luz-encendida-al-ruido", "17.2-cinematic-power-on":"luz-encendida-ruido-animacion",
  "19.1-digital-hot-potato":"papas-caliente-juego",
-"22.1-dj-metronome":"metronomo-con-inclinacion","22.2-applause-battle":"aplausometro-tiempo-aplausos"}
+"22.1-dj-metronome":"metronomo-con-inclinacion","22.2-scream-battle":"gritometro-tiempo-gritos"}
 
 # ---------- parser puro-Python dei file locale ----------
 def load_msg(path):

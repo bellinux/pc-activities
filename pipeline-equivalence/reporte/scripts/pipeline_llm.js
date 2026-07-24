@@ -23,23 +23,23 @@ export const meta = {
 }
 
 const ACTS = [
-  { num: 1, code: 'xilofono-inclinacion', title: 'El Xilófono Mágico Inclinable' },
-  { num: 2, code: 'luci-discoteca-ruido', title: 'El Visualizador de Música' },
+  { num: 1, code: 'corazon-forever-loop', title: 'El Llavero de Corazón Luminoso' },
+  { num: 2, code: 'xilofono-inclinacion', title: 'El Xilófono Mágico Inclinable' },
   { num: 3, code: 'xilofono-inclinacion-con-nota-led', title: 'El Xilófono del Futuro (con LEDs)' },
-  { num: 4, code: 'corazon-forever-loop', title: 'El Llavero de Corazón Luminoso' },
+  { num: 4, code: 'luci-discoteca-ruido', title: 'El Visualizador de Música' },
   { num: 5, code: 'robot-risa-simpatica-al-ruido', title: 'El Robot Cosquilloso' },
-  { num: 6, code: 'corazon-variables-eventos', title: 'El Corazón de Mi Robot Amigo' },
-  { num: 7, code: 'alarma-caja-galletas', title: '¡Alarma: El Ladrón de Galletas!' },
-  { num: 8, code: 'despertador-por-la-manana', title: 'El Despertador de Girasol' },
-  { num: 9, code: 'luces-de-fiesta-al-oscurecer', title: 'El Vuelo del Murciélago Nocturno' },
-  { num: 10, code: 'juego-toques', title: '¡El Desafío de Activación del Robot!' },
-  { num: 11, code: 'luz-encendida-al-ruido', title: 'El Interruptor Mágico de Aplausos' },
-  { num: 12, code: 'flama-vela-con-soplo', title: 'La Vela Mágica de Cumpleaños' },
-  { num: 13, code: 'papas-caliente-juego', title: 'La Papa Explosiva Digital' },
+  { num: 6, code: 'alarma-caja-galletas', title: '¡Alarma: El Ladrón de Galletas!' },
+  { num: 7, code: 'despertador-por-la-manana', title: 'El Despertador de Girasol' },
+  { num: 8, code: 'luces-de-fiesta-al-oscurecer', title: 'El Vuelo del Murciélago Nocturno' },
+  { num: 9, code: 'juego-toques', title: '¡El Desafío de Activación del Robot!' },
+  { num: 10, code: 'corazon-variables-eventos', title: 'El Corazón de Mi Robot Amigo' },
+  { num: 11, code: 'flama-vela-con-soplo', title: 'La Vela Mágica de Cumpleaños' },
+  { num: 12, code: 'nivel-con-ruido', title: '¡No Derrames el Líquido! - El Juego de Pulso' },
+  { num: 13, code: 'luz-encendida-al-ruido', title: 'El Interruptor Mágico de Aplausos' },
   { num: 14, code: 'luz-encendida-ruido-animacion', title: 'El Encendido Cinematográfico' },
-  { num: 15, code: 'metronomo-con-inclinacion', title: 'El Metrónomo de DJ' },
-  { num: 16, code: 'aplausometro-tiempo-aplausos', title: 'La Batalla de Aplausos' },
-  { num: 17, code: 'nivel-con-ruido', title: '¡No Derrames el Líquido! - El Juego de Pulso' },
+  { num: 15, code: 'papas-caliente-juego', title: 'La Papa Explosiva Digital' },
+  { num: 16, code: 'metronomo-con-inclinacion', title: 'El Metrónomo de DJ' },
+  { num: 17, code: 'gritometro-tiempo-gritos', title: 'La Batalla de Gritos' },
 ]
 // args.codes (opcional) = subconjunto de codes a procesar; por defecto las 17.
 const TARGET = (args && Array.isArray(args.codes) && args.codes.length) ? ACTS.filter(a => args.codes.includes(a.code)) : ACTS
