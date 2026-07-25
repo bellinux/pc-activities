@@ -1,3 +1,7 @@
+# ⚠️ NUNCA PUBLICAR — material reservado (papers, work-in-progress, borradores).
+# Regla dura: jamás se versiona ni se sube, ni siquiera al pedir "pushear todo". Ver CLAUDE.md §2.
+context-not-to-publish/
+
 # Configuración local de Claude Code / IDE (no publicar)
 .claude/
 

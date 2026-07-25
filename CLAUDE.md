@@ -28,6 +28,9 @@ Repo originariamente clonato da `github.com/bellinux/pc-activities` e poi riorga
    se cambia un'attività cambia anche l'ordine. Co-evolvono.
 6. **Il report è per studenti.** NON correggere di propria iniziativa: l'utente decide cosa aggiustare.
    Trova/verifica con prova verbatim → verifica avversariale scettica (default: respingere).
+7. **`context-not-to-publish/` NON si pubblica MAI.** Cartella per materiale riservato (paper, work-in-progress,
+   bozze). È in `.gitignore`: **mai** versionarla, farci `git add`, forzarla con `-f`, né includerla quando l'utente
+   dice "pusha/pubblica tutto". Vale per qualunque futura cartella/file che l'utente marchi come riservato.
 
 ---
 
