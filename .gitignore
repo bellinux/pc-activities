@@ -20,3 +20,7 @@ __pycache__/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Metadatos de Windows (marca "descargado de Internet"). Llevan ":" en el nombre,
+# que Windows no admite como archivo: si se versionan, rompen el checkout y el index.
+*:Zone.Identifier
