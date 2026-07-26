@@ -10,7 +10,6 @@ al iniciar el programa:
       ..###..
       .......
       .......
-  establecer color de fondo a #000000 en DibujoLED2
 
 cuando NivelRuido1 detecta aumento repentino:   // Cuando el micrófono del dispositivo detecta un sonido fuerte, se ejecutarán las instrucciones dentro del bloque.
   reproducir sonido 'reacción divertida' en ReproductorSonido3   // Reproduce un sonido predeterminado.

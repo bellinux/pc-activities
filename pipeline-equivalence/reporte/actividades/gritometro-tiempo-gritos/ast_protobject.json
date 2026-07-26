@@ -23,7 +23,7 @@
                             { "type": "Operator", "label": "inicio > 0", "children": [] },
                             {
                                 "type": "Branch_True",
-                                "label": "entonces",
+                                "label": "hacer",
                                 "children": [
                                     {
                                         "type": "Action",
@@ -33,7 +33,13 @@
                                                 "type": "Operator",
                                                 "label": "◻ ÷ 1000",
                                                 "children": [
-                                                    { "type": "Operator", "label": "milisegundos − inicio", "children": [] }
+                                                    {
+                                                        "type": "Operator",
+                                                        "label": "◻ − inicio",
+                                                        "children": [
+                                                            { "type": "Sensor", "label": "milisegundos", "children": [] }
+                                                        ]
+                                                    }
                                                 ]
                                             }
                                         ]
@@ -51,7 +57,7 @@
                                             },
                                             {
                                                 "type": "Branch_True",
-                                                "label": "entonces",
+                                                "label": "hacer",
                                                 "children": [
                                                     { "type": "Assignment", "label": "establecer inicio a 0", "children": [] },
                                                     { "type": "Assignment", "label": "establecer activo a falso", "children": [] },
@@ -77,9 +83,15 @@
                         "children": [
                             {
                                 "type": "Branch_True",
-                                "label": "entonces",
+                                "label": "hacer",
                                 "children": [
-                                    { "type": "Assignment", "label": "establecer inicio a milisegundos", "children": [] }
+                                    {
+                                        "type": "Assignment",
+                                        "label": "establecer inicio a ◻",
+                                        "children": [
+                                            { "type": "Sensor", "label": "milisegundos", "children": [] }
+                                        ]
+                                    }
                                 ]
                             }
                         ]

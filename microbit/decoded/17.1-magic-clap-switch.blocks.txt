@@ -1,5 +1,5 @@
 ACTIVIDAD: 17.1-magic-clap-switch
-FUENTE: micro:bit / MakeCode 8.0.18 — "luz-encendida-al-ruido arreglado"  (etiquetas oficiales es-ES)
+FUENTE: micro:bit / MakeCode 9.0.5 — "luz-encendida-al-ruido arreglado"  (etiquetas oficiales es-ES)
 
 al iniciar:
   fijar estado a falso
@@ -14,9 +14,4 @@ al detectar el sonido alto:
         # # # # #
         # # # # #
   si no:
-    mostrar LEDs:
-        . . . . .
-        . . . . .
-        . . . . .
-        . . . . .
-        . . . . .
+    borrar la pantalla

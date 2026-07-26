@@ -1,10 +1,16 @@
 input.onLogoEvent(TouchButtonEvent.Touched, function () {
     // Aumenta en 1 el valor de la variable "Toques". Cada vez que se presione el botón la cantidad aumenta en 1, es decir la variable cuenta la cantidad de veces que se aprieta el botón.
-    Toques += 1
+    energia += 1
 })
 // Inicia la variable "Toques" con valor inicial = 0.
-let Toques = 0
+let energia = 0
 basic.forever(function () {
-    // Muestra en pantalla el valor actual de la varibale "Toques", es decir el número que tiene "guardado".
-    basic.showNumber(Toques)
+    if (energia < 5) {
+        led.plot(1, 5 - energia)
+        led.plot(2, 5 - energia)
+        led.plot(3, 5 - energia)
+    } else {
+        images.iconImage(IconNames.Happy).showImage(0)
+        music.play(music.builtinPlayableSoundEffect(soundExpression.giggle), music.PlaybackMode.UntilDone)
+    }
 })

@@ -1,12 +1,10 @@
-basic.showLeds(`
-    # . # . #
-    . # . # .
-    # . # . #
-    . # . # .
-    # . # . #
-    `)
 basic.forever(function () {
-    // Este bloque ajusta el nivel de brillo de los leds. Toma valores entre 0 y 255, donde 0 es el silencio absoluto y 255 es ruido máximo.
-    // Este bloque utiliza el micrófono del dispositivo, un sonido muy fuerte será representado con un valor de 255 mientras que el silencio absoluto será representado con un valor de 0.
-    led.setBrightness(input.soundLevel())
+    // Limpia la pantalla antes de realizar el siguiente dibujo.
+    basic.clearScreen()
+    // Dibuja en la columna X el nivel de ruido. El valor se divide para ajustarlo al rango de la matriz LED y utilizar toda la barra.
+    led.plot(2, Math.constrain(4 - input.soundLevel() / 60, 0, 4))
+    // Dibuja en la columna X el nivel de ruido. El valor se divide para ajustarlo al rango de la matriz LED y utilizar toda la barra.
+    led.plot(1, Math.constrain(4 - input.soundLevel() / 60, 0, 4))
+    // Dibuja en la columna X el nivel de ruido. El valor se divide para ajustarlo al rango de la matriz LED y utilizar toda la barra.
+    led.plot(3, Math.constrain(4 - input.soundLevel() / 60, 0, 4))
 })

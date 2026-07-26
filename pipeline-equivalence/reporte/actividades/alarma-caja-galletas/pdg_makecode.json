@@ -99,16 +99,16 @@
             "var": "true"
         },
         {
-            "source": "n5",
-            "target": "n7",
-            "type": "side_effect",
-            "var": "display"
-        },
-        {
             "source": "n4",
             "target": "n8",
             "type": "side_effect",
             "var": "sound"
+        },
+        {
+            "source": "n5",
+            "target": "n7",
+            "type": "side_effect",
+            "var": "display"
         }
     ]
 }

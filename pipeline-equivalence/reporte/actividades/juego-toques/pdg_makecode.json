@@ -28,8 +28,70 @@
         },
         {
             "id": "n5",
-            "kind": "ShowNumber",
+            "kind": "ConditionalBranch",
             "seq": 5,
+            "in_loop": true
+        },
+        {
+            "id": "n6",
+            "kind": "Comparison",
+            "seq": 6,
+            "in_loop": true,
+            "op": "<"
+        },
+        {
+            "id": "n7",
+            "kind": "Arithmetic",
+            "seq": 7,
+            "in_loop": true,
+            "op": "-"
+        },
+        {
+            "id": "n8",
+            "kind": "PlotPoint",
+            "seq": 8,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n9",
+            "kind": "Arithmetic",
+            "seq": 9,
+            "in_loop": true,
+            "op": "-"
+        },
+        {
+            "id": "n10",
+            "kind": "PlotPoint",
+            "seq": 10,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n11",
+            "kind": "Arithmetic",
+            "seq": 11,
+            "in_loop": true,
+            "op": "-"
+        },
+        {
+            "id": "n12",
+            "kind": "PlotPoint",
+            "seq": 12,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n13",
+            "kind": "DrawImage",
+            "seq": 13,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n14",
+            "kind": "PlaySound",
+            "seq": 14,
             "in_loop": true,
             "resId": 1
         }
@@ -48,22 +110,142 @@
             "var": ""
         },
         {
+            "source": "n5",
+            "target": "n7",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n5",
+            "target": "n8",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n5",
+            "target": "n9",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n5",
+            "target": "n10",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n5",
+            "target": "n11",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n5",
+            "target": "n12",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n5",
+            "target": "n13",
+            "type": "control",
+            "var": "false"
+        },
+        {
+            "source": "n5",
+            "target": "n14",
+            "type": "control",
+            "var": "false"
+        },
+        {
+            "source": "n6",
+            "target": "n5",
+            "type": "data",
+            "var": "value"
+        },
+        {
             "source": "n2",
             "target": "n4",
             "type": "data",
-            "var": "toques"
+            "var": "energia"
         },
         {
             "source": "n2",
-            "target": "n5",
+            "target": "n6",
             "type": "data",
-            "var": "toques"
+            "var": "energia"
         },
         {
             "source": "n4",
-            "target": "n5",
+            "target": "n6",
             "type": "data",
-            "var": "toques"
+            "var": "energia"
+        },
+        {
+            "source": "n2",
+            "target": "n7",
+            "type": "data",
+            "var": "energia"
+        },
+        {
+            "source": "n4",
+            "target": "n7",
+            "type": "data",
+            "var": "energia"
+        },
+        {
+            "source": "n2",
+            "target": "n9",
+            "type": "data",
+            "var": "energia"
+        },
+        {
+            "source": "n4",
+            "target": "n9",
+            "type": "data",
+            "var": "energia"
+        },
+        {
+            "source": "n2",
+            "target": "n11",
+            "type": "data",
+            "var": "energia"
+        },
+        {
+            "source": "n4",
+            "target": "n11",
+            "type": "data",
+            "var": "energia"
+        },
+        {
+            "source": "n7",
+            "target": "n8",
+            "type": "data",
+            "var": "value"
+        },
+        {
+            "source": "n9",
+            "target": "n10",
+            "type": "data",
+            "var": "value"
+        },
+        {
+            "source": "n11",
+            "target": "n12",
+            "type": "data",
+            "var": "value"
+        },
+        {
+            "source": "n8",
+            "target": "n10",
+            "type": "side_effect",
+            "var": "display"
+        },
+        {
+            "source": "n10",
+            "target": "n12",
+            "type": "side_effect",
+            "var": "display"
         }
     ]
 }

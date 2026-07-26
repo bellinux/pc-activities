@@ -55,22 +55,50 @@
         },
         {
             "id": "n9",
-            "kind": "ClearDisplay",
+            "kind": "Arithmetic",
             "seq": 9,
             "in_loop": true,
-            "resId": 1
+            "op": "-"
         },
         {
             "id": "n10",
-            "kind": "DrawImage",
+            "kind": "PlotPoint",
             "seq": 10,
             "in_loop": true,
             "resId": 1
         },
         {
             "id": "n11",
-            "kind": "PlaySound",
+            "kind": "Arithmetic",
             "seq": 11,
+            "in_loop": true,
+            "op": "-"
+        },
+        {
+            "id": "n12",
+            "kind": "PlotPoint",
+            "seq": 12,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n13",
+            "kind": "ClearDisplay",
+            "seq": 13,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n14",
+            "kind": "DrawImage",
+            "seq": 14,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n15",
+            "kind": "PlaySound",
+            "seq": 15,
             "in_loop": true,
             "resId": 1
         }
@@ -90,6 +118,12 @@
         },
         {
             "source": "n5",
+            "target": "n7",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n5",
             "target": "n8",
             "type": "control",
             "var": "true"
@@ -98,29 +132,41 @@
             "source": "n5",
             "target": "n9",
             "type": "control",
-            "var": "false"
+            "var": "true"
         },
         {
             "source": "n5",
             "target": "n10",
             "type": "control",
-            "var": "false"
+            "var": "true"
         },
         {
             "source": "n5",
             "target": "n11",
             "type": "control",
-            "var": "false"
+            "var": "true"
         },
         {
-            "source": "n9",
-            "target": "n10",
+            "source": "n5",
+            "target": "n12",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n5",
+            "target": "n13",
             "type": "control",
             "var": "false"
         },
         {
-            "source": "n10",
-            "target": "n11",
+            "source": "n5",
+            "target": "n14",
+            "type": "control",
+            "var": "false"
+        },
+        {
+            "source": "n5",
+            "target": "n15",
             "type": "control",
             "var": "false"
         },
@@ -131,50 +177,92 @@
             "var": "value"
         },
         {
+            "source": "n2",
+            "target": "n4",
+            "type": "data",
+            "var": "energia"
+        },
+        {
+            "source": "n2",
+            "target": "n6",
+            "type": "data",
+            "var": "energia"
+        },
+        {
+            "source": "n4",
+            "target": "n6",
+            "type": "data",
+            "var": "energia"
+        },
+        {
+            "source": "n2",
+            "target": "n7",
+            "type": "data",
+            "var": "energia"
+        },
+        {
+            "source": "n4",
+            "target": "n7",
+            "type": "data",
+            "var": "energia"
+        },
+        {
+            "source": "n2",
+            "target": "n9",
+            "type": "data",
+            "var": "energia"
+        },
+        {
+            "source": "n4",
+            "target": "n9",
+            "type": "data",
+            "var": "energia"
+        },
+        {
+            "source": "n2",
+            "target": "n11",
+            "type": "data",
+            "var": "energia"
+        },
+        {
+            "source": "n4",
+            "target": "n11",
+            "type": "data",
+            "var": "energia"
+        },
+        {
             "source": "n7",
             "target": "n8",
             "type": "data",
             "var": "value"
         },
         {
-            "source": "n2",
-            "target": "n4",
+            "source": "n9",
+            "target": "n10",
             "type": "data",
-            "var": "toques"
+            "var": "value"
         },
         {
-            "source": "n2",
-            "target": "n6",
+            "source": "n11",
+            "target": "n12",
             "type": "data",
-            "var": "toques"
-        },
-        {
-            "source": "n4",
-            "target": "n6",
-            "type": "data",
-            "var": "toques"
-        },
-        {
-            "source": "n2",
-            "target": "n7",
-            "type": "data",
-            "var": "toques"
-        },
-        {
-            "source": "n4",
-            "target": "n7",
-            "type": "data",
-            "var": "toques"
+            "var": "value"
         },
         {
             "source": "n8",
-            "target": "n9",
+            "target": "n10",
             "type": "side_effect",
             "var": "display"
         },
         {
-            "source": "n9",
-            "target": "n10",
+            "source": "n10",
+            "target": "n12",
+            "type": "side_effect",
+            "var": "display"
+        },
+        {
+            "source": "n13",
+            "target": "n14",
             "type": "side_effect",
             "var": "display"
         }

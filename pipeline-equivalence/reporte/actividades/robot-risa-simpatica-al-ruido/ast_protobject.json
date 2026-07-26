@@ -6,8 +6,7 @@
                 "type": "Event",
                 "label": "al iniciar el programa",
                 "children": [
-                    { "type": "Action", "label": "dibuja con color #ff0000 en DibujoLED2", "children": [] },
-                    { "type": "Action", "label": "establecer color de fondo a #000000 en DibujoLED2", "children": [] }
+                    { "type": "Action", "label": "dibuja con color #ff0000 en DibujoLED2", "children": [] }
                 ]
             },
             {

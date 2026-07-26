@@ -10,10 +10,4 @@ Y por otro lado si la varibale estado es falso, algo no faslo es algo verdadero,
         # # # # # 
         # # # # # 
         # # # # #
-        `</field></block></statement><statement name="ELSE"><block type="device_show_leds"><field name="LEDS">`
-        . . . . . 
-        . . . . . 
-        . . . . . 
-        . . . . . 
-        . . . . .
-        `</field></block></statement></block></next></block></statement></block></xml>
+        `</field></block></statement><statement name="ELSE"><block type="device_clear_display"></block></statement></block></next></block></statement></block></xml>

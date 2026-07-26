@@ -4,7 +4,6 @@ COMPONENTES: NivelRuido1=NoiseLevel, DibujoLED2=MatrixDraw, ReproductorSonido3=A
 
 AL INICIAR
   DibujoLED2_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
-  DibujoLED2_background_set_3  VAR=colour_picker(COLOUR=#000000)
 
 protobject_NivelRuido1_change  property=suddenIncrease
     ; // Cuando el micrófono del dispositivo detecta un sonido fuerte, se ejecutarán las instrucciones dentro del bloque.

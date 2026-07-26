@@ -8,6 +8,6 @@
         "  si estado entonces:",
         "    mostrar LEDs",
         "  si no:",
-        "    mostrar LEDs"
+        "    borrar la pantalla"
     ]
 }

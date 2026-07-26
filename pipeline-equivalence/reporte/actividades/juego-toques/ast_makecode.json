@@ -6,21 +6,62 @@
                 "type": "Event",
                 "label": "al iniciar",
                 "children": [
-                    { "type": "Assignment", "label": "fijar Toques a 0", "children": [] }
+                    { "type": "Assignment", "label": "fijar energia a 0", "children": [] }
                 ]
             },
             {
                 "type": "Event_Interrupt",
                 "label": "al tocar el logotipo",
                 "children": [
-                    { "type": "Assignment", "label": "cambiar Toques por 1", "children": [] }
+                    { "type": "Assignment", "label": "cambiar energia por 1", "children": [] }
                 ]
             },
             {
                 "type": "Loop",
                 "label": "para siempre",
                 "children": [
-                    { "type": "Action", "label": "mostrar número Toques", "children": [] }
+                    {
+                        "type": "Conditional",
+                        "label": "si ◻ entonces",
+                        "children": [
+                            { "type": "Operator", "label": "energia < 5", "children": [] },
+                            {
+                                "type": "Branch_True",
+                                "label": "entonces",
+                                "children": [
+                                    {
+                                        "type": "Action",
+                                        "label": "graficar x 1 y ◻",
+                                        "children": [
+                                            { "type": "Operator", "label": "5 − energia", "children": [] }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Action",
+                                        "label": "graficar x 2 y ◻",
+                                        "children": [
+                                            { "type": "Operator", "label": "5 − energia", "children": [] }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Action",
+                                        "label": "graficar x 3 y ◻",
+                                        "children": [
+                                            { "type": "Operator", "label": "5 − energia", "children": [] }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Branch_False",
+                                "label": "si no",
+                                "children": [
+                                    { "type": "Action", "label": "(device_show_image_offset)", "children": [] },
+                                    { "type": "Action", "label": "reproduce secuencia (risa) en modo hasta que termine", "children": [] }
+                                ]
+                            }
+                        ]
+                    }
                 ]
             }
         ]

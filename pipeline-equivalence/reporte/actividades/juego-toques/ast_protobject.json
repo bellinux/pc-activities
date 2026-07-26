@@ -6,7 +6,7 @@
                 "type": "Event",
                 "label": "al iniciar el programa",
                 "children": [
-                    { "type": "Assignment", "label": "establecer toques a 0", "children": [] }
+                    { "type": "Assignment", "label": "establecer energia a 0", "children": [] }
                 ]
             },
             {
@@ -17,26 +17,30 @@
                         "type": "Conditional",
                         "label": "si ◻",
                         "children": [
-                            {
-                                "type": "Operator",
-                                "label": "toques < 7",
-                                "children": []
-                            },
+                            { "type": "Operator", "label": "energia < 7", "children": [] },
                             {
                                 "type": "Branch_True",
-                                "label": "si",
+                                "label": "hacer",
                                 "children": [
                                     {
-                                        "type": "Loop",
-                                        "label": "contar con i desde 0 hasta 6 de a 1",
+                                        "type": "Action",
+                                        "label": "dibuja en x 3 y ◻ con color #ff4444 en DibujoLED11",
                                         "children": [
-                                            {
-                                                "type": "Action",
-                                                "label": "dibuja en x i y ◻ con color #ff4444 en DibujoLED11",
-                                                "children": [
-                                                    { "type": "Operator", "label": "8 − toques", "children": [] }
-                                                ]
-                                            }
+                                            { "type": "Operator", "label": "8 − energia", "children": [] }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Action",
+                                        "label": "dibuja en x 4 y ◻ con color #ff4444 en DibujoLED11",
+                                        "children": [
+                                            { "type": "Operator", "label": "8 − energia", "children": [] }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Action",
+                                        "label": "dibuja en x 5 y ◻ con color #ff4444 en DibujoLED11",
+                                        "children": [
+                                            { "type": "Operator", "label": "8 − energia", "children": [] }
                                         ]
                                     }
                                 ]
@@ -58,7 +62,7 @@
                 "type": "Event_Interrupt",
                 "label": "cuando BotónTáctil1 es tocado",
                 "children": [
-                    { "type": "Assignment", "label": "añadir 1 a toques", "children": [] }
+                    { "type": "Assignment", "label": "añadir 1 a energia", "children": [] }
                 ]
             }
         ]

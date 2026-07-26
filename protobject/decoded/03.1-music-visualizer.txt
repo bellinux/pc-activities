@@ -1,6 +1,13 @@
-ACTIVIDAD: 02.3-music-visualizer
+ACTIVIDAD: 03.1-music-visualizer
 CODE: luci-discoteca-ruido
-COMPONENTES: NivelRuido1=NoiseLevel, DibujoLED2=MatrixDraw
+COMPONENTES: LEDDraw1=MatrixDraw, NoiseLevel2=NoiseLevel
 
 REPETIR PARA SIEMPRE (bucle principal)
-  DibujoLED2_draw_set_1  VAR=drawleds(btmMatrix=0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0)  VAR2=color_light(LEVEL=NivelRuido1.leer(noise))
+  LEDDraw1_clear_set_4
+      ; // Borra la pantalla antes de dibujar de nuevo en la siguiente línea.
+  LEDDraw1_drawOnXY_set_2  VAR=3  VAR2=math_constrain(VALUE=(7 - (NoiseLevel2.leer(noise) / 15)) LOW=1 HIGH=7)  VAR3=colour_picker(COLOUR=#ff4444)
+      ; // Dibuja en la columna X el nivel de ruido. El valor se divide para ajustarlo al rango de la matriz LED y utilizar toda la barra.
+  LEDDraw1_drawOnXY_set_2  VAR=4  VAR2=math_constrain(VALUE=(7 - (NoiseLevel2.leer(noise) / 15)) LOW=1 HIGH=7)  VAR3=colour_picker(COLOUR=#ff4444)
+      ; // Dibuja en la columna X el nivel de ruido. El valor se divide para ajustarlo al rango de la matriz LED y utilizar toda la barra.
+  LEDDraw1_drawOnXY_set_2  VAR=5  VAR2=math_constrain(VALUE=(7 - (NoiseLevel2.leer(noise) / 15)) LOW=1 HIGH=7)  VAR3=colour_picker(COLOUR=#ff4444)
+      ; // Dibuja en la columna X el nivel de ruido. El valor se divide para ajustarlo al rango de la matriz LED y utilizar toda la barra.

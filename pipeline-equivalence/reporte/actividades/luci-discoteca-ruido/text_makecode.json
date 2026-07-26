@@ -3,6 +3,8 @@
     "extracted_text": [
         "para siempre:",
         "  borrar la pantalla",
-        "  graficar x ((nivel de sonido) ÷ 60) y 2"
+        "  graficar x 2 y (restringir (4 − ((nivel de sonido) ÷ 60)) entre 0 y 4)",
+        "  graficar x 1 y (restringir (4 − ((nivel de sonido) ÷ 60)) entre 0 y 4)",
+        "  graficar x 3 y (restringir (4 − ((nivel de sonido) ÷ 60)) entre 0 y 4)"
     ]
 }

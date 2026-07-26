@@ -1,13 +1,8 @@
-ACTIVIDAD: 02.3-music-visualizer
-FUENTE: micro:bit / MakeCode 8.0.18 — "luci-discoteca-ruido"  (etiquetas oficiales es-ES)
-
-al iniciar:
-  mostrar LEDs:
-      # . # . #
-      . # . # .
-      # . # . #
-      . # . # .
-      # . # . #
+ACTIVIDAD: 03.1-music-visualizer
+FUENTE: micro:bit / MakeCode 9.0.5 — "luci-discoteca-ruido"  (etiquetas oficiales es-ES)
 
 para siempre:
-  ajustar brillo nivel de sonido   // Este bloque ajusta el nivel de brillo de los leds. Toma valores entre 0 y 255, donde 0 es el silencio absoluto y 255 es ruido máximo.
+  borrar la pantalla   // Limpia la pantalla antes de realizar el siguiente dibujo.
+  graficar x 2 y restringir (4 − (nivel de sonido ÷ 60)) entre 0 y 4   // Dibuja en la columna X el nivel de ruido. El valor se divide para ajustarlo al rango de la matriz LED y utilizar toda la barra.
+  graficar x 1 y restringir (4 − (nivel de sonido ÷ 60)) entre 0 y 4   // Dibuja en la columna X el nivel de ruido. El valor se divide para ajustarlo al rango de la matriz LED y utilizar toda la barra.
+  graficar x 3 y restringir (4 − (nivel de sonido ÷ 60)) entre 0 y 4   // Dibuja en la columna X el nivel de ruido. El valor se divide para ajustarlo al rango de la matriz LED y utilizar toda la barra.

@@ -9,9 +9,9 @@ inicio = 0
 activo = true
 basic.forever(function () {
     if (inicio > 0) {
-        // Muestra la cantidad de segundos en los que persiste un sonido, en este caso mediremos cuanto es la duración de un grito.
-        basic.showNumber((input.runningTime() - inicio) / 1000)
-        // Si los gritos se detienen termina el temporizador y finaliza la medición.
+        // Muestra la cantidad de segundos en los que persiste un sonido, en este caso mediremos cuanto es la duración de una cantidad de aplausos.
+        basic.showNumber(Math.round((input.runningTime() - inicio) / 1000))
+        // Si los aplausos se detienen termina el temporizador y finaliza la medición.
         if (input.soundLevel() < 5) {
             inicio = 0
             activo = false

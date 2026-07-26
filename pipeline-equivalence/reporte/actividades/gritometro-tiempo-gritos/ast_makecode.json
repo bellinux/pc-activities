@@ -21,13 +21,19 @@
                                         "children": [
                                             {
                                                 "type": "Operator",
-                                                "label": "◻ ÷ 1000",
+                                                "label": "redondeo ◻",
                                                 "children": [
                                                     {
                                                         "type": "Operator",
-                                                        "label": "◻ − inicio",
+                                                        "label": "◻ ÷ 1000",
                                                         "children": [
-                                                            { "type": "Sensor", "label": "tiempo de ejecución (ms)", "children": [] }
+                                                            {
+                                                                "type": "Operator",
+                                                                "label": "◻ − inicio",
+                                                                "children": [
+                                                                    { "type": "Sensor", "label": "tiempo de ejecución (ms)", "children": [] }
+                                                                ]
+                                                            }
                                                         ]
                                                     }
                                                 ]

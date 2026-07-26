@@ -30,18 +30,11 @@
                                 "label": "si no",
                                 "children": [
                                     { "type": "Action", "label": "para todos los sonidos", "children": [] },
-                                    { "type": "Action", "label": "mostrar LEDs", "children": [] }
+                                    { "type": "Action", "label": "borrar la pantalla", "children": [] }
                                 ]
                             }
                         ]
                     }
-                ]
-            },
-            {
-                "type": "Event",
-                "label": "al iniciar",
-                "children": [
-                    { "type": "Action", "label": "mostrar LEDs", "children": [] }
                 ]
             }
         ]

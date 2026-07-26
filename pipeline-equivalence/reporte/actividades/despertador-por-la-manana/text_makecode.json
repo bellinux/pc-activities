@@ -7,8 +7,6 @@
         "    mostrar LEDs",
         "  si no:",
         "    para todos los sonidos",
-        "    mostrar LEDs",
-        "al iniciar:",
-        "  mostrar LEDs"
+        "    borrar la pantalla"
     ]
 }

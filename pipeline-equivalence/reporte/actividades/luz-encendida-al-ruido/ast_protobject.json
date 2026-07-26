@@ -6,8 +6,7 @@
                 "type": "Event",
                 "label": "al iniciar el programa",
                 "children": [
-                    { "type": "Assignment", "label": "establecer estado a falso", "children": [] },
-                    { "type": "Action", "label": "establecer color de fondo a #000000 en DibujoLED2", "children": [] }
+                    { "type": "Assignment", "label": "establecer estado a falso", "children": [] }
                 ]
             },
             {

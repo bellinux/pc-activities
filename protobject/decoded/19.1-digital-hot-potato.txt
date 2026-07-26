@@ -1,6 +1,6 @@
 ACTIVIDAD: 19.1-digital-hot-potato
 CODE: papas-caliente-juego
-COMPONENTES: ReproductorSonido3=AudioPlayer, BotónTáctil3=TouchButton, DibujoLED4=MatrixDraw
+COMPONENTES: ReproductorSonido3=AudioPlayer, BotónTáctil3=TouchButton
 
 AL INICIAR
   ESTABLECER var:pausado = TRUE

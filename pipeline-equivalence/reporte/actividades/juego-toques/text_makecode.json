@@ -2,10 +2,16 @@
     "platform": "MakeCode",
     "extracted_text": [
         "al iniciar:",
-        "  fijar Toques a 0",
+        "  fijar energia a 0",
         "al tocar el logotipo:",
-        "  cambiar Toques por 1",
+        "  cambiar energia por 1",
         "para siempre:",
-        "  mostrar número Toques"
+        "  si (energia < 5) entonces:",
+        "    graficar x 1 y (5 − energia)",
+        "    graficar x 2 y (5 − energia)",
+        "    graficar x 3 y (5 − energia)",
+        "  si no:",
+        "    (device_show_image_offset)",
+        "    reproduce secuencia (risa) en modo hasta que termine"
     ]
 }

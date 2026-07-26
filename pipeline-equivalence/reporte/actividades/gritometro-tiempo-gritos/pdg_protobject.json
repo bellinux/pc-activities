@@ -170,12 +170,42 @@
         },
         {
             "source": "n7",
+            "target": "n8",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n7",
+            "target": "n9",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n7",
+            "target": "n10",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n7",
             "target": "n11",
             "type": "control",
             "var": "true"
         },
         {
-            "source": "n11",
+            "source": "n7",
+            "target": "n12",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n7",
+            "target": "n13",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n7",
             "target": "n14",
             "type": "control",
             "var": "true"
@@ -187,19 +217,19 @@
             "var": "true"
         },
         {
-            "source": "n15",
+            "source": "n14",
             "target": "n16",
             "type": "control",
             "var": "true"
         },
         {
-            "source": "n16",
+            "source": "n14",
             "target": "n17",
             "type": "control",
             "var": "true"
         },
         {
-            "source": "n17",
+            "source": "n14",
             "target": "n18",
             "type": "control",
             "var": "true"
@@ -209,6 +239,12 @@
             "target": "n20",
             "type": "control",
             "var": ""
+        },
+        {
+            "source": "n20",
+            "target": "n21",
+            "type": "control",
+            "var": "true"
         },
         {
             "source": "n20",
@@ -311,6 +347,12 @@
             "target": "n20",
             "type": "data",
             "var": "activo"
+        },
+        {
+            "source": "n2",
+            "target": "n5",
+            "type": "side_effect",
+            "var": "display"
         },
         {
             "source": "n5",

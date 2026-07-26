@@ -181,9 +181,8 @@
                                     },
                                     {
                                         "type": "Conditional",
-                                        "label": "si ◻ entonces",
+                                        "label": "si sonidoFijo entonces",
                                         "children": [
-                                            { "type": "Sensor", "label": "sonidoFijo", "children": [] },
                                             {
                                                 "type": "Branch_True",
                                                 "label": "entonces",
@@ -256,7 +255,7 @@
                 ]
             },
             {
-                "type": "Action",
+                "type": "Operator",
                 "label": "restringir 0 entre 0 y 0",
                 "children": []
             }

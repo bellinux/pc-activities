@@ -37,10 +37,10 @@ al iniciar el programa:
   establecer latidoGrande a 500
   establecer latidoPequeño a 150
 
-cuando Inclinación3 hacie un borde:   // Este bloque detecta el momento en que cambia la posición del dispositivo, cuando lo hace se editan las variables "latidoGrande" y "latidoPequeño". Dependiendo de la posición la velocidad de latido aumentará o disminuirá (Los tiempos son más largos, es decir las variables toman valores grandes).  En este bloque específico la velocidad de latidos aumentará.
+cuando Inclinación3 hacie un borde:   // Este bloque detecta el momento en que cambia la posición del dispositivo, cuando lo hace se editan las variables "latidoGrande" y "latidoPequeño". Al inclinar el dispositivo hacia esta dirección, la velocidad de latido aumentará ya que los tiempos son más cortos.
   establecer latidoGrande a 250
   establecer latidoPequeño a 80
 
-cuando Inclinación3 hacia arriba:   // Este bloque detecta el momento en que cambia la posición del dispositivo, cuando lo hace se editan las variables "latidoGrande" y "latidoPequeño". Dependiendo de la posición la velocidad de latido aumentará (Los tiempos son más largos, es decir las variables toman valores grandes).  En este bloque específico la velocidad de latidos se reducirá.
+cuando Inclinación3 hacia arriba:   // Este bloque detecta el momento en que cambia la posición del dispositivo, cuando lo hace se editan las variables "latidoGrande" y "latidoPequeño". Al inclinar el dispositivo hacia esta dirección, la velocidad de latido disminuirá ya que los tiempos son más largos.
   establecer latidoGrande a 500
   establecer latidoPequeño a 150

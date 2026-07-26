@@ -6,7 +6,7 @@
                 "type": "Event",
                 "label": "al iniciar el programa",
                 "children": [
-                    { "type": "Assignment", "label": "establecer ultimoBeat a 0", "children": [] }
+                    { "type": "Assignment", "label": "establecer ultimoPulso a 0", "children": [] }
                 ]
             },
             {
@@ -28,7 +28,7 @@
                     },
                     {
                         "type": "Assignment",
-                        "label": "establecer intervaloBeat a ◻",
+                        "label": "establecer intervaloPulso a ◻",
                         "children": [
                             { "type": "Operator", "label": "60000 ÷ bpm", "children": [] }
                         ]
@@ -39,11 +39,11 @@
                         "children": [
                             {
                                 "type": "Operator",
-                                "label": "◻ > intervaloBeat",
+                                "label": "◻ > intervaloPulso",
                                 "children": [
                                     {
                                         "type": "Operator",
-                                        "label": "◻ − ultimoBeat",
+                                        "label": "◻ − ultimoPulso",
                                         "children": [
                                             { "type": "Sensor", "label": "milisegundos", "children": [] }
                                         ]
@@ -57,7 +57,7 @@
                                     { "type": "Action", "label": "toca nota tom en BateríaMusical2", "children": [] },
                                     {
                                         "type": "Assignment",
-                                        "label": "establecer ultimoBeat a ◻",
+                                        "label": "establecer ultimoPulso a ◻",
                                         "children": [
                                             { "type": "Sensor", "label": "milisegundos", "children": [] }
                                         ]

@@ -24,8 +24,89 @@
         },
         {
             "id": "n4",
-            "kind": "PlotPoint",
+            "kind": "Arithmetic",
             "seq": 4,
+            "in_loop": true,
+            "op": "-"
+        },
+        {
+            "id": "n5",
+            "kind": "Constrain",
+            "seq": 5,
+            "in_loop": true
+        },
+        {
+            "id": "n6",
+            "kind": "PlotPoint",
+            "seq": 6,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n7",
+            "kind": "ReadSoundLevel",
+            "seq": 7,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n8",
+            "kind": "Arithmetic",
+            "seq": 8,
+            "in_loop": true,
+            "op": "÷"
+        },
+        {
+            "id": "n9",
+            "kind": "Arithmetic",
+            "seq": 9,
+            "in_loop": true,
+            "op": "-"
+        },
+        {
+            "id": "n10",
+            "kind": "Constrain",
+            "seq": 10,
+            "in_loop": true
+        },
+        {
+            "id": "n11",
+            "kind": "PlotPoint",
+            "seq": 11,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n12",
+            "kind": "ReadSoundLevel",
+            "seq": 12,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n13",
+            "kind": "Arithmetic",
+            "seq": 13,
+            "in_loop": true,
+            "op": "÷"
+        },
+        {
+            "id": "n14",
+            "kind": "Arithmetic",
+            "seq": 14,
+            "in_loop": true,
+            "op": "-"
+        },
+        {
+            "id": "n15",
+            "kind": "Constrain",
+            "seq": 15,
+            "in_loop": true
+        },
+        {
+            "id": "n16",
+            "kind": "PlotPoint",
+            "seq": 16,
             "in_loop": true,
             "resId": 1
         }
@@ -33,7 +114,19 @@
     "edges": [
         {
             "source": "n1",
-            "target": "n4",
+            "target": "n6",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n6",
+            "target": "n11",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n11",
+            "target": "n16",
             "type": "control",
             "var": ""
         },
@@ -50,8 +143,80 @@
             "var": "value"
         },
         {
+            "source": "n4",
+            "target": "n5",
+            "type": "data",
+            "var": "value"
+        },
+        {
+            "source": "n5",
+            "target": "n6",
+            "type": "data",
+            "var": "value"
+        },
+        {
+            "source": "n7",
+            "target": "n8",
+            "type": "data",
+            "var": "sound_1"
+        },
+        {
+            "source": "n8",
+            "target": "n9",
+            "type": "data",
+            "var": "value"
+        },
+        {
+            "source": "n9",
+            "target": "n10",
+            "type": "data",
+            "var": "value"
+        },
+        {
+            "source": "n10",
+            "target": "n11",
+            "type": "data",
+            "var": "value"
+        },
+        {
+            "source": "n12",
+            "target": "n13",
+            "type": "data",
+            "var": "sound_1"
+        },
+        {
+            "source": "n13",
+            "target": "n14",
+            "type": "data",
+            "var": "value"
+        },
+        {
+            "source": "n14",
+            "target": "n15",
+            "type": "data",
+            "var": "value"
+        },
+        {
+            "source": "n15",
+            "target": "n16",
+            "type": "data",
+            "var": "value"
+        },
+        {
             "source": "n1",
-            "target": "n4",
+            "target": "n6",
+            "type": "side_effect",
+            "var": "display"
+        },
+        {
+            "source": "n6",
+            "target": "n11",
+            "type": "side_effect",
+            "var": "display"
+        },
+        {
+            "source": "n11",
+            "target": "n16",
             "type": "side_effect",
             "var": "display"
         }

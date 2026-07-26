@@ -1,10 +1,10 @@
 ACTIVIDAD: 22.2-scream-battle
-FUENTE: micro:bit / MakeCode 8.0.18 — "gritometro-tiempo-gritos"  (etiquetas oficiales es-ES)
+FUENTE: micro:bit / MakeCode 9.0.5 — "aplausometro-tiempo-aplausos"  (etiquetas oficiales es-ES)
 
 para siempre:
   si (inicio > 0) entonces:
-    mostrar número ((tiempo de ejecución (ms) − inicio) ÷ 1000)   // Muestra la cantidad de segundos en los que persiste un sonido, en este caso mediremos cuanto es la duración de los gritos.
-    si (nivel de sonido < 5) entonces:   // Si los gritos se detienen termina el temporizador y finaliza la medición.
+    mostrar número redondeo(((tiempo de ejecución (ms) − inicio) ÷ 1000))   // Muestra la cantidad de segundos en los que persiste un sonido, en este caso mediremos cuanto es la duración de una cantidad de aplausos.
+    si (nivel de sonido < 5) entonces:   // Si los aplausos se detienen termina el temporizador y finaliza la medición.
       fijar inicio a 0
       fijar activo a falso
       pausa (ms) 5000

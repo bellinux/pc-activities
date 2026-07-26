@@ -20,11 +20,11 @@ AL INICIAR
   ESTABLECER var:latidoPequeño = 150
 
 protobject_Inclinación3_change  property=side
-    ; // Este bloque detecta el momento en que cambia la posición del dispositivo, cuando lo hace se editan las variables "latidoGrande" y "latidoPequeño". Dependiendo de la posición la velocidad de latido aumentará o disminuirá (Los tiempos son más largos, es decir las variables toman valores grandes).  En este bloque específico la velocidad de latidos aumentará.
+    ; // Este bloque detecta el momento en que cambia la posición del dispositivo, cuando lo hace se editan las variables "latidoGrande" y "latidoPequeño". Al inclinar el dispositivo hacia esta dirección, la velocidad de latido aumentará ya que los tiempos son más cortos.
   ESTABLECER var:latidoGrande = 250
   ESTABLECER var:latidoPequeño = 80
 
 protobject_Inclinación3_change  property=faceUp
-    ; // Este bloque detecta el momento en que cambia la posición del dispositivo, cuando lo hace se editan las variables "latidoGrande" y "latidoPequeño". Dependiendo de la posición la velocidad de latido aumentará (Los tiempos son más largos, es decir las variables toman valores grandes).  En este bloque específico la velocidad de latidos se reducirá.
+    ; // Este bloque detecta el momento en que cambia la posición del dispositivo, cuando lo hace se editan las variables "latidoGrande" y "latidoPequeño". Al inclinar el dispositivo hacia esta dirección, la velocidad de latido disminuirá ya que los tiempos son más largos.
   ESTABLECER var:latidoGrande = 500
   ESTABLECER var:latidoPequeño = 150

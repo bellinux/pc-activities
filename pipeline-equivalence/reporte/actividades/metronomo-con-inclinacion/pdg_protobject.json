@@ -63,7 +63,8 @@
             "id": "n10",
             "kind": "Comparison",
             "seq": 10,
-            "in_loop": true
+            "in_loop": true,
+            "op": ">"
         },
         {
             "id": "n11",
@@ -144,13 +145,13 @@
             "source": "n6",
             "target": "n7",
             "type": "data",
-            "var": "intervalobeat"
+            "var": "intervalopulso"
         },
         {
             "source": "n7",
             "target": "n10",
             "type": "data",
-            "var": "intervalobeat"
+            "var": "intervalopulso"
         },
         {
             "source": "n8",
@@ -162,13 +163,13 @@
             "source": "n2",
             "target": "n9",
             "type": "data",
-            "var": "ultimobeat"
+            "var": "ultimopulso"
         },
         {
             "source": "n14",
             "target": "n9",
             "type": "data",
-            "var": "ultimobeat"
+            "var": "ultimopulso"
         },
         {
             "source": "n9",
@@ -180,7 +181,7 @@
             "source": "n10",
             "target": "n11",
             "type": "data",
-            "var": "value"
+            "var": "condition"
         },
         {
             "source": "n13",

@@ -1,12 +1,8 @@
-ACTIVIDAD: 02.3-music-visualizer
+ACTIVIDAD: 03.1-music-visualizer
 FUENTE: Protobject (bloques, etiquetas oficiales es)
 
 repetir para siempre:
-  dibuja con color claro al ruido in NivelRuido1 en DibujoLED2:
-      .#.#.#.
-      #.#.#.#
-      .#.#.#.
-      #.#.#.#
-      .#.#.#.
-      #.#.#.#
-      .#.#.#.
+  clear  en LEDDraw1   // Borra la pantalla antes de dibujar de nuevo en la siguiente línea.
+  drawOnXY 3 limitar (7 − (noise in NoiseLevel2 ÷ 15)) entre 1 y 7 #ff4444 en LEDDraw1   // Dibuja en la columna X el nivel de ruido. El valor se divide para ajustarlo al rango de la matriz LED y utilizar toda la barra.
+  drawOnXY 4 limitar (7 − (noise in NoiseLevel2 ÷ 15)) entre 1 y 7 #ff4444 en LEDDraw1   // Dibuja en la columna X el nivel de ruido. El valor se divide para ajustarlo al rango de la matriz LED y utilizar toda la barra.
+  drawOnXY 5 limitar (7 − (noise in NoiseLevel2 ÷ 15)) entre 1 y 7 #ff4444 en LEDDraw1   // Dibuja en la columna X el nivel de ruido. El valor se divide para ajustarlo al rango de la matriz LED y utilizar toda la barra.

@@ -34,14 +34,13 @@
         },
         {
             "id": "n6",
-            "kind": "PlotPoint",
+            "kind": "ForRange",
             "seq": 6,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": false
         },
         {
             "id": "n7",
-            "kind": "Delay",
+            "kind": "ForRange",
             "seq": 7,
             "in_loop": true
         },
@@ -49,20 +48,45 @@
             "id": "n8",
             "kind": "PlotPoint",
             "seq": 8,
-            "in_loop": false,
-            "resId": 1
-        },
-        {
-            "id": "n9",
-            "kind": "UnplotPoint",
-            "seq": 9,
             "in_loop": true,
             "resId": 1
         },
         {
-            "id": "n10",
+            "id": "n9",
             "kind": "Delay",
+            "seq": 9,
+            "in_loop": true
+        },
+        {
+            "id": "n10",
+            "kind": "PlotPoint",
             "seq": 10,
+            "in_loop": false,
+            "resId": 1
+        },
+        {
+            "id": "n11",
+            "kind": "ForRange",
+            "seq": 11,
+            "in_loop": false
+        },
+        {
+            "id": "n12",
+            "kind": "ForRange",
+            "seq": 12,
+            "in_loop": true
+        },
+        {
+            "id": "n13",
+            "kind": "UnplotPoint",
+            "seq": 13,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n14",
+            "kind": "Delay",
+            "seq": 14,
             "in_loop": true
         }
     ],
@@ -92,7 +116,7 @@
             "var": "true"
         },
         {
-            "source": "n6",
+            "source": "n5",
             "target": "n7",
             "type": "control",
             "var": "true"
@@ -107,13 +131,79 @@
             "source": "n5",
             "target": "n9",
             "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n5",
+            "target": "n10",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n6",
+            "target": "n7",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n7",
+            "target": "n8",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n8",
+            "target": "n9",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n6",
+            "target": "n10",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n5",
+            "target": "n11",
+            "type": "control",
             "var": "false"
         },
         {
-            "source": "n9",
-            "target": "n10",
+            "source": "n5",
+            "target": "n12",
             "type": "control",
             "var": "false"
+        },
+        {
+            "source": "n5",
+            "target": "n13",
+            "type": "control",
+            "var": "false"
+        },
+        {
+            "source": "n5",
+            "target": "n14",
+            "type": "control",
+            "var": "false"
+        },
+        {
+            "source": "n11",
+            "target": "n12",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n12",
+            "target": "n13",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n13",
+            "target": "n14",
+            "type": "control",
+            "var": ""
         },
         {
             "source": "n2",
@@ -136,12 +226,36 @@
         {
             "source": "n6",
             "target": "n8",
+            "type": "data",
+            "var": "columnas"
+        },
+        {
+            "source": "n7",
+            "target": "n8",
+            "type": "data",
+            "var": "filas"
+        },
+        {
+            "source": "n11",
+            "target": "n13",
+            "type": "data",
+            "var": "columnas"
+        },
+        {
+            "source": "n12",
+            "target": "n13",
+            "type": "data",
+            "var": "filas"
+        },
+        {
+            "source": "n8",
+            "target": "n10",
             "type": "side_effect",
             "var": "display"
         },
         {
-            "source": "n8",
-            "target": "n9",
+            "source": "n10",
+            "target": "n13",
             "type": "side_effect",
             "var": "display"
         }

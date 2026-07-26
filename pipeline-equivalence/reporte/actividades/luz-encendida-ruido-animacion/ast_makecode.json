@@ -6,7 +6,7 @@
                 "type": "Event_Interrupt",
                 "label": "al detectar el sonido alto",
                 "children": [
-                    { "type": "State_Toggle", "label": "fijar estado a no(estado)", "children": [] },
+                    { "type": "State_Toggle", "label": "fijar estado a (no estado)", "children": [] },
                     {
                         "type": "Conditional",
                         "label": "si estado entonces",

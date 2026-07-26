@@ -16,13 +16,7 @@ input.onSound(DetectedSound.Loud, function () {
             # # # # #
             `)
     } else {
-        basic.showLeds(`
-            . . . . .
-            . . . . .
-            . . . . .
-            . . . . .
-            . . . . .
-            `)
+        basic.clearScreen()
     }
 })
 let estado = false

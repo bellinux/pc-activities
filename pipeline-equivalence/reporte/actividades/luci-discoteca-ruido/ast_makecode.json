@@ -9,13 +9,75 @@
                     { "type": "Action", "label": "borrar la pantalla", "children": [] },
                     {
                         "type": "Action",
-                        "label": "graficar x ◻ y 2",
+                        "label": "graficar x 2 y ◻",
                         "children": [
                             {
                                 "type": "Operator",
-                                "label": "◻ ÷ 60",
+                                "label": "restringir ◻ entre 0 y 4",
                                 "children": [
-                                    { "type": "Sensor", "label": "nivel de sonido", "children": [] }
+                                    {
+                                        "type": "Operator",
+                                        "label": "4 − ◻",
+                                        "children": [
+                                            {
+                                                "type": "Operator",
+                                                "label": "◻ ÷ 60",
+                                                "children": [
+                                                    { "type": "Sensor", "label": "nivel de sonido", "children": [] }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Action",
+                        "label": "graficar x 1 y ◻",
+                        "children": [
+                            {
+                                "type": "Operator",
+                                "label": "restringir ◻ entre 0 y 4",
+                                "children": [
+                                    {
+                                        "type": "Operator",
+                                        "label": "4 − ◻",
+                                        "children": [
+                                            {
+                                                "type": "Operator",
+                                                "label": "◻ ÷ 60",
+                                                "children": [
+                                                    { "type": "Sensor", "label": "nivel de sonido", "children": [] }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Action",
+                        "label": "graficar x 3 y ◻",
+                        "children": [
+                            {
+                                "type": "Operator",
+                                "label": "restringir ◻ entre 0 y 4",
+                                "children": [
+                                    {
+                                        "type": "Operator",
+                                        "label": "4 − ◻",
+                                        "children": [
+                                            {
+                                                "type": "Operator",
+                                                "label": "◻ ÷ 60",
+                                                "children": [
+                                                    { "type": "Sensor", "label": "nivel de sonido", "children": [] }
+                                                ]
+                                            }
+                                        ]
+                                    }
                                 ]
                             }
                         ]

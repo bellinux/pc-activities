@@ -9,85 +9,84 @@
         },
         {
             "id": "n2",
-            "kind": "SetBackgroundColor",
-            "seq": 2,
-            "in_loop": false,
-            "resId": 1
-        },
-        {
-            "id": "n3",
             "kind": "SetVariable",
-            "seq": 3,
+            "seq": 2,
             "in_loop": false
         },
         {
+            "id": "n3",
+            "kind": "ClearDisplay",
+            "seq": 3,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
             "id": "n4",
-            "kind": "DrawImage",
+            "kind": "ReadTilt",
             "seq": 4,
             "in_loop": true,
             "resId": 1
         },
         {
             "id": "n5",
-            "kind": "ReadTilt",
+            "kind": "Comparison",
             "seq": 5,
             "in_loop": true,
-            "resId": 1
+            "op": ">"
         },
         {
             "id": "n6",
-            "kind": "Comparison",
-            "seq": 6,
-            "in_loop": true,
-            "op": ">"
-        },
-        {
-            "id": "n7",
             "kind": "ReadTilt",
-            "seq": 7,
+            "seq": 6,
             "in_loop": true,
             "resId": 1
         },
         {
-            "id": "n8",
+            "id": "n7",
             "kind": "Comparison",
-            "seq": 8,
+            "seq": 7,
             "in_loop": true,
             "op": "<"
         },
         {
-            "id": "n9",
+            "id": "n8",
             "kind": "LogicalAnd",
-            "seq": 9,
+            "seq": 8,
             "in_loop": true
         },
         {
-            "id": "n10",
+            "id": "n9",
             "kind": "ReadTilt",
-            "seq": 10,
+            "seq": 9,
             "in_loop": true,
             "resId": 2
         },
         {
-            "id": "n11",
+            "id": "n10",
             "kind": "Comparison",
-            "seq": 11,
+            "seq": 10,
             "in_loop": true,
             "op": ">"
         },
         {
-            "id": "n12",
+            "id": "n11",
             "kind": "ReadTilt",
-            "seq": 12,
+            "seq": 11,
             "in_loop": true,
             "resId": 2
         },
         {
-            "id": "n13",
+            "id": "n12",
             "kind": "Comparison",
-            "seq": 13,
+            "seq": 12,
             "in_loop": true,
             "op": "<"
+        },
+        {
+            "id": "n13",
+            "kind": "LogicalAnd",
+            "seq": 13,
+            "in_loop": true
         },
         {
             "id": "n14",
@@ -97,70 +96,70 @@
         },
         {
             "id": "n15",
-            "kind": "LogicalAnd",
+            "kind": "ConditionalBranch",
             "seq": 15,
             "in_loop": true
         },
         {
             "id": "n16",
-            "kind": "ConditionalBranch",
+            "kind": "ReadTilt",
             "seq": 16,
-            "in_loop": true
+            "in_loop": true,
+            "resId": 1
         },
         {
             "id": "n17",
-            "kind": "ReadTilt",
+            "kind": "Arithmetic",
             "seq": 17,
             "in_loop": true,
-            "resId": 1
+            "op": "×"
         },
         {
             "id": "n18",
             "kind": "Arithmetic",
             "seq": 18,
             "in_loop": true,
-            "op": "×"
-        },
-        {
-            "id": "n19",
-            "kind": "Arithmetic",
-            "seq": 19,
-            "in_loop": true,
             "op": "+"
         },
         {
-            "id": "n20",
+            "id": "n19",
             "kind": "ReadTilt",
-            "seq": 20,
+            "seq": 19,
             "in_loop": true,
             "resId": 2
         },
         {
-            "id": "n21",
+            "id": "n20",
             "kind": "Arithmetic",
-            "seq": 21,
+            "seq": 20,
             "in_loop": true,
             "op": "+"
         },
         {
-            "id": "n22",
+            "id": "n21",
             "kind": "PlotPoint",
-            "seq": 22,
+            "seq": 21,
             "in_loop": true,
             "resId": 1
         },
         {
-            "id": "n23",
+            "id": "n22",
             "kind": "ConditionalBranch",
-            "seq": 23,
+            "seq": 22,
             "in_loop": true
         },
         {
-            "id": "n24",
+            "id": "n23",
             "kind": "EmitSound",
-            "seq": 24,
+            "seq": 23,
             "in_loop": true,
             "resId": 1
+        },
+        {
+            "id": "n24",
+            "kind": "Delay",
+            "seq": 24,
+            "in_loop": true
         },
         {
             "id": "n25",
@@ -259,109 +258,121 @@
             "var": ""
         },
         {
-            "source": "n2",
-            "target": "n3",
+            "source": "n3",
+            "target": "n15",
             "type": "control",
             "var": ""
         },
         {
-            "source": "n4",
-            "target": "n16",
+            "source": "n15",
+            "target": "n21",
             "type": "control",
-            "var": ""
+            "var": "true"
         },
         {
-            "source": "n16",
+            "source": "n15",
             "target": "n22",
             "type": "control",
             "var": "true"
         },
         {
-            "source": "n16",
+            "source": "n22",
             "target": "n23",
             "type": "control",
             "var": "true"
         },
         {
-            "source": "n23",
+            "source": "n22",
             "target": "n24",
             "type": "control",
             "var": "true"
         },
         {
-            "source": "n23",
+            "source": "n22",
             "target": "n25",
             "type": "control",
             "var": "true"
         },
         {
-            "source": "n16",
+            "source": "n15",
             "target": "n33",
             "type": "control",
             "var": "false"
         },
         {
-            "source": "n16",
+            "source": "n15",
             "target": "n34",
             "type": "control",
             "var": "false"
         },
         {
-            "source": "n16",
+            "source": "n15",
             "target": "n35",
             "type": "control",
             "var": "false"
         },
         {
-            "source": "n16",
+            "source": "n15",
             "target": "n36",
             "type": "control",
             "var": "false"
         },
         {
-            "source": "n16",
+            "source": "n15",
             "target": "n37",
             "type": "control",
             "var": "false"
         },
         {
-            "source": "n5",
-            "target": "n6",
-            "type": "data",
-            "var": "tilt_1"
-        },
-        {
-            "source": "n7",
-            "target": "n8",
+            "source": "n4",
+            "target": "n5",
             "type": "data",
             "var": "tilt_1"
         },
         {
             "source": "n6",
-            "target": "n9",
+            "target": "n7",
+            "type": "data",
+            "var": "tilt_1"
+        },
+        {
+            "source": "n5",
+            "target": "n8",
             "type": "data",
             "var": "value"
         },
         {
-            "source": "n8",
-            "target": "n9",
+            "source": "n7",
+            "target": "n8",
             "type": "data",
             "var": "value"
         },
         {
-            "source": "n10",
-            "target": "n11",
-            "type": "data",
-            "var": "tilt_2"
-        },
-        {
-            "source": "n12",
-            "target": "n13",
+            "source": "n9",
+            "target": "n10",
             "type": "data",
             "var": "tilt_2"
         },
         {
             "source": "n11",
+            "target": "n12",
+            "type": "data",
+            "var": "tilt_2"
+        },
+        {
+            "source": "n10",
+            "target": "n13",
+            "type": "data",
+            "var": "value"
+        },
+        {
+            "source": "n12",
+            "target": "n13",
+            "type": "data",
+            "var": "value"
+        },
+        {
+            "source": "n8",
             "target": "n14",
             "type": "data",
             "var": "value"
@@ -373,50 +384,38 @@
             "var": "value"
         },
         {
-            "source": "n9",
-            "target": "n15",
-            "type": "data",
-            "var": "value"
-        },
-        {
             "source": "n14",
             "target": "n15",
             "type": "data",
-            "var": "value"
+            "var": "condition"
         },
         {
-            "source": "n15",
-            "target": "n16",
+            "source": "n16",
+            "target": "n17",
             "type": "data",
-            "var": "condition"
+            "var": "tilt_1"
         },
         {
             "source": "n17",
             "target": "n18",
             "type": "data",
-            "var": "tilt_1"
+            "var": "value"
         },
         {
             "source": "n18",
-            "target": "n19",
+            "target": "n21",
             "type": "data",
             "var": "value"
         },
         {
             "source": "n19",
-            "target": "n22",
-            "type": "data",
-            "var": "value"
-        },
-        {
-            "source": "n20",
-            "target": "n21",
+            "target": "n20",
             "type": "data",
             "var": "tilt_2"
         },
         {
-            "source": "n21",
-            "target": "n22",
+            "source": "n20",
+            "target": "n21",
             "type": "data",
             "var": "value"
         },
@@ -463,43 +462,37 @@
             "var": "value"
         },
         {
-            "source": "n3",
-            "target": "n16",
-            "type": "data",
-            "var": "sonidofijo"
-        },
-        {
-            "source": "n3",
-            "target": "n23",
+            "source": "n2",
+            "target": "n22",
             "type": "data",
             "var": "sonidofijo"
         },
         {
             "source": "n25",
-            "target": "n23",
+            "target": "n22",
             "type": "data",
             "var": "sonidofijo"
         },
         {
             "source": "n34",
-            "target": "n23",
+            "target": "n22",
             "type": "data",
             "var": "sonidofijo"
         },
         {
-            "source": "n4",
-            "target": "n22",
+            "source": "n3",
+            "target": "n21",
             "type": "side_effect",
             "var": "display"
         },
         {
-            "source": "n22",
+            "source": "n21",
             "target": "n33",
             "type": "side_effect",
             "var": "display"
         },
         {
-            "source": "n24",
+            "source": "n23",
             "target": "n35",
             "type": "side_effect",
             "var": "sound"
