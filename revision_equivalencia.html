@@ -50,6 +50,38 @@
   .col.mb .ic{background:#eef2f7;color:#475569}
 
   .note{font-size:12.5px;color:var(--muted);background:#fff8ec;border:1px solid #f3e2b3;border-radius:8px;padding:10px 14px;margin:14px 0}
+
+  /* --- Notas de equivalencia (calculadas con el pipeline PDG: isomorfismo + GED) --- */
+  .eq{border-radius:10px;padding:12px 16px;margin:14px 0;font-size:13.5px;border:1px solid}
+  .eq .eq-h{font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:13px}
+  .eq .badge{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+    border-radius:999px;padding:2px 9px;flex:none}
+  .eq p{margin:6px 0}
+  .eq .fix{margin-top:8px;padding-top:8px;border-top:1px dashed rgba(0,0,0,.14)}
+  .eq .fix b{color:var(--ink)}
+  /* verde: ya equivalentes */
+  .eq-ok{background:#eefaf2;border-color:#bfe6cf;color:#245c3b}
+  .eq-ok .badge{background:#1f7a45;color:#fff}
+  /* ámbar: diferencia mínima, corrección trivial */
+  .eq-facil{background:#fff8e8;border-color:#f0d99a;color:#6b4a09}
+  .eq-facil .badge{background:#c1860c;color:#fff}
+  /* naranja: diferencia moderada */
+  .eq-media{background:#fff1e8;border-color:#f4c9a8;color:#7a3d12}
+  .eq-media .badge{background:#c2570f;color:#fff}
+  /* rojo: diferencia estructural */
+  .eq-dificil{background:#fdecea;border-color:#f2c0ba;color:#7d2318}
+  .eq-dificil .badge{background:#a5281a;color:#fff}
+  .eq code{background:rgba(255,255,255,.75);border-color:rgba(0,0,0,.10)}
+
+  /* Resumen general */
+  .resumen{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin:22px 0}
+  .resumen table{border-collapse:collapse;width:100%;font-size:13px;margin-top:10px}
+  .resumen th,.resumen td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line)}
+  .resumen th{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  .resumen td.ged{font-weight:700;text-align:center;width:56px}
+  .pill{font-size:11px;font-weight:700;border-radius:999px;padding:2px 8px;white-space:nowrap}
+  .p-ok{background:#e9f6ee;color:#1f7a45}.p-facil{background:#fdf3dd;color:#8a6008}
+  .p-media{background:#fdeadd;color:#9c460c}.p-dificil{background:#fbe3e0;color:#8f2016}
   code{font-family:ui-monospace,Menlo,Consolas,monospace;background:#eef2f7;border:1px solid #e0e7ef;border-radius:5px;padding:0 5px;font-size:12.5px}
   footer{margin-top:36px;color:var(--muted);font-size:12px;text-align:center}
 </style>
@@ -65,6 +97,38 @@
 
   <div class="intro">
     Cada ficha describe una actividad, explica en qué se parecen (o en qué se tuvieron que arreglar) las dos versiones, y lista los componentes equivalentes de <b>Protobject</b> y de <b>micro:bit</b> lado a lado.
+  </div>
+
+  <div class="resumen">
+    <b>Verificación automática (pipeline PDG).</b> Cada par de programas se compara con su
+    <i>grafo de dependencias</i> normalizado «a menos del plumbing de plataforma»: se ignoran el color,
+    los nombres de dispositivo, el eje x/y y las constantes numéricas. Dos actividades son
+    <b>equivalentes</b> si los grafos son isomorfos (<code>GED = 0</code>); la <b>distancia de edición</b>
+    (GED) mide cuántas operaciones faltan o sobran.
+    <p style="margin:10px 0 0"><b>9 de 17 actividades ya son equivalentes.</b> De las 8 restantes,
+    <b>cuatro se resuelven cambiando o agregando un solo bloque</b> en micro:bit (las marcadas como
+    <span class="pill p-facil">trivial</span>), y una quinta con un reordenamiento simple. Las dos últimas
+    tienen diferencias estructurales que conviene discutir antes de tocar nada.</p>
+
+    <table>
+      <tr><th>Actividad</th><th>GED</th><th>Qué falta</th></tr>
+      <tr><td><a href="#a166">16.6 Magic Birthday Candle</a></td><td class="ged">1</td>
+          <td><span class="pill p-facil">trivial</span> usar <code>borrar la pantalla</code> en micro:bit</td></tr>
+      <tr><td><a href="#a163">16.3 Bat in the Dark</a></td><td class="ged">1</td>
+          <td><span class="pill p-facil">trivial</span> usar <code>borrar la pantalla</code> en micro:bit</td></tr>
+      <tr><td><a href="#a221">22.1 DJ Metronome</a></td><td class="ged">1</td>
+          <td><span class="pill p-facil">trivial</span> corregir la fórmula del intervalo <b>(además es un error de cálculo)</b></td></tr>
+      <tr><td><a href="#a164">16.4 Robot Activation Challenge</a></td><td class="ged">3</td>
+          <td><span class="pill p-facil">trivial</span> agregar <code>borrar la pantalla</code> antes de la victoria</td></tr>
+      <tr><td><a href="#a191">19.1 Digital Hot Potato</a></td><td class="ged">7</td>
+          <td><span class="pill p-media">moderado</span> ordenar igual el final: reproducir → pausa → parar</td></tr>
+      <tr><td><a href="#a222">22.2 Scream Battle</a></td><td class="ged">11</td>
+          <td><span class="pill p-media">moderado</span> quitar el <code>redondeo</code>; el resto es plumbing</td></tr>
+      <tr><td><a href="#a165">16.5 My Robot Friend Heart</a></td><td class="ged">19</td>
+          <td><span class="pill p-dificil">estructural</span> unificar el evento de entrada (táctil vs inclinación)</td></tr>
+      <tr><td><a href="#a167">16.7 Don't Spill Liquid Game</a></td><td class="ged">108</td>
+          <td><span class="pill p-dificil">estructural</span> quitar depuración y código muerto; el escalado es de plataforma</td></tr>
+    </table>
   </div>
 
   <h2 class="section-title">Actividades</h2>
@@ -241,6 +305,11 @@
     <div class="num">16.3</div>
     <h3>Bat in the Dark</h3>
     <p class="lead">Exactamente igual que con el caso anterior, no hay diferencias.</p>
+    <div class="eq eq-facil">
+      <div class="eq-h"><span class="badge">GED 1</span>Diferencia mínima: un solo bloque</div>
+      <p>Funcionalmente hacen lo mismo. La diferencia está en el bloque elegido para apagar la pantalla en la rama <code>si no</code>: micro:bit usa <code>mostrar LEDs</code> con la matriz vacía, mientras Protobject usa <code>borrar dibujo</code>. El grafo los ve como dos operaciones distintas (dibujar una imagen vs. limpiar la pantalla).</p>
+      <p class="fix"><b>Cómo igualarlas:</b> Reemplazar en micro:bit ese <code>mostrar LEDs</code> vacío por <code>borrar la pantalla</code>. Con ese único cambio los dos grafos quedan idénticos (GED 0).</p>
+    </div>
     <p style="color:#374151;margin:0"><b>Componentes:</b> se utilizan los mismos que en la actividad anterior, pero sin Music y ReproductorSonido.</p>
   </div>
 
@@ -248,6 +317,11 @@
     <div class="num">16.4</div>
     <h3>Robot Activation Challenge</h3>
     <p class="lead">La actividad en protobject era distinta a la de microbit, por lo que me aseguré de hacer que ambas tengan la misma estructura, lógica y funcionamiento, de modo que ahora sí son equivalentes. Se utilizan distintos valores máximos de energía para la activación dados los tamaños de las pantallas leds de cada dispositivo, pero no afecta.</p>
+    <div class="eq eq-facil">
+      <div class="eq-h"><span class="badge">GED 3</span>Diferencia mínima: falta un borrado</div>
+      <p>La estructura coincide en todo salvo el final: en la rama de victoria Protobject hace <code>borrar dibujo</code> antes de pintar la pantalla completa, y micro:bit pinta directamente sobre lo que había.</p>
+      <p class="fix"><b>Cómo igualarlas:</b> Agregar <code>borrar la pantalla</code> en micro:bit justo antes de mostrar la imagen de victoria. Es un bloque y deja ambas versiones equivalentes.</p>
+    </div>
     <div class="cols">
       <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>
         <ul>
@@ -270,6 +344,11 @@
     <div class="num">16.5</div>
     <h3>My Robot Friend Heart</h3>
     <p class="lead">No hubo cambios, ya que ambas versiones de la actividad utilizan la misma lógica y secuencia, lo distinto es que en Protobject se detecta la inclinación como tal, mientras que en Microbit se hace esto verificando la orientación de la pantalla y del logo, lo cual termina funcionando de la misma forma.</p>
+    <div class="eq eq-dificil">
+      <div class="eq-h"><span class="badge">GED 19</span>Diferencia estructural: el evento de entrada</div>
+      <p>Las dos versiones comparten toda la lógica y el mismo número de operaciones (17 y 17), pero el <b>disparador es distinto</b>: micro:bit reacciona <code>al tocar el logotipo</code> (táctil) y Protobject a un <b>gesto de inclinación</b>. Es un solo bloque, pero al ser el evento del que cuelga toda la secuencia, cambia la forma completa del grafo y por eso la distancia sube tanto.</p>
+      <p class="fix"><b>Cómo igualarlas:</b> Unificar el disparador: que ambas usen contacto táctil, o ambas el gesto de inclinación. Es una decisión de diseño de la actividad más que un error; conviene elegir cuál de las dos interacciones se quiere enseñar.</p>
+    </div>
     <div class="cols">
       <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>
         <ul>
@@ -292,6 +371,11 @@
     <div class="num">16.6</div>
     <h3>Magic Birthday Candle</h3>
     <p class="lead">Sin cambios, ya es equivalente.</p>
+    <div class="eq eq-facil">
+      <div class="eq-h"><span class="badge">GED 1</span>Diferencia mínima: un solo bloque</div>
+      <p>Funcionalmente son idénticas. La única diferencia es cómo se apaga la pantalla cuando la vela está soplada: micro:bit usa <code>mostrar LEDs</code> con la matriz vacía y Protobject usa <code>borrar dibujo</code>.</p>
+      <p class="fix"><b>Cómo igualarlas:</b> Reemplazar en micro:bit ese <code>mostrar LEDs</code> vacío por <code>borrar la pantalla</code>. Con eso el grafo queda idéntico (GED 0).</p>
+    </div>
     <div class="cols">
       <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>
         <ul>
@@ -314,6 +398,11 @@
     <p class="lead">Es un poco distinto en funcionalidad. La nota en protobject se mantiene, mientras que en microbit se toca por cada segundo. Además de eso, la lógica de las LEDs es distinta en protobject ya que actualmente usa colores para mostrar los rangos y toca ruido todo el rato (distintos para diferenciar si el líquido está dentro de los parámetros), mientras que microbit no cambia de color (por razones obvias) y solo toca ruido al salirse de los parámetros.
       Además de esto, quitamos el bloque "establecer color de fondo" de protobject ya que era redundante y no se utiliza en microbit, junto con cambiar el bloque "dibujar pantalla con color" por un "clear screen".
     </p>
+    <div class="eq eq-dificil">
+      <div class="eq-h"><span class="badge">GED 108</span>Diferencia estructural: la más divergente del conjunto</div>
+      <p>Son 54 operaciones en micro:bit contra 37 en Protobject, por cuatro motivos distintos: <b>(1)</b> micro:bit lee la aceleración en bruto y tiene que escalarla con <code>÷ 250</code> y <code>redondeo</code> en nueve lugares, mientras que en Protobject <code>Inclinación</code> ya entrega el valor listo para usar; <b>(2)</b> micro:bit tiene un bloque <code>serial escribir</code> de depuración que no aporta nada a la actividad; <b>(3)</b> micro:bit tiene un bloque <code>restringir 0 entre 0 y 0</code> suelto, sin conectar (código muerto); <b>(4)</b> Protobject invierte el eje x con <code>× -1</code> y acota las coordenadas con <code>limitar</code>, cosa que micro:bit no hace.</p>
+      <p class="fix"><b>Cómo igualarlas:</b> Lo fácil y que conviene hacer igual: <b>borrar el bloque de depuración</b> y <b>el bloque suelto</b>. Después, decidir si la inversión y el acotado del eje deben estar en las dos versiones. El escalado del acelerómetro sí es una diferencia real entre plataformas y no se puede eliminar.</p>
+    </div>
     <div class="cols">
       <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>
         <ul>
@@ -363,6 +452,11 @@
     <div class="num">19.1</div>
     <h3>Digital Hot Potato</h3>
     <p class="lead">Sin cambios, ya son equivalentes.</p>
+    <div class="eq eq-media">
+      <div class="eq-h"><span class="badge">GED 7</span>Diferencia moderada: el orden del final</div>
+      <p>Las dos versiones hacen lo mismo hasta el final, pero lo cierran en distinto orden: micro:bit hace <code>parar todos los sonidos</code> y luego <code>reproducir</code> el sonido de derrota; Protobject hace <code>reproducir</code>, después <code>retraso de 4 segundos</code> y recién ahí <code>detener sonido</code>. Protobject tiene una espera que micro:bit no tiene.</p>
+      <p class="fix"><b>Cómo igualarlas:</b> Alinear la secuencia final en micro:bit: reproducir el sonido, agregar una <code>pausa (ms) 4000</code> y recién después parar los sonidos. Así ambas quedan con el mismo orden y la misma cantidad de operaciones.</p>
+    </div>
     <div class="cols">
       <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>
         <ul>
@@ -383,6 +477,11 @@
     <div class="num">22.1</div>
     <h3>DJ Metronome</h3>
     <p class="lead">Arreglé la versión de microbit ya que no funcionaba (debido a que intervaloBeat no estaba definido) y por lo tanto, no era equivalente en funcionamiento ni lógica a protobject, ahora que lo arreglé, funcionan de la misma forma.</p>
+    <div class="eq eq-facil">
+      <div class="eq-h"><span class="badge">GED 1</span>Diferencia mínima — y un error de cálculo en micro:bit</div>
+      <p>Toda la estructura coincide salvo la fórmula del intervalo entre pulsos: Protobject calcula <code>60000 ÷ bpm</code> (una división) y micro:bit calcula <code>600 + bpm</code> (una suma). <b>Ojo: la fórmula de micro:bit está mal.</b> El intervalo de un metrónomo es inversamente proporcional al tempo: si suben los bpm, el intervalo tiene que <i>bajar</i>. Con una suma pasa lo contrario, así que el metrónomo de micro:bit no marca el tempo que indica.</p>
+      <p class="fix"><b>Cómo igualarlas:</b> Cambiar en micro:bit la fórmula a <code>60000 ÷ bpm</code>, igual que en Protobject. Ese único cambio corrige el error y deja las dos versiones equivalentes (GED 0).</p>
+    </div>
     <div class="cols">
       <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>
         <ul>
@@ -403,6 +502,11 @@
     <div class="num">22.2</div>
     <h3>Scream Battle</h3>
     <p class="lead">Arreglé la versión de protobject ya que no cargaba en el visualizador. A pesar de que microbit muestra los dígitos de forma distinta que protobject, son equivalentes ya que eso es algo que depende meramente del sistema y no del algoritmo (microbit muestra números en la pantalla LED y protobject en DibujarEscribir), además de eso, para que se asemeje más la forma de visualización del tiempo de microbit a protobject, hice que el tiempo no se pueda mostrar en decimales para que se vea de forma directa y no hayan saltos gigantezcos entre los números al tardar tanto en mostrar toda la animación. Con este arreglo, la actividad queda mucho más parecida en el lado funcional.</p>
+    <div class="eq eq-media">
+      <div class="eq-h"><span class="badge">GED 11</span>Diferencia moderada: un redondeo y el ajuste del texto</div>
+      <p>Dos diferencias: <b>(1)</b> micro:bit aplica un <code>redondeo</code> a los segundos antes de mostrarlos y Protobject escribe el valor tal cual; <b>(2)</b> Protobject necesita <code>establecer tamaño</code> y <code>limpiar</code> para su display de texto, mientras que el <code>mostrar número</code> de micro:bit no requiere ninguna preparación.</p>
+      <p class="fix"><b>Cómo igualarlas:</b> El <code>redondeo</code> sí se puede igualar: o se quita de micro:bit, o se agrega el equivalente en Protobject (conviene decidir si se quieren mostrar decimales). La preparación del display de texto, en cambio, es propia de Protobject y puede documentarse como diferencia aceptada.</p>
+    </div>
     <div class="cols">
       <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>
         <ul>
