@@ -93,16 +93,21 @@
         </div>`;
     }
 
+    // Cache-buster por carga de página: fuerza a releer los SVG regenerados.
+    const CB = Date.now();
+
     // metricas.json hace de "puerta": si existe, el pipeline corrió -> mostramos
     // métricas + PDG; si no, solo está disponible la extracción de texto.
     function loadActivity(c) {
-        fetch(`reporte/actividades/${c}/metricas.json`)
+        // no-store + cache-buster en los SVG: tras re-ejecutar el pipeline, el navegador
+        // servía métricas y grafos viejos hasta hacer un hard refresh.
+        fetch(`reporte/actividades/${c}/metricas.json`, { cache: 'no-store' })
             .then(r => { if (!r.ok) throw 0; return r.json(); })
             .then(d => {
                 document.getElementById('metrics-' + c).innerHTML = metricsHtml(d);
                 document.getElementById('imgs-' + c).innerHTML = `
-                    <div><strong style="display:block;margin-bottom:20px;">Microbit</strong><img src="reporte/actividades/${c}/pdg_makecode.svg" alt="PDG Microbit"></div>
-                    <div><strong style="display:block;margin-bottom:20px;">Protobject</strong><img src="reporte/actividades/${c}/pdg_protobject.svg" alt="PDG Protobject"></div>`;
+                    <div><strong style="display:block;margin-bottom:20px;">Microbit</strong><img src="reporte/actividades/${c}/pdg_makecode.svg?v=${CB}" alt="PDG Microbit"></div>
+                    <div><strong style="display:block;margin-bottom:20px;">Protobject</strong><img src="reporte/actividades/${c}/pdg_protobject.svg?v=${CB}" alt="PDG Protobject"></div>`;
             })
             .catch(() => {
                 document.getElementById('metrics-' + c).innerHTML = '<span class="pendiente">Pendiente — pipeline aún no ejecutado (de momento solo extracción de texto).</span>';
@@ -126,7 +131,7 @@
         })
         .catch(() => {});
 
-    fetch('actividades.json')
+    fetch('actividades.json', { cache: 'no-store' })
         .then(r => r.json())
         .then(list => {
             document.getElementById('dyn-sub').innerHTML = `${list.length} actividades, ordenadas. Generadas desde <code>actividades.json</code>.`;
