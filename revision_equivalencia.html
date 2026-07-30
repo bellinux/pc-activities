@@ -304,7 +304,7 @@
   <div class="card c3" id="a163">
     <div class="num">16.3</div>
     <h3>Bat in the Dark</h3>
-    <p class="lead">Exactamente igual que con el caso anterior, no hay diferencias.</p>
+    <p class="lead">Ya arreglado el comentario de GED 1, ahora es equivalente.</p>
     <div class="eq eq-facil">
       <div class="eq-h"><span class="badge">GED 1</span>Diferencia mínima: un solo bloque</div>
       <p>Funcionalmente hacen lo mismo. La diferencia está en el bloque elegido para apagar la pantalla en la rama <code>si no</code>: micro:bit usa <code>mostrar LEDs</code> con la matriz vacía, mientras Protobject usa <code>borrar dibujo</code>. El grafo los ve como dos operaciones distintas (dibujar una imagen vs. limpiar la pantalla).</p>
@@ -316,7 +316,7 @@
   <div class="card c4" id="a164">
     <div class="num">16.4</div>
     <h3>Robot Activation Challenge</h3>
-    <p class="lead">La actividad en protobject era distinta a la de microbit, por lo que me aseguré de hacer que ambas tengan la misma estructura, lógica y funcionamiento, de modo que ahora sí son equivalentes. Se utilizan distintos valores máximos de energía para la activación dados los tamaños de las pantallas leds de cada dispositivo, pero no afecta.</p>
+    <p class="lead">(Comentario GED 3 ya resuelto, son equivalentes). La actividad en protobject era distinta a la de microbit, por lo que me aseguré de hacer que ambas tengan la misma estructura, lógica y funcionamiento, de modo que ahora sí son equivalentes. Se utilizan distintos valores máximos de energía para la activación dados los tamaños de las pantallas leds de cada dispositivo, pero no afecta.</p>
     <div class="eq eq-facil">
       <div class="eq-h"><span class="badge">GED 3</span>Diferencia mínima: falta un borrado</div>
       <p>La estructura coincide en todo salvo el final: en la rama de victoria Protobject hace <code>borrar dibujo</code> antes de pintar la pantalla completa, y micro:bit pinta directamente sobre lo que había.</p>
@@ -343,7 +343,8 @@
   <div class="card c5" id="a165">
     <div class="num">16.5</div>
     <h3>My Robot Friend Heart</h3>
-    <p class="lead">No hubo cambios, ya que ambas versiones de la actividad utilizan la misma lógica y secuencia, lo distinto es que en Protobject se detecta la inclinación como tal, mientras que en Microbit se hace esto verificando la orientación de la pantalla y del logo, lo cual termina funcionando de la misma forma.</p>
+    <p class="lead">Arreglo del comentario GED 19: En realidad microbit no utiliza el tocar el logotipo como activador, fue una confusión de la IA, lo que hace es detectar la inclinación del logotipo para realizar las acciones, tal y como en protobject, lo único que cambié aquí fue hacer que ahora se detecta puramente la inclinación del logotipo y no de la pantalla para que sea más consistente, esto debería arreglarlo.
+    </p>
     <div class="eq eq-dificil">
       <div class="eq-h"><span class="badge">GED 19</span>Diferencia estructural: el evento de entrada</div>
       <p>Las dos versiones comparten toda la lógica y el mismo número de operaciones (17 y 17), pero el <b>disparador es distinto</b>: micro:bit reacciona <code>al tocar el logotipo</code> (táctil) y Protobject a un <b>gesto de inclinación</b>. Es un solo bloque, pero al ser el evento del que cuelga toda la secuencia, cambia la forma completa del grafo y por eso la distancia sube tanto.</p>
@@ -370,7 +371,7 @@
   <div class="card c1" id="a166">
     <div class="num">16.6</div>
     <h3>Magic Birthday Candle</h3>
-    <p class="lead">Sin cambios, ya es equivalente.</p>
+    <p class="lead">Arreglado el comentario de GED 1, ya son equivalentes.</p>
     <div class="eq eq-facil">
       <div class="eq-h"><span class="badge">GED 1</span>Diferencia mínima: un solo bloque</div>
       <p>Funcionalmente son idénticas. La única diferencia es cómo se apaga la pantalla cuando la vela está soplada: micro:bit usa <code>mostrar LEDs</code> con la matriz vacía y Protobject usa <code>borrar dibujo</code>.</p>
