@@ -14,7 +14,7 @@
         "al iniciar:",
         "  fijar latidoPequeño a 250",
         "  fijar latidoGrande a 500",
-        "si pantalla hacia arriba:",
+        "si logotipo hacia abajo:",
         "  fijar latidoPequeño a 250",
         "  fijar latidoGrande a 500",
         "si logotipo hacia arriba:",

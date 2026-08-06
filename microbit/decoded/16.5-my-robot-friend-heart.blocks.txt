@@ -1,5 +1,5 @@
 ACTIVIDAD: 16.5-my-robot-friend-heart
-FUENTE: micro:bit / MakeCode 8.0.18 — "corazon-variables-eventos"  (etiquetas oficiales es-ES)
+FUENTE: micro:bit / MakeCode 9.0.8 — "corazon-variables-eventos"  (etiquetas oficiales es-ES)
 
 para siempre:
   mostrar LEDs:
@@ -31,7 +31,7 @@ al iniciar:
   fijar latidoPequeño a 250
   fijar latidoGrande a 500
 
-si pantalla hacia arriba:   // Este bloque detecta el momento en cambia la posición del dispositivo, cuando lo hace se editan las variables "latidoGrande" y "latidoPequeño". Dependiendo de la posición la velocidad de latido aumentará (Los tiempos son más largos, es decir las variables toman valores grandes).  En este bloque específico la velocidad de latidos se reducirá.
+si logotipo hacia abajo:   // Este bloque detecta el momento en cambia la posición del dispositivo, cuando lo hace se editan las variables "latidoGrande" y "latidoPequeño". Dependiendo de la posición la velocidad de latido aumentará (Los tiempos son más largos, es decir las variables toman valores grandes).  En este bloque específico la velocidad de latidos se reducirá.
   fijar latidoPequeño a 250
   fijar latidoGrande a 500
 

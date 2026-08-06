@@ -12,6 +12,6 @@
         "    mostrar LEDs",
         "    pausa (ms) 100",
         "  si no:",
-        "    mostrar LEDs"
+        "    borrar la pantalla"
     ]
 }

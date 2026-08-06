@@ -10,6 +10,7 @@ basic.forever(function () {
         led.plot(2, 5 - energia)
         led.plot(3, 5 - energia)
     } else {
+        basic.clearScreen()
         images.iconImage(IconNames.Happy).showImage(0)
         music.play(music.builtinPlayableSoundEffect(soundExpression.giggle), music.PlaybackMode.UntilDone)
     }

@@ -33,12 +33,6 @@ basic.forever(function () {
         led.plot(2, 0)
         basic.pause(200)
     } else {
-        basic.showLeds(`
-            . . . . .
-            . . . . .
-            . . . . .
-            . . . . .
-            . . . . .
-            `)
+        basic.clearScreen()
     }
 })

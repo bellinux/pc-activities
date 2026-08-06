@@ -56,6 +56,7 @@
                                 "type": "Branch_False",
                                 "label": "si no",
                                 "children": [
+                                    { "type": "Action", "label": "borrar la pantalla", "children": [] },
                                     { "type": "Action", "label": "(device_show_image_offset)", "children": [] },
                                     { "type": "Action", "label": "reproduce secuencia (risa) en modo hasta que termine", "children": [] }
                                 ]

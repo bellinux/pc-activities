@@ -40,7 +40,7 @@
         },
         {
             "id": "n7",
-            "kind": "OnTouchEvent",
+            "kind": "OnTiltGestureEvent",
             "seq": 7,
             "in_loop": false,
             "resId": 1

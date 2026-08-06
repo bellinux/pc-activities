@@ -79,7 +79,7 @@
         },
         {
             "id": "n13",
-            "kind": "DrawImage",
+            "kind": "ClearDisplay",
             "seq": 13,
             "in_loop": true,
             "resId": 1

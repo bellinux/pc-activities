@@ -1,5 +1,5 @@
 ACTIVIDAD: 16.4-robot-activation-challenge
-FUENTE: micro:bit / MakeCode 9.0.5 — "juego-toques"  (etiquetas oficiales es-ES)
+FUENTE: micro:bit / MakeCode 9.0.8 — "juego-toques"  (etiquetas oficiales es-ES)
 
 al iniciar:
   fijar energia a 0   // Inicia la variable "Toques" con valor inicial = 0.
@@ -13,5 +13,6 @@ para siempre:
     graficar x 2 y (5 − energia)
     graficar x 3 y (5 − energia)
   si no:
+    borrar la pantalla
     (device_show_image_offset)
     reproduce secuencia risa en modo hasta que termine

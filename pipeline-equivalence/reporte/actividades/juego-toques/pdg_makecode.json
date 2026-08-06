@@ -83,15 +83,22 @@
         },
         {
             "id": "n13",
-            "kind": "DrawImage",
+            "kind": "ClearDisplay",
             "seq": 13,
             "in_loop": true,
             "resId": 1
         },
         {
             "id": "n14",
-            "kind": "PlaySound",
+            "kind": "DrawImage",
             "seq": 14,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n15",
+            "kind": "PlaySound",
+            "seq": 15,
             "in_loop": true,
             "resId": 1
         }
@@ -154,6 +161,12 @@
         {
             "source": "n5",
             "target": "n14",
+            "type": "control",
+            "var": "false"
+        },
+        {
+            "source": "n5",
+            "target": "n15",
             "type": "control",
             "var": "false"
         },
@@ -244,6 +257,12 @@
         {
             "source": "n10",
             "target": "n12",
+            "type": "side_effect",
+            "var": "display"
+        },
+        {
+            "source": "n13",
+            "target": "n14",
             "type": "side_effect",
             "var": "display"
         }

@@ -7,9 +7,9 @@
                 "label": "para siempre",
                 "children": [
                     { "type": "Action", "label": "mostrar LEDs", "children": [] },
-                    { "type": "Action", "label": "reproduce secuencia tono Re5 durante 1/8 pulso en modo en segundo plano", "children": [] },
+                    { "type": "Action", "label": "reproduce secuencia (tono Re5 durante (1/8 pulso)) en modo en segundo plano", "children": [] },
                     { "type": "Action", "label": "pausa (ms) latidoGrande", "children": [] },
-                    { "type": "Action", "label": "reproduce secuencia tono Re5 durante 1/8 pulso en modo en segundo plano", "children": [] },
+                    { "type": "Action", "label": "reproduce secuencia (tono Re5 durante (1/8 pulso)) en modo en segundo plano", "children": [] },
                     {
                         "type": "Loop",
                         "label": "repetir 4 veces",
@@ -32,7 +32,7 @@
             },
             {
                 "type": "Event_Interrupt",
-                "label": "si pantalla hacia arriba",
+                "label": "si logotipo hacia abajo",
                 "children": [
                     { "type": "Assignment", "label": "fijar latidoPequeño a 250", "children": [] },
                     { "type": "Assignment", "label": "fijar latidoGrande a 500", "children": [] }

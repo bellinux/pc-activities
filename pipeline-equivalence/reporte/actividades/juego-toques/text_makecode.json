@@ -11,6 +11,7 @@
         "    graficar x 2 y (5 − energia)",
         "    graficar x 3 y (5 − energia)",
         "  si no:",
+        "    borrar la pantalla",
         "    (device_show_image_offset)",
         "    reproduce secuencia (risa) en modo hasta que termine"
     ]

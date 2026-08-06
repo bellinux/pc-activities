@@ -10,7 +10,7 @@
         "    graficar x 2 y 0",
         "    pausa (ms) 200",
         "  si no:",
-        "    mostrar LEDs",
+        "    borrar la pantalla",
         "al iniciar:",
         "  fijar flama a verdadero",
         "al detectar el sonido alto:",
