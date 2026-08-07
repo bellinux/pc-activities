@@ -349,7 +349,7 @@
   <div class="card c5" id="a165">
     <div class="num">16.5</div>
     <h3>My Robot Friend Heart</h3>
-    <p class="lead">Arreglo del comentario GED 19: En realidad microbit no utiliza el tocar el logotipo como activador, fue una confusión de la IA, lo que hace es detectar la inclinación del logotipo para realizar las acciones, tal y como en protobject, lo único que cambié aquí fue hacer que ahora se detecta puramente la inclinación del logotipo y no de la pantalla para que sea más consistente, esto debería arreglarlo.
+    <p class="lead">Arreglo del comentario GED 18: Cambiado el orden de asignaciones de latidos en microbit para que sean equivalentes. Arreglo del comentario GED 19: En realidad microbit no utiliza el tocar el logotipo como activador, fue una confusión de la IA, lo que hace es detectar la inclinación del logotipo para realizar las acciones, tal y como en protobject, lo único que cambié aquí fue hacer que ahora se detecta puramente la inclinación del logotipo y no de la pantalla para que sea más consistente, esto debería arreglarlo.
     </p>
     <div class="eq eq-media">
       <div class="eq-h"><span class="badge">GED 18</span>Corregido el diagnóstico anterior — queda el orden de inicialización</div>
@@ -466,7 +466,9 @@
   <div class="card c5" id="a191">
     <div class="num">19.1</div>
     <h3>Digital Hot Potato</h3>
-    <p class="lead">Sin cambios, ya son equivalentes.</p>
+    <p class="lead">Arreglado el comentario de GED 7: Cambié el orden de las operaciones en microbit para que sean iguales que en protobject, además a ambos les añadí un "parar todos los sonidos" antes de
+      reproducir el sonido de derrota, ya que microbit lo necesita para no sobreponer sonidos, además, añadí en microbit el tiempo de espera antes de la finalización.
+    </p>
     <div class="eq eq-media">
       <div class="eq-h"><span class="badge">GED 7</span>Diferencia moderada: el orden del final</div>
       <p>Las dos versiones hacen lo mismo hasta el final, pero lo cierran distinto: micro:bit hace <code>parar todos los sonidos</code> y luego <code>reproducir</code> el sonido de derrota; Protobject hace <code>reproducir</code>, después <code>retraso de 4 segundos</code> y recién entonces <code>detener sonido</code>. Protobject tiene una espera que micro:bit no tiene.</p>
@@ -494,7 +496,7 @@
   <div class="card c1" id="a221">
     <div class="num">22.1</div>
     <h3>DJ Metronome</h3>
-    <p class="lead">Arreglé la versión de microbit ya que no funcionaba (debido a que intervaloBeat no estaba definido) y por lo tanto, no era equivalente en funcionamiento ni lógica a protobject, ahora que lo arreglé, funcionan de la misma forma.</p>
+    <p class="lead">Arreglo de GED 1: La fórmula del cálculo del intervalo en microbit ya fue arreglada. Arreglé la versión de microbit ya que no funcionaba (debido a que intervaloBeat no estaba definido) y por lo tanto, no era equivalente en funcionamiento ni lógica a protobject, ahora que lo arreglé, funcionan de la misma forma.</p>
     <div class="eq eq-facil">
       <div class="eq-h"><span class="badge">GED 1</span>Diferencia mínima — y un error de cálculo en micro:bit</div>
       <p>Toda la estructura coincide salvo la fórmula del intervalo entre pulsos: Protobject calcula <code>60000 ÷ bpm</code> (división) y micro:bit <code>600 + bpm</code> (suma). <b>La fórmula de micro:bit está mal:</b> el intervalo de un metrónomo es inversamente proporcional al tempo — si suben los bpm el intervalo tiene que <i>bajar</i>, y con una suma pasa lo contrario. El metrónomo de micro:bit no marca el tempo que indica.</p>
@@ -522,7 +524,7 @@
   <div class="card c2" id="a222">
     <div class="num">22.2</div>
     <h3>Scream Battle</h3>
-    <p class="lead">Arreglé la versión de protobject ya que no cargaba en el visualizador. A pesar de que microbit muestra los dígitos de forma distinta que protobject, son equivalentes ya que eso es algo que depende meramente del sistema y no del algoritmo (microbit muestra números en la pantalla LED y protobject en DibujarEscribir), además de eso, para que se asemeje más la forma de visualización del tiempo de microbit a protobject, hice que el tiempo no se pueda mostrar en decimales para que se vea de forma directa y no hayan saltos gigantezcos entre los números al tardar tanto en mostrar toda la animación. Con este arreglo, la actividad queda mucho más parecida en el lado funcional.</p>
+    <p class="lead">Arreglo de GED 11: La inicialización de pantalla de protobject es propia del sistema, por lo que es una diferencia necesaria, ya que no hay forma de mostrar los números igual que en microbit, además de esto, apliqué redondeo a ambos para que sean equivalentes. Arreglé la versión de protobject ya que no cargaba en el visualizador. A pesar de que microbit muestra los dígitos de forma distinta que protobject, son equivalentes ya que eso es algo que depende meramente del sistema y no del algoritmo (microbit muestra números en la pantalla LED y protobject en DibujarEscribir), además de eso, para que se asemeje más la forma de visualización del tiempo de microbit a protobject, hice que el tiempo no se pueda mostrar en decimales para que se vea de forma directa y no hayan saltos gigantezcos entre los números al tardar tanto en mostrar toda la animación. Con este arreglo, la actividad queda mucho más parecida en el lado funcional.</p>
     <div class="eq eq-media">
       <div class="eq-h"><span class="badge">GED 11</span>Diferencia moderada: un redondeo y el ajuste del texto</div>
       <p>Dos diferencias: <b>(1)</b> micro:bit aplica un <code>redondeo</code> a los segundos antes de mostrarlos y Protobject escribe el valor tal cual; <b>(2)</b> Protobject necesita <code>establecer tamaño</code> y <code>limpiar</code> para su display de texto, mientras que el <code>mostrar número</code> de micro:bit no requiere preparación.</p>
