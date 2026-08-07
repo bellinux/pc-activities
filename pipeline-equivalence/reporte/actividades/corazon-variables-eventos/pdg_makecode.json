@@ -191,7 +191,7 @@
             "var": ""
         },
         {
-            "source": "n3",
+            "source": "n2",
             "target": "n12",
             "type": "data",
             "var": "latidogrande"
@@ -209,13 +209,13 @@
             "var": "latidogrande"
         },
         {
-            "source": "n2",
+            "source": "n3",
             "target": "n15",
             "type": "data",
             "var": "latidopequeño"
         },
         {
-            "source": "n2",
+            "source": "n3",
             "target": "n17",
             "type": "data",
             "var": "latidopequeño"

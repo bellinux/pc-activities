@@ -1,8 +1,10 @@
 {
     "isomorphic": true,
     "graph_edit_distance": 0.0,
+    "ged_exact": true,
     "nodes_G1": 15,
     "nodes_G2": 15,
     "edges_G1": 27,
-    "edges_G2": 27
+    "edges_G2": 27,
+    "order_hint": false
 }

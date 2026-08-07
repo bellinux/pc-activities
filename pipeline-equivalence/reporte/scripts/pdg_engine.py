@@ -132,16 +132,97 @@ def edge_match_multi(edges_a, edges_b):
 def edge_match_single(attrs_a, attrs_b):
     return _edge_signature(attrs_a) == _edge_signature(attrs_b)
 
+# --- PDG canónico: la dependencia de control es de DOMINANCIA, no de secuencia --
+# Los agentes escriben el control encadenado (Evento -> s1 -> s2 -> s3), lo que
+# convierte el ORDEN en estructura. En un PDG, todas las sentencias de un bloque
+# dependen del MISMO nodo de control (Evento -> s1, Evento -> s2, Evento -> s3):
+# el orden entre sentencias independientes desaparece, que es justo lo que debe
+# pasar. El orden que SÍ importa lo siguen fijando las aristas 'side_effect'
+# (efectos sobre el mismo recurso) y 'data' (def -> uso), que no se tocan.
+CONTROL_CATEGORIES = ('event', 'control')
+_CTRL_KINDS_CACHE = None
+
+def _control_kinds() -> set:
+    """canonical_node de categoría event/control, leídos de la ontología."""
+    global _CTRL_KINDS_CACHE
+    if _CTRL_KINDS_CACHE is None:
+        import os
+        ont = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'tabla_ontologica.json')
+        try:
+            with open(ont, encoding='utf-8') as f:
+                data = json.load(f)
+            _CTRL_KINDS_CACHE = {n['canonical_node'] for n in data['nodes']
+                                 if n.get('category') in CONTROL_CATEGORIES}
+        except Exception:      # sin ontología: respaldo con los nodos de control conocidos
+            _CTRL_KINDS_CACHE = {'ProgramStartEvent', 'SuddenNoiseEvent', 'OnTouchEvent',
+                                 'OnTiltGestureEvent', 'ConditionalBranch', 'LoopForever',
+                                 'RepeatN', 'ForRange', 'WhileLoop'}
+    return _CTRL_KINDS_CACHE
+
+
+def to_pure_pdg(G: nx.MultiDiGraph) -> nx.MultiDiGraph:
+    """Reescribe la cadena secuencial como abanico de dominancia."""
+    ctrl = _control_kinds()
+    H = nx.MultiDiGraph(name=G.graph.get('name', ''))
+    for n, attrs in G.nodes(data=True):
+        H.add_node(n, **attrs)
+
+    ctrl_edges = [(u, v, d) for u, v, d in G.edges(data=True) if d.get('type') == 'control']
+    parent = {}                                   # sentencia -> (nodo de control que la domina, var)
+    for u, v, d in ctrl_edges:                    # 1) hijas directas de un nodo de control
+        if G.nodes[u].get('kind') in ctrl:
+            parent[v] = (u, d.get('var', ''))
+    for _ in range(len(ctrl_edges) + 1):          # 2) propagar por la cadena hasta punto fijo
+        cambio = False
+        for u, v, d in ctrl_edges:
+            if G.nodes[u].get('kind') not in ctrl and u in parent and v not in parent:
+                parent[v] = parent[u]
+                cambio = True
+        if not cambio:
+            break
+
+    for u, v, d in G.edges(data=True):            # 3) data y side_effect intactos
+        if d.get('type') != 'control':
+            H.add_edge(u, v, **d)
+    for v, (u, var) in parent.items():            # 4) control en abanico
+        H.add_edge(u, v, type='control', var=var)
+    return H
+
+
+# El GED es NP-duro: con branch-and-bound, si la búsqueda TERMINA el valor es el
+# óptimo exacto; si la corta el timeout, es solo una cota superior. Se registra
+# cuál de los dos casos ocurrió en 'ged_exact'.
+GED_TIMEOUT = 60
+
+def _ged(G1, G2):
+    import time
+    t0 = time.time()
+    val = nx.graph_edit_distance(G1, G2, node_match=node_match,
+                                 edge_match=edge_match_single, timeout=GED_TIMEOUT)
+    return val, (time.time() - t0) < GED_TIMEOUT * 0.95
+
+
 def compare_pdgs(G1: nx.MultiDiGraph, G2: nx.MultiDiGraph) -> dict:
-    matcher = isomorphism.MultiDiGraphMatcher(G1, G2, node_match=node_match, edge_match=edge_match_multi)
-    is_iso = matcher.is_isomorphic()
-    ged = nx.graph_edit_distance(G1, G2, node_match=node_match, edge_match=edge_match_single, timeout=10)
-    
+    # Veredicto sobre el PDG canónico (sin el orden entre sentencias independientes).
+    P1, P2 = to_pure_pdg(G1), to_pure_pdg(G2)
+    is_iso = isomorphism.MultiDiGraphMatcher(P1, P2, node_match=node_match,
+                                             edge_match=edge_match_multi).is_isomorphic()
+    ged, exact = _ged(P1, P2)
+
+    # Segundo pase sobre el grafo con el orden: solo sirve para saber si hay que
+    # sugerir alinear la secuencia. No produce veredicto ni puntaje visible.
+    orden_iso = isomorphism.MultiDiGraphMatcher(G1, G2, node_match=node_match,
+                                                edge_match=edge_match_multi).is_isomorphic()
+
     return {
         'isomorphic': is_iso,
         'graph_edit_distance': ged,
+        'ged_exact': exact,
         'nodes_G1': G1.number_of_nodes(),
         'nodes_G2': G2.number_of_nodes(),
         'edges_G1': G1.number_of_edges(),
         'edges_G2': G2.number_of_edges(),
+        # equivalentes, pero las sentencias independientes van en distinto orden:
+        # conviene alinearlas para que las dos versiones se lean igual.
+        'order_hint': bool(is_iso and not orden_iso),
     }

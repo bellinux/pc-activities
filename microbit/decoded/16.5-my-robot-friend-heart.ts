@@ -12,10 +12,10 @@ input.onGesture(Gesture.LogoDown, function () {
     latidoGrande = 500
     latidoPequeño = 250
 })
-let latidoGrande = 0
 let latidoPequeño = 0
-latidoPequeño = 250
+let latidoGrande = 0
 latidoGrande = 500
+latidoPequeño = 250
 basic.forever(function () {
     basic.showLeds(`
         . # . # .

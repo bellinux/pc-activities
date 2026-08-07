@@ -61,10 +61,22 @@
 <script>
     function metricsHtml(d) {
         const ok = d.isomorphic ? 'metrics-success' : 'metrics-error';
+        // El GED es NP-duro: si la búsqueda no termina dentro del timeout, el valor
+        // es solo una COTA SUPERIOR y se muestra como "≤ N" (ged_exact === false).
+        const exacto = d.ged_exact !== false;
+        const ged = (exacto ? '' : '≤ ') + d.graph_edit_distance;
+        const gedNota = exacto ? '' :
+            ` <span style="font-size:.8em;color:#8a6008;">(cota superior: la búsqueda no terminó dentro del tiempo)</span>`;
+        // Equivalentes, pero con sentencias independientes en distinto orden.
+        const orden = d.order_hint ?
+            `<div style="margin-top:10px;padding:8px 12px;background:#fff8e8;border:1px solid #f0d99a;border-radius:8px;color:#6b4a09;font-size:.92em;">
+               <b>Equivalentes</b>, aunque algunas sentencias independientes van en distinto orden.
+               Alinearlas no cambia el resultado: es para que las dos versiones se lean igual.</div>` : '';
         return `<div>Isomorfismo (VF2): <span class="${ok}">${d.isomorphic}</span></div>
-            <div>Graph Edit Distance: <strong>${d.graph_edit_distance}</strong></div>
+            <div>Graph Edit Distance: <strong>${ged}</strong>${gedNota}</div>
             <div style="margin-top:10px;color:#555;">Nodos (Microbit / Protobject): ${d.nodes_G1} / ${d.nodes_G2}</div>
-            <div style="color:#555;">Aristas (Microbit / Protobject): ${d.edges_G1} / ${d.edges_G2}</div>`;
+            <div style="color:#555;">Aristas (Microbit / Protobject): ${d.edges_G1} / ${d.edges_G2}</div>
+            ${orden}`;
     }
 
     function activityBlock(a) {

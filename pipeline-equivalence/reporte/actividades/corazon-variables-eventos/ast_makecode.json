@@ -26,8 +26,8 @@
                 "type": "Event",
                 "label": "al iniciar",
                 "children": [
-                    { "type": "Assignment", "label": "fijar latidoPequeño a 250", "children": [] },
-                    { "type": "Assignment", "label": "fijar latidoGrande a 500", "children": [] }
+                    { "type": "Assignment", "label": "fijar latidoGrande a 500", "children": [] },
+                    { "type": "Assignment", "label": "fijar latidoPequeño a 250", "children": [] }
                 ]
             },
             {
