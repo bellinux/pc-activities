@@ -118,12 +118,11 @@
     <table>
       <tr><th>Actividad</th><th>GED</th><th>Qué falta y por dónde ir</th></tr>
       <tr><td><a href="#a222">22.2 Scream Battle</a></td><td class="ged">5</td>
-          <td><span class="pill p-facil">con solución</span> mover el <code>limpiar</code> dentro del
-          condicional (además corrige un defecto real del juego) y dar al <code>tamaño</code> su pareja
-          de configuración en micro:bit</td></tr>
+          <td><span class="pill p-facil">con solución</span> mostrar el resultado en la matriz de LEDs
+          en ambas plataformas, en vez de escribir un número en el display de texto</td></tr>
       <tr><td><a href="#a167">16.7 Don't Spill Liquid Game</a></td><td class="ged">≤ 74</td>
-          <td><span class="pill p-media">en estudio</span> el escalado del acelerómetro: hacerlo
-          explícito también en Protobject, o pasar a zonas en vez de posición continua</td></tr>
+          <td><span class="pill p-media">en estudio</span> el escalado del acelerómetro: pasar a zonas
+          decididas con comparaciones, o hacer la conversión visible también en Protobject</td></tr>
     </table>
 
     <p style="margin:12px 0 0;font-size:12.5px;color:var(--muted)">
@@ -436,7 +435,26 @@
       Además de esto, quitamos el bloque "establecer color de fondo" de protobject ya que era redundante y no se utiliza en microbit, junto con cambiar el bloque "dibujar pantalla con color" por un "clear screen".
     </p>
     <div class="eq eq-media">
-      <div class="eq-h"><span class="badge">GED ≤ 74</span>Pendiente: el escalado del sensor, y qué se puede hacer</div>
+      <div class="eq-h"><span class="badge">GED ≤ 74</span>Pendiente: el escalado del sensor</div>
+      <p>Se limpiaron tres de los cuatro motivos: desapareció el <code>serial escribir</code> de depuración,
+      desapareció el bloque suelto <code>restringir 0 entre 0 y 0</code>, y el recorte de coordenadas está
+      ahora en las dos plataformas (antes solo en Protobject, junto con una inversión <code>× -1</code> que
+      también se quitó). El programa pasó de 54 a 35 operaciones en micro:bit.</p>
+      <p><b>Lo que queda:</b> micro:bit lee <code>aceleración (mg)</code>, que va de −1023 a 1023, y necesita
+      <code>÷ 250</code> y <code>redondeo</code> para obtener la celda de la matriz. En Protobject,
+      <code>x in Inclinación</code> ya entrega un valor pequeño: la plataforma hace por dentro esa conversión.
+      Son 4 operaciones (2 por eje) que existen en un lado y no en el otro.</p>
+      <p style="font-size:.9em;color:#7a3d12"><b>Sobre el número:</b> se muestra <code>≤ 74</code> porque el
+      cálculo exacto de la distancia mínima no termina en un tiempo razonable para grafos de este tamaño; 74
+      es el mejor valor encontrado y el real puede ser menor. El veredicto de equivalencia sí es exacto.</p>
+      <p class="fix"><b>Cómo lograr la equivalencia:</b> igual que en 22.2, conviene mover el diseño en vez de
+      perseguir bloques. <b>(a)</b> Cambiar la granularidad del juego: en lugar de mover el píxel de forma
+      continua, decidir <b>zonas</b> (izquierda / centro / derecha, o dentro / fuera) con comparaciones — que
+      ya existen en las dos plataformas — y así el escalado deja de hacer falta en micro:bit. Cambia la
+      sensación del juego, así que es una decisión pedagógica además de técnica. <b>(b)</b> Si se quiere
+      conservar el movimiento continuo, hacer visible la conversión también en Protobject, de modo que ambas
+      tengan la misma cadena leer → escalar → usar.</p>
+    </div>
       <p>Se limpiaron tres de los cuatro motivos: desapareció el <code>serial escribir</code> de depuración, desapareció el bloque suelto <code>restringir 0 entre 0 y 0</code>, y el recorte de coordenadas está ahora en las dos plataformas (antes solo en Protobject, junto con una inversión <code>× -1</code> que también se quitó). El programa pasó de 54 a 35 operaciones en micro:bit.</p><p><b>Lo que queda:</b> micro:bit lee <code>aceleración (mg)</code>, que va de −1023 a 1023, y necesita <code>÷ 250</code> y <code>redondeo</code> para obtener la celda de la matriz. En Protobject, <code>x in Inclinación</code> ya entrega un valor pequeño, listo para usar: la plataforma hace por dentro esa conversión. Son 4 operaciones (2 por eje) que existen en un lado y no en el otro.</p><p style="font-size:.9em;color:#7a3d12"><b>Sobre el número:</b> se muestra <code>≤ 74</code> porque el cálculo exacto de la distancia mínima no termina en un tiempo razonable para grafos de este tamaño; 74 es el mejor valor encontrado y el real puede ser menor. El veredicto de equivalencia, en cambio, es exacto.</p>
       <p class="fix"><b>Cómo lograr la equivalencia:</b> Tres caminos posibles, de menor a mayor cambio en la actividad. <b>(a)</b> Hacer visible la conversión también en Protobject: si el valor de <code>Inclinación</code> se escala explícitamente (aunque sea con un factor suave) antes de usarlo como coordenada, las dos versiones pasan a tener la misma cadena leer → escalar → usar. <b>(b)</b> Cambiar la granularidad del juego: en lugar de mover el píxel de forma continua, dividir la pantalla en <b>zonas</b> (izquierda / centro / derecha) decididas con comparaciones. Las comparaciones ya existen en ambas plataformas y el escalado deja de hacer falta. Cambia la sensación del juego, así que es una decisión pedagógica, no solo técnica. <b>(c)</b> Si ninguna de las dos convence, dejarla documentada como el caso donde la conversión de sensor no se pudo absorber — pero conviene intentar (a) antes, que es el cambio más pequeño.</p>
     </div>
@@ -572,7 +590,25 @@
     <h3>Scream Battle</h3>
     <p class="lead">Arreglo de GED 11: La inicialización de pantalla de protobject es propia del sistema, por lo que es una diferencia necesaria, ya que no hay forma de mostrar los números igual que en microbit, además de esto, apliqué redondeo a ambos para que sean equivalentes. Arreglé la versión de protobject ya que no cargaba en el visualizador. A pesar de que microbit muestra los dígitos de forma distinta que protobject, son equivalentes ya que eso es algo que depende meramente del sistema y no del algoritmo (microbit muestra números en la pantalla LED y protobject en DibujarEscribir), además de eso, para que se asemeje más la forma de visualización del tiempo de microbit a protobject, hice que el tiempo no se pueda mostrar en decimales para que se vea de forma directa y no hayan saltos gigantezcos entre los números al tardar tanto en mostrar toda la animación. Con este arreglo, la actividad queda mucho más parecida en el lado funcional.</p>
     <div class="eq eq-facil">
-      <div class="eq-h"><span class="badge">GED 5</span>Pendiente: hay un camino de diseño para cerrarla</div>
+      <div class="eq-h"><span class="badge">GED 5</span>Pendiente: la vía es cambiar el medio de salida</div>
+      <p>El <code>redondeo</code> de los segundos ya está en ambas plataformas. Lo que queda viene todo del
+      <b>display de texto</b>: Protobject necesita <code>establecer tamaño 40</code> para escribir en una
+      pantalla gráfica, y un <code>limpiar</code> antes de cada reescritura; la matriz 5×5 de micro:bit no
+      tiene ninguna de las dos cosas porque <code>mostrar número</code> no necesita preparación.</p>
+      <p>Perseguir los bloques uno a uno no lleva lejos: mientras las dos versiones usen <b>medios de salida
+      distintos</b> (texto en una, matriz en la otra), van a necesitar operaciones distintas.</p>
+      <p><b>La vía que se está explorando</b> es la buena: <b>mostrar el resultado en la matriz de LEDs en las
+      dos plataformas</b>, en lugar de escribir un número. Se llena la pantalla mientras dura el grito
+      (<code>graficar x columna y fila</code> ↔ <code>dibuja en x y</code>), y al terminar se borra
+      (<code>borrar la pantalla</code> ↔ <code>borrar dibujo</code>). Con eso desaparecen a la vez el
+      <code>tamaño</code> y la asimetría del <code>limpiar</code>, y las dos versiones quedan con la misma
+      estructura — igual que ya pasa en <a href="#a031">03.1 Music Visualizer</a>, que es equivalente y usa
+      exactamente ese patrón.</p>
+      <p class="fix"><b>Al hacerlo, revisar dos cosas:</b> que el anidamiento (mientras → dos ciclos
+      contados) sea el mismo en las dos plataformas, porque si el orden de los ciclos difiere se abre una
+      divergencia nueva; y que el <b>texto de la actividad</b> acompañe el cambio, porque ya no se lee un
+      número de segundos sino que se llena una pantalla: cambia lo que el estudiante observa.</p>
+    </div>
       <p>El <code>redondeo</code> de los segundos ya está en ambas plataformas. Quedan <b>dos diferencias</b>, y conviene separarlas porque son de naturaleza distinta.</p><p><b>1. Un defecto de la actividad (independiente de la equivalencia).</b> En Protobject el <code>limpiar</code> está <i>fuera</i> del condicional, así que se ejecuta siempre: cuando el grito termina y <code>inicio</code> vuelve a 0, la pantalla se vacía y <b>el jugador ya no ve cuánto duró su grito</b>. En micro:bit el número se queda visible. Para un juego de gritos, el comportamiento de micro:bit es el correcto.</p><p><b>2. La preparación del display.</b> Protobject necesita <code>establecer tamaño 40</code> porque escribe texto en una pantalla gráfica; micro:bit no tiene ese concepto en su matriz 5×5.</p>
       <p class="fix"><b>Cómo lograr la equivalencia:</b> Para (1): mover el <code>limpiar</code> <i>dentro</i> del condicional, justo antes de <code>escribir</code>. Corrige el defecto y de paso acerca los dos programas. Para (2): en vez de descartar el bloque —que es una operación real y el grafo debe reflejarla—, <b>darle su pareja en micro:bit</b>: añadir al arranque un bloque de configuración de pantalla (por ejemplo <code>establecer brillo</code>). Las dos versiones pasan a tener un paso de preparación del display antes de usarlo, que es además una idea razonable de enseñar. Con esos dos cambios la actividad queda equivalente.</p>
     </div>
