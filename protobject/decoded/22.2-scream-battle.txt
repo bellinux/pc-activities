@@ -11,7 +11,7 @@ REPETIR PARA SIEMPRE (bucle principal)
   DibujarEscribir2_clear_set_1
   SI
     [si (var:inicio > 0)]
-    DibujarEscribir2_writeText_set_11  VAR=((protobject_milliseconds() - var:inicio) / 1000)
+    DibujarEscribir2_writeText_set_11  VAR=math_round(OP=ROUND NUM=((protobject_milliseconds() - var:inicio) / 1000))
         ; // Muestra la cantidad de segundos en los que persiste un sonido, en este caso mediremos cuánto es la duración de una cantidad de aplausos.
     SI
         ; // Si los aplausos se detienen termina el temporizador y finaliza la medición.

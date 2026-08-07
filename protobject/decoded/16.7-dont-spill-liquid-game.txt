@@ -6,17 +6,21 @@ AL INICIAR
   ESTABLECER var:sonidoFijo = TRUE
 
 REPETIR PARA SIEMPRE (bucle principal)
+  ESTABLECER var:inclinacionX = Inclinación1.leer(oriY)
+  ESTABLECER var:inclinacionY = Inclinación1.leer(oriX)
+
+REPETIR PARA SIEMPRE (bucle principal)
   DibujoLED2_clear_set_4
   SI
-    [si (((Inclinación1.leer(oriX) > -2) AND (Inclinación1.leer(oriX) < 2)) AND ((Inclinación1.leer(oriY) > -2) AND (Inclinación1.leer(oriY) < 2)))]
-    DibujoLED2_drawOnXY_set_2  VAR=(4 + (-1 * Inclinación1.leer(oriX)))  VAR2=(4 + Inclinación1.leer(oriY))  VAR3=colour_picker(COLOUR=#33cc00)
+    [si (((var:inclinacionX > -2) AND (var:inclinacionX < 2)) AND ((var:inclinacionY > -2) AND (var:inclinacionY < 2)))]
+    DibujoLED2_drawOnXY_set_2  VAR=(4 + var:inclinacionX)  VAR2=(4 + var:inclinacionY)  VAR3=colour_picker(COLOUR=#33cc00)
     SI
       [si var:sonidoFijo]
       TecladoMusical3_play_set_1  VAR=control_note(VAR=60)
       ESPERAR  ms  VAR=1000
       ESTABLECER var:sonidoFijo = FALSE
     [sino]
-    DibujoLED2_drawOnXY_set_2  VAR=math_constrain(VALUE=(4 + (-1 * Inclinación1.leer(oriX))) LOW=1 HIGH=7)  VAR2=math_constrain(VALUE=(4 + Inclinación1.leer(oriY)) LOW=1 HIGH=7)  VAR3=colour_picker(COLOUR=#ff4444)
+    DibujoLED2_drawOnXY_set_2  VAR=math_constrain(VALUE=(4 + var:inclinacionX) LOW=1 HIGH=7)  VAR2=math_constrain(VALUE=(4 + var:inclinacionY) LOW=1 HIGH=7)  VAR3=colour_picker(COLOUR=#ff4444)
     ESTABLECER var:sonidoFijo = TRUE
     TecladoMusical3_stop_set_3
     ESPERAR  ms  VAR=100

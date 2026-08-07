@@ -106,31 +106,27 @@
     <b>equivalentes</b> si los grafos son isomorfos (<code>GED&nbsp;=&nbsp;0</code>); la
     <b>distancia de edición</b> (GED) mide cuántas operaciones faltan o sobran.
 
-    <p style="margin:10px 0 0"><b>12 de 17 actividades son equivalentes.</b> En la última revisión se
-    cerraron tres: <a href="#a163">16.3</a>, <a href="#a164">16.4</a> y <a href="#a166">16.6</a>,
-    con el ajuste hecho en micro:bit. Quedan cinco, y solo una necesita un cambio de una línea.</p>
+    <p style="margin:10px 0 0"><b>14 de 17 actividades son equivalentes.</b> En esta revisión se
+    cerraron dos más: <a href="#a191">19.1</a> y <a href="#a221">22.1</a> — y en el metrónomo el
+    arreglo corrigió además un <b>error de cálculo</b> que hacía que no marcara el tempo indicado.
+    De las tres restantes, dos están a un paso y la tercera ya solo difiere por el sensor.</p>
 
     <table>
       <tr><th>Actividad</th><th>GED</th><th>Qué falta</th></tr>
-      <tr><td><a href="#a221">22.1 DJ Metronome</a></td><td class="ged">1</td>
-          <td><span class="pill p-facil">trivial</span> corregir la fórmula del intervalo
-          <b>(además es un error de cálculo)</b></td></tr>
-      <tr><td><a href="#a191">19.1 Digital Hot Potato</a></td><td class="ged">7</td>
-          <td><span class="pill p-media">moderado</span> ordenar igual el final: reproducir → pausa → parar</td></tr>
-      <tr><td><a href="#a222">22.2 Scream Battle</a></td><td class="ged">11</td>
-          <td><span class="pill p-media">moderado</span> quitar el <code>redondeo</code>; el resto es plumbing</td></tr>
-      <tr><td><a href="#a165">16.5 My Robot Friend Heart</a></td><td class="ged">18</td>
-          <td><span class="pill p-media">moderado</span> mismo orden al inicializar las dos variables
-          (los nodos ya son idénticos)</td></tr>
-      <tr><td><a href="#a167">16.7 Don't Spill Liquid Game</a></td><td class="ged">108</td>
-          <td><span class="pill p-dificil">estructural</span> quitar depuración y código muerto;
-          el escalado es de plataforma</td></tr>
+      <tr><td><a href="#a165">16.5 My Robot Friend Heart</a></td><td class="ged">4</td>
+          <td><span class="pill p-facil">trivial</span> invertir dos asignaciones en el
+          <code>al iniciar</code> de micro:bit</td></tr>
+      <tr><td><a href="#a222">22.2 Scream Battle</a></td><td class="ged">7</td>
+          <td><span class="pill p-facil">trivial</span> los dos bloques de preparación del texto,
+          propios de Protobject</td></tr>
+      <tr><td><a href="#a167">16.7 Don't Spill Liquid Game</a></td><td class="ged">80</td>
+          <td><span class="pill p-media">de plataforma</span> el escalado del acelerómetro de
+          micro:bit (4 operaciones)</td></tr>
     </table>
 
     <p style="margin:12px 0 0;font-size:12.5px;color:var(--muted)">
-      Nota sobre <a href="#a165">16.5</a>: el diagnóstico anterior (que micro:bit usaba el toque del
-      logotipo) era incorrecto y está corregido en su ficha — ambas plataformas usan gestos de
-      orientación, como se advirtió en el comentario de la actividad.</p>
+      Avance respecto a la revisión anterior: 16.5 pasó de 18 a 4, 22.2 de 11 a 7 y 16.7 de 108 a 80
+      (se quitaron el bloque de depuración, el bloque suelto y la inversión asimétrica del eje).</p>
   </div>
 
   <h2 class="section-title">Actividades</h2>
@@ -309,6 +305,8 @@
     <p class="lead">Ya arreglado el comentario de GED 1, ahora es equivalente.</p>
     <div class="eq eq-ok">
       <div class="eq-h"><span class="badge">GED 0</span>Equivalentes ✓</div>
+      <p>Verificado con el pipeline: los dos grafos son <b>isomorfos</b> (GED 0, 12 nodos por lado).</p>
+    </div>
       <p>Verificado con el pipeline: los dos grafos son ahora <b>isomorfos</b> (GED 0, 12 nodos por lado). El ajuste hecho en micro:bit cerró la diferencia.</p>
     </div>
       <p>Funcionalmente hacen lo mismo. La diferencia está en el bloque elegido para apagar la pantalla en la rama <code>si no</code>: micro:bit usa <code>mostrar LEDs</code> con la matriz vacía, mientras Protobject usa <code>borrar dibujo</code>. El grafo los ve como dos operaciones distintas (dibujar una imagen vs. limpiar la pantalla).</p>
@@ -323,6 +321,8 @@
     <p class="lead">(Comentario GED 3 ya resuelto, son equivalentes). La actividad en protobject era distinta a la de microbit, por lo que me aseguré de hacer que ambas tengan la misma estructura, lógica y funcionamiento, de modo que ahora sí son equivalentes. Se utilizan distintos valores máximos de energía para la activación dados los tamaños de las pantallas leds de cada dispositivo, pero no afecta.</p>
     <div class="eq eq-ok">
       <div class="eq-h"><span class="badge">GED 0</span>Equivalentes ✓</div>
+      <p>Verificado con el pipeline: los dos grafos son <b>isomorfos</b> (GED 0, 15 nodos por lado).</p>
+    </div>
       <p>Verificado con el pipeline: los dos grafos son ahora <b>isomorfos</b> (GED 0, 15 nodos por lado). El ajuste hecho en micro:bit cerró la diferencia.</p>
     </div>
       <p>La estructura coincide en todo salvo el final: en la rama de victoria Protobject hace <code>borrar dibujo</code> antes de pintar la pantalla completa, y micro:bit pinta directamente sobre lo que había.</p>
@@ -351,8 +351,11 @@
     <h3>My Robot Friend Heart</h3>
     <p class="lead">Arreglo del comentario GED 18: Cambiado el orden de asignaciones de latidos en microbit para que sean equivalentes. Arreglo del comentario GED 19: En realidad microbit no utiliza el tocar el logotipo como activador, fue una confusión de la IA, lo que hace es detectar la inclinación del logotipo para realizar las acciones, tal y como en protobject, lo único que cambié aquí fue hacer que ahora se detecta puramente la inclinación del logotipo y no de la pantalla para que sea más consistente, esto debería arreglarlo.
     </p>
-    <div class="eq eq-media">
-      <div class="eq-h"><span class="badge">GED 18</span>Corregido el diagnóstico anterior — queda el orden de inicialización</div>
+    <div class="eq eq-facil">
+      <div class="eq-h"><span class="badge">GED 4</span>Casi equivalentes: queda el orden en un solo bloque</div>
+      <p>Buen avance: de GED 18 a 4. Los nodos y las aristas ya son <b>idénticos</b> (17 y 25 por lado) y los dos <i>handlers</i> de gesto quedaron en el mismo orden.</p><p><b>Lo único que queda</b> está en el bloque <code>al iniciar</code>: micro:bit asigna <code>latidoPequeño</code> y después <code>latidoGrande</code>, mientras Protobject lo hace al revés. Los otros dos bloques ya coinciden.</p>
+      <p class="fix"><b>Cómo igualarlas:</b> Invertir esas dos asignaciones en el <code>al iniciar</code> de micro:bit. Es un solo bloque y la actividad queda equivalente. (Como son variables independientes, el programa ya funciona igual; esto cierra la métrica.)</p>
+    </div>
       <p><b>Antes que nada, una corrección:</b> la nota anterior decía que micro:bit usaba el <i>toque</i> del logotipo. <b>Era incorrecta, y el comentario de ustedes tenía razón.</b> <code>si logotipo hacia arriba</code> / <code>hacia abajo</code> son <b>gestos de orientación</b> (<code>onGesture</code>), igual que <code>cuando Inclinación hacia arriba</code> en Protobject. El error venía de un análisis antiguo que no se había vuelto a generar. Ya está corregido: ambas plataformas usan el mismo tipo de evento.</p><p><b>Lo que queda:</b> los nodos son <b>idénticos</b> (17 y 17) y también las aristas (25 y 25). La única diferencia es el <b>orden en que se inicializan dos variables independientes</b> (<code>latidoGrande</code> y <code>latidoPequeño</code>): Protobject asigna primero <code>latidoGrande</code> y micro:bit primero <code>latidoPequeño</code>, en los tres bloques.</p>
       <p class="fix"><b>Cómo igualarlas:</b> Poner las dos asignaciones en el mismo orden en ambas versiones. <b>Ojo:</b> al ser variables independientes el programa funciona igual en los dos casos; es la métrica la que penaliza el orden. Si prefieren no tocar el código, se puede documentar como diferencia aceptada.</p>
     </div>
@@ -383,6 +386,8 @@
     <p class="lead">Arreglado el comentario de GED 1, ya son equivalentes.</p>
     <div class="eq eq-ok">
       <div class="eq-h"><span class="badge">GED 0</span>Equivalentes ✓</div>
+      <p>Verificado con el pipeline: los dos grafos son <b>isomorfos</b> (GED 0, 13 nodos por lado).</p>
+    </div>
       <p>Verificado con el pipeline: los dos grafos son ahora <b>isomorfos</b> (GED 0, 13 nodos por lado). El ajuste hecho en micro:bit cerró la diferencia.</p>
     </div>
       <p>Funcionalmente son idénticas. La única diferencia es cómo se apaga la pantalla cuando la vela está soplada: micro:bit usa <code>mostrar LEDs</code> con la matriz vacía y Protobject usa <code>borrar dibujo</code>.</p>
@@ -411,8 +416,11 @@
       ya que la actividad está pensada para realizarse con el teléfono acostado en horizontal, con la pantalla hacia arriba, esto no pasa en microbit dado que la placa ya se utiliza de esta forma, esa es la única diferencia, la cual es necesaria (por eso antes se invertía el eje X). Además de esto, en microbit también coloqué el bloque constrain. Es un poco distinto en funcionalidad. La nota en protobject se mantiene, mientras que en microbit se toca por cada segundo. Además de eso, la lógica de las LEDs es distinta en protobject ya que actualmente usa colores para mostrar los rangos y toca ruido todo el rato (distintos para diferenciar si el líquido está dentro de los parámetros), mientras que microbit no cambia de color (por razones obvias) y solo toca ruido al salirse de los parámetros.
       Además de esto, quitamos el bloque "establecer color de fondo" de protobject ya que era redundante y no se utiliza en microbit, junto con cambiar el bloque "dibujar pantalla con color" por un "clear screen".
     </p>
-    <div class="eq eq-dificil">
-      <div class="eq-h"><span class="badge">GED 108</span>Diferencia estructural: la más divergente del conjunto</div>
+    <div class="eq eq-media">
+      <div class="eq-h"><span class="badge">GED 80</span>Gran avance: de 108 a 80, y solo por el escalado del sensor</div>
+      <p>Se limpiaron tres de los cuatro motivos: <b>desapareció</b> el <code>serial escribir</code> de depuración, <b>desapareció</b> el bloque suelto <code>restringir 0 entre 0 y 0</code>, y el <code>limitar</code>/<code>restringir</code> está ahora en <b>las dos</b> plataformas (antes solo en Protobject, junto con una inversión <code>× -1</code> que también se quitó). El programa pasó de 54 a 35 operaciones en micro:bit.</p><p><b>Lo que queda</b> es una diferencia real de plataforma: micro:bit lee la aceleración en bruto y tiene que escalarla con <code>÷ 250</code> y <code>redondeo</code> (una vez por eje, 4 operaciones), mientras que <code>Inclinación</code> de Protobject ya entrega el valor listo para usar.</p>
+      <p class="fix"><b>Cómo igualarlas:</b> Esas 4 operaciones no se pueden eliminar sin romper micro:bit: son el precio de leer un acelerómetro crudo. Conviene documentarlas como diferencia de plataforma. (El GED sigue alto porque cada nodo extra arrastra sus aristas de datos, pero la estructura del programa ya es la misma en ambos lados.)</p>
+    </div>
       <p>Son 54 operaciones en micro:bit contra 37 en Protobject, por cuatro motivos: <b>(1)</b> micro:bit lee la aceleración en bruto y la escala con <code>÷ 250</code> y <code>redondeo</code> en nueve lugares, mientras que <code>Inclinación</code> ya entrega el valor listo; <b>(2)</b> micro:bit tiene un <code>serial escribir</code> de depuración; <b>(3)</b> micro:bit tiene un bloque <code>restringir 0 entre 0 y 0</code> suelto, sin conectar (código muerto); <b>(4)</b> Protobject invierte el eje x con <code>× -1</code> y acota con <code>limitar</code>, y micro:bit no.</p>
       <p class="fix"><b>Cómo igualarlas:</b> Lo fácil: <b>borrar el bloque de depuración y el bloque suelto</b>. Después decidir si la inversión y el acotado del eje deben estar en las dos versiones. El escalado del acelerómetro sí es una diferencia real entre plataformas y no se puede eliminar.</p>
     </div>
@@ -470,8 +478,10 @@
     <p class="lead">Arreglado el comentario de GED 7: Cambié el orden de las operaciones en microbit para que sean iguales que en protobject, además a ambos les añadí un "parar todos los sonidos" antes de
       reproducir el sonido de derrota, ya que microbit lo necesita para no sobreponer sonidos, además, añadí en microbit el tiempo de espera antes de la finalización.
     </p>
-    <div class="eq eq-media">
-      <div class="eq-h"><span class="badge">GED 7</span>Diferencia moderada: el orden del final</div>
+    <div class="eq eq-ok">
+      <div class="eq-h"><span class="badge">GED 0</span>Equivalentes ✓ — resuelto el orden del final</div>
+      <p>Verificado: los dos grafos son <b>isomorfos</b> (GED 0, 16 nodos y 34 aristas por lado). Se alinearon <b>los dos lados</b>: ahora ambos cierran con la misma secuencia <code>detener sonido</code> → <code>reproducir</code> → <code>pausa 4 s</code> → <code>detener sonido</code>.</p>
+    </div>
       <p>Las dos versiones hacen lo mismo hasta el final, pero lo cierran distinto: micro:bit hace <code>parar todos los sonidos</code> y luego <code>reproducir</code> el sonido de derrota; Protobject hace <code>reproducir</code>, después <code>retraso de 4 segundos</code> y recién entonces <code>detener sonido</code>. Protobject tiene una espera que micro:bit no tiene.</p>
       <p class="fix"><b>Cómo igualarlas:</b> Alinear el final en micro:bit: reproducir el sonido, agregar una <code>pausa (ms) 4000</code> y después parar los sonidos.</p>
     </div>
@@ -498,8 +508,10 @@
     <div class="num">22.1</div>
     <h3>DJ Metronome</h3>
     <p class="lead">Arreglo de GED 1: La fórmula del cálculo del intervalo en microbit ya fue arreglada. Arreglé la versión de microbit ya que no funcionaba (debido a que intervaloBeat no estaba definido) y por lo tanto, no era equivalente en funcionamiento ni lógica a protobject, ahora que lo arreglé, funcionan de la misma forma.</p>
-    <div class="eq eq-facil">
-      <div class="eq-h"><span class="badge">GED 1</span>Diferencia mínima — y un error de cálculo en micro:bit</div>
+    <div class="eq eq-ok">
+      <div class="eq-h"><span class="badge">GED 0</span>Equivalentes ✓ — y corregido el error de cálculo</div>
+      <p>Verificado: los dos grafos son <b>isomorfos</b> (GED 0, 14 nodos por lado).</p><p>Además del empate, se corrigió el <b>error de fórmula</b>: micro:bit calculaba el intervalo como <code>600 + bpm</code> (suma) y ahora usa <code>60000 ÷ bpm</code>, igual que Protobject. Con la suma, subir el tempo <i>alargaba</i> el intervalo en vez de acortarlo: el metrónomo no marcaba el tempo que indicaba. Ahora sí.</p>
+    </div>
       <p>Toda la estructura coincide salvo la fórmula del intervalo entre pulsos: Protobject calcula <code>60000 ÷ bpm</code> (división) y micro:bit <code>600 + bpm</code> (suma). <b>La fórmula de micro:bit está mal:</b> el intervalo de un metrónomo es inversamente proporcional al tempo — si suben los bpm el intervalo tiene que <i>bajar</i>, y con una suma pasa lo contrario. El metrónomo de micro:bit no marca el tempo que indica.</p>
       <p class="fix"><b>Cómo igualarlas:</b> Cambiar la fórmula de micro:bit a <code>60000 ÷ bpm</code>. Ese único cambio corrige el error y deja las dos versiones equivalentes.</p>
     </div>
@@ -526,8 +538,11 @@
     <div class="num">22.2</div>
     <h3>Scream Battle</h3>
     <p class="lead">Arreglo de GED 11: La inicialización de pantalla de protobject es propia del sistema, por lo que es una diferencia necesaria, ya que no hay forma de mostrar los números igual que en microbit, además de esto, apliqué redondeo a ambos para que sean equivalentes. Arreglé la versión de protobject ya que no cargaba en el visualizador. A pesar de que microbit muestra los dígitos de forma distinta que protobject, son equivalentes ya que eso es algo que depende meramente del sistema y no del algoritmo (microbit muestra números en la pantalla LED y protobject en DibujarEscribir), además de eso, para que se asemeje más la forma de visualización del tiempo de microbit a protobject, hice que el tiempo no se pueda mostrar en decimales para que se vea de forma directa y no hayan saltos gigantezcos entre los números al tardar tanto en mostrar toda la animación. Con este arreglo, la actividad queda mucho más parecida en el lado funcional.</p>
-    <div class="eq eq-media">
-      <div class="eq-h"><span class="badge">GED 11</span>Diferencia moderada: un redondeo y el ajuste del texto</div>
+    <div class="eq eq-facil">
+      <div class="eq-h"><span class="badge">GED 7</span>Casi equivalentes: queda la preparación del texto</div>
+      <p>De GED 11 a 7: el <code>redondeo</code> de los segundos ya está en <b>ambas</b> plataformas, así que esa diferencia desapareció.</p><p><b>Lo que queda</b> son dos bloques que solo tiene Protobject: <code>establecer tamaño 40</code> y <code>limpiar</code> sobre el display de texto. El <code>mostrar número</code> de micro:bit no necesita ninguna preparación.</p>
+      <p class="fix"><b>Cómo igualarlas:</b> Es plumbing propio de Protobject más que una diferencia de algoritmo. Se puede documentar como diferencia aceptada, o quitar el <code>limpiar</code> del bucle si no hace falta redibujar.</p>
+    </div>
       <p>Dos diferencias: <b>(1)</b> micro:bit aplica un <code>redondeo</code> a los segundos antes de mostrarlos y Protobject escribe el valor tal cual; <b>(2)</b> Protobject necesita <code>establecer tamaño</code> y <code>limpiar</code> para su display de texto, mientras que el <code>mostrar número</code> de micro:bit no requiere preparación.</p>
       <p class="fix"><b>Cómo igualarlas:</b> El <code>redondeo</code> sí se puede igualar: quitarlo de micro:bit, o agregar el equivalente en Protobject (según si se quieren mostrar decimales). La preparación del display de texto es propia de Protobject y puede documentarse como diferencia aceptada.</p>
     </div>

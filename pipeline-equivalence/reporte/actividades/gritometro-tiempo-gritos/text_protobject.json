@@ -8,7 +8,7 @@
         "repetir para siempre:",
         "  limpiar en DibujarEscribir2",
         "  si (inicio > 0):",
-        "    escribir ((milisegundos − inicio) ÷ 1000) en DibujarEscribir2",
+        "    escribir (redondear ((milisegundos − inicio) ÷ 1000)) en DibujarEscribir2",
         "    si ((ruido in NivelRuido1) < 5):",
         "      establecer inicio a 0",
         "      establecer activo a falso",

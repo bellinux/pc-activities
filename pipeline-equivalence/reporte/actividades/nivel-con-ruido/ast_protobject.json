@@ -13,6 +13,26 @@
                 "type": "Loop",
                 "label": "repetir para siempre",
                 "children": [
+                    {
+                        "type": "Assignment",
+                        "label": "establecer inclinacionX a ◻",
+                        "children": [
+                            { "type": "Sensor", "label": "y in Inclinación1", "children": [] }
+                        ]
+                    },
+                    {
+                        "type": "Assignment",
+                        "label": "establecer inclinacionY a ◻",
+                        "children": [
+                            { "type": "Sensor", "label": "x in Inclinación1", "children": [] }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "Loop",
+                "label": "repetir para siempre",
+                "children": [
                     { "type": "Action", "label": "borrar dibujo en DibujoLED2", "children": [] },
                     {
                         "type": "Conditional",
@@ -26,40 +46,16 @@
                                         "type": "Operator",
                                         "label": "◻ y ◻",
                                         "children": [
-                                            {
-                                                "type": "Operator",
-                                                "label": "◻ > -2",
-                                                "children": [
-                                                    { "type": "Sensor", "label": "x in Inclinación1", "children": [] }
-                                                ]
-                                            },
-                                            {
-                                                "type": "Operator",
-                                                "label": "◻ < 2",
-                                                "children": [
-                                                    { "type": "Sensor", "label": "x in Inclinación1", "children": [] }
-                                                ]
-                                            }
+                                            { "type": "Operator", "label": "inclinacionX > -2", "children": [] },
+                                            { "type": "Operator", "label": "inclinacionX < 2", "children": [] }
                                         ]
                                     },
                                     {
                                         "type": "Operator",
                                         "label": "◻ y ◻",
                                         "children": [
-                                            {
-                                                "type": "Operator",
-                                                "label": "◻ > -2",
-                                                "children": [
-                                                    { "type": "Sensor", "label": "y in Inclinación1", "children": [] }
-                                                ]
-                                            },
-                                            {
-                                                "type": "Operator",
-                                                "label": "◻ < 2",
-                                                "children": [
-                                                    { "type": "Sensor", "label": "y in Inclinación1", "children": [] }
-                                                ]
-                                            }
+                                            { "type": "Operator", "label": "inclinacionY > -2", "children": [] },
+                                            { "type": "Operator", "label": "inclinacionY < 2", "children": [] }
                                         ]
                                     }
                                 ]
@@ -72,26 +68,8 @@
                                         "type": "Action",
                                         "label": "dibuja en x ◻ y ◻ con color #33cc00 en DibujoLED2",
                                         "children": [
-                                            {
-                                                "type": "Operator",
-                                                "label": "4 + ◻",
-                                                "children": [
-                                                    {
-                                                        "type": "Operator",
-                                                        "label": "-1 × ◻",
-                                                        "children": [
-                                                            { "type": "Sensor", "label": "x in Inclinación1", "children": [] }
-                                                        ]
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                "type": "Operator",
-                                                "label": "4 + ◻",
-                                                "children": [
-                                                    { "type": "Sensor", "label": "y in Inclinación1", "children": [] }
-                                                ]
-                                            }
+                                            { "type": "Operator", "label": "4 + inclinacionX", "children": [] },
+                                            { "type": "Operator", "label": "4 + inclinacionY", "children": [] }
                                         ]
                                     },
                                     {
@@ -123,32 +101,14 @@
                                                 "type": "Operator",
                                                 "label": "limitar ◻ entre 1 y 7",
                                                 "children": [
-                                                    {
-                                                        "type": "Operator",
-                                                        "label": "4 + ◻",
-                                                        "children": [
-                                                            {
-                                                                "type": "Operator",
-                                                                "label": "-1 × ◻",
-                                                                "children": [
-                                                                    { "type": "Sensor", "label": "x in Inclinación1", "children": [] }
-                                                                ]
-                                                            }
-                                                        ]
-                                                    }
+                                                    { "type": "Operator", "label": "4 + inclinacionX", "children": [] }
                                                 ]
                                             },
                                             {
                                                 "type": "Operator",
                                                 "label": "limitar ◻ entre 1 y 7",
                                                 "children": [
-                                                    {
-                                                        "type": "Operator",
-                                                        "label": "4 + ◻",
-                                                        "children": [
-                                                            { "type": "Sensor", "label": "y in Inclinación1", "children": [] }
-                                                        ]
-                                                    }
+                                                    { "type": "Operator", "label": "4 + inclinacionY", "children": [] }
                                                 ]
                                             }
                                         ]

@@ -10,6 +10,8 @@ input.onLogoEvent(TouchButtonEvent.Touched, function () {
         }
         music.stopAllSounds()
         music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Wawawawaa), music.PlaybackMode.InBackground)
+        basic.pause(4000)
+        music.stopAllSounds()
         pausado = true
     }
 })

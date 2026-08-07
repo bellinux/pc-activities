@@ -119,6 +119,12 @@
         },
         {
             "source": "n11",
+            "target": "n13",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n11",
             "target": "n14",
             "type": "control",
             "var": "true"
@@ -133,7 +139,7 @@
             "source": "n4",
             "target": "n5",
             "type": "data",
-            "var": "bpm"
+            "var": "value"
         },
         {
             "source": "n5",
@@ -145,13 +151,7 @@
             "source": "n6",
             "target": "n7",
             "type": "data",
-            "var": "intervalopulso"
-        },
-        {
-            "source": "n7",
-            "target": "n10",
-            "type": "data",
-            "var": "intervalopulso"
+            "var": "value"
         },
         {
             "source": "n8",
@@ -163,19 +163,25 @@
             "source": "n2",
             "target": "n9",
             "type": "data",
-            "var": "ultimopulso"
+            "var": "ultimobeat"
         },
         {
             "source": "n14",
             "target": "n9",
             "type": "data",
-            "var": "ultimopulso"
+            "var": "ultimobeat"
         },
         {
             "source": "n9",
             "target": "n10",
             "type": "data",
-            "var": "delta"
+            "var": "left"
+        },
+        {
+            "source": "n7",
+            "target": "n10",
+            "type": "data",
+            "var": "intervalobeat"
         },
         {
             "source": "n10",

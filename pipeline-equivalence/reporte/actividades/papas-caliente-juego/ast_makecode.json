@@ -26,10 +26,10 @@
                                         "type": "Assignment",
                                         "label": "fijar tiempo a ◻",
                                         "children": [
-                                            { "type": "Action", "label": "escoger al azar de 5 a 15", "children": [] }
+                                            { "type": "Operator", "label": "escoger al azar de 5 a 15", "children": [] }
                                         ]
                                     },
-                                    { "type": "Action", "label": "reproduce baddy bucle en segundo plano", "children": [] },
+                                    { "type": "Action", "label": "reproduce (baddy) bucle en segundo plano", "children": [] },
                                     {
                                         "type": "Loop",
                                         "label": "mientras ◻",
@@ -40,7 +40,9 @@
                                         ]
                                     },
                                     { "type": "Action", "label": "para todos los sonidos", "children": [] },
-                                    { "type": "Action", "label": "reproduce wawawawaa en segundo plano", "children": [] },
+                                    { "type": "Action", "label": "reproduce (wawawawaa) en segundo plano", "children": [] },
+                                    { "type": "Action", "label": "pausa (ms) 4000", "children": [] },
+                                    { "type": "Action", "label": "para todos los sonidos", "children": [] },
                                     { "type": "Assignment", "label": "fijar pausado a verdadero", "children": [] }
                                 ]
                             }

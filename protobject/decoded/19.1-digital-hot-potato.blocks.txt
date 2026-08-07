@@ -12,6 +12,7 @@ cuando BotónTáctil3 es tocado:
     repetir mientras (tiempo > 0):   // Temporizador con tiempo inicial aleatorio, valor entre 5 y 15.
       añadir -1 a tiempo
       retraso de 1 segundos
+    detener sonido de ReproductorSonido3
     reproducir sonido 'reacción divertida' en ReproductorSonido3
     retraso de 4 segundos
     detener sonido de ReproductorSonido3

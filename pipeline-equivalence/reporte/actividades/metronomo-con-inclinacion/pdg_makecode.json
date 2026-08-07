@@ -3,29 +3,30 @@
     "nodes": [
         {
             "id": "n1",
-            "kind": "ProgramStartEvent",
+            "kind": "ReadTilt",
             "seq": 1,
-            "in_loop": false
+            "in_loop": true,
+            "resId": 1
         },
         {
             "id": "n2",
-            "kind": "SetVariable",
+            "kind": "Arithmetic",
             "seq": 2,
-            "in_loop": false
+            "in_loop": true,
+            "op": "+"
         },
         {
             "id": "n3",
-            "kind": "ReadTilt",
+            "kind": "SetVariable",
             "seq": 3,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n4",
             "kind": "Arithmetic",
             "seq": 4,
             "in_loop": true,
-            "op": "+"
+            "op": "÷"
         },
         {
             "id": "n5",
@@ -35,157 +36,162 @@
         },
         {
             "id": "n6",
-            "kind": "Arithmetic",
+            "kind": "ReadRuntimeMillis",
             "seq": 6,
-            "in_loop": true,
-            "op": "+"
+            "in_loop": true
         },
         {
             "id": "n7",
-            "kind": "SetVariable",
-            "seq": 7,
-            "in_loop": true
-        },
-        {
-            "id": "n8",
-            "kind": "ReadRuntimeMillis",
-            "seq": 8,
-            "in_loop": true
-        },
-        {
-            "id": "n9",
             "kind": "Arithmetic",
-            "seq": 9,
+            "seq": 7,
             "in_loop": true,
             "op": "-"
         },
         {
-            "id": "n10",
+            "id": "n8",
             "kind": "Comparison",
-            "seq": 10,
+            "seq": 8,
             "in_loop": true,
             "op": ">"
         },
         {
-            "id": "n11",
+            "id": "n9",
             "kind": "ConditionalBranch",
+            "seq": 9,
+            "in_loop": true
+        },
+        {
+            "id": "n10",
+            "kind": "EmitSound",
+            "seq": 10,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n11",
+            "kind": "ReadRuntimeMillis",
             "seq": 11,
             "in_loop": true
         },
         {
             "id": "n12",
-            "kind": "EmitSound",
+            "kind": "SetVariable",
             "seq": 12,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n13",
-            "kind": "ReadRuntimeMillis",
+            "kind": "ProgramStartEvent",
             "seq": 13,
-            "in_loop": true
+            "in_loop": false
         },
         {
             "id": "n14",
             "kind": "SetVariable",
             "seq": 14,
-            "in_loop": true
+            "in_loop": false
         }
     ],
     "edges": [
         {
-            "source": "n1",
-            "target": "n2",
+            "source": "n13",
+            "target": "n14",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n3",
+            "target": "n5",
             "type": "control",
             "var": ""
         },
         {
             "source": "n5",
-            "target": "n7",
+            "target": "n9",
             "type": "control",
             "var": ""
         },
         {
-            "source": "n7",
+            "source": "n9",
+            "target": "n10",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n9",
             "target": "n11",
             "type": "control",
-            "var": ""
+            "var": "true"
         },
         {
-            "source": "n11",
+            "source": "n9",
             "target": "n12",
             "type": "control",
             "var": "true"
         },
         {
-            "source": "n11",
-            "target": "n14",
-            "type": "control",
-            "var": "true"
+            "source": "n1",
+            "target": "n2",
+            "type": "data",
+            "var": "tilt_1"
+        },
+        {
+            "source": "n2",
+            "target": "n3",
+            "type": "data",
+            "var": "value"
         },
         {
             "source": "n3",
             "target": "n4",
             "type": "data",
-            "var": "tilt_1"
+            "var": "bpm"
         },
         {
             "source": "n4",
             "target": "n5",
             "type": "data",
-            "var": "bpm"
-        },
-        {
-            "source": "n5",
-            "target": "n6",
-            "type": "data",
-            "var": "bpm"
+            "var": "value"
         },
         {
             "source": "n6",
             "target": "n7",
             "type": "data",
-            "var": "intervalopulso"
+            "var": "time_1"
+        },
+        {
+            "source": "n14",
+            "target": "n7",
+            "type": "data",
+            "var": "ultimobeat"
+        },
+        {
+            "source": "n12",
+            "target": "n7",
+            "type": "data",
+            "var": "ultimobeat"
         },
         {
             "source": "n7",
-            "target": "n10",
+            "target": "n8",
             "type": "data",
-            "var": "intervalopulso"
+            "var": "left"
+        },
+        {
+            "source": "n5",
+            "target": "n8",
+            "type": "data",
+            "var": "intervalobeat"
         },
         {
             "source": "n8",
             "target": "n9",
             "type": "data",
-            "var": "time_1"
-        },
-        {
-            "source": "n2",
-            "target": "n9",
-            "type": "data",
-            "var": "ultimopulso"
-        },
-        {
-            "source": "n14",
-            "target": "n9",
-            "type": "data",
-            "var": "ultimopulso"
-        },
-        {
-            "source": "n9",
-            "target": "n10",
-            "type": "data",
-            "var": "delta"
-        },
-        {
-            "source": "n10",
-            "target": "n11",
-            "type": "data",
             "var": "condition"
         },
         {
-            "source": "n13",
-            "target": "n14",
+            "source": "n11",
+            "target": "n12",
             "type": "data",
             "var": "time_1"
         }

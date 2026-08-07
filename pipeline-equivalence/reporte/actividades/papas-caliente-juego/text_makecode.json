@@ -13,6 +13,8 @@
         "      pausa (ms) 1000",
         "    para todos los sonidos",
         "    reproduce (wawawawaa) en segundo plano",
+        "    pausa (ms) 4000",
+        "    para todos los sonidos",
         "    fijar pausado a verdadero"
     ]
 }

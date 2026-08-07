@@ -1,9 +1,9 @@
 ACTIVIDAD: 22.1-dj-metronome
-FUENTE: micro:bit / MakeCode 9.0.5 — "metronomo-con-inclinacion"  (etiquetas oficiales es-ES)
+FUENTE: micro:bit / MakeCode 9.0.8 — "metronomo-con-inclinacion"  (etiquetas oficiales es-ES)
 
 para siempre:
   fijar bpm a (aceleración (mg) x + 600)
-  fijar intervaloBeat a (600 + bpm)
+  fijar intervaloBeat a (60000 ÷ bpm)
   si ((tiempo de ejecución (ms) − ultimoBeat) > intervaloBeat) entonces:
     reproduce secuencia tono La#3 durante 1/4 pulso en modo hasta que termine   // Reproduce un tono específico, en este caso simulará la frecuencia de un metrónomo.
     fijar ultimoBeat a tiempo de ejecución (ms)

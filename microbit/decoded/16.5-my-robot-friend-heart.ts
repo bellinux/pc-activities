@@ -2,15 +2,15 @@
 // 
 // En este bloque específico la velocidad de latidos aumentará.
 input.onGesture(Gesture.LogoUp, function () {
-    latidoPequeño = 10
     latidoGrande = 100
+    latidoPequeño = 10
 })
 // Este bloque detecta el momento en cambia la posición del dispositivo, cuando lo hace se editan las variables "latidoGrande" y "latidoPequeño". Dependiendo de la posición la velocidad de latido aumentará (Los tiempos son más largos, es decir las variables toman valores grandes).
 // 
 // En este bloque específico la velocidad de latidos se reducirá.
 input.onGesture(Gesture.LogoDown, function () {
-    latidoPequeño = 250
     latidoGrande = 500
+    latidoPequeño = 250
 })
 let latidoGrande = 0
 let latidoPequeño = 0

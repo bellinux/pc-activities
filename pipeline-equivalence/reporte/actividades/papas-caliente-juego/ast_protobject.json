@@ -26,7 +26,7 @@
                                         "type": "Assignment",
                                         "label": "establecer tiempo a ◻",
                                         "children": [
-                                            { "type": "Action", "label": "entero aleatorio de 5 a 15", "children": [] }
+                                            { "type": "Operator", "label": "entero aleatorio de 5 a 15", "children": [] }
                                         ]
                                     },
                                     { "type": "Action", "label": "reproducir sonido 'progreso' en ReproductorSonido3", "children": [] },
@@ -39,6 +39,7 @@
                                             { "type": "Action", "label": "retraso de 1 segundos", "children": [] }
                                         ]
                                     },
+                                    { "type": "Action", "label": "detener sonido de ReproductorSonido3", "children": [] },
                                     { "type": "Action", "label": "reproducir sonido 'reacción divertida' en ReproductorSonido3", "children": [] },
                                     { "type": "Action", "label": "retraso de 4 segundos", "children": [] },
                                     { "type": "Action", "label": "detener sonido de ReproductorSonido3", "children": [] },

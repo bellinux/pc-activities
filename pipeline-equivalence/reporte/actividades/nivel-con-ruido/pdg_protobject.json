@@ -15,65 +15,63 @@
         },
         {
             "id": "n3",
-            "kind": "ClearDisplay",
+            "kind": "ReadTilt",
             "seq": 3,
             "in_loop": true,
             "resId": 1
         },
         {
             "id": "n4",
-            "kind": "ReadTilt",
+            "kind": "SetVariable",
             "seq": 4,
+            "in_loop": true
+        },
+        {
+            "id": "n5",
+            "kind": "ReadTilt",
+            "seq": 5,
+            "in_loop": true,
+            "resId": 2
+        },
+        {
+            "id": "n6",
+            "kind": "SetVariable",
+            "seq": 6,
+            "in_loop": true
+        },
+        {
+            "id": "n7",
+            "kind": "ClearDisplay",
+            "seq": 7,
             "in_loop": true,
             "resId": 1
         },
         {
-            "id": "n5",
+            "id": "n8",
             "kind": "Comparison",
-            "seq": 5,
+            "seq": 8,
             "in_loop": true,
             "op": ">"
         },
         {
-            "id": "n6",
-            "kind": "ReadTilt",
-            "seq": 6,
-            "in_loop": true,
-            "resId": 1
-        },
-        {
-            "id": "n7",
+            "id": "n9",
             "kind": "Comparison",
-            "seq": 7,
+            "seq": 9,
             "in_loop": true,
             "op": "<"
         },
         {
-            "id": "n8",
+            "id": "n10",
             "kind": "LogicalAnd",
-            "seq": 8,
+            "seq": 10,
             "in_loop": true
         },
         {
-            "id": "n9",
-            "kind": "ReadTilt",
-            "seq": 9,
-            "in_loop": true,
-            "resId": 2
-        },
-        {
-            "id": "n10",
-            "kind": "Comparison",
-            "seq": 10,
-            "in_loop": true,
-            "op": ">"
-        },
-        {
             "id": "n11",
-            "kind": "ReadTilt",
+            "kind": "Comparison",
             "seq": 11,
             "in_loop": true,
-            "resId": 2
+            "op": ">"
         },
         {
             "id": "n12",
@@ -102,150 +100,108 @@
         },
         {
             "id": "n16",
-            "kind": "ReadTilt",
+            "kind": "Arithmetic",
             "seq": 16,
             "in_loop": true,
-            "resId": 1
+            "op": "+"
         },
         {
             "id": "n17",
             "kind": "Arithmetic",
             "seq": 17,
             "in_loop": true,
-            "op": "×"
+            "op": "+"
         },
         {
             "id": "n18",
-            "kind": "Arithmetic",
-            "seq": 18,
-            "in_loop": true,
-            "op": "+"
-        },
-        {
-            "id": "n19",
-            "kind": "ReadTilt",
-            "seq": 19,
-            "in_loop": true,
-            "resId": 2
-        },
-        {
-            "id": "n20",
-            "kind": "Arithmetic",
-            "seq": 20,
-            "in_loop": true,
-            "op": "+"
-        },
-        {
-            "id": "n21",
             "kind": "PlotPoint",
-            "seq": 21,
+            "seq": 18,
             "in_loop": true,
             "resId": 1
         },
         {
-            "id": "n22",
+            "id": "n19",
             "kind": "ConditionalBranch",
+            "seq": 19,
+            "in_loop": true
+        },
+        {
+            "id": "n20",
+            "kind": "EmitSound",
+            "seq": 20,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n21",
+            "kind": "Delay",
+            "seq": 21,
+            "in_loop": true
+        },
+        {
+            "id": "n22",
+            "kind": "SetVariable",
             "seq": 22,
             "in_loop": true
         },
         {
             "id": "n23",
-            "kind": "EmitSound",
+            "kind": "Arithmetic",
             "seq": 23,
             "in_loop": true,
-            "resId": 1
+            "op": "+"
         },
         {
             "id": "n24",
-            "kind": "Delay",
+            "kind": "Arithmetic",
             "seq": 24,
-            "in_loop": true
+            "in_loop": true,
+            "op": "constrain"
         },
         {
             "id": "n25",
-            "kind": "SetVariable",
+            "kind": "Arithmetic",
             "seq": 25,
-            "in_loop": true
+            "in_loop": true,
+            "op": "+"
         },
         {
             "id": "n26",
-            "kind": "ReadTilt",
+            "kind": "Arithmetic",
             "seq": 26,
             "in_loop": true,
-            "resId": 1
+            "op": "constrain"
         },
         {
             "id": "n27",
-            "kind": "Arithmetic",
+            "kind": "PlotPoint",
             "seq": 27,
             "in_loop": true,
-            "op": "×"
+            "resId": 1
         },
         {
             "id": "n28",
-            "kind": "Arithmetic",
+            "kind": "SetVariable",
             "seq": 28,
-            "in_loop": true,
-            "op": "+"
+            "in_loop": true
         },
         {
             "id": "n29",
-            "kind": "Arithmetic",
+            "kind": "StopSound",
             "seq": 29,
             "in_loop": true,
-            "op": "constrain"
+            "resId": 1
         },
         {
             "id": "n30",
-            "kind": "ReadTilt",
+            "kind": "Delay",
             "seq": 30,
-            "in_loop": true,
-            "resId": 2
+            "in_loop": true
         },
         {
             "id": "n31",
-            "kind": "Arithmetic",
-            "seq": 31,
-            "in_loop": true,
-            "op": "+"
-        },
-        {
-            "id": "n32",
-            "kind": "Arithmetic",
-            "seq": 32,
-            "in_loop": true,
-            "op": "constrain"
-        },
-        {
-            "id": "n33",
-            "kind": "PlotPoint",
-            "seq": 33,
-            "in_loop": true,
-            "resId": 1
-        },
-        {
-            "id": "n34",
-            "kind": "SetVariable",
-            "seq": 34,
-            "in_loop": true
-        },
-        {
-            "id": "n35",
-            "kind": "StopSound",
-            "seq": 35,
-            "in_loop": true,
-            "resId": 1
-        },
-        {
-            "id": "n36",
-            "kind": "Delay",
-            "seq": 36,
-            "in_loop": true
-        },
-        {
-            "id": "n37",
             "kind": "EmitSound",
-            "seq": 37,
+            "seq": 31,
             "in_loop": true,
             "resId": 1
         }
@@ -258,92 +214,140 @@
             "var": ""
         },
         {
-            "source": "n3",
+            "source": "n4",
+            "target": "n6",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n7",
             "target": "n15",
             "type": "control",
             "var": ""
         },
         {
             "source": "n15",
+            "target": "n18",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n15",
+            "target": "n19",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n19",
+            "target": "n20",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n19",
             "target": "n21",
             "type": "control",
             "var": "true"
         },
         {
-            "source": "n15",
+            "source": "n19",
             "target": "n22",
             "type": "control",
             "var": "true"
         },
         {
-            "source": "n22",
-            "target": "n23",
-            "type": "control",
-            "var": "true"
-        },
-        {
-            "source": "n22",
-            "target": "n24",
-            "type": "control",
-            "var": "true"
-        },
-        {
-            "source": "n22",
-            "target": "n25",
-            "type": "control",
-            "var": "true"
-        },
-        {
             "source": "n15",
-            "target": "n33",
+            "target": "n27",
             "type": "control",
             "var": "false"
         },
         {
             "source": "n15",
-            "target": "n34",
+            "target": "n28",
             "type": "control",
             "var": "false"
         },
         {
             "source": "n15",
-            "target": "n35",
+            "target": "n29",
             "type": "control",
             "var": "false"
         },
         {
             "source": "n15",
-            "target": "n36",
+            "target": "n30",
             "type": "control",
             "var": "false"
         },
         {
             "source": "n15",
-            "target": "n37",
+            "target": "n31",
             "type": "control",
             "var": "false"
         },
         {
-            "source": "n4",
-            "target": "n5",
-            "type": "data",
-            "var": "tilt_1"
-        },
-        {
-            "source": "n6",
-            "target": "n7",
+            "source": "n3",
+            "target": "n4",
             "type": "data",
             "var": "tilt_1"
         },
         {
             "source": "n5",
-            "target": "n8",
+            "target": "n6",
             "type": "data",
-            "var": "value"
+            "var": "tilt_2"
         },
         {
-            "source": "n7",
+            "source": "n4",
             "target": "n8",
+            "type": "data",
+            "var": "inclinacionx"
+        },
+        {
+            "source": "n4",
+            "target": "n9",
+            "type": "data",
+            "var": "inclinacionx"
+        },
+        {
+            "source": "n4",
+            "target": "n16",
+            "type": "data",
+            "var": "inclinacionx"
+        },
+        {
+            "source": "n4",
+            "target": "n23",
+            "type": "data",
+            "var": "inclinacionx"
+        },
+        {
+            "source": "n6",
+            "target": "n11",
+            "type": "data",
+            "var": "inclinaciony"
+        },
+        {
+            "source": "n6",
+            "target": "n12",
+            "type": "data",
+            "var": "inclinaciony"
+        },
+        {
+            "source": "n6",
+            "target": "n17",
+            "type": "data",
+            "var": "inclinaciony"
+        },
+        {
+            "source": "n6",
+            "target": "n25",
+            "type": "data",
+            "var": "inclinaciony"
+        },
+        {
+            "source": "n8",
+            "target": "n10",
             "type": "data",
             "var": "value"
         },
@@ -351,16 +355,10 @@
             "source": "n9",
             "target": "n10",
             "type": "data",
-            "var": "tilt_2"
+            "var": "value"
         },
         {
             "source": "n11",
-            "target": "n12",
-            "type": "data",
-            "var": "tilt_2"
-        },
-        {
-            "source": "n10",
             "target": "n13",
             "type": "data",
             "var": "value"
@@ -372,7 +370,7 @@
             "var": "value"
         },
         {
-            "source": "n8",
+            "source": "n10",
             "target": "n14",
             "type": "data",
             "var": "value"
@@ -391,9 +389,9 @@
         },
         {
             "source": "n16",
-            "target": "n17",
+            "target": "n18",
             "type": "data",
-            "var": "tilt_1"
+            "var": "value"
         },
         {
             "source": "n17",
@@ -402,20 +400,20 @@
             "var": "value"
         },
         {
-            "source": "n18",
-            "target": "n21",
+            "source": "n23",
+            "target": "n24",
             "type": "data",
             "var": "value"
         },
         {
-            "source": "n19",
-            "target": "n20",
+            "source": "n24",
+            "target": "n27",
             "type": "data",
-            "var": "tilt_2"
+            "var": "value"
         },
         {
-            "source": "n20",
-            "target": "n21",
+            "source": "n25",
+            "target": "n26",
             "type": "data",
             "var": "value"
         },
@@ -423,83 +421,47 @@
             "source": "n26",
             "target": "n27",
             "type": "data",
-            "var": "tilt_1"
-        },
-        {
-            "source": "n27",
-            "target": "n28",
-            "type": "data",
-            "var": "value"
-        },
-        {
-            "source": "n28",
-            "target": "n29",
-            "type": "data",
-            "var": "value"
-        },
-        {
-            "source": "n29",
-            "target": "n33",
-            "type": "data",
-            "var": "value"
-        },
-        {
-            "source": "n30",
-            "target": "n31",
-            "type": "data",
-            "var": "tilt_2"
-        },
-        {
-            "source": "n31",
-            "target": "n32",
-            "type": "data",
-            "var": "value"
-        },
-        {
-            "source": "n32",
-            "target": "n33",
-            "type": "data",
             "var": "value"
         },
         {
             "source": "n2",
-            "target": "n22",
+            "target": "n19",
             "type": "data",
             "var": "sonidofijo"
         },
         {
-            "source": "n25",
-            "target": "n22",
+            "source": "n22",
+            "target": "n19",
             "type": "data",
             "var": "sonidofijo"
         },
         {
-            "source": "n34",
-            "target": "n22",
+            "source": "n28",
+            "target": "n19",
             "type": "data",
             "var": "sonidofijo"
         },
         {
-            "source": "n3",
-            "target": "n21",
+            "source": "n7",
+            "target": "n18",
             "type": "side_effect",
             "var": "display"
         },
         {
-            "source": "n21",
-            "target": "n33",
+            "source": "n18",
+            "target": "n27",
             "type": "side_effect",
             "var": "display"
         },
         {
-            "source": "n23",
-            "target": "n35",
+            "source": "n20",
+            "target": "n29",
             "type": "side_effect",
             "var": "sound"
         },
         {
-            "source": "n35",
-            "target": "n37",
+            "source": "n29",
+            "target": "n31",
             "type": "side_effect",
             "var": "sound"
         }

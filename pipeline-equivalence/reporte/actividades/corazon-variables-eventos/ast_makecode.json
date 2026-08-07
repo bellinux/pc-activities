@@ -34,16 +34,16 @@
                 "type": "Event_Interrupt",
                 "label": "si logotipo hacia abajo",
                 "children": [
-                    { "type": "Assignment", "label": "fijar latidoPequeño a 250", "children": [] },
-                    { "type": "Assignment", "label": "fijar latidoGrande a 500", "children": [] }
+                    { "type": "Assignment", "label": "fijar latidoGrande a 500", "children": [] },
+                    { "type": "Assignment", "label": "fijar latidoPequeño a 250", "children": [] }
                 ]
             },
             {
                 "type": "Event_Interrupt",
                 "label": "si logotipo hacia arriba",
                 "children": [
-                    { "type": "Assignment", "label": "fijar latidoPequeño a 10", "children": [] },
-                    { "type": "Assignment", "label": "fijar latidoGrande a 100", "children": [] }
+                    { "type": "Assignment", "label": "fijar latidoGrande a 100", "children": [] },
+                    { "type": "Assignment", "label": "fijar latidoPequeño a 10", "children": [] }
                 ]
             }
         ]

@@ -15,10 +15,10 @@
         "  fijar latidoPequeño a 250",
         "  fijar latidoGrande a 500",
         "si logotipo hacia abajo:",
-        "  fijar latidoPequeño a 250",
         "  fijar latidoGrande a 500",
+        "  fijar latidoPequeño a 250",
         "si logotipo hacia arriba:",
-        "  fijar latidoPequeño a 10",
-        "  fijar latidoGrande a 100"
+        "  fijar latidoGrande a 100",
+        "  fijar latidoPequeño a 10"
     ]
 }

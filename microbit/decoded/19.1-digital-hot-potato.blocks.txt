@@ -1,5 +1,5 @@
 ACTIVIDAD: 19.1-digital-hot-potato
-FUENTE: micro:bit / MakeCode 8.0.18 — "papas-caliente-juego"  (etiquetas oficiales es-ES)
+FUENTE: micro:bit / MakeCode 9.0.8 — "papas-caliente-juego"  (etiquetas oficiales es-ES)
 
 al iniciar:
   fijar pausado a verdadero
@@ -14,4 +14,6 @@ al tocar el logotipo:
       pausa (ms) 1000
     para todos los sonidos
     reproduce wawawawaa en segundo plano
+    pausa (ms) 4000
+    para todos los sonidos
     fijar pausado a verdadero

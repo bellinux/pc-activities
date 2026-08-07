@@ -3,19 +3,12 @@
     "ast": {
         "blocks": [
             {
-                "type": "Event",
-                "label": "al iniciar",
-                "children": [
-                    { "type": "Assignment", "label": "fijar sonidoFijo a verdadero", "children": [] }
-                ]
-            },
-            {
                 "type": "Loop",
                 "label": "para siempre",
                 "children": [
                     {
-                        "type": "Action",
-                        "label": "serial escribir valor \"x\" = ◻",
+                        "type": "Assignment",
+                        "label": "fijar inclinacionX a ◻",
                         "children": [
                             {
                                 "type": "Operator",
@@ -32,6 +25,38 @@
                             }
                         ]
                     },
+                    {
+                        "type": "Assignment",
+                        "label": "fijar inclinacionY a ◻",
+                        "children": [
+                            {
+                                "type": "Operator",
+                                "label": "redondeo ◻",
+                                "children": [
+                                    {
+                                        "type": "Operator",
+                                        "label": "◻ ÷ 250",
+                                        "children": [
+                                            { "type": "Sensor", "label": "aceleración (mg) y", "children": [] }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "Event",
+                "label": "al iniciar",
+                "children": [
+                    { "type": "Assignment", "label": "fijar sonidoFijo a verdadero", "children": [] }
+                ]
+            },
+            {
+                "type": "Loop",
+                "label": "para siempre",
+                "children": [
                     { "type": "Action", "label": "borrar la pantalla", "children": [] },
                     {
                         "type": "Conditional",
@@ -45,88 +70,16 @@
                                         "type": "Operator",
                                         "label": "◻ y ◻",
                                         "children": [
-                                            {
-                                                "type": "Operator",
-                                                "label": "◻ > -2",
-                                                "children": [
-                                                    {
-                                                        "type": "Operator",
-                                                        "label": "redondeo ◻",
-                                                        "children": [
-                                                            {
-                                                                "type": "Operator",
-                                                                "label": "◻ ÷ 250",
-                                                                "children": [
-                                                                    { "type": "Sensor", "label": "aceleración (mg) x", "children": [] }
-                                                                ]
-                                                            }
-                                                        ]
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                "type": "Operator",
-                                                "label": "◻ < 2",
-                                                "children": [
-                                                    {
-                                                        "type": "Operator",
-                                                        "label": "redondeo ◻",
-                                                        "children": [
-                                                            {
-                                                                "type": "Operator",
-                                                                "label": "◻ ÷ 250",
-                                                                "children": [
-                                                                    { "type": "Sensor", "label": "aceleración (mg) x", "children": [] }
-                                                                ]
-                                                            }
-                                                        ]
-                                                    }
-                                                ]
-                                            }
+                                            { "type": "Operator", "label": "inclinacionX > -2", "children": [] },
+                                            { "type": "Operator", "label": "inclinacionX < 2", "children": [] }
                                         ]
                                     },
                                     {
                                         "type": "Operator",
                                         "label": "◻ y ◻",
                                         "children": [
-                                            {
-                                                "type": "Operator",
-                                                "label": "◻ > -2",
-                                                "children": [
-                                                    {
-                                                        "type": "Operator",
-                                                        "label": "redondeo ◻",
-                                                        "children": [
-                                                            {
-                                                                "type": "Operator",
-                                                                "label": "◻ ÷ 250",
-                                                                "children": [
-                                                                    { "type": "Sensor", "label": "aceleración (mg) y", "children": [] }
-                                                                ]
-                                                            }
-                                                        ]
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                "type": "Operator",
-                                                "label": "◻ < 2",
-                                                "children": [
-                                                    {
-                                                        "type": "Operator",
-                                                        "label": "redondeo ◻",
-                                                        "children": [
-                                                            {
-                                                                "type": "Operator",
-                                                                "label": "◻ ÷ 250",
-                                                                "children": [
-                                                                    { "type": "Sensor", "label": "aceleración (mg) y", "children": [] }
-                                                                ]
-                                                            }
-                                                        ]
-                                                    }
-                                                ]
-                                            }
+                                            { "type": "Operator", "label": "inclinacionY > -2", "children": [] },
+                                            { "type": "Operator", "label": "inclinacionY < 2", "children": [] }
                                         ]
                                     }
                                 ]
@@ -139,44 +92,8 @@
                                         "type": "Action",
                                         "label": "graficar x ◻ y ◻",
                                         "children": [
-                                            {
-                                                "type": "Operator",
-                                                "label": "2 + ◻",
-                                                "children": [
-                                                    {
-                                                        "type": "Operator",
-                                                        "label": "redondeo ◻",
-                                                        "children": [
-                                                            {
-                                                                "type": "Operator",
-                                                                "label": "◻ ÷ 250",
-                                                                "children": [
-                                                                    { "type": "Sensor", "label": "aceleración (mg) x", "children": [] }
-                                                                ]
-                                                            }
-                                                        ]
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                "type": "Operator",
-                                                "label": "2 + ◻",
-                                                "children": [
-                                                    {
-                                                        "type": "Operator",
-                                                        "label": "redondeo ◻",
-                                                        "children": [
-                                                            {
-                                                                "type": "Operator",
-                                                                "label": "◻ ÷ 250",
-                                                                "children": [
-                                                                    { "type": "Sensor", "label": "aceleración (mg) y", "children": [] }
-                                                                ]
-                                                            }
-                                                        ]
-                                                    }
-                                                ]
-                                            }
+                                            { "type": "Operator", "label": "2 + inclinacionX", "children": [] },
+                                            { "type": "Operator", "label": "2 + inclinacionY", "children": [] }
                                         ]
                                     },
                                     {
@@ -206,40 +123,16 @@
                                         "children": [
                                             {
                                                 "type": "Operator",
-                                                "label": "2 + ◻",
+                                                "label": "restringir ◻ entre 0 y 4",
                                                 "children": [
-                                                    {
-                                                        "type": "Operator",
-                                                        "label": "redondeo ◻",
-                                                        "children": [
-                                                            {
-                                                                "type": "Operator",
-                                                                "label": "◻ ÷ 250",
-                                                                "children": [
-                                                                    { "type": "Sensor", "label": "aceleración (mg) x", "children": [] }
-                                                                ]
-                                                            }
-                                                        ]
-                                                    }
+                                                    { "type": "Operator", "label": "2 + inclinacionX", "children": [] }
                                                 ]
                                             },
                                             {
                                                 "type": "Operator",
-                                                "label": "2 + ◻",
+                                                "label": "restringir ◻ entre 0 y 4",
                                                 "children": [
-                                                    {
-                                                        "type": "Operator",
-                                                        "label": "redondeo ◻",
-                                                        "children": [
-                                                            {
-                                                                "type": "Operator",
-                                                                "label": "◻ ÷ 250",
-                                                                "children": [
-                                                                    { "type": "Sensor", "label": "aceleración (mg) y", "children": [] }
-                                                                ]
-                                                            }
-                                                        ]
-                                                    }
+                                                    { "type": "Operator", "label": "2 + inclinacionY", "children": [] }
                                                 ]
                                             }
                                         ]
@@ -253,11 +146,6 @@
                         ]
                     }
                 ]
-            },
-            {
-                "type": "Operator",
-                "label": "restringir 0 entre 0 y 0",
-                "children": []
             }
         ]
     }

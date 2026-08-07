@@ -31,13 +31,19 @@
                                         "children": [
                                             {
                                                 "type": "Operator",
-                                                "label": "◻ ÷ 1000",
+                                                "label": "redondear ◻",
                                                 "children": [
                                                     {
                                                         "type": "Operator",
-                                                        "label": "◻ − inicio",
+                                                        "label": "◻ ÷ 1000",
                                                         "children": [
-                                                            { "type": "Sensor", "label": "milisegundos", "children": [] }
+                                                            {
+                                                                "type": "Operator",
+                                                                "label": "◻ − inicio",
+                                                                "children": [
+                                                                    { "type": "Sensor", "label": "milisegundos", "children": [] }
+                                                                ]
+                                                            }
                                                         ]
                                                     }
                                                 ]

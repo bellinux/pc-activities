@@ -68,34 +68,34 @@
         },
         {
             "id": "n11",
-            "kind": "ShowNumber",
+            "kind": "Round",
             "seq": 11,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n12",
-            "kind": "ReadSoundLevel",
+            "kind": "ShowNumber",
             "seq": 12,
             "in_loop": true,
             "resId": 1
         },
         {
             "id": "n13",
-            "kind": "Comparison",
+            "kind": "ReadSoundLevel",
             "seq": 13,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n14",
+            "kind": "Comparison",
+            "seq": 14,
             "in_loop": true,
             "op": "<"
         },
         {
-            "id": "n14",
-            "kind": "ConditionalBranch",
-            "seq": 14,
-            "in_loop": true
-        },
-        {
             "id": "n15",
-            "kind": "SetVariable",
+            "kind": "ConditionalBranch",
             "seq": 15,
             "in_loop": true
         },
@@ -107,39 +107,45 @@
         },
         {
             "id": "n17",
-            "kind": "Delay",
+            "kind": "SetVariable",
             "seq": 17,
             "in_loop": true
         },
         {
             "id": "n18",
-            "kind": "SetVariable",
+            "kind": "Delay",
             "seq": 18,
             "in_loop": true
         },
         {
             "id": "n19",
-            "kind": "SuddenNoiseEvent",
+            "kind": "SetVariable",
             "seq": 19,
+            "in_loop": true
+        },
+        {
+            "id": "n20",
+            "kind": "SuddenNoiseEvent",
+            "seq": 20,
             "in_loop": false,
             "resId": 1
         },
         {
-            "id": "n20",
-            "kind": "ConditionalBranch",
-            "seq": 20,
-            "in_loop": false
-        },
-        {
             "id": "n21",
-            "kind": "ReadRuntimeMillis",
+            "kind": "ConditionalBranch",
             "seq": 21,
             "in_loop": false
         },
         {
             "id": "n22",
-            "kind": "SetVariable",
+            "kind": "ReadRuntimeMillis",
             "seq": 22,
+            "in_loop": false
+        },
+        {
+            "id": "n23",
+            "kind": "SetVariable",
+            "seq": 23,
             "in_loop": false
         }
     ],
@@ -211,44 +217,50 @@
             "var": "true"
         },
         {
-            "source": "n14",
+            "source": "n7",
             "target": "n15",
             "type": "control",
             "var": "true"
         },
         {
-            "source": "n14",
+            "source": "n15",
             "target": "n16",
             "type": "control",
             "var": "true"
         },
         {
-            "source": "n14",
+            "source": "n15",
             "target": "n17",
             "type": "control",
             "var": "true"
         },
         {
-            "source": "n14",
+            "source": "n15",
             "target": "n18",
             "type": "control",
             "var": "true"
         },
         {
-            "source": "n19",
-            "target": "n20",
-            "type": "control",
-            "var": ""
-        },
-        {
-            "source": "n20",
-            "target": "n21",
+            "source": "n15",
+            "target": "n19",
             "type": "control",
             "var": "true"
         },
         {
             "source": "n20",
+            "target": "n21",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n21",
             "target": "n22",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n21",
+            "target": "n23",
             "type": "control",
             "var": "true"
         },
@@ -259,8 +271,8 @@
             "var": "condition"
         },
         {
-            "source": "n13",
-            "target": "n14",
+            "source": "n14",
+            "target": "n15",
             "type": "data",
             "var": "condition"
         },
@@ -283,14 +295,20 @@
             "var": "value"
         },
         {
-            "source": "n12",
-            "target": "n13",
+            "source": "n11",
+            "target": "n12",
+            "type": "data",
+            "var": "value"
+        },
+        {
+            "source": "n13",
+            "target": "n14",
             "type": "data",
             "var": "sound_1"
         },
         {
-            "source": "n21",
-            "target": "n22",
+            "source": "n22",
+            "target": "n23",
             "type": "data",
             "var": "time_1"
         },
@@ -307,44 +325,44 @@
             "var": "inicio"
         },
         {
-            "source": "n15",
+            "source": "n16",
             "target": "n6",
             "type": "data",
             "var": "inicio"
         },
         {
-            "source": "n15",
+            "source": "n16",
             "target": "n9",
             "type": "data",
             "var": "inicio"
         },
         {
-            "source": "n22",
+            "source": "n23",
             "target": "n6",
             "type": "data",
             "var": "inicio"
         },
         {
-            "source": "n22",
+            "source": "n23",
             "target": "n9",
             "type": "data",
             "var": "inicio"
         },
         {
             "source": "n4",
-            "target": "n20",
+            "target": "n21",
             "type": "data",
             "var": "activo"
         },
         {
-            "source": "n16",
-            "target": "n20",
+            "source": "n17",
+            "target": "n21",
             "type": "data",
             "var": "activo"
         },
         {
-            "source": "n18",
-            "target": "n20",
+            "source": "n19",
+            "target": "n21",
             "type": "data",
             "var": "activo"
         },
@@ -356,7 +374,7 @@
         },
         {
             "source": "n5",
-            "target": "n11",
+            "target": "n12",
             "type": "side_effect",
             "var": "display"
         }

@@ -72,28 +72,35 @@
         },
         {
             "id": "n12",
-            "kind": "PlaySound",
+            "kind": "StopSound",
             "seq": 12,
             "in_loop": false,
             "resId": 1
         },
         {
             "id": "n13",
-            "kind": "Delay",
+            "kind": "PlaySound",
             "seq": 13,
-            "in_loop": false
-        },
-        {
-            "id": "n14",
-            "kind": "StopSound",
-            "seq": 14,
             "in_loop": false,
             "resId": 1
         },
         {
+            "id": "n14",
+            "kind": "Delay",
+            "seq": 14,
+            "in_loop": false
+        },
+        {
             "id": "n15",
-            "kind": "SetVariable",
+            "kind": "StopSound",
             "seq": 15,
+            "in_loop": false,
+            "resId": 1
+        },
+        {
+            "id": "n16",
+            "kind": "SetVariable",
+            "seq": 16,
             "in_loop": false
         }
     ],
@@ -171,6 +178,12 @@
             "var": "true"
         },
         {
+            "source": "n4",
+            "target": "n16",
+            "type": "control",
+            "var": "true"
+        },
+        {
             "source": "n5",
             "target": "n7",
             "type": "control",
@@ -219,6 +232,12 @@
             "var": ""
         },
         {
+            "source": "n15",
+            "target": "n16",
+            "type": "control",
+            "var": ""
+        },
+        {
             "source": "n2",
             "target": "n4",
             "type": "data",
@@ -231,7 +250,7 @@
             "var": "pausado"
         },
         {
-            "source": "n15",
+            "source": "n16",
             "target": "n4",
             "type": "data",
             "var": "pausado"
@@ -280,7 +299,13 @@
         },
         {
             "source": "n12",
-            "target": "n14",
+            "target": "n13",
+            "type": "side_effect",
+            "var": "sound"
+        },
+        {
+            "source": "n13",
+            "target": "n15",
             "type": "side_effect",
             "var": "sound"
         }

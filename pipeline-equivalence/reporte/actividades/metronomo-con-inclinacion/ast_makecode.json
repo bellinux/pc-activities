@@ -23,7 +23,7 @@
                         "type": "Assignment",
                         "label": "fijar intervaloBeat a ◻",
                         "children": [
-                            { "type": "Operator", "label": "600 + bpm", "children": [] }
+                            { "type": "Operator", "label": "60000 ÷ bpm", "children": [] }
                         ]
                     },
                     {

@@ -197,49 +197,49 @@
             "var": "latidogrande"
         },
         {
-            "source": "n6",
+            "source": "n5",
             "target": "n12",
             "type": "data",
             "var": "latidogrande"
+        },
+        {
+            "source": "n8",
+            "target": "n12",
+            "type": "data",
+            "var": "latidogrande"
+        },
+        {
+            "source": "n2",
+            "target": "n15",
+            "type": "data",
+            "var": "latidopequeño"
+        },
+        {
+            "source": "n2",
+            "target": "n17",
+            "type": "data",
+            "var": "latidopequeño"
+        },
+        {
+            "source": "n6",
+            "target": "n15",
+            "type": "data",
+            "var": "latidopequeño"
+        },
+        {
+            "source": "n6",
+            "target": "n17",
+            "type": "data",
+            "var": "latidopequeño"
         },
         {
             "source": "n9",
-            "target": "n12",
-            "type": "data",
-            "var": "latidogrande"
-        },
-        {
-            "source": "n2",
             "target": "n15",
             "type": "data",
             "var": "latidopequeño"
         },
         {
-            "source": "n2",
-            "target": "n17",
-            "type": "data",
-            "var": "latidopequeño"
-        },
-        {
-            "source": "n5",
-            "target": "n15",
-            "type": "data",
-            "var": "latidopequeño"
-        },
-        {
-            "source": "n5",
-            "target": "n17",
-            "type": "data",
-            "var": "latidopequeño"
-        },
-        {
-            "source": "n8",
-            "target": "n15",
-            "type": "data",
-            "var": "latidopequeño"
-        },
-        {
-            "source": "n8",
+            "source": "n9",
             "target": "n17",
             "type": "data",
             "var": "latidopequeño"
