@@ -192,7 +192,11 @@ def to_pure_pdg(G: nx.MultiDiGraph) -> nx.MultiDiGraph:
 # El GED es NP-duro: con branch-and-bound, si la búsqueda TERMINA el valor es el
 # óptimo exacto; si la corta el timeout, es solo una cota superior. Se registra
 # cuál de los dos casos ocurrió en 'ged_exact'.
-GED_TIMEOUT = 60
+# 300 s. Solo se gasta en las actividades NO isomorfas (las isomorfas devuelven 0
+# sin calcular), asi que el coste real recae en muy pocas. Por encima de este
+# valor no compensa: en grafos de ~33 nodos la busqueda no converge igualmente y
+# solo se afina la cota superior.
+GED_TIMEOUT = 300
 
 def _ged(G1, G2):
     import time

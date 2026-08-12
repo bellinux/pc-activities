@@ -67,7 +67,7 @@ Per ogni attività: legge `pdg_*.json`, costruisce i grafi (networkx), renderizz
 
 **Cosa scrive `metricas.json`** (i primi due campi decidono, gli altri due informano):
 - `isomorphic` — **il verdetto**, calcolato sul PDG canonico (regola E). VF2 è esatto e termina sempre: questo dato è sempre affidabile.
-- `graph_edit_distance` — quanto distano. **Il GED è NP-hard**: `networkx` fa branch-and-bound con `timeout=60`; se la ricerca finisce, il valore è il **minimo esatto**, se viene troncata è solo un **limite superiore**.
+- `graph_edit_distance` — quanto distano. **Il GED è NP-hard**: `networkx` fa branch-and-bound con `timeout=300`; se la ricerca finisce, il valore è il **minimo esatto**, se viene troncata è solo un **limite superiore**. **Se `isomorphic` è vero il GED vale 0 per definizione e NON viene calcolato** (oltre a risparmiare tempo, evita l'incoerenza di pubblicare "isomorfi, GED 22": su grafi grandi il branch-and-bound non converge a 0 entro il timeout, mentre VF2 risponde esatto in millisecondi — sono due algoritmi diversi, uno cerca *una* corrispondenza perfetta, l'altro il *minimo* fra tutte le trasformazioni).
 - `ged_exact` — `true` se la ricerca è terminata (valore esatto), `false` se troncata → **mostralo come `≤ N`**. Misurato a luglio 2026: esatto per 16 attività su 17; solo `nivel-con-ruido` (35 vs 31 nodi) resta un limite superiore anche a 60 s.
 - `order_hint` — `true` quando le due versioni sono **equivalenti** ma con statement indipendenti in ordine diverso. Non è un difetto: è un suggerimento di allineamento per la leggibilità.
 

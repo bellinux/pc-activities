@@ -114,12 +114,12 @@
     «No derrames el líquido» <b>haciendo explícita en las dos plataformas</b> la conversión del sensor
     que antes una hacía a mano y la otra por dentro.</p>
 
-    <p style="margin:10px 0 0;font-size:1.05em"><b>Las 17 actividades son equivalentes.</b></p>
+    <p style="margin:10px 0 0;font-size:1.05em"><b>16 de 17 actividades son equivalentes.</b></p>
 
     <p style="margin:10px 0 0;font-size:12.5px;color:var(--muted)">
-      Queda una observación menor en <a href="#a167">16.7</a>: el tipo de redondeo no es el mismo en las
-      dos plataformas (al más cercano en micro:bit, hacia arriba en Protobject). El grafo no lo distingue y
-      el veredicto no cambia, pero afecta un poco a cuándo el punto salta de casilla.</p>
+      En <a href="#a167">16.7</a> queda una sola diferencia, y está planteada como pregunta abierta: las dos
+      versiones redondean de forma distinta (al entero más cercano en micro:bit, hacia arriba en Protobject).
+      Hasta ahora la comparación no lo distinguía; se afinó la ontología para que lo haga.</p>
   </div>
 
   <h2 class="section-title">Actividades</h2>
@@ -388,26 +388,29 @@
       ya que la actividad está pensada para realizarse con el teléfono acostado en horizontal, con la pantalla hacia arriba, esto no pasa en microbit dado que la placa ya se utiliza de esta forma, esa es la única diferencia, la cual es necesaria (por eso antes se invertía el eje X). Además de esto, en microbit también coloqué el bloque constrain. Es un poco distinto en funcionalidad. La nota en protobject se mantiene, mientras que en microbit se toca por cada segundo. Además de eso, la lógica de las LEDs es distinta en protobject ya que actualmente usa colores para mostrar los rangos y toca ruido todo el rato (distintos para diferenciar si el líquido está dentro de los parámetros), mientras que microbit no cambia de color (por razones obvias) y solo toca ruido al salirse de los parámetros.
       Además de esto, quitamos el bloque "establecer color de fondo" de protobject ya que era redundante y no se utiliza en microbit, junto con cambiar el bloque "dibujar pantalla con color" por un "clear screen".
     </p>
-    <div class="eq eq-ok">
-      <div class="eq-h"><span class="badge">GED 0</span>Equivalentes ✓ — la más difícil, resuelta</div>
-      <p>Isomorfos (33 nodos y 45 aristas por lado). Era la actividad más divergente del conjunto —llegó a
-      54 vs 31 operaciones— y se cerró <b>haciendo explícita la conversión del sensor en las dos
-      plataformas</b>: ahora ambas siguen la misma cadena <code>sensor → + → × → ÷ → redondeo</code>, una vez
-      por eje. Desaparecieron el <code>serial escribir</code> de depuración, el bloque suelto
-      <code>restringir 0 entre 0 y 0</code> y el <code>establecer color de fondo</code> redundante.</p>
-      <p>La <b>inversión de los ejes en Protobject</b> queda explicada arriba y es correcta: el teléfono se
-      usa acostado mientras el sensor mide como si estuviera vertical, así que hay que compensarlo para que
-      inclinar hacia un lado mueva el punto hacia ese lado. Es exactamente el tipo de ajuste físico que la
-      comparación debe absorber, no penalizar.</p>
-      <p style="margin-top:10px;padding:10px 12px;background:#fff8e8;border:1px solid #f0d99a;border-radius:8px;color:#6b4a09">
-      <b>Un detalle que vale la pena revisar.</b> La explicación dice que el valor «se aproxima hacia el
-      entero más cercano <i>hacia arriba</i>» en las dos plataformas, y en Protobject así es
-      (<code>redondear al alza</code>). En micro:bit, en cambio, el bloque que aparece es
-      <code>redondeo</code>, que aproxima al entero <b>más cercano</b>, no hacia arriba. La diferencia es
-      pequeña pero sistemática: con el techo el punto cambia de casilla algo antes, así que la ventana de
-      «nivelado» no coincide del todo entre las dos versiones. El grafo no lo distingue —ambos son
-      <code>Round</code>— por lo que el veredicto de equivalencia no cambia; es una cuestión de que el juego
-      se sienta igual.</p>
+    <div class="eq eq-facil">
+      <div class="eq-h"><span class="badge">GED 26</span>Casi: queda una pregunta abierta sobre el redondeo</div>
+      <p>El rediseño funcionó: las dos versiones tienen ahora <b>los mismos 33 nodos y las mismas 45 aristas</b>,
+      con la misma cadena <code>sensor → + → × → ÷ → redondeo</code> una vez por eje. Desaparecieron el
+      <code>serial escribir</code> de depuración, el bloque suelto <code>restringir 0 entre 0 y 0</code> y el
+      <code>establecer color de fondo</code> redundante. La inversión de ejes en Protobject está explicada
+      arriba y es correcta: el teléfono se usa acostado mientras el sensor mide como si estuviera vertical.</p>
+      <p><b>La única diferencia que queda</b> son 2 operaciones por lado: micro:bit usa <code>redondeo</code>
+      (al entero <b>más cercano</b>) y Protobject <code>redondear al alza</code> (hacia arriba, techo). No son
+      la misma operación: <code>redondeo(2.4) = 2</code> pero <code>al alza(2.4) = 3</code>. Con el techo el
+      punto cambia de casilla algo antes, así que la ventana de «nivelado» no cae exactamente en el mismo
+      rango de inclinación en las dos versiones.</p>
+      <p style="margin-top:10px;padding:10px 12px;background:#eef0fe;border:1px solid #dfe1fb;border-radius:8px;color:#3b3f7a">
+      <b>❓ Pregunta abierta:</b> ¿se puede usar <b>el mismo tipo de redondeo en las dos</b> y que el juego siga
+      comportándose igual? Es decir: ¿qué pasa si en Protobject se cambia a redondeo normal, o si en micro:bit
+      se pasa a redondeo hacia arriba? ¿Hay alguna razón —el rango del sensor, el tamaño de la matriz, dónde
+      queda el centro— por la que en cada plataforma convenga uno distinto, o fue simplemente el bloque que
+      había a mano? Vale la pena probarlo en el dispositivo: si con el mismo redondeo el punto se mueve igual,
+      la actividad queda equivalente del todo.</p>
+      <p class="fix" style="font-size:.9em">Nota técnica: hasta ahora la ontología tenía un único nodo
+      <code>Round</code> para los dos casos, así que la comparación los daba por iguales y la actividad salía
+      equivalente. Se separaron en <code>Round</code> (al más cercano) y <code>RoundUp</code> (hacia arriba)
+      justamente para que una diferencia real deje de pasar desapercibida.</p>
     </div>
     <div class="cols">
       <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>

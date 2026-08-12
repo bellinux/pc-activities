@@ -1,7 +1,7 @@
 {
-    "isomorphic": true,
-    "graph_edit_distance": 0.0,
-    "ged_exact": true,
+    "isomorphic": false,
+    "graph_edit_distance": 26.0,
+    "ged_exact": false,
     "nodes_G1": 33,
     "nodes_G2": 33,
     "edges_G1": 45,

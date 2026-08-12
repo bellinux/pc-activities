@@ -43,7 +43,7 @@
         },
         {
             "id": "n7",
-            "kind": "Round",
+            "kind": "RoundUp",
             "seq": 7,
             "in_loop": true
         },
@@ -83,7 +83,7 @@
         },
         {
             "id": "n13",
-            "kind": "Round",
+            "kind": "RoundUp",
             "seq": 13,
             "in_loop": true
         },
