@@ -499,7 +499,8 @@
   <div class="card c2" id="a222">
     <div class="num">22.2</div>
     <h3>Scream Battle</h3>
-    <p class="lead">Arreglo de GED 11: La inicialización de pantalla de protobject es propia del sistema, por lo que es una diferencia necesaria, ya que no hay forma de mostrar los números igual que en microbit, además de esto, apliqué redondeo a ambos para que sean equivalentes. Arreglé la versión de protobject ya que no cargaba en el visualizador. A pesar de que microbit muestra los dígitos de forma distinta que protobject, son equivalentes ya que eso es algo que depende meramente del sistema y no del algoritmo (microbit muestra números en la pantalla LED y protobject en DibujarEscribir), además de eso, para que se asemeje más la forma de visualización del tiempo de microbit a protobject, hice que el tiempo no se pueda mostrar en decimales para que se vea de forma directa y no hayan saltos gigantezcos entre los números al tardar tanto en mostrar toda la animación. Con este arreglo, la actividad queda mucho más parecida en el lado funcional.</p>
+    <p class="lead">Arreglo final para equivalencia: Se cambió totalmente la actividad, para que sea equivalente, en ambas plataformas se utiliza la pantalla led para visualizar el tiempo del grito,
+      esto mediante el encendido progresivo de la matriz de leds mientras dure el grito. Arreglo de GED 11: La inicialización de pantalla de protobject es propia del sistema, por lo que es una diferencia necesaria, ya que no hay forma de mostrar los números igual que en microbit, además de esto, apliqué redondeo a ambos para que sean equivalentes. Arreglé la versión de protobject ya que no cargaba en el visualizador. A pesar de que microbit muestra los dígitos de forma distinta que protobject, son equivalentes ya que eso es algo que depende meramente del sistema y no del algoritmo (microbit muestra números en la pantalla LED y protobject en DibujarEscribir), además de eso, para que se asemeje más la forma de visualización del tiempo de microbit a protobject, hice que el tiempo no se pueda mostrar en decimales para que se vea de forma directa y no hayan saltos gigantezcos entre los números al tardar tanto en mostrar toda la animación. Con este arreglo, la actividad queda mucho más parecida en el lado funcional.</p>
     <div class="eq eq-facil">
       <div class="eq-h"><span class="badge">GED 5</span>Pendiente: la vía es cambiar el medio de salida</div>
       <p>El <code>redondeo</code> de los segundos ya está en ambas plataformas. Lo que queda viene todo del <b>display de texto</b>: Protobject necesita <code>establecer tamaño 40</code> para escribir en una pantalla gráfica, y un <code>limpiar</code> antes de cada reescritura; la matriz 5×5 de micro:bit no tiene ninguna de las dos cosas porque <code>mostrar número</code> no necesita preparación.</p><p>Perseguir los bloques uno a uno no lleva lejos: mientras las dos versiones usen <b>medios de salida distintos</b>, van a necesitar operaciones distintas.</p><p><b>La vía que se está explorando</b> es la buena: mostrar el resultado en la <b>matriz de LEDs en las dos plataformas</b>, en lugar de escribir un número. Se llena la pantalla mientras dura el grito (<code>graficar x y</code> ↔ <code>dibuja en x y</code>) y al terminar se borra. Con eso desaparecen a la vez el <code>tamaño</code> y la asimetría del <code>limpiar</code> — es el mismo patrón de <a href="#a031">03.1 Music Visualizer</a>, que ya es equivalente.</p>
@@ -509,13 +510,15 @@
       <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>
         <ul>
           <li>NivelRuido (para detectar el ruido constante)</li>
-          <li>DibujarEscribir (para mostrar el tiempo del grito)</li>
+          <li>DibujoLED (para mostrar el tiempo del grito en la matriz)</li>
+          <li>ReproductorSonido (para dar feedback al usuario al momento de avanzar y terminar la partida)</li>
         </ul>
       </div>
       <div class="col mb"><h4><span class="ic">M</span>Microbit</h4>
         <ul>
           <li>Ruido fuerte como input, hace lo mismo que NivelRuido</li>
           <li>Pantalla Led para mostrar el tiempo del grito</li>
+          <li>Música para reproducir efectos al avanzar y terminar la partida.</li>
         </ul>
       </div>
     </div>
