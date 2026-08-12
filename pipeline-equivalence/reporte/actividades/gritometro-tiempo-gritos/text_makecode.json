@@ -2,18 +2,22 @@
     "platform": "MakeCode",
     "extracted_text": [
         "para siempre:",
-        "  si (inicio > 0) entonces:",
-        "    mostrar número (redondeo (((tiempo de ejecución (ms)) − inicio) ÷ 1000))",
-        "    si ((nivel de sonido) < 5) entonces:",
-        "      fijar inicio a 0",
-        "      fijar activo a falso",
-        "      pausa (ms) 5000",
-        "      fijar activo a verdadero",
+        "  si detectado entonces:",
+        "    mientras ((nivel de sonido) ≥ 5):",
+        "      para fila de 0 a 4:",
+        "        para columna de 0 a 4:",
+        "          si ((nivel de sonido) ≥ 5) entonces:",
+        "            graficar x columna y fila",
+        "            reproduce secuencia (feliz) en modo hasta que termine",
+        "            pausa (ms) 500",
+        "    reproduce secuencia (risa) en modo bucle en segundo plano",
+        "    pausa (ms) 5000",
+        "    para todos los sonidos",
+        "    borrar la pantalla",
+        "    fijar detectado a falso",
         "al iniciar:",
-        "  fijar inicio a 0",
-        "  fijar activo a verdadero",
+        "  fijar detectado a falso",
         "al detectar el sonido alto:",
-        "  si activo entonces:",
-        "    fijar inicio a (tiempo de ejecución (ms))"
+        "  fijar detectado a verdadero"
     ]
 }

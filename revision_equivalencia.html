@@ -107,28 +107,19 @@
     se sigue teniendo en cuenta). Dos actividades son <b>equivalentes</b> si los grafos son isomorfos
     (<code>GED&nbsp;=&nbsp;0</code>).
 
-    <p style="margin:10px 0 0"><b>La equivalencia se diseña.</b> Cuando el análisis encuentra una
-    diferencia, la pregunta no es si la plataforma «lo permite», sino <b>cómo rediseñar la actividad
-    para que las dos versiones vuelvan a coincidir</b> — cambiando el bloque, el componente o la forma
-    de presentar el resultado. Lo que se documenta es ese proceso, no la lista de limitaciones.</p>
+    <p style="margin:10px 0 0"><b>La equivalencia se diseña.</b> Cuando el análisis encontró una
+    diferencia, la pregunta no fue si la plataforma «lo permitía», sino cómo rediseñar la actividad para
+    que las dos versiones volvieran a coincidir. Los dos últimos casos lo muestran bien: el gritómetro se
+    cerró <b>cambiando el medio de salida</b> (de escribir un número a llenar la matriz de LEDs), y
+    «No derrames el líquido» <b>haciendo explícita en las dos plataformas</b> la conversión del sensor
+    que antes una hacía a mano y la otra por dentro.</p>
 
-    <p style="margin:10px 0 0"><b>15 de 17 actividades son equivalentes.</b> Las dos pendientes tienen
-    la diferencia localizada y, para ambas, un camino de diseño propuesto en su ficha.</p>
+    <p style="margin:10px 0 0;font-size:1.05em"><b>Las 17 actividades son equivalentes.</b></p>
 
-    <table>
-      <tr><th>Actividad</th><th>GED</th><th>Qué falta y por dónde ir</th></tr>
-      <tr><td><a href="#a222">22.2 Scream Battle</a></td><td class="ged">5</td>
-          <td><span class="pill p-facil">con solución</span> mostrar el resultado en la matriz de LEDs en ambas
-          plataformas, en vez de escribir un número en el display de texto</td></tr>
-      <tr><td><a href="#a167">16.7 Don't Spill Liquid Game</a></td><td class="ged">≤ 74</td>
-          <td><span class="pill p-media">en estudio</span> el escalado del acelerómetro: pasar a zonas decididas
-          con comparaciones, o hacer la conversión visible también en Protobject</td></tr>
-    </table>
-
-    <p style="margin:12px 0 0;font-size:12.5px;color:var(--muted)">
-      El veredicto <i>equivalente / no equivalente</i> es exacto siempre. La distancia (GED) es exacta en 16 de
-      las 17 actividades; en <a href="#a167">16.7</a> se muestra como <code>≤</code> porque el cálculo exacto no
-      termina en un tiempo razonable para grafos de ese tamaño.</p>
+    <p style="margin:10px 0 0;font-size:12.5px;color:var(--muted)">
+      Queda una observación menor en <a href="#a167">16.7</a>: el tipo de redondeo no es el mismo en las
+      dos plataformas (al más cercano en micro:bit, hacia arriba en Protobject). El grafo no lo distingue y
+      el veredicto no cambia, pero afecta un poco a cuándo el punto salta de casilla.</p>
   </div>
 
   <h2 class="section-title">Actividades</h2>
@@ -345,7 +336,7 @@
     </p>
     <div class="eq eq-ok">
       <div class="eq-h"><span class="badge">GED 0</span>Equivalentes ✓ — y con el orden ya alineado</div>
-      <p>Isomorfos (17 nodos y 25 aristas por lado). Los tres bloques asignan ahora <code>latidoGrande</code> antes que <code>latidoPequeño</code> en las dos plataformas.</p><p style="font-size:.93em"><b>Sobre el diagnóstico anterior.</b> Esta actividad llegó a marcar GED 18 por dos motivos, ambos resueltos: un análisis viejo leía <code>si logotipo hacia arriba</code> como si fuera un <i>toque</i> —era un gesto de orientación, y el comentario de la actividad tenía razón al señalarlo—, y la métrica penalizaba el orden entre asignaciones independientes, cosa que un grafo de dependencias no debe hacer. El motor ya lo trata correctamente.</p>
+      <p>Isomorfos (17 nodos y 25 aristas por lado). Los tres bloques asignan <code>latidoGrande</code> antes que <code>latidoPequeño</code> en las dos plataformas.</p>
     </div>
     <div class="cols">
       <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>
@@ -397,10 +388,26 @@
       ya que la actividad está pensada para realizarse con el teléfono acostado en horizontal, con la pantalla hacia arriba, esto no pasa en microbit dado que la placa ya se utiliza de esta forma, esa es la única diferencia, la cual es necesaria (por eso antes se invertía el eje X). Además de esto, en microbit también coloqué el bloque constrain. Es un poco distinto en funcionalidad. La nota en protobject se mantiene, mientras que en microbit se toca por cada segundo. Además de eso, la lógica de las LEDs es distinta en protobject ya que actualmente usa colores para mostrar los rangos y toca ruido todo el rato (distintos para diferenciar si el líquido está dentro de los parámetros), mientras que microbit no cambia de color (por razones obvias) y solo toca ruido al salirse de los parámetros.
       Además de esto, quitamos el bloque "establecer color de fondo" de protobject ya que era redundante y no se utiliza en microbit, junto con cambiar el bloque "dibujar pantalla con color" por un "clear screen".
     </p>
-    <div class="eq eq-media">
-      <div class="eq-h"><span class="badge">GED ≤ 74</span>Pendiente: el escalado del sensor</div>
-      <p>Se limpiaron tres de los cuatro motivos: desapareció el <code>serial escribir</code> de depuración, desapareció el bloque suelto <code>restringir 0 entre 0 y 0</code>, y el recorte de coordenadas está ahora en las dos plataformas (antes solo en Protobject, junto con una inversión <code>× -1</code> que también se quitó). El programa pasó de 54 a 35 operaciones en micro:bit.</p><p><b>Lo que queda:</b> micro:bit lee <code>aceleración (mg)</code>, de −1023 a 1023, y necesita <code>÷ 250</code> y <code>redondeo</code> para obtener la celda de la matriz. En Protobject, <code>x in Inclinación</code> ya entrega un valor pequeño: la plataforma hace por dentro esa conversión. Son 4 operaciones que existen en un lado y no en el otro.</p><p style="font-size:.9em;color:#7a3d12"><b>Sobre el número:</b> se muestra <code>≤ 74</code> porque el cálculo exacto no termina en un tiempo razonable para grafos de este tamaño; 74 es el mejor valor encontrado y el real puede ser menor. El veredicto de equivalencia sí es exacto.</p>
-      <p class="fix"><b>Cómo lograr la equivalencia:</b> igual que en 22.2, conviene mover el diseño en vez de perseguir bloques. <b>(a)</b> Cambiar la granularidad: decidir <b>zonas</b> (izquierda / centro / derecha) con comparaciones —que ya existen en ambas— y el escalado deja de hacer falta. Cambia la sensación del juego, así que es una decisión pedagógica además de técnica. <b>(b)</b> Si se quiere conservar el movimiento continuo, hacer visible la conversión también en Protobject, de modo que ambas tengan la misma cadena leer → escalar → usar.</p>
+    <div class="eq eq-ok">
+      <div class="eq-h"><span class="badge">GED 0</span>Equivalentes ✓ — la más difícil, resuelta</div>
+      <p>Isomorfos (33 nodos y 45 aristas por lado). Era la actividad más divergente del conjunto —llegó a
+      54 vs 31 operaciones— y se cerró <b>haciendo explícita la conversión del sensor en las dos
+      plataformas</b>: ahora ambas siguen la misma cadena <code>sensor → + → × → ÷ → redondeo</code>, una vez
+      por eje. Desaparecieron el <code>serial escribir</code> de depuración, el bloque suelto
+      <code>restringir 0 entre 0 y 0</code> y el <code>establecer color de fondo</code> redundante.</p>
+      <p>La <b>inversión de los ejes en Protobject</b> queda explicada arriba y es correcta: el teléfono se
+      usa acostado mientras el sensor mide como si estuviera vertical, así que hay que compensarlo para que
+      inclinar hacia un lado mueva el punto hacia ese lado. Es exactamente el tipo de ajuste físico que la
+      comparación debe absorber, no penalizar.</p>
+      <p style="margin-top:10px;padding:10px 12px;background:#fff8e8;border:1px solid #f0d99a;border-radius:8px;color:#6b4a09">
+      <b>Un detalle que vale la pena revisar.</b> La explicación dice que el valor «se aproxima hacia el
+      entero más cercano <i>hacia arriba</i>» en las dos plataformas, y en Protobject así es
+      (<code>redondear al alza</code>). En micro:bit, en cambio, el bloque que aparece es
+      <code>redondeo</code>, que aproxima al entero <b>más cercano</b>, no hacia arriba. La diferencia es
+      pequeña pero sistemática: con el techo el punto cambia de casilla algo antes, así que la ventana de
+      «nivelado» no coincide del todo entre las dos versiones. El grafo no lo distingue —ambos son
+      <code>Round</code>— por lo que el veredicto de equivalencia no cambia; es una cuestión de que el juego
+      se sienta igual.</p>
     </div>
     <div class="cols">
       <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>
@@ -455,7 +462,7 @@
     </p>
     <div class="eq eq-ok">
       <div class="eq-h"><span class="badge">GED 0</span>Equivalentes ✓ — resuelto el orden del final</div>
-      <p>Isomorfos (16 nodos y 34 aristas por lado). Se alinearon <b>los dos lados</b>: ambos cierran con <code>detener sonido</code> → <code>reproducir</code> → <code>pausa 4 s</code> → <code>detener sonido</code>.</p>
+      <p>Isomorfos (16 nodos y 34 aristas por lado). Se alinearon los dos lados: ambos cierran con <code>detener sonido</code> → <code>reproducir</code> → <code>pausa 4 s</code> → <code>detener sonido</code>.</p>
     </div>
     <div class="cols">
       <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>
@@ -502,10 +509,9 @@
     <h3>Scream Battle</h3>
     <p class="lead">Arreglo final para equivalencia: Se cambió totalmente la actividad, para que sea equivalente, en ambas plataformas se utiliza la pantalla led para visualizar el tiempo del grito,
       esto mediante el encendido progresivo de la matriz de leds mientras dure el grito. Arreglo de GED 11: La inicialización de pantalla de protobject es propia del sistema, por lo que es una diferencia necesaria, ya que no hay forma de mostrar los números igual que en microbit, además de esto, apliqué redondeo a ambos para que sean equivalentes. Arreglé la versión de protobject ya que no cargaba en el visualizador. A pesar de que microbit muestra los dígitos de forma distinta que protobject, son equivalentes ya que eso es algo que depende meramente del sistema y no del algoritmo (microbit muestra números en la pantalla LED y protobject en DibujarEscribir), además de eso, para que se asemeje más la forma de visualización del tiempo de microbit a protobject, hice que el tiempo no se pueda mostrar en decimales para que se vea de forma directa y no hayan saltos gigantezcos entre los números al tardar tanto en mostrar toda la animación. Con este arreglo, la actividad queda mucho más parecida en el lado funcional.</p>
-    <div class="eq eq-facil">
-      <div class="eq-h"><span class="badge">GED 5</span>Pendiente: la vía es cambiar el medio de salida</div>
-      <p>El <code>redondeo</code> de los segundos ya está en ambas plataformas. Lo que queda viene todo del <b>display de texto</b>: Protobject necesita <code>establecer tamaño 40</code> para escribir en una pantalla gráfica, y un <code>limpiar</code> antes de cada reescritura; la matriz 5×5 de micro:bit no tiene ninguna de las dos cosas porque <code>mostrar número</code> no necesita preparación.</p><p>Perseguir los bloques uno a uno no lleva lejos: mientras las dos versiones usen <b>medios de salida distintos</b>, van a necesitar operaciones distintas.</p><p><b>La vía que se está explorando</b> es la buena: mostrar el resultado en la <b>matriz de LEDs en las dos plataformas</b>, en lugar de escribir un número. Se llena la pantalla mientras dura el grito (<code>graficar x y</code> ↔ <code>dibuja en x y</code>) y al terminar se borra. Con eso desaparecen a la vez el <code>tamaño</code> y la asimetría del <code>limpiar</code> — es el mismo patrón de <a href="#a031">03.1 Music Visualizer</a>, que ya es equivalente.</p>
-      <p class="fix"><b>Al hacerlo, revisar dos cosas:</b> que el anidamiento (mientras → dos ciclos contados) sea el mismo en las dos plataformas, porque si el orden de los ciclos difiere se abre una divergencia nueva; y que el <b>texto de la actividad</b> acompañe el cambio, porque ya no se lee un número de segundos sino que se llena una pantalla.</p>
+    <div class="eq eq-ok">
+      <div class="eq-h"><span class="badge">GED 0</span>Equivalentes ✓ — resuelto cambiando el medio de salida</div>
+      <p>Isomorfos (20 nodos y 38 aristas por lado), y el camino fue el rediseño: en lugar de escribir un número en el display de texto —que obligaba a Protobject a <code>establecer tamaño</code> y <code>limpiar</code>, sin equivalente en micro:bit— <b>las dos versiones llenan ahora la matriz de LEDs</b> mientras dura el grito (<code>mientras</code> → dos ciclos contados → <code>graficar</code> ↔ <code>dibuja en x y</code>) y la borran al terminar.</p><p>Con el cambio desaparecieron de golpe <code>SetTextSize</code>, <code>ClearTextDisplay</code> y <code>ShowNumber</code>, y con ellos el cálculo de segundos. Es un buen ejemplo de que mover el diseño resuelve lo que perseguir bloques uno a uno no resolvía.</p>
     </div>
     <div class="cols">
       <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>

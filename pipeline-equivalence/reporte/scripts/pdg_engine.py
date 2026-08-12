@@ -207,7 +207,14 @@ def compare_pdgs(G1: nx.MultiDiGraph, G2: nx.MultiDiGraph) -> dict:
     P1, P2 = to_pure_pdg(G1), to_pure_pdg(G2)
     is_iso = isomorphism.MultiDiGraphMatcher(P1, P2, node_match=node_match,
                                              edge_match=edge_match_multi).is_isomorphic()
-    ged, exact = _ged(P1, P2)
+    # Si VF2 (exacto) dice que son isomorfos, la distancia de edición es 0 POR
+    # DEFINICIÓN: no hace falta calcularla. Ademas evita una incoherencia real —
+    # en grafos grandes el branch-and-bound no converge a 0 dentro del timeout y
+    # devolvía cosas como "isomorfos, GED 22".
+    if is_iso:
+        ged, exact = 0.0, True
+    else:
+        ged, exact = _ged(P1, P2)
 
     # Segundo pase sobre el grafo con el orden: solo sirve para saber si hay que
     # sugerir alinear la secuencia. No produce veredicto ni puntaje visible.

@@ -1,22 +1,25 @@
 input.onSound(DetectedSound.Loud, function () {
-    if (activo) {
-        inicio = input.runningTime()
-    }
+    detectado = true
 })
-let activo = false
-let inicio = 0
-inicio = 0
-activo = true
+let detectado = false
+detectado = false
 basic.forever(function () {
-    if (inicio > 0) {
-        // Muestra la cantidad de segundos en los que persiste un sonido, en este caso mediremos cuanto es la duración de una cantidad de aplausos.
-        basic.showNumber(Math.round((input.runningTime() - inicio) / 1000))
-        // Si los aplausos se detienen termina el temporizador y finaliza la medición.
-        if (input.soundLevel() < 5) {
-            inicio = 0
-            activo = false
-            basic.pause(5000)
-            activo = true
+    if (detectado) {
+        while (input.soundLevel() >= 5) {
+            for (let fila = 0; fila <= 4; fila++) {
+                for (let columna = 0; columna <= 4; columna++) {
+                    if (input.soundLevel() >= 5) {
+                        led.plot(columna, fila)
+                        music.play(music.builtinPlayableSoundEffect(soundExpression.happy), music.PlaybackMode.UntilDone)
+                        basic.pause(500)
+                    }
+                }
+            }
         }
+        music.play(music.builtinPlayableSoundEffect(soundExpression.giggle), music.PlaybackMode.LoopingInBackground)
+        basic.pause(5000)
+        music.stopAllSounds()
+        basic.clearScreen()
+        detectado = false
     }
 })

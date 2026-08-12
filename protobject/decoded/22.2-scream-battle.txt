@@ -1,27 +1,26 @@
 ACTIVIDAD: 22.2-scream-battle
 CODE: gritometro-tiempo-gritos
-COMPONENTES: NivelRuido1=NoiseLevel, DibujarEscribir2=InteractiveWriteDraw
+COMPONENTES: ReproductorSonido1=AudioPlayer, NivelRuido2=NoiseLevel, DibujoLED3=MatrixDraw
 
 AL INICIAR
-  DibujarEscribir2_setSize_set_4  VAR=40
-  ESTABLECER var:inicio = 0
-  ESTABLECER var:activo = TRUE
+  ESTABLECER var:detectado = FALSE
 
 REPETIR PARA SIEMPRE (bucle principal)
-  DibujarEscribir2_clear_set_1
   SI
-    [si (var:inicio > 0)]
-    DibujarEscribir2_writeText_set_11  VAR=math_round(OP=ROUND NUM=((protobject_milliseconds() - var:inicio) / 1000))
-        ; // Muestra la cantidad de segundos en los que persiste un sonido, en este caso mediremos cuánto es la duración de una cantidad de aplausos.
-    SI
-        ; // Si los aplausos se detienen termina el temporizador y finaliza la medición.
-      [si (NivelRuido1.leer(noise) < 5)]
-      ESTABLECER var:inicio = 0
-      ESTABLECER var:activo = FALSE
-      ESPERAR  s  VAR=5
-      ESTABLECER var:activo = TRUE
+    [si var:detectado]
+    MIENTRAS (WHILE) (NivelRuido2.leer(noise) >= 5)
+      CONTAR CON fila DE 1 A 7 PASO 1
+        CONTAR CON columna DE 1 A 7 PASO 1
+          SI
+            [si (NivelRuido2.leer(noise) >= 5)]
+            DibujoLED3_drawOnXY_set_2  VAR=var:columna  VAR2=var:fila  VAR3=colour_picker(COLOUR=#ff4444)
+            ReproductorSonido1_play_set_2  VAR=sounds_list(VAR=shoppingCart.mp3)
+            ESPERAR  ms  VAR=500
+    ReproductorSonido1_play_set_2  VAR=sounds_list(VAR=shortMelody.mp3)
+    ESPERAR  s  VAR=5
+    ReproductorSonido1_stop_set_3
+    DibujoLED3_clear_set_4
+    ESTABLECER var:detectado = FALSE
 
-protobject_NivelRuido1_change  property=suddenIncrease
-  SI
-    [si var:activo]
-    ESTABLECER var:inicio = protobject_milliseconds()
+protobject_NivelRuido2_change  property=suddenIncrease
+  ESTABLECER var:detectado = TRUE

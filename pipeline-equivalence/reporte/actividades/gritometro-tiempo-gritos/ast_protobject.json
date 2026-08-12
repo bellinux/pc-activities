@@ -6,42 +6,60 @@
                 "type": "Event",
                 "label": "al iniciar el programa",
                 "children": [
-                    { "type": "Action", "label": "establecer tamaño 40 en DibujarEscribir2", "children": [] },
-                    { "type": "Assignment", "label": "establecer inicio a 0", "children": [] },
-                    { "type": "Assignment", "label": "establecer activo a verdadero", "children": [] }
+                    { "type": "Assignment", "label": "establecer detectado a falso", "children": [] }
                 ]
             },
             {
                 "type": "Loop",
                 "label": "repetir para siempre",
                 "children": [
-                    { "type": "Action", "label": "limpiar en DibujarEscribir2", "children": [] },
                     {
                         "type": "Conditional",
-                        "label": "si ◻",
+                        "label": "si detectado",
                         "children": [
-                            { "type": "Operator", "label": "inicio > 0", "children": [] },
                             {
                                 "type": "Branch_True",
                                 "label": "hacer",
                                 "children": [
                                     {
-                                        "type": "Action",
-                                        "label": "escribir ◻ en DibujarEscribir2",
+                                        "type": "Loop",
+                                        "label": "repetir mientras ◻",
                                         "children": [
                                             {
                                                 "type": "Operator",
-                                                "label": "redondear ◻",
+                                                "label": "◻ ≥ 5",
+                                                "children": [
+                                                    { "type": "Sensor", "label": "ruido in NivelRuido2", "children": [] }
+                                                ]
+                                            },
+                                            {
+                                                "type": "Loop",
+                                                "label": "contar con fila desde 1 hasta 7 de a 1",
                                                 "children": [
                                                     {
-                                                        "type": "Operator",
-                                                        "label": "◻ ÷ 1000",
+                                                        "type": "Loop",
+                                                        "label": "contar con columna desde 1 hasta 7 de a 1",
                                                         "children": [
                                                             {
-                                                                "type": "Operator",
-                                                                "label": "◻ − inicio",
+                                                                "type": "Conditional",
+                                                                "label": "si ◻",
                                                                 "children": [
-                                                                    { "type": "Sensor", "label": "milisegundos", "children": [] }
+                                                                    {
+                                                                        "type": "Operator",
+                                                                        "label": "◻ ≥ 5",
+                                                                        "children": [
+                                                                            { "type": "Sensor", "label": "ruido in NivelRuido2", "children": [] }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "type": "Branch_True",
+                                                                        "label": "hacer",
+                                                                        "children": [
+                                                                            { "type": "Action", "label": "dibuja en x columna y fila con color #ff4444 en DibujoLED3", "children": [] },
+                                                                            { "type": "Action", "label": "reproducir sonido 'gestión de objetos' en ReproductorSonido1", "children": [] },
+                                                                            { "type": "Action", "label": "retraso de 500 milisegundos", "children": [] }
+                                                                        ]
+                                                                    }
                                                                 ]
                                                             }
                                                         ]
@@ -50,29 +68,11 @@
                                             }
                                         ]
                                     },
-                                    {
-                                        "type": "Conditional",
-                                        "label": "si ◻",
-                                        "children": [
-                                            {
-                                                "type": "Operator",
-                                                "label": "◻ < 5",
-                                                "children": [
-                                                    { "type": "Sensor", "label": "ruido in NivelRuido1", "children": [] }
-                                                ]
-                                            },
-                                            {
-                                                "type": "Branch_True",
-                                                "label": "hacer",
-                                                "children": [
-                                                    { "type": "Assignment", "label": "establecer inicio a 0", "children": [] },
-                                                    { "type": "Assignment", "label": "establecer activo a falso", "children": [] },
-                                                    { "type": "Action", "label": "retraso de 5 segundos", "children": [] },
-                                                    { "type": "Assignment", "label": "establecer activo a verdadero", "children": [] }
-                                                ]
-                                            }
-                                        ]
-                                    }
+                                    { "type": "Action", "label": "reproducir sonido 'celebración final' en ReproductorSonido1", "children": [] },
+                                    { "type": "Action", "label": "retraso de 5 segundos", "children": [] },
+                                    { "type": "Action", "label": "detener sonido de ReproductorSonido1", "children": [] },
+                                    { "type": "Action", "label": "borrar dibujo en DibujoLED3", "children": [] },
+                                    { "type": "Assignment", "label": "establecer detectado a falso", "children": [] }
                                 ]
                             }
                         ]
@@ -81,27 +81,9 @@
             },
             {
                 "type": "Event_Interrupt",
-                "label": "cuando NivelRuido1 detecta aumento repentino",
+                "label": "cuando NivelRuido2 detecta aumento repentino",
                 "children": [
-                    {
-                        "type": "Conditional",
-                        "label": "si activo",
-                        "children": [
-                            {
-                                "type": "Branch_True",
-                                "label": "hacer",
-                                "children": [
-                                    {
-                                        "type": "Assignment",
-                                        "label": "establecer inicio a ◻",
-                                        "children": [
-                                            { "type": "Sensor", "label": "milisegundos", "children": [] }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
+                    { "type": "Assignment", "label": "establecer detectado a verdadero", "children": [] }
                 ]
             }
         ]

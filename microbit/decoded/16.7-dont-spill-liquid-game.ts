@@ -2,20 +2,20 @@ let inclinacionY = 0
 let inclinacionX = 0
 let sonidoFijo = true
 basic.forever(function () {
-    inclinacionX = Math.round(input.acceleration(Dimension.X) / 250)
-    inclinacionY = Math.round(input.acceleration(Dimension.Y) / 250)
+    inclinacionX = Math.ceil((input.acceleration(Dimension.X) + 1023) * 4 / 2046)
+    inclinacionY = Math.ceil((input.acceleration(Dimension.Y) + 1023) * 4 / 2046)
 })
 basic.forever(function () {
     basic.clearScreen()
-    if (inclinacionX > -2 && inclinacionX < 2 && (inclinacionY > -2 && inclinacionY < 2)) {
-        led.plot(2 + inclinacionX, 2 + inclinacionY)
+    if (inclinacionX >= 1 && inclinacionX <= 3 && (inclinacionY >= 1 && inclinacionY <= 3)) {
+        led.plot(inclinacionX, inclinacionY)
         if (sonidoFijo) {
             music.play(music.tonePlayable(175, music.beat(BeatFraction.Eighth)), music.PlaybackMode.InBackground)
-            basic.pause(1000)
+            basic.pause(100)
             sonidoFijo = false
         }
     } else {
-        led.plot(Math.constrain(2 + inclinacionX, 0, 4), Math.constrain(2 + inclinacionY, 0, 4))
+        led.plot(inclinacionX, inclinacionY)
         sonidoFijo = true
         music.stopMelody(MelodyStopOptions.All)
         basic.pause(100)

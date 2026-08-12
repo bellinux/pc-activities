@@ -9,143 +9,126 @@
         },
         {
             "id": "n2",
-            "kind": "SetTextSize",
+            "kind": "SetVariable",
             "seq": 2,
-            "in_loop": false,
-            "resId": 1
+            "in_loop": false
         },
         {
             "id": "n3",
-            "kind": "SetVariable",
+            "kind": "ConditionalBranch",
             "seq": 3,
-            "in_loop": false
+            "in_loop": true
         },
         {
             "id": "n4",
-            "kind": "SetVariable",
+            "kind": "ReadSoundLevel",
             "seq": 4,
-            "in_loop": false
-        },
-        {
-            "id": "n5",
-            "kind": "ClearTextDisplay",
-            "seq": 5,
             "in_loop": true,
             "resId": 1
         },
         {
-            "id": "n6",
+            "id": "n5",
             "kind": "Comparison",
-            "seq": 6,
+            "seq": 5,
             "in_loop": true,
-            "op": ">"
+            "op": "≥"
+        },
+        {
+            "id": "n6",
+            "kind": "ForRange",
+            "seq": 6,
+            "in_loop": true
         },
         {
             "id": "n7",
-            "kind": "ConditionalBranch",
+            "kind": "ForRange",
             "seq": 7,
             "in_loop": true
         },
         {
             "id": "n8",
-            "kind": "ReadRuntimeMillis",
+            "kind": "ReadSoundLevel",
             "seq": 8,
-            "in_loop": true
+            "in_loop": true,
+            "resId": 1
         },
         {
             "id": "n9",
-            "kind": "Arithmetic",
+            "kind": "Comparison",
             "seq": 9,
             "in_loop": true,
-            "op": "-"
+            "op": "≥"
         },
         {
             "id": "n10",
-            "kind": "Arithmetic",
+            "kind": "ConditionalBranch",
             "seq": 10,
-            "in_loop": true,
-            "op": "÷"
-        },
-        {
-            "id": "n11",
-            "kind": "Round",
-            "seq": 11,
             "in_loop": true
         },
         {
+            "id": "n11",
+            "kind": "PlotPoint",
+            "seq": 11,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
             "id": "n12",
-            "kind": "ShowNumber",
+            "kind": "PlaySound",
             "seq": 12,
             "in_loop": true,
             "resId": 1
         },
         {
             "id": "n13",
-            "kind": "ReadSoundLevel",
+            "kind": "Delay",
             "seq": 13,
+            "in_loop": true
+        },
+        {
+            "id": "n14",
+            "kind": "PlaySound",
+            "seq": 14,
             "in_loop": true,
             "resId": 1
         },
         {
-            "id": "n14",
-            "kind": "Comparison",
-            "seq": 14,
-            "in_loop": true,
-            "op": "<"
-        },
-        {
             "id": "n15",
-            "kind": "ConditionalBranch",
+            "kind": "Delay",
             "seq": 15,
             "in_loop": true
         },
         {
             "id": "n16",
-            "kind": "SetVariable",
+            "kind": "StopSound",
             "seq": 16,
-            "in_loop": true
+            "in_loop": true,
+            "resId": 1
         },
         {
             "id": "n17",
-            "kind": "SetVariable",
+            "kind": "ClearDisplay",
             "seq": 17,
-            "in_loop": true
+            "in_loop": true,
+            "resId": 1
         },
         {
             "id": "n18",
-            "kind": "Delay",
+            "kind": "SetVariable",
             "seq": 18,
             "in_loop": true
         },
         {
             "id": "n19",
-            "kind": "SetVariable",
-            "seq": 19,
-            "in_loop": true
-        },
-        {
-            "id": "n20",
             "kind": "SuddenNoiseEvent",
-            "seq": 20,
+            "seq": 19,
             "in_loop": false,
             "resId": 1
         },
         {
-            "id": "n21",
-            "kind": "ConditionalBranch",
-            "seq": 21,
-            "in_loop": false
-        },
-        {
-            "id": "n22",
-            "kind": "ReadRuntimeMillis",
-            "seq": 22,
-            "in_loop": false
-        },
-        {
-            "id": "n23",
+            "id": "n20",
             "kind": "SetVariable",
-            "seq": 23,
+            "seq": 20,
             "in_loop": false
         }
     ],
@@ -157,122 +140,164 @@
             "var": ""
         },
         {
-            "source": "n2",
-            "target": "n3",
-            "type": "control",
-            "var": ""
-        },
-        {
             "source": "n3",
             "target": "n4",
             "type": "control",
-            "var": ""
+            "var": "true"
         },
         {
-            "source": "n5",
+            "source": "n3",
+            "target": "n5",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n3",
+            "target": "n6",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n3",
             "target": "n7",
             "type": "control",
-            "var": ""
+            "var": "true"
         },
         {
-            "source": "n7",
+            "source": "n3",
             "target": "n8",
             "type": "control",
             "var": "true"
         },
         {
-            "source": "n7",
+            "source": "n3",
             "target": "n9",
             "type": "control",
             "var": "true"
         },
         {
-            "source": "n7",
+            "source": "n3",
             "target": "n10",
             "type": "control",
             "var": "true"
         },
         {
-            "source": "n7",
-            "target": "n11",
-            "type": "control",
-            "var": "true"
-        },
-        {
-            "source": "n7",
-            "target": "n12",
-            "type": "control",
-            "var": "true"
-        },
-        {
-            "source": "n7",
-            "target": "n13",
-            "type": "control",
-            "var": "true"
-        },
-        {
-            "source": "n7",
+            "source": "n3",
             "target": "n14",
             "type": "control",
             "var": "true"
         },
         {
-            "source": "n7",
+            "source": "n3",
             "target": "n15",
             "type": "control",
             "var": "true"
         },
         {
-            "source": "n15",
+            "source": "n3",
             "target": "n16",
             "type": "control",
             "var": "true"
         },
         {
-            "source": "n15",
+            "source": "n3",
             "target": "n17",
             "type": "control",
             "var": "true"
         },
         {
-            "source": "n15",
+            "source": "n3",
             "target": "n18",
-            "type": "control",
-            "var": "true"
-        },
-        {
-            "source": "n15",
-            "target": "n19",
-            "type": "control",
-            "var": "true"
-        },
-        {
-            "source": "n20",
-            "target": "n21",
-            "type": "control",
-            "var": ""
-        },
-        {
-            "source": "n21",
-            "target": "n22",
-            "type": "control",
-            "var": "true"
-        },
-        {
-            "source": "n21",
-            "target": "n23",
             "type": "control",
             "var": "true"
         },
         {
             "source": "n6",
             "target": "n7",
-            "type": "data",
-            "var": "condition"
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n7",
+            "target": "n10",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n10",
+            "target": "n11",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n10",
+            "target": "n12",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n10",
+            "target": "n13",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n11",
+            "target": "n12",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n12",
+            "target": "n13",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n6",
+            "target": "n14",
+            "type": "control",
+            "var": ""
         },
         {
             "source": "n14",
             "target": "n15",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n15",
+            "target": "n16",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n16",
+            "target": "n17",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n17",
+            "target": "n18",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n19",
+            "target": "n20",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n4",
+            "target": "n5",
+            "type": "data",
+            "var": "sound_1"
+        },
+        {
+            "source": "n5",
+            "target": "n6",
             "type": "data",
             "var": "condition"
         },
@@ -280,103 +305,61 @@
             "source": "n8",
             "target": "n9",
             "type": "data",
-            "var": "time_1"
+            "var": "sound_1"
         },
         {
             "source": "n9",
             "target": "n10",
             "type": "data",
-            "var": "left"
+            "var": "condition"
         },
         {
-            "source": "n10",
+            "source": "n6",
             "target": "n11",
             "type": "data",
-            "var": "value"
+            "var": "fila"
         },
         {
-            "source": "n11",
-            "target": "n12",
+            "source": "n7",
+            "target": "n11",
             "type": "data",
-            "var": "value"
-        },
-        {
-            "source": "n13",
-            "target": "n14",
-            "type": "data",
-            "var": "sound_1"
-        },
-        {
-            "source": "n22",
-            "target": "n23",
-            "type": "data",
-            "var": "time_1"
-        },
-        {
-            "source": "n3",
-            "target": "n6",
-            "type": "data",
-            "var": "inicio"
-        },
-        {
-            "source": "n3",
-            "target": "n9",
-            "type": "data",
-            "var": "inicio"
-        },
-        {
-            "source": "n16",
-            "target": "n6",
-            "type": "data",
-            "var": "inicio"
-        },
-        {
-            "source": "n16",
-            "target": "n9",
-            "type": "data",
-            "var": "inicio"
-        },
-        {
-            "source": "n23",
-            "target": "n6",
-            "type": "data",
-            "var": "inicio"
-        },
-        {
-            "source": "n23",
-            "target": "n9",
-            "type": "data",
-            "var": "inicio"
-        },
-        {
-            "source": "n4",
-            "target": "n21",
-            "type": "data",
-            "var": "activo"
-        },
-        {
-            "source": "n17",
-            "target": "n21",
-            "type": "data",
-            "var": "activo"
-        },
-        {
-            "source": "n19",
-            "target": "n21",
-            "type": "data",
-            "var": "activo"
+            "var": "columna"
         },
         {
             "source": "n2",
-            "target": "n5",
+            "target": "n3",
+            "type": "data",
+            "var": "detectado"
+        },
+        {
+            "source": "n18",
+            "target": "n3",
+            "type": "data",
+            "var": "detectado"
+        },
+        {
+            "source": "n20",
+            "target": "n3",
+            "type": "data",
+            "var": "detectado"
+        },
+        {
+            "source": "n11",
+            "target": "n17",
             "type": "side_effect",
             "var": "display"
         },
         {
-            "source": "n5",
-            "target": "n12",
+            "source": "n12",
+            "target": "n14",
             "type": "side_effect",
-            "var": "display"
+            "var": "sound"
+        },
+        {
+            "source": "n14",
+            "target": "n16",
+            "type": "side_effect",
+            "var": "sound"
         }
     ]
 }

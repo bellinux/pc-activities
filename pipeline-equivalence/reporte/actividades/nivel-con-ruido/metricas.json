@@ -1,10 +1,10 @@
 {
-    "isomorphic": false,
-    "graph_edit_distance": 74.0,
-    "ged_exact": false,
-    "nodes_G1": 35,
-    "nodes_G2": 31,
-    "edges_G1": 47,
-    "edges_G2": 43,
+    "isomorphic": true,
+    "graph_edit_distance": 0.0,
+    "ged_exact": true,
+    "nodes_G1": 33,
+    "nodes_G2": 33,
+    "edges_G1": 45,
+    "edges_G2": 45,
     "order_hint": false
 }

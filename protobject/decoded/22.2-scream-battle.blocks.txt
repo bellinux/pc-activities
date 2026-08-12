@@ -2,20 +2,22 @@ ACTIVIDAD: 22.2-scream-battle
 FUENTE: Protobject (bloques, etiquetas oficiales es)
 
 al iniciar el programa:
-  establecer tamaño 40 en DibujarEscribir2
-  establecer inicio a 0
-  establecer activo a verdadero
+  establecer detectado a falso
 
 repetir para siempre:
-  limpiar en DibujarEscribir2
-  si (inicio > 0):
-    escribir redondear((milisegundos − inicio) ÷ 1000) en DibujarEscribir2   // Muestra la cantidad de segundos en los que persiste un sonido, en este caso mediremos cuánto es la duración de una cantidad de aplausos.
-    si (ruido in NivelRuido1 < 5):   // Si los aplausos se detienen termina el temporizador y finaliza la medición.
-      establecer inicio a 0
-      establecer activo a falso
-      retraso de 5 segundos
-      establecer activo a verdadero
+  si detectado:
+    repetir mientras (ruido in NivelRuido2 ≥ 5):
+      contar con fila desde 1 hasta 7 de a 1:
+        contar con columna desde 1 hasta 7 de a 1:
+          si (ruido in NivelRuido2 ≥ 5):
+            dibuja en x columna y fila con color #ff4444 en DibujoLED3
+            reproducir sonido 'gestión de objetos' en ReproductorSonido1
+            retraso de 500 milisegundos
+    reproducir sonido 'celebración final' en ReproductorSonido1
+    retraso de 5 segundos
+    detener sonido de ReproductorSonido1
+    borrar dibujo en DibujoLED3
+    establecer detectado a falso
 
-cuando NivelRuido1 detecta aumento repentino:
-  si activo:
-    establecer inicio a milisegundos
+cuando NivelRuido2 detecta aumento repentino:
+  establecer detectado a verdadero

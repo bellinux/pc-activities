@@ -17,14 +17,62 @@
                         "type": "Assignment",
                         "label": "establecer inclinacionX a ◻",
                         "children": [
-                            { "type": "Sensor", "label": "y in Inclinación1", "children": [] }
+                            {
+                                "type": "Operator",
+                                "label": "redondear al alza ◻",
+                                "children": [
+                                    {
+                                        "type": "Operator",
+                                        "label": "◻ ÷ 198",
+                                        "children": [
+                                            {
+                                                "type": "Operator",
+                                                "label": "◻ × -7",
+                                                "children": [
+                                                    {
+                                                        "type": "Operator",
+                                                        "label": "◻ + -100",
+                                                        "children": [
+                                                            { "type": "Sensor", "label": "x in Inclinación1", "children": [] }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
                         ]
                     },
                     {
                         "type": "Assignment",
                         "label": "establecer inclinacionY a ◻",
                         "children": [
-                            { "type": "Sensor", "label": "x in Inclinación1", "children": [] }
+                            {
+                                "type": "Operator",
+                                "label": "redondear al alza ◻",
+                                "children": [
+                                    {
+                                        "type": "Operator",
+                                        "label": "◻ ÷ 198",
+                                        "children": [
+                                            {
+                                                "type": "Operator",
+                                                "label": "◻ × 7",
+                                                "children": [
+                                                    {
+                                                        "type": "Operator",
+                                                        "label": "◻ + 100",
+                                                        "children": [
+                                                            { "type": "Sensor", "label": "y in Inclinación1", "children": [] }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
                         ]
                     }
                 ]
@@ -46,16 +94,16 @@
                                         "type": "Operator",
                                         "label": "◻ y ◻",
                                         "children": [
-                                            { "type": "Operator", "label": "inclinacionX > -2", "children": [] },
-                                            { "type": "Operator", "label": "inclinacionX < 2", "children": [] }
+                                            { "type": "Operator", "label": "inclinacionX ≥ 3", "children": [] },
+                                            { "type": "Operator", "label": "inclinacionX ≤ 5", "children": [] }
                                         ]
                                     },
                                     {
                                         "type": "Operator",
                                         "label": "◻ y ◻",
                                         "children": [
-                                            { "type": "Operator", "label": "inclinacionY > -2", "children": [] },
-                                            { "type": "Operator", "label": "inclinacionY < 2", "children": [] }
+                                            { "type": "Operator", "label": "inclinacionY ≥ 3", "children": [] },
+                                            { "type": "Operator", "label": "inclinacionY ≤ 5", "children": [] }
                                         ]
                                     }
                                 ]
@@ -64,14 +112,7 @@
                                 "type": "Branch_True",
                                 "label": "hacer",
                                 "children": [
-                                    {
-                                        "type": "Action",
-                                        "label": "dibuja en x ◻ y ◻ con color #33cc00 en DibujoLED2",
-                                        "children": [
-                                            { "type": "Operator", "label": "4 + inclinacionX", "children": [] },
-                                            { "type": "Operator", "label": "4 + inclinacionY", "children": [] }
-                                        ]
-                                    },
+                                    { "type": "Action", "label": "dibuja en x inclinacionX y inclinacionY con color #33cc00 en DibujoLED2", "children": [] },
                                     {
                                         "type": "Conditional",
                                         "label": "si sonidoFijo",
@@ -81,7 +122,7 @@
                                                 "label": "hacer",
                                                 "children": [
                                                     { "type": "Action", "label": "tocar nota do4 en TecladoMusical3", "children": [] },
-                                                    { "type": "Action", "label": "retraso de 1000 milisegundos", "children": [] },
+                                                    { "type": "Action", "label": "retraso de 100 milisegundos", "children": [] },
                                                     { "type": "Assignment", "label": "establecer sonidoFijo a falso", "children": [] }
                                                 ]
                                             }
@@ -93,26 +134,7 @@
                                 "type": "Branch_False",
                                 "label": "sino",
                                 "children": [
-                                    {
-                                        "type": "Action",
-                                        "label": "dibuja en x ◻ y ◻ con color #ff4444 en DibujoLED2",
-                                        "children": [
-                                            {
-                                                "type": "Operator",
-                                                "label": "limitar ◻ entre 1 y 7",
-                                                "children": [
-                                                    { "type": "Operator", "label": "4 + inclinacionX", "children": [] }
-                                                ]
-                                            },
-                                            {
-                                                "type": "Operator",
-                                                "label": "limitar ◻ entre 1 y 7",
-                                                "children": [
-                                                    { "type": "Operator", "label": "4 + inclinacionY", "children": [] }
-                                                ]
-                                            }
-                                        ]
-                                    },
+                                    { "type": "Action", "label": "dibuja en x inclinacionX y inclinacionY con color #ff4444 en DibujoLED2", "children": [] },
                                     { "type": "Assignment", "label": "establecer sonidoFijo a verdadero", "children": [] },
                                     { "type": "Action", "label": "detener en TecladoMusical3", "children": [] },
                                     { "type": "Action", "label": "retraso de 100 milisegundos", "children": [] },
