@@ -35,16 +35,18 @@
   .nav.c4{border-left-color:#0e7490}
   .nav.c5{border-left-color:#8B2418}
   .nav.c6{border-left-color:#c3e8b8}
+  .nav.c7{border-left-color:#9333ea}
   .nav .ic{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
   .c1 .ic{background:#eef0fe;color:#4f46e5}
   .c2 .ic{background:#e9f6ee;color:#1f7a45}
   .c3 .ic{background:#fdf2e2;color:#b06f12}
   .c4 .ic{background:#e4f4f8;color:#0e7490}
   .c5 .ic{background:#f6e9e7;color:#8B2418}
+  .c7 .ic{background:#f3e8ff;color:#9333ea}
   .nav h3{margin:0 0 5px;font-size:17px}
   .nav p{margin:0;font-size:13.5px;color:var(--muted);line-height:1.55}
   .nav .go{margin-top:10px;font-size:12.5px;font-weight:600;color:var(--indigo)}
-  .c2 .go{color:#1f7a45}.c3 .go{color:#b06f12}.c4 .go{color:#0e7490}.c5 .go{color:#8B2418}
+  .c2 .go{color:#1f7a45}.c3 .go{color:#b06f12}.c4 .go{color:#0e7490}.c5 .go{color:#8B2418}.c7 .go{color:#9333ea}
   table.org{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px;background:var(--card);
     border:1px solid var(--line);border-radius:10px;overflow:hidden}
   table.org td{padding:8px 14px;border-bottom:1px solid var(--line);vertical-align:top}
@@ -65,7 +67,7 @@
   </header>
 
   <div class="intro">
-    Este sitio reúne cuatro piezas: el <b>visor</b> para explorar las actividades, la <b>planificación</b> que explica el porqué del orden, el <b>reporte de calidad</b> de los textos y el código, y la <b>pipeline de equivalencia</b> que compara científicamente la versión Protobject con la de micro:bit. Empieza por donde quieras.
+    Este sitio reúne varias piezas: el <b>visor</b> para explorar las actividades, la <b>planificación</b> que explica el porqué del orden, el <b>reporte de calidad</b> de los textos y el código, la <b>pipeline de equivalencia</b> que compara científicamente la versión Protobject con la de micro:bit, y las <b>propuestas de refactorización</b> de los algoritmos. Empieza por donde quieras.
   </div>
 
   <h2>¿Por dónde empezar?</h2>
@@ -125,6 +127,15 @@
       </div>
     </a>
 
+    <a class="cardlink" href="propuestas_refactorizacion.html">
+      <div class="nav c7">
+        <div class="ic"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></div>
+        <h3>Propuestas de refactorización</h3>
+        <p>Revisión de los <b>17 algoritmos</b> buscando escribirlos más claro <b>sin cambiar lo que hacen</b>. Se trabajó sobre el lenguaje de bloques común, así que cada propuesta conserva la equivalencia por construcción. Son propuestas: no se modificó nada.</p>
+        <div class="go">Ver las propuestas →</div>
+      </div>
+    </a>
+
   </div>
 
   <h2>Organización del proyecto</h2>
@@ -133,6 +144,8 @@
     <tr><td class="path">engine.html</td><td>El <b>visor</b> de actividades (renderiza los <code>.md</code>, muestra el código y permite abrir/descargar en Protobject).</td></tr>
     <tr><td class="path">planificacion.html</td><td>El rationale de la progresión (5 fases, 17 proyectos) — documento vivo, HTML autónomo.</td></tr>
     <tr><td class="path">report.html</td><td>El reporte de calidad (texto↔código, redacción es-CL, secuencia), con enlaces al visor.</td></tr>
+    <tr><td class="path">revision_equivalencia.html</td><td>La revisión actividad por actividad de la equivalencia funcional Protobject ↔ micro:bit.</td></tr>
+    <tr><td class="path">propuestas_refactorizacion.html</td><td>Propuestas de refactorización didáctica de los 17 algoritmos, escritas en el lenguaje de bloques común (no se aplicó ninguna).</td></tr>
     <tr><td class="path">_activities/</td><td>Las 17 fichas de actividad en español (<code>.es.md</code>) más las base trilingües.</td></tr>
     <tr><td class="path">src/ · microbit/</td><td>Imágenes y videos por actividad · firmware <code>.hex</code> para micro:bit.</td></tr>
     <tr><td class="path">protobject/</td><td>Código Blockly real decodificado (<code>.ptj</code>/<code>.xml</code> + pseudocódigo) y el decodificador.</td></tr>

@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propuestas de refactorización didáctica</title>
+<style>
+  :root{
+    --bg:#f6f7f9; --card:#ffffff; --ink:#1f2933; --muted:#64748b; --line:#e3e8ee;
+    --indigo:#4f46e5; --indigo-bg:#eef0fe;
+    --verde:#1f7a45; --verde-bg:#e9f6ee;
+    --ambar:#b06f12; --ambar-bg:#fdf2e2;
+    --teal:#0e7490; --teal-bg:#e4f4f8;
+    --vino:#8B2418; --vino-bg:#f6e9e7;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.7;font-size:15px}
+  .wrap{max-width:940px;margin:0 auto;padding:36px 20px 90px}
+  header.hero{border-bottom:2px solid var(--ink);padding-bottom:22px;margin-bottom:8px}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--indigo)}
+  h1{font-size:30px;margin:6px 0 8px;letter-spacing:-.015em;line-height:1.2}
+  .lede{color:#475569;font-size:16px;max-width:720px}
+  .intro{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin:22px 0;color:#374151}
+  .intro b{color:var(--ink)}
+  h2.section-title{font-size:20px;margin:44px 0 4px;padding-top:10px;border-top:1px solid var(--line)}
+  h2.section-title .n{color:var(--muted);font-size:13px;font-weight:700;letter-spacing:.06em;display:block;text-transform:uppercase;margin-bottom:2px}
+  .section-lede{color:#475569;margin:6px 0 18px;max-width:720px}
+  h3.group{font-size:16px;margin:30px 0 2px;color:var(--ink)}
+  .group-note{color:var(--muted);font-size:13.5px;margin:0 0 14px}
+
+  a{color:var(--indigo)}
+  code{background:#eef1f5;border-radius:4px;padding:1px 5px;font-size:.9em;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+
+  .toc{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 6px}
+  .toc a{text-decoration:none;font-size:12.5px;font-weight:600;color:var(--indigo);
+    background:var(--indigo-bg);border:1px solid #dfe1fb;border-radius:999px;padding:5px 12px}
+  .toc a:hover{background:#e2e4fd}
+
+  /* --- tabla resumen --- */
+  table.res{width:100%;border-collapse:collapse;background:var(--card);
+    border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:13.5px;margin:14px 0 8px}
+  table.res th{background:#f0f2f6;text-align:left;padding:9px 12px;font-size:12px;
+    text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700}
+  table.res td{padding:9px 12px;border-top:1px solid var(--line);vertical-align:top}
+  table.res td.n{color:var(--muted);font-weight:700;width:34px;text-align:right}
+  table.res td.act{font-weight:600;white-space:nowrap}
+  table.res td.act a{text-decoration:none}
+  table.res tr:hover td{background:#fafbfd}
+  .tag{display:inline-block;font-size:11px;font-weight:700;border-radius:999px;
+    padding:2px 9px;letter-spacing:.02em;white-space:nowrap}
+  .t-sin{background:#eef2f7;color:#475569}
+  .t-nom{background:var(--verde-bg);color:var(--verde)}
+  .t-blq{background:var(--ambar-bg);color:var(--ambar)}
+  .t-est{background:var(--vino-bg);color:var(--vino)}
+
+  /* --- fichas --- */
+  .card{background:var(--card);border:1px solid var(--line);border-left-width:5px;border-radius:12px;
+    padding:20px 24px;margin:14px 0;box-shadow:0 1px 2px rgba(16,24,40,.04);scroll-margin-top:20px}
+  .card .num{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .card h4{margin:2px 0 10px;font-size:17px}
+  .card h4 .code{font-size:12.5px;color:var(--muted);font-weight:500;font-family:ui-monospace,Menlo,Consolas,monospace}
+  .card p{margin:9px 0}
+  .k-sin{border-left-color:#94a3b8}
+  .k-nom{border-left-color:var(--verde)}
+  .k-blq{border-left-color:#e0992a}
+  .k-est{border-left-color:var(--vino)}
+
+  .lbl{display:block;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--muted);margin:16px 0 4px}
+  pre{background:#fbfbfd;border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:4px 0 0;
+    overflow-x:auto;font-size:12.5px;line-height:1.6;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#334155}
+  pre .add{color:var(--verde);font-weight:700}
+  pre .del{color:var(--vino);text-decoration:line-through;opacity:.75}
+  pre .cm{color:#8a93a3;font-style:italic}
+
+  .why{background:var(--verde-bg);border:1px solid #cfe8da;border-radius:8px;padding:11px 15px;margin:14px 0 0;font-size:13.5px;color:#25543c}
+  .why b{color:#143d29}
+  .keep{background:#f4f6f9;border:1px solid var(--line);border-radius:8px;padding:11px 15px;margin:14px 0 0;font-size:13.5px;color:#3f4b5b}
+  .warn{background:#fff8ec;border:1px solid #f3e2b3;border-radius:8px;padding:11px 15px;margin:14px 0 0;font-size:13.5px;color:#7a5a19}
+  .warn b{color:#5e440f}
+  .cost{background:var(--vino-bg);border:1px solid #ecd3cf;border-radius:8px;padding:11px 15px;margin:14px 0 0;font-size:13.5px;color:#6d2018}
+
+  ul.tight{margin:8px 0;padding-left:20px}
+  ul.tight li{margin:5px 0}
+
+  .callout{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--indigo);
+    border-radius:12px;padding:18px 22px;margin:18px 0;color:#374151}
+  .callout h4{margin:0 0 8px;font-size:16px;color:var(--ink)}
+
+  table.mini{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0;background:var(--card);
+    border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  table.mini th{background:#f0f2f6;text-align:left;padding:8px 11px;font-size:11.5px;
+    text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  table.mini td{padding:8px 11px;border-top:1px solid var(--line);vertical-align:top}
+  table.mini td.a{font-weight:600;white-space:nowrap;width:180px}
+
+  .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0}
+  .scroll table{margin:0}
+  table.res{min-width:540px}
+  table.mini{min-width:460px}
+  footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);
+    color:var(--muted);font-size:12.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">Pensamiento Computacional · Protobject ↔ micro:bit</div>
+    <h1>Propuestas de refactorización didáctica</h1>
+    <p class="lede">Revisión de los <b>17 algoritmos</b>, uno por uno, buscando escribirlos de forma más clara sin cambiar
+    en nada lo que hacen. Son <b>propuestas</b>: no se modificó ningún archivo.</p>
+  </header>
+
+  <div class="intro">
+    Cada actividad se revisó sobre el <b>algoritmo escrito en el lenguaje de bloques común a las dos plataformas</b>,
+    no sobre el código real de cada una. Esa es la clave del método: si la reescritura se piensa en el vocabulario
+    compartido, se puede aplicar igual en Protobject y en micro:bit, y <b>la equivalencia se conserva por construcción</b>
+    en vez de tener que volver a demostrarse después.
+  </div>
+
+  <h2 class="section-title"><span class="n">§1</span> Las tres reglas de la revisión</h2>
+  <p class="section-lede">Antes de mirar nada, el margen de maniobra quedó fijado. Buena parte de las propuestas
+  que aquí <em>no</em> aparecen fueron descartadas por una de estas tres reglas, no por falta de ideas.</p>
+
+  <div class="scroll"><table class="mini">
+    <tr><td class="a">Solo la forma</td>
+        <td>Lo que se ve y se oye tiene que quedar <b>idéntico</b>: los mismos píxeles, en el mismo orden, con las
+        mismas pausas y los mismos sonidos. Una mejora que cambie el comportamiento —aunque sea para bien— no es
+        una refactorización: es un rediseño, y esa es una decisión aparte.</td></tr>
+    <tr><td class="a">La progresión manda</td>
+        <td>Cada actividad solo puede usar construcciones ya introducidas en ella o antes. El condicional aparece
+        en la 6ª, el <code>si no</code> en la 7ª, las variables en la 9ª, el ciclo contado en la 14ª, el
+        <code>mientras</code> en la 15ª. Varias reescrituras obviamente mejores están prohibidas por esto, y se
+        dejan anotadas para que no se vuelvan a proponer.</td></tr>
+    <tr><td class="a">Solo vocabulario común</td>
+        <td>Se pueden usar 34 de los 39 nodos de la ontología: los 5 restantes existen en una sola plataforma
+        (<code>ClearTextDisplay</code>, <code>NoiseToColour</code>, <code>SerialWrite</code>,
+        <code>SetBackgroundColor</code>, <code>SetTextSize</code>) y usarlos rompería la equivalencia.</td></tr>
+  </table></div>
+
+  <h2 class="section-title"><span class="n">§2</span> Resumen</h2>
+  <p class="section-lede">De las 17, <b>siete no necesitan ningún cambio</b> — y eso es un resultado, no una omisión.
+  De las diez restantes, seis se arreglan sin tocar un solo bloque ejecutable.</p>
+
+  <div class="scroll"><table class="res">
+    <tr><th></th><th>Actividad</th><th>Veredicto</th><th>Qué cambia</th></tr>
+    <tr><td class="n">1</td><td class="act"><a href="#a1">corazón</a></td><td><span class="tag t-sin">sin cambios</span></td><td>Ocho bloques son el mínimo para secuencia + ciclo infinito + ciclo anidado.</td></tr>
+    <tr><td class="n">2</td><td class="act"><a href="#a2">xilófono</a></td><td><span class="tag t-sin">sin cambios</span></td><td>Tres bloques que muestran la cadena entrada → ajuste → salida de un vistazo.</td></tr>
+    <tr><td class="n">3</td><td class="act"><a href="#a3">xilófono con LEDs</a></td><td><span class="tag t-nom">forma</span></td><td>Invertir los operandos de la suma: las dos salidas quedan con la misma gramática.</td></tr>
+    <tr><td class="n">4</td><td class="act"><a href="#a4">visualizador</a></td><td><span class="tag t-nom">forma</span></td><td>Ordenar las columnas de micro:bit para que el código siga el orden del dibujo.</td></tr>
+    <tr><td class="n">5</td><td class="act"><a href="#a5">robot cosquilloso</a></td><td><span class="tag t-sin">sin cambios</span></td><td>El patrón de evento ya está en su forma canónica.</td></tr>
+    <tr><td class="n">6</td><td class="act"><a href="#a6">alarma de galletas</a></td><td><span class="tag t-nom">forma</span></td><td>Encender y apagar en el mismo orden; tres rótulos en vez de un muro de texto.</td></tr>
+    <tr><td class="n">7</td><td class="act"><a href="#a7">despertador</a></td><td><span class="tag t-sin">sin cambios</span></td><td>Es el ejemplo canónico del <code>si … si no</code> de toda la secuencia.</td></tr>
+    <tr><td class="n">8</td><td class="act"><a href="#a8">murciélago</a></td><td><span class="tag t-sin">sin cambios</span></td><td>Lo que parecía repetición son cuatro dibujos distintos: una animación.</td></tr>
+    <tr><td class="n">9</td><td class="act"><a href="#a9">desafío del robot</a></td><td><span class="tag t-sin">sin cambios</span></td><td>Los comentarios llaman <code>toques</code> a la variable <code>energia</code>.</td></tr>
+    <tr><td class="n">10</td><td class="act"><a href="#a10">corazón del robot</a></td><td><span class="tag t-nom">forma</span></td><td>Los nombres dicen tamaño y guardan milisegundos.</td></tr>
+    <tr><td class="n">11</td><td class="act"><a href="#a11">vela de cumpleaños</a></td><td><span class="tag t-nom">forma</span></td><td><code>flama</code> es un sustantivo haciendo de valor de verdad.</td></tr>
+    <tr><td class="n">12</td><td class="act"><a href="#a12">no derrames</a></td><td><span class="tag t-est">reestructuración</span></td><td>Dos ciclos <code>para siempre</code> corriendo a la vez, y una carrera invisible.</td></tr>
+    <tr><td class="n">13</td><td class="act"><a href="#a13">interruptor de aplausos</a></td><td><span class="tag t-sin">sin cambios</span></td><td>Propuesta descartada: era agregar un bloque que no hace nada (§4).</td></tr>
+    <tr><td class="n">14</td><td class="act"><a href="#a14">encendido cinematográfico</a></td><td><span class="tag t-blq">un bloque menos</span></td><td>Los nombres de los dos contadores están intercambiados.</td></tr>
+    <tr><td class="n">15</td><td class="act"><a href="#a15">papa explosiva</a></td><td><span class="tag t-nom">forma</span></td><td>El único comentario está pegado a la línea equivocada.</td></tr>
+    <tr><td class="n">16</td><td class="act"><a href="#a16">metrónomo</a></td><td><span class="tag t-blq">un bloque con nombre</span></td><td>La idea central del programa es la única cosa sin nombre.</td></tr>
+    <tr><td class="n">17</td><td class="act"><a href="#a17">batalla de gritos</a></td><td><span class="tag t-est">reestructuración</span></td><td>Dos ciclos contados que giran en vacío para simular una salida.</td></tr>
+  </table></div>
+
+  <div class="toc">
+    <a href="#g-sin">Sin cambios (7)</a>
+    <a href="#g-nom">Nombres, comentarios y orden (6)</a>
+    <a href="#g-blq">Un bloque menos, un bloque con nombre (2)</a>
+    <a href="#g-est">Reestructuración (2)</a>
+    <a href="#s4">§4 Un criterio que hubo que decidir</a>
+    <a href="#s5">§5 Comentarios que no dicen la verdad</a>
+    <a href="#s6">§6 Texto ↔ código</a>
+    <a href="#s7">§7 Lo que la métrica no puede ver</a>
+    <a href="#s8">§8 El techo del lenguaje común</a>
+  </div>
+
+  <h2 class="section-title"><span class="n">§3</span> Las propuestas, una por una</h2>
+
+  <h3 class="group" id="g-sin">Sin cambios · 7 actividades</h3>
+  <p class="group-note">Estos programas ya están escritos en su forma mínima legible. Se documenta el porqué, para
+  que la próxima revisión no vuelva a proponer lo mismo.</p>
+
+  <div class="card k-sin" id="a1">
+    <div class="num">01 · <span class="code">corazon-forever-loop</span></div>
+    <h4>El Llavero de Corazón Luminoso</h4>
+    <p>Ocho bloques: una secuencia dentro de un ciclo infinito, con un ciclo anidado adentro. Es exactamente el
+    mínimo para expresar las tres ideas que la actividad estrena. Poner las pausas en una variable haría el código
+    más elegante para alguien que ya programa, y más opaco para quien lleva diez minutos.</p>
+  </div>
+
+  <div class="card k-sin" id="a2">
+    <div class="num">02 · <span class="code">xilofono-inclinacion</span></div>
+    <h4>El Xilófono Mágico Inclinable</h4>
+    <p>Tres bloques en cadena lineal: <em>leo cómo está inclinado → lo ajusto → suena → espero un poco</em>. Es la
+    primera vez que el programa <b>recibe</b> algo del mundo, y la forma deja ver la cadena completa
+    entrada → transformación → salida de un vistazo, que es el objetivo declarado. Además estrena tres
+    construcciones nuevas: es la carga máxima razonable para una sesión.</p>
+    <div class="keep">El <code>+60</code> / <code>+1000</code> es <em>el</em> concepto de la actividad y no está
+    explicado en las dos plataformas: el comentario de micro:bit sí dice por qué se suma (la inclinación puede ser
+    negativa y el teclado solo recibe positivos), el de Protobject solo declara el rango. Es un arreglo de
+    comentario, no de algoritmo.</div>
+  </div>
+
+  <div class="card k-sin" id="a5">
+    <div class="num">05 · <span class="code">robot-risa-simpatica-al-ruido</span></div>
+    <h4>El Robot Cosquilloso</h4>
+    <p>El patrón canónico de evento: preparar el estado de reposo → esperar → reaccionar → volver al reposo. Es la
+    primera vez en la secuencia que hay <b>dos bloques de nivel superior</b> en vez de un solo
+    <code>repetir para siempre</code>, y la forma hace visible ese concepto.</p>
+    <p>El cuerpo del ciclo de animación es letra por letra el mismo de la actividad 1. Eso es deliberado y conviene
+    mantenerlo: los eventos se aprenden por contraste, así que si la animación no cambia, la única novedad que hay
+    que procesar es la estructura de dos sombreros.</p>
+  </div>
+
+  <div class="card k-sin" id="a7">
+    <div class="num">07 · <span class="code">despertador-por-la-manana</span></div>
+    <h4>El Despertador de Girasol</h4>
+    <p>Este programa funciona como <b>el ejemplo de referencia del <code>si … si no</code></b> en toda la secuencia,
+    y por eso el veredicto es tan firme. Las dos ramas son un espejo exacto: dos acciones cada una, en el mismo
+    orden, con verbo y anti-verbo emparejados uno a uno.</p>
+    <pre>si (nivel de luz &gt; UMBRAL):        si no:
+    reproducir melodía      ←→        detener todos los sonidos
+    mostrar dibujo          ←→        borrar la pantalla</pre>
+    <p>Un estudiante puede tapar una rama con el dedo y predecir la otra. Además la polaridad es la correcta: el
+    caso interesante —el despertador sonando— está en la rama verdadera, no escondido en el <code>si no</code>, y la
+    condición es afirmativa en vez de una negación.</p>
+    <div class="why"><b>Por qué no tocarlo.</b> Cualquier retoque —una acción de más en una rama, un orden distinto—
+    rompe el espejo y convierte el ejemplo canónico en un ejemplo con ruido, justo en la clase donde el concepto se
+    estrena.</div>
+  </div>
+
+  <div class="card k-sin" id="a8">
+    <div class="num">08 · <span class="code">luces-de-fiesta-al-oscurecer</span></div>
+    <h4>El Vuelo del Murciélago Nocturno</h4>
+    <p>A primera vista el cuerpo del <code>si</code> parece cuatro veces el mismo par de bloques, listo para
+    plegarse con <code>repetir 4 veces</code> —que además está disponible desde la primera actividad—. No lo es:
+    las cuatro imágenes <b>son distintas</b>. Es una animación de cuatro fotogramas, un destello que crece.</p>
+    <pre> . . . . .     . . . . .     # . # . #     . . . . .
+ . . . . .     . # . # .     . # # # .     . . # . .
+ . . # . .     . . # . .     # # # # #     . # # # .
+ . . . . .     . # . # .     . # # # .     . . # . .
+ . . . . .     . . . . .     # . # . #     . . . . .
+    (A)           (B)           (C)           (D)</pre>
+    <p><code>repetir 4 veces</code> mostraría cuatro veces la misma chispa: parpadeo en vez de destello. Y no hay
+    pliegue parcial posible, porque los fotogramas avanzan en vez de turnarse.</p>
+    <div class="why"><b>La lección sirve al revés.</b> <code>repetir N veces</code> se usa cuando lo que se repite
+    es idéntico; cuando cada paso es distinto, escribirlo paso a paso es lo correcto. Saber cuándo <em>no</em> usar
+    un ciclo es parte de saber usarlo. Además, esta es la primera animación de más de dos fotogramas de la
+    secuencia: verlos uno debajo del otro hace visible que una animación es una lista de imágenes en el tiempo.</div>
+    <div class="keep">La <b>última pausa</b>, después del cuarto dibujo, parece sobrar y no sobra: sin ella el
+    cuarto fotograma dura casi cero, porque el ciclo vuelve de inmediato al primero.</div>
+  </div>
+
+  <div class="card k-sin" id="a9">
+    <div class="num">09 · <span class="code">juego-toques</span></div>
+    <h4>¡El Desafío de Activación del Robot!</h4>
+    <p>La estructura ya separa los tres roles de una variable y los pone cada uno en su sitio: <b>crear</b>
+    (<code>= 0</code> al iniciar), <b>modificar</b> (<code>+1</code> en el evento), <b>comparar y mostrar</b> (en el
+    ciclo). No hay condiciones infladas, ni pasos fuera de orden, ni bloques muertos.</p>
+    <p>Lo que sí hay que arreglar son los comentarios, y es grave porque cae justo sobre el concepto que se enseña:
+    la variable se llama <code>energia</code>, pero los comentarios dicen —verbatim, en <b>las dos</b>
+    plataformas— <em>«Inicia la variable "toques"…»</em> y <em>«Aumenta en 1 el valor de la variable "toques"»</em>.
+    En la actividad donde se introduce la idea de que una variable es una caja con una etiqueta, la etiqueta tiene
+    que ser una sola.</p>
+    <div class="keep">Un segundo comentario que falta: la barra crece porque los píxeles dibujados en vueltas
+    anteriores <b>siguen encendidos</b> — cada vuelta dibuja una sola fila de 3 píxeles. Quien lee el código espera
+    ver 3 píxeles, no una barra. No se puede resolver con la estructura sin un ciclo contado (14ª), así que
+    conviene decirlo.</div>
+  </div>
+
+  <div class="card k-sin" id="a13">
+    <div class="num">13 · <span class="code">luz-encendida-al-ruido</span></div>
+    <h4>El Interruptor Mágico de Aplausos</h4>
+    <p>El orden dentro del evento —primero invertir, después leer el valor nuevo— es el idioma estándar del
+    interruptor y cualquier otro orden cambia el comportamiento. Las dos ramas son paralelas de verdad. La negación
+    <code>estado ← no estado</code> expresa «cambia al contrario» en una sola línea, sin condicional auxiliar.</p>
+    <div class="warn"><b>Propuesta evaluada y descartada.</b> Se consideró agregar <code>apagar la pantalla</code> en
+    <code>al iniciar</code>, para que el estado inicial quedara declarado del todo. Es un bloque que <b>no hace
+    nada</b>: la pantalla ya arranca apagada en ambas plataformas. Se descarta por el criterio de §4.
+    El estado inicial se documenta en un comentario, no con un bloque inerte.</div>
+    <div class="keep">Se evaluó también renombrar <code>estado</code> a algo como <code>luzEncendida</code>, que se
+    leería solo. Se descarta: todo el andamiaje de la actividad está construido sobre esa palabra («variables de
+    <em>estado</em>») y la actividad 14 reutiliza la misma variable. Solo tendría sentido como cambio conjunto.</div>
+  </div>
+
+  <h3 class="group" id="g-nom">Nombres, comentarios y orden · 6 actividades</h3>
+  <p class="group-note">Ni un bloque agregado, ni uno quitado. Cambia lo que el programa <em>dice</em>, no lo que
+  hace. Son las propuestas de mejor relación entre lo que cuestan y lo que rinden.</p>
+
+  <div class="card k-nom" id="a3">
+    <div class="num">03 · <span class="code">xilofono-inclinacion-con-nota-led</span></div>
+    <h4>El Xilófono del Futuro (con LEDs)</h4>
+    <p>El objetivo declarado es «una sola entrada, múltiples salidas», y depende de que se vea el paralelo entre las
+    dos salidas. Hoy están escritas con <b>dos gramáticas distintas</b>: el píxel como <em>centro + desviación</em>,
+    la nota como <em>lectura + número</em>.</p>
+    <span class="lbl">Propuesta — un solo bloque tocado</span>
+    <pre>repetir para siempre:
+    borrar la pantalla                    <span class="cm">// apaga el punto del ciclo anterior</span>
+    dibujar píxel en:
+        eje móvil = CENTRO + redondear( leer inclinación ÷ K )
+    tocar nota:
+        altura    = <span class="add">BASE + leer inclinación</span>     <span class="cm">// antes: leer inclinación + BASE</span>
+    esperar 100 ms</pre>
+    <div class="why"><b>Por qué mejora.</b> Con la suma invertida, las dos líneas quedan con la misma gramática:
+    <em>valor de reposo + desviación que trae la inclinación</em>. Eso hace legible de un vistazo la propiedad que la
+    actividad quiere enseñar y que hoy hay que deducir: <b>en reposo el punto está en el CENTRO y suena la nota
+    BASE; la inclinación te aleja de ambos a la vez</b>. Y convierte el <code>÷ K</code> con su redondeo en la
+    <em>única</em> diferencia entre las dos líneas, que es justo lo que la sección «La División Mágica» quiere que
+    se note: la pantalla es chica y hay que escalar; el teclado no.</div>
+    <div class="keep">Se elige invertir la línea de la <b>nota</b> y no la del píxel porque las dos plataformas ya
+    ponen la constante primero en el píxel: se unifica hacia la forma que ya existe. La suma es conmutativa, así
+    que el resultado, el instante y el argumento entregado son los mismos.</div>
+  </div>
+
+  <div class="card k-nom" id="a4">
+    <div class="num">04 · <span class="code">luci-discoteca-ruido</span></div>
+    <h4>El Visualizador de Música</h4>
+    <p>Las tres columnas se dibujan en el orden <code>2, 1, 3</code> en micro:bit y <code>3, 4, 5</code> en
+    Protobject. Ninguno de los dos órdenes cambia lo que se ve —las tres columnas aparecen en la misma pasada—,
+    pero el de micro:bit obliga a leer el código saltando.</p>
+    <span class="lbl">Propuesta</span>
+    <pre>micro:bit:  dibujar columna <span class="del">2</span> <span class="add">1</span>
+            dibujar columna <span class="del">1</span> <span class="add">2</span>
+            dibujar columna 3</pre>
+    <div class="why"><b>Por qué mejora.</b> El orden del código pasa a coincidir con el orden espacial del dibujo.
+    Es la forma más barata de que el programa se pueda seguir con el dedo mientras se mira la pantalla.</div>
+  </div>
+
+  <div class="card k-nom" id="a6">
+    <div class="num">06 · <span class="code">alarma-caja-galletas</span></div>
+    <h4>¡Alarma: El Ladrón de Galletas!</h4>
+    <p>El cuerpo del <code>si</code> se lee como una lista plana de cinco órdenes, cuando en realidad son
+    <b>tres momentos</b>. Y hay una asimetría: Protobject enciende luz→sonido y apaga luz→sonido; micro:bit
+    enciende sonido→luz pero apaga luz→sonido, así que la correspondencia se cruza.</p>
+    <span class="lbl">Propuesta</span>
+    <pre>repetir para siempre:                        <span class="cm">// vigilar la caja sin parar</span>
+    si (inclinación de la tapa &gt; umbral):    <span class="cm">// ¿alguien levantó la tapa?</span>
+
+        <span class="cm">// 1. ENCENDER la alarma</span>
+        <span class="add">dibujar el icono de alarma</span>            <span class="cm">← en micro:bit pasa delante</span>
+        empezar el sonido de sirena
+
+        <span class="cm">// 2. DEJARLA sonando</span>
+        esperar 6 segundos
+
+        <span class="cm">// 3. APAGAR lo que encendimos, en el mismo orden</span>
+        borrar el dibujo de la pantalla
+        detener el sonido</pre>
+    <div class="why"><b>Por qué mejora.</b> Convierte cinco órdenes en tres ideas, y hace visible el emparejamiento:
+    con el mismo orden en las dos mitades, la primera acción de encender queda justo encima de la primera de apagar.
+    Es un chequeo que se hace con el dedo — <em>lo que enciendo arriba, lo apago abajo</em> — y es el hábito que se
+    va a necesitar en la actividad siguiente, cuando el <code>si no</code> obligue a pensar en pares de estados.
+    Además la luz primero es lo que se verifica primero: en una sala con veinte celulares sonando, la comprobación
+    real de «¿funcionó mi alarma?» es visual.</div>
+    <div class="keep">El bloque <code>si</code> —el concepto nuevo de la sesión— carga hoy un comentario de cinco
+    líneas que explica qué es un condicional, y compite con el bloque justo cuando hay que mirar la condición. Esa
+    explicación ya está, mejor redactada, en el material. Tres rótulos cortos la reemplazan.</div>
+    <div class="keep">El sonido se reproduce en segundo plano —no bloquea—, así que intercambiarlo con el dibujo
+    solo altera cuál arranca unos milisegundos antes.</div>
+  </div>
+
+  <div class="card k-nom" id="a10">
+    <div class="num">10 · <span class="code">corazon-variables-eventos</span></div>
+    <h4>El Corazón de Mi Robot Amigo</h4>
+    <p><b>Los nombres dicen el tamaño del dibujo y guardan una espera en milisegundos.</b>
+    <code>latidoGrande</code> y <code>latidoPequeño</code> suenan a «corazón grande» y «corazón chico»; nada en el
+    nombre dice duración. La prueba de que confunden está en el propio comentario de micro:bit, que se contradice:
+    dice que «la velocidad de latido aumentará» y explica que eso pasa porque «los tiempos son más largos».</p>
+    <span class="lbl">Propuesta</span>
+    <pre>al iniciar el programa:                       <span class="cm">← arriba: se lee primero</span>
+    <span class="cm">// RITMO TRANQUILO: así arranca el corazón</span>
+    establecer <span class="add">pausaLarga</span> a ⟨larga tranquila⟩    <span class="cm">// espera entre latido y latido</span>
+    establecer <span class="add">pausaCorta</span> a ⟨corta tranquila⟩    <span class="cm">// espera de cada destello</span>
+
+repetir para siempre:
+    <span class="cm">// 1) EL GOLPE FUERTE</span>
+    mostrar corazón LLENO
+    sonar golpe de latido
+    pausa (ms) pausaLarga
+    sonar golpe de latido                     <span class="cm">// este toque anuncia el temblor</span>
+
+    <span class="cm">// 2) EL TEMBLOR: 4 vueltas × 2 imágenes = 8 destellos</span>
+    repetir 4 veces:
+        mostrar corazón HUECO
+        pausa (ms) pausaCorta
+        mostrar corazón CHICO
+        pausa (ms) pausaCorta
+
+cuando el dispositivo queda ⟨gesto TRANQUILO⟩:
+    <span class="cm">// los MISMOS dos números del bloque «al iniciar»</span>
+    ...</pre>
+    <div class="why"><b>Por qué mejora.</b> Las seis asignaciones son en realidad una tabla de 2 × 2 —dos ritmos ×
+    dos esperas— que hoy se ve como seis órdenes sueltas. Con los rótulos, el modelo mental pasa de «hay que
+    acordarse de seis números» a «hay dos ritmos, cada uno con su espera larga y su espera corta». Y la regla queda
+    comprobable a ojo: <b>larga &gt; corta siempre</b>, y <b>acelerar = achicar las dos</b>.</div>
+    <div class="warn"><b>Una trampa silenciosa que el orden hace visible.</b> El bloque <code>al iniciar</code> y el
+    gesto que «devuelve la calma» contienen exactamente los mismos dos números, y ese vínculo no está dicho en
+    ninguna parte: quien cambie el ritmo de partida y no cambie también el gesto obtiene un programa que «vuelve» a
+    un ritmo que nunca existió.</div>
+    <div class="keep">El reorden del lienzo (<code>al iniciar</code> primero, los dos gestos juntos y en el mismo
+    orden en las dos plataformas) hace que el programa se lea en el orden de su historia: <em>aquí nace el valor →
+    aquí se usa → aquí un gesto lo cambia mientras el ciclo sigue corriendo</em>. Que un gesto pueda cambiar lo que
+    otro bloque está usando en ese mismo momento es la idea nueva de esta actividad, y el orden actual la esconde.
+    Para la métrica este reorden es <b>gratis</b>: el PDG ya no cuenta el orden entre sentencias independientes.</div>
+  </div>
+
+  <div class="card k-nom" id="a11">
+    <div class="num">11 · <span class="code">flama-vela-con-soplo</span></div>
+    <h4>La Vela Mágica de Cumpleaños</h4>
+    <p><b><code>flama</code> es un sustantivo haciendo de valor de verdad</b>, y cae justo sobre el concepto que la
+    actividad enseña. <code>si flama</code> se lee «si llama»: no hay verbo, no se lee como una afirmación que puede
+    ser verdadera o falsa. Y <code>establecer flama a (no flama)</code> —el bloque estrella de la actividad— se lee
+    «establecer llama a no llama», que suena a contradicción.</p>
+    <p>Síntoma verificable: la ficha necesita un recuadro entero para descifrar qué significa <code>(no flama)</code>,
+    y lo explica caso por caso. Ese recuadro está gastando su energía en el nombre en vez de en el concepto. Hay
+    además homonimia: la llama que se <b>dibuja</b> y <code>flama</code> que se <b>recuerda</b> son dos cosas
+    distintas con el mismo nombre.</p>
+    <span class="lbl">Propuesta</span>
+    <pre>al iniciar el programa:
+    establecer <span class="add">velaEncendida</span> a verdadero            <span class="cm">// la vela nace prendida</span>
+
+cuando se detecta un soplo:
+    establecer <span class="add">velaEncendida</span> a (no <span class="add">velaEncendida</span>)   <span class="cm">// el soplo da vuelta el estado</span>
+
+repetir para siempre:
+    si <span class="add">velaEncendida</span>:
+        <span class="cm">// fotograma 1: la llama tiembla hacia un lado</span>
+        dibujar la vela          <span class="cm">// redibujar la vela borra la llama anterior</span>
+        encender el punto (columna al azar , fila de la llama)
+        esperar 200 ms
+        <span class="cm">// fotograma 2: la llama vuelve al centro</span>
+        dibujar la vela          <span class="cm">// otra vez: borra la llama del fotograma 1</span>
+        encender el punto (columna CENTRO , fila de la llama)
+        esperar 200 ms
+    sino:
+        borrar la pantalla</pre>
+    <div class="why"><b>Por qué mejora.</b> El condicional pasa a leerse como una frase en voz alta: <em>«si la vela
+    está encendida, dibújala temblando; si no, deja la pantalla en negro»</em>. Y el interruptor deja de necesitar
+    traducción: <em>«la vela pasa a estar al revés de como estaba»</em> es literalmente el objetivo declarado de la
+    actividad. El recuadro de la ficha puede entonces enseñar la negación booleana en vez de descifrar un nombre.</div>
+    <div class="warn"><b>El segundo «dibujar la vela» no dice para qué está.</b> No está para dibujar la vela otra
+    vez: está para <b>borrar el punto de llama anterior</b>. Presentado como una lista plana de seis acciones
+    iguales, es el candidato clásico a que un estudiante lo elimine «para simplificar» — y entonces la llama deja
+    rastro y la vela se ensancha. Los rótulos de fotograma lo protegen.</div>
+    <div class="cost"><b>Costo.</b> <code>flama</code> aparece unas diez veces en la ficha. El renombre obliga a
+    tocarla, o el material queda incoherente. Roza además la decisión editorial abierta <code>flama</code>/<code>llama</code>:
+    lo que se propone es cambiar la <em>categoría gramatical</em> (predicado en vez de sustantivo), no elegir entre
+    las dos palabras — <code>llamaEncendida</code> funciona igual de bien.</div>
+  </div>
+
+  <div class="card k-nom" id="a15">
+    <div class="num">15 · <span class="code">papas-caliente-juego</span></div>
+    <h4>La Papa Explosiva Digital</h4>
+    <p><b>El único comentario del programa está en el lugar equivocado.</b> El texto <em>«Temporizador con tiempo
+    inicial aleatorio, valor entre 5 y 15»</em> está enganchado al <code>mientras</code>, pero describe la línea de
+    arriba. Resultado: el <code>mientras</code> —la construcción que esta actividad estrena— queda sin explicación,
+    y la línea que sí es aleatoria queda sin anotar.</p>
+    <span class="lbl">Propuesta</span>
+    <pre>cuando el botón táctil es tocado:
+  si <span class="add">listo</span>:
+    establecer <span class="add">listo</span> a falso
+        <span class="cm">// cierra la puerta: mientras dure la ronda, tocar no hace nada</span>
+    establecer <span class="add">tiempoRestante</span> a (entero aleatorio de 5 a 15)
+        <span class="cm">// Temporizador con tiempo inicial aleatorio, valor entre 5 y 15.</span>
+    reproducir sonido de suspenso (de fondo)
+    repetir mientras (<span class="add">tiempoRestante</span> &gt; 0):
+        <span class="cm">// nadie sabe cuántas vueltas dará: sigue MIENTRAS quede tiempo</span>
+      añadir -1 a <span class="add">tiempoRestante</span>
+        <span class="cm">// este bloque es el que hace que la condición llegue a ser falsa</span>
+      esperar 1 segundo
+    ...</pre>
+    <div class="why"><b>Por qué mejora.</b> <code>tiempo &gt; 0</code> se puede leer de dos maneras opuestas —«el
+    tiempo que llevo jugando» o «el tiempo que me queda»— y solo la segunda explica por qué hace falta un
+    <code>mientras</code>. Con <code>tiempoRestante &gt; 0</code> la condición <b>es</b> la explicación. Y el
+    contraste con <code>repetir N veces</code>, que es lo que esta actividad tiene que enseñar, queda anotado en las
+    dos líneas donde el ojo se detiene: arriba «el número se sortea», abajo «por eso el ciclo pregunta en vez de
+    contar».</div>
+    <div class="keep"><code>pausado = verdadero</code> significa «no hay nadie jugando», así que cada lectura de
+    <code>si pausado</code> obliga a dar vuelta la frase mentalmente; y en <code>al iniciar</code> se «pausa» algo
+    que nunca empezó. Con <code>listo</code>: «si está listo → ciérralo → juega → vuelve a dejarlo listo».</div>
+    <div class="cost"><b>Costo.</b> <code>tiempo</code> aparece 7 veces en la ficha y hay que tocarlas.
+    <code>pausado</code> no aparece nunca: ese renombre es gratis.</div>
+  </div>
+
+  <h3 class="group" id="g-blq">Un bloque menos, un bloque con nombre · 2 actividades</h3>
+
+  <div class="card k-blq" id="a14">
+    <div class="num">14 · <span class="code">luz-encendida-ruido-animacion</span></div>
+    <h4>El Encendido Cinematográfico</h4>
+    <p><b>Los nombres de los dos contadores están intercambiados respecto a lo que recorren.</b> La variable llamada
+    <code>filas</code> se enchufa en la <b>x</b> (que es la columna) y la llamada <code>columnas</code> en la
+    <b>y</b>. Como el ciclo interior es el que varía más rápido, y el interior mueve la x, la pantalla se llena
+    <b>renglón por renglón de arriba hacia abajo</b> — pero el código, leído en voz alta, dice lo contrario:
+    «para cada columna, para cada fila».</p>
+    <p>En la única lección cuyo objetivo declarado es <em>qué recorre el ciclo de fuera y qué el de dentro</em>,
+    los nombres responden esa pregunta al revés.</p>
+    <span class="lbl">Propuesta</span>
+    <pre>si estado:
+    <span class="cm">// barrido de encendido: fila por fila, de arriba hacia abajo</span>
+    contar con <span class="add">fila</span> desde 1 hasta 7:
+        contar con <span class="add">columna</span> desde 1 hasta 7:
+            encender píxel   x = <span class="add">columna</span>   y = <span class="add">fila</span>
+            esperar 10 ms
+    <span class="del">encender píxel x = 1 y = 1</span>          <span class="cm">← se elimina: no hace nada</span>
+sino:
+    <span class="cm">// el mismo barrido, pero apagando</span>
+    ...</pre>
+    <div class="warn"><b>El cableado no se toca.</b> La variable de fuera sigue alimentando la y y la de dentro la
+    x, exactamente como hoy: cambia el nombre, no la conexión. Arreglar los nombres es gratis; cambiar los ciclos
+    para que el código haga lo que los nombres dicen cambiaría la animación, y eso está prohibido.</div>
+    <div class="why"><b>Por qué mejora.</b> Hoy quien confía en el código predice franjas verticales, ve renglones
+    horizontales, y no tiene manera de saber quién miente: se rompe el único ciclo de aprendizaje que sirve aquí
+    —leer, predecir, mirar, confirmar—. Además <code>x = columna</code>, <code>y = fila</code> es la convención de
+    siempre; aprenderla bien aquí no cuesta nada, y aprenderla al revés se paga en cada actividad con cuadrícula.</div>
+    <div class="keep"><b>El píxel suelto tras el barrido no hace nada:</b> vuelve a encender el primer píxel del
+    barrido, encendido 25 (o 49) pausas antes y nunca apagado. Quitarlo deja las dos ramas idénticas salvo por la
+    acción, y se ve la simetría en la que se apoya el concepto: <em>es el mismo barrido al revés</em>. Existe hoy en
+    las dos plataformas, así que quitarlo de ambas mantiene el PDG simétrico.</div>
+  </div>
+
+  <div class="card k-blq" id="a16">
+    <div class="num">16 · <span class="code">metronomo-con-inclinacion</span></div>
+    <h4>El Metrónomo de DJ</h4>
+    <p><b>La idea central del programa es lo único que no tiene nombre.</b> El patrón que la ficha explica en prosa
+    —«constantemente calculamos el tiempo que ha pasado»— existe en el código solo como una resta escondida dentro
+    de una comparación. Todo lo demás (bpm, intervalo) sí está en una variable.</p>
+    <span class="lbl">Propuesta</span>
+    <pre>repetir para siempre:                     <span class="cm">// Sin 'esperar': el ciclo mira el reloj miles de</span>
+                                          <span class="cm">// veces por segundo y casi siempre no hace nada.</span>
+  establecer bpm a (inclinación en x + ajuste)
+  establecer intervaloPulso a (60000 ÷ bpm) <span class="cm">// 1 min = 60000 ms; cada pulso dura 60000 ÷ bpm</span>
+  <span class="add">establecer tiempoTranscurrido a (milisegundos − ultimoPulso)</span>
+  si (<span class="add">tiempoTranscurrido</span> &gt; intervaloPulso):
+    sonar el pulso
+    establecer ultimoPulso a milisegundos  <span class="cm">// reinicia el cronómetro; sin esta línea</span>
+                                           <span class="cm">// sonaría sin parar para siempre</span></pre>
+    <div class="why"><b>Por qué mejora.</b> Un patrón sin nombre no se puede recordar ni transferir, y el objetivo
+    declarado es que el estudiante se lleve «¿ha pasado suficiente tiempo?». <code>tiempoTranscurrido &gt;
+    intervaloPulso</code> compara dos duraciones con nombre, en las mismas unidades, sin cálculo intermedio — y
+    evita el error clásico de leer la comparación como si fuera entre <em>instantes</em>. El reloj no desaparece:
+    aparece dos veces y ambas en una asignación, que es donde se lee con calma.</div>
+    <div class="warn"><b>Punto crítico.</b> La línea <code>establecer ultimoPulso a milisegundos</code> conserva su
+    <b>propia</b> lectura del reloj. Colapsarla en una sola lectura al comienzo del ciclo —que ahorraría un bloque y
+    se parece más al texto de la ficha— alteraría el tempo, porque en micro:bit el sonido bloquea y esa segunda
+    lectura ocurre después. Se mantienen dos lecturas, en las mismas posiciones.</div>
+    <div class="keep">El único comentario del código está gastado en la línea menos importante y además es
+    inexacto: habla de «tono» y «frecuencia» sobre un golpe de batería sin altura. Mientras tanto la fórmula, la
+    comparación con el reloj y la actualización de <code>ultimoPulso</code> —que la ficha llama «el paso más
+    importante»— no llevan ninguno.</div>
+    <div class="keep"><b>Terminar de unificar los nombres.</b> El <code>.hex</code> de micro:bit sigue diciendo
+    <code>ultimoBeat</code>/<code>intervaloBeat</code> (spanglish), mientras Protobject ya usa
+    <code>ultimoPulso</code>/<code>intervaloPulso</code>. La decisión ya estaba tomada; nunca llegó al firmware.</div>
+  </div>
+
+  <h3 class="group" id="g-est">Reestructuración · 2 actividades</h3>
+  <p class="group-note">Los dos únicos casos donde la forma del programa pelea contra la idea que quiere enseñar.</p>
+
+  <div class="card k-est" id="a12">
+    <div class="num">12 · <span class="code">nivel-con-ruido</span></div>
+    <h4>¡No Derrames el Líquido! — El Juego de Pulso</h4>
+    <p><b>Dos ciclos <code>para siempre</code> corriendo a la vez.</b> El programa se lee de arriba abajo y no se
+    ejecuta de arriba abajo: los dos ciclos corren simultáneamente y se comunican por variables compartidas. Eso es
+    concurrencia — un concepto que la progresión no ha enseñado, que la actividad no menciona, y que aquí no aporta
+    nada. Nadie puede saber, leyendo el código, por qué son dos y no uno.</p>
+    <p>De regalo trae una <b>carrera invisible</b>: la condición se evalúa con una muestra del sensor y el punto
+    puede dibujarse con otra posterior, así que en el instante justo se puede pintar un punto rojo dentro de la
+    zona verde.</p>
+    <span class="lbl">Propuesta</span>
+    <pre>para siempre:
+
+    <span class="cm"># 1) medir: llevar la inclinación a una posición de LED</span>
+    xDesplazado ← leer inclinación x + DESPL
+    <span class="add">ledX</span>        ← redondear( (xDesplazado × NLEDS) ÷ RANGO )
+    yDesplazado ← leer inclinación y + DESPL
+    <span class="add">ledY</span>        ← redondear( (yDesplazado × NLEDS) ÷ RANGO )
+
+    <span class="cm"># 2) decidir: ¿está centrado en cada eje?</span>
+    <span class="add">centradoX</span> ← (ledX ≥ MIN) y (ledX ≤ MAX)
+    <span class="add">centradoY</span> ← (ledY ≥ MIN) y (ledY ≤ MAX)
+
+    <span class="cm"># 3) mostrar y avisar</span>
+    borrar la pantalla
+    si (<span class="add">centradoX</span> y <span class="add">centradoY</span>):
+        dibujar punto en (ledX, ledY)   [verde]
+        si <span class="add">debeSonar</span>:
+            emitir sonido grave
+            esperar 100 ms
+            <span class="add">debeSonar</span> ← falso
+    si no:
+        dibujar punto en (ledX, ledY)   [rojo]
+        detener sonido
+        esperar 100 ms
+        emitir sonido agudo
+        <span class="add">debeSonar</span> ← verdadero</pre>
+    <div class="why"><b>Por qué mejora.</b> El programa vuelve a leerse en el orden en que ocurre —<em>mido →
+    decido → muestro</em>— y el <code>si</code> pasa a ser el titular en vez de la letra chica. Hoy la condición es
+    un monolito de tres <code>y</code> anidados con cuatro comparaciones dentro de la ranura; con
+    <code>si (centradoX y centradoY)</code> se lee palabra por palabra la frase que la propia ficha enseña. La
+    lección del operador <code>y</code> no se diluye: se reparte en tres líneas legibles en vez de una ilegible.
+    Y la tabla de verdad se puede probar apuntando con el dedo — «mantengo el equilibrio izquierda-derecha pero me
+    inclino adelante»: <code>centradoX</code> verdadero, <code>centradoY</code> falso.</div>
+    <div class="keep"><b>Los nombres mienten.</b> Después de la fórmula, <code>inclinacionX</code> ya no contiene
+    una inclinación: contiene un <b>número de LED</b>. Por eso <code>inclinacionX ≥ 3</code> se lee mal — parece
+    hablar de grados y habla de columnas. Y <code>sonidoFijo</code> es el nombre menos útil de la idea más difícil:
+    lo que significa es «todavía me falta tocar el pitido de acierto». Con <code>debeSonar</code>, el mecanismo de
+    disparo único se explica solo: <em>«si debe sonar, suena y ya no debe»</em>.</div>
+    <div class="warn"><b>Lo que sí cambia.</b> Fundir los ciclos hace que la condición y el punto usen siempre la
+    misma muestra: <b>desaparece la carrera</b>. Es una corrección, no una regresión, pero es un cambio de
+    comportamiento y por eso se declara en vez de esconderse.</div>
+    <div class="cost"><b>Costo honesto.</b> Pasa de 3 a 7 variables. Si parecen demasiadas, el orden para recortar
+    es: primero <code>xDesplazado</code>/<code>yDesplazado</code>, después <code>centradoX</code>/<code>centradoY</code>.
+    Fundir los ciclos y los dos renombres no cuestan ninguna variable y son lo que más rinde.</div>
+  </div>
+
+  <div class="card k-est" id="a17">
+    <div class="num">17 · <span class="code">gritometro-tiempo-gritos</span></div>
+    <h4>La Batalla de Gritos</h4>
+    <p><b>Hay un «salir del ciclo» disfrazado.</b> Los dos ciclos contados prometen «recorre toda la pantalla», pero
+    el programa nunca quiere recorrer toda la pantalla: quiere encender una casilla más mientras el grito siga.
+    Como un ciclo contado no se puede interrumpir, la salida se simula con un <code>si</code> interior que deja el
+    cuerpo vacío — y cuando el grito para, <b>los ciclos siguen girando sin hacer nada</b>. Control de flujo
+    invisible: lo peor que se le puede pedir a alguien que recién aprende a leer bloques.</p>
+    <p>Encima, la misma condición está escrita dos veces (en el <code>mientras</code> y en el <code>si</code>
+    interior, con el mismo número mágico duplicado), hay seis niveles de anidamiento, y la estructura no refleja la
+    idea: «medir cuánto dura un grito» es <em>repetir mientras dure una condición</em>. El doble ciclo contado es un
+    modismo de <b>dibujar</b>, no de <b>medir</b>.</p>
+    <span class="lbl">Propuesta</span>
+    <pre>repetir para siempre:
+    si <span class="add">partidaEnCurso</span>:
+
+        <span class="cm">// el gritómetro parte en la primera casilla</span>
+        <span class="add">fijar columna a ⟨primera⟩</span>
+        <span class="add">fijar fila    a ⟨primera⟩</span>
+
+        <span class="cm">// mientras el grito siga, una casilla más cada medio segundo</span>
+        repetir mientras (nivel de sonido ≥ 5):
+            encender el píxel (x = columna, y = fila)
+            reproducir clip de avance
+            esperar 500 ms
+
+            <span class="cm">// avanzar a la casilla siguiente</span>
+            <span class="add">añadir 1 a columna</span>
+            <span class="add">si columna &gt; ⟨última⟩:</span>
+                <span class="add">fijar columna a ⟨primera⟩</span>
+                <span class="add">añadir 1 a fila</span>
+            <span class="add">si fila &gt; ⟨última⟩:</span>
+                <span class="add">fijar fila a ⟨primera⟩</span>
+
+        <span class="cm">// el grito terminó: resultado y reinicio</span>
+        reproducir clip final
+        esperar 5 s
+        detener el sonido
+        borrar la pantalla
+        <span class="add">partidaEnCurso</span> ← falso</pre>
+    <div class="why"><b>Por qué mejora.</b> <code>repetir mientras (nivel de sonido ≥ 5)</code> se lee literalmente
+    como el juego: <em>mientras grites, sigue</em>. Desaparece el ciclo que gira en vacío: cada vuelta es una
+    casilla, verificable a ojo. Queda una sola copia del umbral, así que la pregunta «¿qué valor cambiarías?» tiene
+    una sola respuesta. Y <code>fila</code>/<code>columna</code> se vuelven visibles como lo que son —la posición
+    del gritómetro, memoria del juego— en vez de esconderse como índices de iteración. El avance con retorno de
+    línea es además un patrón nombrable y transferible: <em>sumo 1 a la columna; si me pasé del borde, vuelvo al
+    principio y bajo una fila</em>, que es el gesto de escribir en un cuaderno.</div>
+    <div class="cost"><b>Costo honesto.</b> La propuesta tiene <b>más bloques</b> (unos 12 contra 7 dentro del
+    juego), pero <b>dos niveles menos de anidamiento</b> y cero control de flujo invisible. Es el intercambio
+    correcto: cada bloque nuevo dice en voz alta algo que antes ocurría a escondidas.</div>
+    <div class="keep">La única diferencia detectable no es observable: hoy, cuando el grito para a mitad de
+    pantalla, quedan iteraciones vacías antes de salir (microsegundos, sin dibujo ni sonido); en la propuesta se
+    sale de inmediato. La propuesta <b>conserva</b> el retorno a la primera casilla cuando la pantalla se llena,
+    solo para reproducir fielmente lo que hoy ocurre.</div>
+    <div class="keep">Esta reescritura además <b>elimina</b> el ciclo contado y no introduce nada nuevo: todo lo que
+    usa ya se practicó antes. Es coherente con el objetivo declarado de la actividad, que es una máquina de estados,
+    no un recorrido de matrices.</div>
+  </div>
+
+  <h2 class="section-title" id="s4"><span class="n">§4</span> Un criterio que hubo que decidir</h2>
+  <p class="section-lede">Dos revisiones llegaron a conclusiones opuestas sobre el mismo tipo de bloque, y eso
+  obligó a fijar una regla.</p>
+
+  <div class="callout">
+    <h4>Los bloques que no hacen nada no van en el código</h4>
+    <p>En la actividad <b>13</b> se propuso <em>agregar</em> <code>apagar la pantalla</code> en <code>al iniciar</code>,
+    con el argumento de que el estado inicial quedaba declarado del todo — y justificando que era «puramente de
+    forma» <em>precisamente porque no tiene efecto</em>: la pantalla ya arranca apagada.</p>
+    <p>En la actividad <b>14</b>, en la misma revisión, se propuso <em>quitar</em> un
+    <code>encender píxel (1,1)</code> muerto, con el argumento de que <em>«una instrucción que no hace nada es lo
+    peor que se puede dejar delante de alguien que está aprendiendo a predecir qué hace cada bloque»</em>.</p>
+    <p><b>No pueden valer las dos.</b> El criterio adoptado es el segundo: un bloque inerte enseña que los bloques
+    se ponen para <em>contar</em> algo, no para <em>hacer</em> algo — y eso es exactamente lo contrario de lo que
+    hay que construir. El estado inicial se documenta en un comentario. La propuesta de la 13 queda descartada; la
+    de la 14 se mantiene.</p>
+  </div>
+
+  <h2 class="section-title" id="s5"><span class="n">§5</span> Comentarios que no dicen la verdad</h2>
+  <p class="section-lede">Apareció en siete actividades sin buscarlo, y siempre del mismo modo: el comentario no
+  está donde está el aprendizaje. Un comentario que habla de otra línea enseña que los comentarios no hay que
+  leerlos.</p>
+
+  <div class="scroll"><table class="mini">
+    <tr><th>Actividad</th><th>Qué pasa</th></tr>
+    <tr><td class="a">03 · xilófono LEDs</td><td>Dice «utilizando ejes x e y» cuando solo se calcula un eje. Arrastra un error de tipeo: «a una aceptable e una posición».</td></tr>
+    <tr><td class="a">09 · desafío del robot</td><td>Llama <code>toques</code> a la variable, que se llama <code>energia</code>. En las dos plataformas, y en la actividad donde se introduce el concepto de variable.</td></tr>
+    <tr><td class="a">10 · corazón del robot</td><td>Se autocontradice: «la velocidad aumentará» porque «los tiempos son más largos». Y el mismo texto encabeza los dos manejadores, que hacen cosas opuestas.</td></tr>
+    <tr><td class="a">13 · interruptor</td><td>Cuatro erratas en el comentario de la negación, idénticas en ambas plataformas: «transoforma», «varibale», «faslo», «vardadero».</td></tr>
+    <tr><td class="a">14 · encendido</td><td>Los comentarios sostienen la lectura equivocada de los ciclos. En micro:bit están <b>duplicados literalmente</b> en la rama <code>sino</code>, donde además afirman algo falso.</td></tr>
+    <tr><td class="a">15 · papa explosiva</td><td>El único comentario describe la línea de arriba, no aquella a la que está pegado. La construcción que la actividad estrena queda sin explicar.</td></tr>
+    <tr><td class="a">16 · metrónomo</td><td>Habla de «tono» y «frecuencia» sobre un golpe de batería sin altura, y es el único comentario del programa.</td></tr>
+  </table></div>
+  <div class="warn">Estas correcciones viven <b>dentro de los bloques</b>, así que hay que hacerlas a mano en
+  Protobject y en MakeCode: no se pueden aplicar editando archivos del repositorio.</div>
+
+  <h2 class="section-title" id="s6"><span class="n">§6</span> Texto ↔ código</h2>
+  <p class="section-lede">Desajustes entre lo que la ficha afirma y lo que el programa hace. No son parte de la
+  refactorización — se listan porque salieron de ella.</p>
+
+  <div class="scroll"><table class="mini">
+    <tr><th>Actividad</th><th>Desajuste</th></tr>
+    <tr><td class="a">02 · xilófono</td><td>La ficha dice «¡usaremos el eje Y!» y luego pregunta «¿qué pasaría si leyera el eje X?» — una pregunta que el código de micro:bit ya tiene respondida, porque ahí lee x.</td></tr>
+    <tr><td class="a">08 · murciélago</td><td>La ficha habla del «vuelo» de un murciélago; los fotogramas son un destello que estalla (el propio comentario del código dice «una animación de una luz»). El fotograma C de micro:bit es además la misma imagen que la actividad 7 usa para el sol.</td></tr>
+    <tr><td class="a">09 · desafío del robot</td><td>El texto dice «cargarla hasta 7», cierto solo en Protobject: en micro:bit se gana con 5 toques.</td></tr>
+    <tr><td class="a">13 · interruptor</td><td>La ficha describe una inicialización que el código no hace («colorea con negro el dibujo LED»). Ojo: el bloque que describe sería además el equivocado — un relleno negro se mapea a <code>DrawImage</code>, no a <code>ClearDisplay</code>.</td></tr>
+    <tr><td class="a">14 · encendido</td><td>La ficha explica el barrido al revés, y la pregunta de reflexión —«¿qué cambiarías para que fuera de arriba hacia abajo?»— <b>pide lo que el programa ya hace</b>. Con los nombres corregidos, vuelve a ser contestable.</td></tr>
+    <tr><td class="a">16 · metrónomo</td><td>Tres nombres distintos para la misma variable: <code>ultimoPulso</code> en la ficha, <code>ultimoTiempo</code> en la guía docente, <code>ultimoLatido</code> en la planificación — y <code>ultimoBeat</code> en el firmware.</td></tr>
+  </table></div>
+
+  <div class="callout">
+    <h4>Referencias cruzadas entre actividades</h4>
+    <p>Cuatro fichas nombran explícitamente a otra actividad, lo que va contra la regla del proyecto de que la
+    progresión está en el <b>orden</b> y no en las remisiones textuales:</p>
+    <ul class="tight">
+      <li><b>08 · murciélago</b> — «el proyecto anterior», «el girasol», «compara el código de este proyecto con el del Despertador de Girasol».</li>
+      <li><b>13 · interruptor</b> — «el bucle <em>for</em>, que veremos en la próxima misión».</li>
+      <li><b>14 · encendido</b> — en tres puntos: «su proyecto anterior», «partiremos de la base del Interruptor Mágico de Aplausos», «el juego de la papa caliente… ¡prepárate para el siguiente desafío!».</li>
+      <li><b>17 · batalla de gritos</b> — «como en El Encendido Cinematográfico».</li>
+    </ul>
+  </div>
+
+  <h2 class="section-title" id="s7"><span class="n">§7</span> Lo que la métrica no puede ver</h2>
+  <p class="section-lede">Diferencias entre las dos versiones que <b>conviven con la equivalencia formal</b>: el
+  grafo las da por iguales, y sin embargo se ven o se oyen. No es un defecto de la pipeline — es la consecuencia de
+  reglas que se eligieron a propósito (el color se ignora, las constantes no cuentan, <code>DrawImage</code> es
+  agnóstico a qué imagen dibuja). Lo que muestran es que la dimensión <b>algorítmica</b> y la <b>sensorial</b> son
+  separadas: el PDG certifica la primera, y la segunda necesita un ojo que mire el comportamiento.</p>
+
+  <div class="scroll"><table class="mini">
+    <tr><th>Actividad</th><th>Divergencia</th></tr>
+    <tr><td class="a">01 · corazón</td><td>Pausa de 10 ms (micro:bit) contra 100 ms — y en MakeCode <code>mostrar LEDs</code> tiene su propio intervalo interno (~400 ms), así que esa pausa casi no influye y la animación va unas cuatro veces más lenta. Rompe la pregunta de reflexión «¿qué pasa si cambias las pausas?». Además el orden de los fotogramas está invertido: Protobject encoge de forma monótona, micro:bit salta.</td></tr>
+    <tr><td class="a">05 · robot cosquilloso</td><td>En Protobject la cara de <code>al iniciar</code> es la misma que la del final, así que el robot «vuelve a la normalidad» como promete la ficha. En micro:bit son distintas: el estado de reposo <b>cambia después del primer aplauso</b>. Consecuencia visible: en Protobject la cara no se mueve durante los primeros 400 ms mientras el sonido ya arrancó.</td></tr>
+    <tr><td class="a">08 · murciélago</td><td>El 4.º fotograma es idéntico al 2.º en Protobject (pulso que crece y vuelve) y una forma nueva en micro:bit. El ciclo dura 400 ms contra 800 ms: el doble.</td></tr>
+    <tr><td class="a">09 · desafío del robot</td><td>Con energía 0, micro:bit calcula una fila fuera de la matriz: la barra tiene <b>4 niveles visibles</b> contra los 7 de Protobject.</td></tr>
+    <tr><td class="a">16 · metrónomo</td><td>En micro:bit el pulso se reproduce «hasta que termine»: <b>bloquea el ciclo</b> y el periodo real queda en <code>intervalo + duración de la nota</code>. Es decir, la versión micro:bit no respeta la fórmula — exactamente lo contrario de lo que la actividad enseña.</td></tr>
+    <tr><td class="a">17 · batalla de gritos</td><td>El clip por píxel bloquea en MakeCode y no en Protobject, así que el gritómetro avanza a distinta velocidad. Y 25 LEDs contra 49: llenar la pantalla exige ~12,5 s contra ~24,5 s. <b>La dificultad del juego no es la misma.</b></td></tr>
+  </table></div>
+
+  <div class="warn"><b>Dos notas de la ontología quedaron obsoletas</b> y conviene corregirlas:
+  <code>ClearDisplay</code> afirma que en <em>despertador</em> y <em>flama</em> la rama de apagado diverge («MakeCode
+  usa <code>mostrar LEDs</code> en vez de borrar») — verificado contra la extracción vigente: <b>en ambas</b> la
+  rama de apagado usa <code>borrar la pantalla</code>. Y <code>OnTiltGestureEvent</code> cita como «verificado
+  verbatim» un <code>Gesture.ScreenUp</code> que ya no aparece: hoy el par es <code>LogoUp</code>/<code>LogoDown</code>.</div>
+
+  <h2 class="section-title" id="s8"><span class="n">§8</span> El techo del lenguaje común</h2>
+  <p class="section-lede">Siete de las diecisiete revisiones, sin coordinarse, llegaron por su cuenta a la misma
+  conclusión: <b>la mejora correcta sería un procedimiento con nombre</b>, y no existe.</p>
+
+  <div class="callout">
+    <p>En la <b>10</b> serviría para escribir el ritmo de partida una sola vez en vez de tres. En la <b>11</b>, para
+    nombrar «dibujar el fotograma con la llama en la columna X». En la <b>12</b> y la <b>14</b>, para no duplicar la
+    fórmula de escalado y el barrido. En la <b>15</b>, para bajar tres niveles de sangría. En la <b>16</b>, para
+    ponerle nombre a «¿ya es hora de sonar?» — que es literalmente el patrón que la actividad enseña. En la
+    <b>17</b>, para separar el avance de la casilla del control del grito.</p>
+    <p>Pero <b>no hay ningún nodo de definición ni de llamada a función en la ontología canónica</b>, ni de listas.
+    Y esto no es una restricción de la progresión —no es que lleguen más adelante—: <b>no llegan nunca</b>. Es el
+    techo del vocabulario compartido por las dos plataformas.</p>
+    <p>Tiene una consecuencia didáctica que vale la pena decir en voz alta y no esconder: en varias actividades la
+    duplicación es <b>inevitable</b>, y conviene tratarla como lo que es. «Esto se repite porque todavía no sabemos
+    darle un nombre a un trozo de programa» es una frase honesta, y prepara el terreno para cuando ese nombre
+    exista.</p>
+  </div>
+
+  <h2 class="section-title"><span class="n">§9</span> Qué queda decidido y qué no</h2>
+  <p class="section-lede">Este documento no modificó ningún archivo. Las propuestas de §3 son aplicables tal cual y
+  conservan la equivalencia; lo de §6 y §7 son decisiones de diseño que no corresponde tomar aquí.</p>
+
+  <div class="scroll"><table class="mini">
+    <tr><td class="a">Aplicable directo</td><td>Las 10 propuestas de §3, siempre que se apliquen <b>en las dos plataformas a la vez</b>. Aplicar un renombre o un reorden en un solo lado sí rompería la equivalencia.</td></tr>
+    <tr><td class="a">Cuesta tocar las fichas</td><td>Los renombres de la 11 (<code>flama</code>, ~10 apariciones), la 15 (<code>tiempo</code>, 7) y la 12 (<code>inclinacionX/Y</code>). El resto de renombres no aparece en el texto.</td></tr>
+    <tr><td class="a">Solo a mano en el editor</td><td>Todo lo de §5: los comentarios viven dentro de los bloques.</td></tr>
+    <tr><td class="a">Decisión pendiente</td><td>Las divergencias de §7 — sobre todo el pulso bloqueante del metrónomo, que contradice lo que la actividad enseña, y las dos caras de reposo distintas del robot cosquilloso.</td></tr>
+  </table></div>
+
+  <footer>
+    Protobject · Pensamiento Computacional · revisión de los 17 algoritmos en el lenguaje de bloques común.
+    Ningún archivo fue modificado: todo lo anterior son propuestas.
+  </footer>
+
+</div>
+</body>
+</html>
