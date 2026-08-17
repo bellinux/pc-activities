@@ -133,10 +133,7 @@
     <ul class="tight">
       <li><b>Aplicadas completas:</b> <a href="#a3">3</a>, <a href="#a4">4</a>, <a href="#a6">6</a>,
         <a href="#a11">11</a>, <a href="#a12">12</a>, <a href="#a14">14</a>, <a href="#a15">15</a>,
-        <a href="#a16">16</a> y <a href="#a17">17</a>.</li>
-      <li><b>Aplicada a medias:</b> <a href="#a10">10</a> &mdash; sí los nombres
-        (<code>pausaLarga</code>/<code>pausaCorta</code>), no el reordenamiento del lienzo: el
-        <code>para siempre</code> sigue siendo el primer bloque en las dos plataformas.</li>
+        <a href="#a10">10</a>, <a href="#a16">16</a> y <a href="#a17">17</a>.</li>
       <li><b>No aplicada, por decisión:</b> <a href="#a13">13</a> &mdash; ver el criterio de §4.</li>
       <li><b>De regalo, y no estaba propuesto:</b> en la <a href="#a10">10</a> se alineó el orden de los dos
         manejadores de gesto entre plataformas. Eso cerró una anomalía de medición que llevaba tiempo abierta.</li>
@@ -428,11 +425,15 @@ cuando el dispositivo queda ⟨gesto TRANQUILO⟩:
     gesto que «devuelve la calma» contienen exactamente los mismos dos números, y ese vínculo no está dicho en
     ninguna parte: quien cambie el ritmo de partida y no cambie también el gesto obtiene un programa que «vuelve» a
     un ritmo que nunca existió.</div>
-    <div class="keep">El reorden del lienzo (<code>al iniciar</code> primero, los dos gestos juntos y en el mismo
-    orden en las dos plataformas) hace que el programa se lea en el orden de su historia: <em>aquí nace el valor →
-    aquí se usa → aquí un gesto lo cambia mientras el ciclo sigue corriendo</em>. Que un gesto pueda cambiar lo que
-    otro bloque está usando en ese mismo momento es la idea nueva de esta actividad, y el orden actual la esconde.
-    Para la métrica este reorden es <b>gratis</b>: el PDG ya no cuenta el orden entre sentencias independientes.</div>
+    <div class="keep">El programa se lee en el orden de su historia —<em>aquí nace el valor → aquí se usa → aquí un
+    gesto lo cambia mientras el ciclo sigue corriendo</em>—, que es la idea nueva de esta actividad: un gesto puede
+    cambiar lo que otro bloque está usando en ese mismo momento. <b>En el lienzo eso ya se ve bien:</b>
+    <code>al iniciar</code> y los dos gestos están en la columna izquierda, uno debajo del otro, y el
+    <code>repetir para siempre</code> a la derecha. No hay nada que reordenar.
+    <p style="margin:8px 0 0"><b>Ojo con esto al revisar</b>, porque induce a error: en el <em>texto extraído</em> el
+    <code>repetir para siempre</code> aparece primero, y eso no dice nada sobre cómo se lee la pantalla — solo que ese
+    bloque está unos píxeles más arriba. El orden del archivo no es el orden del lienzo. Ya pasó lo mismo en la 9ª. Si
+    hay que juzgar la disposición, se mira el lienzo o las coordenadas, no la serialización.</p></div>
   </div>
 
   <div class="card k-nom" id="a11">
