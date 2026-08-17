@@ -1,21 +1,17 @@
-// Este bloque detecta el momento en cambia la posición del dispositivo, cuando lo hace se editan las variables "latidoGrande" y "latidoPequeño". Dependiendo de la posición la velocidad de latido aumentará (Los tiempos son más largos, es decir las variables toman valores grandes).
-// 
-// En este bloque específico la velocidad de latidos aumentará.
+// Este bloque detecta el momento en cambia la posición del dispositivo, cuando lo hace se editan las variables "pausaLarga" y "pausaCorta". Al inclinar el dispositivo hacia esta dirección, la velocidad de latido aumentará ya que los tiempos son más cortos.
 input.onGesture(Gesture.LogoUp, function () {
-    latidoGrande = 100
-    latidoPequeño = 10
+    pausaLarga = 100
+    pausaCorta = 10
 })
-// Este bloque detecta el momento en cambia la posición del dispositivo, cuando lo hace se editan las variables "latidoGrande" y "latidoPequeño". Dependiendo de la posición la velocidad de latido aumentará (Los tiempos son más largos, es decir las variables toman valores grandes).
-// 
-// En este bloque específico la velocidad de latidos se reducirá.
+// Este bloque detecta el momento en cambia la posición del dispositivo, cuando lo hace se editan las variables "pausaLarga" y "pausaCorta". Al inclinar el dispositivo hacia esta dirección, la velocidad de latido disminuirá ya que los tiempos son más largos.
 input.onGesture(Gesture.LogoDown, function () {
-    latidoGrande = 500
-    latidoPequeño = 250
+    pausaLarga = 500
+    pausaCorta = 250
 })
-let latidoPequeño = 0
-let latidoGrande = 0
-latidoGrande = 500
-latidoPequeño = 250
+let pausaCorta = 0
+let pausaLarga = 0
+pausaLarga = 500
+pausaCorta = 250
 basic.forever(function () {
     basic.showLeds(`
         . # . # .
@@ -25,8 +21,8 @@ basic.forever(function () {
         . . # . .
         `)
     music.play(music.tonePlayable(587, music.beat(BeatFraction.Eighth)), music.PlaybackMode.InBackground)
-    // Se utiliza la variable "latidoGrande" para cambiar la velocidad de latido del corazón grande dependiendo de la posición del dispositivo.
-    basic.pause(latidoGrande)
+    // Se utiliza la variable "pausaLarga" para cambiar la velocidad de latido del corazón grande dependiendo de la posición del dispositivo.
+    basic.pause(pausaLarga)
     music.play(music.tonePlayable(587, music.beat(BeatFraction.Eighth)), music.PlaybackMode.InBackground)
     for (let index = 0; index < 4; index++) {
         basic.showLeds(`
@@ -36,8 +32,8 @@ basic.forever(function () {
             . # . # .
             . . # . .
             `)
-        // Se utiliza la variable "latidoPequeño" para cambiar la velocidad de latido del corazón chico dependiendo de la posición del dispositivo.
-        basic.pause(latidoPequeño)
+        // Se utiliza la variable "pausaCorta" para cambiar la velocidad de latido del corazón chico dependiendo de la posición del dispositivo.
+        basic.pause(pausaCorta)
         basic.showLeds(`
             . . . . .
             . # . # .
@@ -45,6 +41,6 @@ basic.forever(function () {
             . . # . .
             . . . . .
             `)
-        basic.pause(latidoPequeño)
+        basic.pause(pausaCorta)
     }
 })

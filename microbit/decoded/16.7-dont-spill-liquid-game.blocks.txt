@@ -1,24 +1,26 @@
 ACTIVIDAD: 16.7-dont-spill-liquid-game
 FUENTE: micro:bit / MakeCode 9.0.8 — "nivel-con-ruido"  (etiquetas oficiales es-ES)
 
-para siempre:
-  fijar inclinacionX a redondeo((((aceleración (mg) x + 1023) × 4) ÷ 2046))
-  fijar inclinacionY a redondeo((((aceleración (mg) y + 1023) × 4) ÷ 2046))
-
 al iniciar:
-  fijar sonidoFijo a verdadero
+  fijar debeSonarAlarma a verdadero
 
 para siempre:
+  fijar xDesplazado a (aceleración (mg) x + 1023)
+  fijar ledX a redondeo hacia arriba(((xDesplazado × 4) ÷ 2046))
+  fijar yDesplazado a (aceleración (mg) y + 1023)
+  fijar ledY a redondeo hacia arriba(((yDesplazado × 4) ÷ 2046))
+  fijar centradoX a ((ledX ≥ 1) y (ledX ≤ 3))
+  fijar centradoY a ((ledY ≥ 1) y (ledY ≤ 3))
   borrar la pantalla
-  si (((inclinacionX ≥ 1) y (inclinacionX ≤ 3)) y ((inclinacionY ≥ 1) y (inclinacionY ≤ 3))) entonces:
-    graficar x inclinacionX y inclinacionY
-    si sonidoFijo entonces:
+  si (centradoX y centradoY) entonces:
+    graficar x ledX y ledY
+    si debeSonarAlarma entonces:
       reproduce secuencia tono Fa3 durante 1/8 pulso en modo en segundo plano
       pausa (ms) 100
-      fijar sonidoFijo a falso
+      fijar debeSonarAlarma a falso
   si no:
-    graficar x inclinacionX y inclinacionY
-    fijar sonidoFijo a verdadero
+    graficar x ledX y ledY
     detener la melodía todos
     pausa (ms) 100
     reproduce secuencia tono Re5 durante 1/8 pulso en modo en segundo plano
+    fijar debeSonarAlarma a verdadero

@@ -114,12 +114,12 @@
     «No derrames el líquido» <b>haciendo explícita en las dos plataformas</b> la conversión del sensor
     que antes una hacía a mano y la otra por dentro.</p>
 
-    <p style="margin:10px 0 0;font-size:1.05em"><b>16 de 17 actividades son equivalentes.</b></p>
+    <p style="margin:10px 0 0;font-size:1.05em"><b>Las 17 actividades son equivalentes.</b></p>
 
     <p style="margin:10px 0 0;font-size:12.5px;color:var(--muted)">
-      En <a href="#a167">16.7</a> queda una sola diferencia, y está planteada como pregunta abierta: las dos
-      versiones redondean de forma distinta (al entero más cercano en micro:bit, hacia arriba en Protobject).
-      Hasta ahora la comparación no lo distinguía; se afinó la ontología para que lo haga.</p>
+      Y esta vez con el resultado más limpio posible: <b>las 17 dan isomorfismo con distancia de edición 0</b>, es
+      decir el mismo número de nodos y de aristas en los dos lados, no solo un parecido cercano. Además ya
+      <b>ninguna</b> actividad usa bloques que existan en una sola plataforma: el vocabulario es enteramente común.</p>
   </div>
 
   <h2 class="section-title">Actividades</h2>
@@ -388,29 +388,21 @@
       ya que la actividad está pensada para realizarse con el teléfono acostado en horizontal, con la pantalla hacia arriba, esto no pasa en microbit dado que la placa ya se utiliza de esta forma, esa es la única diferencia, la cual es necesaria (por eso antes se invertía el eje X). Además de esto, en microbit también coloqué el bloque constrain. Es un poco distinto en funcionalidad. La nota en protobject se mantiene, mientras que en microbit se toca por cada segundo. Además de eso, la lógica de las LEDs es distinta en protobject ya que actualmente usa colores para mostrar los rangos y toca ruido todo el rato (distintos para diferenciar si el líquido está dentro de los parámetros), mientras que microbit no cambia de color (por razones obvias) y solo toca ruido al salirse de los parámetros.
       Además de esto, quitamos el bloque "establecer color de fondo" de protobject ya que era redundante y no se utiliza en microbit, junto con cambiar el bloque "dibujar pantalla con color" por un "clear screen".
     </p>
-    <div class="eq eq-facil">
-      <div class="eq-h"><span class="badge">GED 26</span>Casi: queda una pregunta abierta sobre el redondeo</div>
-      <p>El rediseño funcionó: las dos versiones tienen ahora <b>los mismos 33 nodos y las mismas 45 aristas</b>,
-      con la misma cadena <code>sensor → + → × → ÷ → redondeo</code> una vez por eje. Desaparecieron el
-      <code>serial escribir</code> de depuración, el bloque suelto <code>restringir 0 entre 0 y 0</code> y el
-      <code>establecer color de fondo</code> redundante. La inversión de ejes en Protobject está explicada
-      arriba y es correcta: el teléfono se usa acostado mientras el sensor mide como si estuviera vertical.</p>
-      <p><b>La única diferencia que queda</b> son 2 operaciones por lado: micro:bit usa <code>redondeo</code>
-      (al entero <b>más cercano</b>) y Protobject <code>redondear al alza</code> (hacia arriba, techo). No son
-      la misma operación: <code>redondeo(2.4) = 2</code> pero <code>al alza(2.4) = 3</code>. Con el techo el
-      punto cambia de casilla algo antes, así que la ventana de «nivelado» no cae exactamente en el mismo
-      rango de inclinación en las dos versiones.</p>
-      <p style="margin-top:10px;padding:10px 12px;background:#eef0fe;border:1px solid #dfe1fb;border-radius:8px;color:#3b3f7a">
-      <b>❓ Pregunta abierta:</b> ¿se puede usar <b>el mismo tipo de redondeo en las dos</b> y que el juego siga
-      comportándose igual? Es decir: ¿qué pasa si en Protobject se cambia a redondeo normal, o si en micro:bit
-      se pasa a redondeo hacia arriba? ¿Hay alguna razón —el rango del sensor, el tamaño de la matriz, dónde
-      queda el centro— por la que en cada plataforma convenga uno distinto, o fue simplemente el bloque que
-      había a mano? Vale la pena probarlo en el dispositivo: si con el mismo redondeo el punto se mueve igual,
-      la actividad queda equivalente del todo.</p>
-      <p class="fix" style="font-size:.9em">Nota técnica: hasta ahora la ontología tenía un único nodo
-      <code>Round</code> para los dos casos, así que la comparación los daba por iguales y la actividad salía
-      equivalente. Se separaron en <code>Round</code> (al más cercano) y <code>RoundUp</code> (hacia arriba)
-      justamente para que una diferencia real deje de pasar desapercibida.</p>
+    <div class="eq eq-ok">
+      <div class="eq-h"><span class="badge">GED 0</span>Equivalentes &#10003; &mdash; y la pregunta del redondeo queda cerrada</div>
+      <p>El rediseño funcionó del todo: las dos versiones tienen ahora <b>los mismos 37 nodos y las mismas 54
+      aristas</b>, con la misma cadena <code>sensor &rarr; + &rarr; &times; &rarr; &divide; &rarr; redondeo</code> una vez por eje, un
+      <b>solo</b> <code>para siempre</code> con las tres etapas (medir &rarr; decidir &rarr; mostrar) y las mismas variables
+      intermedias con los mismos nombres. Desapareció el <code>serial escribir</code> de depuración, el bloque suelto
+      <code>restringir</code> y el <code>establecer color de fondo</code>. La inversión de ejes en Protobject está
+      explicada arriba y es correcta.</p>
+      <p style="margin-top:10px;padding:10px 12px;background:#e9f6ee;border:1px solid #cfe8da;border-radius:8px;color:#25543c">
+      <b>Sobre la pregunta del redondeo que aparecía aquí:</b> se retira, y el error era <b>nuestro</b>, no del código.
+      Decíamos que micro:bit redondeaba al entero más cercano y Protobject hacia arriba. Al ir a revisar el archivo
+      original resultó que <b>las dos plataformas redondean hacia arriba</b> — micro:bit usa <code>Math.ceil</code> y
+      Protobject <code>redondear al alza</code> — y ya lo hacían antes de estos cambios. Lo que falló fue nuestro
+      programa que lee los bloques: no miraba qué tipo de redondeo era y escribía siempre «redondeo». Ya está
+      arreglado. <b>No había nada que investigar: el código estaba bien.</b></p>
     </div>
     <div class="cols">
       <div class="col pb"><h4><span class="ic">P</span>Protobject</h4>

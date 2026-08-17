@@ -6,14 +6,14 @@
                 "type": "Event",
                 "label": "al iniciar",
                 "children": [
-                    { "type": "Assignment", "label": "fijar flama a verdadero", "children": [] }
+                    { "type": "Assignment", "label": "fijar velaEncendida a verdadero", "children": [] }
                 ]
             },
             {
                 "type": "Event_Interrupt",
                 "label": "al detectar el sonido alto",
                 "children": [
-                    { "type": "State_Toggle", "label": "fijar flama a (no flama)", "children": [] }
+                    { "type": "State_Toggle", "label": "fijar velaEncendida a (no velaEncendida)", "children": [] }
                 ]
             },
             {
@@ -22,7 +22,7 @@
                 "children": [
                     {
                         "type": "Conditional",
-                        "label": "si flama entonces",
+                        "label": "si velaEncendida entonces",
                         "children": [
                             {
                                 "type": "Branch_True",

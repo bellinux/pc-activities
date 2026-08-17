@@ -34,22 +34,23 @@
                         ]
                     },
                     {
-                        "type": "Conditional",
-                        "label": "si ◻",
+                        "type": "Assignment",
+                        "label": "establecer tiempoTranscurrido a ◻",
                         "children": [
                             {
                                 "type": "Operator",
-                                "label": "◻ > intervaloPulso",
+                                "label": "◻ − ultimoPulso",
                                 "children": [
-                                    {
-                                        "type": "Operator",
-                                        "label": "◻ − ultimoPulso",
-                                        "children": [
-                                            { "type": "Sensor", "label": "milisegundos", "children": [] }
-                                        ]
-                                    }
+                                    { "type": "Sensor", "label": "milisegundos", "children": [] }
                                 ]
-                            },
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Conditional",
+                        "label": "si ◻",
+                        "children": [
+                            { "type": "Operator", "label": "tiempoTranscurrido > intervaloPulso", "children": [] },
                             {
                                 "type": "Branch_True",
                                 "label": "hacer",

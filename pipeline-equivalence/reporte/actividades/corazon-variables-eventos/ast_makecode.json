@@ -8,16 +8,16 @@
                 "children": [
                     { "type": "Action", "label": "mostrar LEDs", "children": [] },
                     { "type": "Action", "label": "reproduce secuencia (tono Re5 durante (1/8 pulso)) en modo en segundo plano", "children": [] },
-                    { "type": "Action", "label": "pausa (ms) latidoGrande", "children": [] },
+                    { "type": "Action", "label": "pausa (ms) pausaLarga", "children": [] },
                     { "type": "Action", "label": "reproduce secuencia (tono Re5 durante (1/8 pulso)) en modo en segundo plano", "children": [] },
                     {
                         "type": "Loop",
                         "label": "repetir 4 veces",
                         "children": [
                             { "type": "Action", "label": "mostrar LEDs", "children": [] },
-                            { "type": "Action", "label": "pausa (ms) latidoPequeño", "children": [] },
+                            { "type": "Action", "label": "pausa (ms) pausaCorta", "children": [] },
                             { "type": "Action", "label": "mostrar LEDs", "children": [] },
-                            { "type": "Action", "label": "pausa (ms) latidoPequeño", "children": [] }
+                            { "type": "Action", "label": "pausa (ms) pausaCorta", "children": [] }
                         ]
                     }
                 ]
@@ -26,24 +26,24 @@
                 "type": "Event",
                 "label": "al iniciar",
                 "children": [
-                    { "type": "Assignment", "label": "fijar latidoGrande a 500", "children": [] },
-                    { "type": "Assignment", "label": "fijar latidoPequeño a 250", "children": [] }
-                ]
-            },
-            {
-                "type": "Event_Interrupt",
-                "label": "si logotipo hacia abajo",
-                "children": [
-                    { "type": "Assignment", "label": "fijar latidoGrande a 500", "children": [] },
-                    { "type": "Assignment", "label": "fijar latidoPequeño a 250", "children": [] }
+                    { "type": "Assignment", "label": "fijar pausaLarga a 500", "children": [] },
+                    { "type": "Assignment", "label": "fijar pausaCorta a 250", "children": [] }
                 ]
             },
             {
                 "type": "Event_Interrupt",
                 "label": "si logotipo hacia arriba",
                 "children": [
-                    { "type": "Assignment", "label": "fijar latidoGrande a 100", "children": [] },
-                    { "type": "Assignment", "label": "fijar latidoPequeño a 10", "children": [] }
+                    { "type": "Assignment", "label": "fijar pausaLarga a 100", "children": [] },
+                    { "type": "Assignment", "label": "fijar pausaCorta a 10", "children": [] }
+                ]
+            },
+            {
+                "type": "Event_Interrupt",
+                "label": "si logotipo hacia abajo",
+                "children": [
+                    { "type": "Assignment", "label": "fijar pausaLarga a 500", "children": [] },
+                    { "type": "Assignment", "label": "fijar pausaCorta a 250", "children": [] }
                 ]
             }
         ]

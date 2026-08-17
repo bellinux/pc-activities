@@ -2,19 +2,19 @@
     "platform": "MakeCode",
     "extracted_text": [
         "al iniciar:",
-        "  fijar pausado a verdadero",
+        "  fijar listo a verdadero",
         "al tocar el logotipo:",
-        "  si pausado entonces:",
-        "    fijar pausado a falso",
-        "    fijar tiempo a (escoger al azar de 5 a 15)",
+        "  si listo entonces:",
+        "    fijar listo a falso",
+        "    fijar tiempoRestante a (escoger al azar de 5 a 15)",
         "    reproduce (baddy) bucle en segundo plano",
-        "    mientras (tiempo > 0):",
-        "      cambiar tiempo por -1",
+        "    mientras (tiempoRestante > 0):",
+        "      cambiar tiempoRestante por -1",
         "      pausa (ms) 1000",
         "    para todos los sonidos",
         "    reproduce (wawawawaa) en segundo plano",
         "    pausa (ms) 4000",
         "    para todos los sonidos",
-        "    fijar pausado a verdadero"
+        "    fijar listo a verdadero"
     ]
 }

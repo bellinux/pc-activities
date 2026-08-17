@@ -6,7 +6,7 @@
                 "type": "Event",
                 "label": "al iniciar",
                 "children": [
-                    { "type": "Assignment", "label": "fijar pausado a verdadero", "children": [] }
+                    { "type": "Assignment", "label": "fijar listo a verdadero", "children": [] }
                 ]
             },
             {
@@ -15,16 +15,16 @@
                 "children": [
                     {
                         "type": "Conditional",
-                        "label": "si pausado entonces",
+                        "label": "si listo entonces",
                         "children": [
                             {
                                 "type": "Branch_True",
                                 "label": "entonces",
                                 "children": [
-                                    { "type": "Assignment", "label": "fijar pausado a falso", "children": [] },
+                                    { "type": "Assignment", "label": "fijar listo a falso", "children": [] },
                                     {
                                         "type": "Assignment",
-                                        "label": "fijar tiempo a ◻",
+                                        "label": "fijar tiempoRestante a ◻",
                                         "children": [
                                             { "type": "Operator", "label": "escoger al azar de 5 a 15", "children": [] }
                                         ]
@@ -34,8 +34,8 @@
                                         "type": "Loop",
                                         "label": "mientras ◻",
                                         "children": [
-                                            { "type": "Operator", "label": "tiempo > 0", "children": [] },
-                                            { "type": "Assignment", "label": "cambiar tiempo por -1", "children": [] },
+                                            { "type": "Operator", "label": "tiempoRestante > 0", "children": [] },
+                                            { "type": "Assignment", "label": "cambiar tiempoRestante por -1", "children": [] },
                                             { "type": "Action", "label": "pausa (ms) 1000", "children": [] }
                                         ]
                                     },
@@ -43,7 +43,7 @@
                                     { "type": "Action", "label": "reproduce (wawawawaa) en segundo plano", "children": [] },
                                     { "type": "Action", "label": "pausa (ms) 4000", "children": [] },
                                     { "type": "Action", "label": "para todos los sonidos", "children": [] },
-                                    { "type": "Assignment", "label": "fijar pausado a verdadero", "children": [] }
+                                    { "type": "Assignment", "label": "fijar listo a verdadero", "children": [] }
                                 ]
                             }
                         ]

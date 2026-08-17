@@ -9,7 +9,7 @@
                     { "type": "Action", "label": "borrar la pantalla", "children": [] },
                     {
                         "type": "Action",
-                        "label": "graficar x 2 y ◻",
+                        "label": "graficar x 1 y ◻",
                         "children": [
                             {
                                 "type": "Operator",
@@ -34,7 +34,7 @@
                     },
                     {
                         "type": "Action",
-                        "label": "graficar x 1 y ◻",
+                        "label": "graficar x 2 y ◻",
                         "children": [
                             {
                                 "type": "Operator",

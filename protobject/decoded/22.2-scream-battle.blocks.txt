@@ -1,23 +1,28 @@
 ACTIVIDAD: 22.2-scream-battle
 FUENTE: Protobject (bloques, etiquetas oficiales es)
 
-al iniciar el programa:
-  establecer detectado a falso
-
 repetir para siempre:
-  si detectado:
+  si partidaEnCurso:
+    establecer columna a 1
+    establecer fila a 1
     repetir mientras (ruido in NivelRuido2 ≥ 5):
-      contar con fila desde 1 hasta 7 de a 1:
-        contar con columna desde 1 hasta 7 de a 1:
-          si (ruido in NivelRuido2 ≥ 5):
-            dibuja en x columna y fila con color #ff4444 en DibujoLED3
-            reproducir sonido 'gestión de objetos' en ReproductorSonido1
-            retraso de 500 milisegundos
+      dibuja en x columna y fila con color #ff4444 en DibujoLED3
+      reproducir sonido 'gestión de objetos' en ReproductorSonido1
+      retraso de 500 milisegundos
+      establecer columna a (columna + 1)
+      si (columna > 7):
+        establecer columna a 1
+        establecer fila a (fila + 1)
+      si (fila > 7):
+        establecer fila a 1
     reproducir sonido 'celebración final' en ReproductorSonido1
     retraso de 5 segundos
     detener sonido de ReproductorSonido1
     borrar dibujo en DibujoLED3
-    establecer detectado a falso
+    establecer partidaEnCurso a falso
+
+al iniciar el programa:
+  establecer partidaEnCurso a falso
 
 cuando NivelRuido2 detecta aumento repentino:
-  establecer detectado a verdadero
+  establecer partidaEnCurso a verdadero

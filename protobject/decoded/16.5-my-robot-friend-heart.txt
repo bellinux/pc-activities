@@ -5,26 +5,26 @@ COMPONENTES: DibujoLED1=MatrixDraw, BateríaMusical2=PlayDrum, Inclinación3=Sma
 REPETIR PARA SIEMPRE (bucle principal)
   DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=0,1,0,0,0,1,0,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,0,0,1,1,1,0,0,0,0,0,1,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
   BateríaMusical2_play_set_1  VAR=control_drum(VAR=1)
-  ESPERAR  ms  VAR=var:latidoGrande
-      ; // Se utiliza la variable "latidoGrande" para cambiar la velocidad de latido dependiendo de la posición del dispositivo.
+  ESPERAR  ms  VAR=var:pausaLarga
+      ; // Se utiliza la variable "pausaLarga" para cambiar la velocidad de latido dependiendo de la posición del dispositivo.
   BateríaMusical2_play_set_1  VAR=control_drum(VAR=1)
   REPETIR 4 VECES
     DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,1,1,1,1,0,0,1,1,1,1,1,0,0,0,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
-    ESPERAR  ms  VAR=var:latidoPequeño
-        ; // Se utiliza la variable "latidoPequeño" para cambiar la velocidad de latido del corazón chico dependiendo de la posición del dispositivo.
+    ESPERAR  ms  VAR=var:pausaCorta
+        ; // Se utiliza la variable "pausaCorta" para cambiar la velocidad de latido del corazón chico dependiendo de la posición del dispositivo.
     DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,0,1,0,1,0,0,1,0,0,0,1,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
-    ESPERAR  ms  VAR=var:latidoPequeño
+    ESPERAR  ms  VAR=var:pausaCorta
 
 AL INICIAR
-  ESTABLECER var:latidoGrande = 500
-  ESTABLECER var:latidoPequeño = 150
+  ESTABLECER var:pausaLarga = 500
+  ESTABLECER var:pausaCorta = 150
 
 protobject_Inclinación3_change  property=side
-    ; // Este bloque detecta el momento en que cambia la posición del dispositivo, cuando lo hace se editan las variables "latidoGrande" y "latidoPequeño". Al inclinar el dispositivo hacia esta dirección, la velocidad de latido aumentará ya que los tiempos son más cortos.
-  ESTABLECER var:latidoGrande = 250
-  ESTABLECER var:latidoPequeño = 80
+    ; // Este bloque detecta el momento en que cambia la posición del dispositivo, cuando lo hace se editan las variables "pausaLarga" y "pausaCorta". Al inclinar el dispositivo hacia esta dirección, la velocidad de latido aumentará ya que los tiempos son más cortos.
+  ESTABLECER var:pausaLarga = 250
+  ESTABLECER var:pausaCorta = 80
 
 protobject_Inclinación3_change  property=faceUp
-    ; // Este bloque detecta el momento en que cambia la posición del dispositivo, cuando lo hace se editan las variables "latidoGrande" y "latidoPequeño". Al inclinar el dispositivo hacia esta dirección, la velocidad de latido disminuirá ya que los tiempos son más largos.
-  ESTABLECER var:latidoGrande = 500
-  ESTABLECER var:latidoPequeño = 150
+    ; // Este bloque detecta el momento en que cambia la posición del dispositivo, cuando lo hace se editan las variables "pausaLarga" y "pausaCorta". Al inclinar el dispositivo hacia esta dirección, la velocidad de latido disminuirá ya que los tiempos son más largos.
+  ESTABLECER var:pausaLarga = 500
+  ESTABLECER var:pausaCorta = 150

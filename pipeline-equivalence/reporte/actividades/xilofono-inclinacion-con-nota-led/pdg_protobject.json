@@ -24,10 +24,9 @@
         },
         {
             "id": "n4",
-            "kind": "Arithmetic",
+            "kind": "Round",
             "seq": 4,
-            "in_loop": true,
-            "op": "round"
+            "in_loop": true
         },
         {
             "id": "n5",

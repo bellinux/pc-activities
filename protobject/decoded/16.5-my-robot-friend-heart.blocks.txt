@@ -11,7 +11,7 @@ repetir para siempre:
       ..###..
       ...#...
   toca nota tom en BateríaMusical2
-  retraso de latidoGrande milisegundos   // Se utiliza la variable "latidoGrande" para cambiar la velocidad de latido dependiendo de la posición del dispositivo.
+  retraso de pausaLarga milisegundos   // Se utiliza la variable "pausaLarga" para cambiar la velocidad de latido dependiendo de la posición del dispositivo.
   toca nota tom en BateríaMusical2
   repetir 4 veces:
     dibuja con color #ff0000 en DibujoLED1:
@@ -22,7 +22,7 @@ repetir para siempre:
         ..###..
         ...#...
         .......
-    retraso de latidoPequeño milisegundos   // Se utiliza la variable "latidoPequeño" para cambiar la velocidad de latido del corazón chico dependiendo de la posición del dispositivo.
+    retraso de pausaCorta milisegundos   // Se utiliza la variable "pausaCorta" para cambiar la velocidad de latido del corazón chico dependiendo de la posición del dispositivo.
     dibuja con color #ff0000 en DibujoLED1:
         .......
         ..#.#..
@@ -31,16 +31,16 @@ repetir para siempre:
         ..#.#..
         ...#...
         .......
-    retraso de latidoPequeño milisegundos
+    retraso de pausaCorta milisegundos
 
 al iniciar el programa:
-  establecer latidoGrande a 500
-  establecer latidoPequeño a 150
+  establecer pausaLarga a 500
+  establecer pausaCorta a 150
 
-cuando Inclinación3 hacie un borde:   // Este bloque detecta el momento en que cambia la posición del dispositivo, cuando lo hace se editan las variables "latidoGrande" y "latidoPequeño". Al inclinar el dispositivo hacia esta dirección, la velocidad de latido aumentará ya que los tiempos son más cortos.
-  establecer latidoGrande a 250
-  establecer latidoPequeño a 80
+cuando Inclinación3 hacie un borde:   // Este bloque detecta el momento en que cambia la posición del dispositivo, cuando lo hace se editan las variables "pausaLarga" y "pausaCorta". Al inclinar el dispositivo hacia esta dirección, la velocidad de latido aumentará ya que los tiempos son más cortos.
+  establecer pausaLarga a 250
+  establecer pausaCorta a 80
 
-cuando Inclinación3 hacia arriba:   // Este bloque detecta el momento en que cambia la posición del dispositivo, cuando lo hace se editan las variables "latidoGrande" y "latidoPequeño". Al inclinar el dispositivo hacia esta dirección, la velocidad de latido disminuirá ya que los tiempos son más largos.
-  establecer latidoGrande a 500
-  establecer latidoPequeño a 150
+cuando Inclinación3 hacia arriba:   // Este bloque detecta el momento en que cambia la posición del dispositivo, cuando lo hace se editan las variables "pausaLarga" y "pausaCorta". Al inclinar el dispositivo hacia esta dirección, la velocidad de latido disminuirá ya que los tiempos son más largos.
+  establecer pausaLarga a 500
+  establecer pausaCorta a 150

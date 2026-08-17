@@ -3,20 +3,20 @@ CODE: papas-caliente-juego
 COMPONENTES: ReproductorSonido3=AudioPlayer, BotónTáctil3=TouchButton
 
 AL INICIAR
-  ESTABLECER var:pausado = TRUE
+  ESTABLECER var:listo = TRUE
 
 protobject_BotónTáctil3_change  property=pressed
   SI
-    [si var:pausado]
-    ESTABLECER var:pausado = FALSE
-    ESTABLECER var:tiempo = aleatorio(5..15)
-    ReproductorSonido3_play_set_2  VAR=sounds_list(VAR=movingTrain.mp3)
-    MIENTRAS (WHILE) (var:tiempo > 0)
+    [si var:listo]
+    ESTABLECER var:listo = FALSE
+    ESTABLECER var:tiempoRestante = aleatorio(5..15)
         ; // Temporizador con tiempo inicial aleatorio, valor entre 5 y 15.
-      AÑADIR -1 A var:tiempo
+    ReproductorSonido3_play_set_2  VAR=sounds_list(VAR=movingTrain.mp3)
+    MIENTRAS (WHILE) (var:tiempoRestante > 0)
+      AÑADIR -1 A var:tiempoRestante
       ESPERAR  s  VAR=1
     ReproductorSonido3_stop_set_3
     ReproductorSonido3_play_set_2  VAR=sounds_list(VAR=creatureLaugh.mp3)
     ESPERAR  s  VAR=4
     ReproductorSonido3_stop_set_3
-    ESTABLECER var:pausado = TRUE
+    ESTABLECER var:listo = TRUE

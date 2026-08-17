@@ -285,7 +285,13 @@
     if (t === "logic_compare") return "(" + E("A") + " " + ({ EQ: "=", NEQ: "≠", LT: "<", LTE: "≤", GT: ">", GTE: "≥" }[f.OP] || f.OP) + " " + E("B") + ")";
     if (t === "logic_operation") return "(" + E("A") + " " + ({ AND: "y", OR: "o" }[f.OP] || f.OP) + " " + E("B") + ")";
     if (t === "logic_negate") return par("no " + E("BOOL"));
-    if (t === "math_js_round") return par("redondeo " + E("ARG0"));
+    // math_js_round lleva el campo OP (round/ceil/floor/trunc): NO colapsarlo en "redondeo",
+    // o el techo se confunde con el redondeo al mas cercano (son operaciones distintas).
+    if (t === "math_js_round") {
+      const rl = { round: "redondeo", ceil: "redondeo hacia arriba",
+                   floor: "redondeo hacia abajo", trunc: "truncamiento" }[f.OP] || "redondeo";
+      return par(rl + " " + E("ARG0"));
+    }
     if (t === "device_note") { const nm = f.name; const k = parseInt(nm, 10); return (L.NOTE[k] || nm + " Hz"); }
     const pf = pxtFill(el, L);
     return pf != null ? par(pf) : t;

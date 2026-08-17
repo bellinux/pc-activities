@@ -38,7 +38,7 @@
                         "children": [
                             {
                                 "type": "Operator",
-                                "label": "◻ + 60",
+                                "label": "60 + ◻",
                                 "children": [
                                     { "type": "Sensor", "label": "y in Inclinación2", "children": [] }
                                 ]

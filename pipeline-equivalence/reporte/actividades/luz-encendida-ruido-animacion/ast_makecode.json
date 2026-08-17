@@ -17,19 +17,18 @@
                                 "children": [
                                     {
                                         "type": "Loop",
-                                        "label": "para columnas de 0 a 4",
+                                        "label": "para filas de 0 a 4",
                                         "children": [
                                             {
                                                 "type": "Loop",
-                                                "label": "para filas de 0 a 4",
+                                                "label": "para columnas de 0 a 4",
                                                 "children": [
-                                                    { "type": "Action", "label": "graficar x filas y columnas", "children": [] },
+                                                    { "type": "Action", "label": "graficar x columnas y filas", "children": [] },
                                                     { "type": "Action", "label": "pausa (ms) 20", "children": [] }
                                                 ]
                                             }
                                         ]
-                                    },
-                                    { "type": "Action", "label": "graficar x 0 y 0", "children": [] }
+                                    }
                                 ]
                             },
                             {
@@ -38,13 +37,13 @@
                                 "children": [
                                     {
                                         "type": "Loop",
-                                        "label": "para columnas de 0 a 4",
+                                        "label": "para filas de 0 a 4",
                                         "children": [
                                             {
                                                 "type": "Loop",
-                                                "label": "para filas de 0 a 4",
+                                                "label": "para columnas de 0 a 4",
                                                 "children": [
-                                                    { "type": "Action", "label": "ocultar x filas y columnas", "children": [] },
+                                                    { "type": "Action", "label": "ocultar x columnas y filas", "children": [] },
                                                     { "type": "Action", "label": "pausa (ms) 20", "children": [] }
                                                 ]
                                             }

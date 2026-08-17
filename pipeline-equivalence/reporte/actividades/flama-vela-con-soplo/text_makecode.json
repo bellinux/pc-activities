@@ -2,7 +2,7 @@
     "platform": "MakeCode",
     "extracted_text": [
         "para siempre:",
-        "  si flama entonces:",
+        "  si velaEncendida entonces:",
         "    mostrar LEDs",
         "    graficar x (escoger al azar de 1 a 3) y 0",
         "    pausa (ms) 200",
@@ -12,8 +12,8 @@
         "  si no:",
         "    borrar la pantalla",
         "al iniciar:",
-        "  fijar flama a verdadero",
+        "  fijar velaEncendida a verdadero",
         "al detectar el sonido alto:",
-        "  fijar flama a (no flama)"
+        "  fijar velaEncendida a (no velaEncendida)"
     ]
 }

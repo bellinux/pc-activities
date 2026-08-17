@@ -21,8 +21,8 @@
                                 "type": "Branch_True",
                                 "label": "entonces",
                                 "children": [
-                                    { "type": "Action", "label": "reproduce secuencia (hola) en modo bucle en segundo plano", "children": [] },
                                     { "type": "Action", "label": "mostrar LEDs", "children": [] },
+                                    { "type": "Action", "label": "reproduce secuencia (hola) en modo bucle en segundo plano", "children": [] },
                                     { "type": "Action", "label": "pausa (ms) 6000", "children": [] },
                                     { "type": "Action", "label": "borrar la pantalla", "children": [] },
                                     { "type": "Action", "label": "para todos los sonidos", "children": [] }

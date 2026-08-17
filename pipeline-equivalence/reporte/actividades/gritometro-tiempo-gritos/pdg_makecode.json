@@ -21,114 +21,158 @@
         },
         {
             "id": "n4",
-            "kind": "ReadSoundLevel",
+            "kind": "SetVariable",
             "seq": 4,
+            "in_loop": true
+        },
+        {
+            "id": "n5",
+            "kind": "SetVariable",
+            "seq": 5,
+            "in_loop": true
+        },
+        {
+            "id": "n6",
+            "kind": "ReadSoundLevel",
+            "seq": 6,
             "in_loop": true,
             "resId": 1
         },
         {
-            "id": "n5",
+            "id": "n7",
             "kind": "Comparison",
-            "seq": 5,
+            "seq": 7,
             "in_loop": true,
             "op": "≥"
         },
         {
-            "id": "n6",
-            "kind": "ForRange",
-            "seq": 6,
-            "in_loop": true
-        },
-        {
-            "id": "n7",
-            "kind": "ForRange",
-            "seq": 7,
-            "in_loop": true
-        },
-        {
             "id": "n8",
-            "kind": "ReadSoundLevel",
+            "kind": "PlotPoint",
             "seq": 8,
             "in_loop": true,
             "resId": 1
         },
         {
             "id": "n9",
-            "kind": "Comparison",
+            "kind": "PlaySound",
             "seq": 9,
             "in_loop": true,
-            "op": "≥"
+            "resId": 1
         },
         {
             "id": "n10",
-            "kind": "ConditionalBranch",
+            "kind": "Delay",
             "seq": 10,
             "in_loop": true
         },
         {
             "id": "n11",
-            "kind": "PlotPoint",
+            "kind": "Arithmetic",
             "seq": 11,
             "in_loop": true,
-            "resId": 1
+            "op": "+"
         },
         {
             "id": "n12",
-            "kind": "PlaySound",
+            "kind": "SetVariable",
             "seq": 12,
-            "in_loop": true,
-            "resId": 1
-        },
-        {
-            "id": "n13",
-            "kind": "Delay",
-            "seq": 13,
             "in_loop": true
         },
         {
-            "id": "n14",
-            "kind": "PlaySound",
-            "seq": 14,
+            "id": "n13",
+            "kind": "Comparison",
+            "seq": 13,
             "in_loop": true,
-            "resId": 1
+            "op": ">"
+        },
+        {
+            "id": "n14",
+            "kind": "ConditionalBranch",
+            "seq": 14,
+            "in_loop": true
         },
         {
             "id": "n15",
-            "kind": "Delay",
+            "kind": "SetVariable",
             "seq": 15,
             "in_loop": true
         },
         {
             "id": "n16",
-            "kind": "StopSound",
+            "kind": "Arithmetic",
             "seq": 16,
             "in_loop": true,
-            "resId": 1
+            "op": "+"
         },
         {
             "id": "n17",
-            "kind": "ClearDisplay",
-            "seq": 17,
-            "in_loop": true,
-            "resId": 1
-        },
-        {
-            "id": "n18",
             "kind": "SetVariable",
-            "seq": 18,
+            "seq": 17,
             "in_loop": true
         },
         {
+            "id": "n18",
+            "kind": "Comparison",
+            "seq": 18,
+            "in_loop": true,
+            "op": ">"
+        },
+        {
             "id": "n19",
-            "kind": "SuddenNoiseEvent",
+            "kind": "ConditionalBranch",
             "seq": 19,
-            "in_loop": false,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n20",
             "kind": "SetVariable",
             "seq": 20,
+            "in_loop": true
+        },
+        {
+            "id": "n21",
+            "kind": "PlaySound",
+            "seq": 21,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n22",
+            "kind": "Delay",
+            "seq": 22,
+            "in_loop": true
+        },
+        {
+            "id": "n23",
+            "kind": "StopSound",
+            "seq": 23,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n24",
+            "kind": "ClearDisplay",
+            "seq": 24,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n25",
+            "kind": "SetVariable",
+            "seq": 25,
+            "in_loop": true
+        },
+        {
+            "id": "n26",
+            "kind": "SuddenNoiseEvent",
+            "seq": 26,
+            "in_loop": false,
+            "resId": 1
+        },
+        {
+            "id": "n27",
+            "kind": "SetVariable",
+            "seq": 27,
             "in_loop": false
         }
     ],
@@ -136,6 +180,12 @@
         {
             "source": "n1",
             "target": "n2",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n26",
+            "target": "n27",
             "type": "control",
             "var": ""
         },
@@ -183,181 +233,307 @@
         },
         {
             "source": "n3",
+            "target": "n11",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n3",
+            "target": "n12",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n3",
+            "target": "n13",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n3",
             "target": "n14",
             "type": "control",
             "var": "true"
         },
         {
             "source": "n3",
+            "target": "n18",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n3",
+            "target": "n19",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n3",
+            "target": "n21",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n3",
+            "target": "n22",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n3",
+            "target": "n23",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n3",
+            "target": "n24",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n3",
+            "target": "n25",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n7",
+            "target": "n8",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n7",
+            "target": "n9",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n7",
+            "target": "n10",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n7",
+            "target": "n11",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n7",
+            "target": "n12",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n7",
+            "target": "n13",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n7",
+            "target": "n14",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n7",
+            "target": "n18",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n7",
+            "target": "n19",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n14",
             "target": "n15",
             "type": "control",
             "var": "true"
         },
         {
-            "source": "n3",
+            "source": "n14",
             "target": "n16",
             "type": "control",
             "var": "true"
         },
         {
-            "source": "n3",
+            "source": "n14",
             "target": "n17",
             "type": "control",
             "var": "true"
         },
         {
-            "source": "n3",
-            "target": "n18",
+            "source": "n19",
+            "target": "n20",
             "type": "control",
             "var": "true"
         },
         {
             "source": "n6",
             "target": "n7",
-            "type": "control",
-            "var": ""
+            "type": "data",
+            "var": "sound_1"
         },
         {
-            "source": "n7",
-            "target": "n10",
-            "type": "control",
-            "var": ""
+            "source": "n13",
+            "target": "n14",
+            "type": "data",
+            "var": "condition"
         },
         {
-            "source": "n10",
-            "target": "n11",
-            "type": "control",
-            "var": "true"
-        },
-        {
-            "source": "n10",
-            "target": "n12",
-            "type": "control",
-            "var": "true"
-        },
-        {
-            "source": "n10",
-            "target": "n13",
-            "type": "control",
-            "var": "true"
+            "source": "n18",
+            "target": "n19",
+            "type": "data",
+            "var": "condition"
         },
         {
             "source": "n11",
             "target": "n12",
-            "type": "control",
-            "var": ""
-        },
-        {
-            "source": "n12",
-            "target": "n13",
-            "type": "control",
-            "var": ""
-        },
-        {
-            "source": "n6",
-            "target": "n14",
-            "type": "control",
-            "var": ""
-        },
-        {
-            "source": "n14",
-            "target": "n15",
-            "type": "control",
-            "var": ""
-        },
-        {
-            "source": "n15",
-            "target": "n16",
-            "type": "control",
-            "var": ""
+            "type": "data",
+            "var": "columna"
         },
         {
             "source": "n16",
             "target": "n17",
-            "type": "control",
-            "var": ""
-        },
-        {
-            "source": "n17",
-            "target": "n18",
-            "type": "control",
-            "var": ""
-        },
-        {
-            "source": "n19",
-            "target": "n20",
-            "type": "control",
-            "var": ""
-        },
-        {
-            "source": "n4",
-            "target": "n5",
-            "type": "data",
-            "var": "sound_1"
-        },
-        {
-            "source": "n5",
-            "target": "n6",
-            "type": "data",
-            "var": "condition"
-        },
-        {
-            "source": "n8",
-            "target": "n9",
-            "type": "data",
-            "var": "sound_1"
-        },
-        {
-            "source": "n9",
-            "target": "n10",
-            "type": "data",
-            "var": "condition"
-        },
-        {
-            "source": "n6",
-            "target": "n11",
             "type": "data",
             "var": "fila"
         },
         {
-            "source": "n7",
+            "source": "n4",
+            "target": "n8",
+            "type": "data",
+            "var": "columna"
+        },
+        {
+            "source": "n12",
+            "target": "n8",
+            "type": "data",
+            "var": "columna"
+        },
+        {
+            "source": "n15",
+            "target": "n8",
+            "type": "data",
+            "var": "columna"
+        },
+        {
+            "source": "n4",
             "target": "n11",
             "type": "data",
             "var": "columna"
         },
         {
-            "source": "n2",
-            "target": "n3",
+            "source": "n12",
+            "target": "n11",
             "type": "data",
-            "var": "detectado"
+            "var": "columna"
         },
         {
-            "source": "n18",
-            "target": "n3",
+            "source": "n15",
+            "target": "n11",
             "type": "data",
-            "var": "detectado"
+            "var": "columna"
+        },
+        {
+            "source": "n12",
+            "target": "n13",
+            "type": "data",
+            "var": "columna"
+        },
+        {
+            "source": "n5",
+            "target": "n8",
+            "type": "data",
+            "var": "fila"
+        },
+        {
+            "source": "n17",
+            "target": "n8",
+            "type": "data",
+            "var": "fila"
         },
         {
             "source": "n20",
-            "target": "n3",
+            "target": "n8",
             "type": "data",
-            "var": "detectado"
+            "var": "fila"
         },
         {
-            "source": "n11",
-            "target": "n17",
+            "source": "n5",
+            "target": "n16",
+            "type": "data",
+            "var": "fila"
+        },
+        {
+            "source": "n17",
+            "target": "n16",
+            "type": "data",
+            "var": "fila"
+        },
+        {
+            "source": "n20",
+            "target": "n16",
+            "type": "data",
+            "var": "fila"
+        },
+        {
+            "source": "n5",
+            "target": "n18",
+            "type": "data",
+            "var": "fila"
+        },
+        {
+            "source": "n17",
+            "target": "n18",
+            "type": "data",
+            "var": "fila"
+        },
+        {
+            "source": "n20",
+            "target": "n18",
+            "type": "data",
+            "var": "fila"
+        },
+        {
+            "source": "n2",
+            "target": "n3",
+            "type": "data",
+            "var": "partidaencurso"
+        },
+        {
+            "source": "n25",
+            "target": "n3",
+            "type": "data",
+            "var": "partidaencurso"
+        },
+        {
+            "source": "n27",
+            "target": "n3",
+            "type": "data",
+            "var": "partidaencurso"
+        },
+        {
+            "source": "n8",
+            "target": "n24",
             "type": "side_effect",
             "var": "display"
         },
         {
-            "source": "n12",
-            "target": "n14",
+            "source": "n9",
+            "target": "n21",
             "type": "side_effect",
             "var": "sound"
         },
         {
-            "source": "n14",
-            "target": "n16",
+            "source": "n21",
+            "target": "n23",
             "type": "side_effect",
             "var": "sound"
         }

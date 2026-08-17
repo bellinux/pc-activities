@@ -1,8 +1,11 @@
 ACTIVIDAD: 16.6-magic-birthday-candle
 FUENTE: Protobject (bloques, etiquetas oficiales es)
 
+al iniciar el programa:
+  establecer velaEncendida a verdadero
+
 repetir para siempre:
-  si flama:
+  si velaEncendida:
     dibuja con color #ff0000 en DibujoLED1:
         .......
         .......
@@ -21,13 +24,10 @@ repetir para siempre:
         ..###..
         ..###..
         ..###..
-    dibuja en x 4 y 2 con color #ff0000 en DibujoLED1
+    dibuja en x 4 y 2 con color #ff0000 en DibujoLED1   // Borra la punta de la llama anterior
     retraso de 200 milisegundos
   sino:
     borrar dibujo en DibujoLED1
 
-al iniciar el programa:
-  establecer flama a verdadero
-
 cuando NivelRuido2 detecta aumento repentino:
-  establecer flama a no (flama)
+  establecer velaEncendida a no (velaEncendida)

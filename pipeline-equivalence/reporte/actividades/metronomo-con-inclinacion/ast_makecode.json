@@ -3,6 +3,13 @@
     "ast": {
         "blocks": [
             {
+                "type": "Event",
+                "label": "al iniciar",
+                "children": [
+                    { "type": "Assignment", "label": "fijar ultimoPulso a 0", "children": [] }
+                ]
+            },
+            {
                 "type": "Loop",
                 "label": "para siempre",
                 "children": [
@@ -21,28 +28,29 @@
                     },
                     {
                         "type": "Assignment",
-                        "label": "fijar intervaloBeat a ◻",
+                        "label": "fijar intervaloPulso a ◻",
                         "children": [
                             { "type": "Operator", "label": "60000 ÷ bpm", "children": [] }
+                        ]
+                    },
+                    {
+                        "type": "Assignment",
+                        "label": "fijar tiempoTranscurrido a ◻",
+                        "children": [
+                            {
+                                "type": "Operator",
+                                "label": "◻ − ultimoPulso",
+                                "children": [
+                                    { "type": "Sensor", "label": "tiempo de ejecución (ms)", "children": [] }
+                                ]
+                            }
                         ]
                     },
                     {
                         "type": "Conditional",
                         "label": "si ◻ entonces",
                         "children": [
-                            {
-                                "type": "Operator",
-                                "label": "◻ > intervaloBeat",
-                                "children": [
-                                    {
-                                        "type": "Operator",
-                                        "label": "◻ − ultimoBeat",
-                                        "children": [
-                                            { "type": "Sensor", "label": "tiempo de ejecución (ms)", "children": [] }
-                                        ]
-                                    }
-                                ]
-                            },
+                            { "type": "Operator", "label": "tiempoTranscurrido > intervaloPulso", "children": [] },
                             {
                                 "type": "Branch_True",
                                 "label": "entonces",
@@ -50,7 +58,7 @@
                                     { "type": "Action", "label": "reproduce secuencia (tono La#3 durante (1/4 pulso)) en modo hasta que termine", "children": [] },
                                     {
                                         "type": "Assignment",
-                                        "label": "fijar ultimoBeat a ◻",
+                                        "label": "fijar ultimoPulso a ◻",
                                         "children": [
                                             { "type": "Sensor", "label": "tiempo de ejecución (ms)", "children": [] }
                                         ]
@@ -59,13 +67,6 @@
                             }
                         ]
                     }
-                ]
-            },
-            {
-                "type": "Event",
-                "label": "al iniciar",
-                "children": [
-                    { "type": "Assignment", "label": "fijar ultimoBeat a 0", "children": [] }
                 ]
             }
         ]

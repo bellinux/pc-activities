@@ -6,14 +6,14 @@
                 "type": "Event",
                 "label": "al iniciar el programa",
                 "children": [
-                    { "type": "Assignment", "label": "establecer flama a verdadero", "children": [] }
+                    { "type": "Assignment", "label": "establecer velaEncendida a verdadero", "children": [] }
                 ]
             },
             {
                 "type": "Event_Interrupt",
                 "label": "cuando NivelRuido2 detecta aumento repentino",
                 "children": [
-                    { "type": "State_Toggle", "label": "establecer flama a (no flama)", "children": [] }
+                    { "type": "State_Toggle", "label": "establecer velaEncendida a (no velaEncendida)", "children": [] }
                 ]
             },
             {
@@ -22,7 +22,7 @@
                 "children": [
                     {
                         "type": "Conditional",
-                        "label": "si flama",
+                        "label": "si velaEncendida",
                         "children": [
                             {
                                 "type": "Branch_True",

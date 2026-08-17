@@ -2,7 +2,7 @@ ACTIVIDAD: 16.6-magic-birthday-candle
 FUENTE: micro:bit / MakeCode 9.0.8 — "flama-vela-con-soplo arreglo"  (etiquetas oficiales es-ES)
 
 para siempre:
-  si flama entonces:
+  si velaEncendida entonces:
     mostrar LEDs:
         . . . . .
         . # # # .
@@ -17,13 +17,13 @@ para siempre:
         . # # # .
         . # # # .
         . # # # .
-    graficar x 2 y 0
+    graficar x 2 y 0   // Borra la punta de la llama anterior
     pausa (ms) 200
   si no:
     borrar la pantalla
 
 al iniciar:
-  fijar flama a verdadero
+  fijar velaEncendida a verdadero
 
 al detectar el sonido alto:
-  fijar flama a no(flama)
+  fijar velaEncendida a no(velaEncendida)

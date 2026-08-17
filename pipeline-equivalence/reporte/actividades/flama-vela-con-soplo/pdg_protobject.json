@@ -150,19 +150,19 @@
             "source": "n2",
             "target": "n4",
             "type": "data",
-            "var": "flama"
+            "var": "velaencendida"
         },
         {
             "source": "n2",
             "target": "n5",
             "type": "data",
-            "var": "flama"
+            "var": "velaencendida"
         },
         {
             "source": "n4",
             "target": "n5",
             "type": "data",
-            "var": "flama"
+            "var": "velaencendida"
         },
         {
             "source": "n7",

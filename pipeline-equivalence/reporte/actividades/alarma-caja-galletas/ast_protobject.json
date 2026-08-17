@@ -19,7 +19,7 @@
                             },
                             {
                                 "type": "Branch_True",
-                                "label": "entonces",
+                                "label": "hacer",
                                 "children": [
                                     { "type": "Action", "label": "dibuja con color #2277aa en DibujoLED2", "children": [] },
                                     { "type": "Action", "label": "reproducir sonido 'emergencia' en ReproductorSonido3", "children": [] },

@@ -8,8 +8,9 @@ AL INICIAR
 REPETIR PARA SIEMPRE (bucle principal)
   ESTABLECER var:bpm = (Inclinación1.leer(oriX) + 60)
   ESTABLECER var:intervaloPulso = (60000 / var:bpm)
+  ESTABLECER var:tiempoTranscurrido = (protobject_milliseconds() - var:ultimoPulso)
   SI
-    [si ((protobject_milliseconds() - var:ultimoPulso) > var:intervaloPulso)]
+    [si (var:tiempoTranscurrido > var:intervaloPulso)]
     BateríaMusical2_play_set_1  VAR=control_drum(VAR=1)
         ; // Reproduce un tono específico, en este caso simulará la frecuencia de un metrónomo.
     ESTABLECER var:ultimoPulso = protobject_milliseconds()

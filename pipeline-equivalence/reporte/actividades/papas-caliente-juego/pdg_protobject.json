@@ -241,19 +241,19 @@
             "source": "n2",
             "target": "n4",
             "type": "data",
-            "var": "pausado"
+            "var": "listo"
         },
         {
             "source": "n5",
             "target": "n4",
             "type": "data",
-            "var": "pausado"
+            "var": "listo"
         },
         {
             "source": "n16",
             "target": "n4",
             "type": "data",
-            "var": "pausado"
+            "var": "listo"
         },
         {
             "source": "n6",
@@ -265,25 +265,25 @@
             "source": "n7",
             "target": "n9",
             "type": "data",
-            "var": "tiempo"
+            "var": "tiemporestante"
         },
         {
             "source": "n7",
             "target": "n10",
             "type": "data",
-            "var": "tiempo"
+            "var": "tiemporestante"
         },
         {
             "source": "n10",
             "target": "n9",
             "type": "data",
-            "var": "tiempo"
+            "var": "tiemporestante"
         },
         {
             "source": "n10",
             "target": "n10",
             "type": "data",
-            "var": "tiempo"
+            "var": "tiemporestante"
         },
         {
             "source": "n9",

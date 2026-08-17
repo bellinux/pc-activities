@@ -6,7 +6,8 @@
         "repetir para siempre:",
         "  establecer bpm a ((x in Inclinación1) + 60)",
         "  establecer intervaloPulso a (60000 ÷ bpm)",
-        "  si ((milisegundos − ultimoPulso) > intervaloPulso):",
+        "  establecer tiempoTranscurrido a (milisegundos − ultimoPulso)",
+        "  si (tiempoTranscurrido > intervaloPulso):",
         "    toca nota tom en BateríaMusical2",
         "    establecer ultimoPulso a milisegundos"
     ]

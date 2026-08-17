@@ -143,7 +143,12 @@ def _expr(el):
     if t == "logic_operation":
         return "(%s %s %s)" % (_expr(v.get("A")), {"AND":"y","OR":"o"}.get(f.get("OP"), f.get("OP")), _expr(v.get("B")))
     if t == "logic_negate": return "no(%s)" % _expr(v.get("BOOL"))
-    if t == "math_js_round": return "redondeo(%s)" % _expr(v.get("ARG0"))
+    # math_js_round lleva el campo OP (round/ceil/floor/trunc): NO colapsarlo en "redondeo",
+    # o el techo se confunde con el redondeo al mas cercano (son operaciones distintas).
+    if t == "math_js_round":
+        lbl = {"round": "redondeo", "ceil": "redondeo hacia arriba",
+               "floor": "redondeo hacia abajo", "trunc": "truncamiento"}.get(f.get("OP", "round"), "redondeo")
+        return "%s(%s)" % (lbl, _expr(v.get("ARG0")))
     if t == "device_note":
         nm = f.get("name", "?")
         try: return NOTE.get(int(nm), "%s Hz" % nm)

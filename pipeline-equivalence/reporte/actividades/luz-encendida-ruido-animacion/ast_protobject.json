@@ -17,19 +17,18 @@
                                 "children": [
                                     {
                                         "type": "Loop",
-                                        "label": "contar con columnas desde 1 hasta 7 de a 1",
+                                        "label": "contar con filas desde 1 hasta 7 de a 1",
                                         "children": [
                                             {
                                                 "type": "Loop",
-                                                "label": "contar con filas desde 1 hasta 7 de a 1",
+                                                "label": "contar con columnas desde 1 hasta 7 de a 1",
                                                 "children": [
-                                                    { "type": "Action", "label": "dibuja en x filas y columnas con color #ff4444 en DibujoLED2", "children": [] },
+                                                    { "type": "Action", "label": "dibuja en x columnas y filas con color #ff4444 en DibujoLED2", "children": [] },
                                                     { "type": "Action", "label": "retraso de 10 milisegundos", "children": [] }
                                                 ]
                                             }
                                         ]
-                                    },
-                                    { "type": "Action", "label": "dibuja en x 1 y 1 con color #ff4444 en DibujoLED2", "children": [] }
+                                    }
                                 ]
                             },
                             {
@@ -38,13 +37,13 @@
                                 "children": [
                                     {
                                         "type": "Loop",
-                                        "label": "contar con columnas desde 1 hasta 7 de a 1",
+                                        "label": "contar con filas desde 1 hasta 7 de a 1",
                                         "children": [
                                             {
                                                 "type": "Loop",
-                                                "label": "contar con filas desde 1 hasta 7 de a 1",
+                                                "label": "contar con columnas desde 1 hasta 7 de a 1",
                                                 "children": [
-                                                    { "type": "Action", "label": "dibuja en x filas y columnas con color #000000 en DibujoLED2", "children": [] },
+                                                    { "type": "Action", "label": "dibuja en x columnas y filas con color #000000 en DibujoLED2", "children": [] },
                                                     { "type": "Action", "label": "retraso de 10 milisegundos", "children": [] }
                                                 ]
                                             }

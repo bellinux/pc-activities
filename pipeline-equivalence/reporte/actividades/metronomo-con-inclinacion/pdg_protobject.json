@@ -61,34 +61,40 @@
         },
         {
             "id": "n10",
-            "kind": "Comparison",
+            "kind": "SetVariable",
             "seq": 10,
+            "in_loop": true
+        },
+        {
+            "id": "n11",
+            "kind": "Comparison",
+            "seq": 11,
             "in_loop": true,
             "op": ">"
         },
         {
-            "id": "n11",
+            "id": "n12",
             "kind": "ConditionalBranch",
-            "seq": 11,
+            "seq": 12,
             "in_loop": true
         },
         {
-            "id": "n12",
+            "id": "n13",
             "kind": "EmitSound",
-            "seq": 12,
+            "seq": 13,
             "in_loop": true,
             "resId": 1
         },
         {
-            "id": "n13",
+            "id": "n14",
             "kind": "ReadRuntimeMillis",
-            "seq": 13,
+            "seq": 14,
             "in_loop": true
         },
         {
-            "id": "n14",
+            "id": "n15",
             "kind": "SetVariable",
-            "seq": 14,
+            "seq": 15,
             "in_loop": true
         }
     ],
@@ -107,25 +113,31 @@
         },
         {
             "source": "n7",
-            "target": "n11",
+            "target": "n10",
             "type": "control",
             "var": ""
         },
         {
-            "source": "n11",
+            "source": "n10",
             "target": "n12",
             "type": "control",
-            "var": "true"
+            "var": ""
         },
         {
-            "source": "n11",
+            "source": "n12",
             "target": "n13",
             "type": "control",
             "var": "true"
         },
         {
-            "source": "n11",
+            "source": "n12",
             "target": "n14",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n12",
+            "target": "n15",
             "type": "control",
             "var": "true"
         },
@@ -163,35 +175,41 @@
             "source": "n2",
             "target": "n9",
             "type": "data",
-            "var": "ultimobeat"
+            "var": "ultimopulso"
         },
         {
-            "source": "n14",
+            "source": "n15",
             "target": "n9",
             "type": "data",
-            "var": "ultimobeat"
+            "var": "ultimopulso"
         },
         {
             "source": "n9",
             "target": "n10",
             "type": "data",
-            "var": "left"
-        },
-        {
-            "source": "n7",
-            "target": "n10",
-            "type": "data",
-            "var": "intervalobeat"
+            "var": "value"
         },
         {
             "source": "n10",
             "target": "n11",
             "type": "data",
+            "var": "tiempotranscurrido"
+        },
+        {
+            "source": "n7",
+            "target": "n11",
+            "type": "data",
+            "var": "intervalopulso"
+        },
+        {
+            "source": "n11",
+            "target": "n12",
+            "type": "data",
             "var": "condition"
         },
         {
-            "source": "n13",
-            "target": "n14",
+            "source": "n14",
+            "target": "n15",
             "type": "data",
             "var": "time_1"
         }

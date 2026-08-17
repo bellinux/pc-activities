@@ -3,17 +3,26 @@
     "ast": {
         "blocks": [
             {
+                "type": "Event",
+                "label": "al iniciar",
+                "children": [
+                    { "type": "Assignment", "label": "fijar partidaEnCurso a falso", "children": [] }
+                ]
+            },
+            {
                 "type": "Loop",
                 "label": "para siempre",
                 "children": [
                     {
                         "type": "Conditional",
-                        "label": "si detectado entonces",
+                        "label": "si partidaEnCurso entonces",
                         "children": [
                             {
                                 "type": "Branch_True",
                                 "label": "entonces",
                                 "children": [
+                                    { "type": "Assignment", "label": "fijar columna a 0", "children": [] },
+                                    { "type": "Assignment", "label": "fijar fila a 0", "children": [] },
                                     {
                                         "type": "Loop",
                                         "label": "mientras ◻",
@@ -25,36 +34,47 @@
                                                     { "type": "Sensor", "label": "nivel de sonido", "children": [] }
                                                 ]
                                             },
+                                            { "type": "Action", "label": "graficar x columna y fila", "children": [] },
+                                            { "type": "Action", "label": "reproduce secuencia (feliz) en modo hasta que termine", "children": [] },
+                                            { "type": "Action", "label": "pausa (ms) 200", "children": [] },
                                             {
-                                                "type": "Loop",
-                                                "label": "para fila de 0 a 4",
+                                                "type": "Assignment",
+                                                "label": "fijar columna a ◻",
                                                 "children": [
+                                                    { "type": "Operator", "label": "columna + 1", "children": [] }
+                                                ]
+                                            },
+                                            {
+                                                "type": "Conditional",
+                                                "label": "si ◻ entonces",
+                                                "children": [
+                                                    { "type": "Operator", "label": "columna > 4", "children": [] },
                                                     {
-                                                        "type": "Loop",
-                                                        "label": "para columna de 0 a 4",
+                                                        "type": "Branch_True",
+                                                        "label": "entonces",
                                                         "children": [
+                                                            { "type": "Assignment", "label": "fijar columna a 0", "children": [] },
                                                             {
-                                                                "type": "Conditional",
-                                                                "label": "si ◻ entonces",
+                                                                "type": "Assignment",
+                                                                "label": "fijar fila a ◻",
                                                                 "children": [
-                                                                    {
-                                                                        "type": "Operator",
-                                                                        "label": "◻ ≥ 5",
-                                                                        "children": [
-                                                                            { "type": "Sensor", "label": "nivel de sonido", "children": [] }
-                                                                        ]
-                                                                    },
-                                                                    {
-                                                                        "type": "Branch_True",
-                                                                        "label": "entonces",
-                                                                        "children": [
-                                                                            { "type": "Action", "label": "graficar x columna y fila", "children": [] },
-                                                                            { "type": "Action", "label": "reproduce secuencia (feliz) en modo hasta que termine", "children": [] },
-                                                                            { "type": "Action", "label": "pausa (ms) 500", "children": [] }
-                                                                        ]
-                                                                    }
+                                                                    { "type": "Operator", "label": "fila + 1", "children": [] }
                                                                 ]
                                                             }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "Conditional",
+                                                "label": "si ◻ entonces",
+                                                "children": [
+                                                    { "type": "Operator", "label": "fila > 4", "children": [] },
+                                                    {
+                                                        "type": "Branch_True",
+                                                        "label": "entonces",
+                                                        "children": [
+                                                            { "type": "Assignment", "label": "fijar fila a 0", "children": [] }
                                                         ]
                                                     }
                                                 ]
@@ -65,7 +85,7 @@
                                     { "type": "Action", "label": "pausa (ms) 5000", "children": [] },
                                     { "type": "Action", "label": "para todos los sonidos", "children": [] },
                                     { "type": "Action", "label": "borrar la pantalla", "children": [] },
-                                    { "type": "Assignment", "label": "fijar detectado a falso", "children": [] }
+                                    { "type": "Assignment", "label": "fijar partidaEnCurso a falso", "children": [] }
                                 ]
                             }
                         ]
@@ -73,17 +93,10 @@
                 ]
             },
             {
-                "type": "Event",
-                "label": "al iniciar",
-                "children": [
-                    { "type": "Assignment", "label": "fijar detectado a falso", "children": [] }
-                ]
-            },
-            {
                 "type": "Event_Interrupt",
                 "label": "al detectar el sonido alto",
                 "children": [
-                    { "type": "Assignment", "label": "fijar detectado a verdadero", "children": [] }
+                    { "type": "Assignment", "label": "fijar partidaEnCurso a verdadero", "children": [] }
                 ]
             }
         ]

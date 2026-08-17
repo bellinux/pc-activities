@@ -1,10 +1,10 @@
 input.onSound(DetectedSound.Loud, function () {
-    flama = !(flama)
+    velaEncendida = !(velaEncendida)
 })
-let flama = false
-flama = true
+let velaEncendida = false
+velaEncendida = true
 basic.forever(function () {
-    if (flama) {
+    if (velaEncendida) {
         basic.showLeds(`
             . . . . .
             . # # # .
@@ -30,6 +30,7 @@ basic.forever(function () {
             . # # # .
             . # # # .
             `)
+        // Borra la punta de la llama anterior
         led.plot(2, 0)
         basic.pause(200)
     } else {

@@ -113,7 +113,7 @@
     <div class="eyebrow">Pensamiento Computacional · Protobject ↔ micro:bit</div>
     <h1>Propuestas de refactorización didáctica</h1>
     <p class="lede">Revisión de los <b>17 algoritmos</b>, uno por uno, buscando escribirlos de forma más clara sin cambiar
-    en nada lo que hacen. Son <b>propuestas</b>: no se modificó ningún archivo.</p>
+    en nada lo que hacen. Se escribieron como <b>propuestas</b>; la franja de abajo dice cuáles se aplicaron después.</p>
   </header>
 
   <div class="intro">
@@ -121,6 +121,31 @@
     no sobre el código real de cada una. Esa es la clave del método: si la reescritura se piensa en el vocabulario
     compartido, se puede aplicar igual en Protobject y en micro:bit, y <b>la equivalencia se conserva por construcción</b>
     en vez de tener que volver a demostrarse después.
+  </div>
+
+  <div class="callout" style="border-left-color:#1f7a45;background:#f4fbf6">
+    <h4>Estado al 17 de agosto de 2026 &mdash; casi todas aplicadas</h4>
+    <p>Este documento se escribió como un conjunto de <b>propuestas</b>. Desde entonces se aplicaron, y la
+    verificación de equivalencia se volvió a correr sobre los archivos nuevos: <b>las 17 actividades siguen siendo
+    equivalentes</b>, y con el resultado más limpio que ha dado la medición &mdash; las 17 con isomorfismo y
+    distancia de edición <b>0</b>, mismo número de nodos y de aristas en los dos lados. La refactorización no costó
+    ni un punto de equivalencia, que es exactamente lo que el método pretendía garantizar por construcción.</p>
+    <ul class="tight">
+      <li><b>Aplicadas completas:</b> <a href="#a3">3</a>, <a href="#a4">4</a>, <a href="#a6">6</a>,
+        <a href="#a11">11</a>, <a href="#a12">12</a>, <a href="#a14">14</a>, <a href="#a15">15</a>,
+        <a href="#a16">16</a> y <a href="#a17">17</a>.</li>
+      <li><b>Aplicada a medias:</b> <a href="#a10">10</a> &mdash; sí los nombres
+        (<code>pausaLarga</code>/<code>pausaCorta</code>), no el reordenamiento del lienzo: el
+        <code>para siempre</code> sigue siendo el primer bloque en las dos plataformas.</li>
+      <li><b>No aplicada, por decisión:</b> <a href="#a13">13</a> &mdash; ver el criterio de §4.</li>
+      <li><b>De regalo, y no estaba propuesto:</b> en la <a href="#a10">10</a> se alineó el orden de los dos
+        manejadores de gesto entre plataformas. Eso cerró una anomalía de medición que llevaba tiempo abierta.</li>
+    </ul>
+    <p style="margin-bottom:0"><b>Una corrección que nos toca a nosotros, no al código.</b> La versión anterior de
+    la revisión de equivalencia dejaba en la actividad 12 una «pregunta abierta» sobre el redondeo, diciendo que
+    micro:bit redondeaba al entero más cercano y Protobject hacia arriba. Era falso: <b>las dos redondean hacia
+    arriba</b>, y ya lo hacían antes. El fallo estaba en el programa que lee los bloques, que descartaba el campo
+    que dice de qué tipo de redondeo se trata. Ya está corregido, y la pregunta se retiró.</p>
   </div>
 
   <h2 class="section-title"><span class="n">§1</span> Las tres reglas de la revisión</h2>
@@ -794,7 +819,7 @@ sino:
 
   <footer>
     Protobject · Pensamiento Computacional · revisión de los 17 algoritmos en el lenguaje de bloques común.
-    Ningún archivo fue modificado: todo lo anterior son propuestas.
+    Escrito como propuestas el 17-08-2026 y actualizado el mismo día con el estado de aplicación. La verificación de equivalencia se volvió a correr después de aplicarlas: 17/17, GED 0.
   </footer>
 
 </div>

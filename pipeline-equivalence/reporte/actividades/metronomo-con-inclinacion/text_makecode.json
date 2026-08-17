@@ -1,13 +1,14 @@
 {
     "platform": "MakeCode",
     "extracted_text": [
+        "al iniciar:",
+        "  fijar ultimoPulso a 0",
         "para siempre:",
         "  fijar bpm a ((aceleración (mg) x) + 600)",
-        "  fijar intervaloBeat a (60000 ÷ bpm)",
-        "  si (((tiempo de ejecución (ms)) − ultimoBeat) > intervaloBeat) entonces:",
+        "  fijar intervaloPulso a (60000 ÷ bpm)",
+        "  fijar tiempoTranscurrido a ((tiempo de ejecución (ms)) − ultimoPulso)",
+        "  si (tiempoTranscurrido > intervaloPulso) entonces:",
         "    reproduce secuencia (tono La#3 durante (1/4 pulso)) en modo hasta que termine",
-        "    fijar ultimoBeat a (tiempo de ejecución (ms))",
-        "al iniciar:",
-        "  fijar ultimoBeat a 0"
+        "    fijar ultimoPulso a (tiempo de ejecución (ms))"
     ]
 }

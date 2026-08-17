@@ -1,20 +1,20 @@
 input.onLogoEvent(TouchButtonEvent.Touched, function () {
-    if (pausado) {
-        pausado = false
-        tiempo = randint(5, 15)
-        music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Baddy), music.PlaybackMode.LoopingInBackground)
+    if (listo) {
+        listo = false
         // Temporizador con tiempo inicial aleatorio, valor entre 5 y 15.
-        while (tiempo > 0) {
-            tiempo += -1
+        tiempoRestante = randint(5, 15)
+        music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Baddy), music.PlaybackMode.LoopingInBackground)
+        while (tiempoRestante > 0) {
+            tiempoRestante += -1
             basic.pause(1000)
         }
         music.stopAllSounds()
         music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Wawawawaa), music.PlaybackMode.InBackground)
         basic.pause(4000)
         music.stopAllSounds()
-        pausado = true
+        listo = true
     }
 })
-let tiempo = 0
-let pausado = false
-pausado = true
+let tiempoRestante = 0
+let listo = false
+listo = true

@@ -2,25 +2,31 @@ ACTIVIDAD: 22.2-scream-battle
 CODE: gritometro-tiempo-gritos
 COMPONENTES: ReproductorSonido1=AudioPlayer, NivelRuido2=NoiseLevel, DibujoLED3=MatrixDraw
 
-AL INICIAR
-  ESTABLECER var:detectado = FALSE
-
 REPETIR PARA SIEMPRE (bucle principal)
   SI
-    [si var:detectado]
+    [si var:partidaEnCurso]
+    ESTABLECER var:columna = 1
+    ESTABLECER var:fila = 1
     MIENTRAS (WHILE) (NivelRuido2.leer(noise) >= 5)
-      CONTAR CON fila DE 1 A 7 PASO 1
-        CONTAR CON columna DE 1 A 7 PASO 1
-          SI
-            [si (NivelRuido2.leer(noise) >= 5)]
-            DibujoLED3_drawOnXY_set_2  VAR=var:columna  VAR2=var:fila  VAR3=colour_picker(COLOUR=#ff4444)
-            ReproductorSonido1_play_set_2  VAR=sounds_list(VAR=shoppingCart.mp3)
-            ESPERAR  ms  VAR=500
+      DibujoLED3_drawOnXY_set_2  VAR=var:columna  VAR2=var:fila  VAR3=colour_picker(COLOUR=#ff4444)
+      ReproductorSonido1_play_set_2  VAR=sounds_list(VAR=shoppingCart.mp3)
+      ESPERAR  ms  VAR=500
+      ESTABLECER var:columna = (var:columna + 1)
+      SI
+        [si (var:columna > 7)]
+        ESTABLECER var:columna = 1
+        ESTABLECER var:fila = (var:fila + 1)
+      SI
+        [si (var:fila > 7)]
+        ESTABLECER var:fila = 1
     ReproductorSonido1_play_set_2  VAR=sounds_list(VAR=shortMelody.mp3)
     ESPERAR  s  VAR=5
     ReproductorSonido1_stop_set_3
     DibujoLED3_clear_set_4
-    ESTABLECER var:detectado = FALSE
+    ESTABLECER var:partidaEnCurso = FALSE
+
+AL INICIAR
+  ESTABLECER var:partidaEnCurso = FALSE
 
 protobject_NivelRuido2_change  property=suddenIncrease
-  ESTABLECER var:detectado = TRUE
+  ESTABLECER var:partidaEnCurso = TRUE
