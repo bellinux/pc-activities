@@ -24,7 +24,7 @@ repetir para siempre:
         ..###..
         ..###..
         ..###..
-    dibuja en x 4 y 2 con color #ff0000 en DibujoLED1   // Borra la punta de la llama anterior
+    dibuja en x 4 y 2 con color #ff0000 en DibujoLED1   // Dibuja la punta de la llama en el centro. (Quien borra la punta anterior es el redibujo de la vela, un bloque más arriba.)
     retraso de 200 milisegundos
   sino:
     borrar dibujo en DibujoLED1

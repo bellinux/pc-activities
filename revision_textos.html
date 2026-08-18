@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Los textos frente al código</title>
+<style>
+  :root{
+    --bg:#f6f7f9; --card:#ffffff; --ink:#1f2933; --muted:#64748b; --line:#e3e8ee;
+    --indigo:#4f46e5; --indigo-bg:#eef0fe;
+    --verde:#1f7a45; --verde-bg:#e9f6ee;
+    --ambar:#b06f12; --ambar-bg:#fdf2e2;
+    --vino:#8B2418; --vino-bg:#f6e9e7;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.7;font-size:15px}
+  .wrap{max-width:940px;margin:0 auto;padding:36px 20px 90px}
+  header.hero{border-bottom:2px solid var(--ink);padding-bottom:22px;margin-bottom:8px}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--indigo)}
+  h1{font-size:30px;margin:6px 0 8px;letter-spacing:-.015em;line-height:1.2}
+  .lede{color:#475569;font-size:16px;max-width:720px}
+  .intro{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin:22px 0;color:#374151}
+  .intro b{color:var(--ink)}
+  h2.section-title{font-size:20px;margin:44px 0 4px;padding-top:10px;border-top:1px solid var(--line)}
+  h2.section-title .n{color:var(--muted);font-size:13px;font-weight:700;letter-spacing:.06em;display:block;text-transform:uppercase;margin-bottom:2px}
+  .section-lede{color:#475569;margin:6px 0 18px;max-width:720px}
+  h3.group{font-size:16px;margin:30px 0 2px}
+  .group-note{color:var(--muted);font-size:13.5px;margin:0 0 14px}
+
+  a{color:var(--indigo)}
+  code{background:#eef1f5;border-radius:4px;padding:1px 5px;font-size:.9em;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+
+  .toc{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 6px}
+  .toc a{text-decoration:none;font-size:12.5px;font-weight:600;color:var(--indigo);
+    background:var(--indigo-bg);border:1px solid #dfe1fb;border-radius:999px;padding:5px 12px}
+  .toc a:hover{background:#e2e4fd}
+
+  .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0}
+  .scroll table{margin:0}
+  table.res{width:100%;min-width:560px;border-collapse:collapse;background:var(--card);
+    border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:13.5px}
+  table.res th{background:#f0f2f6;text-align:left;padding:9px 12px;font-size:12px;
+    text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700}
+  table.res td{padding:9px 12px;border-top:1px solid var(--line);vertical-align:top}
+  table.res td.n{color:var(--muted);font-weight:700;width:34px;text-align:right}
+  table.res td.act{font-weight:600;white-space:nowrap}
+  table.res td.act a{text-decoration:none}
+  table.res tr:hover td{background:#fafbfd}
+  table.mini{width:100%;min-width:460px;border-collapse:collapse;font-size:13px;background:var(--card);
+    border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  table.mini th{background:#f0f2f6;text-align:left;padding:8px 11px;font-size:11.5px;
+    text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  table.mini td{padding:8px 11px;border-top:1px solid var(--line);vertical-align:top}
+  table.mini td.a{font-weight:600;white-space:nowrap;width:150px}
+
+  .tag{display:inline-block;font-size:11px;font-weight:700;border-radius:999px;padding:2px 9px;white-space:nowrap}
+  .t-gr{background:var(--vino-bg);color:var(--vino)}
+  .t-me{background:var(--ambar-bg);color:var(--ambar)}
+  .t-ok{background:var(--verde-bg);color:var(--verde)}
+
+  .card{background:var(--card);border:1px solid var(--line);border-left-width:5px;border-radius:12px;
+    padding:20px 24px 22px;margin:14px 0;box-shadow:0 1px 2px rgba(16,24,40,.04);scroll-margin-top:20px}
+  .card .num{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .card .num .c{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;font-weight:500;text-transform:none}
+  .card h4{margin:2px 0 12px;font-size:17px}
+  .card p{margin:9px 0}
+  .k-gr{border-left-color:var(--vino)}
+  .k-me{border-left-color:#e0992a}
+  .k-ok{border-left-color:var(--verde)}
+
+  /* ---- bloque de hallazgo: dice / hace / choca / cambiaría ---- */
+  .find{border:1px solid var(--line);border-radius:10px;margin:16px 0 0;overflow:hidden;background:#fcfcfd}
+  .find > div{padding:10px 14px;border-top:1px solid var(--line);font-size:14px}
+  .find > div:first-child{border-top:none}
+  .find .lbl{display:inline-block;min-width:92px;font-size:11px;font-weight:700;letter-spacing:.07em;
+    text-transform:uppercase;color:var(--muted);vertical-align:top}
+  .find .body{display:inline-block;width:calc(100% - 102px);vertical-align:top}
+  .f-say{background:#fff}
+  .f-say .body{color:#475569;font-style:italic}
+  .f-say .body b{font-style:normal;color:var(--ink)}
+  .f-say .body code{font-style:normal}
+  .f-do{background:#fbfbfd}
+  .f-do .body{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;
+    color:#334155;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere}
+  .f-do .body.prose{font-family:inherit;font-size:14px;white-space:normal;color:#334155}
+  .f-cl{background:#fff8ec}
+  .f-cl .lbl{color:#9a7118}
+  .f-cl .body{color:#7a5a19}
+  .f-cl .body b{color:#5e440f}
+  .f-st{background:#eef6fb;border-top:1px solid var(--line)}
+  .f-st .lbl{color:#1f4b66}
+  .f-st .body{color:#1f4b66;font-weight:600}
+  .f-st .body .pend{color:#9a3412;font-weight:700}
+  .f-fix{background:var(--verde-bg)}
+  .f-fix .lbl{color:#2f6b4c}
+  .f-fix .body{color:#25543c}
+  .f-fix .body b{color:#143d29}
+  .f-fix .body code{background:#dcefe3}
+  @media (max-width:560px){
+    .find .lbl{display:block;min-width:0;margin-bottom:2px}
+    .find .body{display:block;width:100%}
+  }
+
+  /* ---- botones de decisión ---- */
+  .decide{background:#f8f9fb;display:flex;gap:8px;align-items:center}
+  .decide button{border:1px solid var(--line);background:#fff;border-radius:8px;padding:5px 14px;
+    font-size:12.5px;font-weight:700;cursor:pointer;color:#475569;font-family:inherit}
+  .decide button:hover{border-color:#94a3b8}
+  .decide .b-acc.on{background:var(--verde);border-color:var(--verde);color:#fff}
+  .decide .b-rej.on{background:var(--vino);border-color:var(--vino);color:#fff}
+
+  #barra{position:fixed;left:0;right:0;bottom:0;background:var(--ink);color:#e6e9ee;z-index:50;
+    box-shadow:0 -4px 16px rgba(16,24,40,.18)}
+  #barra .in{max-width:940px;margin:0 auto;padding:10px 20px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  #barra #cnt{font-size:13px;flex:1;min-width:180px}
+  #barra button{border:none;border-radius:8px;padding:7px 16px;font-size:13px;font-weight:700;
+    cursor:pointer;font-family:inherit}
+  #barra #dl{background:#4ade80;color:#0b2916}
+  #barra #dl:hover{background:#34d399}
+  #barra #clr{background:#3b4453;color:#cbd5e1}
+
+  .keep{background:#f4f6f9;border:1px solid var(--line);border-radius:8px;padding:11px 15px;margin:14px 0 0;font-size:13.5px;color:#3f4b5b}
+  .callout{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--indigo);
+    border-radius:12px;padding:18px 22px;margin:18px 0;color:#374151}
+  .callout h4{margin:0 0 8px;font-size:16px;color:var(--ink)}
+  ul.tight{margin:8px 0;padding-left:20px}
+  ul.tight li{margin:5px 0}
+  pre{background:#fbfbfd;border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:10px 0 0;
+    overflow-x:auto;font-size:12.5px;line-height:1.6;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#334155}
+  footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">Pensamiento Computacional · Protobject</div>
+    <h1>Los textos frente al código</h1>
+    <p class="lede">Revisión de las <b>17 fichas</b> contra el programa Protobject que cada una describe. Cada
+    hallazgo trae cuatro líneas: <b>qué dice</b> el texto, <b>qué hace</b> el código, <b>dónde chocan</b> — y
+    <b>con qué lo cambiaría</b>.</p>
+  </header>
+
+  <div class="intro">
+    <b>Estado: TODO APLICADO (17-08-2026).</b> El autor aprobó las 38 propuestas en bloque, así que los botones y
+    el JSON ya no hacen falta: cada hallazgo lleva ahora una línea <i>Estado</i> con lo que se hizo. Tres puntos
+    quedaron aplicados solo del lado Protobject — el <code>.hex</code> de micro:bit no se puede editar sin
+    recompilar — y están marcados en ámbar. El detalle de lo pendiente, al final, en <a href="#s7">«Qué queda»</a>.
+    <br><br>
+    Las fichas describen la versión Protobject, y así se revisaron. Donde micro:bit hace algo distinto no es un
+    error del texto: va aparte en <a href="#s5">§5</a>.
+  </div>
+
+  <div class="callout" style="border-left-color:#1f7a45;background:#f4fbf6">
+    <h4>Hallazgos retirados en esta pasada</h4>
+    <p>Todos por el mismo motivo: leer el archivo en vez de la actividad.</p>
+    <ul class="tight">
+      <li><b>«una luz» (4)</b> — tres LEDs que se mueven juntos <b>son</b> una luz que se mueve. Así se dice y así se ve.</li>
+      <li><b>«el murciélago» (8)</b> — el murciélago es el objeto físico que el estudiante construye; la matriz solo le pone la luz.</li>
+      <li><b>Las direcciones</b> — con el celular acostado, la <code>y</code> del código se ve como movimiento lateral. La ficha 12 lo documenta; ninguna frase de dirección se juzga sin ese contexto.</li>
+      <li><b>«durmiente» (10)</b> — dormir no es detenerse: un corazón durmiente late lento, y eso es exactamente lo que hace el ritmo lento del código. La metáfora funciona. Reescrito, el hallazgo no se sostiene.</li>
+      <li><b>«acelerado» en Reflexiona (10)</b> — puede ser un <b>tercer</b> estado, más rápido que el activo. La pregunta funciona. Retirado.</li>
+      <li><b>«mapeamos» (16)</b> — en lenguaje didáctico «mapear» vale como «relacionar un valor con otro»; el caso extremo de la división era un tecnicismo, no una incoherencia. Retirado.</li>
+    </ul>
+  </div>
+
+  <h2 class="section-title"><span class="n">§1</span> Resumen</h2>
+
+  <div class="scroll">
+  <table class="res">
+    <tr><th></th><th>Actividad</th><th>Ficha</th><th>Lo principal</th></tr>
+    <tr><td class="n">1</td><td class="act"><a href="#a1">corazón</a></td><td><span class="tag t-ok">coherente</span></td><td>Solo redacción es-CL.</td></tr>
+    <tr><td class="n">2</td><td class="act"><a href="#a2">xilófono</a></td><td><span class="tag t-me">revisar</span></td><td>El <code>60</code>: la ficha dice qué es (el Do central) y el bloque para qué sirve — falta unir las dos mitades.</td></tr>
+    <tr><td class="n">3</td><td class="act"><a href="#a3">xilófono LEDs</a></td><td><span class="tag t-ok">casi</span></td><td>«La División Mágica» cuenta la mitad de la fórmula.</td></tr>
+    <tr><td class="n">4</td><td class="act"><a href="#a4">visualizador</a></td><td><span class="tag t-me">revisar</span></td><td>Los bloques se ven en inglés: el <code>.ptj</code> tiene los componentes mal nombrados.</td></tr>
+    <tr><td class="n">5</td><td class="act"><a href="#a5">robot cosquilloso</a></td><td><span class="tag t-ok">casi</span></td><td>Falta el bloque que devuelve la cara de reposo.</td></tr>
+    <tr><td class="n">6</td><td class="act"><a href="#a6">alarma de galletas</a></td><td><span class="tag t-me">revisar</span></td><td>Empieza diciendo que los programas ya tienen memoria. No la tienen.</td></tr>
+    <tr><td class="n">7</td><td class="act"><a href="#a7">despertador</a></td><td><span class="tag t-me">revisar</span></td><td>Remite a otra actividad, también desde dentro de un bloque.</td></tr>
+    <tr><td class="n">8</td><td class="act"><a href="#a8">murciélago</a></td><td><span class="tag t-me">revisar</span></td><td>Diez remisiones al girasol, y la animación sin describir.</td></tr>
+    <tr><td class="n">9</td><td class="act"><a href="#a9">desafío del robot</a></td><td><span class="tag t-me">revisar</span></td><td>La celebración no suena una vez: se repite para siempre. Y la ficha no cuenta por qué crece la barra.</td></tr>
+    <tr><td class="n">10</td><td class="act"><a href="#a10">corazón del robot</a></td><td><span class="tag t-me">revisar</span></td><td>Llama «velocidad» a variables que guardan tiempo de espera: la relación es la inversa.</td></tr>
+    <tr><td class="n">11</td><td class="act"><a href="#a11">vela</a></td><td><span class="tag t-ok">casi</span></td><td>Falta un renombre de cinco.</td></tr>
+    <tr><td class="n">12</td><td class="act"><a href="#a12">no derrames</a></td><td><span class="tag t-ok">casi</span></td><td>Una pregunta quedó fósil.</td></tr>
+    <tr><td class="n">13</td><td class="act"><a href="#a13">interruptor</a></td><td><span class="tag t-me">revisar</span></td><td>Describe un paso del <code>al iniciar</code> que no existe.</td></tr>
+    <tr><td class="n">14</td><td class="act"><a href="#a14">encendido</a></td><td><span class="tag t-me">cambiar texto</span></td><td>Decidido: la ficha se actualiza al marco del programa. Propuestas listas.</td></tr>
+    <tr><td class="n">15</td><td class="act"><a href="#a15">papa explosiva</a></td><td><span class="tag t-me">revisar</span></td><td>La bandera no se menciona, y por eso el texto afirma dos cosas falsas.</td></tr>
+    <tr><td class="n">16</td><td class="act"><a href="#a16">metrónomo</a></td><td><span class="tag t-gr">grave</span></td><td>Tres nombres de variable que no existen en el código.</td></tr>
+    <tr><td class="n">17</td><td class="act"><a href="#a17">batalla de gritos</a></td><td><span class="tag t-me">revisar</span></td><td>Habla de un temporizador que ya no existe.</td></tr>
+  </table>
+  </div>
+
+  <div class="toc">
+    <a href="#s2">§2 Pasadas globales</a>
+    <a href="#s3">§3 Ficha por ficha</a>
+    <a href="#s5">§5 Adaptaciones de micro:bit</a>
+    <a href="#s6">§6 Ilustraciones</a>
+    <a href="#s7">§7 Qué queda</a>
+  </div>
+
+  <h2 class="section-title" id="s2"><span class="n">§2</span> Dos pasadas globales</h2>
+  <p class="section-lede">Correcciones transversales que se aceptan o rechazan en bloque.</p>
+
+  <div class="find" data-id="g-escl" data-act="global" data-file="_activities/*.es.md (17 fichas)">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado en las 17 fichas. Excluidos, como estaba dicho: el <code>permalink</code> y el nombre del SVG de la 15 (rompen enlaces; decisión aparte).</span></div>
+    <div class="f-say"><span class="lbl">Dice</span><span class="body"><code>computadora</code> en las 17 fichas · <code>teléfono</code> en 10 · <code>smartphone</code> en 7 · <code>patata</code> en el <code>permalink</code> y el nombre del SVG de la 15.</span></div>
+    <div class="f-cl"><span class="lbl">Problema</span><span class="body">Regla es-CL del proyecto: <code>celular</code>, <code>computador</code>, <code>papa</code>. Son 39 casos, casi todos en la línea de materiales que se repite con cinco variantes.</span></div>
+    <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">Pasada mecánica en las 17: <code>computadora</code> → <code>computador</code>, <code>teléfono</code>/<code>smartphone</code> → <code>celular</code>, y unificar la línea de materiales en una sola forma: «Celular y computador». <b>Excluye</b> el <code>permalink</code> y el nombre de archivo de la 15 (rompen enlaces): esos dos, solo si lo confirmas aparte.</span></div>
+  </div>
+
+  <div class="find" data-id="g-rem" data-act="global" data-file="9 fichas .es.md">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado: las remisiones de las 9 fichas reescritas conservando el contenido didáctico. Verificación global: cero restos (las únicas coincidencias que quedan son autorreferencias de cada ficha a su propio título).</span></div>
+    <div class="f-say"><span class="lbl">Dice</span><span class="body">«el proyecto anterior» · «la última actividad» · «el próximo proyecto» · «Despertador de Girasol» · «Interruptor Mágico de Aplausos»… — <b>25 remisiones</b> en 9 fichas (peores: la 8 con diez y la 14 con ocho).</span></div>
+    <div class="f-cl"><span class="lbl">Problema</span><span class="body">Regla dura del proyecto: la progresión está en el <b>orden</b>, no en las remisiones. Ninguna actividad debe nombrar a otra.</span></div>
+    <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">Reescribir las 25 conservando el contenido didáctico sin nombrar nada. El patrón: «Nuestro girasol buscaba la luz» → «Muchos programas se activan con la luz»; «Comparen este código con el del Despertador de Girasol» → «Miren su propio código: ¿cuál es el único bloque que decide si la criatura ama el día o la noche?»; «Partiremos de la base del Interruptor Mágico» → «Necesitarás 2 componentes…». Te presento las 25 reescrituras completas para vista previa antes de tocar nada.</span></div>
+  </div>
+
+  <h2 class="section-title" id="s3"><span class="n">§3</span> Ficha por ficha</h2>
+
+  <!-- ============ 16 ============ -->
+  <div class="card k-gr" id="a16">
+    <div class="num">16 · <span class="c">metronomo-con-inclinacion</span></div>
+    <h4>El Metrónomo de DJ</h4>
+
+    <div class="find" data-id="f16-1" data-act="22.1-dj-metronome" data-file="_activities/22.1-dj-metronome.es.md">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">«…prestando especial atención a la estructura condicional <code>si (tiempoActual - ultimoTiempo) &gt; intervalo</code>» — y en otra sección, «constantemente calculamos el tiempo que ha pasado: <code>tiempoActual - ultimoPulso</code>».</span></div>
+      <div class="f-do"><span class="lbl">Hace</span><span class="body">establecer tiempoTranscurrido a (milisegundos − ultimoPulso)
+si (tiempoTranscurrido &gt; intervaloPulso):</span></div>
+      <div class="f-cl"><span class="lbl">Choca</span><span class="body">Ninguno de los tres nombres que cita —<code>tiempoActual</code>, <code>ultimoTiempo</code>, <code>intervalo</code>— existe en el programa. El estudiante que los busque en su pantalla no los va a encontrar. Y la resta ya no está anidada dentro del <code>si</code>: hoy tiene nombre propio.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">Guía docente: «…prestando especial atención a los dos pasos: <code>establecer tiempoTranscurrido a (milisegundos − ultimoPulso)</code> y <code>si (tiempoTranscurrido &gt; intervaloPulso)</code>». Sección de aprendizaje: «constantemente calculamos el tiempo que ha pasado y lo guardamos con nombre propio: <code>tiempoTranscurrido = milisegundos − ultimoPulso</code>». Y en «Composición del Código», nombrar la variable: «con el reloj calculamos el <code>tiempoTranscurrido</code> desde el <code>ultimoPulso</code>, y el <code>si</code> compara esas dos duraciones».</span></div>
+    </div>
+
+    <div class="keep"><code>planificacion.html</code> usa un cuarto nombre, <code>ultimoLatido</code> —está en tus
+    decisiones abiertas—, y afirma que el programa «muestra el bpm», cosa que no hace. Lo dejo anotado fuera de los
+    botones porque el nombre es una decisión editorial tuya.</div>
+  </div>
+
+  <!-- ============ 10 ============ -->
+  <div class="card k-me" id="a10">
+    <div class="num">10 · <span class="c">corazon-variables-eventos</span></div>
+    <h4>El Corazón de Mi Robot Amigo</h4>
+    <p>Dos hallazgos de la pasada anterior se retiraron (ver arriba: «durmiente» y «acelerado»). Queda uno.</p>
+
+    <div class="find" data-id="f10-1" data-act="16.5-my-robot-friend-heart" data-file="_activities/16.5-my-robot-friend-heart.es.md">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">«…en cada ciclo, <b>lee</b> las <b>variables de velocidad</b> para saber qué tan rápido debe latir» — y otras dos veces igual.</span></div>
+      <div class="f-do"><span class="lbl">Hace</span><span class="body">retraso de pausaLarga milisegundos</span></div>
+      <div class="f-cl"><span class="lbl">Choca</span><span class="body">Las variables no guardan velocidad: guardan <b>tiempo de espera</b>. La relación es la inversa —más espera, más lento—, así que «variables de velocidad» sugiere que subir el número acelera el corazón, cuando es al revés. Es la confusión que el renombre a <code>pausaLarga</code>/<code>pausaCorta</code> vino a eliminar.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">Usar los nombres reales y enunciar la regla una vez: «en cada ciclo, <b>lee</b> <code>pausaLarga</code> y <code>pausaCorta</code> para saber cuánto esperar entre un dibujo y el siguiente»; «su único trabajo es <b>escribir</b> un nuevo valor en <code>pausaLarga</code> y <code>pausaCorta</code>»; y en Composición: «Ojo: estas variables no guardan velocidad sino <b>milisegundos de espera</b> — mientras más espera, más lento late el corazón».</span></div>
+    </div>
+
+    <div class="find" data-id="f10-2" data-act="16.5-my-robot-friend-heart" data-file="_activities/16.5-my-robot-friend-heart.es.md">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">(Composición) «…establecemos las variables de velocidad a un ritmo "tranquilo"» — sin más.</span></div>
+      <div class="f-do"><span class="lbl">Hace</span><span class="body">al iniciar:            pausaLarga = 500, pausaCorta = 150
+gesto "vuelve la calma": pausaLarga = 500, pausaCorta = 150   ← los MISMOS números</span></div>
+      <div class="f-cl"><span class="lbl">Choca</span><span class="body">El ritmo tranquilo está escrito <b>dos veces</b>, y el texto no lo advierte. Quien cambie los números solo en <code>al iniciar</code> verá que el primer gesto de calma se los deshace, y creerá que el programa no obedece.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">Añadir al final de la Composición: «Ojo: el ritmo tranquilo aparece <b>dos veces</b> — en <code>al iniciar</code> y en el gesto que devuelve la calma. Si cambias uno, cambia también el otro, o el gesto deshará tu ajuste.»</span></div>
+    </div>
+  </div>
+
+  <!-- ============ 14 ============ -->
+  <div class="card k-me" id="a14">
+    <div class="num">14 · <span class="c">17.2-cinematic-power-on</span></div>
+    <h4>El Encendido Cinematográfico — decidido: se cambia el texto</h4>
+    <p>El renombre de los estudiantes puso los contadores en el marco del programa (<code>filas</code> afuera,
+    <code>columnas</code> adentro, <code>x = columnas, y = filas</code>); la ficha seguía hablando en el marco de
+    quien mira. <b>Decisión tomada: el programa se queda como está y la ficha se actualiza.</b> Propuestas:</p>
+
+    <div class="find" data-id="f14-1" data-act="17.2-cinematic-power-on" data-file="_activities/17.2-cinematic-power-on.es.md">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">«El <b>bucle exterior</b> recorre las <b>columnas</b> (de 1 a 7). Por cada columna, el <b>bucle interior</b> recorre todas las <b>filas</b> de esa columna.»</span></div>
+      <div class="f-do"><span class="lbl">Hace</span><span class="body">contar con filas desde 1 hasta 7:
+    contar con columnas desde 1 hasta 7:
+        dibuja en x columnas y filas</span></div>
+      <div class="f-cl"><span class="lbl">Choca</span><span class="body">La ficha y el código usan las mismas dos palabras al revés. El estudiante que lea ambas encuentra que «exterior = columnas» en el papel y «exterior = filas» en la pantalla.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">«El <b>bucle exterior</b> recorre las <b>filas</b> (de 1 a 7): elige un renglón de la cuadrícula. Por cada fila, el <b>bucle interior</b> recorre las <b>columnas</b> y va encendiendo el píxel <code>x = columnas, y = filas</code>. La variable de adentro es la que cambia <b>más rápido</b>: da sus 7 vueltas completas por cada valor de la de afuera — por eso el bloque <code>dibuja</code> se ejecuta 7 × 7 = 49 veces, una por cada LED.» <i>(Incluye el concepto que hoy falta: cuál variable cambia más rápido.)</i></span></div>
+    </div>
+
+    <div class="find" data-id="f14-2" data-act="17.2-cinematic-power-on" data-file="_activities/17.2-cinematic-power-on.es.md">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">(Composición) «…dos bucles <code>contar con</code> anidados recorren cada <code>columna</code> y <code>fila</code>…» · (cierre docente) «¿Qué hace la variable 'columnas'? ¿Y la variable 'filas'?» · (Reflexiona) «¿Qué cambiarías para que el barrido fuera de arriba hacia abajo en lugar de lado a lado?»</span></div>
+      <div class="f-cl"><span class="lbl">Choca</span><span class="body">Los otros tres lugares donde la ficha nombra los bucles, todos en el orden viejo. Coherencia: si el párrafo principal cambia, estos tres tienen que cambiar con él.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">Composición: «…dos bucles <code>contar con</code> anidados recorren la cuadrícula: <code>filas</code> afuera y, dentro de cada fila, <code>columnas</code>, encendiendo cada píxel (<code>dibuja en x columnas y filas</code>) con una pausa de 10 ms.» Cierre docente: «¿Qué hace la variable <code>filas</code>? ¿Y <code>columnas</code>? ¿Cuál de las dos cambia más rápido?» Reflexiona: «El barrido recorre la cuadrícula renglón por renglón. ¿Qué cambiarías para que la recorriera columna por columna? (Pista: piensa cuál de los dos bucles va afuera y cuál adentro, sin tocar el bloque <code>dibuja</code>.)»</span></div>
+    </div>
+  </div>
+
+  <!-- ============ 15 ============ -->
+  <div class="card k-me" id="a15">
+    <div class="num">15 · <span class="c">papas-caliente-juego</span></div>
+    <h4>La Papa Explosiva Digital</h4>
+    <p>El renombre está completo. Lo que no se actualizó es el contenido.</p>
+
+    <div class="find" data-id="f15-1" data-act="19.1-digital-hot-potato" data-file="_activities/19.1-digital-hot-potato.es.md">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">«<b>Toda</b> la lógica del juego está dentro del evento <code>cuando es tocado</code>. Primero, se establece un <code>tiempoRestante</code> aleatorio…» — y en otra sección, «Presionar la pantalla <b>inicia</b> una nueva ronda del juego».</span></div>
+      <div class="f-do"><span class="lbl">Hace</span><span class="body">al iniciar el programa:
+  establecer listo a verdadero
+
+cuando BotónTáctil3 es tocado:
+  si listo:
+    establecer listo a falso
+    establecer tiempoRestante a (entero aleatorio de 5 a 15)</span></div>
+      <div class="f-cl"><span class="lbl">Choca</span><span class="body">Hay un <code>al iniciar</code> aparte; lo primero del evento no es el sorteo sino el <code>si listo</code>; y presionar <b>no</b> inicia una ronda si ya hay una en curso. La bandera es justo lo que impide que un segundo toque reinicie la partida — y el texto nunca la nombra.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">Añadir a «La Lógica de la Papa Caliente»: «<b>Bandera:</b> la variable <code>listo</code> recuerda si el juego está libre. Parte en verdadero en <code>al iniciar</code>; el evento solo arranca una ronda <code>si listo</code>, y lo primero que hace es ponerla en falso, para que un segundo toque no reinicie la ronda en curso.» Y en Composición: «Casi toda la lógica vive dentro del evento <code>cuando es tocado</code>, protegida por un <code>si listo</code>. Primero la bandera pasa a falso, luego se sortea <code>tiempoRestante</code> y comienza la música.»</span></div>
+    </div>
+
+    <div class="find" data-id="f15-2" data-act="19.1-digital-hot-potato" data-file="_activities/19.1-digital-hot-potato.es.md">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">«1. Primero, comprueba una condición (por ejemplo, <code>¿es el tiempo restante &gt; 0?</code>).»</span></div>
+      <div class="f-do"><span class="lbl">Hace</span><span class="body">repetir mientras (tiempoRestante &gt; 0):</span></div>
+      <div class="f-cl"><span class="lbl">Choca</span><span class="body">El renombre se aplicó también <em>dentro</em> de la cita de código: en prosa «el tiempo restante» está bien, pero entre comillas de código tiene que ser el nombre exacto del bloque.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body"><code>¿es tiempoRestante &gt; 0?</code></span></div>
+    </div>
+  </div>
+
+  <!-- ============ 9 ============ -->
+  <div class="card k-me" id="a9">
+    <div class="num">9 · <span class="c">juego-toques</span></div>
+    <h4>¡El Desafío de Activación del Robot!</h4>
+
+    <div class="find" data-id="f9-1" data-act="16.4-robot-activation-challenge" data-file="_activities/16.4-robot-activation-challenge.es.md">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">«…<b>se pintará la pantalla</b> según la cantidad de <code>energía</code> para que podamos ver el progreso del desafío.»</span></div>
+      <div class="f-do"><span class="lbl">Hace</span><span class="body">Cada vuelta del ciclo dibuja UNA sola línea de 3 píxeles. Dentro de esa rama nunca se borra.</span></div>
+      <div class="f-cl"><span class="lbl">Choca</span><span class="body">La frase sugiere que el programa dibuja una barra proporcional. No: dibuja una línea. <b>La barra existe porque lo dibujado antes sigue encendido</b> — es la pantalla la que recuerda, no el programa. Es el punto más difícil de la actividad y no está explicado; tampoco se menciona el <code>repetir para siempre</code> donde vive todo esto.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">«Todo esto vive dentro de <code>repetir para siempre</code>. Cada vuelta enciende <b>una sola línea</b> —la que corresponde a la energía actual— y como dentro de esa rama nunca se borra, las líneas anteriores quedan encendidas: <b>por eso ves crecer la barra</b>.»</span></div>
+    </div>
+
+    <div class="find" data-id="f9-2" data-act="16.4-robot-activation-challenge" data-file="_activities/16.4-robot-activation-challenge.es.md">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">«En caso contrario, sabremos que el robot ha sido activado y <b>reproducirá un sonido</b>.»</span></div>
+      <div class="f-do"><span class="lbl">Hace</span><span class="body">sino:
+  borrar dibujo · dibuja cara feliz · reproducir 'celebración final'
+  (y todo dentro de repetir para siempre)</span></div>
+      <div class="f-cl"><span class="lbl">Choca</span><span class="body">La rama de victoria tiene tres bloques y el texto menciona uno — falta la cara feliz, que es el premio visual. Y la celebración no suena una vez: al estar dentro del ciclo infinito, <b>se repite para siempre</b>.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">«En caso contrario, el robot se activa: se borra la barra, aparece una <b>cara feliz</b> y suena la celebración — y como todo vive dentro del ciclo, la celebración se repite hasta que reinicies el programa.»</span></div>
+    </div>
+
+    <div class="find" data-id="f9-3" data-act="16.4-robot-activation-challenge" data-file="_activities/16.4-robot-activation-challenge.es.md">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">«…quién puede <b>cargarla hasta 7</b> primero tocando la pantalla.»</span></div>
+      <div class="f-do"><span class="lbl">Hace</span><span class="body">si (energia &lt; 7): dibuja …    ← con energía 7 pasa directo a la victoria:
+                                  el séptimo escalón no llega a dibujarse</span></div>
+      <div class="f-cl"><span class="lbl">Choca</span><span class="body">El 7 es correcto (son 7 toques). Pero la barra sube <b>seis</b> escalones y al séptimo toque aparece directamente la cara: quien espere ver la barra llena antes de ganar, no la verá. Menor — decide tú si vale la aclaración.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">Media frase en Composición: «(La barra sube seis escalones: el séptimo toque no dibuja el último, sino que pasa directo a la celebración.)»</span></div>
+    </div>
+
+    <div class="keep">Decisión abierta tuya, fuera de los botones: la variable se llama <code>energia</code>, los
+    comentarios del código dicen «toques» y la ficha escribe <code>energía</code> con tilde en dos citas de bloque.
+    Conviene resolver las tres juntas.</div>
+  </div>
+
+  <!-- ============ 13 ============ -->
+  <div class="card k-me" id="a13">
+    <div class="num">13 · <span class="c">luz-encendida-al-ruido</span></div>
+    <h4>El Interruptor Mágico de Aplausos</h4>
+
+    <div class="find" data-id="f13-1" data-act="17.1-magic-clap-switch" data-file="_activities/17.1-magic-clap-switch.es.md">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">«<code>Al iniciar</code> prepara la variable <code>estado</code> <b>y colorea con negro el dibujo LED</b>.»</span></div>
+      <div class="f-do"><span class="lbl">Hace</span><span class="body">al iniciar el programa:
+  establecer estado a falso</span></div>
+      <div class="f-cl"><span class="lbl">Choca</span><span class="body">Ese segundo paso no existe: el <code>al iniciar</code> tiene una sola instrucción. El estudiante que siga la ficha al pie de la letra construirá un bloque de más.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">«<code>Al iniciar</code> solo prepara la variable <code>estado</code> en <code>falso</code>: la pantalla parte apagada y el programa queda esperando el primer aplauso.»</span></div>
+    </div>
+
+    <div class="find" data-id="f13-2" data-act="17.1-magic-clap-switch" data-file="_activities/17.1-magic-clap-switch.es.md">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">«…primero, usa la lógica de 'interruptor' (<code>estado = no estado</code>) para invertir el estado actual. Inmediatamente después, un bloque <code>si... sino...</code> lee el <i>nuevo</i> estado…»</span></div>
+      <div class="f-cl"><span class="lbl">Problema</span><span class="body">Describe bien el orden, pero no dice que sea <b>obligatorio</b> — y es el concepto central de la actividad.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">Añadir: «Este orden no es opcional: si el <code>si… sino…</code> leyera la variable <i>antes</i> de invertirla, la luz mostraría siempre el estado anterior — el interruptor iría un aplauso atrasado.»</span></div>
+    </div>
+  </div>
+
+  <!-- ============ 17 ============ -->
+  <div class="card k-me" id="a17">
+    <div class="num">17 · <span class="c">gritometro-tiempo-gritos</span></div>
+    <h4>La Batalla de Gritos</h4>
+
+    <div class="find" data-id="f17-1" data-act="22.2-scream-battle" data-file="_activities/22.2-scream-battle.es.md">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">«El <b>temporizador</b> de LEDS está en marcha» — y otra vez, «…el <b>temporizador</b> estará en marcha».</span></div>
+      <div class="f-do"><span class="lbl">Hace</span><span class="body">La reestructuración eliminó el reloj: no queda ningún bloque de tiempo.
+El avance es: encender un LED → esperar 500 ms → pasar a la casilla siguiente.</span></div>
+      <div class="f-cl"><span class="lbl">Choca</span><span class="body">Ya no hay temporizador. El tiempo se mide <b>contando LEDs</b>, uno cada medio segundo — un mecanismo distinto y más bonito de explicar. La palabra vieja hace buscar un bloque que no está.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">«<b>Estado de Conteo:</b> la barra de LEDs va avanzando; <code>partidaEnCurso</code> es verdadera.» Y en la otra: «…mientras el nivel de ruido sea mayor o igual a 5, la barra sigue avanzando <b>un LED cada medio segundo</b> (estado de Conteo).»</span></div>
+    </div>
+
+    <div class="find" data-id="f17-2" data-act="22.2-scream-battle" data-file="_activities/22.2-scream-battle.es.md">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">«Un <b>evento</b> de ruido fuerte inicia el juego, <b>pero solo si estamos en el estado de Espera</b>.»</span></div>
+      <div class="f-do"><span class="lbl">Hace</span><span class="body">cuando NivelRuido2 detecta aumento repentino:
+  establecer partidaEnCurso a verdadero      ← sin ninguna condición</span></div>
+      <div class="f-cl"><span class="lbl">Choca</span><span class="body">El evento dispara <b>siempre</b>; quien decide ignorarlo es el bucle principal. La distinción es el corazón de la máquina de estados que la actividad enseña — y unas líneas más abajo la propia ficha lo cuenta bien: se contradice.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">«Un <b>evento</b> de ruido fuerte pone en marcha el juego activando <code>partidaEnCurso</code>. El evento se dispara siempre; es el <b>bucle principal</b> el que solo le hace caso cuando está en Espera.»</span></div>
+    </div>
+
+    <div class="find" data-id="f17-3" data-act="22.2-scream-battle" data-file="_activities/22.2-scream-battle.es.md">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">(Composición) «…si la columna es mayor a 7, se seguirán iluminando los LEDs de la siguiente fila, y así sucesivamente.»</span></div>
+      <div class="f-do"><span class="lbl">Hace</span><span class="body">si (columna &gt; 7): columna = 1, fila = fila + 1
+si (fila &gt; 7):    fila = 1        ← este segundo paso no está contado</span></div>
+      <div class="f-cl"><span class="lbl">Choca</span><span class="body">El avance tiene dos pasos y el texto cuenta uno. Falta qué pasa al llenarse la pantalla (vuelve arriba y repinta: el gritómetro se satura y deja de cambiar) y que un grito durante los 5 s de enfriamiento se pierde sin aviso.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">«El avance funciona como escribir en un cuaderno: sumo 1 a la columna; si me pasé del borde, vuelvo a la primera columna y bajo una fila; y si me pasé de la última fila, vuelvo arriba — con la pantalla llena, el gritómetro repinta sobre lo encendido y ya no se ve cambio. Ojo: un grito durante los 5 segundos finales se pierde; hay que esperar a que la pantalla se apague y volver a gritar.»</span></div>
+    </div>
+  </div>
+
+  <!-- ============ 6 ============ -->
+  <div class="card k-me" id="a6">
+    <div class="num">6 · <span class="c">alarma-caja-galletas</span></div>
+    <h4>¡Alarma: El Ladrón de Galletas!</h4>
+
+    <div class="find" data-id="f6-1" data-act="16.1-cookie-thief-alarm" data-file="_activities/16.1-cookie-thief-alarm.es.md">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">(primera frase) «<b>Tus programas ya tienen memoria</b>, ¡ahora enseñémosles a tomar decisiones!»</span></div>
+      <div class="f-do"><span class="lbl">Hace</span><span class="body">Ninguna de las cinco actividades anteriores usa variables. La memoria se estrena en la 9.</span></div>
+      <div class="f-cl"><span class="lbl">Choca</span><span class="body">Da por sabido algo que el estudiante no ha visto nunca, en la frase de entrada.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">«Tus programas ya saben repetir y reaccionar a los sensores; ¡ahora enseñémosles a <b>tomar decisiones</b>!»</span></div>
+    </div>
+
+    <div class="find" data-id="f6-2" data-act="16.1-cookie-thief-alarm" data-file="_activities/16.1-cookie-thief-alarm.es.md">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">(cierre) «¡Y eso es lo que aprenderemos en <b>el próximo proyecto</b> con el bloque "Si... Sino..."!»</span></div>
+      <div class="f-cl"><span class="lbl">Problema</span><span class="body">Remite a otra actividad (regla dura) y <b>adelanta el <code>si no</code></b> en la lección que estrena el condicional <em>sin</em> rama falsa.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">«…necesitaríamos una forma de decirle al programa qué hacer cuando la condición <b>no</b> se cumple. ¿Se te ocurre cómo podría el programa apagar la alarma solo?»</span></div>
+    </div>
+
+    <div class="keep"><b>Aquí la refactorización arregló el texto:</b> «activa la secuencia de alarma con luces y
+    sonido» —luces primero— hoy es cierto en las dos plataformas. Único caso de los 17 donde el refactor cerró un
+    desajuste en vez de abrirlo.</div>
+  </div>
+
+  <!-- ============ 4 ============ -->
+  <div class="card k-me" id="a4">
+    <div class="num">4 · <span class="c">luci-discoteca-ruido</span></div>
+    <h4>El Visualizador de Música</h4>
+
+    <div class="find" data-id="f4-1" data-act="03.1-music-visualizer" data-file="protobject/equivalent-luci-discoteca-ruido.ptj + derivados">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado: componentes renombrados a <code>DibujoLED1</code>/<code>NivelRuido2</code> en el <code>.ptj</code>, derivados regenerados, AST actualizado y equivalencia re-verificada: 17/17 con GED 0.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">(paso 1 de «Crear») «Presiona <b>Añadir dispositivo</b> y selecciona <code>NivelRuido</code>… y <code>DibujoLED</code>.»</span></div>
+      <div class="f-do"><span class="lbl">Hace</span><span class="body">COMPONENTES: LEDDraw1=MatrixDraw, NoiseLevel2=NoiseLevel
+  clear en LEDDraw1
+  drawOnXY 3 … en LEDDraw1</span></div>
+      <div class="f-cl"><span class="lbl">Choca</span><span class="body">Única de las 17 con los componentes nombrados en inglés. El decodificador no reconoce la categoría y muestra los bloques en inglés: quien abre «Ver bloques en vivo» lee <code>clear en LEDDraw1</code> justo después de que la ficha le dijo <code>DibujoLED</code>.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body"><b>Cambio en el código, no en la ficha:</b> renombrar en el <code>.ptj</code> <code>LEDDraw1</code> → <code>DibujoLED1</code> y <code>NoiseLevel2</code> → <code>NivelRuido2</code>, regenerar los cuatro derivados y verificar que la equivalencia sigue en GED 0 (los nombres de instancia no son parte del nodo canónico, así que no debería moverse).</span></div>
+    </div>
+
+    <div class="find" data-id="f4-2" data-act="03.1-music-visualizer" data-file="_activities/03.1-music-visualizer.es.md">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">«La pantalla es una cuadrícula de LEDs y cada posición se identifica con <b>una</b> coordenada de fila (Y).»</span></div>
+      <div class="f-do"><span class="lbl">Hace</span><span class="body">dibuja en x 3 y ◻ · dibuja en x 4 y ◻ · dibuja en x 5 y ◻</span></div>
+      <div class="f-cl"><span class="lbl">Choca</span><span class="body">Como simplificación funciona (la altura es lo único que cambia). Pero la actividad lleva la etiqueta «Posición y Coordenadas» y el bloque que el estudiante arma pide <b>dos</b> coordenadas: decir que basta una choca con lo que ve al armar el bloque. Cuesta una línea evitarlo.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">«La pantalla es una cuadrícula de LEDs y cada posición se identifica con <b>dos</b> coordenadas: la columna (X) y la fila (Y). En este visualizador las columnas quedan fijas, y lo que el ruido controla es la fila.»</span></div>
+    </div>
+
+    <div class="find" data-id="f4-3" data-act="03.1-music-visualizer" data-file="_activities/03.1-music-visualizer.es.md">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">(Composición) «En un bucle <code>repetir para siempre</code>, el programa lee constantemente el <code>nivel de ruido</code>. Luego, usa ese número para decidir la fila…»</span></div>
+      <div class="f-do"><span class="lbl">Hace</span><span class="body">repetir para siempre:
+  borrar dibujo        ← primera instrucción, no mencionada
+  dibuja …</span></div>
+      <div class="f-cl"><span class="lbl">Choca</span><span class="body">El <code>borrar</code> que abre cada vuelta no se menciona, y es lo que impide que las luces anteriores queden encendidas — la pregunta que cualquier estudiante se hace al ver la luz «moverse».</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">«En un bucle <code>repetir para siempre</code>, el programa primero <b>borra el dibujo</b> —para que la luz anterior no quede encendida— y luego lee el <code>nivel de ruido</code> y decide en qué fila dibujar.»</span></div>
+    </div>
+  </div>
+
+  <!-- ============ 2 ============ -->
+  <div class="card k-me" id="a2">
+    <div class="num">2 · <span class="c">xilofono-inclinacion</span></div>
+    <h4>El Xilófono Mágico Inclinable</h4>
+
+    <div class="find" data-id="f2-1" data-act="02.2-xylophone" data-file="_activities/02.2-xylophone.es.md">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">«Haz clic en el signo de interrogación para abrir los comentarios… tomamos ese número, se lo sumamos a una <b>nota base (60, que es Do central)</b> y reproducimos el resultado.»</span></div>
+      <div class="f-do"><span class="lbl">Hace</span><span class="body">// comentario del propio bloque:
+"El teclado musical solo recibe números positivos, mientras la inclinación
+ puede tener valores negativos, por lo que sumamos un valor, en este caso 60."</span></div>
+      <div class="f-cl"><span class="lbl">Choca</span><span class="body">Las dos explicaciones son ciertas y <b>complementarias</b>: el 60 <b>es</b> el Do central (nota MIDI 60), y sumarlo es además lo que garantiza que el resultado nunca sea negativo. Pero la ficha da una mitad y el comentario del bloque da la otra, sin nada que las conecte — y la propia ficha manda abrir ese comentario. El estudiante aplicado encuentra dos explicaciones distintas del mismo número.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">«…se lo sumamos a una nota base (<b>60, que es el Do central</b>) y reproducimos el resultado. Ese corrimiento cumple además una segunda función: el teclado musical solo acepta números positivos y la inclinación puede ser negativa — sumar 60 asegura que la nota siempre exista.»</span></div>
+    </div>
+
+    <div class="find" data-id="f2-2" data-act="02.2-xylophone" data-file="_activities/02.2-xylophone.es.md">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">(pasos de «Crear») «1. …selecciona <code>Inclinación</code>. / 2. Presiona de nuevo… y selecciona <code>TecladoMusical</code>.»</span></div>
+      <div class="f-do"><span class="lbl">Hace</span><span class="body">COMPONENTES: TecladoMusical1, Inclinación2
+  tocar nota número (y in Inclinación2 + 60) en TecladoMusical1</span></div>
+      <div class="f-cl"><span class="lbl">Choca</span><span class="body">El orden de los pasos es el inverso al del proyecto guardado: siguiendo la ficha, el estudiante obtiene <code>Inclinación1</code>/<code>TecladoMusical2</code> y los bloques que ve dicen lo contrario. Pasa solo en los dos xilófonos.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">Invertir los dos pasos: primero <code>TecladoMusical</code>, después <code>Inclinación</code>. (Igual en la ficha 3, que hereda el mismo orden.)</span></div>
+    </div>
+  </div>
+
+  <!-- ============ 7 ============ -->
+  <div class="card k-me" id="a7">
+    <div class="num">7 · <span class="c">despertador-por-la-manana</span></div>
+    <h4>El Despertador de Girasol</h4>
+    <p>El código es el ejemplo canónico del <code>si … si no</code> y el texto lo describe bien. Los problemas son
+    de otro tipo.</p>
+
+    <div class="find" data-id="f7-1" data-act="16.2-sunflower-alarm-clock" data-file="protobject/equivalent-despertador-por-la-manana.ptj (comentario) + micro:bit a mano">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado en Protobject (el comentario vive en el <code>.ptj</code>). <span class="pend">⏳ micro:bit: mismo arreglo a mano en MakeCode y re-exportar el .hex.</span></span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">(comentario del bloque condicional, en ambas plataformas) «Este bloque es un condicional extendido, <b>en la actividad anterior</b> teníamos un bloque que ejecutaba su contenido si se cumple la condición…»</span></div>
+      <div class="f-cl"><span class="lbl">Problema</span><span class="body">La remisión prohibida está <b>dentro del código</b>. El lado Protobject puedo corregirlo yo (el comentario vive en el XML del <code>.ptj</code>); el lado micro:bit queda manual.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">«Condicional extendido: si la condición se cumple se ejecuta la primera parte; si no se cumple, se ejecuta una segunda parte distinta.» — la misma explicación, sin remitir a nada.</span></div>
+    </div>
+
+    <div class="find" data-id="f7-2" data-act="16.2-sunflower-alarm-clock" data-file="_activities/16.2-sunflower-alarm-clock.es.md">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">(guía docente) «SI hay luz, suena una melodía. SINO, <b>permanece en silencio</b>.»</span></div>
+      <div class="f-do"><span class="lbl">Hace</span><span class="body">sino:
+  detener sonido de ReproductorSonido3
+  borrar dibujo en DibujoLED2</span></div>
+      <div class="f-cl"><span class="lbl">Choca</span><span class="body">El <code>si no</code> no «permanece»: ejecuta dos acciones. Y ese es el punto de la actividad — la rama falsa <b>hace algo</b>. La frase trabaja contra la lección; la propia ficha lo dice bien dos secciones más abajo.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">«SI hay luz, suena una melodía. SINO, <b>apaga la melodía y la pantalla</b>.»</span></div>
+    </div>
+
+    <div class="find" data-id="f7-3" data-act="16.2-sunflower-alarm-clock" data-file="_activities/16.2-sunflower-alarm-clock.es.md">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">(Reflexiona) «¿Cómo cambiarías <b>solo la condición</b> para crear una luz de noche que se encienda automáticamente en la oscuridad?»</span></div>
+      <div class="f-do"><span class="lbl">Hace</span><span class="body">La rama verdadera tiene DOS acciones: melodía + dibujo.</span></div>
+      <div class="f-cl"><span class="lbl">Choca</span><span class="body">Invirtiendo solo la comparación se obtiene una luz de noche que además toca la melodía de alarma toda la noche. La pregunta funciona en lo lógico, pero el resultado no es el que promete — y esa asimetría daría una pregunta mejor.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">«…¿Cómo cambiarías la condición para que el sol se encienda en la oscuridad? ¿Y qué <b>más</b> tendrías que cambiar para que sea una luz de noche de verdad, y no una alarma nocturna?»</span></div>
+    </div>
+  </div>
+
+  <!-- ============ 8 ============ -->
+  <div class="card k-me" id="a8">
+    <div class="num">8 · <span class="c">luces-de-fiesta-al-oscurecer</span></div>
+    <h4>El Vuelo del Murciélago Nocturno</h4>
+    <p>El murciélago es la actividad física; eso no se toca. Quedan las remisiones —cubiertas por la pasada global
+    <a href="#s2">g-rem</a>, diez de las 25 están aquí— y una sección incompleta.</p>
+
+    <div class="find" data-id="f8-1" data-act="16.3-bat-in-the-dark" data-file="_activities/16.3-bat-in-the-dark.es.md">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">(«Composición del Código») «Dentro del <code>bucle principal</code>, usamos el bloque <code>si... sino...</code>. La clave es la condición…» — y nada más.</span></div>
+      <div class="f-do"><span class="lbl">Hace</span><span class="body">La rama verdadera tiene 8 bloques más: 4 dibujos y 4 pausas de 200 ms.</span></div>
+      <div class="f-cl"><span class="lbl">Choca</span><span class="body">De once bloques se describen dos, y falta justamente la animación — lo que el estudiante ve. Falta también el porqué de la <b>última</b> pausa: sin ella el cuarto dibujo dura casi nada, porque el bucle vuelve de inmediato al primero. Es el bloque que parece sobrar y no sobra.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">Añadir: «Dentro de la rama verdadera hay <b>cuatro dibujos</b> que se alternan, cada uno seguido de un <code>retraso de 200 ms</code>: eso produce el aleteo. La última pausa también hace falta — sin ella, el cuarto dibujo se borraría de inmediato al reiniciar el bucle: cada imagen necesita su tiempo en pantalla.»</span></div>
+    </div>
+
+    <div class="find" data-id="f8-2" data-act="16.3-bat-in-the-dark" data-file="report.html">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">(<code>report.html</code>) enlace a <code>_activities/16.4-bat-in-the-dark.es.md</code></span></div>
+      <div class="f-cl"><span class="lbl">Problema</span><span class="body">Ese archivo no existe (el real es <code>16.3-…</code>): enlace roto en el reporte que leen los estudiantes.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">Corregir el enlace a <code>_activities/16.3-bat-in-the-dark.es.md</code>.</span></div>
+    </div>
+  </div>
+
+  <!-- ============ 12 ============ -->
+  <div class="card k-ok" id="a12">
+    <div class="num">12 · <span class="c">nivel-con-ruido</span></div>
+    <h4>¡No Derrames el Líquido! — la mejor actualizada</h4>
+    <p>Cero remisiones, ningún resto de los nombres viejos, el redondeo bien contado, y la ficha que documenta el
+    asunto de los ejes. Dos retoques.</p>
+
+    <div class="find" data-id="f12-1" data-act="16.7-dont-spill-liquid-game" data-file="_activities/16.7-dont-spill-liquid-game.es.md">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">(Reflexiona) «Describe una situación en la que la alarma sonaría. ¿Qué valores tendrían que tener <b>la inclinación X y la inclinación Y</b>?»</span></div>
+      <div class="f-do"><span class="lbl">Hace</span><span class="body">establecer centradoX a ((ledX ≥ 3) y (ledX ≤ 5))</span></div>
+      <div class="f-cl"><span class="lbl">Choca</span><span class="body">La zona segura ya no se define sobre la inclinación cruda sino sobre la posición de LED. Para contestar en inclinaciones habría que rehacer el escalado de cabeza. Es el último fósil de los nombres viejos.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">«Describe una situación en la que la alarma sonaría. ¿Qué valores tendrían que tener <code>ledX</code> y <code>ledY</code> para que eso suceda — y hacia dónde tendrías que inclinar el celular para conseguirlo?»</span></div>
+    </div>
+
+    <div class="find" data-id="f12-2" data-act="16.7-dont-spill-liquid-game" data-file="_activities/16.7-dont-spill-liquid-game.es.md">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">«Al iniciar el programa, estableceremos la variable <code>debeSonarAlarma</code> a verdadero» — y no vuelve a aparecer.</span></div>
+      <div class="f-do"><span class="lbl">Hace</span><span class="body">si (centradoX y centradoY):
+    dibuja … [verde]
+    si debeSonarAlarma:
+        tocar nota · esperar 100 ms · debeSonarAlarma = falso</span></div>
+      <div class="f-cl"><span class="lbl">Choca</span><span class="body">Hay un <code>si</code> anidado bien visible en la imagen del código que la ficha nunca explica. Es el mecanismo de disparo único: la nota de acierto suena una sola vez al entrar a la zona, no en cada vuelta.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">Añadir a la Composición: «Dentro del camino verde hay un <code>si debeSonarAlarma</code>: hace que la nota de acierto suene <b>una sola vez</b> al entrar a la zona (la bandera pasa a falso), y la rama de alarma la vuelve a poner en verdadero, dejándola lista para la próxima vez que recuperes el equilibrio.»</span></div>
+    </div>
+  </div>
+
+  <!-- ============ 11 ============ -->
+  <div class="card k-ok" id="a11">
+    <div class="num">11 · <span class="c">flama-vela-con-soplo</span></div>
+    <h4>La Vela Mágica de Cumpleaños</h4>
+
+    <div class="find" data-id="f11-1" data-act="16.6-magic-birthday-candle" data-file="_activities/16.6-magic-birthday-candle.es.md">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">«…un <b>evento</b> (tu soplo) cambiará el <b>estado de una variable</b> (la <b>flama</b>), y un <b>condicional</b> leerá ese estado».</span></div>
+      <div class="f-do"><span class="lbl">Hace</span><span class="body">establecer velaEncendida a verdadero</span></div>
+      <div class="f-cl"><span class="lbl">Choca</span><span class="body">Es la única de las cinco apariciones que quedó sin renombrar — aquí «la flama» nombra la variable, no la llama del dibujo. Corrigiéndola, la ficha queda con «llama» al 100 % y la indecisión flama/llama se resuelve sola.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">«…cambiará el <b>estado de una variable</b> (<code>velaEncendida</code>), y un <b>condicional</b> leerá ese estado.»</span></div>
+    </div>
+
+    <div class="find" data-id="f11-2" data-act="16.6-magic-birthday-candle" data-file="protobject/equivalent-flama-vela-con-soplo.ptj (comentario) + micro:bit a mano">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado en Protobject: el comentario ahora describe el bloque al que está pegado («Dibuja la punta de la llama en el centro. (Quien borra la punta anterior es el redibujo de la vela, un bloque más arriba.)»). <span class="pend">⏳ micro:bit: mismo arreglo a mano.</span></span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">(comentario del código) «Borra la punta de la llama anterior»</span></div>
+      <div class="f-do"><span class="lbl">Hace</span><span class="body">El comentario está en el bloque que DIBUJA la punta central;
+el que borra es el "dibuja" de la vela, un bloque más arriba.</span></div>
+      <div class="f-cl"><span class="lbl">Choca</span><span class="body">Señala el bloque equivocado, en las dos plataformas — y el que sí borra es justo el que los estudiantes tienden a eliminar «para simplificar», con lo que la llama deja rastro.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">Mover el comentario al bloque <code>dibuja</code> de la vela (el que efectivamente borra la punta anterior). Protobject lo aplico yo en el <code>.ptj</code>; micro:bit queda manual.</span></div>
+    </div>
+
+    <div class="find" data-id="f11-3" data-act="16.6-magic-birthday-candle" data-file="_activities/16.6-magic-birthday-candle.es.md">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">«Su única tarea es mirar la variable <code>velaEncendida</code> en cada ciclo y decidir: ¿dibujo la llama o dejo la pantalla en negro?» — sin describir la animación.</span></div>
+      <div class="f-do"><span class="lbl">Hace</span><span class="body">dibuja la vela → punta al azar → 200 ms → dibuja la vela → punta al centro → 200 ms</span></div>
+      <div class="f-cl"><span class="lbl">Choca</span><span class="body">Los dos fotogramas y el porqué del segundo «dibuja la vela» no están contados. Ese redibujo es lo que apaga la punta anterior: quien lo borre «para simplificar» verá la llama dejar rastro.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">Añadir: «La rama verdadera alterna <b>dos fotogramas</b> —la punta al azar y la punta al centro— con 200 ms entre ellos. Antes de cada punta se vuelve a dibujar la vela: ese redibujo es lo que <b>apaga la punta anterior</b>. Si lo quitas para simplificar, las puntas se acumulan y la llama deja de titilar.»</span></div>
+    </div>
+  </div>
+
+  <!-- ============ 5 ============ -->
+  <div class="card k-ok" id="a5">
+    <div class="num">5 · <span class="c">robot-risa-simpatica-al-ruido</span></div>
+    <h4>El Robot Cosquilloso</h4>
+
+    <div class="find" data-id="f5-1" data-act="14.1-ticklish-robot" data-file="_activities/14.1-ticklish-robot.es.md">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">«Cuando aplaudes, este bloque se activa, reproduce el sonido y ejecuta un bucle <code>repetir 8 veces</code> para animar la boca. <b>Al terminar, el robot vuelve a la normalidad</b> y espera el próximo aplauso.»</span></div>
+      <div class="f-do"><span class="lbl">Hace</span><span class="body">reproducir sonido 'reacción divertida'
+repetir 8 veces: …
+detener sonido        ← no mencionado
+dibuja (cara de reposo) ← no mencionado</span></div>
+      <div class="f-cl"><span class="lbl">Choca</span><span class="body">Volver al reposo <b>no es automático</b>: es un bloque que hay que poner, y el texto lo presenta como si ocurriera solo — justo en la actividad que estrena los eventos, donde la lección es «disparo → pasa algo → vuelve». Falta también el <code>detener sonido</code>.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">«…ejecuta un bucle <code>repetir 8 veces</code> para animar la boca. Después, un bloque <code>detener sonido</code> corta la risa si aún sonaba, y un último <code>dibuja</code> <b>vuelve a poner la cara de reposo</b> — la misma de <code>Al iniciar</code>. Por eso el robot queda listo para el próximo aplauso.»</span></div>
+    </div>
+  </div>
+
+  <!-- ============ 3 ============ -->
+  <div class="card k-ok" id="a3">
+    <div class="num">3 · <span class="c">xilofono-inclinacion-con-nota-led</span></div>
+    <h4>El Xilófono del Futuro (con LEDs)</h4>
+
+    <div class="find" data-id="f3-1" data-act="02.3-led-xylophone" data-file="_activities/02.3-led-xylophone.es.md">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">(«La División Mágica») «…usando una simple operación matemática como la <b>división</b>, podemos reducir el rango de números del sensor para que <b>encaje perfectamente</b> en nuestra pantalla.»</span></div>
+      <div class="f-do"><span class="lbl">Hace</span><span class="body">dibuja en x 4 y (4 + redondear((y in Inclinación2) ÷ 15))</span></div>
+      <div class="f-cl"><span class="lbl">Choca</span><span class="body">Dividir no basta: el resultado queda centrado en cero, con negativos que caerían fuera de la pantalla. Lo que hace que encaje son el <code>+ 4</code> (el LED del centro) y el redondeo, y ninguno se menciona. Quien quite la división para probar —como sugiere la reflexión— verá algo que el texto no le preparó para entender.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">Añadir: «Pero dividir no basta: el resultado queda centrado en cero, con números negativos que caerían fuera de la pantalla. Por eso además sumamos 4 —el LED del centro— y redondeamos, porque la pantalla solo entiende posiciones enteras. Con el celular quieto, el punto queda justo al medio.»</span></div>
+    </div>
+
+    <div class="find" data-id="f3-2" data-act="02.3-led-xylophone" data-file="_activities/02.3-led-xylophone.es.md">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado.</span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">«La clave de este código es que el valor de la <code>inclinación Y</code> se lee dos veces: primero dividiéndolo por 15… y luego para calcular la <code>nota musical</code>.»</span></div>
+      <div class="f-do"><span class="lbl">Hace</span><span class="body">luz:    4 + redondear(inclinación ÷ 15)
+sonido: 60 + inclinación          ← misma forma: reposo + desviación</span></div>
+      <div class="f-cl"><span class="lbl">Choca</span><span class="body">No es falso, pero desaprovecha lo que la refactorización dejó servido: las dos fórmulas tienen hoy la <b>misma forma</b>, y esa simetría es el objetivo declarado de la actividad («una entrada, múltiples salidas»).</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">«La clave es que la inclinación se lee dos veces, y las dos fórmulas tienen la <b>misma forma</b>: un valor de reposo más la desviación. Para el sonido, <code>60 + inclinación</code>. Para la luz, <code>4 + inclinación ÷ 15</code>. Un mismo dato, dos escalas, la misma idea — ¡por eso luz y sonido nunca se desincronizan!»</span></div>
+    </div>
+
+    <div class="find" data-id="f3-3" data-act="02.2-xylophone" data-file="protobject/equivalent-xilofono-inclinacion.ptj + microbit/xilofono-inclinacion.hex">
+      <div class="f-st"><span class="lbl">Estado</span><span class="body">✔ Aplicado en Protobject: la suma quedó <code>60 + y in Inclinación2</code> (verificado en el decodificado). <span class="pend">⏳ micro:bit: invertir a <code>1000 + aceleración x</code> en MakeCode y re-exportar el .hex — el binario no se puede editar sin recompilar.</span></span></div>
+      <div class="f-say"><span class="lbl">Dice</span><span class="body">(contexto) La actividad 3 quedó con <code>60 + inclinación</code>; la actividad 2, con el orden viejo <code>inclinación + 60</code>.</span></div>
+      <div class="f-cl"><span class="lbl">Problema</span><span class="body">El mismo bloque conceptual aparece invertido en dos actividades consecutivas. Si la gramática «reposo + desviación» debe reconocerse, conviene alinear también la 2. <b>Es un cambio de código</b> (mismo resultado: la suma es conmutativa), con pipeline a re-verificar.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiaría con</span><span class="body">Invertir los operandos en la actividad 2, en ambas plataformas: <code>60 + (y in Inclinación2)</code> / <code>1000 + aceleración x</code>. Comportamiento idéntico; re-correr la pipeline para confirmar GED 0.</span></div>
+    </div>
+  </div>
+
+  <!-- ============ 1 ============ -->
+  <div class="card k-ok" id="a1">
+    <div class="num">1 · <span class="c">corazon-forever-loop</span></div>
+    <h4>El Llavero de Corazón Luminoso — coherente</h4>
+    <p>Verificado bloque por bloque: ninguna afirmación falsa, ninguna remisión, las preguntas de reflexión
+    funcionan. Le aplica solo la pasada es-CL global.</p>
+  </div>
+
+  <h2 class="section-title" id="s5"><span class="n">§5</span> Adaptaciones de micro:bit</h2>
+  <p class="section-lede">Informativo, sin botones: son decisiones de plataforma, no correcciones de ficha. Las
+  legítimas no se tocan; las que parecen descuidos, si quieres las convierto en propuestas en otra pasada.</p>
+
+  <h3 class="group">Correctas — no tocar</h3>
+  <div class="scroll">
+  <table class="mini">
+    <tr><th>Qué</th><th>Protobject → micro:bit</th></tr>
+    <tr><td class="a">Tamaño de la matriz</td><td>7×7 (1..7) → 5×5 (0..4)</td></tr>
+    <tr><td class="a">Escala del sensor</td><td>inclinación ±100 → aceleración ±1023 mg</td></tr>
+    <tr><td class="a">Umbrales</td><td>luz 50 → 100, oscuridad 30 → 75, inclinación 20 → 400</td></tr>
+    <tr><td class="a">Eje del sensor</td><td>cada plataforma usa el que le resulta natural</td></tr>
+    <tr><td class="a">Altura del sonido</td><td>nota MIDI → frecuencia en Hz</td></tr>
+  </table>
+  </div>
+
+  <h3 class="group">Parecen descuidos</h3>
+  <div class="scroll">
+  <table class="mini">
+    <tr><th>Actividad</th><th>Qué pasa</th><th>Por qué importa</th></tr>
+    <tr><td class="a">16 · metrónomo</td><td><code>+600</code> contra <code>+60</code>: con el aparato plano, 600 BPM contra 60.</td><td>La unidad (BPM) es la misma en ambas: parece un cero de más.</td></tr>
+    <tr><td class="a">16 · metrónomo</td><td>El pulso se reproduce «hasta que termine»: bloquea el ciclo.</td><td>El periodo real es <code>intervalo + nota</code>: no respeta la fórmula que la actividad enseña.</td></tr>
+    <tr><td class="a">5 · robot</td><td>La cara de <code>al iniciar</code> no coincide con la del final.</td><td>El robot no vuelve al reposo tras el primer aplauso. Arreglo: usar la cara del primer dibujo.</td></tr>
+    <tr><td class="a">5 · robot</td><td>La melodía es Nyan Cat; en Protobject es una risa.</td><td>La gracia del robot cosquilloso es la carcajada.</td></tr>
+    <tr><td class="a">1 · corazón</td><td>Pausa anidada 10 ms contra 100; fotogramas en orden inverso.</td><td>El «ritmo rápido dentro del lento» se percibe muy distinto.</td></tr>
+    <tr><td class="a">17 · gritómetro</td><td>200 ms/casilla sobre 25 LEDs contra 500 ms sobre 49.</td><td>Llenar la pantalla: ~12,5 s contra ~24,5 s — dificultad distinta.</td></tr>
+  </table>
+  </div>
+
+  <h2 class="section-title" id="s6"><span class="n">§6</span> Ilustraciones a revisar a ojo</h2>
+  <div class="callout">
+    <p style="margin-top:0">167 SVG tienen el texto convertido en trazados: ninguna búsqueda los alcanza. Si se
+    aceptan las correcciones, conviene mirar estos cuatro por si quedaron contradiciendo el texto nuevo:</p>
+    <ul class="tight">
+      <li><b>14</b> — <code>c-2d-matrix.es.svg</code>: si rotula los bucles, ver en qué marco lo hace.</li>
+      <li><b>16</b> — <code>c-advanced-time-logic.es.svg</code> y <code>d-interval-formula.svg</code>: pueden dibujar la resta anidada vieja o el <code>tiempoActual</code>.</li>
+      <li><b>11</b> — <code>b-light-switch.es.svg</code> y <code>c-program-architecture.es.svg</code>: pueden mostrar el nombre viejo <code>flama</code>.</li>
+      <li><b>8</b> — <code>b-sunflower-and-bat.svg</code>: remite al girasol si la pasada de remisiones se acepta.</li>
+    </ul>
+  </div>
+
+
+  <h2 class="section-title" id="s7"><span class="n">§7</span> Qué queda</h2>
+
+  <div class="callout" style="border-left-color:#e0992a">
+    <h4>Pendiente a mano en MakeCode (re-exportar el .hex y avisar para regenerar derivados)</h4>
+    <ul class="tight">
+      <li><b>7 · despertador</b> — el comentario del condicional: quitar las dos remisiones a «la actividad anterior» (misma corrección ya aplicada en Protobject).</li>
+      <li><b>11 · vela</b> — el comentario «Borra la punta de la llama anterior» está sobre <code>led.plot(2, 0)</code>, que enciende: corregirlo como en Protobject.</li>
+      <li><b>2 · xilófono</b> — invertir la suma a <code>1000 + aceleración x</code> para que las dos plataformas compartan la gramática «reposo + desviación». (Y de paso: «porgramada» en el comentario del bucle.)</li>
+    </ul>
+    <p style="margin-bottom:0">Ninguno de los tres afecta la equivalencia: los comentarios no son nodos del PDG y
+    la suma es conmutativa. Cuando el <code>.hex</code> nuevo esté en el repo, regenero derivados y re-verifico.</p>
+  </div>
+
+  <div class="callout">
+    <h4>Fuera de los 38 — decisiones abiertas del autor, sin tocar</h4>
+    <ul class="tight">
+      <li><b>energía / toques (9)</b> — los comentarios del código (ambas plataformas) llaman «toques» a la variable <code>energia</code>, y la ficha escribe <code>energía</code> con tilde en dos citas de bloque. Tres cosas a decidir juntas.</li>
+      <li><b>ultimoLatido</b> — <code>planificacion.html</code> sigue usando ese nombre, y además afirma que el programa «muestra el bpm» (no lo muestra: no hay bloque de pantalla). El nombre está en tus decisiones abiertas; lo del bpm es un error factual que se corrige cuando decidas el nombre.</li>
+      <li><b>permalink «patata» (15)</b> — el <code>permalink</code> y el nombre del SVG rompen enlaces si se cambian.</li>
+      <li><b>Erratas en comentarios de bloques</b> (ambas plataformas, §F): «transoforma/varibale/faslo/vardadero» (13), «utilizando ejes x e y» + «a una aceptable e una posición» (3), «tono/frecuencia» sobre un golpe de batería (16).</li>
+      <li><b>Descuidos de micro:bit de §5</b> — el <code>+600</code> y el pulso bloqueante del metrónomo, la cara de reposo y Nyan Cat del robot, la pausa de 10 ms del corazón: cambios de comportamiento, decisión tuya.</li>
+      <li><b>Ilustraciones de §6</b> — los SVG con texto vectorizado: revisión a ojo.</li>
+    </ul>
+  </div>
+
+  <footer>
+    Protobject · Pensamiento Computacional · revisión de las 17 fichas contra el código Protobject, 17-08-2026.
+    Las 38 propuestas fueron aplicadas el 17-08-2026 (tres de ellas, solo del lado Protobject: ver §7).
+  </footer>
+
+</div>
+
+
+</body>
+</html>

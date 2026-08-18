@@ -12,7 +12,7 @@
                         "children": [
                             {
                                 "type": "Operator",
-                                "label": "◻ + 60",
+                                "label": "60 + ◻",
                                 "children": [
                                     {
                                         "type": "Sensor",

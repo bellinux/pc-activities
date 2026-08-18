@@ -6,10 +6,10 @@
                 "type": "Loop",
                 "label": "repetir para siempre",
                 "children": [
-                    { "type": "Action", "label": "borrar dibujo en LEDDraw1", "children": [] },
+                    { "type": "Action", "label": "borrar dibujo en DibujoLED1", "children": [] },
                     {
                         "type": "Action",
-                        "label": "dibuja en x 3 y ◻ con color #ff4444 en LEDDraw1",
+                        "label": "dibuja en x 3 y ◻ con color #ff4444 en DibujoLED1",
                         "children": [
                             {
                                 "type": "Operator",
@@ -23,7 +23,7 @@
                                                 "type": "Operator",
                                                 "label": "◻ ÷ 15",
                                                 "children": [
-                                                    { "type": "Sensor", "label": "ruido in NoiseLevel2", "children": [] }
+                                                    { "type": "Sensor", "label": "ruido in NivelRuido2", "children": [] }
                                                 ]
                                             }
                                         ]
@@ -34,7 +34,7 @@
                     },
                     {
                         "type": "Action",
-                        "label": "dibuja en x 4 y ◻ con color #ff4444 en LEDDraw1",
+                        "label": "dibuja en x 4 y ◻ con color #ff4444 en DibujoLED1",
                         "children": [
                             {
                                 "type": "Operator",
@@ -48,7 +48,7 @@
                                                 "type": "Operator",
                                                 "label": "◻ ÷ 15",
                                                 "children": [
-                                                    { "type": "Sensor", "label": "ruido in NoiseLevel2", "children": [] }
+                                                    { "type": "Sensor", "label": "ruido in NivelRuido2", "children": [] }
                                                 ]
                                             }
                                         ]
@@ -59,7 +59,7 @@
                     },
                     {
                         "type": "Action",
-                        "label": "dibuja en x 5 y ◻ con color #ff4444 en LEDDraw1",
+                        "label": "dibuja en x 5 y ◻ con color #ff4444 en DibujoLED1",
                         "children": [
                             {
                                 "type": "Operator",
@@ -73,7 +73,7 @@
                                                 "type": "Operator",
                                                 "label": "◻ ÷ 15",
                                                 "children": [
-                                                    { "type": "Sensor", "label": "ruido in NoiseLevel2", "children": [] }
+                                                    { "type": "Sensor", "label": "ruido in NivelRuido2", "children": [] }
                                                 ]
                                             }
                                         ]

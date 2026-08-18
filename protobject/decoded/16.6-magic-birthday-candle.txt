@@ -14,7 +14,7 @@ REPETIR PARA SIEMPRE (bucle principal)
     ESPERAR  ms  VAR=200
     DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,1,1,0,0,0,0,1,1,1,0,0,0,0,1,1,1,0,0,0,0,1,1,1,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
     DibujoLED1_drawOnXY_set_2  VAR=4  VAR2=2  VAR3=colour_picker(COLOUR=#ff0000)
-        ; // Borra la punta de la llama anterior
+        ; // Dibuja la punta de la llama en el centro. (Quien borra la punta anterior es el redibujo de la vela, un bloque más arriba.)
     ESPERAR  ms  VAR=200
     [sino]
     DibujoLED1_clear_set_4

@@ -2,7 +2,7 @@
     "platform": "Protobject",
     "extracted_text": [
         "repetir para siempre:",
-        "  tocar nota número ((y in Inclinación2) + 60) en TecladoMusical1",
+        "  tocar nota número (60 + (y in Inclinación2)) en TecladoMusical1",
         "  retraso de 100 milisegundos"
     ]
 }

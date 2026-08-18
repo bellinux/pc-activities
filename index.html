@@ -36,6 +36,7 @@
   .nav.c5{border-left-color:#8B2418}
   .nav.c6{border-left-color:#c3e8b8}
   .nav.c7{border-left-color:#9333ea}
+  .nav.c8{border-left-color:#0f766e}
   .nav .ic{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
   .c1 .ic{background:#eef0fe;color:#4f46e5}
   .c2 .ic{background:#e9f6ee;color:#1f7a45}
@@ -43,10 +44,11 @@
   .c4 .ic{background:#e4f4f8;color:#0e7490}
   .c5 .ic{background:#f6e9e7;color:#8B2418}
   .c7 .ic{background:#f3e8ff;color:#9333ea}
+  .c8 .ic{background:#e0f2f0;color:#0f766e}
   .nav h3{margin:0 0 5px;font-size:17px}
   .nav p{margin:0;font-size:13.5px;color:var(--muted);line-height:1.55}
   .nav .go{margin-top:10px;font-size:12.5px;font-weight:600;color:var(--indigo)}
-  .c2 .go{color:#1f7a45}.c3 .go{color:#b06f12}.c4 .go{color:#0e7490}.c5 .go{color:#8B2418}.c7 .go{color:#9333ea}
+  .c2 .go{color:#1f7a45}.c3 .go{color:#b06f12}.c4 .go{color:#0e7490}.c5 .go{color:#8B2418}.c7 .go{color:#9333ea}.c8 .go{color:#0f766e}
   table.org{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px;background:var(--card);
     border:1px solid var(--line);border-radius:10px;overflow:hidden}
   table.org td{padding:8px 14px;border-bottom:1px solid var(--line);vertical-align:top}
@@ -136,6 +138,15 @@
       </div>
     </a>
 
+    <a class="cardlink" href="revision_textos.html">
+      <div class="nav c8">
+        <div class="ic"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 3v4a1 1 0 001 1h4"/></svg></div>
+        <h3>Los textos frente al código</h3>
+        <p>Revisión de las <b>17 fichas</b> contra el programa que cada una describe, después de la refactorización: qué afirma el texto que el código ya no hace. Cada hallazgo con la cita de las dos partes.</p>
+        <div class="go">Ver la revisión de textos →</div>
+      </div>
+    </a>
+
   </div>
 
   <h2>Organización del proyecto</h2>
@@ -145,6 +156,7 @@
     <tr><td class="path">planificacion.html</td><td>El rationale de la progresión (5 fases, 17 proyectos) — documento vivo, HTML autónomo.</td></tr>
     <tr><td class="path">report.html</td><td>El reporte de calidad (texto↔código, redacción es-CL, secuencia), con enlaces al visor.</td></tr>
     <tr><td class="path">revision_equivalencia.html</td><td>La revisión actividad por actividad de la equivalencia funcional Protobject ↔ micro:bit.</td></tr>
+    <tr><td class="path">revision_textos.html</td><td>Revisión de las 17 fichas <code>.md</code> frente al código actual (texto↔código, remisiones cruzadas, redacción es-CL).</td></tr>
     <tr><td class="path">propuestas_refactorizacion.html</td><td>Propuestas de refactorización didáctica de los 17 algoritmos, escritas en el lenguaje de bloques común (no se aplicó ninguna).</td></tr>
     <tr><td class="path">_activities/</td><td>Las 17 fichas de actividad en español (<code>.es.md</code>) más las base trilingües.</td></tr>
     <tr><td class="path">src/ · microbit/</td><td>Imágenes y videos por actividad · firmware <code>.hex</code> para micro:bit.</td></tr>
