@@ -277,7 +277,7 @@
             }
             else if (lowerUrl.startsWith('http')) {
                 // El render embebido (iframe) se sirve desde el espejo en Cloudflare Pages
-                const iframeUrl = url.replace(/app\.protobject\.com/g, 'protobject-app.pages.dev');
+                const iframeUrl = url.replace(/app\.protobject\.com/g, 'app-protobject-com.pages.dev');
                 return `
                 <div class="rounded-xl overflow-hidden shadow-sm border border-gray-200 bg-gray-100">
                     <iframe src="${iframeUrl}" style="height: ${height}; width: 100%; border: none;" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
