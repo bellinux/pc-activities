@@ -149,7 +149,7 @@
     <b>Estado: TODO APLICADO (17-08-2026).</b> El autor aprobó las 38 propuestas en bloque, así que los botones y
     el JSON ya no hacen falta: cada hallazgo lleva ahora una línea <i>Estado</i> con lo que se hizo. Tres puntos
     quedaron aplicados solo del lado Protobject — el <code>.hex</code> de micro:bit no se puede editar sin
-    recompilar — y están marcados en ámbar. El detalle de lo pendiente, al final, en <a href="#s7">«Qué queda»</a>.
+    recompilar — y están marcados en ámbar. El detalle de lo pendiente, al final, en <a href="#s7">«Qué se hizo y qué queda»</a>.
     <br><br>
     Las fichas describen la versión Protobject, y así se revisaron. Donde micro:bit hace algo distinto no es un
     error del texto: va aparte en <a href="#s5">§5</a>.
@@ -198,7 +198,7 @@
     <a href="#s3">§3 Ficha por ficha</a>
     <a href="#s5">§5 Adaptaciones de micro:bit</a>
     <a href="#s6">§6 Ilustraciones</a>
-    <a href="#s7">§7 Qué queda</a>
+    <a href="#s7">§7 Hecho y pendiente</a>
   </div>
 
   <h2 class="section-title" id="s2"><span class="n">§2</span> Dos pasadas globales</h2>
@@ -705,27 +705,69 @@ sonido: 60 + inclinación          ← misma forma: reposo + desviación</span><
   </div>
 
 
-  <h2 class="section-title" id="s7"><span class="n">§7</span> Qué queda</h2>
+  <h2 class="section-title" id="s7"><span class="n">§7</span> Qué se hizo y qué queda</h2>
+
+  <div class="callout" style="border-left-color:#1f7a45;background:#f4fbf6">
+    <h4>Hecho (17-08-2026)</h4>
+    <ul class="tight">
+      <li><b>Las 17 fichas</b> corregidas: redacción es-CL, remisiones entre actividades eliminadas, y las
+      descripciones del código alineadas con los programas actuales (cada corrección está arriba, con su
+      línea <i>Estado</i>).</li>
+      <li><b>4 proyectos Protobject</b> corregidos directamente en el <code>.ptj</code>: los componentes del
+      visualizador renombrados al español, la suma del xilófono invertida a <code>60 + inclinación</code>, y dos
+      comentarios arreglados (despertador y vela).</li>
+      <li><b>Equivalencia re-verificada</b> después de todos los cambios: las 17 actividades siguen isomorfas con
+      distancia de edición 0.</li>
+    </ul>
+  </div>
 
   <div class="callout" style="border-left-color:#e0992a">
-    <h4>Pendiente a mano en MakeCode (re-exportar el .hex y avisar para regenerar derivados)</h4>
-    <ul class="tight">
-      <li><b>7 · despertador</b> — el comentario del condicional: quitar las dos remisiones a «la actividad anterior» (misma corrección ya aplicada en Protobject).</li>
-      <li><b>11 · vela</b> — el comentario «Borra la punta de la llama anterior» está sobre <code>led.plot(2, 0)</code>, que enciende: corregirlo como en Protobject.</li>
-      <li><b>2 · xilófono</b> — invertir la suma a <code>1000 + aceleración x</code> para que las dos plataformas compartan la gramática «reposo + desviación». (Y de paso: «porgramada» en el comentario del bucle.)</li>
-    </ul>
-    <p style="margin-bottom:0">Ninguno de los tres afecta la equivalencia: los comentarios no son nodos del PDG y
-    la suma es conmutativa. Cuando el <code>.hex</code> nuevo esté en el repo, regenero derivados y re-verifico.</p>
+    <h4>Pendiente: 3 arreglos en micro:bit — instrucciones para estudiantes</h4>
+
+    <p><b>Por qué estos tres no se pudieron hacer automáticamente.</b> Los proyectos Protobject viven en un
+    archivo <code>.ptj</code> que <b>es</b> el código fuente: se puede corregir directo. El archivo
+    <code>.hex</code> de micro:bit es distinto — contiene <b>dos cosas pegadas</b>: el programa ya
+    <b>compilado</b> (los bytes que la placa ejecuta) y, al final, una copia del código fuente (lo que MakeCode
+    muestra cuando lo abres). Si se editara el texto dentro del <code>.hex</code> a mano, esas dos partes
+    quedarían en desacuerdo: MakeCode mostraría el código nuevo, pero la placa ejecutaría el viejo. Por eso los
+    cambios de micro:bit se hacen <b>en el editor MakeCode</b>, que recompila todo junto al descargar.</p>
+
+    <p><b>El procedimiento, para cada uno de los tres archivos:</b></p>
+    <ol style="margin:8px 0;padding-left:22px">
+      <li>Entra a <code>makecode.microbit.org</code> → <b>Importar</b> → <b>Importar archivo…</b> y elige el
+      <code>.hex</code> desde la carpeta <code>microbit/</code> del repositorio.</li>
+      <li>Haz <b>solo</b> el cambio indicado abajo. Nada más.</li>
+      <li><b>Descargar</b> → renombra el archivo descargado al nombre original exacto → reemplaza el archivo en
+      <code>microbit/</code> → commit y push.</li>
+      <li>Avisa: con el <code>.hex</code> nuevo se regeneran los derivados y se re-verifica la equivalencia.
+      (Los tres cambios son seguros: los comentarios no cuentan en el grafo, y una suma da lo mismo en los dos
+      órdenes — el resultado seguirá siendo 17/17 con distancia 0.)</li>
+    </ol>
+
+    <div class="find">
+      <div class="f-say"><span class="lbl">Tarea 1</span><span class="body"><b><code>microbit/xilofono-inclinacion.hex</code></b> — dos cosas en el mismo proyecto.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiar</span><span class="body">(1) En el bloque <code>tono de timbre (Hz)</code>, la suma dice <code>aceleración (mg) x + 1000</code>: <b>intercambia los dos operandos</b> para que quede <code>1000 + aceleración (mg) x</code> — así las dos plataformas comparten la forma «valor de reposo + desviación» que la ficha enseña. (2) En el comentario del bloque <code>para siempre</code>, corrige la errata: «porgramada» → «programada».</span></div>
+    </div>
+
+    <div class="find">
+      <div class="f-say"><span class="lbl">Tarea 2</span><span class="body"><b><code>microbit/despertador-por-la-manana.hex</code></b> — el comentario del bloque <code>si… si no</code> menciona «la actividad anterior» dos veces, y la regla del proyecto es que ninguna actividad nombre a otra.</span></div>
+      <div class="f-fix"><span class="lbl">Cambiar</span><span class="body">Reemplaza el texto completo del comentario por este (es el mismo que ya quedó en Protobject):<br><br>«Este bloque es un condicional extendido: un condicional simple ejecuta su contenido si se cumple la condición; en este caso se extiende el bloque condicional y se le da la instrucción de que si se cumple la condición se ejecuta la primera parte del bloque, pero si no se cumple se ejecuta otra parte diferente.<br><br>Con un condicional simple, si no se cumplía la condición no pasaba nada más que no ejecutar lo de dentro, en este caso si no se cumple se ejecuta una serie de instrucciones específicas.»</span></div>
+    </div>
+
+    <div class="find">
+      <div class="f-say"><span class="lbl">Tarea 3</span><span class="body"><b><code>microbit/flama-vela-con-soplo.hex</code></b> — el comentario «Borra la punta de la llama anterior» está pegado a <code>graficar x 2 y 0</code>, que <b>enciende</b> la punta central: describe el bloque equivocado. (Quien borra de verdad es el <code>mostrar LEDs</code> de la vela, un bloque más arriba.)</span></div>
+      <div class="f-fix"><span class="lbl">Cambiar</span><span class="body">Reemplaza ese comentario por (igual que en Protobject):<br><br>«Dibuja la punta de la llama en el centro. (Quien borra la punta anterior es el redibujo de la vela, un bloque más arriba.)»</span></div>
+    </div>
   </div>
 
   <div class="callout">
-    <h4>Fuera de los 38 — decisiones abiertas del autor, sin tocar</h4>
+    <h4>Aparte: decisiones abiertas del autor (no son tareas de estudiantes)</h4>
     <ul class="tight">
       <li><b>energía / toques (9)</b> — los comentarios del código (ambas plataformas) llaman «toques» a la variable <code>energia</code>, y la ficha escribe <code>energía</code> con tilde en dos citas de bloque. Tres cosas a decidir juntas.</li>
-      <li><b>ultimoLatido</b> — <code>planificacion.html</code> sigue usando ese nombre, y además afirma que el programa «muestra el bpm» (no lo muestra: no hay bloque de pantalla). El nombre está en tus decisiones abiertas; lo del bpm es un error factual que se corrige cuando decidas el nombre.</li>
+      <li><b>ultimoLatido</b> — <code>planificacion.html</code> sigue usando ese nombre, y además afirma que el programa «muestra el bpm» (no lo muestra). Se corrige cuando el autor decida el nombre.</li>
       <li><b>permalink «patata» (15)</b> — el <code>permalink</code> y el nombre del SVG rompen enlaces si se cambian.</li>
-      <li><b>Erratas en comentarios de bloques</b> (ambas plataformas, §F): «transoforma/varibale/faslo/vardadero» (13), «utilizando ejes x e y» + «a una aceptable e una posición» (3), «tono/frecuencia» sobre un golpe de batería (16).</li>
-      <li><b>Descuidos de micro:bit de §5</b> — el <code>+600</code> y el pulso bloqueante del metrónomo, la cara de reposo y Nyan Cat del robot, la pausa de 10 ms del corazón: cambios de comportamiento, decisión tuya.</li>
+      <li><b>Erratas en comentarios de bloques</b> (ambas plataformas): «transoforma/varibale/faslo/vardadero» (13), «utilizando ejes x e y» + «a una aceptable e una posición» (3), «tono/frecuencia» sobre un golpe de batería (16).</li>
+      <li><b>Descuidos de micro:bit de §5</b> — el <code>+600</code> y el pulso bloqueante del metrónomo, la cara de reposo y Nyan Cat del robot, la pausa de 10 ms del corazón: cambios de comportamiento, decisión del autor.</li>
       <li><b>Ilustraciones de §6</b> — los SVG con texto vectorizado: revisión a ojo.</li>
     </ul>
   </div>
