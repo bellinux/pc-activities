@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Objetivo 1 · Mejorar las actividades</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,30;0,9..144,300..900,100;1,9..144,300..900,30&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="guia.css">
+</head>
+<body class="guia">
+
+<nav class="toc">
+  <div class="toc-title">Objetivo 1 · contenido</div>
+  <a href="#def"><span class="n">§ 01</span> Definición</a>
+  <a href="#participantes"><span class="n">§ 02</span> Dos pistas de participantes</a>
+  <a href="#actividades"><span class="n">§ 03</span> Actividades y material</a>
+  <a href="#sesion"><span class="n">§ 04</span> La sesión formativa</a>
+  <a href="#incidentes"><span class="n">§ 05</span> Clasificar las notas</a>
+  <a href="#mejora"><span class="n">§ 06</span> De las notas a la mejora</a>
+  <a href="#limites"><span class="n">§ 07</span> Adultos y piloto escolar</a>
+  <a href="#preguntas"><span class="n">§ 08</span> Preguntas abiertas</a>
+  <a href="#partida"><span class="n">§ 09</span> Puntos de partida</a>
+  <a href="#plantillas"><span class="n">§ 10</span> Plantillas</a>
+  <div class="grp">Plan</div>
+  <div class="sub">
+    <a href="../guia-equivalencia.html"><span class="n">↑</span> Plan de acción</a>
+    <a href="objetivo-2-ground-truth.html"><span class="n">O2</span> Ground truth</a>
+    <a href="objetivo-3-equivalencia-experiencial.html"><span class="n">O3</span> Experiencial</a>
+    <a href="constantes-y-unidades.html"><span class="n">§</span> Constantes y unidades</a>
+  </div>
+</nav>
+
+<div class="content">
+<article class="article">
+
+  <header class="masthead">
+    <span class="vol">Objetivo 1</span>
+    <span>Mejorar las actividades</span>
+    <span>Septiembre 2026</span>
+  </header>
+  <nav class="plan-nav">
+    <a href="../guia-equivalencia.html">↑ Plan</a>
+    <a class="here" href="objetivo-1-mejorar-actividades.html">O1 · Mejorar</a>
+    <a href="objetivo-2-ground-truth.html">O2 · Ground truth</a>
+    <a href="objetivo-3-equivalencia-experiencial.html">O3 · Experiencial</a>
+    <a href="constantes-y-unidades.html">Constantes y unidades</a>
+    <a href="ensayo-junio-2026.html">Ensayo de junio</a>
+  </nav>
+
+  <section class="title-block">
+    <span class="eyebrow">Objetivo 1 · evaluación formativa</span>
+    <h1 class="title">Mejorar las actividades <span class="em">antes</span> de que lleguen a la escuela</h1>
+    <p class="deck">Cada actividad debe llegar a niñas y niños de 12–13 años ya optimizada: texto, código, plan de lección y modelo de cartón. Las sesiones producen <em>hallazgos</em> con evidencia.</p>
+  </section>
+
+  <section class="section" id="def">
+    <div class="section-marker"><span class="section-num">§ 01</span><span class="section-rule"></span><span class="section-num">DEFINICIÓN</span></div>
+    <h2>El objetivo, con su <span class="it">plantilla</span></h2>
+    <div class="obj" data-label="Objetivo 1">
+      <p class="q">¿Qué hay que cambiar en cada actividad —texto, código, plan de lección, modelo de cartón— para que llegue a niñas y niños de 12–13 años ya optimizada?</p>
+      <dl class="def">
+        <dt>Entregable</dt><dd>Para cada actividad probada: una lista de <strong>áreas de mejora con evidencia</strong> (qué pasó, en qué diapositiva, cita de la nota del participante), priorizada por severidad y frecuencia; las mejoras <strong>implementadas</strong> en los <code>.md</code>, en la fuente de la presentación, en los <code>.ptj</code>/<code>.hex</code> y en el plan de lección; y un <strong>registro de cambios</strong> por actividad. Al final del semestre, un corpus v2 estable.</dd>
+        <dt>Método</dt><dd>Evaluación formativa: sesiones individuales con estudiantes universitarios que siguen la presentación, hacen la actividad y anotan todo lo que no les queda claro; cinco minutos de conversación sobre las notas; síntesis; decisión; implementación; nueva prueba de lo cambiado. Dos pistas: mixta (informática y otras disciplinas) para las actividades de entrada; solo informática para las avanzadas.</dd>
+        <dt>Cuándo</dt><dd>Hasta el 25 de septiembre: protocolo y reclutamiento. Fines de septiembre y octubre: ronda 1 (mixta primero, informática después). Noviembre: mejoras y ronda 2. Diciembre: corpus v2.</dd>
+        <dt>Listo cuando</dt><dd>Toda actividad del corpus, E1 y E2 incluidas, fue hecha por cuatro a cinco personas en sesión formativa; las áreas de severidad alta están implementadas y re-probadas; todo cambio de código pasó de nuevo por la pipeline con veredicto <em>equivalente</em>; el registro de cambios se entiende sin haber estado en las sesiones.</dd>
+      </dl>
+    </div>
+    <p>Este objetivo es la fase que en diseño instruccional se llama <em>evaluación formativa</em>: probar el material con pocas personas, encontrar lo que falla, arreglarlo, volver a probar. La cantidad de notas sirve para ordenar los hallazgos. El tiempo de cada actividad es un dato de contexto.</p>
+  </section>
+
+  <section class="section" id="participantes">
+    <div class="section-marker"><span class="section-num">§ 02</span><span class="section-rule"></span><span class="section-num">PARTICIPANTES</span></div>
+    <h2>Dos <span class="it">pistas</span>: grupos con recorrido distinto</h2>
+    <div class="two">
+      <div><div class="k">Pista A · mixta</div><p><strong>Quiénes:</strong> estudiantes universitarios de informática y de otras disciplinas, mitad y mitad. <strong>Qué hacen:</strong> las actividades de entrada, en orden. <strong>Cuántas por sesión:</strong> dos o tres, en 60–75 minutos, una sola sesión por persona. <strong>Para qué:</strong> ver cómo entra alguien que recién empieza a programar; qué explica y qué da por sabido el material; dónde la primera actividad falla como primera.</p></div>
+      <div><div class="k">Pista B · informática</div><p><strong>Quiénes:</strong> solo estudiantes de informática, porque las avanzadas suponen haber hecho las anteriores y la pista B pide una o dos sesiones por persona. <strong>Qué hacen:</strong> las actividades avanzadas; pueden empezar en cualquier punto de la progresión. <strong>Cuántas por sesión:</strong> tres o cuatro, en 75–90 minutos; una o dos sesiones por persona. <strong>Para qué:</strong> cubrir toda la progresión con gente que entiende el código y puede decir <em>por qué</em> un paso se traba.</p></div>
+    </div>
+    <p><strong>Reclutamiento.</strong> Amigos y conocidos sirven, con dos condiciones: que no hayan visto las actividades, y que se registre su formación (carrera, semestre, si programan). En la pista A, «sin formación» significa cero experiencia de programación, en bloques o en texto.</p>
+    <p><strong>Requisitos técnicos.</strong> Celular Android con cámara para escanear QR, porque el audio de Protobject falla en iPhone; un computador del laboratorio con Protobject abierto. Un celular del laboratorio de respaldo. Se anota modelo y versión de Android. Una falla del dispositivo se clasifica como incidente técnico.</p>
+    <p><strong>Cobertura:</strong> cuatro a cinco personas por actividad. La pista A se parte en dos grupos de cuatro: uno empieza en E1 y hace E1–E3; el otro, tras cinco minutos de introducción a lo que E1 y E2 enseñan, empieza en E3 y hace E3–E5. Con ocho personas, E1, E2, E4 y E5 quedan cubiertas cuatro veces y E3 ocho, cuatro en cada grupo, lo que permite comparar E3 con y sin E1–E2; con grupos de cinco, diez personas. En la pista B, catorce actividades por cuatro personas son 56 actividades-persona; con tres o cuatro actividades por sesión, 14 a 19 sesiones: unas diez personas haciendo una o dos sesiones (con cinco por actividad, 18 a 24 sesiones). <strong>Presupuesto:</strong> ronda 1, unas 18 personas (ocho en la pista A, diez en la B); ronda 2, dos personas nuevas por actividad cambiada, que verifican la corrección (si cambian ocho o diez actividades, seis a siete personas más, reclutadas en octubre). Total en el semestre: unas 25 personas.</p>
+  </section>
+
+  <section class="section" id="actividades">
+    <div class="section-marker"><span class="section-num">§ 03</span><span class="section-rule"></span><span class="section-num">LAS ACTIVIDADES</span></div>
+    <h2>Qué actividades, con qué <span class="it">material</span></h2>
+    <p><strong>El material es la presentación.</strong> Cada actividad se hace siguiendo la presentación que genera el sitio de Protobject («Presenta»). Las sesiones prueban la versión Protobject. La versión micro:bit es la misma presentación, con las variaciones mínimas para hacerla compatible. Toda mejora de texto se aplica en la fuente de la presentación y pasa así a las dos versiones.</p>
+    <p><strong>Conjunto de entrada (pista A).</strong> Las cinco primeras de la progresión publicada en el sitio de Protobject (páginas consultadas el 11-09-2026):</p>
+    <table class="plan">
+      <thead><tr><th>#</th><th>Actividad</th><th>Concepto</th><th>En el corpus</th><th>URL</th></tr></thead>
+      <tbody>
+        <tr><td>E1</td><td>Enciende un corazón</td><td>una instrucción, un efecto</td><td>solo en el sitio</td><td><a href="https://protobject.com/es/actividades/enciende-un-corazon/">enciende-un-corazon</a></td></tr>
+        <tr><td>E2</td><td>El corazón parpadeante</td><td>secuencia y temporización</td><td>solo en el sitio</td><td><a href="https://protobject.com/es/actividades/el-corazon-parpadeante/">el-corazon-parpadeante</a></td></tr>
+        <tr><td>E3</td><td>El llavero de corazón luminoso</td><td>bucle infinito, bucles anidados, sonido</td><td><span class="pill ok">sí</span> n.º 1</td><td><a href="https://protobject.com/es/actividades/el-llavero-de-corazon-luminoso/">el-llavero-de-corazon-luminoso</a></td></tr>
+        <tr><td>E4</td><td>El xilófono mágico inclinable</td><td>sensor de inclinación, mapeo directo</td><td><span class="pill ok">sí</span> n.º 2</td><td><a href="https://protobject.com/es/actividades/el-xilofono-magico-inclinable/">el-xilofono-magico-inclinable</a></td></tr>
+        <tr><td>E5</td><td>El xilófono del futuro (con LEDs)</td><td>un sensor, dos salidas</td><td><span class="pill ok">sí</span> n.º 3</td><td><a href="https://protobject.com/es/actividades/el-xilofono-del-futuro-con-leds/">el-xilofono-del-futuro-con-leds</a></td></tr>
+      </tbody>
+    </table>
+    <p><strong>Conjunto avanzado (pista B).</strong> Las catorce siguientes, del n.º 4 (El visualizador de música) al n.º 17 (La batalla de gritos), en el orden de <code>activities.json</code>. Cada sesión toma un tramo de tres o cuatro actividades consecutivas. Los tramos se asignan de modo que cada actividad quede cubierta cuatro a cinco veces y que cada participante empiece en un punto distinto de la progresión.</p>
+    <p><strong>Matriz de cobertura.</strong> Antes de la primera sesión se arma una tabla actividad × participante y se rellena a medida que se agenda. Dice cuántas sesiones faltan y qué actividad está descubierta.</p>
+  </section>
+
+  <section class="section" id="sesion">
+    <div class="section-marker"><span class="section-num">§ 04</span><span class="section-rule"></span><span class="section-num">PROTOCOLO</span></div>
+    <h2>La sesión <span class="it">formativa</span></h2>
+    <p>Las notas del participante son el dato principal. El participante tiene una tarea: seguir la presentación, hacer la actividad y anotar en una hoja todo lo que no le quede claro. En la sala basta una persona que conduce la sesión.</p>
+    <ol class="pasos">
+      <li><strong>Antes (5 min).</strong> Consentimiento informado (adultos; datos anónimos; audio solo si el participante lo acepta). Ficha del participante: carrera, semestre, experiencia con programación, celular y versión de Android. Se explica la tarea: «Vas a seguir la presentación y hacer cada actividad como un estudiante que la encuentra en la web. En esta hoja anota todo lo que no te quede claro: el número de diapositiva, qué no entendiste, qué esperabas que pasara y dónde te trabaste. Al final de cada actividad, escribe en una línea qué hace tu programa. Lo que se prueba es el material».</li>
+      <li><strong>Introducción mínima (5 min).</strong> Qué es Protobject, cómo se abre, cómo se escanea el QR. Todo lo que la presentación deja sin explicar queda en las notas como hallazgo.</li>
+      <li><strong>La actividad, con la hoja de notas.</strong> El participante sigue la presentación, hace la actividad y anota. La persona que conduce la sesión ayuda solo cuando alguien lleva más de dos minutos trabado. Da la ayuda mínima y la anota en la hoja de ayudas, con la hora, la actividad y la diapositiva. En la misma hoja anota la hora de inicio y de fin de cada actividad.</li>
+      <li><strong>Al terminar cada actividad (2 min).</strong> El participante escribe en una línea qué hace su programa. Si la línea describe otra cosa, la explicación del material falló.</li>
+      <li><strong>Conversación sobre las notas (5 min al final).</strong> La conversación puede abrir con dos preguntas cerradas. Luego se recorren las notas con el participante: «En esta diapositiva anotaste esto, ¿qué pasaba?»; «¿Qué esperabas que pasara?»; «¿Qué cambiarías del texto? ¿Y del cartón?»; «¿Qué parte te gustó más?». Cierra con una pregunta abierta: «¿Otra cosa que quieras decir?». Las respuestas se agregan a la hoja de notas.</li>
+      <li><strong>Cierre del día.</strong> Se archivan la hoja de notas, la ficha, la hoja de ayudas y, si hubo, el audio.</li>
+    </ol>
+    <div class="callout">
+      <span class="tag">Opción</span>
+      <p>Si el participante lo acepta, piensa en voz alta y la sesión se graba en audio. La persona que conduce la sesión solo recuerda «sigue hablando» si el silencio pasa de veinte segundos. El audio sirve para completar las notas en la síntesis.</p>
+    </div>
+  </section>
+
+  <section class="section" id="incidentes">
+    <div class="section-marker"><span class="section-num">§ 05</span><span class="section-rule"></span><span class="section-num">EL DATO</span></div>
+    <h2>Clasificar las <span class="it">notas</span></h2>
+    <p>En la síntesis, cada nota se clasifica como incidente. Un incidente es una nota concreta: algo que no quedó claro, una expectativa distinta de lo que pasó, un punto donde el participante se trabó, o una ayuda de la hoja de ayudas. Cada incidente lleva actividad, diapositiva, código, descripción de una línea y la cita de la nota. Cada ayuda de la hoja de ayudas entra con el código <code>AYU</code>. Los códigos:</p>
+    <table class="plan">
+      <thead><tr><th>Código</th><th>Qué es</th><th>Ejemplo</th></tr></thead>
+      <tbody>
+        <tr><td><code>INS</code></td><td>Instrucción poco clara, ambigua o que falta</td><td>«¿Dónde dice cómo se conecta el teclado?»</td></tr>
+        <tr><td><code>NAV</code></td><td>No encuentra un bloque, componente, menú o botón</td><td>Busca «esperar» en la categoría equivocada durante un minuto</td></tr>
+        <tr><td><code>EXP</code></td><td>Expectativa distinta de lo que pasa</td><td>«Pensé que el corazón iba a parpadear solo»</td></tr>
+        <tr><td><code>CON</code></td><td>Malentendido conceptual (bucle, condición, variable, sensor)</td><td>Pone la pausa fuera del bucle y no entiende por qué no parpadea</td></tr>
+        <tr><td><code>TEC</code></td><td>Problema técnico: QR, cámara, permisos, audio, versión de Android</td><td>El sonido no suena hasta que se toca la pantalla</td></tr>
+        <tr><td><code>MAT</code></td><td>Cartón, elásticos, cómo se sostiene el celular</td><td>El celular se desliza al inclinar</td></tr>
+        <tr><td><code>MOT</code></td><td>Motivación: aburrimiento, salto de pasos, ganas de seguir</td><td>«La parte de Aprende la leí por encima»</td></tr>
+        <tr><td><code>AYU</code></td><td>Necesitó ayuda para continuar (hoja de ayudas)</td><td>—</td></tr>
+        <tr><td><code>LOG</code></td><td>Momento de logro o de gusto</td><td>«¡Ah, por eso suma 60!»</td></tr>
+      </tbody>
+    </table>
+    <p>Los momentos <code>LOG</code> se clasifican con el mismo cuidado que los problemas, porque dicen qué parte del material funciona y queda como está. La línea «qué hace mi programa» de cada actividad se codifica aparte: cita textual · correcto / parcial / incorrecto · qué faltó.</p>
+  </section>
+
+  <section class="section" id="mejora">
+    <div class="section-marker"><span class="section-num">§ 06</span><span class="section-rule"></span><span class="section-num">EL CICLO</span></div>
+    <h2>De las notas a la <span class="it">mejora</span></h2>
+    <ol class="pasos">
+      <li><strong>Síntesis por actividad.</strong> Terminada la ronda, las notas y las ayudas de todos los participantes de esa actividad se clasifican (§ 05) y se juntan en una tabla: incidente, frecuencia (en cuántas personas apareció), severidad, cambio propuesto, dónde (texto / código / plan de lección / cartón).</li>
+      <li><strong>Severidad.</strong> Se asigna en la síntesis con una escala 0–4. Dos personas la asignan por separado cuando es posible, y luego se concilia. Se registran las dos valoraciones y la final. Se reporta el porcentaje de acuerdo exacto y a ±1. Los incidentes con desacuerdo de dos puntos o más se revisan en conjunto. La escala: 0 sin problema; 1 cosmético; 2 menor (se resuelve solo, cuesta tiempo); 3 mayor (bloquea o produce un malentendido); 4 catastrófico (impide terminar). La prioridad es el producto severidad × frecuencia. Un incidente de severidad 3 en una sola persona recibe una propuesta.</li>
+      <li><strong>Decisión.</strong> Cada propuesta de la tabla recibe una marca: entra, no entra, se discute. Las razones se escriben en la misma tabla. Nada se implementa sin esa marca.</li>
+      <li><strong>Implementación.</strong> Texto: se edita el <code>.md</code> de la actividad y la fuente de la presentación (español de Chile; ninguna actividad menciona a otra), y el cambio pasa a la versión micro:bit de la presentación. Código: se editan el <code>.ptj</code> <em>y</em> el <code>.hex</code>, los dos; se regeneran los derivados y se re-ejecuta la pipeline. Si el veredicto es <em>no equivalente</em>, el cambio vuelve a discusión. Plan de lección y modelo de cartón: se editan y se anota el cambio. Cada versión queda en git.</li>
+      <li><strong>Ronda 2.</strong> Cada actividad cambiada se prueba con dos personas nuevas, con el mismo protocolo, para ver si el incidente desapareció y si apareció otro.</li>
+      <li><strong>Registro de cambios.</strong> Un archivo por actividad, o una tabla única: fecha, qué cambió, por qué (incidente que lo motivó), resultado en la ronda 2. Ese registro entrega a O2 las versiones sustituidas como candidatas a no equivalentes, para la segunda ola del corpus.</li>
+    </ol>
+  </section>
+
+  <section class="section" id="limites">
+    <div class="section-marker"><span class="section-num">§ 07</span><span class="section-rule"></span><span class="section-num">ALCANCE</span></div>
+    <h2>Qué se prueba con adultos y qué queda para el <span class="it">piloto escolar</span></h2>
+    <p>Una sesión con universitarios encuentra los defectos del material que son defectos para cualquiera: la instrucción que falta, el paso que se puede seguir solo con ayuda, la palabra usada sin explicar, la diapositiva que calla qué esperar, el cartón que suelta el celular. Se corrigen antes del piloto escolar.</p>
+    <p>En colegio se decide lo que depende de la edad y del aula: si la explicación de «bucle anidado» la entiende un niño de 12; si el ritmo de la actividad cabe en un bloque de clase; si la motivación se sostiene. Este objetivo prepara ese paso: un piloto en colegio, con una clase y el profesor de la clase, aprobación del Comité Ético Científico y consentimiento de apoderados.</p>
+  </section>
+
+  <section class="section" id="preguntas">
+    <div class="section-marker"><span class="section-num">§ 08</span><span class="section-rule"></span><span class="section-num">DECISIONES PENDIENTES</span></div>
+    <h2>Preguntas <span class="it">abiertas</span></h2>
+    <ol class="preguntas">
+      <li><strong>¿Celular propio o del laboratorio?</strong> Propuesta: propio, con uno de respaldo, porque la variabilidad de dispositivos existe en una sala de clases. Se registra modelo y versión.</li>
+      <li><strong>¿El modelo de cartón se construye en la sesión o se entrega hecho?</strong> Propuesta: entregado hecho en la ronda 1, porque el foco es el material didáctico; construido por el participante en la ronda 2 para una o dos actividades, porque construirlo es parte de la actividad y puede fallar.</li>
+      <li><strong>¿Umbral para implementar?</strong> Propuesta: severidad ≥ 3, o severidad 2 con frecuencia ≥ 2.</li>
+      <li><strong>¿Cómo se registra?</strong> Propuesta: hoja de notas y hoja de ayudas; audio si el participante lo acepta; video de las manos solo si el consentimiento lo cubre. Sin grabación de pantalla del celular en la ronda 1.</li>
+      <li><strong>¿Qué pasa si un participante de la pista A termina las cinco de entrada y quiere seguir?</strong> Propuesta: se le deja, y se marca la sesión como «A extendida»; sus notas en las avanzadas se analizan aparte.</li>
+      <li><strong>¿Se prueba también el plan de lección (la parte del profesor)?</strong> Propuesta: en otro semestre, con docentes en formación como participantes y con otro protocolo.</li>
+    </ol>
+  </section>
+
+  <section class="section" id="partida">
+    <div class="section-marker"><span class="section-num">§ 09</span><span class="section-rule"></span><span class="section-num">LITERATURA</span></div>
+    <h2>Puntos de <span class="it">partida</span></h2>
+    <p>Estas referencias están verificadas.</p>
+    <h3>Evaluación formativa de material instruccional</h3>
+<ul class="refs">
+<li><span class="cite">Walter Dick; Lou Carey; James O. Carey (2015). <em>The Systematic Design of Instruction (8th ed.)</em>. Pearson, Upper Saddle River, NJ. <a href="https://www.pearson.com/en-us/subject-catalog/p/systematic-design-of-instruction-the/P200000000952">www.pearson.com/en-us/subject-catalog/p/systematic-design-of-instruction-the/P200000000952</a></span><span class="why">Las tres fases —uno-a-uno, grupo pequeño, ensayo de campo— son la secuencia que este objetivo sigue: universitarios ahora (uno-a-uno), colegio después (campo).</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Martin Tessmer (1993). <em>Planning and Conducting Formative Evaluations: Improving the Quality of Education and Training</em>. Kogan Page, London, 159 pp.; ISBN 0-7494-0801-4 / 978-0-7494-0801-5. <a href="https://doi.org/10.4324/9780203061978">doi:10.4324/9780203061978</a></span><span class="why">Manual práctico, con instrumentos para cada fase y para la revisión de expertos; de aquí salen las hojas de § 10.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+</ul>
+<h3>Pensar en voz alta e incidentes</h3>
+<ul class="refs">
+<li><span class="cite">K. Anders Ericsson; Herbert A. Simon (1993). <em>Protocol Analysis: Verbal Reports as Data (revised edition)</em>. MIT Press (A Bradford Book), Cambridge, MA. <a href="https://mitpress.mit.edu/9780262550239/protocol-analysis/">mitpress.mit.edu/9780262550239/protocol-analysis/</a></span><span class="why">Cómo intervenir lo mínimo cuando alguien se traba, y cómo usar el pensamiento en voz alta si se graba.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Ted Boren; Judith Ramey (2000). <em>Thinking aloud: reconciling theory and practice</em>. IEEE Transactions on Professional Communication, 43(3), 261–278. <a href="https://doi.org/10.1109/47.867942">doi:10.1109/47.867942</a></span><span class="why">Cómo intervenir lo mínimo cuando alguien se traba, y cómo usar el pensamiento en voz alta si se graba.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">John C. Flanagan (1954). <em>The critical incident technique</em>. Psychological Bulletin, 51(4), 327–358. <a href="https://doi.org/10.1037/h0061470">doi:10.1037/h0061470</a></span><span class="why">El incidente concreto como unidad de registro; la clasificación de § 05 es una versión reducida de este método.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Cathleen Wharton; John Rieman; Clayton Lewis; Peter Polson (1994). <em>The cognitive walkthrough method: a practitioner&#x27;s guide</em>. In J. Nielsen &amp; R. L. Mack (Eds.), Usability Inspection Methods. New York: John Wiley &amp; Sons (ISBN 978-0-471-01877-3), pp. 105-140. <a href="https://dl.acm.org/doi/10.5555/189200.189214">dl.acm.org/doi/10.5555/189200.189214</a></span><span class="why">Recorrido cognitivo: revisar paso a paso qué necesita saber el usuario en cada punto. Sirve como revisión de escritorio de cada actividad antes de la sesión.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Jakob Nielsen (1994). <em>Severity Ratings for Usability Problems</em>. Nielsen Norman Group (artículo web). <a href="https://www.nngroup.com/articles/how-to-rate-the-severity-of-usability-problems/">www.nngroup.com/articles/how-to-rate-the-severity-of-usability-problems/</a></span><span class="why">La escala de severidad 0–4 de § 06.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Jakob Nielsen; Thomas K. Landauer (1993). <em>A mathematical model of the finding of usability problems</em>. Proceedings of the INTERACT &#x27;93 and CHI &#x27;93 Conference on Human Factors in Computing Systems (INTERCHI &#x27;93), Amsterdam, 24-29 April 1993, ACM, pp. 206-213. <a href="https://doi.org/10.1145/169059.169166">doi:10.1145/169059.169166</a></span><span class="why">Por qué pocos participantes bastan para encontrar problemas —y por qué eso no dice nada sobre medirlos con escalas.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+</ul>
+<h3>Con niños, después</h3>
+<ul class="refs">
+<li><span class="cite">Panos Markopoulos; Janet C. Read; Stuart MacFarlane; Johanna Höysniemi (2008). <em>Evaluating Children&#x27;s Interactive Products: Principles and Practices for Interaction Designers</em>. Morgan Kaufmann (Elsevier), serie Interactive Technologies, Amsterdam / Burlington, MA, 369 pp.; ISBN 978-0-12-374111-0. <a href="https://doi.org/10.1016/B978-0-12-374111-0.X0001-1">doi:10.1016/B978-0-12-374111-0.X0001-1</a></span><span class="why">Métodos, logística y ética para evaluar con niños: el manual de la fase de colegio.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Janet C. Read; Stuart MacFarlane (2006). <em>Using the fun toolkit and other survey methods to gather opinions in child computer interaction</em>. Proceedings of the 2006 Conference on Interaction Design and Children (IDC &#x27;06), Tampere, Finland. ACM, pp. 81-88. <a href="https://doi.org/10.1145/1139073.1139096">doi:10.1145/1139073.1139096</a></span><span class="why">Fun Toolkit: instrumentos breves para recoger la opinión de niños; su sesgo positivo es conocido.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Bieke Zaman; Vero Vanden Abeele; Dirk De Grooff (2013). <em>Measuring product liking in preschool children: An evaluation of the Smileyometer and This or That methods</em>. International Journal of Child-Computer Interaction (Elsevier), vol. 1, no. 2, pp. 61-70. <a href="https://doi.org/10.1016/j.ijcci.2012.12.001">doi:10.1016/j.ijcci.2012.12.001</a></span><span class="why">Documenta ese sesgo y propone «¿este o ese?» como método comparativo: el puente con el Objetivo 3.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Allison Druin (2002). <em>The role of children in the design of new technology</em>. Behaviour &amp; Information Technology (Taylor &amp; Francis), vol. 21, no. 1, pp. 1-25. <a href="https://doi.org/10.1080/01449290110108659">doi:10.1080/01449290110108659</a></span><span class="why">Los roles posibles de los niños (usuario, probador, informante, socio de diseño); ayuda a decidir cuál tendrán en el piloto escolar.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+</ul>
+<h3>Leer y diseñar la progresión</h3>
+<ul class="refs">
+<li><span class="cite">Irene Lee; Fred Martin; Jill Denner; Bob Coulter; Walter Allan; Jeri Erickson; Joyce Malyn-Smith; Linda Werner (2011). <em>Computational thinking for youth in practice</em>. ACM Inroads, vol. 2, no. 1, pp. 32-37. <a href="https://doi.org/10.1145/1929887.1929902">doi:10.1145/1929887.1929902</a></span><span class="why">Use-Modify-Create: una lente para leer cada actividad (¿usa, modifica o crea?) y la progresión entera.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Sue Sentance; Jane Waite; Maria Kallia (2019). <em>Teaching computer programming with PRIMM: a sociocultural perspective</em>. Computer Science Education (Taylor &amp; Francis), vol. 29, no. 2-3, pp. 136-176. <a href="https://doi.org/10.1080/08993408.2019.1608781">doi:10.1080/08993408.2019.1608781</a></span><span class="why">Predecir, correr, investigar, modificar, hacer; evaluado con 493 estudiantes de 11–14 años. Sugiere dónde poner la predicción dentro del paso a paso.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Grillenberger, Mareen (2023). <em>Why and How to Teach Physical Computing: Research and Practice in Computer Science Education at Secondary Schools</em>. En Keane &amp; Fluck (eds.), Teaching Coding in K-12 Schools, Springer, pp. 225–243. <a href="https://doi.org/10.1007/978-3-031-21970-2_15">doi:10.1007/978-3-031-21970-2_15</a></span><span class="why">Definición y práctica del physical computing en secundaria; sirve para juzgar qué enseña cada actividad más allá de los bloques que usa.</span><span class="src">bibliografía del proyecto · PDF en la carpeta compartida</span></li>
+<li><span class="cite">Przybylla, Mareen; Romeike, Ralf (2018). <em>Impact of Physical Computing on Learner Motivation</em>. Proceedings of the 18th International Conference on Computing Education Research (2018), ACM, pp. 1–10. <a href="https://doi.org/10.1145/3279720.3279730">doi:10.1145/3279720.3279730</a></span><span class="why">Cómo se midió la motivación en physical computing escolar; referencia si más adelante se quiere medir motivación y no solo observarla.</span><span class="src">bibliografía del proyecto · PDF en la carpeta compartida</span></li>
+</ul>
+  </section>
+
+  <section class="section" id="plantillas">
+    <div class="section-marker"><span class="section-num">§ 10</span><span class="section-rule"></span><span class="section-num">PLANTILLAS</span></div>
+    <h2>Las hojas <span class="it">impresas</span></h2>
+    <p><strong>Ficha del participante.</strong> Código anónimo · pista (A/B) · carrera y semestre · ¿ha programado? (nunca / bloques / texto) · celular: modelo, versión de Android · fecha · audio (sí/no).</p>
+    <p><strong>Hoja de notas del participante.</strong> Una fila por nota: diapositiva · qué no quedó claro · qué esperaba · dónde se trabó. Al final de cada actividad, una línea: qué hace mi programa.</p>
+    <p><strong>Hoja de ayudas.</strong> Columnas: hora · actividad · diapositiva · qué ayuda se dio. Por actividad: hora de inicio y hora de fin.</p>
+    <p><strong>Codificación de «qué hace mi programa».</strong> Por actividad: cita textual de la línea del participante · correcto / parcial / incorrecto · qué faltó.</p>
+    <p><strong>Guion de la conversación.</strong> Las preguntas del paso 5 de § 04, más espacio para «otra cosa que quieras decir».</p>
+    <p><strong>Tabla de síntesis (por actividad).</strong> Incidente · frecuencia · severidad · cambio propuesto · dónde · decisión · razón · estado · resultado en ronda 2.</p>
+    <p><strong>Matriz de cobertura.</strong> Actividad × participante; se marca la fecha de la sesión.</p>
+  </section>
+
+  <div class="colofon">
+    <div class="ornament">❖ ❖ ❖</div>
+    <p>Objetivo 1 · Plan de acción de equivalencia · septiembre 2026</p>
+  </div>
+
+</article>
+</div>
+</body>
+</html>

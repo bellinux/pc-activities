@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Objetivo 2 · Ground truth de equivalencia algorítmica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,30;0,9..144,300..900,100;1,9..144,300..900,30&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="guia.css">
+</head>
+<body class="guia">
+
+<nav class="toc">
+  <div class="toc-title">Objetivo 2 · contenido</div>
+  <a href="#def"><span class="n">§ 01</span> Definición</a>
+  <a href="#porque"><span class="n">§ 02</span> Por qué hace falta</a>
+  <a href="#spec"><span class="n">§ 03</span> La especificación</a>
+  <a href="#corpus"><span class="n">§ 04</span> El corpus</a>
+  <a href="#panel"><span class="n">§ 05</span> El panel de expertos</a>
+  <a href="#llm"><span class="n">§ 06</span> Las condiciones automáticas</a>
+  <a href="#metricas"><span class="n">§ 07</span> Qué se mide</a>
+  <a href="#amenazas"><span class="n">§ 08</span> Amenazas a la validez</a>
+  <a href="#pasos"><span class="n">§ 09</span> Pasos</a>
+  <a href="#preguntas"><span class="n">§ 10</span> Preguntas abiertas</a>
+  <a href="#partida"><span class="n">§ 11</span> Puntos de partida</a>
+  <div class="grp">Plan</div>
+  <div class="sub">
+    <a href="../guia-equivalencia.html"><span class="n">↑</span> Plan de acción</a>
+    <a href="objetivo-1-mejorar-actividades.html"><span class="n">O1</span> Mejorar</a>
+    <a href="objetivo-3-equivalencia-experiencial.html"><span class="n">O3</span> Experiencial</a>
+    <a href="constantes-y-unidades.html"><span class="n">§</span> Constantes y unidades</a>
+  </div>
+</nav>
+
+<div class="content">
+<article class="article">
+
+  <header class="masthead">
+    <span class="vol">Objetivo 2</span>
+    <span>Ground truth de equivalencia algorítmica</span>
+    <span>Septiembre 2026</span>
+  </header>
+  <nav class="plan-nav">
+    <a href="../guia-equivalencia.html">↑ Plan</a>
+    <a href="objetivo-1-mejorar-actividades.html">O1 · Mejorar</a>
+    <a class="here" href="objetivo-2-ground-truth.html">O2 · Ground truth</a>
+    <a href="objetivo-3-equivalencia-experiencial.html">O3 · Experiencial</a>
+    <a href="constantes-y-unidades.html">Constantes y unidades</a>
+    <a href="ensayo-junio-2026.html">Ensayo de junio</a>
+  </nav>
+
+  <section class="title-block">
+    <span class="eyebrow">Objetivo 2 · primera contribución</span>
+    <h1 class="title">Un <span class="em">ground truth</span> humano para la equivalencia algorítmica</h1>
+    <p class="deck">Expertos humanos juzgan los 17 pares vigentes y sus variantes con las mismas reglas que la pipeline. Se mide cuánto coinciden los veredictos.</p>
+  </section>
+
+  <section class="section" id="def">
+    <div class="section-marker"><span class="section-num">§ 01</span><span class="section-rule"></span><span class="section-num">DEFINICIÓN</span></div>
+    <h2>El objetivo, con su <span class="it">plantilla</span></h2>
+    <div class="obj" data-label="Objetivo 2 · primera contribución">
+      <p class="q">Dados los mismos criterios de equivalencia —la especificación de la pipeline—, ¿coincide el veredicto de expertos humanos con el de la pipeline? ¿Dónde divergen, y qué dice eso de la especificación?</p>
+      <dl class="def">
+        <dt>Entregable</dt><dd>(1) Un <strong>corpus etiquetado</strong>: pares de programas (Protobject ↔ micro:bit) con veredicto experto, justificación y reglas aplicadas; mitad equivalentes, mitad no. (2) Medidas de <strong>acuerdo</strong>: entre expertos; entre la etiqueta de oro y la pipeline; entre la etiqueta de oro y un LLM que juzga directamente; matriz de confusión; análisis de cada desacuerdo regla por regla. (3) Un <strong>manuscrito</strong>: el método de equivalencia algorítmica validado contra el juicio de expertos que aplican la misma especificación.</dd>
+        <dt>Método</dt><dd>Corpus = 17 pares vigentes + revisiones anteriores desde git + variantes controladas. Especificación escrita (reglas A–E y cuatro clases de veredicto). Panel de expertos calibrado; juicio ciego e independiente; resolución de desacuerdos (en la literatura de anotación, <em>adjudicación</em>) moderada por una persona sin acceso a los veredictos de la pipeline ni al archivo de variantes, que no vota; etiqueta de oro sellada. Pipeline y LLM-juez sobre los mismos pares, varias corridas con ontología, modelo y parámetros congelados. Comparación por estratos.</dd>
+        <dt>Cuándo</dt><dd>Septiembre–octubre: especificación y corpus. Octubre: juicios; inicios de noviembre: resolución de desacuerdos. Noviembre: corridas y análisis. Diciembre: borrador.</dd>
+        <dt>Listo cuando</dt><dd>≥ 40 pares de ≥ 12 actividades distintas, etiquetados por ≥ 4 expertos, con acuerdo entre ellos reportado (con el mínimo de 30 pares y 3 expertos el entregable se enmarca como estudio piloto); criterio de éxito escrito y fechado antes de la primera corrida; pipeline y LLM-juez corridos ≥ 3 veces sobre todos los pares; acuerdo humano–pipeline con intervalo de confianza; cada desacuerdo con una explicación de una línea que apunta a una regla.</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section" id="porque">
+    <div class="section-marker"><span class="section-num">§ 02</span><span class="section-rule"></span><span class="section-num">MOTIVACIÓN</span></div>
+    <h2>Por qué hace <span class="it">falta</span></h2>
+    <p class="lede">La pipeline declara isomorfas las 17 actividades, con distancia de edición cero. Ese veredicto se contrasta con un juicio humano externo, porque las 17 actividades están refactorizadas <em>para</em> ser equivalentes y la pipeline está ajustada sobre esas mismas 17.</p>
+    <p>Los expertos leen programación por bloques y aplican las mismas reglas escritas que la pipeline, porque así la afirmación «son equivalentes» tiene un referente externo a la pipeline. Cada desacuerdo, entre expertos o entre expertos y máquina, se analiza regla por regla, porque señala una regla ambigua, ausente o discutible de la <em>especificación</em>. La pipeline se compara con jueces humanos sobre un corpus con negativos, porque un modelo de lenguaje decide su vocabulario canónico y construye sus grafos, y su fiabilidad se mide solo contra jueces humanos. Los negativos miden si la pipeline sabe decir «no».</p>
+    <p>El acuerdo entre expertos y pipeline mide si la pipeline <em>implementa</em> la especificación tal como la leen personas. La corrección de la especificación se mide con el juicio libre. Antes de recibir las reglas, cada experto da un juicio libre («¿dirías que son el mismo programa? ¿por qué?»), porque la distancia entre ese juicio y el juicio con reglas mide cuánto de la equivalencia crean las reglas.</p>
+  </section>
+
+  <section class="section" id="spec">
+    <div class="section-marker"><span class="section-num">§ 03</span><span class="section-rule"></span><span class="section-num">LAS REGLAS</span></div>
+    <h2>La <span class="it">especificación</span> que juzgan humanos y máquina</h2>
+    <p>La equivalencia es relativa a una especificación. La especificación fija qué se observa, y el veredicto se sigue de ahí. La pipeline juzga «módulo <em>plumbing</em> de plataforma»: se descarta lo que una plataforma exige y la otra no. La especificación es una página: las cinco reglas de normalización de <code>prompt.md</code>, escritas para personas, con un ejemplo por regla. Ese texto se entrega íntegro a los expertos y al LLM-juez. Es el primer entregable.</p>
+    <table class="plan">
+      <thead><tr><th>Regla</th><th>Qué se ignora / qué cuenta</th><th>Ejemplo</th></tr></thead>
+      <tbody>
+        <tr><td><strong>A · sin análogo</strong></td><td>Se descarta lo que una plataforma tiene y la otra no puede tener: el color de la matriz LED. También absorbe lo implícito en un bloque: «mostrar LEDs» de MakeCode incluye una pausa implícita de 400 ms; la ontología lo modela como dibujo puro, y el glosario lo dice.</td><td>«dibuja con color rojo» ≡ «mostrar LEDs» (= dibujar + pausa implícita de 400 ms).</td></tr>
+        <tr><td><strong>B · recursos</strong></td><td>Los recursos físicos se renombran: cuenta la <em>identidad</em> del recurso. El eje x y el eje y del sensor son «el mismo eje» si cada programa usa siempre uno solo; dos ejes distintos ≠ un eje.</td><td>«aceleración x» ≡ «y en Inclinación2».</td></tr>
+        <tr><td><strong>C · sonido por intención</strong></td><td>Tono con altura variable (<code>PlayTone</code>) ≠ sonido de evento a altura fija (<code>EmitSound</code>) ≠ clip con nombre (<code>PlaySound</code>). Dentro de la primera clase, Hz y número de nota se tratan como el mismo tono.</td><td>«tono de timbre (Hz) x» ≡ «tocar nota número x». Ver la <a href="constantes-y-unidades.html">discusión</a>.</td></tr>
+        <tr><td><strong>D · aritmética (las constantes no cuentan)</strong></td><td>El operador cuenta; la constante se ignora. El redondeo es un nodo propio (al más cercano ≠ hacia arriba).</td><td>«x + 1000» ≡ «y + 60»; «x × 2» ≠ «x + 2».</td></tr>
+        <tr><td><strong>E · orden</strong></td><td>El orden entre instrucciones independientes se ignora. Cuenta cuando dos instrucciones actúan sobre el mismo recurso (pantalla, sonido) o cuando una usa un valor que la otra produce.</td><td>«borrar; dibujar» ≠ «dibujar; borrar»; «sonar; dibujar» ≡ «dibujar; sonar».</td></tr>
+        <tr><td><strong>Estructura</strong></td><td>Misma estructura de eventos, bucles, condiciones, ramas, variables y flujo de datos.</td><td>Un «repetir 4 veces» dentro de un «para siempre» en ambos.</td></tr>
+      </tbody>
+    </table>
+    <div class="callout">
+      <span class="tag">Nota sobre la regla E</span>
+      <p>Las actividades del corpus se editan hasta que las dos versiones coinciden, y eso incluye el orden de las instrucciones: alinear el orden a mano deja a la regla E sin trabajo en los 17 pares vigentes. La regla sigue en la especificación porque los pares históricos y los fabricados llegan tal como están, con el orden que tenían, y porque el motor de la pipeline trabaja sobre un grafo de dependencias, donde el orden entre instrucciones independientes deja de existir. Para el corpus vigente, la regla E es una precaución, y abre la pregunta de si el grafo hace falta (§ 03, más abajo).</p>
+    </div>
+    <p><strong>Las cuatro clases de veredicto</strong>: <em>equivalente</em> (mismo grafo); <em>equivalente módulo plumbing</em> (difieren solo en un bloque de configuración que una plataforma exige y la otra no); <em>variante</em> (misma idea, una diferencia algorítmica localizada que se describe en una línea); <em>diferente</em>. Los expertos juzgan en cuatro clases; el análisis se hace en cuatro y también colapsado a dos (equivalente / no).</p>
+    <h3>¿Hace falta el grafo?</h3>
+    <p>Sobre el mismo vocabulario canónico caben dos criterios:</p>
+    <ul>
+      <li><strong>Comparación línea a línea.</strong> Cada bloque se traduce a su nodo canónico con las reglas A–D y las dos secuencias se comparan término a término, expresiones incluidas. El veredicto es «iguales» o «distintas, en estas líneas».</li>
+      <li><strong>Grafo de dependencias.</strong> La comparación actual, que además ignora el orden entre instrucciones independientes (regla E) y los nombres de variables y de recursos.</li>
+    </ul>
+    <p>La comparación línea a línea es la más estricta: los pares que la pasan tienen también grafos isomorfos. El grafo aporta exactamente dos cosas, la regla E y los nombres; el resto de la normalización vive en la ontología. Para el corpus vigente eso queda cubierto al escribir las actividades, porque las dos versiones se escriben para coincidir y el orden se alinea a mano. El grafo trabaja cuando los dos programas llegan escritos por separado: los pares históricos, las actividades de terceros, los proyectos de estudiantes.</p>
+    <p>Lo que cambia si el criterio simple basta: la abstracción con LLM produce una secuencia canónica en vez de un grafo con aristas, con menos puntos de falla (aristas de efecto colateral, índices de recurso); la GED, NP-hard y con resultados truncados por tiempo, deja de calcularse; y el veredicto se lee como un diff, «estas dos líneas difieren», que sirve para enseñar.</p>
+    <div class="callout">
+      <span class="tag">Se decide con datos</span>
+      <p>Los dos criterios corren sobre el corpus etiquetado de § 04 y se comparan con la etiqueta de oro: cuántos pares reproduce cada uno y en cuáles divergen. El recuento de pares en que el grafo cambia el veredicto responde a la pregunta. Implementar el criterio simple es un script sobre el texto extraído y la ontología, y su costo cabe dentro del Objetivo 2. Propuesta operativa mientras tanto: el criterio simple corre primero y reporta las líneas distintas; el grafo decide los pares que el criterio simple marca distintos.</p>
+    </div>
+    <div class="callout warn">
+      <span class="tag">Qué recibe el panel</span>
+      <p>El panel recibe la especificación y un glosario corto de correspondencias evidentes (qué bloque de MakeCode es «esperar», qué componente de Protobject es el sensor de inclinación), para que la lectura de cada dialecto sea inmediata. La ontología completa (la tabla <code>canonical_node</code> ↔ bloque MakeCode ↔ bloque Protobject) queda fuera del material, porque contiene las decisiones que se ponen a prueba. El límite entre glosario y ontología es la pregunta P9.</p>
+    </div>
+  </section>
+
+  <section class="section" id="corpus">
+    <div class="section-marker"><span class="section-num">§ 04</span><span class="section-rule"></span><span class="section-num">EL MATERIAL</span></div>
+    <h2>El <span class="it">corpus</span>: positivos, negativos y controles</h2>
+    <p>El corpus incluye, en proporción parecida, pares que los expertos pueden declarar no equivalentes, porque en un corpus solo de positivos acierta también un juez que dice «sí» a todo. Cada par entra con una <strong>etiqueta esperada</strong> fijada al armar el corpus (histórico: por el <em>diff</em> en la fuente; fabricado: por el cambio documentado). El corpus se cierra <em>antes</em> del panel. Ningún par se elimina después de etiquetado, porque la selección de pares queda así independiente del resultado. La prevalencia real la fija el panel y se reporta.</p>
+    <h3>Positivos: los 17 pares vigentes</h3>
+    <p>Las versiones actuales de <code>protobject/equivalent-&lt;code&gt;.ptj</code> y <code>microbit/&lt;code&gt;.hex</code>, que la pipeline declara isomorfas. Son los positivos esperados.</p>
+    <h3>Negativos naturales: las revisiones anteriores en git</h3>
+    <p>El historial de git guarda cada paso de la refactorización de las actividades hacia la equivalencia, entre fines de julio y mediados de agosto de 2026. Los commits de junio (reorganización y erratas de comentarios) quedan fuera del corpus. Cuentan las versiones <em>distintas por contenido</em>: dos commits de <em>luci-discoteca-ruido</em> restauran una versión anterior y cuentan como una. Doce actividades tienen tres o más versiones del archivo Protobject o del micro:bit. El lado Protobject tiene unas 40 versiones anteriores. El lado micro:bit tiene unas 30. Dos archivos «old» se conservan fuera del historial. Un par histórico se arma con los dos archivos <strong>tal como estaban en un mismo commit</strong> (<code>git show &lt;commit&gt;:&lt;ruta&gt;</code>) y se etiqueta con la fecha. Los mensajes de commit («fix a music visualizer», «gritometro es ahora equivalente») indican el cambio de cada versión.</p>
+    <table class="plan">
+      <thead><tr><th>Actividad (code)</th><th>Versiones distintas .ptj</th><th>Versiones distintas .hex</th></tr></thead>
+      <tbody>
+        <tr><td>luci-discoteca-ruido</td><td class="num">6 (+1 old)</td><td class="num">6 (+1 old)</td></tr>
+        <tr><td>gritometro-tiempo-gritos</td><td class="num">4</td><td class="num">3</td></tr>
+        <tr><td>luz-encendida-ruido-animacion</td><td class="num">6</td><td class="num">2</td></tr>
+        <tr><td>nivel-con-ruido</td><td class="num">5</td><td class="num">4</td></tr>
+        <tr><td>corazon-variables-eventos</td><td class="num">5</td><td class="num">5</td></tr>
+        <tr><td>papas-caliente-juego · flama-vela-con-soplo</td><td class="num">4 · 4</td><td class="num">3 · 3</td></tr>
+        <tr><td>metronomo, juego-toques, despertador, alarma, xilofono-inclinacion</td><td class="num">3 c/u</td><td class="num">1–4</td></tr>
+        <tr><td colspan="3" style="font-size:0.85rem;color:var(--ink-soft)">Máximo tres o cuatro pares por actividad en el corpus, porque los pares de una misma actividad son dependientes y un experto que ve ocho variantes de la misma termina juzgándolas entre sí.</td></tr>
+      </tbody>
+    </table>
+    <div class="callout bad">
+      <span class="tag">Las etiquetas antiguas son candidatas</span>
+      <p>Los negativos históricos entran como <em>candidatos</em>. La etiqueta la fija el panel mirando el programa, porque un veredicto antiguo de la pipeline puede venir de un defecto del decodificador (p. ej., una falsa divergencia de redondeo).</p>
+    </div>
+    <h3>Controles fabricados</h3>
+    <p>Se fabrican variantes a partir de pares vigentes, con un cambio conocido cada una, para saber qué distingue cada juez:</p>
+    <ul>
+      <li><strong>Casi-equivalentes algorítmicas</strong> (esperado: <em>variante</em> o <em>diferente</em>): cambiar un operador (+ por ×), quitar o agregar un bloque dentro del bucle, usar dos ejes del sensor donde el otro usa uno, mover una instrucción fuera del bucle.</li>
+      <li><strong>Solo plumbing</strong> (esperado: <em>equivalente</em>): reordenar dos instrucciones independientes, cambiar una constante de calibración, renombrar la instancia del dispositivo, cambiar el color del LED.</li>
+      <li><strong>Pares cruzados</strong> (esperado: <em>diferente</em>): la versión Protobject de una actividad con la micro:bit de otra parecida (los dos xilófonos; las dos luces al ruido).</li>
+    </ul>
+    <p>El corpus tiene 40–60 pares de al menos 12 actividades distintas. La etiqueta esperada está equilibrada. Tres estratos se analizan por separado: vigentes, históricos y fabricados. Los pares cruzados quedan fuera del kappa principal y se reportan como control de sanidad (acierto esperado cercano al 100 %). Presentación <strong>ciega</strong>: código de par, orden aleatorio distinto por juez, sin fecha ni procedencia, ambas versiones mostradas como programas de bloques (capturas renderizadas desde la fuente) y también como texto extraído, registrando cuál usó cada juez (P1).</p>
+    <div class="callout warn"><span class="tag">Una tarea previa</span><p>La pipeline identifica los 17 pares por su <code>code</code> (<code>prompt.md</code>, § 1). Para correr sobre pares históricos y fabricados, la pipeline se extiende: cada par con identificador y carpeta propios. Es la primera tarea técnica.</p></div>
+  </section>
+
+  <section class="section" id="panel">
+    <div class="section-marker"><span class="section-num">§ 05</span><span class="section-rule"></span><span class="section-num">LOS JUECES</span></div>
+    <h2>El <span class="it">panel</span> de expertos</h2>
+    <ol class="pasos">
+      <li><strong>Composición.</strong> Personas que enseñan o investigan programación por bloques y pueden leer MakeCode y Protobject tras una introducción de media hora. Cuatro como objetivo, porque con tres un solo cambio de opinión cambia la mayoría. Tres como mínimo. Quedan fuera del panel quienes construyeron la pipeline o refactorizaron las actividades.</li>
+      <li><strong>Juicio libre, antes de las reglas.</strong> Sobre cinco pares (uno por tipo), cada experto responde sin especificación: «¿dirías que son el mismo programa? ¿por qué?». La respuesta se guarda. Mide cuánto de la equivalencia la crean las reglas.</li>
+      <li><strong>Calibración (1 sesión).</strong> Se lee la especificación en conjunto; se juzgan tres pares de práctica —uno de cada tipo— y se discuten hasta entender las reglas igual. Los pares de práctica quedan fuera del corpus. Las dudas se registran: son hallazgos sobre la especificación.</li>
+      <li><strong>Juicio independiente y ciego.</strong> Cada experto, por su cuenta, para cada par: veredicto (cuatro clases), confianza (1–5), reglas que aplicó, justificación de una o dos líneas, tiempo aproximado. Sin conversar entre ellos hasta terminar.</li>
+      <li><strong>Acuerdo entre expertos.</strong> Antes de discutir nada se calcula la fiabilidad entre jueces (§ 07). Ese número se reporta tal cual: mide cuán clara es la especificación.</li>
+      <li><strong>Resolución de desacuerdos (adjudicación).</strong> Los pares con desacuerdo se discuten en una reunión con guion fijo. La modera una persona sin acceso a los veredictos de la pipeline ni al archivo de variantes, que no vota. Cada par recibe una etiqueta de consenso (o de mayoría, y se anota). La etiqueta final es la <strong>etiqueta de oro</strong>. Se sella —archivo con hash y fecha— <em>antes</em> de las corridas automáticas. Las razones de cada cambio de opinión se escriben.</li>
+    </ol>
+    <p>Todo lo que los expertos escriben es dato: sus justificaciones muestran qué criterios usan <em>además</em> de la especificación. Los criterios sobre constantes o tipo de sonido alimentan la <a href="constantes-y-unidades.html">página de constantes y unidades</a>.</p>
+  </section>
+
+  <section class="section" id="llm">
+    <div class="section-marker"><span class="section-num">§ 06</span><span class="section-rule"></span><span class="section-num">LA MÁQUINA</span></div>
+    <h2>Las condiciones <span class="it">automáticas</span></h2>
+    <p>Tres condiciones se comparan contra la etiqueta de oro, porque responden a preguntas distintas.</p>
+    <table class="plan">
+      <thead><tr><th>Condición</th><th>Qué es</th><th>Pregunta que responde</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Pipeline completa</strong></td><td>Extracción determinística → abstracción con LLM (AST → ontología → PDG) → VF2 y GED. El veredicto principal es <strong>binario</strong> (isomorfas o no). La distancia GED, relativa al tamaño del grafo, entra en un análisis secundario en cuatro clases solo si el motor emite la etiqueta «plumbing» de forma determinística (un nodo no emparejado cuyo <code>canonical_node</code> está marcado como plumbing en la ontología). Los umbrales se fijan por escrito antes de la primera corrida.</td><td>¿El método tal como existe reproduce el juicio experto?</td></tr>
+        <tr><td><strong>LLM-juez directo</strong></td><td>El modelo recibe la misma especificación de una página y los dos programas (texto extraído) y devuelve veredicto en cuatro clases, reglas aplicadas y justificación. Varios modelos.</td><td>¿La estructura de la pipeline (ontología, grafos, isomorfismo) aporta algo sobre pedirle al modelo que juzgue?</td></tr>
+        <tr><td><strong>LLM-juez con bloques</strong></td><td>Igual, pero el modelo ve las capturas de los programas de bloques, como los expertos.</td><td>¿Cuánto pesa la extracción determinística? Esta condición separa el efecto del juez (humano / modelo) del efecto de la representación (bloques / texto).</td></tr>
+      </tbody>
+    </table>
+    <p>Cada condición se corre <strong>al menos tres veces</strong> sobre todo el corpus, porque la abstracción y el juicio directo son estocásticos. La variabilidad entre corridas se reporta como resultado. Las corridas son ciegas a la etiqueta de oro. Se congela por escrito la versión de <code>prompt.md</code> (hash), el modelo y sus parámetros de muestreo. La ontología se trata en dos niveles: (1) una ontología nueva, distinta de la vigente, construida a ciegas sobre el corpus completo y congelada, con tres corridas de abstracción sobre ella, que miden la consistencia de la abstracción; (2) tres reconstrucciones de la ontología, que miden su variabilidad (qué nodos cambian), reportada aparte.</p>
+  </section>
+
+  <section class="section" id="metricas">
+    <div class="section-marker"><span class="section-num">§ 07</span><span class="section-rule"></span><span class="section-num">EL ANÁLISIS</span></div>
+    <h2>Qué se <span class="it">mide</span></h2>
+    <ul>
+      <li><strong>Fiabilidad entre expertos</strong>, antes de la resolución de desacuerdos: alfa de Krippendorff (sirve para más de dos jueces y datos nominales) y, por pares de jueces, kappa de Cohen. Intervalo de confianza por <em>bootstrap</em> por conglomerado: se remuestrean actividades, porque los pares de una misma actividad son dependientes; se reporta el número de actividades distintas junto al de pares.</li>
+      <li><strong>Acuerdo de cada condición automática con la etiqueta de oro</strong>: kappa (binario como análisis principal; cuatro clases como secundario), matriz de confusión, y para el binario sensibilidad (detección de los no equivalentes) y especificidad (respeto de los equivalentes), por estrato. <strong>Criterio de éxito, escrito y fechado antes de la primera corrida</strong> (propuesta): kappa binario ≥ 0,6 con límite inferior del intervalo ≥ 0,4 y sensibilidad ≥ 0,8; si no se alcanza, el resultado se reporta como negativo y la especificación no se ajusta hasta alcanzarlo.</li>
+      <li><strong>Aporte del grafo</strong>: acuerdo con la etiqueta de oro del criterio línea a línea y del criterio con grafo, por separado, y lista de los pares en que difieren entre sí. Ese recuento dice cuánto agrega el grafo sobre el corpus.</li>
+      <li><strong>Consistencia entre corridas</strong> de cada condición: proporción de pares con el mismo veredicto en las tres corridas.</li>
+      <li><strong>Análisis de desacuerdos</strong>: cada par donde la etiqueta de oro y la condición difieren se explica en una línea que nombra la regla implicada (A–E, estructura, o «fuera de la especificación»). El recuento por regla orienta la revisión de la pipeline.</li>
+      <li><strong>Lo que los expertos agregan</strong>: criterios que aparecen en las justificaciones y faltan en la especificación. Es la lista de candidatos a reglas nuevas, o a dimensiones distintas de la algorítmica.</li>
+    </ul>
+  </section>
+
+  <section class="section" id="amenazas">
+    <div class="section-marker"><span class="section-num">§ 08</span><span class="section-rule"></span><span class="section-num">RIGOR</span></div>
+    <h2>Amenazas a la <span class="it">validez</span>, y qué se hace</h2>
+    <table class="plan">
+      <thead><tr><th>Amenaza</th><th>Mitigación</th></tr></thead>
+      <tbody>
+        <tr><td>La pipeline fue ajustada sobre los 17 pares vigentes (sobreajuste).</td><td>Los negativos históricos y las variantes fabricadas son material nuevo para la pipeline; la ontología se reconstruye a ciegas; el acuerdo se reporta por estrato (vigentes, históricos, fabricados).</td></tr>
+        <tr><td>Fabricar las variantes y correr la pipeline exige conocer las etiquetas esperadas.</td><td>La resolución de desacuerdos la modera una persona sin acceso a los veredictos de la pipeline ni al archivo de variantes, que no vota. La etiqueta de oro se sella antes de las corridas.</td></tr>
+        <tr><td>Las variantes fabricadas son fáciles e inflan el acuerdo.</td><td>Se analizan como estrato aparte; los pares cruzados quedan fuera del kappa principal.</td></tr>
+        <tr><td>Los expertos reconocen las actividades y saben cuál es «la buena».</td><td>Ciego: códigos, orden aleatorio, sin fechas; los controles cruzados y fabricados rompen la asociación «actividad conocida = equivalente».</td></tr>
+        <tr><td>La especificación es ambigua y el desacuerdo mide esa ambigüedad.</td><td>Calibración con pares de práctica; la fiabilidad entre expertos se reporta antes de la adjudicación; las ambigüedades encontradas se documentan como resultado.</td></tr>
+        <tr><td>El decodificador introduce diferencias ausentes en la fuente.</td><td>Todo par se verifica en la fuente (<code>.ts</code>, XML de Blockly) antes de entrar al corpus. Los expertos ven bloques renderizados desde la fuente.</td></tr>
+        <tr><td>El LLM es estocástico.</td><td>Tres corridas mínimo; la consistencia se reporta.</td></tr>
+        <tr><td>Pocos pares: el intervalo de kappa es ancho.</td><td>40–60 pares como objetivo; el intervalo se reporta siempre, en la forma «kappa 0,7 [0,5–0,85]».</td></tr>
+        <tr><td>Fatiga de los jueces.</td><td>Sesiones de máximo 20 pares; orden aleatorio distinto por juez.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section" id="pasos">
+    <div class="section-marker"><span class="section-num">§ 09</span><span class="section-rule"></span><span class="section-num">SECUENCIA</span></div>
+    <h2>Pasos, en <span class="it">secuencia</span></h2>
+    <ol class="pasos">
+      <li><strong>Especificación para personas.</strong> Una página, reglas A–E con ejemplo, cuatro clases, glosario de correspondencias. Septiembre.</li>
+      <li><strong>Corpus histórico.</strong> Exportar de git las versiones distintas por commit, armar los pares (máximo tres o cuatro por actividad), verificar cada uno en la fuente, escribir la etiqueta esperada a partir del <em>diff</em>, renderizar las capturas de bloques y extraer el texto, asignar códigos. Septiembre–octubre.</li>
+      <li><strong>Variantes fabricadas.</strong> Diez a quince, con el cambio documentado en un archivo cerrado al panel. Octubre.</li>
+      <li><strong>Panel.</strong> Reclutar, preparar el material, y luego: juicio libre, calibración, juicio independiente, cálculo de fiabilidad, resolución de desacuerdos, etiqueta de oro sellada. Octubre–inicios de noviembre.</li>
+      <li><strong>Extensión de la pipeline y corridas automáticas.</strong> Primero, que la pipeline acepte pares con identificador propio; luego ontología a ciegas congelada, pipeline ×3, reconstrucciones de ontología ×3, LLM-juez ×3 por modelo (texto y bloques), todo ciego y con parámetros escritos. Noviembre.</li>
+      <li><strong>Análisis.</strong> Métricas de § 07, tabla de desacuerdos por regla, lista de criterios que los expertos agregan. Noviembre–diciembre.</li>
+      <li><strong>Propuestas de revisión de la especificación.</strong> Qué regla cambia, qué se agrega, qué queda para la dimensión experiencial. Diciembre.</li>
+      <li><strong>Borrador del manuscrito.</strong> Diciembre.</li>
+    </ol>
+  </section>
+
+  <section class="section" id="preguntas">
+    <div class="section-marker"><span class="section-num">§ 10</span><span class="section-rule"></span><span class="section-num">DECISIONES PENDIENTES</span></div>
+    <h2>Preguntas <span class="it">abiertas</span></h2>
+    <ol class="preguntas">
+      <li><strong>¿La pipeline adopta la comparación línea a línea como primer criterio?</strong> Propuesta: sí para el corpus co-diseñado, con el grafo para los pares que salgan distintos; la decisión final sale del recuento de § 07.</li>
+      <li><strong>¿Los expertos ven los bloques, el texto extraído, o ambos?</strong> Bloques prueba la pipeline entera (incluida la extracción); texto prueba solo la abstracción. Propuesta: ambos, registrando cuál usó cada juez, para separar en el análisis el efecto de la representación del efecto del juez.</li>
+      <li><strong>¿Cuatro clases o dos?</strong> Propuesta: se juzga en cuatro, se analiza en ambas. Una fiabilidad baja en cuatro clases y alta en dos es un resultado sobre la distinción «módulo plumbing» / «variante».</li>
+      <li><strong>¿La regla D (las constantes no cuentan) va en la especificación tal cual?</strong> Ver la <a href="constantes-y-unidades.html">página</a>. Propuesta: va tal cual, y además se le pide al experto que marque si una constante le parece relevante, para saber cuántas veces disiente de la regla aun aplicándola.</li>
+      <li><strong>¿La equivalencia Hz ≡ nota (regla C) va tal cual?</strong> Misma página. Propuesta: tal cual en la especificación, con la misma marca de disenso.</li>
+      <li><strong>¿Se le pide al panel un segundo juicio sobre la dimensión interactiva?</strong> Una casilla: «¿las mismas entradas producen las mismas salidas?». Da un primer dato para O3. Propuesta: sí.</li>
+      <li><strong>¿Cuántos pares y cuántos expertos?</strong> Propuesta: 40–60 pares de ≥ 12 actividades, 4 expertos (5 si se consigue), 3 como mínimo. Con 3 expertos y 30 pares el resultado es un estudio piloto y el manuscrito se enmarca así.</li>
+      <li><strong>¿Qué perfil cuenta como experto?</strong> Propuesta: docentes o investigadores en enseñanza de la programación; estudiantes de posgrado del área si han enseñado. Quedan excluidos los estudiantes de pregrado.</li>
+      <li><strong>¿Se compara también contra los veredictos que la pipeline dio en su momento a las versiones históricas?</strong> Propuesta: como nota, fuera de las condiciones principales, porque mezcla versiones distintas del decodificador y de la ontología.</li>
+      <li><strong>¿Dónde termina el glosario y empieza la ontología?</strong> Propuesta: el glosario nombra los bloques y componentes (qué es «esperar», qué es «Inclinación»); no dice qué es equivalente a qué.</li>
+    </ol>
+  </section>
+
+  <section class="section" id="partida">
+    <div class="section-marker"><span class="section-num">§ 11</span><span class="section-rule"></span><span class="section-num">LITERATURA</span></div>
+    <h2>Puntos de <span class="it">partida</span></h2>
+    <p>Cinco campos de la literatura: la fiabilidad entre jueces (cómo se mide el acuerdo), la validación de jueces automáticos contra humanos, la detección de clones y la equivalencia de programas (qué significa «el mismo programa» en ingeniería de software), el análisis de programas por bloques y la construcción de corpus anotados. Referencias verificadas, cada una con su uso.</p>
+    <h3>Acuerdo entre jueces</h3>
+<ul class="refs">
+<li><span class="cite">Jacob Cohen (1960). <em>A Coefficient of Agreement for Nominal Scales</em>. Educational and Psychological Measurement, 20(1), 37-46. <a href="https://doi.org/10.1177/001316446002000104">doi:10.1177/001316446002000104</a></span><span class="why">El kappa original: acuerdo entre dos jueces corregido por azar.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">J. Richard Landis, Gary G. Koch (1977). <em>The Measurement of Observer Agreement for Categorical Data</em>. Biometrics, 33(1), 159-174. <a href="https://doi.org/10.2307/2529310">doi:10.2307/2529310</a></span><span class="why">La tabla de interpretación de kappa que todo el mundo cita —y que conviene usar con cautela, como advierten sus autores.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Klaus Krippendorff (2011). <em>Computing Krippendorff&#x27;s Alpha-Reliability</em>. University of Pennsylvania ScholarlyCommons, Departmental Papers (ASC), Annenberg School for Communication (working paper / postprint, fechado 25-01-2011). <a href="http://repository.upenn.edu/asc_papers/43">http://repository.upenn.edu/asc_papers/43</a></span><span class="why">Alfa: para más de dos jueces, datos nominales y datos faltantes. Es la medida principal para el panel.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Ron Artstein, Massimo Poesio (2008). <em>Survey Article: Inter-Coder Agreement for Computational Linguistics</em>. Computational Linguistics (MIT Press / ACL Anthology J08-4004), 34(4), 555-596. <a href="https://doi.org/10.1162/coli.07-034-R2">doi:10.1162/coli.07-034-R2</a></span><span class="why">La guía completa: qué coeficiente usar, qué reportar, cómo interpretar el desacuerdo como información sobre las guías de anotación.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Kevin A. Hallgren (2012). <em>Computing Inter-Rater Reliability for Observational Data: An Overview and Tutorial</em>. Tutorials in Quantitative Methods for Psychology, 8(1), 23-34. <a href="https://doi.org/10.20982/tqmp.08.1.p023">doi:10.20982/tqmp.08.1.p023</a></span><span class="why">Tutorial práctico con ejemplos de cálculo.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Mary L. McHugh (2012). <em>Interrater reliability: the kappa statistic</em>. Biochemia Medica, 22(3), 276-282. <a href="https://doi.org/10.11613/BM.2012.031">doi:10.11613/BM.2012.031</a></span><span class="why">Límites de kappa (prevalencia, número de categorías): por qué se reporta también la matriz de confusión.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+</ul>
+<h3>Jueces automáticos contra humanos</h3>
+<ul class="refs">
+<li><span class="cite">Lianmin Zheng, Wei-Lin Chiang, Ying Sheng, Siyuan Zhuang, Zhanghao Wu, Yonghao Zhuang, Zi Lin, Zhuohan Li, Dacheng Li, Eric P. Xing, Hao Zhang, Joseph E. Gonzalez, Ion Stoica (2023). <em>Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena</em>. Advances in Neural Information Processing Systems 36 (NeurIPS 2023), Datasets and Benchmarks Track, New Orleans, USA, vol. 36, pp. 46595-46623 (arXiv v4, 24 Dec 2023). <a href="https://doi.org/10.52202/075280-2020">doi:10.52202/075280-2020</a></span><span class="why">Cómo se valida un modelo como juez contra humanos: acuerdo, sesgos de posición y de verbosidad, límites. El diseño de referencia para nuestras condiciones automáticas.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Fabrizio Gilardi, Meysam Alizadeh, Maël Kubli (2023). <em>ChatGPT outperforms crowd workers for text-annotation tasks</em>. Proceedings of the National Academy of Sciences (PNAS), 120(30), e2305016120 (online 18 Jul 2023; print 25 Jul 2023). <a href="https://doi.org/10.1073/pnas.2305016120">doi:10.1073/pnas.2305016120</a></span><span class="why">Comparación de anotación por modelo y por personas: acuerdo con expertos y consistencia entre corridas; nuestro análisis de consistencia sigue este modelo.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Cheng-Han Chiang, Hung-yi Lee (2023). <em>Can Large Language Models Be an Alternative to Human Evaluations?</em>. Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), Toronto, Canada, ACL, pp. 15607-15631. <a href="https://doi.org/10.18653/v1/2023.acl-long.870">doi:10.18653/v1/2023.acl-long.870</a></span><span class="why">Cuándo un modelo puede sustituir la evaluación humana y cuándo no; útil para escribir las limitaciones.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Anjiang Wei, Jiannan Cao, Ran Li, Hongyu Chen, Yuhui Zhang, Ziheng Wang, Yuan Liu, Thiago S. F. X. Teixeira, Diyi Yang, Ke Wang, Alex Aiken (2025). <em>EquiBench: Benchmarking Large Language Models&#x27; Reasoning about Program Semantics via Equivalence Checking</em>. Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing (EMNLP 2025), Suzhou, China, ACL, pp. 33868-33881 (arXiv v3, 19 Sep 2025). <a href="https://doi.org/10.18653/v1/2025.emnlp-main.1718">doi:10.18653/v1/2025.emnlp-main.1718</a></span><span class="why">Benchmark de equivalencia de programas para modelos de lenguaje: la tarea más cercana a la nuestra, y la evidencia de que los modelos tienden a juzgar por similitud sintáctica. Lectura obligatoria.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+</ul>
+<h3>Clones y equivalencia de programas</h3>
+<ul class="refs">
+<li><span class="cite">Chanchal Kumar Roy; James R. Cordy (2007). <em>A Survey on Software Clone Detection Research</em>. Technical Report No. 2007-541, School of Computing, Queen&#x27;s University at Kingston, Ontario, Canada, 115 pp. (dated September 26, 2007). <a href="https://research.cs.queensu.ca/TechReports/Reports/2007-541.pdf">research.cs.queensu.ca/TechReports/Reports/2007-541.pdf</a></span><span class="why">Los cuatro tipos de clon: el tipo 2 (idénticos salvo identificadores y literales) es donde se ubica la regla D; el tipo 4 (semántico) es el objetivo de la pipeline.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Chanchal K. Roy; James R. Cordy; Rainer Koschke (2009). <em>Comparison and evaluation of code clone detection techniques and tools: A qualitative approach</em>. Science of Computer Programming (Elsevier), 74(7), 470–495. <a href="https://doi.org/10.1016/j.scico.2009.02.007">doi:10.1016/j.scico.2009.02.007</a></span><span class="why">Escenarios de edición para evaluar detectores de clones: la plantilla de nuestras variantes fabricadas.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Jeffrey Svajlenko; Judith F. Islam; Iman Keivanloo; Chanchal K. Roy; Mohammad Mamun Mia (2014). <em>Towards a Big Data Curated Benchmark of Inter-project Code Clones</em>. 2014 IEEE International Conference on Software Maintenance and Evolution (ICSME), Victoria, BC, Canada. IEEE, pp. 476–480. <a href="https://doi.org/10.1109/ICSME.2014.77">doi:10.1109/ICSME.2014.77</a></span><span class="why">Cómo se construyó un benchmark de clones con etiquetas humanas y jueces múltiples.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Luigi P. Cordella; Pasquale Foggia; Carlo Sansone; Mario Vento (2004). <em>A (Sub)Graph Isomorphism Algorithm for Matching Large Graphs</em>. IEEE Transactions on Pattern Analysis and Machine Intelligence, 26(10), 1367–1372. <a href="https://doi.org/10.1109/TPAMI.2004.75">doi:10.1109/TPAMI.2004.75</a></span><span class="why">VF2, el algoritmo que decide el isomorfismo en la pipeline.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Armando Solar-Lezama (2008). <em>Program Synthesis By Sketching</em>. PhD thesis, EECS Department, University of California, Berkeley; Technical Report No. UCB/EECS-2008-176, Tech. Rep. UCB/EECS-2008-176, diciembre 2008. <a href="https://www2.eecs.berkeley.edu/Pubs/TechRpts/2008/EECS-2008-176.html">www2.eecs.berkeley.edu/Pubs/TechRpts/2008/EECS-2008-176.html</a></span><span class="why">El sketch: «mismo esqueleto, constantes por determinar», formalizado.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+</ul>
+<h3>Programas por bloques</h3>
+<ul class="refs">
+<li><span class="cite">Jesús Moreno-León; Gregorio Robles (2015). <em>Dr. Scratch: a Web Tool to Automatically Evaluate Scratch Projects</em>. Proceedings of the Workshop in Primary and Secondary Computing Education (WiPSCE &#x27;15), London, UK. ACM, pp. 132–133 (poster, 2 páginas). <a href="https://doi.org/10.1145/2818314.2818338">doi:10.1145/2818314.2818338</a></span><span class="why">Análisis automático de proyectos por bloques: qué se puede medir de un programa de bloques sin ejecutarlo.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Efthimia Aivaloglou; Felienne Hermans (2016). <em>How Kids Code and How We Know: An Exploratory Study on the Scratch Repository</em>. Proceedings of the 2016 ACM Conference on International Computing Education Research (ICER &#x27;16), Melbourne, VIC, Australia. ACM, pp. 53–61. <a href="https://doi.org/10.1145/2960310.2960325">doi:10.1145/2960310.2960325</a></span><span class="why">Cómo programan los niños en Scratch, a escala: base para saber qué variantes son realistas.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+</ul>
+<h3>Construir un corpus anotado</h3>
+<ul class="refs">
+<li><span class="cite">James Pustejovsky, Amber Stubbs (2012). <em>Natural Language Annotation for Machine Learning: A Guide to Corpus-Building for Applications</em>. O&#x27;Reilly Media, Sebastopol, CA (libro, 1.ª ed.), 342 pp. (publicado 11 Oct 2012). <a href="https://www.oreilly.com/library/view/natural-language-annotation/9781449332693/">www.oreilly.com/library/view/natural-language-annotation/9781449332693/</a></span><span class="why">Guías de anotación y el ciclo modelar–anotar–evaluar: la especificación de § 03 es, técnicamente, una guía de anotación.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+</ul>
+  </section>
+
+  <div class="colofon">
+    <div class="ornament">❖ ❖ ❖</div>
+    <p>Objetivo 2 · Plan de acción de equivalencia · septiembre 2026</p>
+  </div>
+
+</article>
+</div>
+</body>
+</html>

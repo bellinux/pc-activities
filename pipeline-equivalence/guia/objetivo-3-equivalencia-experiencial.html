@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Objetivo 3 · Equivalencia experiencial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,30;0,9..144,300..900,100;1,9..144,300..900,30&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="guia.css">
+</head>
+<body class="guia">
+
+<nav class="toc">
+  <div class="toc-title">Objetivo 3 · contenido</div>
+  <a href="#def"><span class="n">§ 01</span> Definición</a>
+  <a href="#porque"><span class="n">§ 02</span> Qué tiene que medir</a>
+  <a href="#dimensiones"><span class="n">§ 03</span> Dimensiones: ideas de partida</a>
+  <a href="#frase"><span class="n">§ 04</span> Elicitar las diferencias</a>
+  <a href="#protocolo"><span class="n">§ 05</span> Requisitos del protocolo v1</a>
+  <a href="#piloto"><span class="n">§ 06</span> El piloto</a>
+  <a href="#validez"><span class="n">§ 07</span> Cómo se sabe que sirve</a>
+  <a href="#preguntas"><span class="n">§ 08</span> Preguntas abiertas</a>
+  <a href="#partida"><span class="n">§ 09</span> Puntos de partida</a>
+  <div class="grp">Plan</div>
+  <div class="sub">
+    <a href="../guia-equivalencia.html"><span class="n">↑</span> Plan de acción</a>
+    <a href="objetivo-1-mejorar-actividades.html"><span class="n">O1</span> Mejorar</a>
+    <a href="objetivo-2-ground-truth.html"><span class="n">O2</span> Ground truth</a>
+    <a href="constantes-y-unidades.html"><span class="n">§</span> Constantes y unidades</a>
+  </div>
+</nav>
+
+<div class="content">
+<article class="article">
+
+  <header class="masthead">
+    <span class="vol">Objetivo 3</span>
+    <span>Equivalencia experiencial</span>
+    <span>Septiembre 2026</span>
+  </header>
+  <nav class="plan-nav">
+    <a href="../guia-equivalencia.html">↑ Plan</a>
+    <a href="objetivo-1-mejorar-actividades.html">O1 · Mejorar</a>
+    <a href="objetivo-2-ground-truth.html">O2 · Ground truth</a>
+    <a class="here" href="objetivo-3-equivalencia-experiencial.html">O3 · Experiencial</a>
+    <a href="constantes-y-unidades.html">Constantes y unidades</a>
+    <a href="ensayo-junio-2026.html">Ensayo de junio</a>
+  </nav>
+
+  <section class="title-block">
+    <span class="eyebrow">Objetivo 3 · segunda contribución</span>
+    <h1 class="title">Medir la equivalencia <span class="em">fuera</span> del algoritmo</h1>
+    <p class="deck">Dos versiones de una actividad pueden computar lo mismo y vivirse distinto. Hace falta un instrumento que diga, dimensión por dimensión, si son la misma actividad, y una manera de saber que el instrumento mide lo que dice.</p>
+  </section>
+
+  <section class="section" id="def">
+    <div class="section-marker"><span class="section-num">§ 01</span><span class="section-rule"></span><span class="section-num">DEFINICIÓN</span></div>
+    <h2>El objetivo, con su <span class="it">plantilla</span></h2>
+    <div class="obj" data-label="Objetivo 3 · segunda contribución">
+      <p class="q">¿Con qué metodología se decide si dos versiones de una actividad son la misma en las dimensiones interactiva, material, sensoriomotriz y estética, y cómo se sabe que el instrumento mide lo que dice medir?</p>
+      <dl class="def">
+        <dt>Entregable</dt><dd>(1) Una <strong>revisión de literatura</strong> orientada: por cada dimensión, al menos dos métodos candidatos —las ideas de partida y los que aparezcan en la búsqueda—, con fuente y una razón escrita a favor o en contra. (2) Un <strong>protocolo v1</strong> armado con los métodos elegidos. (3) Un <strong>piloto</strong> sobre 3–5 pares con tres o más evaluadores y pares de control, incluido un control nulo. (4) El borrador de la segunda contribución.</dd>
+        <dt>Método</dt><dd>Explorar las ideas de partida, buscar alternativas en la literatura, probar las candidatas en pequeño, elegir con una razón escrita, armar el protocolo y pilotearlo con controles.</dd>
+        <dt>Cuándo</dt><dd>Septiembre–octubre: búsqueda y prueba de alternativas. Noviembre: protocolo v1 y piloto sobre el corpus v2 congelado. Diciembre: descripción del piloto y borrador.</dd>
+        <dt>Listo cuando</dt><dd>Cada dimensión tiene al menos dos métodos candidatos con fuente y uno elegido con su razón; un evaluador nuevo aplica el protocolo v1 sin ayuda; el piloto muestra que los ítems se entienden y discriminan, que el procedimiento cabe en el tiempo previsto, que los controles se detectan y que el control nulo queda sin diferencias.</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section" id="porque">
+    <div class="section-marker"><span class="section-num">§ 02</span><span class="section-rule"></span><span class="section-num">ALCANCE</span></div>
+    <h2>Qué tiene que medir el <span class="it">instrumento</span></h2>
+    <p class="lede">La comparación que persigue el proyecto: la misma actividad en una placa dedicada y en un celular dentro de una carcasa de cartón, para ver qué agrega la placa. Esa comparación es limpia solo si las dos versiones son la misma actividad en todo salvo el aparato. El algoritmo es una de esas condiciones; las otras cuatro son el objeto de este objetivo.</p>
+    <p>Con el mismo código y la misma presentación, la interacción sensorial puede diferir: el peso (un celular pesa unos 170 g; una micro:bit, unos 9 g sola o unos 40 g con portapilas), la superficie, la familiaridad con el objeto, la sensibilidad del sensor, la legibilidad de la pantalla, el timbre del parlante. Esas diferencias se miden, porque sin medirlas cualquier resultado de aprendizaje queda confundido con ellas. El instrumento sirve también para diseñar: señala dónde divergen las dos versiones, para rediseñar la carcasa, el mapeo del sensor o el tiempo de una animación hasta que quienes hacen la actividad las juzguen la misma.</p>
+    <div class="callout">
+      <span class="tag">Qué debe resolver la búsqueda</span>
+      <p>Para cada dimensión: con qué método se decide si las dos versiones son la misma, de qué fuente sale y por qué sirve aquí. Además: cómo se separa en la práctica lo material (el objeto, antes de usarlo) de lo sensoriomotriz (el uso); dónde está el límite de lo que un celular reconstituye —capta inclinación, sonido, luz y toque; emite luz, sonido y vibración; lo que actúa mecánicamente sobre el mundo queda fuera—; y cómo se mide la interacción sensorial cuando el código y el cartón son los mismos.</p>
+    </div>
+  </section>
+
+  <section class="section" id="dimensiones">
+    <div class="section-marker"><span class="section-num">§ 03</span><span class="section-rule"></span><span class="section-num">IDEAS DE PARTIDA</span></div>
+    <h2>Las dimensiones, <span class="it">una por una</span></h2>
+    <p>Para cada dimensión: la pregunta, por qué importa, ideas de partida y dónde buscar. Las ideas de partida son alternativas para explorar y comparar; la búsqueda puede encontrar otras mejores. Las referencias completas están en § 09.</p>
+
+    <div class="dim">
+      <div class="k">1 · Algorítmica</div>
+      <h4>¿Los dos programas computan lo mismo, con la misma estructura de control y de datos?</h4>
+      <p><strong>Cómo se decide:</strong> la pipeline, validada en el Objetivo 2. <strong>Abierto:</strong> dos programas con la misma lógica pueden leerse distinto («pausa (ms) 100» y «retraso de 100 milisegundos»).</p>
+      <p><strong>Ideas de partida:</strong> una tarea de predicción («¿qué hará este programa?») con los bloques de cada plataforma; un ítem de legibilidad en el cuestionario del protocolo.</p>
+    </div>
+
+    <div class="dim">
+      <div class="k">2 · Interactiva</div>
+      <h4>¿Corren el mismo ciclo sentir–actuar: los mismos tipos de entrada captada y de salida producida, con el mismo tipo de mapeo?</h4>
+      <p><strong>Por qué importa:</strong> es la única dimensión que puede fallar sin remedio. Si una actividad necesita actuar mecánicamente sobre el mundo (un motor, una bomba), carece de versión celular equivalente.</p>
+      <p><strong>Ideas de partida:</strong></p>
+      <ul>
+        <li><strong>Tabla sentir–actuar</strong> por actividad, armada a mano: cada entrada captada → cada salida producida, con el tipo de mapeo (umbral, directo, temporizado), el rango del sensor y la unidad de la salida.</li>
+        <li><strong>Firma de entrada/salida emitida por la pipeline:</strong> la ontología ya tiene los nodos <code>Sensor</code> y <code>Action</code>; falta que la pipeline la escriba por actividad y la compare.</li>
+        <li><strong>Registro del comportamiento:</strong> las dos versiones reciben el mismo gesto (por ejemplo, una inclinación lenta de un extremo al otro) y se registran entrada y salida (valor del sensor, frecuencia o nota, estado de los LED); se comparan las dos curvas. Captura también la forma de la función, como el caso Hz ≡ nota MIDI de la <a href="constantes-y-unidades.html">página de constantes y unidades</a>.</li>
+      </ul>
+      <p><strong>Dónde buscar:</strong> los marcos de interacción tangible que describen la relación entre acción física y efecto digital; las taxonomías de interfaces tangibles por grado de corporeización y de metáfora; los «atributos de la interacción» (ritmo, continuidad, capacidad de respuesta) del diseño de interacción; las pruebas de caja negra y la equivalencia observacional en ingeniería de software.</p>
+    </div>
+
+    <div class="dim">
+      <div class="k">3 · Material</div>
+      <h4>¿Comparten la misma materialidad como objetos: el mismo material, trabajado igual, por la misma mano?</h4>
+      <p><strong>Por qué importa:</strong> la carcasa la construye el estudiante, y lo que se construye con las manos se valora y se entiende distinto. Un soporte impreso y un cartón cortado por el propio niño son dos actividades distintas aunque el código coincida.</p>
+      <p><strong>Ideas de partida:</strong></p>
+      <ul>
+        <li><strong>El mismo cartón en las dos versiones:</strong> el modelo de carcasa del celular, usado tal cual para la micro:bit.</li>
+        <li><strong>Un bloque impreso en 3D del tamaño y el peso de un celular,</strong> con un alojamiento para la micro:bit: la placa queda tan grande y pesada como el celular y entra en la misma carcasa. Iguala la masa por diseño.</li>
+        <li><strong>Lista de inspección antes del uso:</strong> material de la carcasa, operaciones de fabricación (cortar, doblar, pegar, encajar), quién la construyó, sujeción del dispositivo, masa y tamaño del conjunto, fragilidad.</li>
+        <li><strong>Caracterización de la experiencia del material,</strong> la fase inicial del diseño guiado por el material, aplicada a las dos carcasas.</li>
+      </ul>
+      <p><strong>Dónde buscar:</strong> los marcos de interacción tangible que hablan de «representaciones materiales con cualidades táctiles propias»; la literatura de <em>materials experience</em> en diseño (cuatro niveles: sensorial, interpretativo, afectivo, performativo) y el método de diseño guiado por el material; la noción de que una misma función se instancia en materiales distintos, cada uno con su materialidad.</p>
+    </div>
+
+    <div class="dim">
+      <div class="k">4 · Sensoriomotriz</div>
+      <h4>¿Le piden lo mismo al cuerpo y le devuelven lo mismo a los sentidos?</h4>
+      <p><strong>Por qué importa:</strong> es donde una placa y un celular más probablemente divergen sin que el código lo muestre: cuánto hay que inclinar para que suene la nota siguiente, si el parpadeo se ve, si el sonido se oye en una sala, cuánto tarda la respuesta. Dos carcasas del mismo cartón pueden exigir gestos de amplitud muy distinta.</p>
+      <p><strong>Ideas de partida:</strong></p>
+      <ul>
+        <li><strong>Ítems comparativos</strong> puntuados por quienes hacen la actividad, sobre el gesto (amplitud, precisión, esfuerzo), la retroalimentación (visual, sonora, háptica) y la inmediatez: «¿la nota siguiente aparece con la misma inclinación en las dos?».</li>
+        <li><strong>Medidas instrumentadas:</strong> el rango de inclinación que registra el sensor durante el uso, la latencia entrada–salida medida en video, el nivel sonoro a un metro.</li>
+        <li><strong>Prueba de discriminación,</strong> de la evaluación sensorial: tres artefactos, dos iguales y uno distinto, y la pregunta «¿cuál es el distinto?». Si nadie acierta más que por azar, la diferencia no se percibe.</li>
+        <li><strong>Elicitación de gestos:</strong> la consigna «haz sonar la nota siguiente» en las dos versiones, y la comparación de los gestos que hace cada persona.</li>
+      </ul>
+      <p><strong>Dónde buscar:</strong> los marcos de movimiento para diseño de interacción (cualidades, esfuerzo, dirección); los estudios de elicitación de gestos y de acuerdo entre participantes; los marcos de aprendizaje corporeizado (fisicalidad, transformaciones, mapeo, correspondencia entre acción y concepto); las comparaciones entre interfaz tangible y gráfica para programar; las pruebas de discriminación de la evaluación sensorial (triangular, dúo-trío, ABX).</p>
+    </div>
+
+    <div class="dim">
+      <div class="k">5 · Estética</div>
+      <h4>¿Se perciben como comparables en forma y terminación?</h4>
+      <p><strong>Por qué importa:</strong> el artefacto que uno construye se valora más que uno idéntico recibido hecho, un efecto documentado ya en niños de cinco años. Si una versión «se ve mejor», el afecto por el objeto entra en la comparación.</p>
+      <p><strong>Ideas de partida:</strong></p>
+      <ul>
+        <li><strong>Escala corta de estética percibida,</strong> respondida por la misma persona para las dos versiones.</li>
+        <li><strong>Tarjetas de reacción:</strong> elegir, de una lista, las palabras que describen cada objeto, y comparar las dos listas.</li>
+        <li><strong>Preferencia por pares:</strong> «¿cuál te gusta más?», con la razón.</li>
+        <li><strong>Evaluación consensuada de expertos,</strong> la técnica usada para juzgar productos creativos.</li>
+      </ul>
+      <p><strong>Dónde buscar:</strong> la estética percibida en productos interactivos (belleza, bondad, usabilidad; estética clásica y expresiva); el marco de experiencia de producto (estética, significado, emoción); las tarjetas de reacción (<em>desirability toolkit</em>); los métodos de preferencia entre dos artefactos usados con niños.</p>
+    </div>
+
+    <div class="dim">
+      <div class="k">6 · Configuración social (condición de despliegue)</div>
+      <h4>¿Cuántos artefactos por grupo, cuántas manos pueden actuar a la vez?</h4>
+      <p><strong>Por qué importa:</strong> un kit tiende a ser recurso compartido de la sala; un celular es personal. En la comparación más cercana que existe entre la misma tarea en dos medios, la comprensión fue igual; difirieron cuánta gente se acercaba y cuánta participaba a la vez.</p>
+      <p><strong>Ideas de partida:</strong> el mismo número de artefactos por grupo y las mismas reglas de turno en las dos versiones; el conteo, en video, de participantes activos a la vez.</p>
+    </div>
+
+    <h3>Lo que se mantiene constante</h3>
+    <p>Colaboración, integración con la tarea y accesibilidad las fijan el guion, el grupo y la sala: son iguales en las dos versiones, como la presentación (la del sitio para Protobject y su adaptación equivalente para micro:bit) y la metáfora, porque ambas versiones usan la misma carcasa. La <em>novedad</em> es un confundente: una placa es un objeto desconocido y un celular es cotidiano. Se registra la familiaridad previa de cada evaluador con cada dispositivo.</p>
+  </section>
+
+  <section class="section" id="frase">
+    <div class="section-marker"><span class="section-num">§ 04</span><span class="section-rule"></span><span class="section-num">ELICITAR</span></div>
+    <h2>Que las diferencias las nombre <span class="it">quien hace la actividad</span></h2>
+    <p>Tres ideas de partida. La búsqueda decide cuál sirve, o qué combinación.</p>
+    <ol class="pasos">
+      <li><strong>Una frase por versión.</strong> Hecha la actividad en una versión: «describe en una frase qué hace el prototipo y qué hiciste tú» («inclino el xilófono a la derecha y oigo un tono que sube; a la izquierda, baja»). Lo mismo con la otra. Después: «¿en qué difieren?». Dos personas codifican frases y diferencias por dimensión.</li>
+      <li><strong>Rejilla de repertorio con tríadas.</strong> Tres artefactos (por ejemplo, la versión placa, la versión celular y una variante) y la pregunta «¿en qué se parecen dos y se diferencian del tercero?». Cada respuesta es un constructo; después cada artefacto se puntúa en cada constructo. Los constructos salen de la persona y las puntuaciones son comparables.</li>
+      <li><strong>¿Cuál es distinto?</strong> La prueba de discriminación de § 03 aplicada a la actividad entera: tres artefactos, dos iguales. Mide si la diferencia se percibe, sin pedir palabras; después se pregunta en qué se notó.</li>
+    </ol>
+    <p><strong>Dónde buscar:</strong> la rejilla de repertorio y el diferencial semántico en diseño de interacción; los métodos comparativos con niños («¿este o ese?»); las pruebas de discriminación de la evaluación sensorial; la codificación de respuestas abiertas y el acuerdo entre codificadores.</p>
+  </section>
+
+  <section class="section" id="protocolo">
+    <div class="section-marker"><span class="section-num">§ 05</span><span class="section-rule"></span><span class="section-num">PROTOCOLO</span></div>
+    <h2>Requisitos del protocolo <span class="it">v1</span></h2>
+    <p>El protocolo se arma con los métodos elegidos. Cumple estos requisitos:</p>
+    <ul>
+      <li>Cubre las cuatro dimensiones, cada una con su método y la razón de la elección.</li>
+      <li>«Hacer la actividad» es usar el artefacto con el programa cargado y la carcasa armada, siguiendo la presentación de la actividad. Construir la carcasa queda para una versión posterior (P9).</li>
+      <li>Separa lo que se decide antes de la sesión (interactiva, material) de lo que se decide en uso (sensoriomotriz, estética).</li>
+      <li>Formula las comparaciones con anclas en los extremos y en el centro, para que «igual» signifique lo mismo para todos.</li>
+      <li>Sortea el orden de las dos versiones y registra la familiaridad previa con cada dispositivo.</li>
+      <li>Fija antes del piloto el tiempo por par y el umbral de «equivalente».</li>
+    </ul>
+  </section>
+
+  <section class="section" id="piloto">
+    <div class="section-marker"><span class="section-num">§ 06</span><span class="section-rule"></span><span class="section-num">PRUEBA</span></div>
+    <h2>El <span class="it">piloto</span></h2>
+    <ol class="pasos">
+      <li><strong>Pares.</strong> Tres a cinco actividades del corpus con ambas versiones y su carcasa: al menos una con sensor de inclinación (xilófono), una con sonido como entrada (interruptor de aplausos), una con temporización visible (llavero de corazón).</li>
+      <li><strong>Controles.</strong> (i) <em>Nulo:</em> el mismo artefacto presentado como dos versiones, para medir cuántas diferencias se reportan entre versiones idénticas, porque la gente encuentra diferencias donde se le pide buscarlas. (ii) <em>Sensoriomotriz,</em> con una magnitud del orden de los residuos reales del corpus: el llavero de corazón con las mismas pausas nominales en las dos plataformas, que produce ritmos distintos porque la matriz del micro:bit tarda en encenderse y el celular responde de inmediato. (iii) <em>Material:</em> la micro:bit dentro del bloque impreso y fuera de él, en la misma carcasa. El instrumento sirve si detecta (ii) y (iii) y deja (i) sin diferencias.</li>
+      <li><strong>Evaluadores y sesión.</strong> Tres o más, en sesión aparte, después de la ronda 2 del Objetivo 1, sobre las versiones congeladas del corpus v2 (commit indicado). Los participantes del Objetivo 1 pueden volver en otra sesión, porque en la misma llegarían con el orden fijo y cansados. Orden de las versiones por sorteo.</li>
+      <li><strong>Análisis.</strong> Con tres a cinco evaluadores y tres a cinco pares el piloto es <em>descriptivo</em>: acuerdo bruto por ítem, distribución de respuestas, ítems con techo o suelo, diferencias reportadas en el control nulo, detección de los controles, relación entre medidas instrumentadas y puntuaciones, tiempo del procedimiento. La fiabilidad con intervalo (correlación intraclase para escalas; alfa de Krippendorff para codificaciones) corresponde a un estudio posterior con quince pares o más.</li>
+      <li><strong>Revisión.</strong> Protocolo v2 con los ítems cambiados y la razón de cada cambio.</li>
+    </ol>
+  </section>
+
+  <section class="section" id="validez">
+    <div class="section-marker"><span class="section-num">§ 07</span><span class="section-rule"></span><span class="section-num">RIGOR</span></div>
+    <h2>Cómo se sabe que el instrumento <span class="it">sirve</span></h2>
+    <ul>
+      <li><strong>Validez de contenido:</strong> cada ítem se rastrea a una dimensión del marco y a una fuente; una revisión externa de la lista señala qué falta.</li>
+      <li><strong>Fiabilidad:</strong> evaluadores distintos llegan a puntuaciones parecidas (ICC) y codificadores distintos a los mismos códigos (alfa), con intervalo, en el estudio que siga al piloto.</li>
+      <li><strong>Sensibilidad y especificidad:</strong> los controles se detectan en la dimensión correcta y solo en esa, y el control nulo queda sin diferencias.</li>
+      <li><strong>Convergencia:</strong> donde hay medida instrumentada (masa, rango de inclinación, latencia), va en la misma dirección que la puntuación.</li>
+    </ul>
+  </section>
+
+  <section class="section" id="preguntas">
+    <div class="section-marker"><span class="section-num">§ 08</span><span class="section-rule"></span><span class="section-num">DECISIONES PENDIENTES</span></div>
+    <h2>Preguntas <span class="it">abiertas</span></h2>
+    <ol class="preguntas">
+      <li><strong>¿Quién evalúa?</strong> Quienes hacen la actividad (universitarios ahora; niños después, con otro protocolo y aprobación ética), o expertos que observan a otros hacerla. Propuesta: en el piloto, quienes la hacen; los expertos revisan los ítems.</li>
+      <li><strong>¿Se evalúa en vivo o desde video?</strong> El video permite más evaluadores y pierde lo háptico y el peso. Propuesta: en vivo para sensoriomotriz y material; video para estética e interactiva.</li>
+      <li><strong>¿Cómo se iguala la masa?</strong> Propuesta: el bloque impreso en 3D del tamaño y el peso de un celular, con alojamiento para la micro:bit; se verifica con balanza y con el control material del piloto.</li>
+      <li><strong>¿La forma de la función entrada→salida (lineal o exponencial) se juzga en la interactiva o en la sensoriomotriz?</strong> Propuesta: la interactiva decide sobre tipos (sensor, salida, mapeo); la forma se reporta como residuo y se juzga en la sensoriomotriz.</li>
+      <li><strong>¿Qué umbral hace «equivalente» a un par?</strong> Propuesta: media del ítem dentro de ±0,5 alrededor de «igual» en una escala de cinco puntos, con acuerdo mínimo entre evaluadores; se fija antes del piloto.</li>
+      <li><strong>¿La prima de novedad se controla o se mide?</strong> Propuesta: se registra la familiaridad previa por dispositivo y se describe; modelarla exige un estudio mayor.</li>
+      <li><strong>¿Se puntúa la legibilidad del código?</strong> Propuesta: un ítem, informativo.</li>
+      <li><strong>¿Cuánto entra en la pipeline?</strong> Propuesta: la firma de entrada/salida y los residuos (constantes, unidades), como salida adicional de <code>metricas.json</code>.</li>
+      <li><strong>¿Se prueba el efecto de construir la carcasa?</strong> En el piloto la carcasa viene armada. Propuesta: un par de control en que el evaluador arma una de las dos carcasas.</li>
+    </ol>
+  </section>
+
+  <section class="section" id="partida">
+    <div class="section-marker"><span class="section-num">§ 09</span><span class="section-rule"></span><span class="section-num">LITERATURA</span></div>
+    <h2>Puntos de <span class="it">partida</span></h2>
+    <p>Agrupados por dimensión y por tipo de método; cada uno aporta un instrumento, un marco o una técnica adaptable a la pregunta «¿son la misma?». Son un punto de partida para la búsqueda. Los PDF marcados «carpeta compartida» están en la carpeta del proyecto; los demás, en línea por su DOI.</p>
+    <h3>Los marcos en que se apoya el perfil de seis dimensiones</h3>
+<ul class="refs">
+<li><span class="cite">Hornecker, Eva; Buur, Jacob (2006). <em>Getting a Grip on Tangible Interaction: A Framework on Physical Space and Social Interaction</em>. Proc. CHI &#x27;06, ACM, pp. 437–446. <a href="https://doi.org/10.1145/1124772.1124838">doi:10.1145/1124772.1124838</a></span><span class="why">Cuatro temas —manipulación tangible, interacción espacial, facilitación corporeizada, representación expresiva— y las preguntas de las que descienden las dimensiones material y sensoriomotriz («¿se puede agarrar, sentir y mover lo importante?», «¿hay retroalimentación rápida?», «¿cuántos puntos de acceso?»).</span><span class="src">bibliografía del proyecto · PDF en la carpeta compartida</span></li>
+<li><span class="cite">Fishkin, Kenneth P. (2004). <em>A Taxonomy for and Analysis of Tangible Interfaces</em>. Personal and Ubiquitous Computing, 8(5), 347–358. <a href="https://doi.org/10.1007/s00779-004-0297-4">doi:10.1007/s00779-004-0297-4</a></span><span class="why">Dos ejes —incorporación y metáfora— para ubicar un artefacto: útil para decidir cuándo un celular dentro de una carcasa cuenta como tangible (pantalla como emisor, como control, como interfaz general).</span><span class="src">bibliografía del proyecto · PDF en la carpeta compartida</span></li>
+<li><span class="cite">Marshall, Paul (2007). <em>Do Tangible Interfaces Enhance Learning?</em>. Proc. TEI &#x27;07, ACM, pp. 163–170. <a href="https://doi.org/10.1145/1226969.1227004">doi:10.1145/1226969.1227004</a></span><span class="why">Seis perspectivas para analizar tangibles en aprendizaje, y la advertencia de que la intuición de que lo físico beneficia descansa en supuestos no probados. Las propiedades físicas (masa, textura) que pide explotar son las de la dimensión material.</span><span class="src">bibliografía del proyecto · PDF en la carpeta compartida</span></li>
+<li><span class="cite">Melcer, Edward F.; Isbister, Katherine (2016). <em>Bridging the Physical Divide: A Design Framework for Embodied Learning Games and Simulations</em>. Proc. CHI EA &#x27;16, ACM, pp. 2225–2233. <a href="https://doi.org/10.1145/2851581.2892455">doi:10.1145/2851581.2892455</a></span><span class="why">Dimensiones del diseño de aprendizaje corporeizado (fisicalidad, transformaciones, mapeo, correspondencia, modo de juego, coordinación): una lente lista para codificar en qué difieren dos versiones.</span><span class="src">bibliografía del proyecto · PDF en la carpeta compartida</span></li>
+<li><span class="cite">Blikstein, Paulo (2015). <em>Computationally Enhanced Toolkits for Children: Historical Review and a Framework for Future Design</em>. Foundations and Trends in Human–Computer Interaction, 9(1), 1–68. <a href="https://doi.org/10.1561/1100000057">doi:10.1561/1100000057</a></span><span class="why">«Exposición selectiva»: qué pone en primer plano y qué esconde cada kit, y cómo mapea operaciones cognitivas y físicas. Predice dónde una placa y un celular divergirán.</span><span class="src">bibliografía del proyecto · PDF en la carpeta compartida</span></li>
+<li><span class="cite">Wiberg, Mikael (2018). <em>The Materiality of Interaction: Notes on the Materials of Interaction Design</em>. The MIT Press. sin DOI</span><span class="why">Los materiales dan forma a la interacción; la misma función puede instanciarse en materiales distintos («interacción primero»), y lo que hace auténtica una composición es que sus partes retroceden. Fundamento de la dimensión material.</span><span class="src">bibliografía del proyecto · PDF en la carpeta compartida</span></li>
+<li><span class="cite">Manches, Andrew; O&#x27;Malley, Claire (2012). <em>Tangibles for Learning: A Representational Analysis of Physical Manipulation</em>. Personal and Ubiquitous Computing, 16, 405–419. <a href="https://doi.org/10.1007/s00779-011-0406-0">doi:10.1007/s00779-011-0406-0</a></span><span class="why">Mecanismos por los que manipular objetos puede ayudar a aprender (descarga cognitiva, metáforas conceptuales) y la advertencia de que el significado lo da el contexto de uso. Sirve para escribir los ítems de «correspondencia acción–concepto».</span><span class="src">bibliografía del proyecto · PDF en la carpeta compartida</span></li>
+<li><span class="cite">Sara Price (2008). <em>A representation approach to conceptualizing tangible learning environments</em>. Proceedings of the 2nd International Conference on Tangible and Embedded Interaction (TEI &#x27;08), Bonn, Germany, 18-20 Feb 2008. ACM, New York, pp. 151-158. <a href="https://doi.org/10.1145/1347390.1347425">doi:10.1145/1347390.1347425</a></span><span class="why">Cuatro dimensiones representacionales de un entorno tangible de aprendizaje (ubicación, dinámica, correspondencia, modalidad): otra lente para codificar diferencias entre versiones.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Alissa N. Antle, Alyssa F. Wise (2013). <em>Getting Down to Details: Using Theories of Cognition and Learning to Inform Tangible User Interface Design</em>. Interacting with Computers (Oxford University Press), vol. 25, no. 1, pp. 1-20. <a href="https://doi.org/10.1093/iwc/iws007">doi:10.1093/iwc/iws007</a></span><span class="why">Guías de diseño de interfaces tangibles derivadas de teorías de cognición y aprendizaje; útil para justificar ítems.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Paul Marshall; Sara Price; Yvonne Rogers (2003). <em>Conceptualising tangibles to support learning</em>. Proceedings of the 2003 Conference on Interaction Design and Children (IDC &#x27;03), Preston, UK, ACM, pp. 101-109. <a href="https://doi.org/10.1145/953536.953551">doi:10.1145/953536.953551</a></span><span class="why">Tangibles expresivos y exploratorios: una distinción que afecta qué se le pide al cuerpo.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+</ul>
+<h3>Comparaciones entre medios que ya se hicieron</h3>
+<ul class="refs">
+<li><span class="cite">Horn, Michael S.; Solovey, Erin Treacy; Crouser, R. Jordan; Jacob, Robert J. K. (2009). <em>Comparing the Use of Tangible and Graphical Programming Languages for Informal Science Education</em>. Proc. CHI &#x27;09, ACM, pp. 975–984. <a href="https://doi.org/10.1145/1518701.1518851">doi:10.1145/1518701.1518851</a></span><span class="why">La comparación más cercana a la nuestra: misma tarea, dos medios, 260 visitantes de museo; medidas de invitación, comprensión, participación. Comprensión igual, participación distinta. Modelo de qué medir y de cómo reportarlo.</span><span class="src">bibliografía del proyecto · PDF en la carpeta compartida</span></li>
+<li><span class="cite">Xie, Lesley; Antle, Alissa N.; Motamedi, Nima (2008). <em>Are Tangibles More Fun? Comparing Children&#x27;s Enjoyment and Engagement Using Physical, Graphical and Tangible User Interfaces</em>. Proc. TEI &#x27;08, ACM, pp. 191–198. <a href="https://doi.org/10.1145/1347390.1347433">doi:10.1145/1347390.1347433</a></span><span class="why">Niños comparando un mismo rompecabezas en tres interfaces: cómo se midieron disfrute y compromiso, y qué resultó invariante al medio.</span><span class="src">bibliografía del proyecto · PDF en la carpeta compartida</span></li>
+<li><span class="cite">Theodosios Sapounidis; Stavros Demetriadis (2013). <em>Tangible versus graphical user interfaces for robot programming: exploring cross-age children&#x27;s preferences</em>. Personal and Ubiquitous Computing (Springer), 17(8), 1775-1786. <a href="https://doi.org/10.1007/s00779-013-0641-7">doi:10.1007/s00779-013-0641-7</a></span><span class="why">Preferencias por edad entre interfaz tangible y gráfica para programar robots: un diseño comparativo con niños de varias edades.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Strawhacker, Amanda; Bers, Marina U. (2014). <em>“I Want My Robot to Look for Food”: Comparing Kindergartner&#x27;s Programming Comprehension Using Tangible, Graphic, and Hybrid User Interfaces</em>. International Journal of Technology and Design Education, 25(3), 293–319. <a href="https://doi.org/10.1007/s10798-014-9287-7">doi:10.1007/s10798-014-9287-7</a></span><span class="why">Comprensión de programación en kindergarten con interfaces tangible, gráfica e híbrida: un diseño de comparación entre medios con niños pequeños.</span><span class="src">bibliografía del proyecto · PDF en la carpeta compartida</span></li>
+</ul>
+<h3>Elicitar la experiencia: la idea de «una frase»</h3>
+<ul class="refs">
+<li><span class="cite">George A. Kelly (1955). <em>The Psychology of Personal Constructs (Vol. 1: A Theory of Personality; Vol. 2: Clinical Diagnosis and Psychotherapy)</em>. W. W. Norton, New York (monografía en 2 volúmenes; reimpresión Routledge, Londres/Nueva York, 1991). <a href="https://journals.sagepub.com/doi/abs/10.1177/1359104512454264">journals.sagepub.com/doi/abs/10.1177/1359104512454264</a></span><span class="why">Origen de la rejilla de repertorio: obtener, comparando objetos, los constructos con que una persona los distingue.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Marc Hassenzahl, Rainer Wessler (2000). <em>Capturing Design Space From a User Perspective: The Repertory Grid Technique Revisited</em>. International Journal of Human-Computer Interaction (Taylor &amp; Francis; originalmente Lawrence Erlbaum), 12(3-4), 441-459. <a href="https://doi.org/10.1080/10447318.2000.9669070">doi:10.1080/10447318.2000.9669070</a></span><span class="why">La rejilla aplicada a productos interactivos: cómo capturar el espacio de diseño desde el usuario.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Daniel Fallman, John Waterworth (2010). <em>Capturing User Experiences of Mobile Information Technology With the Repertory Grid Technique</em>. Human Technology: An Interdisciplinary Journal on Humans in ICT Environments (Univ. de Jyväskylä), acceso abierto CC BY-NC, 6(2), 250-268. <a href="https://doi.org/10.17011/ht/urn.201011173094">doi:10.17011/ht/urn.201011173094</a></span><span class="why">La rejilla aplicada a celulares: un ejemplo completo del procedimiento.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Charles E. Osgood, George J. Suci, Percy H. Tannenbaum (1957). <em>The Measurement of Meaning</em>. University of Illinois Press, Urbana (libro), vii + 342 pp.. <a href="https://www.press.uillinois.edu/books/?id=p745393">www.press.uillinois.edu/books/?id=p745393</a></span><span class="why">El diferencial semántico: pares de adjetivos opuestos como escala; la forma en que los constructos elicitados se convierten en ítems.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Bieke Zaman; Vero Vanden Abeele; Dirk De Grooff (2013). <em>Measuring product liking in preschool children: An evaluation of the Smileyometer and This or That methods</em>. International Journal of Child-Computer Interaction (Elsevier), vol. 1, no. 2, pp. 61-70. <a href="https://doi.org/10.1016/j.ijcci.2012.12.001">doi:10.1016/j.ijcci.2012.12.001</a></span><span class="why">«¿Este o ese?»: método comparativo con niños, y evidencia del sesgo positivo de las escalas con caritas.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Joey Benedek, Trish Miner (Microsoft) (2002). <em>Measuring Desirability: New Methods for Evaluating Desirability in a Usability Lab Setting</em>. Proceedings of UPA 2002 Conference (Usability Professionals&#x27; Association), Orlando, FL, 8-12 de julio de 2002. <a href="http://www.microsoft.com/usability/uepostings/desirabilitytoolkit.doc">http://www.microsoft.com/usability/uepostings/desirabilitytoolkit.doc</a></span><span class="why">Tarjetas de reacción: elegir palabras que describen el objeto; rápido y útil para la estética. Literatura gris; cítese con cuidado.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+</ul>
+<h3>Interactiva y sensoriomotriz</h3>
+<ul class="refs">
+<li><span class="cite">Youn-kyung Lim, Erik Stolterman, Heekyoung Jung, Justin Donaldson (2007). <em>Interaction gestalt and the design of aesthetic interactions</em>. Proceedings of the 2007 Conference on Designing Pleasurable Products and Interfaces (DPPI &#x27;07), Helsinki, Finland, pp. 239-254. <a href="https://doi.org/10.1145/1314161.1314183">doi:10.1145/1314161.1314183</a></span><span class="why">Atributos de la interacción (ritmo, continuidad, capacidad de respuesta, etc.): vocabulario para describir cómo se siente un ciclo sentir–actuar.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Eva Lenz, Sarah Diefenbach, Marc Hassenzahl (2013). <em>Exploring relationships between interaction attributes and experience</em>. Proceedings of the 6th International Conference on Designing Pleasurable Products and Interfaces (DPPI &#x27;13), Newcastle upon Tyne, UK, pp. 126-135. <a href="https://doi.org/10.1145/2513506.2513520">doi:10.1145/2513506.2513520</a></span><span class="why">Relación empírica entre esos atributos y la experiencia: cuáles importan.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Lian Loke, Astrid T. Larssen, Toni Robertson, Jenny Edwards (2007). <em>Understanding movement for interaction design: frameworks and approaches</em>. Personal and Ubiquitous Computing, 11(8), 691-701. <a href="https://doi.org/10.1007/s00779-006-0132-1">doi:10.1007/s00779-006-0132-1</a></span><span class="why">Marcos para describir el movimiento (cualidades, esfuerzo): cómo caracterizar el gesto que una actividad exige.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Jacob O. Wobbrock, Meredith Ringel Morris, Andrew D. Wilson (2009). <em>User-defined gestures for surface computing</em>. Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI &#x27;09), Boston, MA, USA, pp. 1083-1092. <a href="https://doi.org/10.1145/1518701.1518866">doi:10.1145/1518701.1518866</a></span><span class="why">Elicitación de gestos con muchas personas y medida de acuerdo entre ellas: método transferible a «qué gesto hace cada uno para tocar la nota siguiente».</span><span class="src">verificado en línea · 11-09-2026</span></li>
+</ul>
+<h3>Material</h3>
+<ul class="refs">
+<li><span class="cite">Elisa Giaccardi, Elvin Karana (2015). <em>Foundations of Materials Experience: An Approach for HCI</em>. Proceedings of the 33rd Annual ACM Conference on Human Factors in Computing Systems (CHI &#x27;15), Seoul, Republic of Korea, 18-23 Apr 2015. ACM, New York, pp. 2447-2456. <a href="https://doi.org/10.1145/2702123.2702337">doi:10.1145/2702123.2702337</a></span><span class="why">Cuatro niveles de experiencia de un material (sensorial, interpretativo, afectivo, performativo): la base para los ítems de la dimensión material.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Elvin Karana, Bahar Barati, Valentina Rognoli, Anouk Zeeuw van der Laan (2015). <em>Material Driven Design (MDD): A Method to Design for Material Experiences</em>. International Journal of Design (Chinese Institute of Design; ISSN 1991-3761), vol. 9, no. 2, pp. 35-54. <a href="http://www.ijdesign.org/index.php/IJDesign/article/view/1965">http://www.ijdesign.org/index.php/IJDesign/article/view/1965</a></span><span class="why">Método de diseño guiado por el material, con una fase de caracterización de la experiencia del material que se puede usar tal cual sobre el cartón.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+</ul>
+<h3>Estética</h3>
+<ul class="refs">
+<li><span class="cite">Marc Hassenzahl (2004). <em>The Interplay of Beauty, Goodness, and Usability in Interactive Products</em>. Human-Computer Interaction (Taylor &amp; Francis / Lawrence Erlbaum), 19(4), 319-349. <a href="https://doi.org/10.1207/s15327051hci1904_2">doi:10.1207/s15327051hci1904_2</a></span><span class="why">Belleza, bondad y usabilidad en productos interactivos: cómo se relacionan y cómo medir la belleza percibida.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Talia Lavie, Noam Tractinsky (2004). <em>Assessing dimensions of perceived visual aesthetics of web sites</em>. International Journal of Human-Computer Studies (Elsevier), 60(3), 269-298. <a href="https://doi.org/10.1016/j.ijhcs.2003.09.002">doi:10.1016/j.ijhcs.2003.09.002</a></span><span class="why">Escala de estética percibida en dos factores (clásica, expresiva); adaptable a objetos.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Pieter M. A. Desmet, Paul Hekkert (2007). <em>Framework of product experience</em>. International Journal of Design, 1(1), 57-66. <a href="http://www.ijdesign.org/index.php/IJDesign/article/view/66/15">http://www.ijdesign.org/index.php/IJDesign/article/view/66/15</a></span><span class="why">Tres componentes de la experiencia de producto: estética, significado, emoción.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Bettina Laugwitz, Theo Held, Martin Schrepp (2008). <em>Construction and Evaluation of a User Experience Questionnaire</em>. HCI and Usability for Education and Work. 4th Symposium of the Workgroup Human-Computer Interaction and Usability Engineering of the Austrian Computer Society (USAB 2008), Graz, Austria, 20-21 Nov 2008. A. Holzinger (ed.), Lecture Notes in Computer Science, Springer, Berlin/Heidelberg, LNCS vol. 5298, pp. 63-76. <a href="https://doi.org/10.1007/978-3-540-89350-9_6">doi:10.1007/978-3-540-89350-9_6</a></span><span class="why">El UEQ: cuestionario corto y validado de experiencia de usuario, con escalas de atractivo y estimulación.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Marsh, Lauren E.; Gil, Joanna; Kanngiesser, Patricia (2022). <em>The Influence of Collaboration and Culture on the IKEA Effect: Does Cocreation Alter Perceptions of Value?</em>. Developmental Psychology, 58(4), 662–670. <a href="https://doi.org/10.1037/dev0001321">doi:10.1037/dev0001321</a></span><span class="why">Lo construido por uno mismo se valora más que lo idéntico recibido hecho, desde los cinco años y en culturas distintas: la razón de la dimensión estética y de comparar dentro de cada persona.</span><span class="src">bibliografía del proyecto · PDF en la carpeta compartida</span></li>
+</ul>
+<h3>Fiabilidad del instrumento y confundentes</h3>
+<ul class="refs">
+<li><span class="cite">Patrick E. Shrout; Joseph L. Fleiss (1979). <em>Intraclass correlations: Uses in assessing rater reliability</em>. Psychological Bulletin (APA), 86(2), 420-428. <a href="https://doi.org/10.1037/0033-2909.86.2.420">doi:10.1037/0033-2909.86.2.420</a></span><span class="why">Los coeficientes de correlación intraclase: cuál usar según el diseño de evaluadores.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Terry K. Koo; Mae Y. Li (2016). <em>A Guideline of Selecting and Reporting Intraclass Correlation Coefficients for Reliability Research</em>. Journal of Chiropractic Medicine (Elsevier), 15(2), 155-163. <a href="https://doi.org/10.1016/j.jcm.2016.02.012">doi:10.1016/j.jcm.2016.02.012</a></span><span class="why">Guía práctica para elegir y reportar el ICC.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Klaus Krippendorff (2011). <em>Computing Krippendorff&#x27;s Alpha-Reliability</em>. University of Pennsylvania ScholarlyCommons, Departmental Papers (ASC), Annenberg School for Communication (working paper / postprint, fechado 25-01-2011). <a href="http://repository.upenn.edu/asc_papers/43">http://repository.upenn.edu/asc_papers/43</a></span><span class="why">Alfa para las codificaciones de frases y diferencias.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Lee, Joomi; Chen, Chen Crystal; Basu, Aryabrata (2025). <em>From Novelty to Knowledge: A Longitudinal Investigation of the Novelty Effect on Learning</em>. IEEE Transactions on Visualization and Computer Graphics, 31(5), 3204–3212. <a href="https://doi.org/10.1109/tvcg.2025.3549897">doi:10.1109/tvcg.2025.3549897</a></span><span class="why">El efecto de novedad decae con la exposición: por qué el protocolo registra la familiaridad previa con cada dispositivo y por qué una sola sesión puede favorecer al aparato desconocido.</span><span class="src">bibliografía del proyecto · PDF en la carpeta compartida</span></li>
+<li><span class="cite">Design-Based Research Collective (2003). <em>Design-Based Research: An Emerging Paradigm for Educational Inquiry</em>. Educational Researcher, 32(1), 5–8. <a href="https://doi.org/10.3102/0013189X032001005">doi:10.3102/0013189X032001005</a></span><span class="why">El ciclo diseñar–probar–analizar–rediseñar en que el instrumento sirve para diseñar y para medir.</span><span class="src">bibliografía del proyecto · PDF en la carpeta compartida</span></li>
+<li><span class="cite">Barab, Sasha; Squire, Kurt (2004). <em>Design-Based Research: Putting a Stake in the Ground</em>. Journal of the Learning Sciences, 13(1), 1–14. <a href="https://doi.org/10.1207/s15327809jls1301_1">doi:10.1207/s15327809jls1301_1</a></span><span class="why">La investigación basada en diseño como fuente de conocimiento generalizable sobre el diseño.</span><span class="src">bibliografía del proyecto · PDF en la carpeta compartida</span></li>
+</ul>
+<h3>Con niños</h3>
+<ul class="refs">
+<li><span class="cite">Panos Markopoulos; Janet C. Read; Stuart MacFarlane; Johanna Höysniemi (2008). <em>Evaluating Children&#x27;s Interactive Products: Principles and Practices for Interaction Designers</em>. Morgan Kaufmann (Elsevier), serie Interactive Technologies, Amsterdam / Burlington, MA, 369 pp.; ISBN 978-0-12-374111-0. <a href="https://doi.org/10.1016/B978-0-12-374111-0.X0001-1">doi:10.1016/B978-0-12-374111-0.X0001-1</a></span><span class="why">Métodos y ética para la fase escolar.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Janet C. Read; Stuart MacFarlane (2006). <em>Using the fun toolkit and other survey methods to gather opinions in child computer interaction</em>. Proceedings of the 2006 Conference on Interaction Design and Children (IDC &#x27;06), Tampere, Finland. ACM, pp. 81-88. <a href="https://doi.org/10.1145/1139073.1139096">doi:10.1145/1139073.1139096</a></span><span class="why">Instrumentos breves de opinión con niños, con su sesgo conocido.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+</ul>
+  </section>
+
+  <div class="colofon">
+    <div class="ornament">❖ ❖ ❖</div>
+    <p>Objetivo 3 · Plan de acción de equivalencia · septiembre 2026</p>
+  </div>
+
+</article>
+</div>
+</body>
+</html>
