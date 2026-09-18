@@ -46,32 +46,22 @@
 <circle cx="393" cy="645" r="5" fill="#FF0000"/>
 <circle cx="419" cy="606" r="5" fill="#FF0000"/>
 <circle cx="419" cy="619" r="5" fill="#FF0000"/>
-<circle cx="727" cy="74" r="5" fill="#FF0000"/>
-<circle cx="727" cy="87" r="5" fill="#FF0000"/>
-<circle cx="727" cy="100" r="5" fill="#FF0000"/>
-<circle cx="727" cy="113" r="5" fill="#FF0000"/>
 <circle cx="714" cy="87" r="5" fill="#FF0000"/>
 <circle cx="714" cy="100" r="5" fill="#FF0000"/>
-<circle cx="753" cy="74" r="5" fill="#FF0000"/>
-<circle cx="753" cy="87" r="5" fill="#FF0000"/>
-<circle cx="753" cy="100" r="5" fill="#FF0000"/>
-<circle cx="753" cy="113" r="5" fill="#FF0000"/>
+<circle cx="727" cy="74" r="5" fill="#FF0000"/>
+<circle cx="727" cy="113" r="5" fill="#FF0000"/>
 <circle cx="740" cy="87" r="5" fill="#FF0000"/>
-<circle cx="740" cy="100" r="5" fill="#FF0000"/>
-<circle cx="740" cy="113" r="5" fill="#FF0000"/>
 <circle cx="740" cy="126" r="5" fill="#FF0000"/>
+<circle cx="753" cy="74" r="5" fill="#FF0000"/>
+<circle cx="753" cy="113" r="5" fill="#FF0000"/>
 <circle cx="766" cy="87" r="5" fill="#FF0000"/>
 <circle cx="766" cy="100" r="5" fill="#FF0000"/>
-<circle cx="732" cy="411" r="5" fill="#FF0000"/>
-<circle cx="732" cy="450" r="5" fill="#FF0000"/>
-<circle cx="719" cy="424" r="5" fill="#FF0000"/>
-<circle cx="719" cy="437" r="5" fill="#FF0000"/>
-<circle cx="758" cy="411" r="5" fill="#FF0000"/>
-<circle cx="758" cy="450" r="5" fill="#FF0000"/>
-<circle cx="745" cy="424" r="5" fill="#FF0000"/>
-<circle cx="745" cy="463" r="5" fill="#FF0000"/>
-<circle cx="771" cy="424" r="5" fill="#FF0000"/>
-<circle cx="771" cy="437" r="5" fill="#FF0000"/>
+<circle cx="732" cy="424" r="5" fill="#FF0000"/>
+<circle cx="732" cy="437" r="5" fill="#FF0000"/>
+<circle cx="745" cy="437" r="5" fill="#FF0000"/>
+<circle cx="745" cy="450" r="5" fill="#FF0000"/>
+<circle cx="758" cy="424" r="5" fill="#FF0000"/>
+<circle cx="758" cy="437" r="5" fill="#FF0000"/>
 </g>
 <defs>
 <clipPath id="clip0_107_26">
