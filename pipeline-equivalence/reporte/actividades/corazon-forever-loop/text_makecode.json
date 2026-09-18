@@ -2,14 +2,14 @@
     "platform": "MakeCode",
     "extracted_text": [
         "para siempre:",
+        "  tono de timbre (Hz) Re5",
         "  mostrar LEDs",
-        "  reproduce secuencia (tono Re5 durante (1/8 pulso)) en modo en segundo plano",
-        "  pausa (ms) 300",
-        "  reproduce secuencia (tono Re5 durante (1/8 pulso)) en modo en segundo plano",
-        "  repetir 4 veces:",
+        "  pausa (ms) 500",
+        "  para todos los sonidos",
+        "  repetir 2 veces:",
         "    mostrar LEDs",
-        "    pausa (ms) 10",
+        "    pausa (ms) 100",
         "    mostrar LEDs",
-        "    pausa (ms) 10"
+        "    pausa (ms) 100"
     ]
 }

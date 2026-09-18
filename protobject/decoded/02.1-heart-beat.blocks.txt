@@ -2,6 +2,7 @@ ACTIVIDAD: 02.1-heart-beat
 FUENTE: Protobject (bloques, etiquetas oficiales es)
 
 repetir para siempre:   // El bloque 'repetir para siempre' ejecuta una y otra vez, sin parar, la secuencia que tiene dentro.
+  tocar nota re5 en TecladoMusical
   dibuja con color #ff0000 en DibujoLED1:
       .#...#.
       ###.###
@@ -10,10 +11,9 @@ repetir para siempre:   // El bloque 'repetir para siempre' ejecuta una y otra v
       .#####.
       ..###..
       ...#...
-  toca nota tom en BateríaMusical2
-  retraso de 300 milisegundos   // El bloque 'retraso de' hace una pausa del tiempo que tú elijas antes de pasar a la orden siguiente.
-  toca nota tom en BateríaMusical2
-  repetir 4 veces:   // Este bloque repite lo que tiene dentro la cantidad de veces que tú elijas.
+  retraso de 900 milisegundos   // El bloque 'retraso de' hace una pausa del tiempo que tú elijas antes de pasar a la orden siguiente.
+  detener en TecladoMusical
+  repetir 2 veces:   // Este bloque repite lo que tiene dentro la cantidad de veces que tú elijas.
     dibuja con color #ff0000 en DibujoLED1:
         .......
         ..#.#..
@@ -22,7 +22,7 @@ repetir para siempre:   // El bloque 'repetir para siempre' ejecuta una y otra v
         ..###..
         ...#...
         .......
-    retraso de 100 milisegundos
+    retraso de 500 milisegundos
     dibuja con color #ff0000 en DibujoLED1:
         .......
         ..#.#..
@@ -31,4 +31,4 @@ repetir para siempre:   // El bloque 'repetir para siempre' ejecuta una y otra v
         ..#.#..
         ...#...
         .......
-    retraso de 100 milisegundos
+    retraso de 500 milisegundos

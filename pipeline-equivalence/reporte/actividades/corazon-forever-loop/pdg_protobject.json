@@ -3,14 +3,14 @@
     "nodes": [
         {
             "id": "n1",
-            "kind": "DrawImage",
+            "kind": "EmitSound",
             "seq": 1,
             "in_loop": true,
             "resId": 1
         },
         {
             "id": "n2",
-            "kind": "EmitSound",
+            "kind": "DrawImage",
             "seq": 2,
             "in_loop": true,
             "resId": 1
@@ -23,35 +23,41 @@
         },
         {
             "id": "n4",
-            "kind": "EmitSound",
+            "kind": "StopSound",
             "seq": 4,
             "in_loop": true,
             "resId": 1
         },
         {
             "id": "n5",
-            "kind": "DrawImage",
+            "kind": "RepeatN",
             "seq": 5,
-            "in_loop": true,
-            "resId": 1
-        },
-        {
-            "id": "n6",
-            "kind": "Delay",
-            "seq": 6,
             "in_loop": true
         },
         {
-            "id": "n7",
+            "id": "n6",
             "kind": "DrawImage",
-            "seq": 7,
+            "seq": 6,
             "in_loop": true,
             "resId": 1
         },
         {
-            "id": "n8",
+            "id": "n7",
             "kind": "Delay",
+            "seq": 7,
+            "in_loop": true
+        },
+        {
+            "id": "n8",
+            "kind": "DrawImage",
             "seq": 8,
+            "in_loop": true,
+            "resId": 1
+        },
+        {
+            "id": "n9",
+            "kind": "Delay",
+            "seq": 9,
             "in_loop": true
         }
     ],
@@ -84,7 +90,7 @@
             "source": "n5",
             "target": "n6",
             "type": "control",
-            "var": ""
+            "var": "body"
         },
         {
             "source": "n6",
@@ -99,19 +105,25 @@
             "var": ""
         },
         {
-            "source": "n1",
-            "target": "n5",
-            "type": "side_effect",
-            "var": "display"
-        },
-        {
-            "source": "n5",
-            "target": "n7",
-            "type": "side_effect",
-            "var": "display"
+            "source": "n8",
+            "target": "n9",
+            "type": "control",
+            "var": ""
         },
         {
             "source": "n2",
+            "target": "n6",
+            "type": "side_effect",
+            "var": "display"
+        },
+        {
+            "source": "n6",
+            "target": "n8",
+            "type": "side_effect",
+            "var": "display"
+        },
+        {
+            "source": "n1",
             "target": "n4",
             "type": "side_effect",
             "var": "sound"
