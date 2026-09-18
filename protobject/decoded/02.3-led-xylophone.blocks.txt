@@ -3,6 +3,6 @@ FUENTE: Protobject (bloques, etiquetas oficiales es)
 
 repetir para siempre:
   borrar dibujo en DibujoLED4
-  dibuja en x 4 y (4 + redondear(y in Inclinación2 ÷ 15)) con color #ff4444 en DibujoLED4   // Dibuja un punto según la inclinación: mientras más inclinas el celular, más cerca de los bordes aparece el punto; si lo inclinas demasiado, se sale de la pantalla y no se ve.
-  tocar frecuencia (262 + y in Inclinación2) Hz en TecladoMusical1
+  dibuja en x 4 y (4 + redondear(y in Inclinación2 ÷ 30)) con color #ff4444 en DibujoLED4   // Dibuja un punto según la inclinación: con el celular horizontal queda en el centro, y mientras más lo inclinas, más se acerca al borde de la pantalla.
+  tocar frecuencia (440 + (y in Inclinación2 ÷ 2)) Hz en TecladoMusical1
   retraso de 100 milisegundos

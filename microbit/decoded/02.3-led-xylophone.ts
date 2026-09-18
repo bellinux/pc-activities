@@ -1,8 +1,8 @@
 basic.forever(function () {
     basic.clearScreen()
-    // Dibuja un punto dependiendo de la cantidad de inclinación. Mientras más inclinado, más a los extremos aparecerá el punto.
-    // Transforma los datos de inclinación a una aceptable e una posición del dibujo utilizando ejes x e y.
-    led.plot(2 + Math.round(input.acceleration(Dimension.X) / 350), 2)
-    music.ringTone(1000 + input.acceleration(Dimension.X))
+    // Dibuja un punto según la inclinación: con la micro:bit horizontal queda en el centro, y mientras más la inclinas, más se acerca al borde de la pantalla.
+    // Convierte la inclinación en la posición del punto: la divide por 450 y la redondea, así queda entre −2 y 2, y le suma 2, el centro de la pantalla. Resultado: una posición del 0 al 4.
+    led.plot(2 + Math.round(input.acceleration(Dimension.X) / 450), 2)
+    music.ringTone(440 + input.acceleration(Dimension.X) / 20)
     basic.pause(100)
 })

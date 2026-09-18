@@ -4,7 +4,7 @@ COMPONENTES: TecladoMusical1=PlayKeyboard, Inclinación2=SmartphoneOrientation, 
 
 REPETIR PARA SIEMPRE (bucle principal)
   DibujoLED4_clear_set_4
-  DibujoLED4_drawOnXY_set_2  VAR=4  VAR2=(4 + math_round(OP=ROUND NUM=(Inclinación2.leer(oriY) / 15)))  VAR3=colour_picker(COLOUR=#ff4444)
-      ; // Dibuja un punto según la inclinación: mientras más inclinas el celular, más cerca de los bordes aparece el punto; si lo inclinas demasiado, se sale de la pantalla y no se ve.
-  TecladoMusical1_frequency_set_4  VAR=(262 + Inclinación2.leer(oriY))
+  DibujoLED4_drawOnXY_set_2  VAR=4  VAR2=(4 + math_round(OP=ROUND NUM=(Inclinación2.leer(oriY) / 30)))  VAR3=colour_picker(COLOUR=#ff4444)
+      ; // Dibuja un punto según la inclinación: con el celular horizontal queda en el centro, y mientras más lo inclinas, más se acerca al borde de la pantalla.
+  TecladoMusical1_frequency_set_4  VAR=(440 + (Inclinación2.leer(oriY) / 2))
   ESPERAR  ms  VAR=100
