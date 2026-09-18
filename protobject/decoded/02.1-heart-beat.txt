@@ -1,17 +1,17 @@
 ACTIVIDAD: 02.1-heart-beat
 CODE: corazon-forever-loop
-COMPONENTES: DibujoLED1=MatrixDraw, TecladoMusical=PlayKeyboard, BateríaMusical2=PlayDrum
+COMPONENTES: DibujoLED1=MatrixDraw, TecladoMusical=PlayKeyboard
 
 REPETIR PARA SIEMPRE (bucle principal)
     ; // El bloque 'repetir para siempre' ejecuta una y otra vez, sin parar, la secuencia que tiene dentro.
   TecladoMusical_play_set_1  VAR=control_note(VAR=74)
-  DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=0,1,0,0,0,1,0,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,0,0,1,1,1,0,0,0,0,0,1,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
+  DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,1,1,1,1,0,0,1,1,1,1,1,0,0,0,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
   ESPERAR  ms  VAR=900
       ; // El bloque 'retraso de' hace una pausa del tiempo que tú elijas antes de pasar a la orden siguiente.
   TecladoMusical_stop_set_3
   REPETIR 2 VECES
       ; // Este bloque repite lo que tiene dentro la cantidad de veces que tú elijas.
-    DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,1,1,1,1,0,0,1,1,1,1,1,0,0,0,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
-    ESPERAR  ms  VAR=500
     DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,0,1,0,1,0,0,1,0,0,0,1,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
+    ESPERAR  ms  VAR=500
+    DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
     ESPERAR  ms  VAR=500
