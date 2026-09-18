@@ -6,3 +6,5 @@ para siempre:
   graficar x (2 + redondeo((aceleración (mg) x ÷ 450))) y 2   // Dibuja un punto según la inclinación: con la micro:bit horizontal queda en el centro, y mientras más la inclinas, más se acerca al borde de la pantalla.
   tono de timbre (Hz) (440 + (aceleración (mg) x ÷ 20))
   pausa (ms) 100
+  para todos los sonidos
+  pausa (ms) 50

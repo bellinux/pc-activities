@@ -5,4 +5,6 @@ basic.forever(function () {
     led.plot(2 + Math.round(input.acceleration(Dimension.X) / 450), 2)
     music.ringTone(440 + input.acceleration(Dimension.X) / 20)
     basic.pause(100)
+    music.stopAllSounds()
+    basic.pause(50)
 })

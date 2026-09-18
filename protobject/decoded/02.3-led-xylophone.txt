@@ -8,3 +8,5 @@ REPETIR PARA SIEMPRE (bucle principal)
       ; // Dibuja un punto según la inclinación: con el celular horizontal queda en el centro, y mientras más lo inclinas, más se acerca al borde de la pantalla.
   TecladoMusical1_frequency_set_4  VAR=(440 + (Inclinación2.leer(oriY) / 2))
   ESPERAR  ms  VAR=100
+  TecladoMusical1_stop_set_3
+  ESPERAR  ms  VAR=50

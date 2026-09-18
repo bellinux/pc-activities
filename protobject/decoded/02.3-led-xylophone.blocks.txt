@@ -6,3 +6,5 @@ repetir para siempre:
   dibuja en x 4 y (4 + redondear(y in Inclinación2 ÷ 30)) con color #ff4444 en DibujoLED4   // Dibuja un punto según la inclinación: con el celular horizontal queda en el centro, y mientras más lo inclinas, más se acerca al borde de la pantalla.
   tocar frecuencia (440 + (y in Inclinación2 ÷ 2)) Hz en TecladoMusical1
   retraso de 100 milisegundos
+  detener en TecladoMusical1
+  retraso de 50 milisegundos
