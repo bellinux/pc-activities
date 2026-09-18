@@ -62,16 +62,17 @@
   <section class="section" id="constantes">
     <div class="section-marker"><span class="section-num">§ 02</span><span class="section-rule"></span><span class="section-num">CRÍTICA 1</span></div>
     <h2>Las constantes: <span class="it">calibración</span></h2>
-    <p>Una constante queda fuera del algoritmo, porque si un sensor entrega valores de 0 a 100 y el otro de 0 a 500, el programa que hace lo mismo con los dos usa constantes distintas. Escalar un sensor adapta el programa a la plataforma. Es el caso del xilófono. Las dos versiones suman una constante a la lectura de un acelerómetro y tocan el resultado en hercios. Los dos sensores miden lo mismo, la gravedad a lo largo de un eje, en unidades distintas. El micro:bit entrega milésimas de g: plano, un eje lee 1023. Protobject entrega m/s² multiplicados por diez: 1 g se lee como unos 98. La constante sirve para dos cosas: mantener la frecuencia por encima de cero al inclinar y fijar el tono de reposo. En Protobject la frecuencia nunca baja de 164 Hz; en el micro:bit baja de cero solo casi en vertical, donde 1000 − 1023 da −23. Como los rangos de los sensores difieren unas diez veces, las constantes también difieren: el micro:bit suma 1000 y Protobject 262, el Do central.</p>
+    <p>Una constante queda fuera del algoritmo, porque si un sensor entrega valores de 0 a 100 y el otro de 0 a 500, el programa que hace lo mismo con los dos usa constantes distintas. Escalar un sensor adapta el programa a la plataforma. Es el caso del xilófono. Las dos versiones toman la lectura de un acelerómetro, la dividen por una constante, le suman 440 y tocan el resultado en hercios. Los dos sensores miden lo mismo, la gravedad a lo largo de un eje, en unidades distintas. El micro:bit entrega milésimas de g: plano, un eje lee 1023. Protobject entrega m/s² multiplicados por diez: 1 g se lee como unos 98. Por eso el divisor es distinto: el micro:bit divide por 20 y Protobject por 2, y en las dos el tono sube o baja como mucho unos 50 Hz alrededor de 440. La base fija el tono de reposo y deja la frecuencia siempre positiva; el divisor fija cuánto sube. El divisor es una constante de calibración en estado puro: compensa la unidad del sensor para que las dos versiones suenen igual.</p>
     <table class="plan">
       <thead><tr><th>Xilófono</th><th>micro:bit</th><th>Protobject</th></tr></thead>
       <tbody>
         <tr><td>Bloque</td><td>«tono de timbre (Hz)»</td><td>«tocar frecuencia (Hz)»</td></tr>
         <tr><td>Sensor y unidad</td><td>aceleración x, en milésimas de g</td><td>inclinación y, en m/s² × 10</td></tr>
         <tr><td>1 g se lee como</td><td>≈ 1023</td><td>≈ 98</td></tr>
-        <tr><td>Fórmula</td><td><code>aceleración x + 1000</code></td><td><code>262 + inclinación y</code></td></tr>
-        <tr><td>Tono en reposo</td><td>1000 Hz</td><td>262 Hz, el Do central</td></tr>
-        <tr><td>Cerca del reposo, por grado</td><td>≈ 18 Hz, unos 0,3 semitonos</td><td>≈ 1,7 Hz, unos 0,1 semitonos</td></tr>
+        <tr><td>Fórmula</td><td><code>440 + aceleración x ÷ 20</code></td><td><code>440 + inclinación y ÷ 2</code></td></tr>
+        <tr><td>Tono en reposo</td><td>440 Hz, la nota La</td><td>440 Hz, la nota La</td></tr>
+        <tr><td>Tono al inclinar del todo</td><td>≈ 389 a 491 Hz</td><td>≈ 391 a 489 Hz</td></tr>
+        <tr><td>Cerca del reposo, por grado</td><td>≈ 0,9 Hz</td><td>≈ 0,9 Hz</td></tr>
       </tbody>
     </table>
     <p>En la detección de clones de código, dos fragmentos que difieren solo en identificadores y <em>literales</em> son clones de tipo 2: «el mismo código» con parámetros distintos. La noción de <em>sketch</em> en síntesis de programas formaliza «mismo esqueleto, constantes por determinar». La regla D pone a la pipeline en ese nivel de abstracción, de forma declarada y documentada.</p>
@@ -87,14 +88,14 @@
       <p>Se lleva el rango de cada sensor a [0, 1] y el rango de cada salida a [0, 1], en las dos plataformas, con una transformación <strong>afín</strong> (solo escala y desplazamiento, porque la prueba debe distinguir una función lineal de una exponencial). Si, después de normalizar, la función que va de la entrada a la salida es la <em>misma</em> en las dos versiones —misma familia y desviación máxima por debajo de un umbral fijado de antemano—, las constantes eran de calibración y la regla D las ignora. Si las funciones difieren en forma —una lineal, otra exponencial; una con un umbral a la mitad, otra con un umbral al borde—, la diferencia es de comportamiento: se reporta como residuo y se juzga en la dimensión <em>sensoriomotriz</em>. El rango que se normaliza es el <em>alcanzable</em> en el gesto de la actividad, medido. La prueba se aplica en el tramo donde ambas salidas están definidas. Se documenta qué hace cada plataforma fuera de rango, por ejemplo con una frecuencia de cero o negativa: en Protobject es silencio, verificado en la fuente; en MakeCode, por verificar. Para el tiempo vale lo mismo: se normaliza sobre la duración <em>medida</em> en pantalla, intervalos implícitos y tiempo de encendido incluidos.</p>
     </div>
     <p>La regla D se aplica a la dimensión algorítmica, la única que la pipeline decide. Las constantes que cambian lo que el niño ve u oye pertenecen a la dimensión sensoriomotriz y se hacen visibles como residuo. La pipeline <strong>declara cuáles constantes ignoró</strong>.</p>
-    <p>Aplicada al xilófono, la prueba da «calibración»: en las dos versiones la frecuencia es una recta de la lectura del sensor. Lo que las constantes cambian, el tono de reposo y cuánto sube el tono por grado, se reporta como residuo y se juzga en la dimensión sensoriomotriz.</p>
+    <p>Aplicada al xilófono, la prueba da «calibración»: en las dos versiones la frecuencia es una recta de la lectura del sensor, con el mismo punto de reposo y casi la misma pendiente. Lo que queda, un par de hercios en los extremos porque 1023 ÷ 20 no es exactamente 98 ÷ 2, se reporta como residuo.</p>
   </section>
 
   <section class="section" id="corazon">
     <div class="section-marker"><span class="section-num">§ 03</span><span class="section-rule"></span><span class="section-num">UN CASO DEL CORPUS</span></div>
     <h2>El llavero de corazón: una constante que <span class="it">compensa</span> la plataforma</h2>
     <p>La actividad n.º 1 del corpus tiene, en las dos plataformas, la misma estructura: un bucle infinito que muestra el corazón, hace sonar un latido, espera 300 ms, vuelve a sonar, y luego repite cuatro veces una alternancia de dos dibujos con una pausa entre ellos. La pipeline la declara isomorfa. Las pausas del bucle interno son distintas: <strong>10 ms</strong> en el micro:bit, <strong>100 ms</strong> en Protobject, verificado en la fuente (<code>microbit/decoded/02.1-heart-beat.ts</code> y <code>protobject/raw/corazon-forever-loop.xml</code>). Por la regla D, la diferencia queda fuera del veredicto algorítmico.</p>
-    <p>Las pausas son distintas <em>a propósito</em>. La matriz de LED del micro:bit tarda en encenderse por completo, y el bloque «mostrar LEDs» lleva una pausa implícita: la documentación oficial dice que, al programar con bloques, el parámetro <code>interval</code> «is set at 400 milliseconds», y el código fuente lo confirma (<code>showLeds(leds, interval = 400)</code>). Protobject dibuja de inmediato. Con una pausa nominal más corta en el micro:bit y más larga en el celular, las dos animaciones se <em>acercan</em> perceptivamente. La constante absorbe un límite de la implementación: es una constante de calibración en el tiempo, como el +1000 y el +262 del xilófono lo son en el rango del sensor.</p>
+    <p>Las pausas son distintas <em>a propósito</em>. La matriz de LED del micro:bit tarda en encenderse por completo, y el bloque «mostrar LEDs» lleva una pausa implícita: la documentación oficial dice que, al programar con bloques, el parámetro <code>interval</code> «is set at 400 milliseconds», y el código fuente lo confirma (<code>showLeds(leds, interval = 400)</code>). Protobject dibuja de inmediato. Con una pausa nominal más corta en el micro:bit y más larga en el celular, las dos animaciones se <em>acercan</em> perceptivamente. La constante absorbe un límite de la implementación: es una constante de calibración en el tiempo, como el ÷ 20 y el ÷ 2 del xilófono lo son en el rango del sensor.</p>
     <table class="plan">
       <thead><tr><th>Bucle interno</th><th>micro:bit</th><th>Protobject</th></tr></thead>
       <tbody>
@@ -122,9 +123,9 @@
   <section class="section" id="principio">
     <div class="section-marker"><span class="section-num">§ 05</span><span class="section-rule"></span><span class="section-num">PRINCIPIO</span></div>
     <h2>Toda normalización deja una <span class="it">huella</span></h2>
-    <p>Las dos críticas llevan a un principio. Las cinco reglas de normalización de la pipeline (A: sin análogo; B: recursos; C: sonido por intención; D: aritmética, las constantes no cuentan; E: orden) deciden la dimensión algorítmica, y cada una <em>borra</em> una diferencia. La pipeline escribe qué borró: que una versión suma 1000 y la otra 262, que una espera 10 ms y la otra 100. El principio:</p>
+    <p>Las dos críticas llevan a un principio. Las cinco reglas de normalización de la pipeline (A: sin análogo; B: recursos; C: sonido por intención; D: aritmética, las constantes no cuentan; E: orden) deciden la dimensión algorítmica, y cada una <em>borra</em> una diferencia. La pipeline escribe qué borró: que una versión divide por 20 y la otra por 2, que una espera 10 ms y la otra 100. El principio:</p>
     <div class="pullquote">Cada regla que iguala dos cosas distintas deja escrito qué igualó. El veredicto va acompañado de su residuo.</div>
-    <p>La salida de la pipeline es un perfil: «equivalentes en la dimensión algorítmica; residuos: constantes {1000 ↔ 262, 350 ↔ 15}, recursos {eje x ↔ eje y}». El panel lo usa para juzgar, y el instrumento del Objetivo 3 lo usa para saber dónde mirar.</p>
+    <p>La salida de la pipeline es un perfil: «equivalentes en la dimensión algorítmica; residuos: constantes {÷ 20 ↔ ÷ 2, 350 ↔ 15}, recursos {eje x ↔ eje y}». El panel lo usa para juzgar, y el instrumento del Objetivo 3 lo usa para saber dónde mirar.</p>
   </section>
 
   <section class="section" id="tareas">
@@ -144,7 +145,7 @@
     <div class="section-marker"><span class="section-num">§ 07</span><span class="section-rule"></span><span class="section-num">DECISIONES PENDIENTES</span></div>
     <h2>Preguntas <span class="it">abiertas</span></h2>
     <ol class="preguntas">
-      <li><strong>¿Se percibe la diferencia entre los dos xilófonos?</strong> Con la misma unidad, difieren el tono de reposo (1000 Hz contra 262 Hz) y cuánto sube el tono por grado. Propuesta: medirla con la prueba de discriminación del Objetivo 3, con participantes de la edad de destino.</li>
+      <li><strong>¿Suenan igual los dos xilófonos?</strong> Están calibrados para eso: la misma base, 440 Hz, y el mismo recorrido, unos ±50 Hz. Propuesta: confirmarlo con la prueba de discriminación del Objetivo 3, con participantes de la edad de destino.</li>
       <li><strong>¿Está bien ajustada la compensación temporal del llavero de corazón?</strong> Filmar cuatro vueltas del bucle en las dos plataformas y comparar los ritmos.</li>
       <li><strong>¿Tiene «dibuja en DibujoLED» de Protobject alguna pausa implícita?</strong> Verificar en la fuente de la plataforma, o medir.</li>
       <li><strong>¿La regla D se le presenta al panel tal cual, con la marca de disenso?</strong> Ver P3 del Objetivo 2.</li>

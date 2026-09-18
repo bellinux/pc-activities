@@ -2,7 +2,7 @@
     "platform": "Protobject",
     "extracted_text": [
         "repetir para siempre:",
-        "  tocar frecuencia (262 + (y in Inclinación2)) Hz en TecladoMusical1",
+        "  tocar frecuencia (440 + ((y in Inclinación2) ÷ 2)) Hz en TecladoMusical1",
         "  retraso de 100 milisegundos"
     ]
 }

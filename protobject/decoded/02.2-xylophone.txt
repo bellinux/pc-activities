@@ -4,7 +4,7 @@ COMPONENTES: TecladoMusical1=PlayKeyboard, Inclinación2=SmartphoneOrientation
 
 REPETIR PARA SIEMPRE (bucle principal)
     ; // El bloque 'repetir para siempre' repite sin parar toda la secuencia que está dentro.
-  TecladoMusical1_frequency_set_4  VAR=(262 + Inclinación2.leer(oriY))
-      ; // Este bloque toca un sonido de la frecuencia que le des, en hercios (Hz): cuanto más pequeño el número, más grave; cuanto más grande, más agudo. Con 0 o un número negativo no suena nada.
+  TecladoMusical1_frequency_set_4  VAR=(440 + (Inclinación2.leer(oriY) / 2))
+      ; // Este bloque toca un sonido de la frecuencia que le des, en hercios (Hz): cuanto más pequeño el número, más grave; cuanto más grande, más agudo.
   ESPERAR  ms  VAR=100
       ; // El bloque 'retraso de' hace una pausa de 100 milisegundos (0,1 segundos), así puedes tocar muchos sonidos distintos en poco tiempo.

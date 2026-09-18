@@ -12,12 +12,18 @@
                         "children": [
                             {
                                 "type": "Operator",
-                                "label": "◻ + 1000",
+                                "label": "440 + ◻",
                                 "children": [
                                     {
-                                        "type": "Sensor",
-                                        "label": "aceleración (mg) x",
-                                        "children": []
+                                        "type": "Operator",
+                                        "label": "◻ ÷ 20",
+                                        "children": [
+                                            {
+                                                "type": "Sensor",
+                                                "label": "aceleración (mg) x",
+                                                "children": []
+                                            }
+                                        ]
                                     }
                                 ]
                             }

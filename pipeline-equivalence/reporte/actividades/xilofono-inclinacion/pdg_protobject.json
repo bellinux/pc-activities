@@ -13,23 +13,36 @@
             "kind": "Arithmetic",
             "seq": 2,
             "in_loop": true,
-            "op": "+"
+            "op": "÷"
         },
         {
             "id": "n3",
-            "kind": "PlayTone",
+            "kind": "Arithmetic",
             "seq": 3,
+            "in_loop": true,
+            "op": "+"
+        },
+        {
+            "id": "n4",
+            "kind": "PlayTone",
+            "seq": 4,
             "in_loop": true,
             "resId": 1
         },
         {
-            "id": "n4",
+            "id": "n5",
             "kind": "Delay",
-            "seq": 4,
+            "seq": 5,
             "in_loop": true
         }
     ],
     "edges": [
+        {
+            "source": "n4",
+            "target": "n5",
+            "type": "control",
+            "var": ""
+        },
         {
             "source": "n1",
             "target": "n2",
@@ -40,19 +53,13 @@
             "source": "n2",
             "target": "n3",
             "type": "data",
+            "var": "value"
+        },
+        {
+            "source": "n3",
+            "target": "n4",
+            "type": "data",
             "var": "pitch"
-        },
-        {
-            "source": "n3",
-            "target": "n4",
-            "type": "control",
-            "var": ""
-        },
-        {
-            "source": "n3",
-            "target": "n4",
-            "type": "side_effect",
-            "var": "sound"
         }
     ]
 }

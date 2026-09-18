@@ -12,12 +12,18 @@
                         "children": [
                             {
                                 "type": "Operator",
-                                "label": "262 + ◻",
+                                "label": "440 + ◻",
                                 "children": [
                                     {
-                                        "type": "Sensor",
-                                        "label": "y in Inclinación2",
-                                        "children": []
+                                        "type": "Operator",
+                                        "label": "◻ ÷ 2",
+                                        "children": [
+                                            {
+                                                "type": "Sensor",
+                                                "label": "y in Inclinación2",
+                                                "children": []
+                                            }
+                                        ]
                                     }
                                 ]
                             }
