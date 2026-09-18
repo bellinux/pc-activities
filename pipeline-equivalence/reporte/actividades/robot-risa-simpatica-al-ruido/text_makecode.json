@@ -4,7 +4,7 @@
         "al iniciar:",
         "  mostrar LEDs",
         "al detectar el sonido alto:",
-        "  reproduce (nyan) en segundo plano",
+        "  reproduce (nyan) bucle en segundo plano",
         "  repetir 8 veces:",
         "    mostrar LEDs",
         "    pausa (ms) 100",

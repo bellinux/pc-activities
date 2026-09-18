@@ -11,9 +11,9 @@ protobject_NivelRuido1_change  property=suddenIncrease
       ; // Reproduce un sonido ya preparado.
   REPETIR 8 VECES
     DibujoLED2_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
-    ESPERAR  ms  VAR=400
+    ESPERAR  ms  VAR=500
     DibujoLED2_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
-    ESPERAR  ms  VAR=400
+    ESPERAR  ms  VAR=500
   ReproductorSonido3_stop_set_3
       ; // Corta la risa; sin este bloque, el sonido se repetiría sin parar.
   DibujoLED2_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)

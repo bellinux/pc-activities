@@ -1,5 +1,5 @@
 ACTIVIDAD: 14.1-ticklish-robot
-FUENTE: micro:bit / MakeCode 8.0.18 — "robot-risa-simpatica-al-ruido"  (etiquetas oficiales es-ES)
+FUENTE: micro:bit / MakeCode 9.0.12 — "robot-risa-simpatica-al-ruido"  (etiquetas oficiales es-ES)
 
 al iniciar:
   mostrar LEDs:
@@ -10,7 +10,7 @@ al iniciar:
       . # # # .
 
 al detectar el sonido alto:   // Cuando el micrófono del dispositivo detecta un sonido fuerte, se ejecutarán las instrucciones dentro del bloque.
-  reproduce nyan en segundo plano   // Reproduce un sonido predeterminado.
+  reproduce nyan bucle en segundo plano   // Reproduce un sonido predeterminado.
   repetir 8 veces:
     mostrar LEDs:
         . # . # .
@@ -26,7 +26,7 @@ al detectar el sonido alto:   // Cuando el micrófono del dispositivo detecta un
         # . . . #
         . # # # .
     pausa (ms) 100
-  detener la melodía todos   // En caso de que el sonido reproducido al inicio dure más que el bloque anterior, este bloque fuerza a detenerlo para evitar que continue sonado cuando no debería.
+  detener la melodía todos   // Corta la risa; sin este bloque, la melodía se repetiría sin parar.
   mostrar LEDs:
       . # . # .
       . . . . .

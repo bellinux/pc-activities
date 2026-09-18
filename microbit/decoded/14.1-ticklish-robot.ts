@@ -1,7 +1,7 @@
 // Cuando el micrófono del dispositivo detecta un sonido fuerte, se ejecutarán las instrucciones dentro del bloque.
 input.onSound(DetectedSound.Loud, function () {
     // Reproduce un sonido predeterminado.
-    music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Nyan), music.PlaybackMode.InBackground)
+    music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Nyan), music.PlaybackMode.LoopingInBackground)
     for (let index = 0; index < 8; index++) {
         basic.showLeds(`
             . # . # .
@@ -20,7 +20,7 @@ input.onSound(DetectedSound.Loud, function () {
             `)
         basic.pause(100)
     }
-    // En caso de que el sonido reproducido al inicio dure más que el bloque anterior, este bloque fuerza a detenerlo para evitar que continue sonado cuando no debería.
+    // Corta la risa; sin este bloque, la melodía se repetiría sin parar.
     music.stopMelody(MelodyStopOptions.All)
     basic.showLeds(`
         . # . # .
