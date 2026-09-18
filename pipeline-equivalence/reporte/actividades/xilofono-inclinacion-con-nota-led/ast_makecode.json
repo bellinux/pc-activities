@@ -6,7 +6,11 @@
                 "type": "Loop",
                 "label": "para siempre",
                 "children": [
-                    { "type": "Action", "label": "borrar la pantalla", "children": [] },
+                    {
+                        "type": "Action",
+                        "label": "borrar la pantalla",
+                        "children": []
+                    },
                     {
                         "type": "Action",
                         "label": "graficar x ◻ y 2",
@@ -23,7 +27,11 @@
                                                 "type": "Operator",
                                                 "label": "◻ ÷ 350",
                                                 "children": [
-                                                    { "type": "Sensor", "label": "aceleración (mg) x", "children": [] }
+                                                    {
+                                                        "type": "Sensor",
+                                                        "label": "aceleración (mg) x",
+                                                        "children": []
+                                                    }
                                                 ]
                                             }
                                         ]
@@ -40,12 +48,20 @@
                                 "type": "Operator",
                                 "label": "1000 + ◻",
                                 "children": [
-                                    { "type": "Sensor", "label": "aceleración (mg) x", "children": [] }
+                                    {
+                                        "type": "Sensor",
+                                        "label": "aceleración (mg) x",
+                                        "children": []
+                                    }
                                 ]
                             }
                         ]
                     },
-                    { "type": "Action", "label": "pausa (ms) 100", "children": [] }
+                    {
+                        "type": "Action",
+                        "label": "pausa (ms) 100",
+                        "children": []
+                    }
                 ]
             }
         ]

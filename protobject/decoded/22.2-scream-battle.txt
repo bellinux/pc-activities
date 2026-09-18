@@ -8,9 +8,12 @@ REPETIR PARA SIEMPRE (bucle principal)
     ESTABLECER var:columna = 1
     ESTABLECER var:fila = 1
     MIENTRAS (WHILE) (NivelRuido2.leer(noise) >= 5)
+        ; // 'repetir mientras' da vueltas mientras el ruido sea 5 o más, o sea mientras dura el grito, y sale cuando te callas.
       DibujoLED3_drawOnXY_set_2  VAR=var:columna  VAR2=var:fila  VAR3=colour_picker(COLOUR=#ff4444)
+          ; // Encendemos un LED rojo en la columna y la fila de ahora: cuanto más largo es el grito, más LEDs se encienden, hasta llenar la matriz.
       ReproductorSonido1_play_set_2  VAR=sounds_list(VAR=shoppingCart.mp3)
       ESPERAR  ms  VAR=500
+          ; // 'retraso de 500 milisegundos' espera medio segundo antes del siguiente LED, así cada LED encendido vale medio segundo de grito.
       ESTABLECER var:columna = (var:columna + 1)
       SI
         [si (var:columna > 7)]
@@ -23,10 +26,13 @@ REPETIR PARA SIEMPRE (bucle principal)
     ESPERAR  s  VAR=5
     ReproductorSonido1_stop_set_3
     DibujoLED3_clear_set_4
+        ; // Apagamos toda la matriz para dejarla lista para el próximo grito.
     ESTABLECER var:partidaEnCurso = FALSE
 
 AL INICIAR
   ESTABLECER var:partidaEnCurso = FALSE
+      ; // Creamos la variable 'partidaEnCurso' y la ponemos en falso: al empezar, no hay ninguna partida en curso.
 
 protobject_NivelRuido2_change  property=suddenIncrease
+    ; // 'cuando NivelRuido2 detecta aumento repentino' avisa que alguien ha empezado a gritar, y entonces ponemos 'partidaEnCurso' en verdadero.
   ESTABLECER var:partidaEnCurso = TRUE

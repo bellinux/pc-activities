@@ -86,6 +86,7 @@ var locutions = {
 	playKeyboard: {
 		play: "tocar nota",
 		playNumber: "tocar nota n\u00FAmero",
+		playFrequency: "tocar frecuencia",
 		stop: "detener",
 		inTxt: "en",
 		playKeyboard: "Tocar Teclado",

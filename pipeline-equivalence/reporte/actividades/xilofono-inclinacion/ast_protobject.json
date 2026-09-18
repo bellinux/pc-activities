@@ -8,11 +8,11 @@
                 "children": [
                     {
                         "type": "Action",
-                        "label": "tocar nota número ◻ en TecladoMusical1",
+                        "label": "tocar frecuencia ◻ Hz en TecladoMusical1",
                         "children": [
                             {
                                 "type": "Operator",
-                                "label": "60 + ◻",
+                                "label": "262 + ◻",
                                 "children": [
                                     {
                                         "type": "Sensor",

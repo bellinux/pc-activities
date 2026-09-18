@@ -11,8 +11,8 @@ al iniciar el programa:
       .......
       .......
 
-cuando NivelRuido1 detecta aumento repentino:   // Cuando el micrófono del dispositivo detecta un sonido fuerte, se ejecutarán las instrucciones dentro del bloque.
-  reproducir sonido 'reacción divertida' en ReproductorSonido3   // Reproduce un sonido predeterminado.
+cuando NivelRuido1 detecta aumento repentino:   // Cuando el ruido sube de golpe (por ejemplo, con un aplauso), se ejecuta todo lo que está dentro de este bloque.
+  reproducir sonido 'reacción divertida' en ReproductorSonido3   // Reproduce un sonido ya preparado.
   repetir 8 veces:
     dibuja con color #ff0000 en DibujoLED2:
         .......
@@ -32,7 +32,7 @@ cuando NivelRuido1 detecta aumento repentino:   // Cuando el micrófono del disp
         ..###..
         .......
     retraso de 400 milisegundos
-  detener sonido de ReproductorSonido3   // En caso de que el sonido reproducido al inicio dure más que el bloque anterior, este bloque fuerza a detenerlo para evitar que suene cuando no debería sonar.
+  detener sonido de ReproductorSonido3   // Corta la risa; sin este bloque, el sonido se repetiría sin parar.
   dibuja con color #ff0000 en DibujoLED2:
       .......
       ..#.#..

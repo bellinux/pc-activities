@@ -1,6 +1,6 @@
 ACTIVIDAD: 02.2-xylophone
 FUENTE: Protobject (bloques, etiquetas oficiales es)
 
-repetir para siempre:   // Bucle principal, repite infinitamente la secuencia programada dentro de este bloque.
-  tocar nota número (60 + y in Inclinación2) en TecladoMusical1   // Este bloque recibe un número entre 0 y 150 y transforma este valor a un sonido, mientras más pequeño el número más grave el sonido, por el contrario si el número es grande el sonido será agudo.
-  retraso de 100 milisegundos   // Retraso de 0.1 segundos para poder hacer diferentes sonidos en un corto periodo de tiempo.
+repetir para siempre:   // El bloque 'repetir para siempre' repite sin parar toda la secuencia que está dentro.
+  tocar frecuencia (262 + y in Inclinación2) Hz en TecladoMusical1   // Este bloque toca un sonido de la frecuencia que le des, en hercios (Hz): cuanto más pequeño el número, más grave; cuanto más grande, más agudo. Con 0 o un número negativo no suena nada.
+  retraso de 100 milisegundos   // El bloque 'retraso de' hace una pausa de 100 milisegundos (0,1 segundos), así puedes tocar muchos sonidos distintos en poco tiempo.

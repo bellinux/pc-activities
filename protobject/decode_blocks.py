@@ -90,10 +90,20 @@ def midi_note(n):
     return "%s%d" % (names[n % 12], n // 12 - 1)
 
 # ---------- .ptj -> XML ----------
+_LANG_TAG = re.compile(r"\[([a-z]{2})\]([\s\S]*?)\[\1\]")
+
+def localise_es(s):
+    """Comentarios trilingues de la app: se queda el espanol (ver decode_ptj.py)."""
+    if not _LANG_TAG.search(s):
+        return s
+    kept = _LANG_TAG.sub(lambda m: m.group(2) if m.group(1) == "es" else "", s)
+    return re.sub(r"\s+", " ", kept).strip()
+
 def ptj_xml(path):
     raw = open(path, encoding="utf-8").read().strip()
     s = json.loads(raw[raw.index("(")+1: raw.rindex(")")])
-    return s[s.index("\n")+1:]
+    # El XML no siempre sigue a la linea de componentes (ver decode_ptj.py).
+    return s[s.index("<xml", s.index("\n")):]
 
 # ---------- parsing Blockly ----------
 def _strip(t): return t.split("}", 1)[1] if "}" in t else t
@@ -112,7 +122,7 @@ def _parts(el):
         elif tg == "value": v[ch.get("name")] = _first(ch)
         elif tg == "statement": s[ch.get("name")] = _first(ch)
         elif tg == "next": nx = _first(ch)
-        elif tg == "comment": c = (ch.text or "").strip()
+        elif tg == "comment": c = localise_es((ch.text or "").strip())
     return f, v, s, nx, c
 def _matrix(csv):
     vals = csv.split(",")
@@ -180,6 +190,7 @@ def _devbody(comp, base, action, fields, values):
         if action == "play":                                          # variante dedotta dall'input
             var = values.get("VAR"); picker = var is not None and var.get("type") in ("control_note", "control_drum")
             return "%s %s %s" % (d["play"] if picker else d["playNumber"], E("VAR"), enC)
+        if action == "frequency": return "%s %s Hz %s" % (d.get("playFrequency", "tocar frecuencia"), E("VAR"), enC)
         if action == "stop": return "%s %s" % (d["stop"], enC)
     if cat == "interactiveTurtleDraw":
         if action == "setSize": return "%s %s %s" % (d["setSize"], E("VAR"), enC)

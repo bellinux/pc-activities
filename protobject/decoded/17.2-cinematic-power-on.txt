@@ -7,16 +7,16 @@ protobject_NivelRuido1_change  property=suddenIncrease
   SI
     [si var:estado]
     CONTAR CON filas DE 1 A 7 PASO 1
-        ; // Este bloque crea una variable llamada "filas". Luego asigna valores desde 1 hasta 7 en aumentos de 1 y cada vez que toma un nuevo valor se ejecutará lo de dentro.  Es decir inicia con filas= 1, luego ejecuta lo de dentro y al terminar ahora filas = 2 y se vuelve a ejecutar todo. Una vez filas = 7 se ejecuta lo de dentro y pasa al siguiente bloque de instrucciones que no esté dentro.
+        ; // Este 'contar con' da a 'filas' los valores del 1 al 7 y ejecuta lo de dentro por cada valor, recorriendo las filas una a una.
       CONTAR CON columnas DE 1 A 7 PASO 1
-          ; // Este bloque crea una variable llamada "columnas". Luego asigna valores desde 1 hasta 7 en aumentos de 1 y cada vez que toma un nuevo valor se ejecutará lo de dentro.  Es decir inicia con columnas = 1, luego ejecuta lo de dentro y al terminar ahora columnas = 2 y se vuelve a ejecutar todo. Una vez columnas = 7 se ejecuta lo de dentro y pasa al siguiente bloque de instrucciones que no esté dentro.  Se puede analizar que por cada vez que el valor de "filas" cambia, se ejecuta 7 veces el bloque donde cambia columna y como filas cambia 7 veces, el bloque de "dibuja en x..." se ejecuta 7x7 = 49 veces, que corresponde a la cantidad total de leds.
+          ; // Este 'contar con' da a 'columnas' los valores del 1 al 7 dentro de cada fila, así que dibuja 7x7 = 49 veces: una por cada led.
         DibujoLED2_drawOnXY_set_2  VAR=var:columnas  VAR2=var:filas  VAR3=colour_picker(COLOUR=#ff4444)
         ESPERAR  ms  VAR=10
     [sino]
     CONTAR CON filas DE 1 A 7 PASO 1
-        ; // Realiza lo mismo que el anterior contar con filas, solo que esta vez para apagar la luz de cada fila.
+        ; // Este 'contar con' recorre las filas del 1 al 7 para apagar la luz de cada una.
       CONTAR CON columnas DE 1 A 7 PASO 1
-          ; // Realiza lo mismo que el contar con columnas anterior, solo que se utiliza para apagar las luces en la columna actual.
+          ; // Dentro de cada fila, este 'contar con' da a 'columnas' los valores del 1 al 7 y apaga el led de cada columna.
         DibujoLED2_drawOnXY_set_2  VAR=var:columnas  VAR2=var:filas  VAR3=colour_picker(COLOUR=#000000)
         ESPERAR  ms  VAR=10
 

@@ -2,7 +2,7 @@ ACTIVIDAD: 16.1-cookie-thief-alarm
 FUENTE: Protobject (bloques, etiquetas oficiales es)
 
 repetir para siempre:
-  si (x in Inclinación1 > 20):   // Este es un bloque condicional, ¿Qué quiere decir esto? Es un bloque que se ejecuta o no dependiendo de una condición que nosotros propongamos. En este caso la condición es que la inclinación debe ser superior a cierto valor, al superarse el valor la condición se cumple y por lo tanto se ejecutan todas las instrucciones en el interior de nuestro bloque condicional.
+  si (x in Inclinación1 > 20):   // El bloque 'si … hacer' mira la inclinación: cuando pasa del valor elegido, se ejecuta todo lo que está dentro del bloque; si no, se lo salta.
     dibuja con color #2277aa en DibujoLED2:   // Encender la alarma
         .......
         .#..##.

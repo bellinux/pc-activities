@@ -12,5 +12,5 @@ REPETIR PARA SIEMPRE (bucle principal)
   SI
     [si (var:tiempoTranscurrido > var:intervaloPulso)]
     BateríaMusical2_play_set_1  VAR=control_drum(VAR=1)
-        ; // Reproduce un tono específico, en este caso simulará la frecuencia de un metrónomo.
+        ; // Suena un golpe de batería: es el tic del metrónomo que marca el pulso.
     ESTABLECER var:ultimoPulso = protobject_milliseconds()

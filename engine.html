@@ -223,16 +223,14 @@
                                  <span class="truncate flex-1">${escapeHtml(meta.title)}</span>`
                                  + (meta.missing ? ` <span class="text-[0.6rem] font-bold px-1 rounded bg-red-100 text-red-600 shrink-0" title="archivo no encontrado">!</span>` : '');
 
+                // El clic solo cambia la direccion (#a=<slug>); la actividad la abre
+                // openDeepLinkFromHash al cambiar el hash. Asi la direccion siempre dice
+                // lo que se ve, recargar no vuelve a la actividad anterior, y atras /
+                // adelante del navegador recorren las actividades vistas.
                 btn.onclick = () => {
-                    document.querySelectorAll('#menuList button').forEach(b => {
-                        b.classList.remove('bg-indigo-50', 'border-indigo-200', 'text-indigo-700', 'shadow-sm');
-                        b.classList.add('border-transparent');
-                    });
-                    btn.classList.remove('border-transparent');
-                    btn.classList.add('bg-indigo-50', 'border-indigo-200', 'text-indigo-700', 'shadow-sm');
-
-                    currentActivity = slug;
-                    loadActivity(slug);
+                    const target = '#a=' + encodeURIComponent(slug);
+                    if (location.hash === target) openDeepLinkFromHash();   // mismo hash: no hay evento
+                    else location.hash = target;
                 };
                 menuList.appendChild(btn);
             });
@@ -439,8 +437,13 @@
                 </div>`;
         }
 
+        // Cada carga lleva un numero; si al llegar la respuesta ya se pidio otra
+        // actividad, la respuesta vieja se descarta.
+        let loadSeq = 0;
+
         async function loadActivity(baseName, highlightQuery) {
             const lang = LANG;
+            const mySeq = ++loadSeq;
 
             const contentArea = document.getElementById('mainContent');
             
@@ -454,16 +457,20 @@
 
             // 1. Fetch File
             try {
-                const response = await fetch(`_activities/${fileName}`);
+                // no-store: el navegador no debe servir una version vieja del texto.
+                const response = await fetch(`_activities/${fileName}`, { cache: 'no-store' });
+                if (mySeq !== loadSeq) return;
                 if (!response.ok) {
                     if(response.status === 404) throw new Error('FILE_NOT_FOUND');
                     throw new Error(`HTTP Error: ${response.status}`);
                 }
                 fileText = await response.text();
+                if (mySeq !== loadSeq) return;
                 // Normaliza los finales de línea de Windows (CRLF) y elimina un eventual BOM,
                 // de lo contrario la regex del frontmatter (^---\n) no encuentra los delimitadores.
                 fileText = fileText.replace(/^﻿/, '').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
             } catch (error) {
+                if (mySeq !== loadSeq) return;
                 if(error.message === 'FILE_NOT_FOUND') {
                     renderError("Archivo no encontrado (404)", `El archivo <b>${fileName}</b> no existe en la carpeta <code>_activities/</code>.`);
                 } else {

@@ -2,7 +2,7 @@ ACTIVIDAD: 16.4-robot-activation-challenge
 FUENTE: Protobject (bloques, etiquetas oficiales es)
 
 al iniciar el programa:
-  establecer energia a 0   // Inicia la variable "toques" con valor inicial = 0.
+  establecer energia a 0   // Empieza la variable "energia" en 0: todavía no se ha tocado el botón ninguna vez.
 
 repetir para siempre:
   si (energia < 7):
@@ -22,4 +22,4 @@ repetir para siempre:
     reproducir sonido 'celebración final' en ReproductorSonido3
 
 cuando BotónTáctil1 es tocado:
-  añadir 1 a energia   // Aumenta en 1 el valor de la variable "toques". Cada vez que se presione el botón la cantidad aumenta en 1, es decir la variable cuenta la cantidad de veces que se aprieta el botón.
+  añadir 1 a energia   // Suma 1 a la variable "energia" cada vez que se aprieta el botón, así la variable cuenta cuántas veces lo has tocado.

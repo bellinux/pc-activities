@@ -6,12 +6,12 @@ REPETIR PARA SIEMPRE (bucle principal)
   DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=0,1,0,0,0,1,0,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,0,0,1,1,1,0,0,0,0,0,1,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
   BateríaMusical2_play_set_1  VAR=control_drum(VAR=1)
   ESPERAR  ms  VAR=var:pausaLarga
-      ; // Se utiliza la variable "pausaLarga" para cambiar la velocidad de latido dependiendo de la posición del dispositivo.
+      ; // El bloque 'retraso de' espera los milisegundos que guarda la variable 'pausaLarga': cambia esa variable y el corazón grande late más rápido o más lento.
   BateríaMusical2_play_set_1  VAR=control_drum(VAR=1)
   REPETIR 4 VECES
     DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,1,1,1,1,0,0,1,1,1,1,1,0,0,0,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
     ESPERAR  ms  VAR=var:pausaCorta
-        ; // Se utiliza la variable "pausaCorta" para cambiar la velocidad de latido del corazón chico dependiendo de la posición del dispositivo.
+        ; // El bloque 'retraso de' espera los milisegundos que guarda la variable 'pausaCorta': así de rápido late el corazón chico.
     DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,0,1,0,1,0,0,1,0,0,0,1,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
     ESPERAR  ms  VAR=var:pausaCorta
 
@@ -20,11 +20,11 @@ AL INICIAR
   ESTABLECER var:pausaCorta = 150
 
 protobject_Inclinación3_change  property=side
-    ; // Este bloque detecta el momento en que cambia la posición del dispositivo, cuando lo hace se editan las variables "pausaLarga" y "pausaCorta". Al inclinar el dispositivo hacia esta dirección, la velocidad de latido aumentará ya que los tiempos son más cortos.
+    ; // Cuando giras el celular de lado, este bloque pone 'pausaLarga' en 250 y 'pausaCorta' en 80: tiempos más cortos y el corazón late más rápido.
   ESTABLECER var:pausaLarga = 250
   ESTABLECER var:pausaCorta = 80
 
 protobject_Inclinación3_change  property=faceUp
-    ; // Este bloque detecta el momento en que cambia la posición del dispositivo, cuando lo hace se editan las variables "pausaLarga" y "pausaCorta". Al inclinar el dispositivo hacia esta dirección, la velocidad de latido disminuirá ya que los tiempos son más largos.
+    ; // Cuando pones el celular boca arriba, este bloque deja 'pausaLarga' en 500 y 'pausaCorta' en 150: tiempos más largos y el corazón late más lento.
   ESTABLECER var:pausaLarga = 500
   ESTABLECER var:pausaCorta = 150

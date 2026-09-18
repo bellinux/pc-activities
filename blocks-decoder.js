@@ -25,6 +25,17 @@
 })(typeof self !== "undefined" ? self : (typeof globalThis !== "undefined" ? globalThis : this), function () {
   "use strict";
 
+  // ---------- comentarios trilingues ----------
+  // Los programas de la app guardan cada comentario en tres idiomas:
+  // [it]...[it][en]...[en][es]...[es]. Como la app (localiseComments en
+  // src/generate/localise.ts), nos quedamos con el espanol, tiramos los demas
+  // trozos y compactamos los espacios. Sin etiquetas, el texto no se toca.
+  const LANG_TAG = /\[([a-z]{2})\]([\s\S]*?)\[\1\]/g;
+  function localiseEs(s) {
+    if (!/\[([a-z]{2})\][\s\S]*?\[\1\]/.test(s)) return s;
+    return s.replace(LANG_TAG, (_t, code, inner) => (code === "es" ? inner : "")).replace(/\s+/g, " ").trim();
+  }
+
   // ---------- mini-parser XML (navegador + Node, sin dependencias) ----------
   function decodeEntities(s) {
     return s.replace(/&(#x?[0-9a-fA-F]+|[A-Za-z]+);/g, (m, e) => {
@@ -80,7 +91,7 @@
       else if (t === "value") v[ch.getAttribute("name")] = firstBlock(ch);
       else if (t === "statement") s[ch.getAttribute("name")] = firstBlock(ch);
       else if (t === "next") n = firstBlock(ch);
-      else if (t === "comment") c = (ch.textContent || "").trim();
+      else if (t === "comment") c = localiseEs((ch.textContent || "").trim());
     }
     return { f, v, s, n, c };
   }
@@ -171,6 +182,7 @@
     }
     if (cat === "playKeyboard" || cat === "playDrum") {
       if (action === "play") { const vr = values.VAR, picker = vr && ["control_note", "control_drum"].includes(vr.getAttribute("type")); return (picker ? d.play : d.playNumber) + " " + E("VAR") + " " + enC; }
+      if (action === "frequency") return (d.playFrequency || "tocar frecuencia") + " " + E("VAR") + " Hz " + enC;
       if (action === "stop") return d.stop + " " + enC;
     }
     if (cat === "interactiveTurtleDraw") {
@@ -234,7 +246,9 @@
     const inner = JSON.parse(ptjText.trim().slice(ptjText.indexOf("(") + 1, ptjText.lastIndexOf(")")));
     const nl0 = inner.indexOf("\n");
     try { _comps = {}; JSON.parse(inner.slice(0, nl0)).forEach(c => { _comps[c.name] = c.type; }); } catch (e) { _comps = {}; }
-    const xml = inner.slice(nl0 + 1);
+    // El XML no siempre sigue a la linea de componentes: algunos .ptj traen en
+    // medio la traduccion de los nombres de variable. Se busca por "<xml".
+    const xml = inner.slice(inner.indexOf("<xml", nl0));
     const root = parseXml(xml), out = ["FUENTE: Protobject (bloques, etiquetas oficiales es)", ""];
     for (const ch of root.children) if (["block", "shadow"].includes(TAG(ch))) { pbRenderBlock(ch, 0, out, L, O); out.push(""); }
     return out.join("\n");

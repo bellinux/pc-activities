@@ -50,7 +50,7 @@
   <section class="title-block">
     <span class="eyebrow">Dos críticas a la pipeline</span>
     <h1 class="title">Las <span class="em">constantes</span> y las unidades del sonido</h1>
-    <p class="deck">Dos objeciones al método de equivalencia. La primera se responde con una prueba de normalización; la segunda se acepta como significativa. Las dos amplían lo que la pipeline <em>reporta</em>: el veredicto algorítmico y, junto a él, el residuo.</p>
+    <p class="deck">Dos objeciones al método de equivalencia. La primera se responde con una prueba de normalización. La segunda se acepta y se resuelve en el diseño: las dos plataformas tocan en hercios. Las dos amplían lo que la pipeline <em>reporta</em>: el veredicto algorítmico y, junto a él, el residuo.</p>
   </section>
 
   <section class="section" id="origen">
@@ -62,7 +62,18 @@
   <section class="section" id="constantes">
     <div class="section-marker"><span class="section-num">§ 02</span><span class="section-rule"></span><span class="section-num">CRÍTICA 1</span></div>
     <h2>Las constantes: <span class="it">calibración</span></h2>
-    <p>Una constante queda fuera del algoritmo, porque si un sensor entrega valores de 0 a 100 y el otro de 0 a 500, el programa que hace lo mismo con los dos usa constantes distintas. Escalar un sensor adapta el programa a la plataforma. Es el caso del xilófono: el acelerómetro del micro:bit entrega milésimas de g (mg) en un rango de miles; el componente de inclinación de Protobject entrega un valor de rango mucho menor (la actividad dice que sumar 60 basta para que la nota siempre exista). Uno suma 1000 y el otro 60 por esa razón.</p>
+    <p>Una constante queda fuera del algoritmo, porque si un sensor entrega valores de 0 a 100 y el otro de 0 a 500, el programa que hace lo mismo con los dos usa constantes distintas. Escalar un sensor adapta el programa a la plataforma. Es el caso del xilófono. Las dos versiones suman una constante a la lectura de un acelerómetro y tocan el resultado en hercios. Los dos sensores miden lo mismo, la gravedad a lo largo de un eje, en unidades distintas. El micro:bit entrega milésimas de g: plano, un eje lee 1023. Protobject entrega m/s² multiplicados por diez: 1 g se lee como unos 98. La constante sirve para dos cosas: mantener la frecuencia por encima de cero al inclinar y fijar el tono de reposo. En Protobject la frecuencia nunca baja de 164 Hz; en el micro:bit baja de cero solo casi en vertical, donde 1000 − 1023 da −23. Como los rangos de los sensores difieren unas diez veces, las constantes también difieren: el micro:bit suma 1000 y Protobject 262, el Do central.</p>
+    <table class="plan">
+      <thead><tr><th>Xilófono</th><th>micro:bit</th><th>Protobject</th></tr></thead>
+      <tbody>
+        <tr><td>Bloque</td><td>«tono de timbre (Hz)»</td><td>«tocar frecuencia (Hz)»</td></tr>
+        <tr><td>Sensor y unidad</td><td>aceleración x, en milésimas de g</td><td>inclinación y, en m/s² × 10</td></tr>
+        <tr><td>1 g se lee como</td><td>≈ 1023</td><td>≈ 98</td></tr>
+        <tr><td>Fórmula</td><td><code>aceleración x + 1000</code></td><td><code>262 + inclinación y</code></td></tr>
+        <tr><td>Tono en reposo</td><td>1000 Hz</td><td>262 Hz, el Do central</td></tr>
+        <tr><td>Cerca del reposo, por grado</td><td>≈ 18 Hz, unos 0,3 semitonos</td><td>≈ 1,7 Hz, unos 0,1 semitonos</td></tr>
+      </tbody>
+    </table>
     <p>En la detección de clones de código, dos fragmentos que difieren solo en identificadores y <em>literales</em> son clones de tipo 2: «el mismo código» con parámetros distintos. La noción de <em>sketch</em> en síntesis de programas formaliza «mismo esqueleto, constantes por determinar». La regla D pone a la pipeline en ese nivel de abstracción, de forma declarada y documentada.</p>
     <p>Algunas constantes cambian el comportamiento <em>cualitativo</em> del programa:</p>
     <ul>
@@ -73,16 +84,17 @@
     <p>La distinción es <strong>calibración contra comportamiento</strong>, con una prueba operativa:</p>
     <div class="callout">
       <span class="tag">Prueba de normalización</span>
-      <p>Se lleva el rango de cada sensor a [0, 1] y el rango de cada salida a [0, 1], en las dos plataformas, con una transformación <strong>afín</strong> (solo escala y desplazamiento, porque la prueba debe distinguir una función lineal de una exponencial). Si, después de normalizar, la función que va de la entrada a la salida es la <em>misma</em> en las dos versiones —misma familia y desviación máxima por debajo de un umbral fijado de antemano—, las constantes eran de calibración y la regla D las ignora. Si las funciones difieren en forma —una lineal, otra exponencial; una con un umbral a la mitad, otra con un umbral al borde—, la diferencia es de comportamiento: se reporta como residuo y se juzga en la dimensión <em>sensoriomotriz</em>. El rango que se normaliza es el <em>alcanzable</em> en el gesto de la actividad, medido. La prueba se aplica en el tramo donde ambas salidas están definidas. Se documenta qué hace cada plataforma fuera de rango: una nota fuera de 0–127 en Protobject, una frecuencia negativa en MakeCode. Para el tiempo vale lo mismo: se normaliza sobre la duración <em>medida</em> en pantalla, intervalos implícitos y tiempo de encendido incluidos.</p>
+      <p>Se lleva el rango de cada sensor a [0, 1] y el rango de cada salida a [0, 1], en las dos plataformas, con una transformación <strong>afín</strong> (solo escala y desplazamiento, porque la prueba debe distinguir una función lineal de una exponencial). Si, después de normalizar, la función que va de la entrada a la salida es la <em>misma</em> en las dos versiones —misma familia y desviación máxima por debajo de un umbral fijado de antemano—, las constantes eran de calibración y la regla D las ignora. Si las funciones difieren en forma —una lineal, otra exponencial; una con un umbral a la mitad, otra con un umbral al borde—, la diferencia es de comportamiento: se reporta como residuo y se juzga en la dimensión <em>sensoriomotriz</em>. El rango que se normaliza es el <em>alcanzable</em> en el gesto de la actividad, medido. La prueba se aplica en el tramo donde ambas salidas están definidas. Se documenta qué hace cada plataforma fuera de rango, por ejemplo con una frecuencia de cero o negativa: en Protobject es silencio, verificado en la fuente; en MakeCode, por verificar. Para el tiempo vale lo mismo: se normaliza sobre la duración <em>medida</em> en pantalla, intervalos implícitos y tiempo de encendido incluidos.</p>
     </div>
     <p>La regla D se aplica a la dimensión algorítmica, la única que la pipeline decide. Las constantes que cambian lo que el niño ve u oye pertenecen a la dimensión sensoriomotriz y se hacen visibles como residuo. La pipeline <strong>declara cuáles constantes ignoró</strong>.</p>
+    <p>Aplicada al xilófono, la prueba da «calibración»: en las dos versiones la frecuencia es una recta de la lectura del sensor. Lo que las constantes cambian, el tono de reposo y cuánto sube el tono por grado, se reporta como residuo y se juzga en la dimensión sensoriomotriz.</p>
   </section>
 
   <section class="section" id="corazon">
     <div class="section-marker"><span class="section-num">§ 03</span><span class="section-rule"></span><span class="section-num">UN CASO DEL CORPUS</span></div>
     <h2>El llavero de corazón: una constante que <span class="it">compensa</span> la plataforma</h2>
     <p>La actividad n.º 1 del corpus tiene, en las dos plataformas, la misma estructura: un bucle infinito que muestra el corazón, hace sonar un latido, espera 300 ms, vuelve a sonar, y luego repite cuatro veces una alternancia de dos dibujos con una pausa entre ellos. La pipeline la declara isomorfa. Las pausas del bucle interno son distintas: <strong>10 ms</strong> en el micro:bit, <strong>100 ms</strong> en Protobject, verificado en la fuente (<code>microbit/decoded/02.1-heart-beat.ts</code> y <code>protobject/raw/corazon-forever-loop.xml</code>). Por la regla D, la diferencia queda fuera del veredicto algorítmico.</p>
-    <p>Las pausas son distintas <em>a propósito</em>. La matriz de LED del micro:bit tarda en encenderse por completo, y el bloque «mostrar LEDs» lleva una pausa implícita: la documentación oficial dice que, al programar con bloques, el parámetro <code>interval</code> «is set at 400 milliseconds», y el código fuente lo confirma (<code>showLeds(leds, interval = 400)</code>). Protobject dibuja de inmediato. Con una pausa nominal más corta en el micro:bit y más larga en el celular, las dos animaciones se <em>acercan</em> perceptivamente. La constante absorbe un límite de la implementación: es una constante de calibración en el tiempo, como el +1000 y el +60 del xilófono lo son en el rango del sensor.</p>
+    <p>Las pausas son distintas <em>a propósito</em>. La matriz de LED del micro:bit tarda en encenderse por completo, y el bloque «mostrar LEDs» lleva una pausa implícita: la documentación oficial dice que, al programar con bloques, el parámetro <code>interval</code> «is set at 400 milliseconds», y el código fuente lo confirma (<code>showLeds(leds, interval = 400)</code>). Protobject dibuja de inmediato. Con una pausa nominal más corta en el micro:bit y más larga en el celular, las dos animaciones se <em>acercan</em> perceptivamente. La constante absorbe un límite de la implementación: es una constante de calibración en el tiempo, como el +1000 y el +262 del xilófono lo son en el rango del sensor.</p>
     <table class="plan">
       <thead><tr><th>Bucle interno</th><th>micro:bit</th><th>Protobject</th></tr></thead>
       <tbody>
@@ -101,43 +113,18 @@
 
   <section class="section" id="unidades">
     <div class="section-marker"><span class="section-num">§ 04</span><span class="section-rule"></span><span class="section-num">CRÍTICA 2</span></div>
-    <h2>Hercios y número de nota: una diferencia <span class="it">significativa</span></h2>
-    <p>Esta crítica se acepta. Los hechos, verificados:</p>
-    <ul>
-      <li>En MakeCode, el bloque «tono de timbre» recibe una <strong>frecuencia en Hz</strong>; el bloque «frecuencia de nota» devuelve directamente los Hz de una nota elegida en un menú. La caja de herramientas estándar de MakeCode convierte un número de nota en Hz solo con una potencia de exponente fraccionario o una tabla.</li>
-      <li>En Protobject, «tocar nota número» recibe un <strong>número de nota MIDI</strong>: la actividad explica que 60 es el Do central. La especificación MIDI fija el Do central en 60 y la nota 69 en 440 Hz, con pasos de un semitono en temperamento igual: cada unidad multiplica la frecuencia por 2<sup>1/12</sup>.</li>
-      <li>En el corpus, el xilófono del micro:bit toca <code>aceleración x + 1000</code> Hz; el de Protobject toca la nota <code>60 + inclinación y</code>.</li>
-    </ul>
-    <p>La pipeline canonicaliza ambas cosas como «altura del tono» (regla C). Estructuralmente coinciden: en las dos versiones, un sensor alimenta una suma que alimenta un tono. La <em>función</em> de la inclinación a la altura percibida es distinta. En el micro:bit, una milésima de g más es un hercio más: una escala lineal en frecuencia. En Protobject, una unidad de inclinación más es un semitono más: una escala lineal en altura musical, que en frecuencia es exponencial (el rango y la unidad del componente de inclinación se verifican en la fuente antes de decir «un grado, un semitono»). Los intervalos musicales se perciben como razones de frecuencia. Las dos versiones suben al inclinar. La diferencia está en cuánto sube cada una: en Protobject, cada unidad de inclinación sube un semitono, siempre el mismo; en el micro:bit, subir un semitono cuesta unas 12 unidades del sensor cerca de 200 Hz y unas 59 cerca de 1000 Hz, así que el tono sube cada vez menos a medida que se inclina más.</p>
-    <table class="plan">
-      <thead><tr><th></th><th>micro:bit (Hz lineal)</th><th>Protobject (nota MIDI lineal)</th></tr></thead>
-      <tbody>
-        <tr><td>Un paso del sensor</td><td>+1 Hz</td><td>+1 semitono (× 1,059 en frecuencia)</td></tr>
-        <tr><td>Un semitono alrededor de 200 Hz</td><td>≈ 12 unidades del sensor</td><td>1 unidad</td></tr>
-        <tr><td>Un semitono alrededor de 1000 Hz</td><td>≈ 59 unidades del sensor</td><td>1 unidad</td></tr>
-        <tr><td>Lo que se oye</td><td>Sube; hacia lo agudo sube cada vez menos</td><td>Sube en pasos iguales, un semitono por unidad</td></tr>
-      </tbody>
-    </table>
-    <p>Con la prueba de normalización de § 02, el veredicto: llevando ambos rangos a [0, 1], las funciones difieren en forma —lineal contra exponencial—; la diferencia es de comportamiento, y se reporta como residuo. Las dos suben: el celular en pasos iguales, el micro:bit con pasos que se achican hacia lo agudo.</p>
-    <h3>Dónde vive la diferencia, y qué hacer con ella</h3>
-    <p>En la dimensión algorítmica, las dos versiones son equivalentes bajo la especificación vigente: la misma estructura, la regla C declarada. En la <em>interactiva</em> también: los mismos tipos de entrada, de salida y de mapeo. Difiere la <em>forma</em> de la función de la entrada a la salida percibida; eso se reporta como residuo y se juzga en la <em>sensoriomotriz</em> (lo que se oye por unidad de inclinación). Hay tres caminos:</p>
-    <table class="plan">
-      <thead><tr><th>Camino</th><th>Qué implica</th><th>Costo</th></tr></thead>
-      <tbody>
-        <tr><td><strong>(a) Declarar y anotar</strong></td><td>Mantener la regla C tal cual («equivalencia salvo la codificación de la salida») y hacer que la pipeline <em>reporte</em> el desajuste de unidades como residuo visible. La pipeline reporta el desajuste de unidades junto al veredicto.</td><td>Bajo. Es la tarea T2 de § 06.</td></tr>
-        <tr><td><strong>(b) Alinear las actividades</strong></td><td>Hacer que el micro:bit toque notas (convertir número de nota a Hz) o que Protobject toque frecuencias. Lo primero requiere una potencia con exponente fraccionario o una tabla, lo que sube la dificultad a bloques de una actividad situada segunda en la progresión; lo segundo depende de que Protobject tenga un componente que reciba Hz.</td><td>Medio a alto. Cambia el código en ambas plataformas y la dificultad a bloques.</td></tr>
-        <tr><td><strong>(c) Aceptar la diferencia y medirla</strong></td><td>Dejar el par como está, someterlo al panel de expertos del Objetivo 2 con la regla C explícita (¿la aceptan?) y al piloto del Objetivo 3 (¿la diferencia se oye y se juzga relevante?).</td><td>Nulo ahora; produce datos.</td></tr>
-      </tbody>
-    </table>
-    <p>Propuesta: (a) ahora, (c) en el semestre, y (b) si el piloto muestra que la diferencia se percibe. El criterio tiene dos partes. La percepción: la diferencia cuenta cuando quien hace la actividad la nota, y eso se mide con la prueba de discriminación del <a href="objetivo-3-equivalencia-experiencial.html">Objetivo 3</a>, con niñas y niños de 12 o 13 años. El objetivo de la actividad: a esa edad es «entender que inclinar el dispositivo controla un sonido y un movimiento», y las dos versiones lo logran. Un objetivo sobre la representación lineal o logarítmica del sonido corresponde a otra edad y a otra actividad.</p>
+    <h2>El tono, en <span class="it">hercios</span> en las dos plataformas</h2>
+    <p>Esta crítica se acepta y se resuelve en el diseño. Un número de nota y una frecuencia no son la misma escala. Cada unidad de número de nota multiplica la frecuencia por 2<sup>1/12</sup>, un semitono; cada unidad de frecuencia le suma un hercio. Ante la misma inclinación, las dos codificaciones dan funciones de forma distinta, una exponencial y otra lineal en hercios, y los intervalos musicales se perciben como razones de frecuencia. La regla C igualaría dos cosas que suenan distinto.</p>
+    <p>Por eso, en las dos versiones del xilófono, el tono se da en hercios: «tono de timbre (Hz)» en el micro:bit y «tocar frecuencia (Hz)» en Protobject. Con la misma unidad, la regla C iguala lo que de verdad es igual. Lo que queda distinto es la constante, y eso es la crítica 1 (§ 02).</p>
+    <p>Donde la altura es incidental, la unidad no importa. En la actividad del líquido que no se derrama, el teclado de Protobject toca dos notas fijas como señal («tocar nota do4», «tocar nota sol5») y el micro:bit dos tonos de 175 y 587 Hz. La regla C los trata como sonido de evento, por intención: su función es avisar.</p>
   </section>
 
   <section class="section" id="principio">
     <div class="section-marker"><span class="section-num">§ 05</span><span class="section-rule"></span><span class="section-num">PRINCIPIO</span></div>
     <h2>Toda normalización deja una <span class="it">huella</span></h2>
-    <p>Las dos críticas llevan a un principio. Las cinco reglas de normalización de la pipeline (A: sin análogo; B: recursos; C: sonido por intención; D: aritmética, las constantes no cuentan; E: orden) deciden la dimensión algorítmica, y cada una <em>borra</em> una diferencia. La pipeline escribe qué borró: que una versión suma 1000 y la otra 60, que una toca hercios y la otra notas, que una espera 10 ms y la otra 100. El principio:</p>
+    <p>Las dos críticas llevan a un principio. Las cinco reglas de normalización de la pipeline (A: sin análogo; B: recursos; C: sonido por intención; D: aritmética, las constantes no cuentan; E: orden) deciden la dimensión algorítmica, y cada una <em>borra</em> una diferencia. La pipeline escribe qué borró: que una versión suma 1000 y la otra 262, que una espera 10 ms y la otra 100. El principio:</p>
     <div class="pullquote">Cada regla que iguala dos cosas distintas deja escrito qué igualó. El veredicto va acompañado de su residuo.</div>
-    <p>La salida de la pipeline es un perfil: «equivalentes en la dimensión algorítmica; residuos: constantes {1000 ↔ 60, 350 ↔ 15}, unidad del tono {Hz ↔ MIDI}, recursos {eje x ↔ eje y}». El panel lo usa para juzgar, y el instrumento del Objetivo 3 lo usa para saber dónde mirar.</p>
+    <p>La salida de la pipeline es un perfil: «equivalentes en la dimensión algorítmica; residuos: constantes {1000 ↔ 262, 350 ↔ 15}, recursos {eje x ↔ eje y}». El panel lo usa para juzgar, y el instrumento del Objetivo 3 lo usa para saber dónde mirar.</p>
   </section>
 
   <section class="section" id="tareas">
@@ -145,7 +132,7 @@
     <h2>Tareas <span class="it">concretas</span> para la pipeline</h2>
     <ol class="pasos">
       <li><strong>T1 · Residuos de constantes.</strong> En la construcción del PDG, cada nodo aritmético conserva sus constantes (el AST fiel las guarda); el motor de cálculo emite en <code>metricas.json</code> una lista <code>residuals</code> con, por cada nodo emparejado, los valores de un lado y del otro. <code>node_match</code> conserva la regla D.</li>
-      <li><strong>T2 · Residuos de unidades.</strong> La ontología marca, para <code>PlayTone</code>, la unidad de cada plataforma (Hz / nota MIDI); el motor la reporta en <code>residuals</code> como <code>unit</code>. Lo mismo para cualquier otra salida con unidad (ms, grados).</li>
+      <li><strong>T2 · Residuos de unidades.</strong> La ontología marca la unidad de cada salida que la tiene (Hz, ms). Si las dos plataformas usan unidades distintas, el motor lo reporta en <code>residuals</code> como <code>unit</code>. El tono va en Hz en las dos.</li>
       <li><strong>T3 · Prueba de normalización.</strong> Para los pares donde se conocen los rangos de sensor y de salida, un script normaliza con una transformación afín y compara la forma de la función (misma familia, desviación máxima bajo un umbral escrito de antemano); reporta «calibración» o «forma distinta». Los rangos van en una tabla de plataforma que distingue rango nominal del sensor y rango alcanzable en el gesto de la actividad (medido, con fuente), y documenta el comportamiento fuera de rango de cada salida.</li>
       <li><strong>T4 · Pausas implícitas.</strong> El decodificador anota los bloques con duración implícita conocida («mostrar LEDs»: 400 ms) y el PDG muestra ese nodo de espera con la marca «implícito», para que el panel vea el residuo temporal. Los tiempos reales de encendido de las dos plataformas se miden en hardware, porque el residuo temporal se calcula sobre lo que se ve.</li>
       <li><strong>T5 · Dashboard.</strong> El visor muestra los residuos junto a la métrica, con la regla que los produjo.</li>
@@ -157,13 +144,11 @@
     <div class="section-marker"><span class="section-num">§ 07</span><span class="section-rule"></span><span class="section-num">DECISIONES PENDIENTES</span></div>
     <h2>Preguntas <span class="it">abiertas</span></h2>
     <ol class="preguntas">
-      <li><strong>¿Se percibe la diferencia entre los pasos iguales del celular y los pasos que se achican del micro:bit?</strong> Propuesta: medirla con la prueba de discriminación del Objetivo 3, con participantes de la edad de destino, antes de decidir el camino (b).</li>
+      <li><strong>¿Se percibe la diferencia entre los dos xilófonos?</strong> Con la misma unidad, difieren el tono de reposo (1000 Hz contra 262 Hz) y cuánto sube el tono por grado. Propuesta: medirla con la prueba de discriminación del Objetivo 3, con participantes de la edad de destino.</li>
       <li><strong>¿Está bien ajustada la compensación temporal del llavero de corazón?</strong> Filmar cuatro vueltas del bucle en las dos plataformas y comparar los ritmos.</li>
       <li><strong>¿Tiene «dibuja en DibujoLED» de Protobject alguna pausa implícita?</strong> Verificar en la fuente de la plataforma, o medir.</li>
-      <li><strong>¿Cuál de los tres caminos para el xilófono?</strong> Propuesta: (a) ahora, (c) este semestre, (b) según resultados.</li>
       <li><strong>¿La regla D se le presenta al panel tal cual, con la marca de disenso?</strong> Ver P3 del Objetivo 2.</li>
       <li><strong>¿Qué constantes pasan la prueba de normalización en las 17?</strong> T3 produce esa tabla antes de que el panel juzgue.</li>
-      <li><strong>¿Cuál es el rango y la unidad del componente de inclinación de Protobject?</strong> Con ese dato, «una unidad, un semitono» se convierte en grados. Verificar en la fuente de la plataforma.</li>
       <li><strong>¿Dónde se documentan los rangos de sensores de cada plataforma?</strong> Propuesta: una tabla nueva junto a la ontología, con fuente para cada rango.</li>
     </ol>
   </section>
@@ -180,6 +165,11 @@
 <ul class="refs">
 <li><span class="cite">Microsoft MakeCode team (repositorio microsoft/pxt-microbit) (s.f.). <em>show leds — basic.showLeds(leds, interval)</em>. MakeCode for micro:bit, referencia y código fuente (pxt-microbit). <a href="https://makecode.microbit.org/reference/basic/show-leds">makecode.microbit.org/reference/basic/show-leds</a></span><span class="why">Documentación y código fuente: «mostrar LEDs» pausa 400 ms por defecto tras dibujar cuando se programa con bloques.</span><span class="src">verificado en línea · 11-09-2026</span></li>
 <li><span class="cite">Microsoft MakeCode team (repositorio microsoft/pxt-microbit) (s.f.). <em>ring tone / note frequency — music.ringTone, music.noteFrequency</em>. MakeCode for micro:bit, referencia y código fuente (pxt-microbit). <a href="https://makecode.microbit.org/reference/music/ring-tone">makecode.microbit.org/reference/music/ring-tone</a></span><span class="why">«tono de timbre» recibe Hz; «frecuencia de nota» devuelve los Hz de una nota elegida en un menú; no hay bloque número de nota → Hz en la caja estándar.</span><span class="src">verificado en línea · 11-09-2026</span></li>
+<li><span class="cite">Microsoft MakeCode team (s.f.). <em>acceleration — input.acceleration</em>. MakeCode for micro:bit, referencia. <a href="https://makecode.microbit.org/reference/input/acceleration">makecode.microbit.org/reference/input/acceleration</a></span><span class="why">La aceleración se mide en milésimas de g; con la placa plana y la pantalla hacia arriba, z lee −1023.</span><span class="src">verificado en línea · 18-09-2026</span></li>
+</ul>
+<h3>Sobre Protobject</h3>
+<ul class="refs">
+<li><span class="cite">Protobject (código fuente de la aplicación). <em>Inclinación (SmartphoneOrientation) y Teclado Musical (PlayKeyboard)</em>. <code>src/device/components/accorientation/index.ts</code>, <code>src/device/components/_shared/orientation.ts</code>, <code>src/device/components/playkeyboard/index.ts</code>.</span><span class="why">La inclinación entrega la aceleración con gravedad en m/s² × 10, truncada: 1 g se lee como unos 98. «tocar frecuencia (Hz)» toca cualquier frecuencia positiva; con 0 o menos, silencio.</span><span class="src">verificado en la fuente · 18-09-2026</span></li>
 </ul>
 <h3>Sobre MIDI y la percepción de intervalos</h3>
 <ul class="refs">

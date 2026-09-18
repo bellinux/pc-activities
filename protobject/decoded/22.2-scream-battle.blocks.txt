@@ -5,10 +5,10 @@ repetir para siempre:
   si partidaEnCurso:
     establecer columna a 1
     establecer fila a 1
-    repetir mientras (ruido in NivelRuido2 ≥ 5):
-      dibuja en x columna y fila con color #ff4444 en DibujoLED3
+    repetir mientras (ruido in NivelRuido2 ≥ 5):   // 'repetir mientras' da vueltas mientras el ruido sea 5 o más, o sea mientras dura el grito, y sale cuando te callas.
+      dibuja en x columna y fila con color #ff4444 en DibujoLED3   // Encendemos un LED rojo en la columna y la fila de ahora: cuanto más largo es el grito, más LEDs se encienden, hasta llenar la matriz.
       reproducir sonido 'gestión de objetos' en ReproductorSonido1
-      retraso de 500 milisegundos
+      retraso de 500 milisegundos   // 'retraso de 500 milisegundos' espera medio segundo antes del siguiente LED, así cada LED encendido vale medio segundo de grito.
       establecer columna a (columna + 1)
       si (columna > 7):
         establecer columna a 1
@@ -18,11 +18,11 @@ repetir para siempre:
     reproducir sonido 'celebración final' en ReproductorSonido1
     retraso de 5 segundos
     detener sonido de ReproductorSonido1
-    borrar dibujo en DibujoLED3
+    borrar dibujo en DibujoLED3   // Apagamos toda la matriz para dejarla lista para el próximo grito.
     establecer partidaEnCurso a falso
 
 al iniciar el programa:
-  establecer partidaEnCurso a falso
+  establecer partidaEnCurso a falso   // Creamos la variable 'partidaEnCurso' y la ponemos en falso: al empezar, no hay ninguna partida en curso.
 
-cuando NivelRuido2 detecta aumento repentino:
+cuando NivelRuido2 detecta aumento repentino:   // 'cuando NivelRuido2 detecta aumento repentino' avisa que alguien ha empezado a gritar, y entonces ponemos 'partidaEnCurso' en verdadero.
   establecer partidaEnCurso a verdadero

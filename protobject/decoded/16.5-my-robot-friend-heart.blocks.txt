@@ -11,7 +11,7 @@ repetir para siempre:
       ..###..
       ...#...
   toca nota tom en BateríaMusical2
-  retraso de pausaLarga milisegundos   // Se utiliza la variable "pausaLarga" para cambiar la velocidad de latido dependiendo de la posición del dispositivo.
+  retraso de pausaLarga milisegundos   // El bloque 'retraso de' espera los milisegundos que guarda la variable 'pausaLarga': cambia esa variable y el corazón grande late más rápido o más lento.
   toca nota tom en BateríaMusical2
   repetir 4 veces:
     dibuja con color #ff0000 en DibujoLED1:
@@ -22,7 +22,7 @@ repetir para siempre:
         ..###..
         ...#...
         .......
-    retraso de pausaCorta milisegundos   // Se utiliza la variable "pausaCorta" para cambiar la velocidad de latido del corazón chico dependiendo de la posición del dispositivo.
+    retraso de pausaCorta milisegundos   // El bloque 'retraso de' espera los milisegundos que guarda la variable 'pausaCorta': así de rápido late el corazón chico.
     dibuja con color #ff0000 en DibujoLED1:
         .......
         ..#.#..
@@ -37,10 +37,10 @@ al iniciar el programa:
   establecer pausaLarga a 500
   establecer pausaCorta a 150
 
-cuando Inclinación3 hacie un borde:   // Este bloque detecta el momento en que cambia la posición del dispositivo, cuando lo hace se editan las variables "pausaLarga" y "pausaCorta". Al inclinar el dispositivo hacia esta dirección, la velocidad de latido aumentará ya que los tiempos son más cortos.
+cuando Inclinación3 hacie un borde:   // Cuando giras el celular de lado, este bloque pone 'pausaLarga' en 250 y 'pausaCorta' en 80: tiempos más cortos y el corazón late más rápido.
   establecer pausaLarga a 250
   establecer pausaCorta a 80
 
-cuando Inclinación3 hacia arriba:   // Este bloque detecta el momento en que cambia la posición del dispositivo, cuando lo hace se editan las variables "pausaLarga" y "pausaCorta". Al inclinar el dispositivo hacia esta dirección, la velocidad de latido disminuirá ya que los tiempos son más largos.
+cuando Inclinación3 hacia arriba:   // Cuando pones el celular boca arriba, este bloque deja 'pausaLarga' en 500 y 'pausaCorta' en 150: tiempos más largos y el corazón late más lento.
   establecer pausaLarga a 500
   establecer pausaCorta a 150

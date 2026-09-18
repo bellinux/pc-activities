@@ -4,13 +4,13 @@ FUENTE: Protobject (bloques, etiquetas oficiales es)
 cuando NivelRuido1 detecta aumento repentino:
   establecer estado a no (estado)
   si estado:
-    contar con filas desde 1 hasta 7 de a 1:   // Este bloque crea una variable llamada "filas". Luego asigna valores desde 1 hasta 7 en aumentos de 1 y cada vez que toma un nuevo valor se ejecutará lo de dentro.  Es decir inicia con filas= 1, luego ejecuta lo de dentro y al terminar ahora filas = 2 y se vuelve a ejecutar todo. Una vez filas = 7 se ejecuta lo de dentro y pasa al siguiente bloque de instrucciones que no esté dentro.
-      contar con columnas desde 1 hasta 7 de a 1:   // Este bloque crea una variable llamada "columnas". Luego asigna valores desde 1 hasta 7 en aumentos de 1 y cada vez que toma un nuevo valor se ejecutará lo de dentro.  Es decir inicia con columnas = 1, luego ejecuta lo de dentro y al terminar ahora columnas = 2 y se vuelve a ejecutar todo. Una vez columnas = 7 se ejecuta lo de dentro y pasa al siguiente bloque de instrucciones que no esté dentro.  Se puede analizar que por cada vez que el valor de "filas" cambia, se ejecuta 7 veces el bloque donde cambia columna y como filas cambia 7 veces, el bloque de "dibuja en x..." se ejecuta 7x7 = 49 veces, que corresponde a la cantidad total de leds.
+    contar con filas desde 1 hasta 7 de a 1:   // Este 'contar con' da a 'filas' los valores del 1 al 7 y ejecuta lo de dentro por cada valor, recorriendo las filas una a una.
+      contar con columnas desde 1 hasta 7 de a 1:   // Este 'contar con' da a 'columnas' los valores del 1 al 7 dentro de cada fila, así que dibuja 7x7 = 49 veces: una por cada led.
         dibuja en x columnas y filas con color #ff4444 en DibujoLED2
         retraso de 10 milisegundos
   sino:
-    contar con filas desde 1 hasta 7 de a 1:   // Realiza lo mismo que el anterior contar con filas, solo que esta vez para apagar la luz de cada fila.
-      contar con columnas desde 1 hasta 7 de a 1:   // Realiza lo mismo que el contar con columnas anterior, solo que se utiliza para apagar las luces en la columna actual.
+    contar con filas desde 1 hasta 7 de a 1:   // Este 'contar con' recorre las filas del 1 al 7 para apagar la luz de cada una.
+      contar con columnas desde 1 hasta 7 de a 1:   // Dentro de cada fila, este 'contar con' da a 'columnas' los valores del 1 al 7 y apaga el led de cada columna.
         dibuja en x columnas y filas con color #000000 en DibujoLED2
         retraso de 10 milisegundos
 

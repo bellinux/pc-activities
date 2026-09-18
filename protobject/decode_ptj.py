@@ -36,12 +36,24 @@ def fetch(code):
         raise FileNotFoundError("Falta el .ptj oficial: %s" % os.path.basename(path))
     return open(path, encoding="utf-8").read().strip()
 
+_LANG_TAG = re.compile(r"\[([a-z]{2})\]([\s\S]*?)\[\1\]")
+
+def localise_es(s):
+    """Comentarios trilingues de la app: se queda el espanol (como localiseComments
+    en app.protobject.com/src/generate/localise.ts). Sin etiquetas, no se toca."""
+    if not _LANG_TAG.search(s):
+        return s
+    kept = _LANG_TAG.sub(lambda m: m.group(2) if m.group(1) == "es" else "", s)
+    return re.sub(r"\s+", " ", kept).strip()
+
 def split_ptj(raw):
     inner = raw[raw.index("(")+1: raw.rindex(")")]
     s = json.loads(inner)
     nl = s.index("\n")
     comps = json.loads(s[:nl])
-    xml = s[nl+1:]
+    # El XML no siempre sigue a la linea de componentes: algunos .ptj traen en
+    # medio la traduccion de los nombres de variable. Se busca por "<xml".
+    xml = s[s.index("<xml", nl):]
     return comps, xml
 
 def strip_ns(t):
@@ -71,7 +83,7 @@ def child_blocks(el):
         elif tag == "next":
             nxt = first_block(ch)
         elif tag == "comment":
-            comment = (ch.text or "").strip()
+            comment = localise_es((ch.text or "").strip())
     return fields, values, stmts, nxt, comment
 
 def first_block(el):

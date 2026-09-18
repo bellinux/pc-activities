@@ -4,10 +4,10 @@ COMPONENTES: DibujoLED1=MatrixDraw, NivelRuido2=NoiseLevel
 
 REPETIR PARA SIEMPRE (bucle principal)
   DibujoLED1_clear_set_4
-      ; // Borra la pantalla antes de dibujar de nuevo en la siguiente línea.
+      ; // Borra la pantalla antes de dibujar otra vez, para que la luz anterior no quede encendida.
   DibujoLED1_drawOnXY_set_2  VAR=3  VAR2=math_constrain(VALUE=(7 - (NivelRuido2.leer(noise) / 15)) LOW=1 HIGH=7)  VAR3=colour_picker(COLOUR=#ff4444)
-      ; // Dibuja en la columna X el nivel de ruido. El valor se divide para ajustarlo al rango de la matriz LED y utilizar toda la barra.
+      ; // Dibuja en la columna X una luz, más arriba cuanto más ruido hay; el valor se divide para que quepa en la matriz de LEDs.
   DibujoLED1_drawOnXY_set_2  VAR=4  VAR2=math_constrain(VALUE=(7 - (NivelRuido2.leer(noise) / 15)) LOW=1 HIGH=7)  VAR3=colour_picker(COLOUR=#ff4444)
-      ; // Dibuja en la columna X el nivel de ruido. El valor se divide para ajustarlo al rango de la matriz LED y utilizar toda la barra.
+      ; // Dibuja en la columna X una luz, más arriba cuanto más ruido hay; el valor se divide para que quepa en la matriz de LEDs.
   DibujoLED1_drawOnXY_set_2  VAR=5  VAR2=math_constrain(VALUE=(7 - (NivelRuido2.leer(noise) / 15)) LOW=1 HIGH=7)  VAR3=colour_picker(COLOUR=#ff4444)
-      ; // Dibuja en la columna X el nivel de ruido. El valor se divide para ajustarlo al rango de la matriz LED y utilizar toda la barra.
+      ; // Dibuja en la columna X una luz, más arriba cuanto más ruido hay; el valor se divide para que quepa en la matriz de LEDs.

@@ -4,7 +4,7 @@ COMPONENTES: Inclinación1=SmartphoneOrientation, DibujoLED2=MatrixDraw, Reprodu
 
 REPETIR PARA SIEMPRE (bucle principal)
   SI
-      ; // Este es un bloque condicional, ¿Qué quiere decir esto? Es un bloque que se ejecuta o no dependiendo de una condición que nosotros propongamos. En este caso la condición es que la inclinación debe ser superior a cierto valor, al superarse el valor la condición se cumple y por lo tanto se ejecutan todas las instrucciones en el interior de nuestro bloque condicional.
+      ; // El bloque 'si … hacer' mira la inclinación: cuando pasa del valor elegido, se ejecuta todo lo que está dentro del bloque; si no, se lo salta.
     [si (Inclinación1.leer(oriX) > 20)]
     DibujoLED2_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,1,0,0,1,1,0,0,0,1,0,1,0,0,0,0,0,0,1,0,0,0,0,1,0,1,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#2277aa)
         ; // Encender la alarma
