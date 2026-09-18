@@ -1,7 +1,7 @@
 // Cuando el micrófono del dispositivo detecta un sonido fuerte, se ejecutarán las instrucciones dentro del bloque.
 input.onSound(DetectedSound.Loud, function () {
     // Reproduce un sonido predeterminado.
-    music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Nyan), music.PlaybackMode.LoopingInBackground)
+    music._playDefaultBackground(music.builtInPlayableMelody(Melodies.BaDing), music.PlaybackMode.LoopingInBackground)
     for (let index = 0; index < 8; index++) {
         basic.showLeds(`
             . # . # .

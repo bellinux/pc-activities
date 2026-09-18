@@ -10,7 +10,7 @@ al iniciar:
       . # # # .
 
 al detectar el sonido alto:   // Cuando el micrófono del dispositivo detecta un sonido fuerte, se ejecutarán las instrucciones dentro del bloque.
-  reproduce nyan bucle en segundo plano   // Reproduce un sonido predeterminado.
+  reproduce ba ding bucle en segundo plano   // Reproduce un sonido predeterminado.
   repetir 8 veces:
     mostrar LEDs:
         . # . # .
