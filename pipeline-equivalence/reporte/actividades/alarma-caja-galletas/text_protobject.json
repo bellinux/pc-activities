@@ -4,9 +4,13 @@
         "repetir para siempre:",
         "  si ((x in Inclinación1) > 20):",
         "    dibuja con color #2277aa en DibujoLED2",
-        "    reproducir sonido 'emergencia' en ReproductorSonido3",
-        "    retraso de 6 segundos",
+        "    repetir 8 veces:",
+        "      tocar nota re#5 en TecladoMusical3",
+        "      retraso de 200 milisegundos",
+        "      detener en TecladoMusical3",
+        "      retraso de 500 milisegundos",
+        "      tocar nota re#5 en TecladoMusical3",
         "    borrar dibujo en DibujoLED2",
-        "    detener sonido de ReproductorSonido3"
+        "    detener en TecladoMusical3"
     ]
 }

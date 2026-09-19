@@ -2,10 +2,14 @@
     "platform": "MakeCode",
     "extracted_text": [
         "para siempre:",
-        "  si ((aceleración (mg) y) > 400) entonces:",
+        "  si ((aceleración (mg) x) > 400) entonces:",
         "    mostrar LEDs",
-        "    reproduce secuencia (hola) en modo bucle en segundo plano",
-        "    pausa (ms) 6000",
+        "    repetir 8 veces:",
+        "      tono de timbre (Hz) Re#5",
+        "      pausa (ms) 200",
+        "      para todos los sonidos",
+        "      pausa (ms) 500",
+        "      tono de timbre (Hz) Re#5",
         "    borrar la pantalla",
         "    para todos los sonidos"
     ]

@@ -1,20 +1,26 @@
 {
     "platform": "MakeCode",
     "extracted_text": [
-        "al iniciar:",
-        "  fijar listo a verdadero",
-        "al tocar el logotipo:",
+        "para siempre:",
         "  si listo entonces:",
-        "    fijar listo a falso",
         "    fijar tiempoRestante a (escoger al azar de 5 a 15)",
-        "    reproduce (baddy) bucle en segundo plano",
         "    mientras (tiempoRestante > 0):",
+        "      tono de timbre (Hz) Sol#3",
         "      cambiar tiempoRestante por -1",
-        "      pausa (ms) 1000",
+        "      pausa (ms) 200",
+        "      para todos los sonidos",
+        "      pausa (ms) 800",
+        "    tono de timbre (Hz) Re#",
+        "    pausa (ms) 500",
+        "    tono de timbre (Hz) Re",
+        "    pausa (ms) 500",
+        "    tono de timbre (Hz) Do#",
+        "    pausa (ms) 500",
+        "    tono de timbre (Hz) Do",
+        "    pausa (ms) 1000",
         "    para todos los sonidos",
-        "    reproduce (wawawawaa) en segundo plano",
-        "    pausa (ms) 4000",
-        "    para todos los sonidos",
-        "    fijar listo a verdadero"
+        "    fijar listo a falso",
+        "al tocar el logotipo:",
+        "  fijar listo a verdadero"
     ]
 }

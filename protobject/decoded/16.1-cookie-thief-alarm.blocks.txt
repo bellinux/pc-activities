@@ -2,8 +2,8 @@ ACTIVIDAD: 16.1-cookie-thief-alarm
 FUENTE: Protobject (bloques, etiquetas oficiales es)
 
 repetir para siempre:
-  si (x in Inclinación1 > 20):   // El bloque 'si … hacer' mira la inclinación: cuando pasa del valor elegido, se ejecuta todo lo que está dentro del bloque; si no, se lo salta.
-    dibuja con color #2277aa en DibujoLED2:   // Encender la alarma
+  si (x in Inclinación1 > 20):   // El bloque 'si … hacer' hace una pregunta: ¿la inclinación en x es mayor que 20? Si la respuesta es verdadera, ejecuta todo lo que tiene dentro; si es falsa, se lo salta y sigue vigilando.
+    dibuja con color #2277aa en DibujoLED2:   // Enciende la alarma: aparece una cara enojada en la pantalla.
         .......
         .#..##.
         ..#.#..
@@ -11,7 +11,11 @@ repetir para siempre:
         ..#.#..
         .#..##.
         .......
-    reproducir sonido 'emergencia' en ReproductorSonido3
-    retraso de 6 segundos   // Dejarla sonando
-    borrar dibujo en DibujoLED2   // Apagar lo que encendimos
-    detener sonido de ReproductorSonido3
+    repetir 8 veces:   // La alarma pita 8 veces: 200 milisegundos de sonido y 500 de silencio.
+      tocar nota re#5 en TecladoMusical3
+      retraso de 200 milisegundos
+      detener en TecladoMusical3
+      retraso de 500 milisegundos
+      tocar nota re#5 en TecladoMusical3
+    borrar dibujo en DibujoLED2   // Al terminar, apaga la pantalla y el sonido: el programa vuelve a vigilar la tapa.
+    detener en TecladoMusical3

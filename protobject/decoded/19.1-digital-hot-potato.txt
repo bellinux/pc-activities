@@ -1,22 +1,31 @@
 ACTIVIDAD: 19.1-digital-hot-potato
 CODE: papas-caliente-juego
-COMPONENTES: ReproductorSonido3=AudioPlayer, BotónTáctil3=TouchButton
+COMPONENTES: TecladoMusical3=PlayKeyboard, BotónTáctil3=TouchButton
 
-AL INICIAR
-  ESTABLECER var:listo = TRUE
-
-protobject_BotónTáctil3_change  property=pressed
+REPETIR PARA SIEMPRE (bucle principal)
   SI
     [si var:listo]
-    ESTABLECER var:listo = FALSE
     ESTABLECER var:tiempoRestante = aleatorio(5..15)
-        ; // Temporizador con tiempo inicial aleatorio, valor entre 5 y 15.
-    ReproductorSonido3_play_set_2  VAR=sounds_list(VAR=movingTrain.mp3)
+        ; // Elige al azar cuántos segundos dura la ronda, entre 5 y 15: nadie sabe cuándo va a explotar la papa.
     MIENTRAS (WHILE) (var:tiempoRestante > 0)
+        ; // Mientras quede tiempo, en cada vuelta suena un 'tic', se resta 1 a 'tiempoRestante' y se espera un segundo.
+      TecladoMusical3_play_set_1  VAR=control_note(VAR=56)
       AÑADIR -1 A var:tiempoRestante
-      ESPERAR  s  VAR=1
-    ReproductorSonido3_stop_set_3
-    ReproductorSonido3_play_set_2  VAR=sounds_list(VAR=creatureLaugh.mp3)
-    ESPERAR  s  VAR=4
-    ReproductorSonido3_stop_set_3
-    ESTABLECER var:listo = TRUE
+      ESPERAR  ms  VAR=200
+      TecladoMusical3_stop_set_3
+      ESPERAR  ms  VAR=800
+    TecladoMusical3_play_set_1  VAR=control_note(VAR=63)
+    ESPERAR  ms  VAR=500
+    TecladoMusical3_play_set_1  VAR=control_note(VAR=62)
+    ESPERAR  ms  VAR=500
+    TecladoMusical3_play_set_1  VAR=control_note(VAR=61)
+    ESPERAR  ms  VAR=500
+    TecladoMusical3_play_set_1  VAR=control_note(VAR=60)
+    ESPERAR  ms  VAR=1000
+    TecladoMusical3_stop_set_3
+    ESTABLECER var:listo = FALSE
+        ; // La ronda terminó: 'listo' vuelve a falso. Si alguien tocó la pantalla durante la ronda, ese toque no cuenta y el juego espera un toque nuevo.
+
+protobject_BotónTáctil3_change  property=pressed
+    ; // Al tocar la pantalla, 'listo' pasa a verdadero: así el bucle principal sabe que tiene que empezar una ronda.
+  ESTABLECER var:listo = TRUE

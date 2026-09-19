@@ -1,15 +1,19 @@
 ACTIVIDAD: 16.1-cookie-thief-alarm
-FUENTE: micro:bit / MakeCode 9.0.8 — "alarma-caja-galletas"  (etiquetas oficiales es-ES)
+FUENTE: micro:bit / MakeCode 9.0.12 — "alarma-caja-galletas"  (etiquetas oficiales es-ES)
 
 para siempre:
-  si (aceleración (mg) y > 400) entonces:   // Este es un bloque condicional, ¿Qué quiere decir esto? Es un bloque que se ejecuta o no dependiendo de una condición que nosotros propongamos. En este caso la condición es que la inclinación debe ser superior a cierto valor, al superarse el valor la condición se cumple y por lo tanto se ejecutan todas las instrucciones en el interior de nuestro bloque condicional.
-    mostrar LEDs:   // Encender la alarma
+  si (aceleración (mg) x > 400) entonces:   // El bloque 'si … entonces' hace una pregunta: ¿la inclinación en x es mayor que 400? Si la respuesta es verdadera, ejecuta todo lo que tiene dentro; si es falsa, se lo salta y sigue vigilando.
+    mostrar LEDs:   // Enciende la alarma: aparece una cara enojada en la pantalla.
         # . . # #
         . # . # .
         . . . # .
         . # . # .
         # . . # #
-    reproduce secuencia hola en modo bucle en segundo plano
-    pausa (ms) 6000   // Dejarla sonando
-    borrar la pantalla   // Apagar lo que encendimos
+    repetir 8 veces:   // La alarma pita 8 veces: 200 milisegundos de sonido y 500 de silencio.
+      tono de timbre (Hz) Re#5
+      pausa (ms) 200
+      para todos los sonidos
+      pausa (ms) 500
+      tono de timbre (Hz) Re#5
+    borrar la pantalla   // Al terminar, apaga la pantalla y el sonido: el programa vuelve a vigilar la tapa.
     para todos los sonidos

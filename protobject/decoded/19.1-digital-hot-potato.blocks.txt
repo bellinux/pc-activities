@@ -1,19 +1,25 @@
 ACTIVIDAD: 19.1-digital-hot-potato
 FUENTE: Protobject (bloques, etiquetas oficiales es)
 
-al iniciar el programa:
-  establecer listo a verdadero
-
-cuando BotónTáctil3 es tocado:
+repetir para siempre:
   si listo:
-    establecer listo a falso
-    establecer tiempoRestante a entero aleatorio de 5 a 15   // Temporizador con tiempo inicial aleatorio, valor entre 5 y 15.
-    reproducir sonido 'progreso' en ReproductorSonido3
-    repetir mientras (tiempoRestante > 0):
+    establecer tiempoRestante a entero aleatorio de 5 a 15   // Elige al azar cuántos segundos dura la ronda, entre 5 y 15: nadie sabe cuándo va a explotar la papa.
+    repetir mientras (tiempoRestante > 0):   // Mientras quede tiempo, en cada vuelta suena un 'tic', se resta 1 a 'tiempoRestante' y se espera un segundo.
+      tocar nota sol#3 en TecladoMusical3
       añadir -1 a tiempoRestante
-      retraso de 1 segundos
-    detener sonido de ReproductorSonido3
-    reproducir sonido 'reacción divertida' en ReproductorSonido3
-    retraso de 4 segundos
-    detener sonido de ReproductorSonido3
-    establecer listo a verdadero
+      retraso de 200 milisegundos
+      detener en TecladoMusical3
+      retraso de 800 milisegundos
+    tocar nota re#4 en TecladoMusical3
+    retraso de 500 milisegundos
+    tocar nota re4 en TecladoMusical3
+    retraso de 500 milisegundos
+    tocar nota do#4 en TecladoMusical3
+    retraso de 500 milisegundos
+    tocar nota do4 en TecladoMusical3
+    retraso de 1000 milisegundos
+    detener en TecladoMusical3
+    establecer listo a falso   // La ronda terminó: 'listo' vuelve a falso. Si alguien tocó la pantalla durante la ronda, ese toque no cuenta y el juego espera un toque nuevo.
+
+cuando BotónTáctil3 es tocado:   // Al tocar la pantalla, 'listo' pasa a verdadero: así el bucle principal sabe que tiene que empezar una ronda.
+  establecer listo a verdadero

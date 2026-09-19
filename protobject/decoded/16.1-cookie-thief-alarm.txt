@@ -1,16 +1,20 @@
 ACTIVIDAD: 16.1-cookie-thief-alarm
 CODE: alarma-caja-galletas
-COMPONENTES: Inclinación1=SmartphoneOrientation, DibujoLED2=MatrixDraw, ReproductorSonido3=AudioPlayer
+COMPONENTES: Inclinación1=SmartphoneOrientation, DibujoLED2=MatrixDraw, TecladoMusical3=PlayKeyboard
 
 REPETIR PARA SIEMPRE (bucle principal)
   SI
-      ; // El bloque 'si … hacer' mira la inclinación: cuando pasa del valor elegido, se ejecuta todo lo que está dentro del bloque; si no, se lo salta.
+      ; // El bloque 'si … hacer' hace una pregunta: ¿la inclinación en x es mayor que 20? Si la respuesta es verdadera, ejecuta todo lo que tiene dentro; si es falsa, se lo salta y sigue vigilando.
     [si (Inclinación1.leer(oriX) > 20)]
     DibujoLED2_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,1,0,0,1,1,0,0,0,1,0,1,0,0,0,0,0,0,1,0,0,0,0,1,0,1,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#2277aa)
-        ; // Encender la alarma
-    ReproductorSonido3_play_set_2  VAR=sounds_list(VAR=fireAlarm.mp3)
-    ESPERAR  s  VAR=6
-        ; // Dejarla sonando
+        ; // Enciende la alarma: aparece una cara enojada en la pantalla.
+    REPETIR 8 VECES
+        ; // La alarma pita 8 veces: 200 milisegundos de sonido y 500 de silencio.
+      TecladoMusical3_play_set_1  VAR=control_note(VAR=75)
+      ESPERAR  ms  VAR=200
+      TecladoMusical3_stop_set_3
+      ESPERAR  ms  VAR=500
+      TecladoMusical3_play_set_1  VAR=control_note(VAR=75)
     DibujoLED2_clear_set_4
-        ; // Apagar lo que encendimos
-    ReproductorSonido3_stop_set_3
+        ; // Al terminar, apaga la pantalla y el sonido: el programa vuelve a vigilar la tapa.
+    TecladoMusical3_stop_set_3

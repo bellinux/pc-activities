@@ -1,8 +1,7 @@
 basic.forever(function () {
-    // Este es un bloque condicional, ¿Qué quiere decir esto? Es un bloque que se ejecuta o no dependiendo de una condición que nosotros propongamos.
-    // En este caso la condición es que la inclinación debe ser superior a cierto valor, al superarse el valor la condición se cumple y por lo tanto se ejecutan todas las instrucciones en el interior de nuestro bloque condicional.
-    if (input.acceleration(Dimension.Y) > 400) {
-        // Encender la alarma
+    // El bloque 'si … entonces' hace una pregunta: ¿la inclinación en x es mayor que 400? Si la respuesta es verdadera, ejecuta todo lo que tiene dentro; si es falsa, se lo salta y sigue vigilando.
+    if (input.acceleration(Dimension.X) > 400) {
+        // Enciende la alarma: aparece una cara enojada en la pantalla.
         basic.showLeds(`
             # . . # #
             . # . # .
@@ -10,10 +9,15 @@ basic.forever(function () {
             . # . # .
             # . . # #
             `)
-        music.play(music.builtinPlayableSoundEffect(soundExpression.hello), music.PlaybackMode.LoopingInBackground)
-        // Dejarla sonando
-        basic.pause(6000)
-        // Apagar lo que encendimos
+        // La alarma pita 8 veces: 200 milisegundos de sonido y 500 de silencio.
+        for (let index = 0; index < 8; index++) {
+            music.ringTone(622)
+            basic.pause(200)
+            music.stopAllSounds()
+            basic.pause(500)
+            music.ringTone(622)
+        }
+        // Al terminar, apaga la pantalla y el sonido: el programa vuelve a vigilar la tapa.
         basic.clearScreen()
         music.stopAllSounds()
     }
