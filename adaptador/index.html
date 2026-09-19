@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adaptador micro:bit tamaño celular</title>
+<style>
+  :root { --bg: #f4f5f7; --panel: #ffffff; --ink: #1d2433; --muted: #5b6475; --line: #d9dde5; --accent: #3b5bdb; --warn: #b54708; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  #app { display: grid; grid-template-columns: 340px 1fr; height: 100%; }
+  aside { background: var(--panel); border-right: 1px solid var(--line); padding: 16px 16px 28px; overflow: auto; }
+  h1 { font-size: 17px; margin: 0 0 2px; }
+  .sub { color: var(--muted); margin: 0 0 10px; }
+  h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 16px 0 6px; }
+  .row { display: grid; grid-template-columns: 1fr 96px 58px; align-items: center; gap: 6px; margin: 3px 0; }
+  .row.check { grid-template-columns: 1fr auto; }
+  .row input[type=range] { width: 100%; }
+  .row input[type=number] { width: 58px; font: inherit; padding: 2px 4px; border: 1px solid var(--line); border-radius: 5px; text-align: right; }
+  .row select { font: inherit; padding: 2px 4px; border: 1px solid var(--line); border-radius: 5px; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 13px; }
+  td { padding: 2px 0; border-bottom: 1px solid #eef0f4; vertical-align: top; }
+  td:last-child { text-align: right; white-space: nowrap; padding-left: 8px; }
+  label.t { display: flex; align-items: center; gap: 8px; margin: 3px 0; cursor: pointer; }
+  .sw { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+  .views, .actions { display: flex; gap: 6px; flex-wrap: wrap; }
+  button { border: 1px solid var(--line); background: #fff; border-radius: 6px; padding: 5px 10px; cursor: pointer; font: inherit; }
+  button:hover { border-color: var(--accent); color: var(--accent); }
+  #view { position: relative; }
+  #view canvas { display: block; width: 100%; height: 100%; }
+  #busy { position: absolute; top: 10px; right: 12px; color: var(--muted); font-size: 12px; }
+  .note { color: var(--muted); font-size: 12.5px; }
+  #warn { color: var(--warn); font-size: 12.5px; }
+  @media (max-width: 760px) { #app { grid-template-columns: 1fr; grid-template-rows: auto 60vh; } aside { border-right: 0; border-bottom: 1px solid var(--line); } }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<div id="app">
+  <aside>
+    <h1>Adaptador micro:bit tamaño celular</h1>
+    <p class="sub">Boceto 5 · 19-09-2026 · paramétrico</p>
+
+    <div id="params"></div>
+    <p id="warn"></p>
+    <div class="actions"><button id="stl">Descargar STL</button><button id="reset">Restablecer valores</button></div>
+
+    <h2>Medidas resultantes (mm)</h2>
+    <table id="dims"></table>
+
+    <h2>Mostrar</h2>
+    <label class="t"><input type="checkbox" id="t-body" checked> <span class="sw" style="background:#cfd6e3"></span> Cuerpo</label>
+    <label class="t"><input type="checkbox" id="t-ghost"> Cuerpo transparente</label>
+    <label class="t"><input type="checkbox" id="t-mb" checked> <span class="sw" style="background:#2f8f4e"></span> micro:bit V2</label>
+    <label class="t"><input type="checkbox" id="t-bat" checked> <span class="sw" style="background:#3a3f4b"></span> Portapilas 2×AAA</label>
+    <label class="t"><input type="checkbox" id="t-cable" checked> <span class="sw" style="background:#2fb344"></span> Cable (recorrido aproximado)</label>
+    <label class="t"><input type="checkbox" id="t-cap"> <span class="sw" style="background:#f08c3a"></span> Cover de referencia (STL)</label>
+
+    <h2>Vistas</h2>
+    <div class="views">
+      <button data-view="front">Frente</button>
+      <button data-view="back">Atrás</button>
+      <button data-view="iso">3/4 frente</button>
+      <button data-view="isoBack">3/4 atrás</button>
+    </div>
+
+    <h2>Notas</h2>
+    <p class="note">Posiciones medidas desde el centro del celular, mirando el frente: x hacia la derecha, y hacia arriba. Mover el micro:bit mueve con él la ventana, los botones, su bolsillo y la zona abierta. Los valores se guardan en este navegador.</p>
+    <p class="note">El frente tiene los mismos agujeros que la cover. El micro:bit se ubica con los botones A y B centrados en sus agujeros. El cable sale del conector de la batería del micro:bit (atrás, arriba a la izquierda mirando el frente).</p>
+    <p class="note">Modelo del micro:bit V2: <a href="https://www.tinkercad.com/things/7YHJn6jCvik" target="_blank" rel="noopener">DrakerDG en Tinkercad</a>, licencia CC BY-SA 3.0.</p>
+  </aside>
+  <div id="view"><span id="busy"></span></div>
+</div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { STLLoader } from 'three/addons/loaders/STLLoader.js';
+
+const JSCAD = await import('https://cdn.jsdelivr.net/npm/@jscad/modeling@2/+esm');
+const M = JSCAD.default || JSCAD;
+const { roundedRectangle } = M.primitives;
+const { extrudeLinear } = M.extrusions;
+const { translate } = M.transforms;
+const { subtract, union } = M.booleans;
+const { hull } = M.hulls;
+
+// ---------------------------------------------------------------- parámetros
+// Coordenadas: x = ancho (derecha mirando el frente), y = alto (arriba = logo), z = grosor (z = T es el frente).
+const SCHEMA = [
+  { group: 'Celular' },
+  { key: 'W', label: 'Ancho', min: 60, max: 90, step: 0.5, def: 72 },
+  { key: 'H', label: 'Alto', min: 120, max: 180, step: 0.5, def: 150 },
+  { key: 'T', label: 'Grosor', min: 10, max: 30, step: 0.1, def: 15 },
+  { key: 'R', label: 'Radio de las esquinas', min: 0, max: 15, step: 0.5, def: 8 },
+  { key: 'plate', label: 'Placa del frente', min: 1, max: 4, step: 0.1, def: 2.5 },
+  { group: 'micro:bit (ventana, botones y bolsillo)' },
+  { key: 'mbX', label: 'Posición x', min: -20, max: 20, step: 0.5, def: 0 },
+  { key: 'mbY', label: 'Posición y', min: -50, max: 50, step: 0.5, def: 0 },
+  { group: 'Zona abierta arriba del micro:bit' },
+  { key: 'topW', label: 'Ancho', min: 20, max: 80, step: 0.5, def: 54.5 },
+  { key: 'topH', label: 'Alto', min: 0, max: 60, step: 0.5, def: 23.5 },
+  { group: 'Portapilas 2×AAA (52.5 × 25.8 × 15.3)' },
+  { key: 'batX', label: 'Posición x', min: -30, max: 30, step: 0.5, def: -5 },
+  { key: 'batY', label: 'Posición y', min: -75, max: 75, step: 0.5, def: -44 },
+  { key: 'batRot', label: 'Girado 90°', type: 'check', def: false },
+  { key: 'batFlipX', label: 'Espejado horizontal', type: 'check', def: true },
+  { key: 'batFlipY', label: 'Espejado vertical', type: 'check', def: true },
+  { key: 'batThrough', label: 'Bolsillo pasante (abierto al frente)', type: 'check', def: true },
+  { group: 'Canal del cable' },
+  { key: 'chSide', label: 'Lado', type: 'select', options: [['-1', 'Izquierda (mirando el frente)'], ['1', 'Derecha (mirando el frente)']], def: '1' },
+  { key: 'chW', label: 'Ancho', min: 2, max: 10, step: 0.5, def: 5.5 },
+  { key: 'chD', label: 'Profundidad', min: 2, max: 15, step: 0.5, def: 8.5 },
+  { group: 'Ajuste' },
+  { key: 'gap', label: 'Holgura por lado', min: 0, max: 1.5, step: 0.05, def: 1.5 },
+];
+const STORE = 'adaptador-microbit-parametros-v1';
+const DEFAULTS = Object.fromEntries(SCHEMA.filter(s => s.key).map(s => [s.key, s.def]));
+let saved = {};
+try { saved = JSON.parse(localStorage.getItem(STORE) || '{}') || {}; } catch (_) { saved = {}; }
+const P = { ...DEFAULTS, ...saved };
+const save = () => { try { localStorage.setItem(STORE, JSON.stringify(P)); } catch (_) {} };
+
+// ---------------------------------------------------------------- datos fijos
+const BAT = [52.5, 25.8, 15.3];
+// Agujeros de la cover (en sus coordenadas): ventana centrada en y = -1, A/B en x = ±19.75, y = -3.75.
+// El centro de la ventana es el punto que se mueve con (mbX, mbY).
+const WIN = { top: [27, 32.5, 3.5], bottom: [23, 28.5, 2.0], bevel: 2.0 };
+const BTN = { size: 7, bore: 9, boreDepth: 1.0, x: 19.75, dy: -2.75 };   // respecto del centro de la ventana
+const COVER_DY = 1.0;                                                     // centro de la ventana en la cover: y = -1
+// micro:bit V2 (microbit-v2.stl): de pie, ancho en x, alto en z (logo arriba), frente hacia -y;
+// placa 51.6 × 42.72, cara delantera en y = -0.8, botones A/B en z = 20.97 a ±19.98 del centro (x = -30.94).
+const STL = { cx: -30.94, w: 51.6, h: 42.72, btnZ: 20.97, pcbFront: -0.8, jst: { x: -18.9, z: 38.3, y: 5.9 } };
+
+// ---------------------------------------------------------------- derivados
+function derive(P) {
+  const D = {};
+  D.win = { cx: P.mbX, cy: P.mbY };
+  D.btn = { cy: P.mbY + BTN.dy };
+  D.board = { cx: P.mbX, bottom: D.btn.cy - STL.btnZ, front: P.T - P.plate - 0.4 };
+  D.board.top = D.board.bottom + STL.h;
+  D.mb = { w: STL.w + 2 * P.gap, h: STL.h + 2 * P.gap, top: D.board.top + P.gap };
+  D.mb.bottom = D.mb.top - D.mb.h; D.mb.cy = (D.mb.top + D.mb.bottom) / 2;
+  D.top = { w: P.topW, h: P.topH, cy: D.mb.top + P.topH / 2 };
+  const [bw, bh] = P.batRot ? [BAT[1], BAT[0]] : [BAT[0], BAT[1]];
+  D.bat = { w: bw + 2 * P.gap, h: bh + 2 * P.gap, depth: BAT[2] + 2 * P.gap, cx: P.batX, cy: P.batY, bw, bh };
+  // salida del cable del portapilas: en un extremo, cerca de un borde (antes de espejar: extremo izquierdo, arriba)
+  let ex = -BAT[0] / 2, ey = BAT[1] / 2 - 4;
+  if (P.batFlipX) ex = -ex;
+  if (P.batFlipY) ey = -ey;
+  if (P.batRot) [ex, ey] = [-ey, ex];
+  D.bat.exit = { x: P.batX + ex, y: P.batY + ey };
+  const side = +P.chSide;
+  D.ch = { side, w: P.chW, depth: P.chD, x: P.mbX + side * (D.mb.w / 2 + P.chW / 2 - 0.01) };
+  D.ch.y0 = Math.min(D.top.cy, D.bat.exit.y); D.ch.y1 = Math.max(D.top.cy, D.bat.exit.y);
+  D.jst = { x: P.mbX + STL.jst.x, y: D.board.bottom + STL.jst.z };
+  return D;
+}
+
+// ---------------------------------------------------------------- geometría
+const rr = (w, h, r, z0, z1, cx = 0, cy = 0) =>
+  translate([cx, cy, z0], extrudeLinear({ height: z1 - z0 },
+    roundedRectangle({ size: [w, h], roundRadius: Math.max(0.01, Math.min(r, w / 2 - 0.01, h / 2 - 0.01)), segments: 32 })));
+
+// caja de esquinas rectas, dada por sus límites
+const box = (x0, x1, y0, y1, z0, z1) =>
+  M.primitives.cuboid({ size: [x1 - x0, y1 - y0, z1 - z0], center: [(x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2] });
+
+function buildPart(P, D) {
+  const T = P.T, e = 0.5;
+  const chL = D.ch.x - D.ch.w / 2, chR = D.ch.x + D.ch.w / 2;
+  const mbL = D.board.cx - D.mb.w / 2, mbR = D.board.cx + D.mb.w / 2;
+  const batL = D.bat.cx - D.bat.w / 2, batR = D.bat.cx + D.bat.w / 2;
+  const batB = D.bat.cy - D.bat.h / 2, batT = D.bat.cy + D.bat.h / 2;
+  const batBlind = Math.min(D.bat.depth, T - 0.6);          // bolsillo ciego: se detiene antes del frente
+  const batZ = P.batThrough ? T + e : batBlind;
+  const holes = [
+    // agujeros del frente, como la cover (con sus redondeos)
+    hull(rr(...WIN.top, T, T + e, D.win.cx, D.win.cy), rr(...WIN.bottom, T - WIN.bevel, T - WIN.bevel + 0.01, D.win.cx, D.win.cy)),
+    rr(...WIN.bottom, T - P.plate - e, T - WIN.bevel + 0.01, D.win.cx, D.win.cy),
+    ...[-1, 1].flatMap(s => [
+      rr(BTN.size, BTN.size, 0.6, T - P.plate + BTN.boreDepth - 0.01, T + e, D.win.cx + s * BTN.x, D.btn.cy),
+      rr(BTN.bore, BTN.bore, 0.6, T - P.plate - e, T - P.plate + BTN.boreDepth, D.win.cx + s * BTN.x, D.btn.cy),
+    ]),
+    // bolsillos desde atrás, todos rectos
+    box(mbL, mbR, D.mb.bottom, D.mb.top, -e, T - P.plate),
+    box(batL, batR, batB, batT, -e, batZ),
+    // canal vertical por el costado
+    box(chL, chR, Math.min(D.ch.y0, batB), Math.max(D.ch.y1, D.mb.top), -e, D.ch.depth),
+  ];
+  // sin pared entre el canal y la zona abierta: la zona abierta llega hasta el borde exterior del canal
+  if (P.topH > 0)
+    holes.push(box(Math.min(D.board.cx - D.top.w / 2, chL), Math.max(D.board.cx + D.top.w / 2, chR),
+                   D.mb.top - 0.01, D.mb.top + D.top.h, -e, T - P.plate));
+  // sin pared entre el canal y el portapilas: si están cerca, el bolsillo del portapilas llega hasta el canal
+  const gapChBat = Math.max(batL - chR, chL - batR);
+  if (gapChBat < 15) holes.push(box(Math.min(chL, batL), Math.max(chR, batR), batB, batT, -e, batBlind));
+  else holes.push(box(Math.min(chL, D.bat.exit.x), Math.max(chR, D.bat.exit.x), D.bat.exit.y - D.ch.w / 2, D.bat.exit.y + D.ch.w / 2, -e, D.ch.depth));
+  return subtract(rr(P.W, P.H, P.R, 0, T), union(...holes));
+}
+
+function toThree(geom) {
+  const pos = [];
+  for (const poly of M.geometries.geom3.toPolygons(geom)) {
+    const v = poly.vertices;
+    for (let i = 1; i < v.length - 1; i++) pos.push(...v[0], ...v[i], ...v[i + 1]);
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+  g.computeVertexNormals();
+  return g;
+}
+
+// ---------------------------------------------------------------- escena
+const view = document.getElementById('view');
+const busy = document.getElementById('busy');
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(window.devicePixelRatio);
+view.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xf4f5f7);
+scene.add(new THREE.HemisphereLight(0xffffff, 0x8890a0, 1.1));
+const sun = new THREE.DirectionalLight(0xffffff, 1.5); sun.position.set(80, 120, 200); scene.add(sun);
+const sun2 = new THREE.DirectionalLight(0xffffff, 0.6); sun2.position.set(-100, -80, -150); scene.add(sun2);
+const camera = new THREE.PerspectiveCamera(35, 1, 1, 5000);
+const controls = new OrbitControls(camera, renderer.domElement);
+
+const bodyMat = new THREE.MeshStandardMaterial({ color: 0xcfd6e3, roughness: 0.55, metalness: 0.02, flatShading: true, side: THREE.DoubleSide });
+const bodyMesh = new THREE.Mesh(new THREE.BufferGeometry(), bodyMat); scene.add(bodyMesh);
+
+const mbGroup = new THREE.Group(); scene.add(mbGroup);
+const mbMesh = new THREE.Group(); mbGroup.add(mbMesh);
+new STLLoader().load('microbit-v2.stl', g => {
+  g.computeVertexNormals();
+  const m = new THREE.Mesh(g, new THREE.MeshStandardMaterial({ color: 0x2f8f4e, roughness: 0.55, metalness: 0.05 }));
+  m.rotation.x = -Math.PI / 2;                          // (x, y, z) del STL → (x, z, -y)
+  m.position.set(-STL.cx, 0, 0);
+  mbMesh.add(m);
+});
+
+const batGroup = new THREE.Group(); scene.add(batGroup);
+const batMat = new THREE.MeshStandardMaterial({ color: 0x3a3f4b, roughness: 0.7 });
+const batBox = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), batMat); batGroup.add(batBox);
+const exitMark = new THREE.Mesh(new THREE.CylinderGeometry(1.6, 1.6, 4, 16), new THREE.MeshStandardMaterial({ color: 0xd9480f }));
+batGroup.add(exitMark);
+
+const cableMat = new THREE.MeshStandardMaterial({ color: 0x2fb344, roughness: 0.5 });
+const cable = new THREE.Mesh(new THREE.BufferGeometry(), cableMat); scene.add(cable);
+
+const capGroup = new THREE.Group(); capGroup.visible = false; scene.add(capGroup);
+const capMesh = new THREE.Group(); capGroup.add(capMesh);
+new STLLoader().load('cap-v2.4.2.stl', g => {
+  g.computeVertexNormals();
+  capMesh.add(new THREE.Mesh(g, new THREE.MeshStandardMaterial({ color: 0xf08c3a, roughness: 0.6, transparent: true, opacity: 0.85 })));
+});
+
+// ---------------------------------------------------------------- actualización
+function update() {
+  const D = derive(P);
+  const T = P.T;
+  busy.textContent = 'calculando…';
+  const warn = [];
+  if (!P.batThrough && T < BAT[2] + 2 * P.gap + 0.6) warn.push('El grosor no alcanza para el portapilas (necesita ' + (BAT[2] + 2 * P.gap + 0.6).toFixed(1) + ' mm).');
+  if (Math.abs(D.board.cx) + D.mb.w / 2 > P.W / 2 - 1) warn.push('El bolsillo del micro:bit toca el borde lateral.');
+  if (D.top.cy + D.top.h / 2 > P.H / 2 - 1 || D.mb.bottom < -P.H / 2 + 1) warn.push('El micro:bit o la zona abierta tocan el borde superior o inferior.');
+  if (Math.abs(D.bat.cx) + D.bat.w / 2 > P.W / 2 - 1 || Math.abs(D.bat.cy) + D.bat.h / 2 > P.H / 2 - 1) warn.push('El portapilas toca un borde del celular.');
+  const overlapY = D.bat.cy + D.bat.h / 2 > D.mb.bottom && D.bat.cy - D.bat.h / 2 < D.top.cy + D.top.h / 2;
+  const overlapX = Math.abs(D.bat.cx - D.board.cx) < (D.bat.w + Math.max(D.mb.w, D.top.w)) / 2;
+  if (overlapX && overlapY) warn.push('El portapilas se cruza con el micro:bit o con la zona abierta.');
+  document.getElementById('warn').textContent = warn.join(' ');
+
+  setTimeout(() => {
+    const geo = toThree(buildPart(P, D));
+    bodyMesh.geometry.dispose(); bodyMesh.geometry = geo;
+    busy.textContent = '';
+  }, 0);
+
+  // micro:bit: el origen del grupo es el centro inferior de la placa, cara delantera en board.front
+  mbMesh.position.set(D.board.cx, D.board.bottom, D.board.front + STL.pcbFront);
+  // cover de referencia: su arriba (z = 1.5) al ras del frente, su ventana (y = -1) sobre la ventana
+  capMesh.position.set(D.win.cx, D.win.cy + COVER_DY, T - 1.5 + 0.05);
+
+  batBox.scale.set(D.bat.bw, D.bat.bh, BAT[2]);
+  // pasante: el portapilas al ras del dorso; ciego: apoyado en el fondo del bolsillo
+  const batZc = P.batThrough ? BAT[2] / 2 : Math.min(D.bat.depth, T - 0.6) - BAT[2] / 2;
+  batBox.position.set(D.bat.cx, D.bat.cy, batZc);
+  const ex = D.bat.exit;
+  const alongX = !P.batRot;                               // la salida está en un extremo: hacia afuera en x (o en y si está girado)
+  exitMark.rotation.set(0, 0, alongX ? Math.PI / 2 : 0);
+  const out = alongX ? Math.sign(ex.x - D.bat.cx) : Math.sign(ex.y - D.bat.cy);
+  exitMark.position.set(ex.x + (alongX ? out * 2 : 0), ex.y + (alongX ? 0 : out * 2), batZc);
+
+  // cable: conector del micro:bit → zona abierta → canal del costado → salida del portapilas
+  const zBack = D.board.front + STL.pcbFront - 1.6 - 3;
+  const zc = Math.min(P.chD / 2, zBack);
+  const yTop = D.mb.top + Math.max(3, Math.min(8, P.topH / 2));
+  const pts = [
+    [D.jst.x, D.jst.y, zBack], [D.jst.x, yTop, zBack], [D.ch.x, yTop, zc],
+    [D.ch.x, ex.y, zc], [ex.x + (alongX ? out * 4 : 0), ex.y + (alongX ? 0 : out * 4), batZc],
+  ].map(p => new THREE.Vector3(...p));
+  cable.geometry.dispose();
+  cable.geometry = new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts, false, 'catmullrom', 0.15), 160, 1.1, 10, false);
+
+  const rows = [
+    ['Celular', `${P.W} × ${P.H} × ${T}`],
+    ['Ventana LED (frente → fondo)', `${WIN.top[0]} × ${WIN.top[1]} → ${WIN.bottom[0]} × ${WIN.bottom[1]}`],
+    ['Botones A y B', `${BTN.size} × ${BTN.size} (rebaje ${BTN.bore} × ${BTN.bore})`],
+    ['Centro de la ventana', `x ${D.win.cx}, y ${D.win.cy}`],
+    ['Bolsillo micro:bit', `${D.mb.w.toFixed(1)} × ${D.mb.h.toFixed(1)} × ${(T - P.plate).toFixed(1)}`],
+    ['Zona abierta', P.topH > 0 ? `${P.topW} × ${P.topH}` : 'sin zona abierta'],
+    ['Bolsillo portapilas', `${D.bat.w.toFixed(1)} × ${D.bat.h.toFixed(1)} × ` + (P.batThrough ? 'pasante' : Math.min(D.bat.depth, T - 0.6).toFixed(1))],
+    ['El portapilas sobresale', (P.batThrough ? Math.max(0, BAT[2] - T) : Math.max(0, BAT[2] - Math.min(D.bat.depth, T - 0.6))).toFixed(1)],
+    ['Canal del cable', `${P.chW} × ${P.chD} de profundidad`],
+    ['Margen sobre la zona abierta', (P.H / 2 - (D.top.cy + D.top.h / 2)).toFixed(1)],
+    ['Margen bajo el portapilas', (D.bat.cy - D.bat.h / 2 + P.H / 2).toFixed(1)],
+  ];
+  document.getElementById('dims').innerHTML = rows.map(([k, v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join('');
+}
+
+// ---------------------------------------------------------------- panel de parámetros
+const params = document.getElementById('params');
+let timer = null;
+const changed = () => { save(); clearTimeout(timer); timer = setTimeout(update, 120); };
+for (const s of SCHEMA) {
+  if (s.group) { const h = document.createElement('h2'); h.textContent = s.group; params.appendChild(h); continue; }
+  const row = document.createElement('div');
+  if (s.type === 'check') {
+    row.className = 'row check';
+    row.innerHTML = `<span>${s.label}</span><input type="checkbox">`;
+    const c = row.querySelector('input'); c.checked = !!P[s.key];
+    c.addEventListener('change', () => { P[s.key] = c.checked; changed(); });
+    s.sync = () => { c.checked = !!P[s.key]; };
+  } else if (s.type === 'select') {
+    row.className = 'row check';
+    row.innerHTML = `<span>${s.label}</span><select>${s.options.map(([v, t]) => `<option value="${v}">${t}</option>`).join('')}</select>`;
+    const c = row.querySelector('select'); c.value = String(P[s.key]);
+    c.addEventListener('change', () => { P[s.key] = c.value; changed(); });
+    s.sync = () => { c.value = String(P[s.key]); };
+  } else {
+    row.className = 'row';
+    row.innerHTML = `<span>${s.label}</span><input type="range" min="${s.min}" max="${s.max}" step="${s.step}"><input type="number" min="${s.min}" max="${s.max}" step="${s.step}">`;
+    const [r, n] = row.querySelectorAll('input');
+    r.value = n.value = P[s.key];
+    r.addEventListener('input', () => { n.value = r.value; P[s.key] = +r.value; changed(); });
+    n.addEventListener('input', () => { if (n.value === '' || isNaN(+n.value)) return; r.value = n.value; P[s.key] = +n.value; changed(); });
+    s.sync = () => { r.value = n.value = P[s.key]; };
+  }
+  params.appendChild(row);
+}
+document.getElementById('reset').addEventListener('click', () => {
+  Object.assign(P, DEFAULTS); save();
+  SCHEMA.forEach(s => s.sync && s.sync());
+  update();
+});
+
+// ---------------------------------------------------------------- descarga STL (binario, en mm)
+function stlBlob(geo) {
+  const p = geo.getAttribute('position').array, n = p.length / 9;
+  const buf = new ArrayBuffer(84 + n * 50), dv = new DataView(buf);
+  const head = 'Adaptador micro:bit tamano celular - ' + JSON.stringify({ W: P.W, H: P.H, T: P.T });
+  for (let i = 0; i < 80; i++) dv.setUint8(i, i < head.length ? head.charCodeAt(i) & 0x7f : 32);
+  dv.setUint32(80, n, true);
+  let o = 84;
+  for (let t = 0; t < n; t++) {
+    const a = t * 9;
+    const ux = p[a + 3] - p[a], uy = p[a + 4] - p[a + 1], uz = p[a + 5] - p[a + 2];
+    const vx = p[a + 6] - p[a], vy = p[a + 7] - p[a + 1], vz = p[a + 8] - p[a + 2];
+    let nx = uy * vz - uz * vy, ny = uz * vx - ux * vz, nz = ux * vy - uy * vx;
+    const l = Math.hypot(nx, ny, nz) || 1; nx /= l; ny /= l; nz /= l;
+    for (const f of [nx, ny, nz, ...p.slice(a, a + 9)]) { dv.setFloat32(o, f, true); o += 4; }
+    dv.setUint16(o, 0, true); o += 2;
+  }
+  return new Blob([buf], { type: 'model/stl' });
+}
+document.getElementById('stl').addEventListener('click', () => {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(stlBlob(bodyMesh.geometry));
+  a.download = `adaptador-microbit-${P.W}x${P.H}x${P.T}.stl`;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+});
+
+// ---------------------------------------------------------------- vistas y capas
+const bind = (id, fn) => { const el = document.getElementById(id); el.addEventListener('change', () => fn(el.checked)); fn(el.checked); };
+bind('t-body', v => bodyMesh.visible = v);
+bind('t-ghost', v => { bodyMat.transparent = v; bodyMat.opacity = v ? 0.35 : 1; bodyMat.depthWrite = !v; bodyMat.needsUpdate = true; });
+bind('t-mb', v => mbGroup.visible = v);
+bind('t-bat', v => batGroup.visible = v);
+bind('t-cable', v => cable.visible = v);
+bind('t-cap', v => capGroup.visible = v);
+
+const VIEWS = { front: [0, 0, 330], back: [0, 0, -330], iso: [170, -190, 230], isoBack: [-170, -190, -230] };
+function setView(k) {
+  const [x, y, z] = VIEWS[k];
+  camera.position.set(x, y, z + P.T / 2); camera.up.set(0, 1, 0);
+  controls.target.set(0, 0, P.T / 2); controls.update();
+}
+document.querySelectorAll('[data-view]').forEach(b => b.addEventListener('click', () => setView(b.dataset.view)));
+
+function resize() {
+  const r = view.getBoundingClientRect();
+  renderer.setSize(r.width, r.height, false);
+  camera.aspect = r.width / r.height; camera.updateProjectionMatrix();
+}
+new ResizeObserver(resize).observe(view); resize();
+update();
+setView('iso');
+renderer.setAnimationLoop(() => { controls.update(); renderer.render(scene, camera); });
+window.__ready = true;
+</script>
+</body>
+</html>
