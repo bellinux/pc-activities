@@ -13,18 +13,19 @@
                 "type": "Event_Interrupt",
                 "label": "cuando NivelRuido1 detecta aumento repentino",
                 "children": [
-                    { "type": "Action", "label": "reproducir sonido 'reacción divertida' en ReproductorSonido3", "children": [] },
                     {
                         "type": "Loop",
                         "label": "repetir 8 veces",
                         "children": [
                             { "type": "Action", "label": "dibuja con color #ff0000 en DibujoLED2", "children": [] },
-                            { "type": "Action", "label": "retraso de 400 milisegundos", "children": [] },
+                            { "type": "Action", "label": "retraso de 500 milisegundos", "children": [] },
+                            { "type": "Action", "label": "tocar nota fa4 en TecladoMusical3", "children": [] },
                             { "type": "Action", "label": "dibuja con color #ff0000 en DibujoLED2", "children": [] },
-                            { "type": "Action", "label": "retraso de 400 milisegundos", "children": [] }
+                            { "type": "Action", "label": "retraso de 500 milisegundos", "children": [] },
+                            { "type": "Action", "label": "tocar nota mi4 en TecladoMusical3", "children": [] }
                         ]
                     },
-                    { "type": "Action", "label": "detener sonido de ReproductorSonido3", "children": [] },
+                    { "type": "Action", "label": "detener en TecladoMusical3", "children": [] },
                     { "type": "Action", "label": "dibuja con color #ff0000 en DibujoLED2", "children": [] }
                 ]
             }

@@ -24,7 +24,7 @@
                         "type": "Conditional",
                         "label": "si ◻ entonces",
                         "children": [
-                            { "type": "Operator", "label": "energia < 5", "children": [] },
+                            { "type": "Operator", "label": "energia < 6", "children": [] },
                             {
                                 "type": "Branch_True",
                                 "label": "entonces",
@@ -56,9 +56,13 @@
                                 "type": "Branch_False",
                                 "label": "si no",
                                 "children": [
-                                    { "type": "Action", "label": "borrar la pantalla", "children": [] },
-                                    { "type": "Action", "label": "(device_show_image_offset)", "children": [] },
-                                    { "type": "Action", "label": "reproduce secuencia (risa) en modo hasta que termine", "children": [] }
+                                    { "type": "Action", "label": "mostrar LEDs", "children": [] },
+                                    { "type": "Action", "label": "tono de timbre (Hz) Re", "children": [] },
+                                    { "type": "Action", "label": "pausa (ms) 200", "children": [] },
+                                    { "type": "Action", "label": "tono de timbre (Hz) Fa#", "children": [] },
+                                    { "type": "Action", "label": "pausa (ms) 200", "children": [] },
+                                    { "type": "Action", "label": "tono de timbre (Hz) La", "children": [] },
+                                    { "type": "Action", "label": "pausa (ms) 500", "children": [] }
                                 ]
                             }
                         ]

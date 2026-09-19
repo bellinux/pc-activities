@@ -18,72 +18,72 @@
             "kind": "ReadTilt",
             "seq": 3,
             "in_loop": true,
-            "resId": 1
+            "resId": "x"
         },
         {
             "id": "n4",
             "kind": "Arithmetic",
             "seq": 4,
             "in_loop": true,
-            "op": "+"
+            "op": "÷"
         },
         {
             "id": "n5",
-            "kind": "SetVariable",
+            "kind": "Arithmetic",
             "seq": 5,
-            "in_loop": true
+            "in_loop": true,
+            "op": "+"
         },
         {
             "id": "n6",
-            "kind": "Arithmetic",
+            "kind": "SetVariable",
             "seq": 6,
+            "in_loop": true
+        },
+        {
+            "id": "n7",
+            "kind": "Arithmetic",
+            "seq": 7,
             "in_loop": true,
             "op": "÷"
         },
         {
-            "id": "n7",
-            "kind": "SetVariable",
-            "seq": 7,
-            "in_loop": true
-        },
-        {
             "id": "n8",
-            "kind": "ReadRuntimeMillis",
+            "kind": "SetVariable",
             "seq": 8,
             "in_loop": true
         },
         {
             "id": "n9",
-            "kind": "Arithmetic",
+            "kind": "ReadRuntimeMillis",
             "seq": 9,
+            "in_loop": true
+        },
+        {
+            "id": "n10",
+            "kind": "Arithmetic",
+            "seq": 10,
             "in_loop": true,
             "op": "-"
         },
         {
-            "id": "n10",
+            "id": "n11",
             "kind": "SetVariable",
-            "seq": 10,
+            "seq": 11,
             "in_loop": true
         },
         {
-            "id": "n11",
+            "id": "n12",
             "kind": "Comparison",
-            "seq": 11,
+            "seq": 12,
             "in_loop": true,
             "op": ">"
         },
         {
-            "id": "n12",
-            "kind": "ConditionalBranch",
-            "seq": 12,
-            "in_loop": true
-        },
-        {
             "id": "n13",
-            "kind": "EmitSound",
+            "kind": "ConditionalBranch",
             "seq": 13,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n14",
@@ -96,6 +96,24 @@
             "kind": "SetVariable",
             "seq": 15,
             "in_loop": true
+        },
+        {
+            "id": "n16",
+            "kind": "PlayTone",
+            "seq": 16,
+            "in_loop": true
+        },
+        {
+            "id": "n17",
+            "kind": "Delay",
+            "seq": 17,
+            "in_loop": true
+        },
+        {
+            "id": "n18",
+            "kind": "StopSound",
+            "seq": 18,
+            "in_loop": true
         }
     ],
     "edges": [
@@ -106,46 +124,76 @@
             "var": ""
         },
         {
-            "source": "n5",
-            "target": "n7",
+            "source": "n6",
+            "target": "n8",
             "type": "control",
             "var": ""
         },
         {
-            "source": "n7",
-            "target": "n10",
+            "source": "n8",
+            "target": "n11",
             "type": "control",
             "var": ""
         },
         {
-            "source": "n10",
-            "target": "n12",
-            "type": "control",
-            "var": ""
-        },
-        {
-            "source": "n12",
+            "source": "n11",
             "target": "n13",
             "type": "control",
-            "var": "true"
+            "var": ""
         },
         {
-            "source": "n12",
+            "source": "n13",
             "target": "n14",
             "type": "control",
             "var": "true"
         },
         {
-            "source": "n12",
+            "source": "n13",
             "target": "n15",
             "type": "control",
             "var": "true"
         },
         {
+            "source": "n13",
+            "target": "n16",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n13",
+            "target": "n17",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n13",
+            "target": "n18",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n15",
+            "target": "n16",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n16",
+            "target": "n17",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n17",
+            "target": "n18",
+            "type": "control",
+            "var": ""
+        },
+        {
             "source": "n3",
             "target": "n4",
             "type": "data",
-            "var": "tilt_1"
+            "var": "tilt_x"
         },
         {
             "source": "n4",
@@ -157,53 +205,59 @@
             "source": "n5",
             "target": "n6",
             "type": "data",
-            "var": "bpm"
+            "var": "value"
         },
         {
             "source": "n6",
             "target": "n7",
             "type": "data",
+            "var": "bpm"
+        },
+        {
+            "source": "n7",
+            "target": "n8",
+            "type": "data",
             "var": "value"
-        },
-        {
-            "source": "n8",
-            "target": "n9",
-            "type": "data",
-            "var": "time_1"
-        },
-        {
-            "source": "n2",
-            "target": "n9",
-            "type": "data",
-            "var": "ultimopulso"
-        },
-        {
-            "source": "n15",
-            "target": "n9",
-            "type": "data",
-            "var": "ultimopulso"
         },
         {
             "source": "n9",
             "target": "n10",
             "type": "data",
-            "var": "value"
+            "var": "time_1"
+        },
+        {
+            "source": "n2",
+            "target": "n10",
+            "type": "data",
+            "var": "ultimopulso"
+        },
+        {
+            "source": "n15",
+            "target": "n10",
+            "type": "data",
+            "var": "ultimopulso"
         },
         {
             "source": "n10",
             "target": "n11",
             "type": "data",
-            "var": "tiempotranscurrido"
-        },
-        {
-            "source": "n7",
-            "target": "n11",
-            "type": "data",
-            "var": "intervalopulso"
+            "var": "value"
         },
         {
             "source": "n11",
             "target": "n12",
+            "type": "data",
+            "var": "tiempotranscurrido"
+        },
+        {
+            "source": "n8",
+            "target": "n12",
+            "type": "data",
+            "var": "intervalopulso"
+        },
+        {
+            "source": "n12",
+            "target": "n13",
             "type": "data",
             "var": "condition"
         },
@@ -212,6 +266,12 @@
             "target": "n15",
             "type": "data",
             "var": "time_1"
+        },
+        {
+            "source": "n16",
+            "target": "n18",
+            "type": "side_effect",
+            "var": "sound"
         }
     ]
 }

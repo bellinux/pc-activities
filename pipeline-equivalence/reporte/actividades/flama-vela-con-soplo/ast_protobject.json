@@ -36,10 +36,9 @@
                                             { "type": "Action", "label": "entero aleatorio de 3 a 5", "children": [] }
                                         ]
                                     },
-                                    { "type": "Action", "label": "retraso de 200 milisegundos", "children": [] },
+                                    { "type": "Action", "label": "retraso de 700 milisegundos", "children": [] },
                                     { "type": "Action", "label": "dibuja con color #ff0000 en DibujoLED1", "children": [] },
-                                    { "type": "Action", "label": "dibuja en x 4 y 2 con color #ff0000 en DibujoLED1", "children": [] },
-                                    { "type": "Action", "label": "retraso de 200 milisegundos", "children": [] }
+                                    { "type": "Action", "label": "retraso de 900 milisegundos", "children": [] }
                                 ]
                             },
                             {

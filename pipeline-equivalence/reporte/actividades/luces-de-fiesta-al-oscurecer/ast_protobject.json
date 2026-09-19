@@ -14,28 +14,68 @@
                                 "type": "Operator",
                                 "label": "◻ < 30",
                                 "children": [
-                                    { "type": "Sensor", "label": "luminosidad in IntensidadLuz2", "children": [] }
+                                    {
+                                        "type": "Sensor",
+                                        "label": "luminosidad in IntensidadLuz2",
+                                        "children": []
+                                    }
                                 ]
                             },
                             {
                                 "type": "Branch_True",
-                                "label": "entonces",
+                                "label": "hacer",
                                 "children": [
-                                    { "type": "Action", "label": "dibuja con color #ff0000 en DibujoLED1", "children": [] },
-                                    { "type": "Action", "label": "retraso de 200 milisegundos", "children": [] },
-                                    { "type": "Action", "label": "dibuja con color #ff0000 en DibujoLED1", "children": [] },
-                                    { "type": "Action", "label": "retraso de 200 milisegundos", "children": [] },
-                                    { "type": "Action", "label": "dibuja con color #ff0000 en DibujoLED1", "children": [] },
-                                    { "type": "Action", "label": "retraso de 200 milisegundos", "children": [] },
-                                    { "type": "Action", "label": "dibuja con color #ff0000 en DibujoLED1", "children": [] },
-                                    { "type": "Action", "label": "retraso de 200 milisegundos", "children": [] }
+                                    {
+                                        "type": "Action",
+                                        "label": "dibuja con color #ff0000 en DibujoLED1",
+                                        "children": []
+                                    },
+                                    {
+                                        "type": "Action",
+                                        "label": "retraso de 500 milisegundos",
+                                        "children": []
+                                    },
+                                    {
+                                        "type": "Action",
+                                        "label": "dibuja con color #ff0000 en DibujoLED1",
+                                        "children": []
+                                    },
+                                    {
+                                        "type": "Action",
+                                        "label": "retraso de 500 milisegundos",
+                                        "children": []
+                                    },
+                                    {
+                                        "type": "Action",
+                                        "label": "dibuja con color #ff0000 en DibujoLED1",
+                                        "children": []
+                                    },
+                                    {
+                                        "type": "Action",
+                                        "label": "retraso de 500 milisegundos",
+                                        "children": []
+                                    },
+                                    {
+                                        "type": "Action",
+                                        "label": "dibuja con color #ff0000 en DibujoLED1",
+                                        "children": []
+                                    },
+                                    {
+                                        "type": "Action",
+                                        "label": "retraso de 500 milisegundos",
+                                        "children": []
+                                    }
                                 ]
                             },
                             {
                                 "type": "Branch_False",
                                 "label": "sino",
                                 "children": [
-                                    { "type": "Action", "label": "borrar dibujo en DibujoLED1", "children": [] }
+                                    {
+                                        "type": "Action",
+                                        "label": "borrar dibujo en DibujoLED1",
+                                        "children": []
+                                    }
                                 ]
                             }
                         ]

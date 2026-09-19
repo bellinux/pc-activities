@@ -44,6 +44,8 @@ const ACTS = [
 // args.codes (opcional) = subconjunto de codes a procesar; por defecto las 17.
 const TARGET = (args && Array.isArray(args.codes) && args.codes.length) ? ACTS.filter(a => args.codes.includes(a.code)) : ACTS
 const IS_FULL = TARGET.length === ACTS.length   // re-run completo vs parcial (subconjunto)
+// args.ontologia = 'vigente' → usar la ontología curada de tabla_ontologica.json sin reconstruirla (también con las 17).
+const USE_CURATED = !!(args && args.ontologia === 'vigente')
 const DIR = c => `pipeline-equivalence/reporte/actividades/${c}`
 const REF = 'pipeline-equivalence/vela-analisis/vela'   // esquema gold de referencia
 const ONT_PATH = 'pipeline-equivalence/reporte/tabla_ontologica.json'
@@ -51,14 +53,32 @@ const ONT_PATH = 'pipeline-equivalence/reporte/tabla_ontologica.json'
 // Reglas de equivalencia (curadas, fuente de verdad). Se escriben SIEMPRE en la
 // ontología (sobreviven a los re-runs). Si cambian las reglas, edítalas aquí.
 const REGLAS = {
-  veredicto: "Dos actividades son equivalentes si lo son sus PROGRAMAS «a menos del plumbing de plataforma»: se comparan los grafos de dependencias (PDG) normalizados, coincidiendo el kind canónico, el operador aritmético, la identidad del recurso físico y la topología (def→uso).",
-  reglas: [
-    { clave: "El COLOR se ignora", detalle: "La matriz LED de Protobject tiene color; micro:bit no. Sin análogo → se descarta." },
-    { clave: "Los NOMBRES de dispositivo no importan", detalle: "DibujoLED1/2, TecladoMusical1, Inclinación2… son instancias: cuenta la FUNCIÓN, no el nombre (micro:bit tiene una sola de cada tipo)." },
-    { clave: "Los EJES x/y son indiferentes", detalle: "Leer la inclinación en x o en y es la misma operación física; se renombran por orden de aparición (tilt_1, tilt_2…). PERO usar 2 ejes distintos ≠ usar 1 solo (eso sí es una diferencia real). Igual para 2 dispositivos distintos del mismo tipo." },
-    { clave: "Hz y nota = mismo pitch", detalle: "frequency (Hz) y nota (MIDI) son dos codificaciones de la misma altura; no distinguen." },
-    { clave: "Sonido por INTENCIÓN", detalle: "PlayTone = pitch controlado/variable (xilófono); EmitSound = sonido genérico a evento (latido, bip, percusión; el «drum» va aquí); PlaySound = clip/melodía con nombre. No se distingue por timbre ni dispositivo." },
-    { clave: "Aritmética: operador sí, constante no", detalle: "Cuenta la operación (+, −, ×, ÷, round), no el número. Así «+1000» ≡ «+60» (ajuste de escala), pero «×» ≠ «+» (sensibilidad distinta)." }
+  "veredicto": "Dos actividades son equivalentes si sus programas tienen los mismos bloques, con las mismas operaciones y la misma estructura: se comparan los grafos de dependencias (PDG) por tipo de nodo, operador aritmético, eje del sensor y topología (definición → uso; efectos sobre la pantalla y el sonido). Los números no se comparan: ahí van las diferencias entre plataformas.",
+  "reglas": [
+    {
+      "clave": "El COLOR se ignora",
+      "detalle": "La matriz LED de Protobject tiene color; micro:bit no. Sin análogo → se descarta."
+    },
+    {
+      "clave": "Los NOMBRES de dispositivo no importan",
+      "detalle": "DibujoLED1/2, TecladoMusical3, Inclinación1… son instancias: cuenta la FUNCIÓN, no el nombre (en las dos plataformas hay un solo dispositivo de cada tipo)."
+    },
+    {
+      "clave": "El EJE sí cuenta",
+      "detalle": "Desde el 19-09-2026 el micro:bit se monta igual que el celular: la inclinación se compara con su eje real (x con x, y con y). Leer un eje distinto es una diferencia."
+    },
+    {
+      "clave": "Aritmética: operador sí, constante no",
+      "detalle": "Cuenta la operación (+, −, ×, ÷, restringir), no el número. Las diferencias de plataforma viven en las constantes: unidades de los sensores (÷ 20 contra ÷ 2), los 400 ms que «mostrar LEDs» espera por su cuenta, la altura de las notas (Hz o nombre de nota) y los umbrales. Pero «×» ≠ «+»."
+    },
+    {
+      "clave": "Redondear ≠ redondear al alza",
+      "detalle": "«redondeo» / «redondear» (al entero más cercano) y «redondeo hacia arriba» / «redondear al alza» (techo) son operaciones distintas."
+    },
+    {
+      "clave": "El orden de instrucciones independientes no cuenta",
+      "detalle": "Dos instrucciones que no dependen una de otra pueden ir en cualquier orden. El orden sí cuenta entre efectos sobre el mismo recurso (pantalla, sonido) y entre una variable y su uso."
+    }
   ]
 }
 
@@ -98,12 +118,8 @@ SEMILLA: lee la ontología vigente ${ONT_PATH} (si existe) y MANTÉN ESTABLES su
 INVENTARIO agregado de operaciones reales (alineaciones makecode↔protobject por actividad):
 ${JSON.stringify(inv)}
 Reglas: misma operación semántica => UN solo canonical_node (PascalCase, estable). makecode_block/protobject_block = forma representativa genérica; si una plataforma no tiene equivalente, anótalo en "note". category = event/variable/control/display/sound/sensor/math/timing/debug. Documenta divergencias reales en "note" (no fuerces equivalencias falsas).
-Los canonical_node son AGNÓSTICOS al eje (ReadTilt, no ReadTiltX/Y), a la instancia de dispositivo (DrawImage, no DrawImageLED2) y al encoding del pitch (Hz y nota MIDI son el mismo concepto). La aritmética es UN solo nodo "Arithmetic" (el operador concreto va en el atributo "op" del PDG, no en el canonical_node).
-SONIDO — CAMBIO DELIBERADO (aplícalo AUNQUE rompa la estabilidad; elimina "PlayDrum"): distingue el sonido POR INTENCIÓN, y escribe en cada nodo una NOTA clara del "cuándo":
- • "PlayTone" — SOLO cuando la ALTURA (pitch) es el punto: controlada/variable (p.ej. xilófono, el pitch sale de la inclinación). note: "Usar cuando la altura del sonido ES el objetivo (pitch controlado/variable); Hz y nota MIDI son el mismo concepto. NO para sonidos genéricos."
- • "EmitSound" — sonido GENÉRICO a evento, con timbre/altura INCIDENTALES (un latido, un bip, una percusión, o un tono de altura FIJA usado como señal). Aquí colapsa el antiguo PlayDrum. note: "Usar cuando solo importa que SUENE algo en un evento (latido/bip/percusión/feedback); la altura y el timbre son incidentales. En micro:bit no existe 'drum': usa un tono — da igual."
- • "PlaySound" — clip/melodía PREGRABADO con nombre (alarma, risa, 'celebración final'); se mantiene. note: "Sonido/melodía con nombre, pregrabado."
- Criterio PlayTone vs EmitSound: pitch CALCULADO/VARIABLE → PlayTone; pitch FIJO o incidental → EmitSound.
+Los canonical_node son AGNÓSTICOS a la instancia de dispositivo (DrawImage, no DrawImageLED2) y al eje (ReadTilt, no ReadTiltX/Y: el eje va en el atributo resId del PDG). La aritmética es UN solo nodo "Arithmetic" (el operador concreto va en el atributo "op" del PDG, no en el canonical_node).
+SONIDO: todas las actividades usan solo TONOS. «tono de timbre (Hz)» (MakeCode) y «tocar nota» / «tocar frecuencia (Hz)» (Protobject) = "PlayTone" (el tono suena hasta el siguiente o hasta StopSound); «para todos los sonidos» / «detener» = "StopSound". No crees otros nodos de sonido, ni nodos sin ninguna instancia en el inventario.
 DEVUELVE: { nodes:[ {canonical_node, makecode_block, protobject_block, category, note?} ] } cubriendo TODO el inventario. NO escribas archivos aún.`
 
 const reviewPrompt = (ont, inv, lens) => `Eres REVISOR ADVERSARIAL (lente "${lens}") de la ontología canónica común. Por defecto BUSCA problemas; aprueba solo si está bien.
@@ -135,12 +151,11 @@ TAREA: ESCRIBE 2 archivos en ${DIR(a.code)}/ (JSON indent 4): pdg_makecode.json 
 - "kind" SOLO de la ontología. Misma operación => mismo kind en ambas plataformas.
 REGLAS DURAS DE NORMALIZACIÓN (el PDG compara "módulo plumbing de plataforma" — NO las olvides):
   (A) DESCARTAR sin analogo: el COLOR de la matriz LED se IGNORA (micro:bit no tiene color) — no generes nodos/edges por el color.
-  (B) ALPHA-RENOMBRAR recursos físicos (la etiqueta no importa, la IDENTIDAD sí): para cada TIPO de recurso (eje de sensor x/y; instancia de dispositivo DibujoLED1/2, Inclinación1/2, TecladoMusical1/2, NivelRuido1/2…) enumera los DISTINTOS que usa ESTE programa y asígnales un índice por orden de aparición (1,2,3…); pon ese índice en "resId" del nodo que toca el recurso, y TIRA la etiqueta literal (x/y, el número del dispositivo). Consecuencia buscada: usar SIEMPRE el mismo eje/dispositivo (resId 1) ≡ usar siempre otro (también resId 1) → equivalentes; usar 2 ejes/dispositivos DISTINTOS (resId 1 y 2) ≠ usar 1 solo.
-  (C) UNIFICAR encoding: frequency (Hz) y nota (MIDI) son el MISMO concepto → kind "PlayTone" en ambas plataformas; el encoding es plumbing.
-  (D) ARITMÉTICA = opción B (operador SÍ, constante NO): cada operación aritmética es un nodo kind "Arithmetic" con campo "op" ∈ {"+","-","×","÷","constrain"}; las CONSTANTES numéricas se DESCARTAN (no son nodos ni operandos). Así "+1000" ≡ "+60" (ambos op="+") pero "×" ≠ "+".
+  (B) RECURSOS: el NOMBRE del dispositivo no importa (DibujoLED1/2, TecladoMusical3, Inclinación1…): no pongas resId en los nodos de dispositivo. En ReadTilt pon en "resId" el EJE real, "x" o "y": desde el 19-09-2026 los dos dispositivos se montan igual, así que leer un eje distinto ES una diferencia.
+  (C) SONIDO = solo tonos: «tono de timbre (Hz)» y «tocar nota» / «tocar frecuencia» → kind "PlayTone"; «para todos los sonidos» y «detener» → "StopSound". La altura (Hz o nota) es una constante: no es nodo ni operando; si sale de una expresión, sus operaciones sí son nodos y llegan a PlayTone con una arista data.
+  (D) ARITMÉTICA = opción B (operador SÍ, constante NO): cada operación aritmética es un nodo kind "Arithmetic" con campo "op" ∈ {"+","-","×","÷","constrain"}; las CONSTANTES numéricas se DESCARTAN (no son nodos ni operandos). Así "+1000" ≡ "+60" (ambos op="+") pero "×" ≠ "+". Las diferencias de plataforma (unidades de los sensores, los 400 ms de «mostrar LEDs», alturas, umbrales) viven en esas constantes.
       EL REDONDEO NO ES "Arithmetic": tiene canonical_node propios en la ontología — "Round" (al entero MÁS CERCANO: MakeCode "redondeo" = Math.round; Protobject "redondear" = math_round OP=ROUND) y "RoundUp" (HACIA ARRIBA/techo: MakeCode "redondeo hacia arriba" = Math.ceil; Protobject "redondear al alza" = math_round OP=ROUNDUP). Usa el kind que corresponda EXACTAMENTE a la etiqueta del texto extraído. Son operaciones distintas (round(2.4)=2 vs ceil(2.4)=3) y la métrica debe poder distinguirlas; codificarlas de dos maneras distintas segun la actividad hacia que la MISMA operación pareciera divergente entre plataformas.
-  (E) La "var" de las aristas "data" se canonicaliza después automáticamente (valor de sensor → "tilt_1"/"sound_1"… con su resId; altura de tono → "pitch", no frequency/nota; intermedio → "value"; variable de usuario → su nombre). Puedes poner nombres razonables; el motor (normalize_pdg) los normaliza igual.
-  (F) SONIDO por INTENCIÓN (no por dispositivo ni timbre): kind "PlayTone" SOLO si el pitch es controlado/variable (xilófono); "EmitSound" si es un sonido genérico a evento (latido/bip/percusión/tono de altura fija como señal — el antiguo "drum" va AQUÍ); "PlaySound" si es un clip/melodía con nombre. Criterio: pitch calculado/variable → PlayTone; pitch fijo o incidental → EmitSound. NO uses "PlayDrum".
+  (E) La "var" de las aristas "data" se canonicaliza después automáticamente (valor de sensor → "tilt_x"/"tilt_y"/"sound_1"… según su resId; altura de tono → "pitch"; intermedio → "value"; variable de usuario → su nombre). Puedes poner nombres razonables; el motor (normalize_pdg) los normaliza igual.
 FIDELIDAD: tras la normalización, si los programas siguen difiriendo, los grafos DEBEN diferir (no fuerces isomorfismo).
 - NOTA: la tabla de equivalencia per-actividad ya NO se escribe (tabla_ir.json quedó deprecado); la vista por actividad resalta la ontología común. NO escribas tabla_ir.json.
 DEVUELVE: { code:"${a.code}", written:true, nodes_mb, nodes_pb, kinds_used:[...] }.`
@@ -155,7 +170,7 @@ log(`AST generados: ${astResults.length}/${TARGET.length}`)
 phase('Ontología')
 const inventory = astResults.map(r => ({ code: r.code, operations: r.operations }))
 let ontology, round = 0, approved = false
-if (IS_FULL) {
+if (IS_FULL && !USE_CURATED) {
   // Re-run COMPLETO: (re)construir la ontología común y verificarla adversarialmente.
   ontology = await agent(ontologyBuildPrompt(inventory), { label: 'ontology:build', phase: 'Ontología', agentType: 'general-purpose', schema: ONTOLOGY_SCHEMA })
   while (!approved && round < 4 && ontology) {
@@ -170,7 +185,7 @@ if (IS_FULL) {
   }
   if (ontology) { await agent(writeOntologyPrompt(ontology), { label: 'ontology:write', phase: 'Ontología', agentType: 'general-purpose' }); log(`Ontología final: ${ontology.nodes.length} nodos, consenso=${approved} (rondas=${round})`) }
 } else {
-  // Re-run PARCIAL: usar la ontología vigente SIN reconstruirla (no se sobreescribe).
+  // Re-run PARCIAL, u ontología curada: usar la ontología vigente SIN reconstruirla (no se sobreescribe).
   ontology = await agent(`Lee el archivo ${ONT_PATH} (cwd = raíz del proyecto) y devuélvelo TAL CUAL como { nodes:[ {canonical_node, makecode_block, protobject_block, category, note} ] }. NO modifiques, NO reconstruyas, NO escribas nada.`, { label: 'ontology:load', phase: 'Ontología', agentType: 'general-purpose', schema: ONTOLOGY_SCHEMA })
   approved = true
   log(`Ontología vigente cargada sin reconstruir (re-run parcial): ${ontology ? ontology.nodes.length : 0} nodos`)

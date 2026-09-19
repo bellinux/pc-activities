@@ -6,18 +6,22 @@
                 "type": "Loop",
                 "label": "repetir para siempre",
                 "children": [
+                    { "type": "Action", "label": "tocar nota do#5 en TecladoMusical2", "children": [] },
                     { "type": "Action", "label": "dibuja con color #ff0000 en DibujoLED1", "children": [] },
-                    { "type": "Action", "label": "toca nota tom en BateríaMusical2", "children": [] },
                     { "type": "Action", "label": "retraso de pausaLarga milisegundos", "children": [] },
-                    { "type": "Action", "label": "toca nota tom en BateríaMusical2", "children": [] },
+                    { "type": "Action", "label": "detener en TecladoMusical2", "children": [] },
                     {
                         "type": "Loop",
-                        "label": "repetir 4 veces",
+                        "label": "repetir 2 veces",
                         "children": [
+                            { "type": "Action", "label": "tocar nota si4 en TecladoMusical2", "children": [] },
                             { "type": "Action", "label": "dibuja con color #ff0000 en DibujoLED1", "children": [] },
                             { "type": "Action", "label": "retraso de pausaCorta milisegundos", "children": [] },
+                            { "type": "Action", "label": "detener en TecladoMusical2", "children": [] },
+                            { "type": "Action", "label": "tocar nota do5 en TecladoMusical2", "children": [] },
                             { "type": "Action", "label": "dibuja con color #ff0000 en DibujoLED1", "children": [] },
-                            { "type": "Action", "label": "retraso de pausaCorta milisegundos", "children": [] }
+                            { "type": "Action", "label": "retraso de pausaCorta milisegundos", "children": [] },
+                            { "type": "Action", "label": "detener en TecladoMusical2", "children": [] }
                         ]
                     }
                 ]
@@ -26,24 +30,24 @@
                 "type": "Event",
                 "label": "al iniciar el programa",
                 "children": [
-                    { "type": "Assignment", "label": "establecer pausaLarga a 500", "children": [] },
-                    { "type": "Assignment", "label": "establecer pausaCorta a 150", "children": [] }
+                    { "type": "Assignment", "label": "establecer pausaLarga a 1000", "children": [] },
+                    { "type": "Assignment", "label": "establecer pausaCorta a 700", "children": [] }
                 ]
             },
             {
                 "type": "Event_Interrupt",
                 "label": "cuando Inclinación3 hacie un borde",
                 "children": [
-                    { "type": "Assignment", "label": "establecer pausaLarga a 250", "children": [] },
-                    { "type": "Assignment", "label": "establecer pausaCorta a 80", "children": [] }
+                    { "type": "Assignment", "label": "establecer pausaLarga a 600", "children": [] },
+                    { "type": "Assignment", "label": "establecer pausaCorta a 500", "children": [] }
                 ]
             },
             {
                 "type": "Event_Interrupt",
                 "label": "cuando Inclinación3 hacia arriba",
                 "children": [
-                    { "type": "Assignment", "label": "establecer pausaLarga a 500", "children": [] },
-                    { "type": "Assignment", "label": "establecer pausaCorta a 150", "children": [] }
+                    { "type": "Assignment", "label": "establecer pausaLarga a 1000", "children": [] },
+                    { "type": "Assignment", "label": "establecer pausaCorta a 700", "children": [] }
                 ]
             }
         ]

@@ -21,8 +21,11 @@
                                 "type": "Branch_True",
                                 "label": "entonces",
                                 "children": [
-                                    { "type": "Action", "label": "reproduce (preludio) bucle en segundo plano", "children": [] },
-                                    { "type": "Action", "label": "mostrar LEDs", "children": [] }
+                                    { "type": "Action", "label": "mostrar LEDs", "children": [] },
+                                    { "type": "Action", "label": "tono de timbre (Hz) Re5", "children": [] },
+                                    { "type": "Action", "label": "pausa (ms) 200", "children": [] },
+                                    { "type": "Action", "label": "tono de timbre (Hz) Fa#5", "children": [] },
+                                    { "type": "Action", "label": "pausa (ms) 500", "children": [] }
                                 ]
                             },
                             {

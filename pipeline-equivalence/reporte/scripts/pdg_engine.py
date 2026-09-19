@@ -37,10 +37,10 @@ def build_graph_from_json(json_data: dict) -> nx.MultiDiGraph:
 
 
 # --- Canonicalización determinista de la 'var' de las aristas de DATOS --------
-# La var es plumbing: el eje (x/y), el encoding del pitch (frequency/nota) y los
-# nombres intermedios (value/a/b) no deben distinguir plataformas. Se reescribe a
-# una forma canónica reproducible:
-#   valor de un sensor  -> "<sensor>_<resId>"  (p.ej. "tilt_1"; "tilt_2" si hay un 2º eje distinto)
+# La var es plumbing: el encoding del pitch (frequency/nota) y los nombres
+# intermedios (value/a/b) no deben distinguir plataformas. El eje del sensor SÍ
+# cuenta (desde el 19-09-2026 va literal en resId, "x"/"y"). Forma canónica:
+#   valor de un sensor  -> "<sensor>_<resId>"  (p.ej. "tilt_x", "tilt_y", "sound_1")
 #   altura de un tono   -> "pitch"             (no "frequency"/"nota")
 #   intermedio genérico -> "value"
 #   variable de usuario -> su nombre en minúsculas

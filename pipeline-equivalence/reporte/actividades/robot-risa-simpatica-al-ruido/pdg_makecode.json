@@ -11,39 +11,35 @@
             "id": "n2",
             "kind": "DrawImage",
             "seq": 2,
-            "in_loop": false,
-            "resId": 1
+            "in_loop": false
         },
         {
             "id": "n3",
             "kind": "SuddenNoiseEvent",
             "seq": 3,
-            "in_loop": false,
-            "resId": 1
-        },
-        {
-            "id": "n4",
-            "kind": "PlaySound",
-            "seq": 4,
-            "in_loop": false,
-            "resId": 1
-        },
-        {
-            "id": "n5",
-            "kind": "RepeatN",
-            "seq": 5,
             "in_loop": false
         },
         {
-            "id": "n6",
+            "id": "n4",
+            "kind": "RepeatN",
+            "seq": 4,
+            "in_loop": false
+        },
+        {
+            "id": "n5",
             "kind": "DrawImage",
+            "seq": 5,
+            "in_loop": true
+        },
+        {
+            "id": "n6",
+            "kind": "Delay",
             "seq": 6,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n7",
-            "kind": "Delay",
+            "kind": "PlayTone",
             "seq": 7,
             "in_loop": true
         },
@@ -51,8 +47,7 @@
             "id": "n8",
             "kind": "DrawImage",
             "seq": 8,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n9",
@@ -62,17 +57,21 @@
         },
         {
             "id": "n10",
-            "kind": "StopSound",
+            "kind": "PlayTone",
             "seq": 10,
-            "in_loop": false,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n11",
-            "kind": "DrawImage",
+            "kind": "StopSound",
             "seq": 11,
-            "in_loop": false,
-            "resId": 1
+            "in_loop": false
+        },
+        {
+            "id": "n12",
+            "kind": "DrawImage",
+            "seq": 12,
+            "in_loop": false
         }
     ],
     "edges": [
@@ -92,13 +91,13 @@
             "source": "n4",
             "target": "n5",
             "type": "control",
-            "var": ""
+            "var": "body"
         },
         {
             "source": "n5",
             "target": "n6",
             "type": "control",
-            "var": "body"
+            "var": ""
         },
         {
             "source": "n6",
@@ -119,38 +118,50 @@
             "var": ""
         },
         {
-            "source": "n5",
+            "source": "n9",
             "target": "n10",
             "type": "control",
             "var": ""
         },
         {
-            "source": "n10",
+            "source": "n4",
             "target": "n11",
             "type": "control",
             "var": ""
         },
         {
+            "source": "n11",
+            "target": "n12",
+            "type": "control",
+            "var": ""
+        },
+        {
             "source": "n2",
-            "target": "n6",
+            "target": "n5",
             "type": "side_effect",
             "var": "display"
         },
         {
-            "source": "n6",
+            "source": "n5",
             "target": "n8",
             "type": "side_effect",
             "var": "display"
         },
         {
             "source": "n8",
-            "target": "n11",
+            "target": "n12",
             "type": "side_effect",
             "var": "display"
         },
         {
-            "source": "n4",
+            "source": "n7",
             "target": "n10",
+            "type": "side_effect",
+            "var": "sound"
+        },
+        {
+            "source": "n10",
+            "target": "n11",
             "type": "side_effect",
             "var": "sound"
         }

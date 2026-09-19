@@ -35,8 +35,7 @@
             "id": "n6",
             "kind": "DrawImage",
             "seq": 6,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n7",
@@ -48,8 +47,7 @@
             "id": "n8",
             "kind": "PlotPoint",
             "seq": 8,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n9",
@@ -61,28 +59,19 @@
             "id": "n10",
             "kind": "DrawImage",
             "seq": 10,
-            "in_loop": true,
-            "resId": 1
-        },
-        {
-            "id": "n11",
-            "kind": "PlotPoint",
-            "seq": 11,
-            "in_loop": true,
-            "resId": 1
-        },
-        {
-            "id": "n12",
-            "kind": "Delay",
-            "seq": 12,
             "in_loop": true
         },
         {
-            "id": "n13",
+            "id": "n11",
+            "kind": "Delay",
+            "seq": 11,
+            "in_loop": true
+        },
+        {
+            "id": "n12",
             "kind": "ClearDisplay",
-            "seq": 13,
-            "in_loop": true,
-            "resId": 1
+            "seq": 12,
+            "in_loop": true
         }
     ],
     "edges": [
@@ -138,12 +127,6 @@
             "source": "n5",
             "target": "n12",
             "type": "control",
-            "var": "true"
-        },
-        {
-            "source": "n5",
-            "target": "n13",
-            "type": "control",
             "var": "false"
         },
         {
@@ -184,13 +167,7 @@
         },
         {
             "source": "n10",
-            "target": "n11",
-            "type": "side_effect",
-            "var": "display"
-        },
-        {
-            "source": "n11",
-            "target": "n13",
+            "target": "n12",
             "type": "side_effect",
             "var": "display"
         }

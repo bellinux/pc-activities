@@ -6,18 +6,22 @@
                 "type": "Loop",
                 "label": "para siempre",
                 "children": [
+                    { "type": "Action", "label": "tono de timbre (Hz) Do#5", "children": [] },
                     { "type": "Action", "label": "mostrar LEDs", "children": [] },
-                    { "type": "Action", "label": "reproduce secuencia (tono Re5 durante (1/8 pulso)) en modo en segundo plano", "children": [] },
                     { "type": "Action", "label": "pausa (ms) pausaLarga", "children": [] },
-                    { "type": "Action", "label": "reproduce secuencia (tono Re5 durante (1/8 pulso)) en modo en segundo plano", "children": [] },
+                    { "type": "Action", "label": "para todos los sonidos", "children": [] },
                     {
                         "type": "Loop",
-                        "label": "repetir 4 veces",
+                        "label": "repetir 2 veces",
                         "children": [
+                            { "type": "Action", "label": "tono de timbre (Hz) Si", "children": [] },
                             { "type": "Action", "label": "mostrar LEDs", "children": [] },
                             { "type": "Action", "label": "pausa (ms) pausaCorta", "children": [] },
+                            { "type": "Action", "label": "para todos los sonidos", "children": [] },
+                            { "type": "Action", "label": "tono de timbre (Hz) Do5", "children": [] },
                             { "type": "Action", "label": "mostrar LEDs", "children": [] },
-                            { "type": "Action", "label": "pausa (ms) pausaCorta", "children": [] }
+                            { "type": "Action", "label": "pausa (ms) pausaCorta", "children": [] },
+                            { "type": "Action", "label": "para todos los sonidos", "children": [] }
                         ]
                     }
                 ]
@@ -26,24 +30,24 @@
                 "type": "Event",
                 "label": "al iniciar",
                 "children": [
-                    { "type": "Assignment", "label": "fijar pausaLarga a 500", "children": [] },
-                    { "type": "Assignment", "label": "fijar pausaCorta a 250", "children": [] }
+                    { "type": "Assignment", "label": "fijar pausaLarga a 600", "children": [] },
+                    { "type": "Assignment", "label": "fijar pausaCorta a 300", "children": [] }
                 ]
             },
             {
                 "type": "Event_Interrupt",
                 "label": "si logotipo hacia arriba",
                 "children": [
-                    { "type": "Assignment", "label": "fijar pausaLarga a 100", "children": [] },
-                    { "type": "Assignment", "label": "fijar pausaCorta a 10", "children": [] }
+                    { "type": "Assignment", "label": "fijar pausaLarga a 200", "children": [] },
+                    { "type": "Assignment", "label": "fijar pausaCorta a 100", "children": [] }
                 ]
             },
             {
                 "type": "Event_Interrupt",
                 "label": "si logotipo hacia abajo",
                 "children": [
-                    { "type": "Assignment", "label": "fijar pausaLarga a 500", "children": [] },
-                    { "type": "Assignment", "label": "fijar pausaCorta a 250", "children": [] }
+                    { "type": "Assignment", "label": "fijar pausaLarga a 600", "children": [] },
+                    { "type": "Assignment", "label": "fijar pausaCorta a 300", "children": [] }
                 ]
             }
         ]

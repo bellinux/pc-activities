@@ -3,64 +3,62 @@
     "nodes": [
         {
             "id": "n1",
-            "kind": "ProgramStartEvent",
+            "kind": "ConditionalBranch",
             "seq": 1,
-            "in_loop": false
+            "in_loop": true
         },
         {
             "id": "n2",
-            "kind": "SetVariable",
+            "kind": "RandomInteger",
             "seq": 2,
-            "in_loop": false
+            "in_loop": true
         },
         {
             "id": "n3",
-            "kind": "OnTouchEvent",
+            "kind": "SetVariable",
             "seq": 3,
-            "in_loop": false,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n4",
-            "kind": "ConditionalBranch",
-            "seq": 4,
-            "in_loop": false
-        },
-        {
-            "id": "n5",
-            "kind": "SetVariable",
-            "seq": 5,
-            "in_loop": false
-        },
-        {
-            "id": "n6",
-            "kind": "RandomInteger",
-            "seq": 6,
-            "in_loop": false
-        },
-        {
-            "id": "n7",
-            "kind": "SetVariable",
-            "seq": 7,
-            "in_loop": false
-        },
-        {
-            "id": "n8",
-            "kind": "PlaySound",
-            "seq": 8,
-            "in_loop": false,
-            "resId": 1
-        },
-        {
-            "id": "n9",
             "kind": "Comparison",
-            "seq": 9,
+            "seq": 4,
             "in_loop": true,
             "op": ">"
         },
         {
-            "id": "n10",
+            "id": "n5",
+            "kind": "PlayTone",
+            "seq": 5,
+            "in_loop": true
+        },
+        {
+            "id": "n6",
             "kind": "ChangeVariableBy",
+            "seq": 6,
+            "in_loop": true
+        },
+        {
+            "id": "n7",
+            "kind": "Delay",
+            "seq": 7,
+            "in_loop": true
+        },
+        {
+            "id": "n8",
+            "kind": "StopSound",
+            "seq": 8,
+            "in_loop": true
+        },
+        {
+            "id": "n9",
+            "kind": "Delay",
+            "seq": 9,
+            "in_loop": true
+        },
+        {
+            "id": "n10",
+            "kind": "PlayTone",
             "seq": 10,
             "in_loop": true
         },
@@ -72,50 +70,179 @@
         },
         {
             "id": "n12",
-            "kind": "StopSound",
+            "kind": "PlayTone",
             "seq": 12,
-            "in_loop": false,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n13",
-            "kind": "PlaySound",
+            "kind": "Delay",
             "seq": 13,
-            "in_loop": false,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n14",
-            "kind": "Delay",
+            "kind": "PlayTone",
             "seq": 14,
-            "in_loop": false
+            "in_loop": true
         },
         {
             "id": "n15",
-            "kind": "StopSound",
+            "kind": "Delay",
             "seq": 15,
-            "in_loop": false,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n16",
-            "kind": "SetVariable",
+            "kind": "PlayTone",
             "seq": 16,
+            "in_loop": true
+        },
+        {
+            "id": "n17",
+            "kind": "Delay",
+            "seq": 17,
+            "in_loop": true
+        },
+        {
+            "id": "n18",
+            "kind": "StopSound",
+            "seq": 18,
+            "in_loop": true
+        },
+        {
+            "id": "n19",
+            "kind": "SetVariable",
+            "seq": 19,
+            "in_loop": true
+        },
+        {
+            "id": "n20",
+            "kind": "OnTouchEvent",
+            "seq": 20,
+            "in_loop": false
+        },
+        {
+            "id": "n21",
+            "kind": "SetVariable",
+            "seq": 21,
             "in_loop": false
         }
     ],
     "edges": [
         {
-            "source": "n1",
-            "target": "n2",
+            "source": "n20",
+            "target": "n21",
             "type": "control",
             "var": ""
         },
         {
-            "source": "n3",
+            "source": "n1",
+            "target": "n2",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n1",
+            "target": "n3",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n1",
             "target": "n4",
             "type": "control",
-            "var": ""
+            "var": "true"
+        },
+        {
+            "source": "n1",
+            "target": "n5",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n1",
+            "target": "n6",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n1",
+            "target": "n7",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n1",
+            "target": "n8",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n1",
+            "target": "n9",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n1",
+            "target": "n10",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n1",
+            "target": "n11",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n1",
+            "target": "n12",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n1",
+            "target": "n13",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n1",
+            "target": "n14",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n1",
+            "target": "n15",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n1",
+            "target": "n16",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n1",
+            "target": "n17",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n1",
+            "target": "n18",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n1",
+            "target": "n19",
+            "type": "control",
+            "var": "true"
         },
         {
             "source": "n4",
@@ -125,6 +252,12 @@
         },
         {
             "source": "n4",
+            "target": "n6",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n4",
             "target": "n7",
             "type": "control",
             "var": "true"
@@ -140,172 +273,82 @@
             "target": "n9",
             "type": "control",
             "var": "true"
-        },
-        {
-            "source": "n4",
-            "target": "n10",
-            "type": "control",
-            "var": "true"
-        },
-        {
-            "source": "n4",
-            "target": "n11",
-            "type": "control",
-            "var": "true"
-        },
-        {
-            "source": "n4",
-            "target": "n12",
-            "type": "control",
-            "var": "true"
-        },
-        {
-            "source": "n4",
-            "target": "n13",
-            "type": "control",
-            "var": "true"
-        },
-        {
-            "source": "n4",
-            "target": "n14",
-            "type": "control",
-            "var": "true"
-        },
-        {
-            "source": "n4",
-            "target": "n15",
-            "type": "control",
-            "var": "true"
-        },
-        {
-            "source": "n4",
-            "target": "n16",
-            "type": "control",
-            "var": "true"
-        },
-        {
-            "source": "n5",
-            "target": "n7",
-            "type": "control",
-            "var": ""
-        },
-        {
-            "source": "n7",
-            "target": "n8",
-            "type": "control",
-            "var": ""
-        },
-        {
-            "source": "n8",
-            "target": "n9",
-            "type": "control",
-            "var": ""
-        },
-        {
-            "source": "n9",
-            "target": "n10",
-            "type": "control",
-            "var": "true"
-        },
-        {
-            "source": "n10",
-            "target": "n11",
-            "type": "control",
-            "var": ""
-        },
-        {
-            "source": "n12",
-            "target": "n13",
-            "type": "control",
-            "var": ""
-        },
-        {
-            "source": "n13",
-            "target": "n14",
-            "type": "control",
-            "var": ""
-        },
-        {
-            "source": "n14",
-            "target": "n15",
-            "type": "control",
-            "var": ""
-        },
-        {
-            "source": "n15",
-            "target": "n16",
-            "type": "control",
-            "var": ""
         },
         {
             "source": "n2",
-            "target": "n4",
-            "type": "data",
-            "var": "listo"
-        },
-        {
-            "source": "n5",
-            "target": "n4",
-            "type": "data",
-            "var": "listo"
-        },
-        {
-            "source": "n16",
-            "target": "n4",
-            "type": "data",
-            "var": "listo"
-        },
-        {
-            "source": "n6",
-            "target": "n7",
+            "target": "n3",
             "type": "data",
             "var": "value"
         },
         {
-            "source": "n7",
-            "target": "n9",
+            "source": "n3",
+            "target": "n4",
             "type": "data",
             "var": "tiemporestante"
         },
         {
-            "source": "n7",
-            "target": "n10",
+            "source": "n3",
+            "target": "n6",
             "type": "data",
             "var": "tiemporestante"
         },
         {
-            "source": "n10",
-            "target": "n9",
+            "source": "n6",
+            "target": "n4",
             "type": "data",
             "var": "tiemporestante"
         },
         {
-            "source": "n10",
-            "target": "n10",
+            "source": "n6",
+            "target": "n6",
             "type": "data",
             "var": "tiemporestante"
         },
         {
-            "source": "n9",
-            "target": "n10",
+            "source": "n19",
+            "target": "n1",
             "type": "data",
-            "var": "condition"
+            "var": "listo"
+        },
+        {
+            "source": "n21",
+            "target": "n1",
+            "type": "data",
+            "var": "listo"
+        },
+        {
+            "source": "n5",
+            "target": "n8",
+            "type": "side_effect",
+            "var": "sound"
         },
         {
             "source": "n8",
+            "target": "n10",
+            "type": "side_effect",
+            "var": "sound"
+        },
+        {
+            "source": "n10",
             "target": "n12",
             "type": "side_effect",
             "var": "sound"
         },
         {
             "source": "n12",
-            "target": "n13",
+            "target": "n14",
             "type": "side_effect",
             "var": "sound"
         },
         {
-            "source": "n13",
-            "target": "n15",
+            "source": "n14",
+            "target": "n16",
+            "type": "side_effect",
+            "var": "sound"
+        },
+        {
+            "source": "n16",
+            "target": "n18",
             "type": "side_effect",
             "var": "sound"
         }

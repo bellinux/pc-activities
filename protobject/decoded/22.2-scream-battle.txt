@@ -1,30 +1,34 @@
 ACTIVIDAD: 22.2-scream-battle
 CODE: gritometro-tiempo-gritos
-COMPONENTES: ReproductorSonido1=AudioPlayer, NivelRuido2=NoiseLevel, DibujoLED3=MatrixDraw
+COMPONENTES: TecladoMusical1=PlayKeyboard, NivelRuido2=NoiseLevel, DibujoLED3=MatrixDraw
 
 REPETIR PARA SIEMPRE (bucle principal)
   SI
     [si var:partidaEnCurso]
-    ESTABLECER var:columna = 1
-    ESTABLECER var:fila = 1
+    ESTABLECER var:columna = 2
+    ESTABLECER var:fila = 2
     MIENTRAS (WHILE) (NivelRuido2.leer(noise) >= 5)
         ; // 'repetir mientras' da vueltas mientras el ruido sea 5 o más, o sea mientras dura el grito, y sale cuando te callas.
       DibujoLED3_drawOnXY_set_2  VAR=var:columna  VAR2=var:fila  VAR3=colour_picker(COLOUR=#ff4444)
           ; // Encendemos un LED rojo en la columna y la fila de ahora: cuanto más largo es el grito, más LEDs se encienden, hasta llenar la matriz.
-      ReproductorSonido1_play_set_2  VAR=sounds_list(VAR=shoppingCart.mp3)
-      ESPERAR  ms  VAR=500
-          ; // 'retraso de 500 milisegundos' espera medio segundo antes del siguiente LED, así cada LED encendido vale medio segundo de grito.
+      ESPERAR  ms  VAR=200
+          ; // 'retraso de 200 milisegundos' espera un momento antes del siguiente LED: cada LED encendido vale 200 milisegundos de grito, así que la pantalla se llena en 5 segundos.
       ESTABLECER var:columna = (var:columna + 1)
       SI
-        [si (var:columna > 7)]
-        ESTABLECER var:columna = 1
+        [si (var:columna > 6)]
+        ESTABLECER var:columna = 2
         ESTABLECER var:fila = (var:fila + 1)
       SI
-        [si (var:fila > 7)]
-        ESTABLECER var:fila = 1
-    ReproductorSonido1_play_set_2  VAR=sounds_list(VAR=shortMelody.mp3)
-    ESPERAR  s  VAR=5
-    ReproductorSonido1_stop_set_3
+        [si (var:fila > 6)]
+        ESTABLECER var:fila = 2
+    TecladoMusical1_play_set_1  VAR=control_note(VAR=60)
+        ; // Cuando termina el grito suenan tres notas que suben (do, mi, sol): la última se queda 5 segundos mientras miras el resultado.
+    ESPERAR  ms  VAR=200
+    TecladoMusical1_play_set_1  VAR=control_note(VAR=64)
+    ESPERAR  ms  VAR=200
+    TecladoMusical1_play_set_1  VAR=control_note(VAR=67)
+    ESPERAR  ms  VAR=5000
+    TecladoMusical1_stop_set_3
     DibujoLED3_clear_set_4
         ; // Apagamos toda la matriz para dejarla lista para el próximo grito.
     ESTABLECER var:partidaEnCurso = FALSE

@@ -14,18 +14,63 @@
                                 "type": "Operator",
                                 "label": "◻ > 400",
                                 "children": [
-                                    { "type": "Sensor", "label": "aceleración (mg) y", "children": [] }
+                                    {
+                                        "type": "Sensor",
+                                        "label": "aceleración (mg) x",
+                                        "children": []
+                                    }
                                 ]
                             },
                             {
                                 "type": "Branch_True",
                                 "label": "entonces",
                                 "children": [
-                                    { "type": "Action", "label": "mostrar LEDs", "children": [] },
-                                    { "type": "Action", "label": "reproduce secuencia (hola) en modo bucle en segundo plano", "children": [] },
-                                    { "type": "Action", "label": "pausa (ms) 6000", "children": [] },
-                                    { "type": "Action", "label": "borrar la pantalla", "children": [] },
-                                    { "type": "Action", "label": "para todos los sonidos", "children": [] }
+                                    {
+                                        "type": "Action",
+                                        "label": "mostrar LEDs",
+                                        "children": []
+                                    },
+                                    {
+                                        "type": "Loop",
+                                        "label": "repetir 8 veces",
+                                        "children": [
+                                            {
+                                                "type": "Action",
+                                                "label": "tono de timbre (Hz) Re#5",
+                                                "children": []
+                                            },
+                                            {
+                                                "type": "Action",
+                                                "label": "pausa (ms) 200",
+                                                "children": []
+                                            },
+                                            {
+                                                "type": "Action",
+                                                "label": "para todos los sonidos",
+                                                "children": []
+                                            },
+                                            {
+                                                "type": "Action",
+                                                "label": "pausa (ms) 500",
+                                                "children": []
+                                            },
+                                            {
+                                                "type": "Action",
+                                                "label": "tono de timbre (Hz) Re#5",
+                                                "children": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Action",
+                                        "label": "borrar la pantalla",
+                                        "children": []
+                                    },
+                                    {
+                                        "type": "Action",
+                                        "label": "para todos los sonidos",
+                                        "children": []
+                                    }
                                 ]
                             }
                         ]

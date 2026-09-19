@@ -3,15 +3,8 @@
     "ast": {
         "blocks": [
             {
-                "type": "Event",
-                "label": "al iniciar el programa",
-                "children": [
-                    { "type": "Assignment", "label": "establecer listo a verdadero", "children": [] }
-                ]
-            },
-            {
-                "type": "Event_Interrupt",
-                "label": "cuando BotónTáctil3 es tocado",
+                "type": "Loop",
+                "label": "repetir para siempre",
                 "children": [
                     {
                         "type": "Conditional",
@@ -21,7 +14,6 @@
                                 "type": "Branch_True",
                                 "label": "hacer",
                                 "children": [
-                                    { "type": "Assignment", "label": "establecer listo a falso", "children": [] },
                                     {
                                         "type": "Assignment",
                                         "label": "establecer tiempoRestante a ◻",
@@ -29,25 +21,39 @@
                                             { "type": "Operator", "label": "entero aleatorio de 5 a 15", "children": [] }
                                         ]
                                     },
-                                    { "type": "Action", "label": "reproducir sonido 'progreso' en ReproductorSonido3", "children": [] },
                                     {
                                         "type": "Loop",
                                         "label": "repetir mientras ◻",
                                         "children": [
                                             { "type": "Operator", "label": "tiempoRestante > 0", "children": [] },
+                                            { "type": "Action", "label": "tocar nota sol#3 en TecladoMusical3", "children": [] },
                                             { "type": "Assignment", "label": "añadir -1 a tiempoRestante", "children": [] },
-                                            { "type": "Action", "label": "retraso de 1 segundos", "children": [] }
+                                            { "type": "Action", "label": "retraso de 200 milisegundos", "children": [] },
+                                            { "type": "Action", "label": "detener en TecladoMusical3", "children": [] },
+                                            { "type": "Action", "label": "retraso de 800 milisegundos", "children": [] }
                                         ]
                                     },
-                                    { "type": "Action", "label": "detener sonido de ReproductorSonido3", "children": [] },
-                                    { "type": "Action", "label": "reproducir sonido 'reacción divertida' en ReproductorSonido3", "children": [] },
-                                    { "type": "Action", "label": "retraso de 4 segundos", "children": [] },
-                                    { "type": "Action", "label": "detener sonido de ReproductorSonido3", "children": [] },
-                                    { "type": "Assignment", "label": "establecer listo a verdadero", "children": [] }
+                                    { "type": "Action", "label": "tocar nota re#4 en TecladoMusical3", "children": [] },
+                                    { "type": "Action", "label": "retraso de 500 milisegundos", "children": [] },
+                                    { "type": "Action", "label": "tocar nota re4 en TecladoMusical3", "children": [] },
+                                    { "type": "Action", "label": "retraso de 500 milisegundos", "children": [] },
+                                    { "type": "Action", "label": "tocar nota do#4 en TecladoMusical3", "children": [] },
+                                    { "type": "Action", "label": "retraso de 500 milisegundos", "children": [] },
+                                    { "type": "Action", "label": "tocar nota do4 en TecladoMusical3", "children": [] },
+                                    { "type": "Action", "label": "retraso de 1000 milisegundos", "children": [] },
+                                    { "type": "Action", "label": "detener en TecladoMusical3", "children": [] },
+                                    { "type": "Assignment", "label": "establecer listo a falso", "children": [] }
                                 ]
                             }
                         ]
                     }
+                ]
+            },
+            {
+                "type": "Event_Interrupt",
+                "label": "cuando BotónTáctil3 es tocado",
+                "children": [
+                    { "type": "Assignment", "label": "establecer listo a verdadero", "children": [] }
                 ]
             }
         ]

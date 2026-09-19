@@ -1,10 +1,10 @@
 ACTIVIDAD: 16.4-robot-activation-challenge
 CODE: juego-toques
-COMPONENTES: BotónTáctil1=TouchButton, TecladoMusical3=PlayKeyboard, DibujoLED11=MatrixDraw
+COMPONENTES: TecladoMusical3=PlayKeyboard, DibujoLED11=MatrixDraw
 
 AL INICIAR
   ESTABLECER var:energia = 0
-      ; // Empieza la variable "energia" en 0: todavía no se ha tocado el botón ninguna vez.
+      ; // Empieza la variable "energia" en 0: todavía no se ha tocado la pantalla ninguna vez.
 
 REPETIR PARA SIEMPRE (bucle principal)
   SI
@@ -21,6 +21,6 @@ REPETIR PARA SIEMPRE (bucle principal)
     TecladoMusical3_play_set_1  VAR=control_note(VAR=69)
     ESPERAR  ms  VAR=900
 
-protobject_BotónTáctil1_change  property=pressed
+protobject_DibujoLED11_change  property=pressed
   AÑADIR 1 A var:energia
-      ; // Suma 1 a la variable "energia" cada vez que se aprieta el botón, así la variable cuenta cuántas veces lo has tocado.
+      ; // Suma 1 a la variable "energia" cada vez que se toca la pantalla, así la variable cuenta cuántas veces la has tocado.

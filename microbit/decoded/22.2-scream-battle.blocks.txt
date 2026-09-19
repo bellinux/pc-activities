@@ -1,28 +1,31 @@
 ACTIVIDAD: 22.2-scream-battle
-FUENTE: micro:bit / MakeCode 9.0.8 — "aplausometro-tiempo-aplausos"  (etiquetas oficiales es-ES)
+FUENTE: micro:bit / MakeCode 9.0.12 — "aplausometro-tiempo-aplausos"  (etiquetas oficiales es-ES)
 
 al iniciar:
-  fijar partidaEnCurso a falso
+  fijar partidaEnCurso a falso   // Creamos la variable 'partidaEnCurso' y la ponemos en falso: al empezar, no hay ninguna partida en curso.
 
 para siempre:
   si partidaEnCurso entonces:
     fijar columna a 0
     fijar fila a 0
-    mientras (nivel de sonido ≥ 5):
-      graficar x columna y fila
-      reproduce secuencia feliz en modo hasta que termine
-      pausa (ms) 200
+    mientras (nivel de sonido ≥ 20):   // 'mientras' da vueltas mientras el nivel de sonido sea 20 o más, o sea mientras dura el grito, y sale cuando te callas.
+      graficar x columna y fila   // Encendemos un LED en la columna y la fila de ahora: cuanto más largo es el grito, más LEDs se encienden, hasta llenar la pantalla.
+      pausa (ms) 200   // 'pausa (ms) 200' espera un momento antes del siguiente LED: cada LED encendido vale 200 milisegundos de grito, así que la pantalla se llena en 5 segundos.
       fijar columna a (columna + 1)
       si (columna > 4) entonces:
         fijar columna a 0
         fijar fila a (fila + 1)
       si (fila > 4) entonces:
         fijar fila a 0
-    reproduce secuencia risa en modo bucle en segundo plano
+    tono de timbre (Hz) Do   // Cuando termina el grito suenan tres notas que suben (do, mi, sol): la última se queda 5 segundos mientras miras el resultado.
+    pausa (ms) 200
+    tono de timbre (Hz) Mi
+    pausa (ms) 200
+    tono de timbre (Hz) Sol
     pausa (ms) 5000
     para todos los sonidos
-    borrar la pantalla
+    borrar la pantalla   // Apagamos toda la pantalla para dejarla lista para el próximo grito.
     fijar partidaEnCurso a falso
 
-al detectar el sonido alto:
+al detectar el sonido alto:   // 'al detectar el sonido alto' avisa que alguien ha empezado a gritar, y entonces ponemos 'partidaEnCurso' en verdadero.
   fijar partidaEnCurso a verdadero

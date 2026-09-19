@@ -5,9 +5,11 @@ al iniciar el programa:
   establecer ultimoPulso a 0
 
 repetir para siempre:
-  establecer bpm a (x in Inclinación1 + 60)
-  establecer intervaloPulso a (60000 ÷ bpm)
+  establecer bpm a ((x in Inclinación1 ÷ 2) + 60)   // Convierte la inclinación en bpm (pulsos por minuto): con el celular horizontal da 60, y al inclinarlo sube o baja como mucho unos 50.
+  establecer intervaloPulso a (60000 ÷ bpm)   // Calcula cuántos milisegundos hay entre un pulso y el siguiente: 60000 (los milisegundos de un minuto) dividido por los bpm.
   establecer tiempoTranscurrido a (milisegundos − ultimoPulso)
-  si (tiempoTranscurrido > intervaloPulso):
-    toca nota tom en BateríaMusical2   // Suena un golpe de batería: es el tic del metrónomo que marca el pulso.
-    establecer ultimoPulso a milisegundos
+  si (tiempoTranscurrido > intervaloPulso):   // Si el tiempo que pasó desde el último pulso ya supera el intervalo, es hora de un pulso nuevo.
+    establecer ultimoPulso a milisegundos   // Lo primero es guardar el momento de este pulso: así el cronómetro vuelve a empezar justo desde aquí.
+    tocar nota do4 en TecladoMusical   // Suena un tic corto, de 100 milisegundos: es el pulso del metrónomo.
+    retraso de 100 milisegundos
+    detener en TecladoMusical

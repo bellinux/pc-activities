@@ -17,7 +17,7 @@
                         "type": "Conditional",
                         "label": "si ◻",
                         "children": [
-                            { "type": "Operator", "label": "energia < 7", "children": [] },
+                            { "type": "Operator", "label": "energia < 6", "children": [] },
                             {
                                 "type": "Branch_True",
                                 "label": "hacer",
@@ -49,9 +49,13 @@
                                 "type": "Branch_False",
                                 "label": "sino",
                                 "children": [
-                                    { "type": "Action", "label": "borrar dibujo en DibujoLED11", "children": [] },
                                     { "type": "Action", "label": "dibuja con color #ff0000 en DibujoLED11", "children": [] },
-                                    { "type": "Action", "label": "reproducir sonido 'celebración final' en ReproductorSonido3", "children": [] }
+                                    { "type": "Action", "label": "tocar nota re4 en TecladoMusical3", "children": [] },
+                                    { "type": "Action", "label": "retraso de 200 milisegundos", "children": [] },
+                                    { "type": "Action", "label": "tocar nota fa#4 en TecladoMusical3", "children": [] },
+                                    { "type": "Action", "label": "retraso de 200 milisegundos", "children": [] },
+                                    { "type": "Action", "label": "tocar nota la4 en TecladoMusical3", "children": [] },
+                                    { "type": "Action", "label": "retraso de 900 milisegundos", "children": [] }
                                 ]
                             }
                         ]
@@ -60,7 +64,7 @@
             },
             {
                 "type": "Event_Interrupt",
-                "label": "cuando BotónTáctil1 es tocado",
+                "label": "cuando DibujoLED11 es tocado",
                 "children": [
                     { "type": "Assignment", "label": "añadir 1 a energia", "children": [] }
                 ]

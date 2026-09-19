@@ -4,11 +4,13 @@
         "al iniciar el programa:",
         "  establecer ultimoPulso a 0",
         "repetir para siempre:",
-        "  establecer bpm a ((x in Inclinación1) + 60)",
+        "  establecer bpm a (((x in Inclinación1) ÷ 2) + 60)",
         "  establecer intervaloPulso a (60000 ÷ bpm)",
         "  establecer tiempoTranscurrido a (milisegundos − ultimoPulso)",
         "  si (tiempoTranscurrido > intervaloPulso):",
-        "    toca nota tom en BateríaMusical2",
-        "    establecer ultimoPulso a milisegundos"
+        "    establecer ultimoPulso a milisegundos",
+        "    tocar nota do4 en TecladoMusical",
+        "    retraso de 100 milisegundos",
+        "    detener en TecladoMusical"
     ]
 }

@@ -3,15 +3,8 @@
     "ast": {
         "blocks": [
             {
-                "type": "Event",
-                "label": "al iniciar",
-                "children": [
-                    { "type": "Assignment", "label": "fijar listo a verdadero", "children": [] }
-                ]
-            },
-            {
-                "type": "Event_Interrupt",
-                "label": "al tocar el logotipo",
+                "type": "Loop",
+                "label": "para siempre",
                 "children": [
                     {
                         "type": "Conditional",
@@ -21,7 +14,6 @@
                                 "type": "Branch_True",
                                 "label": "entonces",
                                 "children": [
-                                    { "type": "Assignment", "label": "fijar listo a falso", "children": [] },
                                     {
                                         "type": "Assignment",
                                         "label": "fijar tiempoRestante a ◻",
@@ -29,25 +21,39 @@
                                             { "type": "Operator", "label": "escoger al azar de 5 a 15", "children": [] }
                                         ]
                                     },
-                                    { "type": "Action", "label": "reproduce (baddy) bucle en segundo plano", "children": [] },
                                     {
                                         "type": "Loop",
                                         "label": "mientras ◻",
                                         "children": [
                                             { "type": "Operator", "label": "tiempoRestante > 0", "children": [] },
+                                            { "type": "Action", "label": "tono de timbre (Hz) Sol#3", "children": [] },
                                             { "type": "Assignment", "label": "cambiar tiempoRestante por -1", "children": [] },
-                                            { "type": "Action", "label": "pausa (ms) 1000", "children": [] }
+                                            { "type": "Action", "label": "pausa (ms) 200", "children": [] },
+                                            { "type": "Action", "label": "para todos los sonidos", "children": [] },
+                                            { "type": "Action", "label": "pausa (ms) 800", "children": [] }
                                         ]
                                     },
+                                    { "type": "Action", "label": "tono de timbre (Hz) Re#", "children": [] },
+                                    { "type": "Action", "label": "pausa (ms) 500", "children": [] },
+                                    { "type": "Action", "label": "tono de timbre (Hz) Re", "children": [] },
+                                    { "type": "Action", "label": "pausa (ms) 500", "children": [] },
+                                    { "type": "Action", "label": "tono de timbre (Hz) Do#", "children": [] },
+                                    { "type": "Action", "label": "pausa (ms) 500", "children": [] },
+                                    { "type": "Action", "label": "tono de timbre (Hz) Do", "children": [] },
+                                    { "type": "Action", "label": "pausa (ms) 1000", "children": [] },
                                     { "type": "Action", "label": "para todos los sonidos", "children": [] },
-                                    { "type": "Action", "label": "reproduce (wawawawaa) en segundo plano", "children": [] },
-                                    { "type": "Action", "label": "pausa (ms) 4000", "children": [] },
-                                    { "type": "Action", "label": "para todos los sonidos", "children": [] },
-                                    { "type": "Assignment", "label": "fijar listo a verdadero", "children": [] }
+                                    { "type": "Assignment", "label": "fijar listo a falso", "children": [] }
                                 ]
                             }
                         ]
                     }
+                ]
+            },
+            {
+                "type": "Event_Interrupt",
+                "label": "al tocar el logotipo",
+                "children": [
+                    { "type": "Assignment", "label": "fijar listo a verdadero", "children": [] }
                 ]
             }
         ]

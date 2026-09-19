@@ -2,7 +2,7 @@ ACTIVIDAD: 16.4-robot-activation-challenge
 FUENTE: Protobject (bloques, etiquetas oficiales es)
 
 al iniciar el programa:
-  establecer energia a 0   // Empieza la variable "energia" en 0: todavía no se ha tocado el botón ninguna vez.
+  establecer energia a 0   // Empieza la variable "energia" en 0: todavía no se ha tocado la pantalla ninguna vez.
 
 repetir para siempre:
   si (energia < 6):
@@ -25,5 +25,5 @@ repetir para siempre:
     tocar nota la4 en TecladoMusical3
     retraso de 900 milisegundos
 
-cuando BotónTáctil1 es tocado:
-  añadir 1 a energia   // Suma 1 a la variable "energia" cada vez que se aprieta el botón, así la variable cuenta cuántas veces lo has tocado.
+cuando DibujoLED11 es tocado:
+  añadir 1 a energia   // Suma 1 a la variable "energia" cada vez que se toca la pantalla, así la variable cuenta cuántas veces la has tocado.

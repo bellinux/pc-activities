@@ -19,9 +19,15 @@
                         "children": [
                             {
                                 "type": "Operator",
-                                "label": "◻ + 600",
+                                "label": "◻ + 60",
                                 "children": [
-                                    { "type": "Sensor", "label": "aceleración (mg) x", "children": [] }
+                                    {
+                                        "type": "Operator",
+                                        "label": "◻ ÷ 20",
+                                        "children": [
+                                            { "type": "Sensor", "label": "aceleración (mg) x", "children": [] }
+                                        ]
+                                    }
                                 ]
                             }
                         ]
@@ -55,14 +61,16 @@
                                 "type": "Branch_True",
                                 "label": "entonces",
                                 "children": [
-                                    { "type": "Action", "label": "reproduce secuencia (tono La#3 durante (1/4 pulso)) en modo hasta que termine", "children": [] },
                                     {
                                         "type": "Assignment",
                                         "label": "fijar ultimoPulso a ◻",
                                         "children": [
                                             { "type": "Sensor", "label": "tiempo de ejecución (ms)", "children": [] }
                                         ]
-                                    }
+                                    },
+                                    { "type": "Action", "label": "tono de timbre (Hz) Do", "children": [] },
+                                    { "type": "Action", "label": "pausa (ms) 100", "children": [] },
+                                    { "type": "Action", "label": "para todos los sonidos", "children": [] }
                                 ]
                             }
                         ]

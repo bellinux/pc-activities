@@ -19,7 +19,7 @@
                         "children": [
                             {
                                 "type": "Operator",
-                                "label": "◻ + 1023",
+                                "label": "◻ + 615",
                                 "children": [
                                     { "type": "Sensor", "label": "aceleración (mg) x", "children": [] }
                                 ]
@@ -36,7 +36,7 @@
                                 "children": [
                                     {
                                         "type": "Operator",
-                                        "label": "◻ ÷ 2046",
+                                        "label": "◻ ÷ 1640",
                                         "children": [
                                             { "type": "Operator", "label": "xDesplazado × 4", "children": [] }
                                         ]
@@ -51,7 +51,7 @@
                         "children": [
                             {
                                 "type": "Operator",
-                                "label": "◻ + 1023",
+                                "label": "◻ + 615",
                                 "children": [
                                     { "type": "Sensor", "label": "aceleración (mg) y", "children": [] }
                                 ]
@@ -68,7 +68,7 @@
                                 "children": [
                                     {
                                         "type": "Operator",
-                                        "label": "◻ ÷ 2046",
+                                        "label": "◻ ÷ 1640",
                                         "children": [
                                             { "type": "Operator", "label": "yDesplazado × 4", "children": [] }
                                         ]
@@ -124,8 +124,7 @@
                                                 "type": "Branch_True",
                                                 "label": "entonces",
                                                 "children": [
-                                                    { "type": "Action", "label": "reproduce secuencia (tono Fa3 durante (1/8 pulso)) en modo en segundo plano", "children": [] },
-                                                    { "type": "Action", "label": "pausa (ms) 100", "children": [] },
+                                                    { "type": "Action", "label": "tono de timbre (Hz) Do", "children": [] },
                                                     { "type": "Assignment", "label": "fijar debeSonarAlarma a falso", "children": [] }
                                                 ]
                                             }
@@ -138,9 +137,10 @@
                                 "label": "si no",
                                 "children": [
                                     { "type": "Action", "label": "graficar x ledX y ledY", "children": [] },
-                                    { "type": "Action", "label": "detener la melodía todos", "children": [] },
                                     { "type": "Action", "label": "pausa (ms) 100", "children": [] },
-                                    { "type": "Action", "label": "reproduce secuencia (tono Re5 durante (1/8 pulso)) en modo en segundo plano", "children": [] },
+                                    { "type": "Action", "label": "tono de timbre (Hz) Sol5", "children": [] },
+                                    { "type": "Action", "label": "pausa (ms) 100", "children": [] },
+                                    { "type": "Action", "label": "para todos los sonidos", "children": [] },
                                     { "type": "Assignment", "label": "fijar debeSonarAlarma a verdadero", "children": [] }
                                 ]
                             }

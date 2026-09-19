@@ -14,18 +14,63 @@
                                 "type": "Operator",
                                 "label": "◻ > 20",
                                 "children": [
-                                    { "type": "Sensor", "label": "x in Inclinación1", "children": [] }
+                                    {
+                                        "type": "Sensor",
+                                        "label": "x in Inclinación1",
+                                        "children": []
+                                    }
                                 ]
                             },
                             {
                                 "type": "Branch_True",
                                 "label": "hacer",
                                 "children": [
-                                    { "type": "Action", "label": "dibuja con color #2277aa en DibujoLED2", "children": [] },
-                                    { "type": "Action", "label": "reproducir sonido 'emergencia' en ReproductorSonido3", "children": [] },
-                                    { "type": "Action", "label": "retraso de 6 segundos", "children": [] },
-                                    { "type": "Action", "label": "borrar dibujo en DibujoLED2", "children": [] },
-                                    { "type": "Action", "label": "detener sonido de ReproductorSonido3", "children": [] }
+                                    {
+                                        "type": "Action",
+                                        "label": "dibuja con color #2277aa en DibujoLED2",
+                                        "children": []
+                                    },
+                                    {
+                                        "type": "Loop",
+                                        "label": "repetir 8 veces",
+                                        "children": [
+                                            {
+                                                "type": "Action",
+                                                "label": "tocar nota re#5 en TecladoMusical3",
+                                                "children": []
+                                            },
+                                            {
+                                                "type": "Action",
+                                                "label": "retraso de 200 milisegundos",
+                                                "children": []
+                                            },
+                                            {
+                                                "type": "Action",
+                                                "label": "detener en TecladoMusical3",
+                                                "children": []
+                                            },
+                                            {
+                                                "type": "Action",
+                                                "label": "retraso de 500 milisegundos",
+                                                "children": []
+                                            },
+                                            {
+                                                "type": "Action",
+                                                "label": "tocar nota re#5 en TecladoMusical3",
+                                                "children": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Action",
+                                        "label": "borrar dibujo en DibujoLED2",
+                                        "children": []
+                                    },
+                                    {
+                                        "type": "Action",
+                                        "label": "detener en TecladoMusical3",
+                                        "children": []
+                                    }
                                 ]
                             }
                         ]

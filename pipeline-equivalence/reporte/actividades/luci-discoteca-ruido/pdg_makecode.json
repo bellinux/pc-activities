@@ -5,15 +5,13 @@
             "id": "n1",
             "kind": "ClearDisplay",
             "seq": 1,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n2",
             "kind": "ReadSoundLevel",
             "seq": 2,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n3",
@@ -39,15 +37,13 @@
             "id": "n6",
             "kind": "PlotPoint",
             "seq": 6,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n7",
             "kind": "ReadSoundLevel",
             "seq": 7,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n8",
@@ -73,15 +69,13 @@
             "id": "n11",
             "kind": "PlotPoint",
             "seq": 11,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n12",
             "kind": "ReadSoundLevel",
             "seq": 12,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n13",
@@ -107,8 +101,7 @@
             "id": "n16",
             "kind": "PlotPoint",
             "seq": 16,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         }
     ],
     "edges": [

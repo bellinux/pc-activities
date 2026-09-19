@@ -16,7 +16,7 @@
         "    retraso de 200 milisegundos",
         "    tocar nota la4 en TecladoMusical3",
         "    retraso de 900 milisegundos",
-        "cuando BotónTáctil1 es tocado:",
+        "cuando DibujoLED11 es tocado:",
         "  añadir 1 a energia"
     ]
 }

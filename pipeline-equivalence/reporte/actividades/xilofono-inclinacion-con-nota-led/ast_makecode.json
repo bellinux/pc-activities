@@ -13,7 +13,7 @@
                     },
                     {
                         "type": "Action",
-                        "label": "graficar x ◻ y 2",
+                        "label": "graficar x 2 y ◻",
                         "children": [
                             {
                                 "type": "Operator",
@@ -29,7 +29,7 @@
                                                 "children": [
                                                     {
                                                         "type": "Sensor",
-                                                        "label": "aceleración (mg) x",
+                                                        "label": "aceleración (mg) y",
                                                         "children": []
                                                     }
                                                 ]
@@ -54,7 +54,7 @@
                                         "children": [
                                             {
                                                 "type": "Sensor",
-                                                "label": "aceleración (mg) x",
+                                                "label": "aceleración (mg) y",
                                                 "children": []
                                             }
                                         ]
@@ -66,6 +66,16 @@
                     {
                         "type": "Action",
                         "label": "pausa (ms) 100",
+                        "children": []
+                    },
+                    {
+                        "type": "Action",
+                        "label": "para todos los sonidos",
+                        "children": []
+                    },
+                    {
+                        "type": "Action",
+                        "label": "pausa (ms) 50",
                         "children": []
                     }
                 ]

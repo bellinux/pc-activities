@@ -34,7 +34,7 @@ def run_one(code):
     with open(pb, 'r', encoding='utf-8') as f:
         jb = json.load(f)
     # canonicalizar la var de las aristas de datos (determinista) y reescribir,
-    # para que los .json queden limpios y reproducibles (tilt_1 / pitch / value)
+    # para que los .json queden limpios y reproducibles (tilt_x / pitch / value)
     normalize_pdg(ja)
     normalize_pdg(jb)
     with open(pa, 'w', encoding='utf-8') as f:

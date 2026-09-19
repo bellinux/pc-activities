@@ -21,7 +21,13 @@
                                 "type": "Operator",
                                 "label": "◻ + 60",
                                 "children": [
-                                    { "type": "Sensor", "label": "x in Inclinación1", "children": [] }
+                                    {
+                                        "type": "Operator",
+                                        "label": "◻ ÷ 2",
+                                        "children": [
+                                            { "type": "Sensor", "label": "x in Inclinación1", "children": [] }
+                                        ]
+                                    }
                                 ]
                             }
                         ]
@@ -55,14 +61,16 @@
                                 "type": "Branch_True",
                                 "label": "hacer",
                                 "children": [
-                                    { "type": "Action", "label": "toca nota tom en BateríaMusical2", "children": [] },
                                     {
                                         "type": "Assignment",
                                         "label": "establecer ultimoPulso a ◻",
                                         "children": [
                                             { "type": "Sensor", "label": "milisegundos", "children": [] }
                                         ]
-                                    }
+                                    },
+                                    { "type": "Action", "label": "tocar nota do4 en TecladoMusical", "children": [] },
+                                    { "type": "Action", "label": "retraso de 100 milisegundos", "children": [] },
+                                    { "type": "Action", "label": "detener en TecladoMusical", "children": [] }
                                 ]
                             }
                         ]

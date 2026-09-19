@@ -3,17 +3,15 @@
     "nodes": [
         {
             "id": "n1",
-            "kind": "EmitSound",
+            "kind": "PlayTone",
             "seq": 1,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n2",
             "kind": "DrawImage",
             "seq": 2,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n3",
@@ -25,8 +23,7 @@
             "id": "n4",
             "kind": "StopSound",
             "seq": 4,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n5",
@@ -38,8 +35,7 @@
             "id": "n6",
             "kind": "DrawImage",
             "seq": 6,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n7",
@@ -51,8 +47,7 @@
             "id": "n8",
             "kind": "DrawImage",
             "seq": 8,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n9",

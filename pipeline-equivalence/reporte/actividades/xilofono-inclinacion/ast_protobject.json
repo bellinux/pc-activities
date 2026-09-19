@@ -33,6 +33,16 @@
                         "type": "Action",
                         "label": "retraso de 100 milisegundos",
                         "children": []
+                    },
+                    {
+                        "type": "Action",
+                        "label": "detener en TecladoMusical1",
+                        "children": []
+                    },
+                    {
+                        "type": "Action",
+                        "label": "retraso de 50 milisegundos",
+                        "children": []
                     }
                 ]
             }

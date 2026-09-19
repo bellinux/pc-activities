@@ -19,7 +19,7 @@
                         "children": [
                             {
                                 "type": "Operator",
-                                "label": "◻ + 100",
+                                "label": "◻ + 140",
                                 "children": [
                                     { "type": "Sensor", "label": "x in Inclinación1", "children": [] }
                                 ]
@@ -36,9 +36,9 @@
                                 "children": [
                                     {
                                         "type": "Operator",
-                                        "label": "◻ ÷ 198",
+                                        "label": "◻ ÷ 160",
                                         "children": [
-                                            { "type": "Operator", "label": "xDesplazado × 7", "children": [] }
+                                            { "type": "Operator", "label": "xDesplazado × 4", "children": [] }
                                         ]
                                     }
                                 ]
@@ -51,7 +51,7 @@
                         "children": [
                             {
                                 "type": "Operator",
-                                "label": "◻ + 100",
+                                "label": "◻ + 140",
                                 "children": [
                                     { "type": "Sensor", "label": "y in Inclinación1", "children": [] }
                                 ]
@@ -68,9 +68,9 @@
                                 "children": [
                                     {
                                         "type": "Operator",
-                                        "label": "◻ ÷ 198",
+                                        "label": "◻ ÷ 160",
                                         "children": [
-                                            { "type": "Operator", "label": "yDesplazado × 7", "children": [] }
+                                            { "type": "Operator", "label": "yDesplazado × 4", "children": [] }
                                         ]
                                     }
                                 ]
@@ -115,7 +115,7 @@
                                 "type": "Branch_True",
                                 "label": "hacer",
                                 "children": [
-                                    { "type": "Action", "label": "dibuja en x ledY y ledX con color #33cc00 en DibujoLED2", "children": [] },
+                                    { "type": "Action", "label": "dibuja en x ledX y ledY con color #ff0000 en DibujoLED2", "children": [] },
                                     {
                                         "type": "Conditional",
                                         "label": "si debeSonarAlarma",
@@ -125,7 +125,6 @@
                                                 "label": "hacer",
                                                 "children": [
                                                     { "type": "Action", "label": "tocar nota do4 en TecladoMusical3", "children": [] },
-                                                    { "type": "Action", "label": "retraso de 100 milisegundos", "children": [] },
                                                     { "type": "Assignment", "label": "establecer debeSonarAlarma a falso", "children": [] }
                                                 ]
                                             }
@@ -137,10 +136,11 @@
                                 "type": "Branch_False",
                                 "label": "sino",
                                 "children": [
-                                    { "type": "Action", "label": "dibuja en x ledY y ledX con color #ff4444 en DibujoLED2", "children": [] },
-                                    { "type": "Action", "label": "detener en TecladoMusical3", "children": [] },
+                                    { "type": "Action", "label": "dibuja en x ledX y ledY con color #ff4444 en DibujoLED2", "children": [] },
                                     { "type": "Action", "label": "retraso de 100 milisegundos", "children": [] },
                                     { "type": "Action", "label": "tocar nota sol5 en TecladoMusical3", "children": [] },
+                                    { "type": "Action", "label": "retraso de 100 milisegundos", "children": [] },
+                                    { "type": "Action", "label": "detener en TecladoMusical3", "children": [] },
                                     { "type": "Assignment", "label": "establecer debeSonarAlarma a verdadero", "children": [] }
                                 ]
                             }

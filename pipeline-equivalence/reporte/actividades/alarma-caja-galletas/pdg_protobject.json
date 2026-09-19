@@ -6,7 +6,7 @@
             "kind": "ReadTilt",
             "seq": 1,
             "in_loop": true,
-            "resId": 1
+            "resId": "x"
         },
         {
             "id": "n2",
@@ -24,35 +24,55 @@
             "id": "n4",
             "kind": "DrawImage",
             "seq": 4,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n5",
-            "kind": "PlaySound",
+            "kind": "RepeatN",
             "seq": 5,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n6",
-            "kind": "Delay",
+            "kind": "PlayTone",
             "seq": 6,
             "in_loop": true
         },
         {
             "id": "n7",
-            "kind": "ClearDisplay",
+            "kind": "Delay",
             "seq": 7,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n8",
             "kind": "StopSound",
             "seq": 8,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
+        },
+        {
+            "id": "n9",
+            "kind": "Delay",
+            "seq": 9,
+            "in_loop": true
+        },
+        {
+            "id": "n10",
+            "kind": "PlayTone",
+            "seq": 10,
+            "in_loop": true
+        },
+        {
+            "id": "n11",
+            "kind": "ClearDisplay",
+            "seq": 11,
+            "in_loop": true
+        },
+        {
+            "id": "n12",
+            "kind": "StopSound",
+            "seq": 12,
+            "in_loop": true
         }
     ],
     "edges": [
@@ -60,7 +80,7 @@
             "source": "n1",
             "target": "n2",
             "type": "data",
-            "var": "tilt_1"
+            "var": "tilt_x"
         },
         {
             "source": "n2",
@@ -82,31 +102,67 @@
         },
         {
             "source": "n3",
+            "target": "n11",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n3",
+            "target": "n12",
+            "type": "control",
+            "var": "true"
+        },
+        {
+            "source": "n5",
             "target": "n6",
             "type": "control",
-            "var": "true"
+            "var": "body"
         },
         {
-            "source": "n3",
+            "source": "n6",
             "target": "n7",
             "type": "control",
-            "var": "true"
+            "var": ""
         },
         {
-            "source": "n3",
+            "source": "n7",
             "target": "n8",
             "type": "control",
-            "var": "true"
+            "var": ""
+        },
+        {
+            "source": "n8",
+            "target": "n9",
+            "type": "control",
+            "var": ""
+        },
+        {
+            "source": "n9",
+            "target": "n10",
+            "type": "control",
+            "var": ""
         },
         {
             "source": "n4",
-            "target": "n7",
+            "target": "n11",
             "type": "side_effect",
             "var": "display"
         },
         {
-            "source": "n5",
+            "source": "n6",
             "target": "n8",
+            "type": "side_effect",
+            "var": "sound"
+        },
+        {
+            "source": "n8",
+            "target": "n10",
+            "type": "side_effect",
+            "var": "sound"
+        },
+        {
+            "source": "n10",
+            "target": "n12",
             "type": "side_effect",
             "var": "sound"
         }

@@ -36,10 +36,9 @@
                                             { "type": "Action", "label": "escoger al azar de 1 a 3", "children": [] }
                                         ]
                                     },
-                                    { "type": "Action", "label": "pausa (ms) 200", "children": [] },
+                                    { "type": "Action", "label": "pausa (ms) 700", "children": [] },
                                     { "type": "Action", "label": "mostrar LEDs", "children": [] },
-                                    { "type": "Action", "label": "graficar x 2 y 0", "children": [] },
-                                    { "type": "Action", "label": "pausa (ms) 200", "children": [] }
+                                    { "type": "Action", "label": "pausa (ms) 100", "children": [] }
                                 ]
                             },
                             {

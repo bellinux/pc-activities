@@ -1,16 +1,22 @@
 ACTIVIDAD: 22.1-dj-metronome
 CODE: metronomo-con-inclinacion
-COMPONENTES: Inclinación1=SmartphoneOrientation, BateríaMusical2=PlayDrum
+COMPONENTES: Inclinación1=SmartphoneOrientation, TecladoMusical=PlayKeyboard
 
 AL INICIAR
   ESTABLECER var:ultimoPulso = 0
 
 REPETIR PARA SIEMPRE (bucle principal)
-  ESTABLECER var:bpm = (Inclinación1.leer(oriX) + 60)
+  ESTABLECER var:bpm = ((Inclinación1.leer(oriX) / 2) + 60)
+      ; // Convierte la inclinación en bpm (pulsos por minuto): con el celular horizontal da 60, y al inclinarlo sube o baja como mucho unos 50.
   ESTABLECER var:intervaloPulso = (60000 / var:bpm)
+      ; // Calcula cuántos milisegundos hay entre un pulso y el siguiente: 60000 (los milisegundos de un minuto) dividido por los bpm.
   ESTABLECER var:tiempoTranscurrido = (protobject_milliseconds() - var:ultimoPulso)
   SI
+      ; // Si el tiempo que pasó desde el último pulso ya supera el intervalo, es hora de un pulso nuevo.
     [si (var:tiempoTranscurrido > var:intervaloPulso)]
-    BateríaMusical2_play_set_1  VAR=control_drum(VAR=1)
-        ; // Suena un golpe de batería: es el tic del metrónomo que marca el pulso.
     ESTABLECER var:ultimoPulso = protobject_milliseconds()
+        ; // Lo primero es guardar el momento de este pulso: así el cronómetro vuelve a empezar justo desde aquí.
+    TecladoMusical_play_set_1  VAR=control_note(VAR=60)
+        ; // Suena un tic corto, de 100 milisegundos: es el pulso del metrónomo.
+    ESPERAR  ms  VAR=100
+    TecladoMusical_stop_set_3

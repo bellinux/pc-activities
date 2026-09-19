@@ -2,9 +2,9 @@
     "isomorphic": true,
     "graph_edit_distance": 0.0,
     "ged_exact": true,
-    "nodes_G1": 11,
-    "nodes_G2": 11,
-    "edges_G1": 11,
-    "edges_G2": 11,
+    "nodes_G1": 13,
+    "nodes_G2": 13,
+    "edges_G1": 14,
+    "edges_G2": 14,
     "order_hint": false
 }

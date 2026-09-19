@@ -229,6 +229,9 @@ var locutions = {
 		withColour: "con color",
 		onTxt: "en",
 		setBg: "establecer color de fondo a",
+		touched: "presionado",
+		pressedEv: "es tocado",
+		releasedEv: "es soltado",
 	},
 	interactiveTurtleDraw: {
 		touched: "presionado",

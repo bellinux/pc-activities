@@ -3,17 +3,15 @@
     "nodes": [
         {
             "id": "n1",
-            "kind": "DrawImage",
+            "kind": "PlayTone",
             "seq": 1,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n2",
-            "kind": "EmitSound",
+            "kind": "DrawImage",
             "seq": 2,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n3",
@@ -23,10 +21,9 @@
         },
         {
             "id": "n4",
-            "kind": "EmitSound",
+            "kind": "StopSound",
             "seq": 4,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n5",
@@ -36,58 +33,55 @@
         },
         {
             "id": "n6",
-            "kind": "DrawImage",
+            "kind": "PlayTone",
             "seq": 6,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n7",
-            "kind": "Delay",
+            "kind": "DrawImage",
             "seq": 7,
             "in_loop": true
         },
         {
             "id": "n8",
-            "kind": "DrawImage",
+            "kind": "Delay",
             "seq": 8,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n9",
-            "kind": "Delay",
+            "kind": "StopSound",
             "seq": 9,
             "in_loop": true
         },
         {
             "id": "n10",
-            "kind": "ProgramStartEvent",
+            "kind": "PlayTone",
             "seq": 10,
-            "in_loop": false
+            "in_loop": true
         },
         {
             "id": "n11",
-            "kind": "SetVariable",
+            "kind": "DrawImage",
             "seq": 11,
-            "in_loop": false
+            "in_loop": true
         },
         {
             "id": "n12",
-            "kind": "SetVariable",
+            "kind": "Delay",
             "seq": 12,
-            "in_loop": false
+            "in_loop": true
         },
         {
             "id": "n13",
-            "kind": "OnTiltGestureEvent",
+            "kind": "StopSound",
             "seq": 13,
-            "in_loop": false,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n14",
-            "kind": "SetVariable",
+            "kind": "ProgramStartEvent",
             "seq": 14,
             "in_loop": false
         },
@@ -99,14 +93,13 @@
         },
         {
             "id": "n16",
-            "kind": "OnTiltGestureEvent",
+            "kind": "SetVariable",
             "seq": 16,
-            "in_loop": false,
-            "resId": 1
+            "in_loop": false
         },
         {
             "id": "n17",
-            "kind": "SetVariable",
+            "kind": "OnTiltGestureEvent",
             "seq": 17,
             "in_loop": false
         },
@@ -114,6 +107,30 @@
             "id": "n18",
             "kind": "SetVariable",
             "seq": 18,
+            "in_loop": false
+        },
+        {
+            "id": "n19",
+            "kind": "SetVariable",
+            "seq": 19,
+            "in_loop": false
+        },
+        {
+            "id": "n20",
+            "kind": "OnTiltGestureEvent",
+            "seq": 20,
+            "in_loop": false
+        },
+        {
+            "id": "n21",
+            "kind": "SetVariable",
+            "seq": 21,
+            "in_loop": false
+        },
+        {
+            "id": "n22",
+            "kind": "SetVariable",
+            "seq": 22,
             "in_loop": false
         }
     ],
@@ -167,6 +184,12 @@
             "var": ""
         },
         {
+            "source": "n9",
+            "target": "n10",
+            "type": "control",
+            "var": ""
+        },
+        {
             "source": "n10",
             "target": "n11",
             "type": "control",
@@ -179,8 +202,8 @@
             "var": ""
         },
         {
-            "source": "n13",
-            "target": "n14",
+            "source": "n12",
+            "target": "n13",
             "type": "control",
             "var": ""
         },
@@ -191,8 +214,8 @@
             "var": ""
         },
         {
-            "source": "n16",
-            "target": "n17",
+            "source": "n15",
+            "target": "n16",
             "type": "control",
             "var": ""
         },
@@ -203,74 +226,116 @@
             "var": ""
         },
         {
-            "source": "n11",
-            "target": "n3",
-            "type": "data",
-            "var": "pausalarga"
+            "source": "n18",
+            "target": "n19",
+            "type": "control",
+            "var": ""
         },
         {
-            "source": "n14",
-            "target": "n3",
-            "type": "data",
-            "var": "pausalarga"
+            "source": "n20",
+            "target": "n21",
+            "type": "control",
+            "var": ""
         },
         {
-            "source": "n17",
-            "target": "n3",
-            "type": "data",
-            "var": "pausalarga"
-        },
-        {
-            "source": "n12",
-            "target": "n7",
-            "type": "data",
-            "var": "pausacorta"
-        },
-        {
-            "source": "n12",
-            "target": "n9",
-            "type": "data",
-            "var": "pausacorta"
+            "source": "n21",
+            "target": "n22",
+            "type": "control",
+            "var": ""
         },
         {
             "source": "n15",
-            "target": "n7",
+            "target": "n3",
             "type": "data",
-            "var": "pausacorta"
-        },
-        {
-            "source": "n15",
-            "target": "n9",
-            "type": "data",
-            "var": "pausacorta"
+            "var": "pausalarga"
         },
         {
             "source": "n18",
-            "target": "n7",
+            "target": "n3",
             "type": "data",
-            "var": "pausacorta"
+            "var": "pausalarga"
         },
         {
-            "source": "n18",
-            "target": "n9",
+            "source": "n21",
+            "target": "n3",
             "type": "data",
-            "var": "pausacorta"
+            "var": "pausalarga"
         },
         {
-            "source": "n1",
-            "target": "n6",
-            "type": "side_effect",
-            "var": "display"
-        },
-        {
-            "source": "n6",
+            "source": "n16",
             "target": "n8",
-            "type": "side_effect",
-            "var": "display"
+            "type": "data",
+            "var": "pausacorta"
+        },
+        {
+            "source": "n16",
+            "target": "n12",
+            "type": "data",
+            "var": "pausacorta"
+        },
+        {
+            "source": "n19",
+            "target": "n8",
+            "type": "data",
+            "var": "pausacorta"
+        },
+        {
+            "source": "n19",
+            "target": "n12",
+            "type": "data",
+            "var": "pausacorta"
+        },
+        {
+            "source": "n22",
+            "target": "n8",
+            "type": "data",
+            "var": "pausacorta"
+        },
+        {
+            "source": "n22",
+            "target": "n12",
+            "type": "data",
+            "var": "pausacorta"
         },
         {
             "source": "n2",
+            "target": "n7",
+            "type": "side_effect",
+            "var": "display"
+        },
+        {
+            "source": "n7",
+            "target": "n11",
+            "type": "side_effect",
+            "var": "display"
+        },
+        {
+            "source": "n1",
             "target": "n4",
+            "type": "side_effect",
+            "var": "sound"
+        },
+        {
+            "source": "n4",
+            "target": "n6",
+            "type": "side_effect",
+            "var": "sound"
+        },
+        {
+            "source": "n6",
+            "target": "n9",
+            "type": "side_effect",
+            "var": "sound"
+        },
+        {
+            "source": "n9",
+            "target": "n10",
+            "type": "side_effect",
+            "var": "sound"
+        },
+        {
+            "source": "n10",
+            "target": "n13",
             "type": "side_effect",
             "var": "sound"
         }

@@ -18,7 +18,7 @@
             "kind": "ReadTilt",
             "seq": 3,
             "in_loop": true,
-            "resId": 1
+            "resId": "x"
         },
         {
             "id": "n4",
@@ -64,7 +64,7 @@
             "kind": "ReadTilt",
             "seq": 10,
             "in_loop": true,
-            "resId": 2
+            "resId": "y"
         },
         {
             "id": "n11",
@@ -161,8 +161,7 @@
             "id": "n25",
             "kind": "ClearDisplay",
             "seq": 25,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n26",
@@ -180,8 +179,7 @@
             "id": "n28",
             "kind": "PlotPoint",
             "seq": 28,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n29",
@@ -191,36 +189,33 @@
         },
         {
             "id": "n30",
-            "kind": "EmitSound",
+            "kind": "PlayTone",
             "seq": 30,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n31",
-            "kind": "Delay",
+            "kind": "SetVariable",
             "seq": 31,
             "in_loop": true
         },
         {
             "id": "n32",
-            "kind": "SetVariable",
+            "kind": "PlotPoint",
             "seq": 32,
             "in_loop": true
         },
         {
             "id": "n33",
-            "kind": "PlotPoint",
+            "kind": "Delay",
             "seq": 33,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n34",
-            "kind": "StopSound",
+            "kind": "PlayTone",
             "seq": 34,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n35",
@@ -230,10 +225,9 @@
         },
         {
             "id": "n36",
-            "kind": "EmitSound",
+            "kind": "StopSound",
             "seq": 36,
-            "in_loop": true,
-            "resId": 1
+            "in_loop": true
         },
         {
             "id": "n37",
@@ -316,10 +310,10 @@
             "var": "true"
         },
         {
-            "source": "n29",
+            "source": "n27",
             "target": "n32",
             "type": "control",
-            "var": "true"
+            "var": "false"
         },
         {
             "source": "n27",
@@ -355,7 +349,7 @@
             "source": "n3",
             "target": "n4",
             "type": "data",
-            "var": "tilt_1"
+            "var": "tilt_x"
         },
         {
             "source": "n4",
@@ -391,7 +385,7 @@
             "source": "n10",
             "target": "n11",
             "type": "data",
-            "var": "tilt_2"
+            "var": "tilt_y"
         },
         {
             "source": "n11",
@@ -436,18 +430,6 @@
             "var": "ledx"
         },
         {
-            "source": "n16",
-            "target": "n21",
-            "type": "data",
-            "var": "ledy"
-        },
-        {
-            "source": "n16",
-            "target": "n22",
-            "type": "data",
-            "var": "ledy"
-        },
-        {
             "source": "n17",
             "target": "n19",
             "type": "data",
@@ -464,6 +446,18 @@
             "target": "n20",
             "type": "data",
             "var": "value"
+        },
+        {
+            "source": "n16",
+            "target": "n21",
+            "type": "data",
+            "var": "ledy"
+        },
+        {
+            "source": "n16",
+            "target": "n22",
+            "type": "data",
+            "var": "ledy"
         },
         {
             "source": "n21",
@@ -515,13 +509,13 @@
         },
         {
             "source": "n9",
-            "target": "n33",
+            "target": "n32",
             "type": "data",
             "var": "ledx"
         },
         {
             "source": "n16",
-            "target": "n33",
+            "target": "n32",
             "type": "data",
             "var": "ledy"
         },
@@ -532,7 +526,7 @@
             "var": "debesonaralarma"
         },
         {
-            "source": "n32",
+            "source": "n31",
             "target": "n29",
             "type": "data",
             "var": "debesonaralarma"
@@ -550,16 +544,10 @@
             "var": "display"
         },
         {
-            "source": "n28",
-            "target": "n33",
+            "source": "n25",
+            "target": "n32",
             "type": "side_effect",
             "var": "display"
-        },
-        {
-            "source": "n30",
-            "target": "n34",
-            "type": "side_effect",
-            "var": "sound"
         },
         {
             "source": "n34",
