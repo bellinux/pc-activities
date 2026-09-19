@@ -37,6 +37,7 @@
   .nav.c6{border-left-color:#c3e8b8}
   .nav.c7{border-left-color:#9333ea}
   .nav.c8{border-left-color:#0f766e}
+  .nav.c9{border-left-color:#c2410c}
   .nav .ic{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
   .c1 .ic{background:#eef0fe;color:#4f46e5}
   .c2 .ic{background:#e9f6ee;color:#1f7a45}
@@ -45,10 +46,11 @@
   .c5 .ic{background:#f6e9e7;color:#8B2418}
   .c7 .ic{background:#f3e8ff;color:#9333ea}
   .c8 .ic{background:#e0f2f0;color:#0f766e}
+  .c9 .ic{background:#fff1e6;color:#c2410c}
   .nav h3{margin:0 0 5px;font-size:17px}
   .nav p{margin:0;font-size:13.5px;color:var(--muted);line-height:1.55}
   .nav .go{margin-top:10px;font-size:12.5px;font-weight:600;color:var(--indigo)}
-  .c2 .go{color:#1f7a45}.c3 .go{color:#b06f12}.c4 .go{color:#0e7490}.c5 .go{color:#8B2418}.c7 .go{color:#9333ea}.c8 .go{color:#0f766e}
+  .c2 .go{color:#1f7a45}.c3 .go{color:#b06f12}.c4 .go{color:#0e7490}.c5 .go{color:#8B2418}.c7 .go{color:#9333ea}.c8 .go{color:#0f766e}.c9 .go{color:#c2410c}
   table.org{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px;background:var(--card);
     border:1px solid var(--line);border-radius:10px;overflow:hidden}
   table.org td{padding:8px 14px;border-bottom:1px solid var(--line);vertical-align:top}
@@ -147,6 +149,15 @@
       </div>
     </a>
 
+    <a class="cardlink" href="adaptador/">
+      <div class="nav c9">
+        <div class="ic"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path stroke-linecap="round" stroke-linejoin="round" d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/></svg></div>
+        <h3>Adaptador micro:bit tamaño celular</h3>
+        <p>Pieza 3D paramétrica para que el micro:bit tenga la medida de un celular y calce en los mismos cartones: frente con la ventana de los LED y los botones A y B, portapilas 2×AAA y descarga en <b>STL</b>. <em>En construcción.</em></p>
+        <div class="go">Abrir el adaptador →</div>
+      </div>
+    </a>
+
   </div>
 
   <h2>Organización del proyecto</h2>
@@ -158,6 +169,7 @@
     <tr><td class="path">revision_equivalencia.html</td><td>La revisión actividad por actividad de la equivalencia funcional Protobject ↔ micro:bit.</td></tr>
     <tr><td class="path">revision_textos.html</td><td>Revisión de las 17 fichas <code>.md</code> frente al código actual (texto↔código, remisiones cruzadas, redacción es-CL).</td></tr>
     <tr><td class="path">propuestas_refactorizacion.html</td><td>Propuestas de refactorización didáctica de los 17 algoritmos, escritas en el lenguaje de bloques común (no se aplicó ninguna).</td></tr>
+    <tr><td class="path">adaptador/</td><td>Pieza 3D paramétrica para llevar el micro:bit al tamaño de un celular (parámetros guardados en el navegador, descarga STL).</td></tr>
     <tr><td class="path">_activities/</td><td>Las 17 fichas de actividad en español (<code>.es.md</code>) más las base trilingües.</td></tr>
     <tr><td class="path">src/ · microbit/</td><td>Imágenes y videos por actividad · firmware <code>.hex</code> para micro:bit.</td></tr>
     <tr><td class="path">protobject/</td><td>Código Blockly real decodificado (<code>.ptj</code>/<code>.xml</code> + pseudocódigo) y el decodificador.</td></tr>
