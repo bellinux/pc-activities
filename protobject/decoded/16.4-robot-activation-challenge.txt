@@ -1,6 +1,6 @@
 ACTIVIDAD: 16.4-robot-activation-challenge
 CODE: juego-toques
-COMPONENTES: BotónTáctil1=TouchButton, ReproductorSonido3=AudioPlayer, DibujoLED11=MatrixDraw
+COMPONENTES: BotónTáctil1=TouchButton, TecladoMusical3=PlayKeyboard, DibujoLED11=MatrixDraw
 
 AL INICIAR
   ESTABLECER var:energia = 0
@@ -8,14 +8,18 @@ AL INICIAR
 
 REPETIR PARA SIEMPRE (bucle principal)
   SI
-    [si (var:energia < 7)]
+    [si (var:energia < 6)]
     DibujoLED11_drawOnXY_set_2  VAR=3  VAR2=(8 - var:energia)  VAR3=colour_picker(COLOUR=#ff4444)
     DibujoLED11_drawOnXY_set_2  VAR=4  VAR2=(8 - var:energia)  VAR3=colour_picker(COLOUR=#ff4444)
     DibujoLED11_drawOnXY_set_2  VAR=5  VAR2=(8 - var:energia)  VAR3=colour_picker(COLOUR=#ff4444)
     [sino]
-    DibujoLED11_clear_set_4
-    DibujoLED11_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,1,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,1,1,1,1,1,0)  VAR2=colour_picker(COLOUR=#ff0000)
-    ReproductorSonido3_play_set_2  VAR=sounds_list(VAR=shortMelody.mp3)
+    DibujoLED11_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
+    TecladoMusical3_play_set_1  VAR=control_note(VAR=62)
+    ESPERAR  ms  VAR=200
+    TecladoMusical3_play_set_1  VAR=control_note(VAR=66)
+    ESPERAR  ms  VAR=200
+    TecladoMusical3_play_set_1  VAR=control_note(VAR=69)
+    ESPERAR  ms  VAR=900
 
 protobject_BotónTáctil1_change  property=pressed
   AÑADIR 1 A var:energia

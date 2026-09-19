@@ -12,7 +12,6 @@ al iniciar el programa:
       .......
 
 cuando NivelRuido1 detecta aumento repentino:   // Cuando el ruido sube de golpe (por ejemplo, con un aplauso), se ejecuta todo lo que está dentro de este bloque.
-  reproducir sonido 'reacción divertida' en ReproductorSonido3   // Reproduce un sonido ya preparado.
   repetir 8 veces:
     dibuja con color #ff0000 en DibujoLED2:
         .......
@@ -23,6 +22,7 @@ cuando NivelRuido1 detecta aumento repentino:   // Cuando el ruido sube de golpe
         .......
         .......
     retraso de 500 milisegundos
+    tocar nota fa4 en TecladoMusical3
     dibuja con color #ff0000 en DibujoLED2:
         .......
         ..#.#..
@@ -32,7 +32,8 @@ cuando NivelRuido1 detecta aumento repentino:   // Cuando el ruido sube de golpe
         ..###..
         .......
     retraso de 500 milisegundos
-  detener sonido de ReproductorSonido3   // Corta la risa; sin este bloque, el sonido se repetiría sin parar.
+    tocar nota mi4 en TecladoMusical3
+  detener en TecladoMusical3   // Corta la risa; sin este bloque, la última nota seguiría sonando sin parar.
   dibuja con color #ff0000 en DibujoLED2:
       .......
       ..#.#..

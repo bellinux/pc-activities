@@ -10,7 +10,6 @@ al iniciar:
       . # # # .
 
 al detectar el sonido alto:   // Cuando el micrófono del dispositivo detecta un sonido fuerte, se ejecutarán las instrucciones dentro del bloque.
-  reproduce ba ding bucle en segundo plano   // Reproduce un sonido predeterminado.
   repetir 8 veces:
     mostrar LEDs:
         . # . # .
@@ -19,6 +18,7 @@ al detectar el sonido alto:   // Cuando el micrófono del dispositivo detecta un
         . # # # .
         . . . . .
     pausa (ms) 100
+    tono de timbre (Hz) Fa
     mostrar LEDs:
         . # . # .
         . . . . .
@@ -26,7 +26,8 @@ al detectar el sonido alto:   // Cuando el micrófono del dispositivo detecta un
         # . . . #
         . # # # .
     pausa (ms) 100
-  detener la melodía todos   // Corta la risa; sin este bloque, la melodía se repetiría sin parar.
+    tono de timbre (Hz) Mi
+  para todos los sonidos   // Corta la risa; sin este bloque, la melodía se repetiría sin parar.
   mostrar LEDs:
       . # . # .
       . . . . .

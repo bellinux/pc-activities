@@ -2,7 +2,9 @@
     "platform": "MakeCode",
     "extracted_text": [
         "para siempre:",
-        "  tono de timbre (Hz) (440 + ((aceleración (mg) x) ÷ 20))",
-        "  pausa (ms) 100"
+        "  tono de timbre (Hz) (440 + ((aceleración (mg) y) ÷ 20))",
+        "  pausa (ms) 100",
+        "  para todos los sonidos",
+        "  pausa (ms) 50"
     ]
 }

@@ -5,22 +5,22 @@ al iniciar el programa:
   establecer debeSonarAlarma a verdadero   // Creamos la variable 'debeSonarAlarma' y la ponemos en verdadero, para recordar que la nota de acierto todavía no ha empezado a sonar.
 
 repetir para siempre:
-  establecer xDesplazado a (x in Inclinación1 + 100)
-  establecer ledX a redondear al alza((xDesplazado × 7) ÷ 198)   // Convertimos la inclinación del celular, ya desplazada en 'xDesplazado', en un número del 1 al 7 y lo guardamos en la variable 'ledX': es la posición del LED que se encenderá.
-  establecer yDesplazado a (y in Inclinación1 + 100)
-  establecer ledY a redondear al alza((yDesplazado × 7) ÷ 198)
+  establecer xDesplazado a (x in Inclinación1 + 140)
+  establecer ledX a redondear al alza((xDesplazado × 4) ÷ 160)   // Convertimos la inclinación del celular, ya desplazada en 'xDesplazado', en un número del 2 al 6 y lo guardamos en la variable 'ledX': es la posición del LED que se encenderá.
+  establecer yDesplazado a (y in Inclinación1 + 140)
+  establecer ledY a redondear al alza((yDesplazado × 4) ÷ 160)
   establecer centradoX a ((ledX ≥ 3) y (ledX ≤ 5))
   establecer centradoY a ((ledY ≥ 3) y (ledY ≤ 5))
   borrar dibujo en DibujoLED2
   si (centradoX y centradoY):   // Este bloque 'si' pregunta si 'centradoX' y 'centradoY' son verdaderas a la vez: si es así, el celular está nivelado.
-    dibuja en x ledY y ledX con color #33cc00 en DibujoLED2   // Dibujamos un punto verde en la matriz, justo donde apunta la inclinación: verde quiere decir que está nivelado.
+    dibuja en x ledX y ledY con color #ff0000 en DibujoLED2
     si debeSonarAlarma:
       tocar nota do4 en TecladoMusical3   // Suena una nota grave y se queda sonando, y la variable 'debeSonarAlarma' pasa a falso para no volver a empezarla en cada vuelta.
-      retraso de 100 milisegundos
       establecer debeSonarAlarma a falso
   sino:
-    dibuja en x ledY y ledX con color #ff4444 en DibujoLED2
-    detener en TecladoMusical3
+    dibuja en x ledX y ledY con color #ff4444 en DibujoLED2
     retraso de 100 milisegundos
     tocar nota sol5 en TecladoMusical3   // Si está torcido suena una nota aguda que se para y vuelve a empezar en cada vuelta, así que hace 'pip pip' para avisarte.
+    retraso de 100 milisegundos
+    detener en TecladoMusical3
     establecer debeSonarAlarma a verdadero

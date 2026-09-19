@@ -3,8 +3,8 @@ FUENTE: micro:bit / MakeCode 9.0.12 — "xilofono-inclinacion-con-nota-led"  (et
 
 para siempre:
   borrar la pantalla
-  graficar x (2 + redondeo((aceleración (mg) x ÷ 450))) y 2   // Dibuja un punto según la inclinación: con la micro:bit horizontal queda en el centro, y mientras más la inclinas, más se acerca al borde de la pantalla.
-  tono de timbre (Hz) (440 + (aceleración (mg) x ÷ 20))
+  graficar x 2 y (2 + redondeo((aceleración (mg) y ÷ 450)))   // Dibuja un punto según la inclinación: con la micro:bit horizontal queda en el centro, y mientras más la inclinas, más se acerca al borde de la pantalla.
+  tono de timbre (Hz) (440 + (aceleración (mg) y ÷ 20))
   pausa (ms) 100
   para todos los sonidos
   pausa (ms) 50

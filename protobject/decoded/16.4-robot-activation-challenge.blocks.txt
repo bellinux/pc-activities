@@ -5,21 +5,25 @@ al iniciar el programa:
   establecer energia a 0   // Empieza la variable "energia" en 0: todavía no se ha tocado el botón ninguna vez.
 
 repetir para siempre:
-  si (energia < 7):
+  si (energia < 6):
     dibuja en x 3 y (8 − energia) con color #ff4444 en DibujoLED11
     dibuja en x 4 y (8 − energia) con color #ff4444 en DibujoLED11
     dibuja en x 5 y (8 − energia) con color #ff4444 en DibujoLED11
   sino:
-    borrar dibujo en DibujoLED11
     dibuja con color #ff0000 en DibujoLED11:
         .......
-        .#...#.
-        .#...#.
-        .#...#.
+        ..#.#..
         .......
-        #.....#
-        .#####.
-    reproducir sonido 'celebración final' en ReproductorSonido3
+        .......
+        .#...#.
+        ..###..
+        .......
+    tocar nota re4 en TecladoMusical3
+    retraso de 200 milisegundos
+    tocar nota fa#4 en TecladoMusical3
+    retraso de 200 milisegundos
+    tocar nota la4 en TecladoMusical3
+    retraso de 900 milisegundos
 
 cuando BotónTáctil1 es tocado:
   añadir 1 a energia   // Suma 1 a la variable "energia" cada vez que se aprieta el botón, así la variable cuenta cuántas veces lo has tocado.

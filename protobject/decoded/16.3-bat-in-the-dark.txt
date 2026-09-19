@@ -7,12 +7,12 @@ REPETIR PARA SIEMPRE (bucle principal)
       ; // Bloque 'si … hacer … sino' con dos caminos: si hay oscuridad se ejecuta la animación de luz, y si hay claridad los LEDs se quedan apagados.
     [si (IntensidadLuz2.leer(lightIntensity) < 30)]
     DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
-    ESPERAR  ms  VAR=200
+    ESPERAR  ms  VAR=500
     DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,1,0,1,0,1,0,0,0,1,1,1,0,0,0,1,1,1,1,1,0,0,0,1,1,1,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
-    ESPERAR  ms  VAR=200
+    ESPERAR  ms  VAR=500
     DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=1,0,0,1,0,0,1,0,1,0,1,0,1,0,0,0,1,1,1,0,0,1,1,1,1,1,1,1,0,0,1,1,1,0,0,0,1,0,1,0,1,0,1,0,0,1,0,0,1)  VAR2=colour_picker(COLOUR=#ff0000)
-    ESPERAR  ms  VAR=200
+    ESPERAR  ms  VAR=500
     DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,1,0,1,0,1,0,0,0,1,1,1,0,0,0,1,1,1,1,1,0,0,0,1,1,1,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
-    ESPERAR  ms  VAR=200
+    ESPERAR  ms  VAR=500
     [sino]
     DibujoLED1_clear_set_4

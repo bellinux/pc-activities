@@ -4,13 +4,14 @@
         "al iniciar el programa:",
         "  dibuja con color #ff0000 en DibujoLED2",
         "cuando NivelRuido1 detecta aumento repentino:",
-        "  reproducir sonido 'reacción divertida' en ReproductorSonido3",
         "  repetir 8 veces:",
         "    dibuja con color #ff0000 en DibujoLED2",
         "    retraso de 500 milisegundos",
+        "    tocar nota fa4 en TecladoMusical3",
         "    dibuja con color #ff0000 en DibujoLED2",
         "    retraso de 500 milisegundos",
-        "  detener sonido de ReproductorSonido3",
+        "    tocar nota mi4 en TecladoMusical3",
+        "  detener en TecladoMusical3",
         "  dibuja con color #ff0000 en DibujoLED2"
     ]
 }

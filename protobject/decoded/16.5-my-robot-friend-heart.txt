@@ -1,30 +1,34 @@
 ACTIVIDAD: 16.5-my-robot-friend-heart
 CODE: corazon-variables-eventos
-COMPONENTES: DibujoLED1=MatrixDraw, BateríaMusical2=PlayDrum, Inclinación3=SmartphoneOrientation
+COMPONENTES: DibujoLED1=MatrixDraw, TecladoMusical2=PlayKeyboard, Inclinación3=SmartphoneOrientation
 
 REPETIR PARA SIEMPRE (bucle principal)
-  DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=0,1,0,0,0,1,0,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,0,0,1,1,1,0,0,0,0,0,1,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
-  BateríaMusical2_play_set_1  VAR=control_drum(VAR=1)
+  TecladoMusical2_play_set_1  VAR=control_note(VAR=73)
+  DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,1,1,1,1,0,0,1,1,1,1,1,0,0,0,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
   ESPERAR  ms  VAR=var:pausaLarga
       ; // El bloque 'retraso de' espera los milisegundos que guarda la variable 'pausaLarga': cambia esa variable y el corazón grande late más rápido o más lento.
-  BateríaMusical2_play_set_1  VAR=control_drum(VAR=1)
-  REPETIR 4 VECES
-    DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,1,1,1,1,0,0,1,1,1,1,1,0,0,0,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
-    ESPERAR  ms  VAR=var:pausaCorta
-        ; // El bloque 'retraso de' espera los milisegundos que guarda la variable 'pausaCorta': así de rápido late el corazón chico.
+  TecladoMusical2_stop_set_3
+  REPETIR 2 VECES
+    TecladoMusical2_play_set_1  VAR=control_note(VAR=71)
     DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,0,1,0,1,0,0,1,0,0,0,1,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
     ESPERAR  ms  VAR=var:pausaCorta
+        ; // El bloque 'retraso de' espera los milisegundos que guarda la variable 'pausaCorta': así de rápido late el corazón chico.
+    TecladoMusical2_stop_set_3
+    TecladoMusical2_play_set_1  VAR=control_note(VAR=72)
+    DibujoLED1_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
+    ESPERAR  ms  VAR=var:pausaCorta
+    TecladoMusical2_stop_set_3
 
 AL INICIAR
-  ESTABLECER var:pausaLarga = 500
-  ESTABLECER var:pausaCorta = 150
+  ESTABLECER var:pausaLarga = 1000
+  ESTABLECER var:pausaCorta = 700
 
 protobject_Inclinación3_change  property=side
-    ; // Cuando giras el celular de lado, este bloque pone 'pausaLarga' en 250 y 'pausaCorta' en 80: tiempos más cortos y el corazón late más rápido.
-  ESTABLECER var:pausaLarga = 250
-  ESTABLECER var:pausaCorta = 80
+    ; // Cuando giras el celular de lado, este bloque pone 'pausaLarga' en 600 y 'pausaCorta' en 500: tiempos más cortos y el corazón late más rápido.
+  ESTABLECER var:pausaLarga = 600
+  ESTABLECER var:pausaCorta = 500
 
 protobject_Inclinación3_change  property=faceUp
-    ; // Cuando pones el celular boca arriba, este bloque deja 'pausaLarga' en 500 y 'pausaCorta' en 150: tiempos más largos y el corazón late más lento.
-  ESTABLECER var:pausaLarga = 500
-  ESTABLECER var:pausaCorta = 150
+    ; // Cuando pones el celular boca arriba, este bloque deja 'pausaLarga' en 1000 y 'pausaCorta' en 700: tiempos más largos y el corazón late más lento.
+  ESTABLECER var:pausaLarga = 1000
+  ESTABLECER var:pausaCorta = 700

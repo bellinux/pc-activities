@@ -4,13 +4,13 @@
         "repetir para siempre:",
         "  si ((luminosidad in IntensidadLuz2) < 30):",
         "    dibuja con color #ff0000 en DibujoLED1",
-        "    retraso de 200 milisegundos",
+        "    retraso de 500 milisegundos",
         "    dibuja con color #ff0000 en DibujoLED1",
-        "    retraso de 200 milisegundos",
+        "    retraso de 500 milisegundos",
         "    dibuja con color #ff0000 en DibujoLED1",
-        "    retraso de 200 milisegundos",
+        "    retraso de 500 milisegundos",
         "    dibuja con color #ff0000 en DibujoLED1",
-        "    retraso de 200 milisegundos",
+        "    retraso de 500 milisegundos",
         "  sino:",
         "    borrar dibujo en DibujoLED1"
     ]

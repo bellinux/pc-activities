@@ -1,26 +1,26 @@
 ACTIVIDAD: 16.7-dont-spill-liquid-game
-FUENTE: micro:bit / MakeCode 9.0.8 — "nivel-con-ruido"  (etiquetas oficiales es-ES)
+FUENTE: micro:bit / MakeCode 9.0.12 — "nivel-con-ruido"  (etiquetas oficiales es-ES)
 
 al iniciar:
-  fijar debeSonarAlarma a verdadero
+  fijar debeSonarAlarma a verdadero   // Creamos la variable 'debeSonarAlarma' y la ponemos en verdadero, para recordar que la nota de acierto todavía no ha empezado a sonar.
 
 para siempre:
-  fijar xDesplazado a (aceleración (mg) x + 1023)
-  fijar ledX a redondeo hacia arriba(((xDesplazado × 4) ÷ 2046))
-  fijar yDesplazado a (aceleración (mg) y + 1023)
-  fijar ledY a redondeo hacia arriba(((yDesplazado × 4) ÷ 2046))
+  fijar xDesplazado a (aceleración (mg) x + 615)
+  fijar ledX a redondeo hacia arriba(((xDesplazado × 4) ÷ 1640))   // Convertimos la inclinación de la micro:bit, ya desplazada en 'xDesplazado', en un número del 0 al 4 y lo guardamos en la variable 'ledX': es la posición del LED que se encenderá.
+  fijar yDesplazado a (aceleración (mg) y + 615)
+  fijar ledY a redondeo hacia arriba(((yDesplazado × 4) ÷ 1640))
   fijar centradoX a ((ledX ≥ 1) y (ledX ≤ 3))
   fijar centradoY a ((ledY ≥ 1) y (ledY ≤ 3))
   borrar la pantalla
-  si (centradoX y centradoY) entonces:
+  si (centradoX y centradoY) entonces:   // Este bloque 'si' pregunta si 'centradoX' y 'centradoY' son verdaderas a la vez: si es así, la micro:bit está nivelada.
     graficar x ledX y ledY
     si debeSonarAlarma entonces:
-      reproduce secuencia tono Fa3 durante 1/8 pulso en modo en segundo plano
-      pausa (ms) 100
+      tono de timbre (Hz) Do   // Suena una nota grave y se queda sonando, y la variable 'debeSonarAlarma' pasa a falso para no volver a empezarla en cada vuelta.
       fijar debeSonarAlarma a falso
   si no:
     graficar x ledX y ledY
-    detener la melodía todos
     pausa (ms) 100
-    reproduce secuencia tono Re5 durante 1/8 pulso en modo en segundo plano
+    tono de timbre (Hz) Sol5   // Si está torcida suena una nota aguda que se para y vuelve a empezar en cada vuelta, así que hace 'pip pip' para avisarte.
+    pausa (ms) 100
+    para todos los sonidos
     fijar debeSonarAlarma a verdadero

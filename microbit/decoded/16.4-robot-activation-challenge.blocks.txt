@@ -1,18 +1,27 @@
 ACTIVIDAD: 16.4-robot-activation-challenge
-FUENTE: micro:bit / MakeCode 9.0.8 — "juego-toques"  (etiquetas oficiales es-ES)
+FUENTE: micro:bit / MakeCode 9.0.12 — "juego-toques"  (etiquetas oficiales es-ES)
 
 al iniciar:
-  fijar energia a 0   // Inicia la variable "Toques" con valor inicial = 0.
+  fijar energia a 0   // Empieza la variable "energia" en 0: todavía no se ha tocado el logo ninguna vez.
 
 al tocar el logotipo:
-  cambiar energia por 1   // Aumenta en 1 el valor de la variable "Toques". Cada vez que se presione el botón la cantidad aumenta en 1, es decir la variable cuenta la cantidad de veces que se aprieta el botón.
+  cambiar energia por 1   // Suma 1 a la variable "energia" cada vez que se toca el logo, así la variable cuenta cuántas veces lo has tocado.
 
 para siempre:
-  si (energia < 5) entonces:
+  si (energia < 6) entonces:
     graficar x 1 y (5 − energia)
     graficar x 2 y (5 − energia)
     graficar x 3 y (5 − energia)
   si no:
-    borrar la pantalla
-    (device_show_image_offset)
-    reproduce secuencia risa en modo hasta que termine
+    mostrar LEDs:
+        . # . # .
+        . . . . .
+        . . . . .
+        # . . . #
+        . # # # .
+    tono de timbre (Hz) Re
+    pausa (ms) 200
+    tono de timbre (Hz) Fa#
+    pausa (ms) 200
+    tono de timbre (Hz) La
+    pausa (ms) 500

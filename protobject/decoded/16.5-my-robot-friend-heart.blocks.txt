@@ -2,27 +2,19 @@ ACTIVIDAD: 16.5-my-robot-friend-heart
 FUENTE: Protobject (bloques, etiquetas oficiales es)
 
 repetir para siempre:
+  tocar nota do#5 en TecladoMusical2
   dibuja con color #ff0000 en DibujoLED1:
-      .#...#.
-      ###.###
-      #######
-      #######
+      .......
+      ..#.#..
+      .#####.
       .#####.
       ..###..
       ...#...
-  toca nota tom en BateríaMusical2
+      .......
   retraso de pausaLarga milisegundos   // El bloque 'retraso de' espera los milisegundos que guarda la variable 'pausaLarga': cambia esa variable y el corazón grande late más rápido o más lento.
-  toca nota tom en BateríaMusical2
-  repetir 4 veces:
-    dibuja con color #ff0000 en DibujoLED1:
-        .......
-        ..#.#..
-        .#####.
-        .#####.
-        ..###..
-        ...#...
-        .......
-    retraso de pausaCorta milisegundos   // El bloque 'retraso de' espera los milisegundos que guarda la variable 'pausaCorta': así de rápido late el corazón chico.
+  detener en TecladoMusical2
+  repetir 2 veces:
+    tocar nota si4 en TecladoMusical2
     dibuja con color #ff0000 en DibujoLED1:
         .......
         ..#.#..
@@ -31,16 +23,28 @@ repetir para siempre:
         ..#.#..
         ...#...
         .......
+    retraso de pausaCorta milisegundos   // El bloque 'retraso de' espera los milisegundos que guarda la variable 'pausaCorta': así de rápido late el corazón chico.
+    detener en TecladoMusical2
+    tocar nota do5 en TecladoMusical2
+    dibuja con color #ff0000 en DibujoLED1:
+        .......
+        .......
+        ..#.#..
+        ..###..
+        ...#...
+        .......
+        .......
     retraso de pausaCorta milisegundos
+    detener en TecladoMusical2
 
 al iniciar el programa:
-  establecer pausaLarga a 500
-  establecer pausaCorta a 150
+  establecer pausaLarga a 1000
+  establecer pausaCorta a 700
 
-cuando Inclinación3 hacie un borde:   // Cuando giras el celular de lado, este bloque pone 'pausaLarga' en 250 y 'pausaCorta' en 80: tiempos más cortos y el corazón late más rápido.
-  establecer pausaLarga a 250
-  establecer pausaCorta a 80
+cuando Inclinación3 hacie un borde:   // Cuando giras el celular de lado, este bloque pone 'pausaLarga' en 600 y 'pausaCorta' en 500: tiempos más cortos y el corazón late más rápido.
+  establecer pausaLarga a 600
+  establecer pausaCorta a 500
 
-cuando Inclinación3 hacia arriba:   // Cuando pones el celular boca arriba, este bloque deja 'pausaLarga' en 500 y 'pausaCorta' en 150: tiempos más largos y el corazón late más lento.
-  establecer pausaLarga a 500
-  establecer pausaCorta a 150
+cuando Inclinación3 hacia arriba:   // Cuando pones el celular boca arriba, este bloque deja 'pausaLarga' en 1000 y 'pausaCorta' en 700: tiempos más largos y el corazón late más lento.
+  establecer pausaLarga a 1000
+  establecer pausaCorta a 700

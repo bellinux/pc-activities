@@ -1,24 +1,27 @@
 ACTIVIDAD: 16.5-my-robot-friend-heart
-FUENTE: micro:bit / MakeCode 9.0.8 — "corazon-variables-eventos"  (etiquetas oficiales es-ES)
+FUENTE: micro:bit / MakeCode 9.0.12 — "corazon-variables-eventos"  (etiquetas oficiales es-ES)
 
 para siempre:
+  tono de timbre (Hz) Do#5
   mostrar LEDs:
       . # . # .
       # # # # #
       # # # # #
       . # # # .
       . . # . .
-  reproduce secuencia tono Re5 durante 1/8 pulso en modo en segundo plano
-  pausa (ms) pausaLarga   // Se utiliza la variable "pausaLarga" para cambiar la velocidad de latido del corazón grande dependiendo de la posición del dispositivo.
-  reproduce secuencia tono Re5 durante 1/8 pulso en modo en segundo plano
-  repetir 4 veces:
+  pausa (ms) pausaLarga   // El bloque 'pausa (ms)' espera los milisegundos que guarda la variable 'pausaLarga': cambia esa variable y el corazón grande late más rápido o más lento.
+  para todos los sonidos
+  repetir 2 veces:
+    tono de timbre (Hz) Si
     mostrar LEDs:
         . # . # .
         # . # . #
         # . . . #
         . # . # .
         . . # . .
-    pausa (ms) pausaCorta   // Se utiliza la variable "pausaCorta" para cambiar la velocidad de latido del corazón chico dependiendo de la posición del dispositivo.
+    pausa (ms) pausaCorta   // El bloque 'pausa (ms)' espera los milisegundos que guarda la variable 'pausaCorta': así de rápido late el corazón chico.
+    para todos los sonidos
+    tono de timbre (Hz) Do5
     mostrar LEDs:
         . . . . .
         . # . # .
@@ -26,15 +29,16 @@ para siempre:
         . . # . .
         . . . . .
     pausa (ms) pausaCorta
+    para todos los sonidos
 
 al iniciar:
-  fijar pausaLarga a 500
-  fijar pausaCorta a 250
+  fijar pausaLarga a 600
+  fijar pausaCorta a 300
 
-si logotipo hacia arriba:   // Este bloque detecta el momento en cambia la posición del dispositivo, cuando lo hace se editan las variables "pausaLarga" y "pausaCorta". Al inclinar el dispositivo hacia esta dirección, la velocidad de latido aumentará ya que los tiempos son más cortos.
-  fijar pausaLarga a 100
-  fijar pausaCorta a 10
+si logotipo hacia arriba:   // Cuando pones la micro:bit con el logo hacia arriba, este bloque pone 'pausaLarga' en 200 y 'pausaCorta' en 100: tiempos más cortos y el corazón late más rápido.
+  fijar pausaLarga a 200
+  fijar pausaCorta a 100
 
-si logotipo hacia abajo:   // Este bloque detecta el momento en cambia la posición del dispositivo, cuando lo hace se editan las variables "pausaLarga" y "pausaCorta". Al inclinar el dispositivo hacia esta dirección, la velocidad de latido disminuirá ya que los tiempos son más largos.
-  fijar pausaLarga a 500
-  fijar pausaCorta a 250
+si logotipo hacia abajo:   // Cuando pones la micro:bit con el logo hacia abajo, este bloque deja 'pausaLarga' en 600 y 'pausaCorta' en 300: tiempos más largos y el corazón late más lento.
+  fijar pausaLarga a 600
+  fijar pausaCorta a 300

@@ -4,13 +4,14 @@
         "al iniciar:",
         "  mostrar LEDs",
         "al detectar el sonido alto:",
-        "  reproduce (ba ding) bucle en segundo plano",
         "  repetir 8 veces:",
         "    mostrar LEDs",
         "    pausa (ms) 100",
+        "    tono de timbre (Hz) Fa",
         "    mostrar LEDs",
         "    pausa (ms) 100",
-        "  detener la melodía todos",
+        "    tono de timbre (Hz) Mi",
+        "  para todos los sonidos",
         "  mostrar LEDs"
     ]
 }

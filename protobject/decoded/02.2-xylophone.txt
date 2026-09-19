@@ -8,3 +8,5 @@ REPETIR PARA SIEMPRE (bucle principal)
       ; // Este bloque toca un sonido de la frecuencia que le des, en hercios (Hz): cuanto más pequeño el número, más grave; cuanto más grande, más agudo.
   ESPERAR  ms  VAR=100
       ; // El bloque 'retraso de' hace una pausa de 100 milisegundos (0,1 segundos), así puedes tocar muchos sonidos distintos en poco tiempo.
+  TecladoMusical1_stop_set_3
+  ESPERAR  ms  VAR=50

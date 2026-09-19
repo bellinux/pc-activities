@@ -6,13 +6,17 @@
         "al tocar el logotipo:",
         "  cambiar energia por 1",
         "para siempre:",
-        "  si (energia < 5) entonces:",
+        "  si (energia < 6) entonces:",
         "    graficar x 1 y (5 − energia)",
         "    graficar x 2 y (5 − energia)",
         "    graficar x 3 y (5 − energia)",
         "  si no:",
-        "    borrar la pantalla",
-        "    (device_show_image_offset)",
-        "    reproduce secuencia (risa) en modo hasta que termine"
+        "    mostrar LEDs",
+        "    tono de timbre (Hz) Re",
+        "    pausa (ms) 200",
+        "    tono de timbre (Hz) Fa#",
+        "    pausa (ms) 200",
+        "    tono de timbre (Hz) La",
+        "    pausa (ms) 500"
     ]
 }

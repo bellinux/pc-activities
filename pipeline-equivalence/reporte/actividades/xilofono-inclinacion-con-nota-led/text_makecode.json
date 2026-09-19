@@ -3,8 +3,8 @@
     "extracted_text": [
         "para siempre:",
         "  borrar la pantalla",
-        "  graficar x (2 + (redondeo ((aceleración (mg) x) ÷ 450))) y 2",
-        "  tono de timbre (Hz) (440 + ((aceleración (mg) x) ÷ 20))",
+        "  graficar x 2 y (2 + (redondeo ((aceleración (mg) y) ÷ 450)))",
+        "  tono de timbre (Hz) (440 + ((aceleración (mg) y) ÷ 20))",
         "  pausa (ms) 100",
         "  para todos los sonidos",
         "  pausa (ms) 50"

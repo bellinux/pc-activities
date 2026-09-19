@@ -3,7 +3,6 @@ FUENTE: Protobject (bloques, etiquetas oficiales es)
 
 repetir para siempre:
   si (luminosidad in IntensidadLuz1 > 50):   // Condicional extendido: un condicional simple ejecuta su contenido solo si la condición se cumple, y si no, no hace nada. Aquí hay dos caminos: si la condición se cumple se ejecuta la primera parte; si no, se ejecuta una parte distinta.
-    reproducir sonido 'celebración final' en ReproductorSonido3
     dibuja con color #ff0000 en DibujoLED2:
         #..#..#
         .#.#.#.
@@ -12,6 +11,10 @@ repetir para siempre:
         ..###..
         .#.#.#.
         #..#..#
+    tocar nota re5 en TecladoMusical3
+    retraso de 200 milisegundos
+    tocar nota fa#5 en TecladoMusical3
+    retraso de 900 milisegundos
   sino:
-    detener sonido de ReproductorSonido3
+    detener en TecladoMusical3
     borrar dibujo en DibujoLED2

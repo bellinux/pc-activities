@@ -1,5 +1,5 @@
 ACTIVIDAD: 16.6-magic-birthday-candle
-FUENTE: micro:bit / MakeCode 9.0.8 — "flama-vela-con-soplo arreglo"  (etiquetas oficiales es-ES)
+FUENTE: micro:bit / MakeCode 9.0.12 — "flama-vela-con-soplo arreglo"  (etiquetas oficiales es-ES)
 
 para siempre:
   si velaEncendida entonces:
@@ -9,16 +9,15 @@ para siempre:
         . # # # .
         . # # # .
         . # # # .
-    graficar x escoger al azar de 1 a 3 y 0   // La posición de los leds está dado por 2 números que los llamaremos X e Y. El número X representará la posición de un led en posición horizontal. Es decir la posición en una fila.   Por otro lado el número Y representa la altura de un led, es decir su posición en una columna.  Por ejemplo, el led de la esquina superior izquierda tiene posición X = 0 e Y = 0, mientra que la esquina inferior derecha tiene posición X= 4 e Y = 4. Siendo X posición para los lados e Y posición arriba o abajo.
-    pausa (ms) 200
+    graficar x escoger al azar de 1 a 3 y 0   // En el bloque 'graficar x y', X es la posición de lado a lado e Y la de arriba abajo: la esquina de arriba a la izquierda es X=0, Y=0.
+    pausa (ms) 700
     mostrar LEDs:
         . . . . .
         . # # # .
         . # # # .
         . # # # .
         . # # # .
-    graficar x 2 y 0   // Borra la punta de la llama anterior
-    pausa (ms) 200
+    pausa (ms) 100
   si no:
     borrar la pantalla
 

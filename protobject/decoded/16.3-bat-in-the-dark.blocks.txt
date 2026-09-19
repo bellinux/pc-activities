@@ -11,7 +11,7 @@ repetir para siempre:
         ..#.#..
         .......
         .......
-    retraso de 200 milisegundos
+    retraso de 500 milisegundos
     dibuja con color #ff0000 en DibujoLED1:
         .......
         .#.#.#.
@@ -20,7 +20,7 @@ repetir para siempre:
         ..###..
         .#.#.#.
         .......
-    retraso de 200 milisegundos
+    retraso de 500 milisegundos
     dibuja con color #ff0000 en DibujoLED1:
         #..#..#
         .#.#.#.
@@ -29,7 +29,7 @@ repetir para siempre:
         ..###..
         .#.#.#.
         #..#..#
-    retraso de 200 milisegundos
+    retraso de 500 milisegundos
     dibuja con color #ff0000 en DibujoLED1:
         .......
         .#.#.#.
@@ -38,6 +38,6 @@ repetir para siempre:
         ..###..
         .#.#.#.
         .......
-    retraso de 200 milisegundos
+    retraso de 500 milisegundos
   sino:
     borrar dibujo en DibujoLED1

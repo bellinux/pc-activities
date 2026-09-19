@@ -7,29 +7,28 @@ AL INICIAR
       ; // Creamos la variable 'debeSonarAlarma' y la ponemos en verdadero, para recordar que la nota de acierto todavía no ha empezado a sonar.
 
 REPETIR PARA SIEMPRE (bucle principal)
-  ESTABLECER var:xDesplazado = (Inclinación1.leer(oriX) + 100)
-  ESTABLECER var:ledX = math_round(OP=ROUNDUP NUM=((var:xDesplazado * 7) / 198))
-      ; // Convertimos la inclinación del celular, ya desplazada en 'xDesplazado', en un número del 1 al 7 y lo guardamos en la variable 'ledX': es la posición del LED que se encenderá.
-  ESTABLECER var:yDesplazado = (Inclinación1.leer(oriY) + 100)
-  ESTABLECER var:ledY = math_round(OP=ROUNDUP NUM=((var:yDesplazado * 7) / 198))
+  ESTABLECER var:xDesplazado = (Inclinación1.leer(oriX) + 140)
+  ESTABLECER var:ledX = math_round(OP=ROUNDUP NUM=((var:xDesplazado * 4) / 160))
+      ; // Convertimos la inclinación del celular, ya desplazada en 'xDesplazado', en un número del 2 al 6 y lo guardamos en la variable 'ledX': es la posición del LED que se encenderá.
+  ESTABLECER var:yDesplazado = (Inclinación1.leer(oriY) + 140)
+  ESTABLECER var:ledY = math_round(OP=ROUNDUP NUM=((var:yDesplazado * 4) / 160))
   ESTABLECER var:centradoX = ((var:ledX >= 3) AND (var:ledX <= 5))
   ESTABLECER var:centradoY = ((var:ledY >= 3) AND (var:ledY <= 5))
   DibujoLED2_clear_set_4
   SI
       ; // Este bloque 'si' pregunta si 'centradoX' y 'centradoY' son verdaderas a la vez: si es así, el celular está nivelado.
     [si (var:centradoX AND var:centradoY)]
-    DibujoLED2_drawOnXY_set_2  VAR=var:ledY  VAR2=var:ledX  VAR3=colour_picker(COLOUR=#33cc00)
-        ; // Dibujamos un punto verde en la matriz, justo donde apunta la inclinación: verde quiere decir que está nivelado.
+    DibujoLED2_drawOnXY_set_2  VAR=var:ledX  VAR2=var:ledY  VAR3=colour_picker(COLOUR=#ff0000)
     SI
       [si var:debeSonarAlarma]
       TecladoMusical3_play_set_1  VAR=control_note(VAR=60)
           ; // Suena una nota grave y se queda sonando, y la variable 'debeSonarAlarma' pasa a falso para no volver a empezarla en cada vuelta.
-      ESPERAR  ms  VAR=100
       ESTABLECER var:debeSonarAlarma = FALSE
     [sino]
-    DibujoLED2_drawOnXY_set_2  VAR=var:ledY  VAR2=var:ledX  VAR3=colour_picker(COLOUR=#ff4444)
-    TecladoMusical3_stop_set_3
+    DibujoLED2_drawOnXY_set_2  VAR=var:ledX  VAR2=var:ledY  VAR3=colour_picker(COLOUR=#ff4444)
     ESPERAR  ms  VAR=100
     TecladoMusical3_play_set_1  VAR=control_note(VAR=79)
         ; // Si está torcido suena una nota aguda que se para y vuelve a empezar en cada vuelta, así que hace 'pip pip' para avisarte.
+    ESPERAR  ms  VAR=100
+    TecladoMusical3_stop_set_3
     ESTABLECER var:debeSonarAlarma = TRUE

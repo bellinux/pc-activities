@@ -3,6 +3,8 @@
     "extracted_text": [
         "repetir para siempre:",
         "  tocar frecuencia (440 + ((y in Inclinación2) ÷ 2)) Hz en TecladoMusical1",
-        "  retraso de 100 milisegundos"
+        "  retraso de 100 milisegundos",
+        "  detener en TecladoMusical1",
+        "  retraso de 50 milisegundos"
     ]
 }
