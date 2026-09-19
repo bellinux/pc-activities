@@ -77,6 +77,20 @@
       <span class="tag">Qué debe resolver la búsqueda</span>
       <p>Para cada dimensión: con qué método se decide si las dos versiones son la misma, de qué fuente sale y por qué sirve aquí. Además: cómo se separa en la práctica lo material (el objeto, antes de usarlo) de lo sensoriomotriz (el uso); dónde está el límite de lo que un celular reconstituye —capta inclinación, sonido, luz y toque; emite luz, sonido y vibración; lo que actúa mecánicamente sobre el mundo queda fuera—; y cómo se mide la interacción sensorial cuando el código y el cartón son los mismos.</p>
     </div>
+    <h3>Un primer paso, en el código</h3>
+    <p>El 18-09-2026 una auditoría comparó los dos programas de cada actividad según lo que hace de verdad cada bloque, verificado en el código de la app de Protobject y en el de MakeCode para micro:bit (pxt-microbit). Encontró 75 diferencias candidatas: un verificador escéptico confirmó 70 y rechazó 5, y el autor quitó otras 5 porque dependen de cómo se monta el dispositivo en el cartón (gestos, ejes, sentido). Eran de sonido, de tiempos, de sensores y umbrales, de eventos, de pantalla, de lógica, del texto de la actividad y de los comentarios. El autor las revisó una por una y alineó la mayoría: todos los sonidos son tonos, la espera de «mostrar LEDs» se compensa en las constantes y los dibujos usan el mismo 5 × 5.</p>
+    <p>La auditoría no reemplaza al instrumento: lo antecede. Lee el código y <strong>predice</strong> diferencias que quien hace la actividad podría notar; el instrumento tiene que decir si se notan en uso. Las que <strong>quedan</strong> tras la alineación (19-09-2026) son las candidatas:</p>
+    <ul>
+      <li><strong>Timbre.</strong> Onda cuadrada en el micro:bit, muestra del teclado en Protobject. Es una diferencia intrínseca.</li>
+      <li><strong>Detección del ruido.</strong> El micro:bit reconoce un «sonido alto» sobre 85 dB y se rearma bajo 65 dB; Protobject, un salto relativo de más de 30 puntos en unos 400 ms.</li>
+      <li><strong>Umbrales de los sensores.</strong> Luz 50 contra 100 y 30 contra 75, ruido 5 contra 20, inclinación 20 contra 400 (Protobject contra micro:bit). Los fija el autor empíricamente, no por fórmula.</li>
+      <li><strong>Los 400 ms del primer «mostrar LEDs»,</strong> cuando no hay una pausa previa donde absorberlos. En la alarma de galletas, el primer pitido del micro:bit llega 0,4 s después de la cara; en Protobject, junto con ella.</li>
+      <li><strong>Granularidad de los bucles.</strong> «Para siempre» suma 20 ms por vuelta en el micro:bit; «repetir para siempre», 33 ms en Protobject.</li>
+      <li><strong>Latencia de red en Protobject.</strong> El programa corre en el computador y los celulares hablan con él por WebRTC.</li>
+      <li><strong>Muestreo de los sensores de Protobject.</strong> Ruido a 10 Hz, inclinación a 30 Hz.</li>
+      <li><strong>iPhone.</strong> Los componentes de sonido de Protobject no funcionan en iPhone, solo en Android y en el computador.</li>
+    </ul>
+    <p>El autor dejó las dos versiones de cada uno de los 17 pares «percibidas y algorítmicamente equivalentes». Lo algorítmico lo decide la pipeline (el 19-09-2026, 17/17 isomorfas). Lo percibido es su juicio, al revisar los pares uno por uno: por ejemplo, las constantes del xilófono (÷ 2 en Protobject contra ÷ 20 en el micro:bit) las eligió escuchando las dos versiones. Es un juicio perceptivo informal, de una sola persona que conoce los dos programas; el instrumento tiene que poder confirmarlo o refutarlo.</p>
   </section>
 
   <section class="section" id="dimensiones">
@@ -87,7 +101,7 @@
     <div class="dim">
       <div class="k">1 · Algorítmica</div>
       <h4>¿Los dos programas computan lo mismo, con la misma estructura de control y de datos?</h4>
-      <p><strong>Cómo se decide:</strong> la pipeline, validada en el Objetivo 2. <strong>Abierto:</strong> dos programas con la misma lógica pueden leerse distinto («pausa (ms) 100» y «retraso de 100 milisegundos»).</p>
+      <p><strong>Cómo se decide:</strong> la pipeline, validada en el Objetivo 2. <strong>Abierto:</strong> dos programas con la misma lógica pueden leerse distinto («pausa (ms) 100» y «retraso de 100 milisegundos»). Desde el 18-09-2026 el mismo tiempo puede llevar, además, números distintos, porque la espera de «mostrar LEDs» se compensa en las constantes: en el corazón, «pausa (ms) 100» contra «retraso de 500 milisegundos».</p>
       <p><strong>Ideas de partida:</strong> una tarea de predicción («¿qué hará este programa?») con los bloques de cada plataforma; un ítem de legibilidad en el cuestionario del protocolo.</p>
     </div>
 
@@ -98,7 +112,7 @@
       <p><strong>Ideas de partida:</strong></p>
       <ul>
         <li><strong>Tabla sentir–actuar</strong> por actividad, armada a mano: cada entrada captada → cada salida producida, con el tipo de mapeo (umbral, directo, temporizado), el rango del sensor y la unidad de la salida.</li>
-        <li><strong>Firma de entrada/salida emitida por la pipeline:</strong> la ontología ya tiene los nodos <code>Sensor</code> y <code>Action</code>; falta que la pipeline la escriba por actividad y la compare.</li>
+        <li><strong>Firma de entrada/salida emitida por la pipeline:</strong> la ontología ya separa las lecturas de sensores (<code>ReadTilt</code>, <code>ReadLightLevel</code>, <code>ReadSoundLevel</code>) de las salidas de pantalla y de sonido; falta que la pipeline la escriba por actividad y la compare.</li>
         <li><strong>Registro del comportamiento:</strong> las dos versiones reciben el mismo gesto (por ejemplo, una inclinación lenta de un extremo al otro) y se registran entrada y salida (valor del sensor, frecuencia o nota, estado de los LED); se comparan las dos curvas. Captura también la forma de la función: el tono de reposo y cuánto sube por grado, que dependen de las constantes (ver la <a href="constantes-y-unidades.html">página de constantes y unidades</a>).</li>
       </ul>
       <p><strong>Dónde buscar:</strong> los marcos de interacción tangible que describen la relación entre acción física y efecto digital; las taxonomías de interfaces tangibles por grado de corporeización y de metáfora; los «atributos de la interacción» (ritmo, continuidad, capacidad de respuesta) del diseño de interacción; las pruebas de caja negra y la equivalencia observacional en ingeniería de software.</p>
@@ -187,8 +201,8 @@
     <div class="section-marker"><span class="section-num">§ 06</span><span class="section-rule"></span><span class="section-num">PRUEBA</span></div>
     <h2>El <span class="it">piloto</span></h2>
     <ol class="pasos">
-      <li><strong>Pares.</strong> Tres a cinco actividades del corpus con ambas versiones y su carcasa: al menos una con sensor de inclinación (xilófono), una con sonido como entrada (interruptor de aplausos), una con temporización visible (llavero de corazón).</li>
-      <li><strong>Controles.</strong> (i) <em>Nulo:</em> el mismo artefacto presentado como dos versiones, para medir cuántas diferencias se reportan entre versiones idénticas, porque la gente encuentra diferencias donde se le pide buscarlas. (ii) <em>Sensoriomotriz,</em> con una magnitud del orden de los residuos reales del corpus: el llavero de corazón con las mismas pausas nominales en las dos plataformas, que produce ritmos distintos porque la matriz del micro:bit tarda en encenderse y el celular responde de inmediato. (iii) <em>Material:</em> la micro:bit dentro del bloque impreso y fuera de él, en la misma carcasa. El instrumento sirve si detecta (ii) y (iii) y deja (i) sin diferencias.</li>
+      <li><strong>Pares.</strong> Tres a cinco actividades del corpus con ambas versiones y su carcasa: al menos una con sensor de inclinación (xilófono), una con sonido como entrada (interruptor de aplausos), una con temporización visible (llavero de corazón). Las diferencias que quedan tras la alineación (§ 02) dicen qué buscar en cada par.</li>
+      <li><strong>Controles.</strong> (i) <em>Nulo:</em> el mismo artefacto presentado como dos versiones, para medir cuántas diferencias se reportan entre versiones idénticas, porque la gente encuentra diferencias donde se le pide buscarlas. (ii) <em>Sensoriomotriz,</em> con una magnitud del orden de los residuos reales del corpus: el llavero de corazón con las mismas pausas nominales en las dos plataformas, que produce ritmos distintos porque «mostrar LEDs» del micro:bit dibuja y además espera 400 ms, y el «dibuja» de Protobject no espera. Desde el 18-09-2026 el corpus compensa esa espera en las constantes (retraso de 900 y de 500 en Protobject contra pausa de 500 y de 100 en el micro:bit); el control la deshace. (iii) <em>Material:</em> la micro:bit dentro del bloque impreso y fuera de él, en la misma carcasa. El instrumento sirve si detecta (ii) y (iii) y deja (i) sin diferencias.</li>
       <li><strong>Evaluadores y sesión.</strong> Tres o más, en sesión aparte, después de la ronda 2 del Objetivo 1, sobre las versiones congeladas del corpus v2 (commit indicado). Los participantes del Objetivo 1 pueden volver en otra sesión, porque en la misma llegarían con el orden fijo y cansados. Orden de las versiones por sorteo.</li>
       <li><strong>Análisis.</strong> Con tres a cinco evaluadores y tres a cinco pares el piloto es <em>descriptivo</em>: acuerdo bruto por ítem, distribución de respuestas, ítems con techo o suelo, diferencias reportadas en el control nulo, detección de los controles, relación entre medidas instrumentadas y puntuaciones, tiempo del procedimiento. La fiabilidad con intervalo (correlación intraclase para escalas; alfa de Krippendorff para codificaciones) corresponde a un estudio posterior con quince pares o más.</li>
       <li><strong>Revisión.</strong> Protocolo v2 con los ítems cambiados y la razón de cada cambio.</li>
@@ -293,7 +307,7 @@
 
   <div class="colofon">
     <div class="ornament">❖ ❖ ❖</div>
-    <p>Objetivo 3 · Plan de acción de equivalencia · septiembre 2026</p>
+    <p>Objetivo 3 · Plan de acción de equivalencia · septiembre 2026 · actualizado el 19-09-2026</p>
   </div>
 
 </article>

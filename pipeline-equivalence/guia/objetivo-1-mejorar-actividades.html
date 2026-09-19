@@ -99,6 +99,11 @@
     </table>
     <p><strong>Conjunto avanzado (pista B).</strong> Las catorce siguientes, del n.º 4 (El visualizador de música) al n.º 17 (La batalla de gritos), en el orden de <code>activities.json</code>. Cada sesión toma un tramo de tres o cuatro actividades consecutivas. Los tramos se asignan de modo que cada actividad quede cubierta cuatro a cinco veces y que cada participante empiece en un punto distinto de la progresión.</p>
     <p><strong>Matriz de cobertura.</strong> Antes de la primera sesión se arma una tabla actividad × participante y se rellena a medida que se agenda. Dice cuántas sesiones faltan y qué actividad está descubierta.</p>
+    <div class="callout">
+      <span class="tag">Material al 19-09-2026</span>
+      <p>Las sesiones parten de un material ya revisado. El 18 y el 19-09-2026 el autor alineó las 17 actividades en las dos plataformas: mismos bloques, en el mismo orden y con los mismos operadores; las diferencias de plataforma quedan solo en los números. Los textos de las actividades (<code>_activities/&lt;slug&gt;.es.md</code>) dicen lo que hace el código. Los comentarios de los bloques dicen lo mismo en el micro:bit y en Protobject, adaptados a cada uno. Se corrigieron dos imágenes: la de bucles anidados de la 02.1 (E3, El llavero de corazón luminoso; «Repetir 2 veces» con los corazones de la palpitación real) y la de rangos de inclinación de la 02.3 (E5, El xilófono del futuro; límites reales ±15, ±45 y ±75). Todos los sonidos son tonos: TecladoMusical en Protobject, «tono de timbre» en el micro:bit; ya no quedan clips grabados (ReproductorSonido) ni golpes de batería (BateríaMusical). En la 16.4 (n.º 9, ¡El desafío de activación del robot!) la energía se carga tocando la propia matriz de LEDs, como el logo del micro:bit, y no un botón táctil aparte. La pipeline dio veredicto <em>equivalente</em> en las 17 (19-09-2026).</p>
+      <p>La auditoría de diferencias percibidas (18-09-2026) es un insumo previo a las sesiones. Comparó los dos programas de cada actividad: de 75 diferencias candidatas se confirmaron 70, y el autor las revisó una por una. La mayoría quedó alineada. Las que quedan son candidatas para el Objetivo 3: el timbre, la detección del ruido, los umbrales que el autor fija probando, los 400 ms del primer «mostrar LEDs» cuando no hay pausa donde absorberlos, el ritmo de los bucles (20 ms por vuelta en el micro:bit, 33 ms en Protobject), la latencia de red, el muestreo de los sensores de Protobject y que el sonido de Protobject no funciona en iPhone (por eso § 02 pide Android).</p>
+    </div>
   </section>
 
   <section class="section" id="sesion">
@@ -147,7 +152,7 @@
       <li><strong>Síntesis por actividad.</strong> Terminada la ronda, las notas y las ayudas de todos los participantes de esa actividad se clasifican (§ 05) y se juntan en una tabla: incidente, frecuencia (en cuántas personas apareció), severidad, cambio propuesto, dónde (texto / código / plan de lección / cartón).</li>
       <li><strong>Severidad.</strong> Se asigna en la síntesis con una escala 0–4. Dos personas la asignan por separado cuando es posible, y luego se concilia. Se registran las dos valoraciones y la final. Se reporta el porcentaje de acuerdo exacto y a ±1. Los incidentes con desacuerdo de dos puntos o más se revisan en conjunto. La escala: 0 sin problema; 1 cosmético; 2 menor (se resuelve solo, cuesta tiempo); 3 mayor (bloquea o produce un malentendido); 4 catastrófico (impide terminar). La prioridad es el producto severidad × frecuencia. Un incidente de severidad 3 en una sola persona recibe una propuesta.</li>
       <li><strong>Decisión.</strong> Cada propuesta de la tabla recibe una marca: entra, no entra, se discute. Las razones se escriben en la misma tabla. Nada se implementa sin esa marca.</li>
-      <li><strong>Implementación.</strong> Texto: se edita el <code>.md</code> de la actividad y la fuente de la presentación (español de Chile; ninguna actividad menciona a otra), y el cambio pasa a la versión micro:bit de la presentación. Código: se editan el <code>.ptj</code> <em>y</em> el <code>.hex</code>, los dos; se regeneran los derivados y se re-ejecuta la pipeline. Si el veredicto es <em>no equivalente</em>, el cambio vuelve a discusión. Plan de lección y modelo de cartón: se editan y se anota el cambio. Cada versión queda en git.</li>
+      <li><strong>Implementación.</strong> Texto: se edita el <code>.md</code> de la actividad y la fuente de la presentación (español de Chile; ninguna actividad menciona a otra), y el cambio pasa a la versión micro:bit de la presentación. Código: se editan el <code>.ptj</code> <em>y</em> el <code>.hex</code>, los dos, con los mismos bloques, en el mismo orden y con los mismos operadores (las diferencias de plataforma van solo en los números); se regeneran los derivados y se re-ejecuta la pipeline. Si el veredicto es <em>no equivalente</em>, el cambio vuelve a discusión. Plan de lección y modelo de cartón: se editan y se anota el cambio. Cada versión queda en git.</li>
       <li><strong>Ronda 2.</strong> Cada actividad cambiada se prueba con dos personas nuevas, con el mismo protocolo, para ver si el incidente desapareció y si apareció otro.</li>
       <li><strong>Registro de cambios.</strong> Un archivo por actividad, o una tabla única: fecha, qué cambió, por qué (incidente que lo motivó), resultado en la ronda 2. Ese registro entrega a O2 las versiones sustituidas como candidatas a no equivalentes, para la segunda ola del corpus.</li>
     </ol>
@@ -221,7 +226,7 @@
 
   <div class="colofon">
     <div class="ornament">❖ ❖ ❖</div>
-    <p>Objetivo 1 · Plan de acción de equivalencia · septiembre 2026</p>
+    <p>Objetivo 1 · Plan de acción de equivalencia · septiembre 2026 · actualizado el 19-09-2026</p>
   </div>
 
 </article>

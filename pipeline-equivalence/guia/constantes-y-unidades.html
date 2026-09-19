@@ -36,7 +36,7 @@
   <header class="masthead">
     <span class="vol">Dos críticas</span>
     <span>Constantes y unidades del sonido</span>
-    <span>Septiembre 2026</span>
+    <span>Septiembre 2026 · actualizado el 19-09-2026</span>
   </header>
   <nav class="plan-nav">
     <a href="../guia-equivalencia.html">↑ Plan</a>
@@ -50,13 +50,13 @@
   <section class="title-block">
     <span class="eyebrow">Dos críticas a la pipeline</span>
     <h1 class="title">Las <span class="em">constantes</span> y las unidades del sonido</h1>
-    <p class="deck">Dos objeciones al método de equivalencia. La primera se responde con una prueba de normalización. La segunda se acepta y se resuelve en el diseño: las dos plataformas tocan en hercios. Las dos amplían lo que la pipeline <em>reporta</em>: el veredicto algorítmico y, junto a él, el residuo.</p>
+    <p class="deck">Dos objeciones al método de equivalencia. La primera se responde con una prueba de normalización. La segunda se acepta y se resuelve en el diseño: cuando el tono sale de un sensor, las dos plataformas tocan en hercios. Las dos amplían lo que la pipeline <em>reporta</em>: el veredicto algorítmico y, junto a él, el residuo.</p>
   </section>
 
   <section class="section" id="origen">
     <div class="section-marker"><span class="section-num">§ 01</span><span class="section-rule"></span><span class="section-num">ORIGEN</span></div>
     <h2>De dónde vienen las <span class="it">críticas</span></h2>
-    <p class="lede">Se pidió a tres modelos de lenguaje que criticaran el método de equivalencia (septiembre de 2026); el registro de esas conversaciones se archiva en la carpeta del proyecto. Dos críticas se tratan aquí. Crítica 1: la regla D ignora las <strong>constantes</strong>; para los tres modelos, si las constantes difieren, los programas difieren. Crítica 2: la regla C trata un tono en <strong>hercios</strong> y un tono como <strong>número de nota</strong> como el mismo tono. Esas dos codificaciones producen sonidos distintos ante la misma inclinación. Cada crítica se examina con ejemplos del corpus. Cada una termina en tareas para la pipeline y en preguntas para el <a href="objetivo-2-ground-truth.html">panel de expertos</a> del Objetivo 2.</p>
+    <p class="lede">Se pidió a tres modelos de lenguaje que criticaran el método de equivalencia (septiembre de 2026); el registro de esas conversaciones se archiva en la carpeta del proyecto. Dos críticas se tratan aquí. Crítica 1: la regla D ignora las <strong>constantes</strong>; para los tres modelos, si las constantes difieren, los programas difieren. Crítica 2: la antigua regla C trataba un tono en <strong>hercios</strong> y un tono como <strong>número de nota</strong> como el mismo tono (desde el 19-09-2026 ya no es una regla aparte: la altura es una constante más, regla D, § 04). Esas dos codificaciones producen sonidos distintos ante la misma inclinación. Cada crítica se examina con ejemplos del corpus. Cada una termina en tareas para la pipeline y en preguntas para el <a href="objetivo-2-ground-truth.html">panel de expertos</a> del Objetivo 2.</p>
   </section>
 
   <section class="section" id="constantes">
@@ -67,9 +67,9 @@
       <thead><tr><th>Xilófono</th><th>micro:bit</th><th>Protobject</th></tr></thead>
       <tbody>
         <tr><td>Bloque</td><td>«tono de timbre (Hz)»</td><td>«tocar frecuencia (Hz)»</td></tr>
-        <tr><td>Sensor y unidad</td><td>aceleración x, en milésimas de g</td><td>inclinación y, en m/s² × 10</td></tr>
+        <tr><td>Sensor y unidad</td><td>aceleración y, en milésimas de g</td><td>inclinación y, en m/s² × 10</td></tr>
         <tr><td>1 g se lee como</td><td>≈ 1023</td><td>≈ 98</td></tr>
-        <tr><td>Fórmula</td><td><code>440 + aceleración x ÷ 20</code></td><td><code>440 + inclinación y ÷ 2</code></td></tr>
+        <tr><td>Fórmula</td><td><code>440 + aceleración y ÷ 20</code></td><td><code>440 + inclinación y ÷ 2</code></td></tr>
         <tr><td>Tono en reposo</td><td>440 Hz, la nota La</td><td>440 Hz, la nota La</td></tr>
         <tr><td>Tono al inclinar del todo</td><td>≈ 389 a 491 Hz</td><td>≈ 391 a 489 Hz</td></tr>
         <tr><td>Cerca del reposo, por grado</td><td>≈ 0,9 Hz</td><td>≈ 0,9 Hz</td></tr>
@@ -89,55 +89,75 @@
     </div>
     <p>La regla D se aplica a la dimensión algorítmica, la única que la pipeline decide. Las constantes que cambian lo que el niño ve u oye pertenecen a la dimensión sensoriomotriz y se hacen visibles como residuo. La pipeline <strong>declara cuáles constantes ignoró</strong>.</p>
     <p>Aplicada al xilófono, la prueba da «calibración»: en las dos versiones la frecuencia es una recta de la lectura del sensor, con el mismo punto de reposo y casi la misma pendiente. Lo que queda, un par de hercios en los extremos porque 1023 ÷ 20 no es exactamente 98 ÷ 2, se reporta como residuo.</p>
+    <p>Entre el 18-09-2026 y el 19-09-2026 el autor revisó una por una las 17 parejas y las alineó con un principio explícito: <strong>los mismos bloques, en el mismo orden y con los mismos operadores en las dos plataformas; las diferencias entre plataformas van solo en los números</strong>, constantes o valores de variables. Rechazó dos arreglos que cambiaban la estructura: agregar bloques de pausa de 400 ms en un solo lado (actividad 16.5) y cambiar un operador en un solo lado, <code>100 − x</code> en lugar de <code>x + 100</code> (actividad 16.7), porque «un cambio de signo lo haría no equivalente algorítmicamente». Así, las diferencias de plataforma que se pueden compensar quedan en las constantes, y la regla D las deja fuera del veredicto. Si cada una es de calibración o de comportamiento lo decide la prueba de normalización (T3). Las principales, vigentes al 19-09-2026 y verificadas en los programas (<code>microbit/decoded/</code> y <code>protobject/decoded/</code>):</p>
+    <table class="plan">
+      <thead><tr><th>Qué se calibra</th><th>micro:bit</th><th>Protobject</th></tr></thead>
+      <tbody>
+        <tr><td>Unidad de la inclinación</td><td>milésimas de g: unos ±1023 a 90°</td><td>m/s² × 10, truncado: unos ±98 a 90°</td></tr>
+        <tr><td>Tono del xilófono (02.2 y 02.3)</td><td><code>440 + aceleración y ÷ 20</code></td><td><code>440 + inclinación y ÷ 2</code></td></tr>
+        <tr><td>Punto del xilófono (02.3)</td><td><code>2 + redondeo(y ÷ 450)</code>: posición 0 a 4 en la matriz de 5 × 5</td><td><code>4 + redondear(y ÷ 30)</code>: posición 1 a 7 en la de 7 × 7</td></tr>
+        <tr><td>Pulsos por minuto del metrónomo (22.1)</td><td><code>aceleración x ÷ 20 + 60</code></td><td><code>inclinación x ÷ 2 + 60</code></td></tr>
+        <tr><td>Columna del nivel (16.7), redondeada hacia arriba</td><td><code>(aceleración + 615) × 4 ÷ 1640</code>: columnas 0 a 4</td><td><code>(inclinación + 140) × 4 ÷ 160</code>: columnas 2 a 6, con el borde apagado</td></tr>
+        <tr><td>Zona segura y columna central (16.7)</td><td colspan="2">unos ±37° y unos ±11,5°, en las dos</td></tr>
+        <tr><td>Los 400 ms que espera «mostrar LEDs»</td><td>pausas de 500 y 100 ms (02.1); de 100 ms (14.1, 16.3); última pausa de 500 ms (16.2, 16.4); pausas de 700 y 100 ms (16.6)</td><td>retrasos de 900 y 500 ms (02.1); de 500 ms (14.1, 16.3); último retraso de 900 ms (16.2, 16.4); retrasos de 700 y 900 ms (16.6)</td></tr>
+        <tr><td>Los 400 ms, en variables (16.5)</td><td><code>pausaLarga</code> y <code>pausaCorta</code>: 600 y 300, o 200 y 100</td><td>las mismas más 400: 1000 y 700, o 600 y 500</td></tr>
+        <tr><td>Umbrales, fijados probando</td><td>aceleración x &gt; 400 (16.1); luz &gt; 100 (16.2) y &lt; 75 (16.3); ruido ≥ 20 (22.2)</td><td>inclinación x &gt; 20; luz &gt; 50 y &lt; 30; ruido ≥ 5</td></tr>
+        <tr><td>Signo del eje x</td><td>positivo al inclinar a la derecha</td><td>igual desde el 18-09-2026; antes, negativo. Se corrigió la app, no los programas</td></tr>
+      </tbody>
+    </table>
+    <p>Dos de estas constantes cambiaron en esos días. El nivel de Protobject pasó de 7 a 5 columnas: antes la alarma saltaba a unos ±25° y el micro:bit era asimétrico. El metrónomo dejó <code>x + 600</code> contra <code>x + 60</code>, que daba 600 contra 60 pulsos por minuto en reposo. Los umbrales los fija el autor probando, no con una fórmula, y el plan no los iguala. El signo de x no necesita constante: la Inclinación de Protobject seguía la convención del navegador y ahora entrega x con el signo del micro:bit; el eje y ya coincidía. Lo que ninguna constante compensa queda como residuo para el Objetivo 3: el timbre, la forma de detectar el ruido, los 400 ms del primer «mostrar LEDs» cuando no hay una pausa antes donde absorberlos (en 16.1 el primer pitido llega 0,4 s después de la cara), la vuelta de los bucles (20 ms en el micro:bit, 33 ms en Protobject), el muestreo de los sensores de Protobject (ruido a 10 Hz, inclinación a 30 Hz) y la latencia de red de Protobject.</p>
   </section>
 
   <section class="section" id="corazon">
     <div class="section-marker"><span class="section-num">§ 03</span><span class="section-rule"></span><span class="section-num">UN CASO DEL CORPUS</span></div>
     <h2>El llavero de corazón: una constante que <span class="it">compensa</span> la plataforma</h2>
-    <p>La actividad n.º 1 del corpus tiene, en las dos plataformas, la misma estructura: un bucle infinito que muestra el corazón, hace sonar un latido, espera 300 ms, vuelve a sonar, y luego repite cuatro veces una alternancia de dos dibujos con una pausa entre ellos. La pipeline la declara isomorfa. Las pausas del bucle interno son distintas: <strong>10 ms</strong> en el micro:bit, <strong>100 ms</strong> en Protobject, verificado en la fuente (<code>microbit/decoded/02.1-heart-beat.ts</code> y <code>protobject/raw/corazon-forever-loop.xml</code>). Por la regla D, la diferencia queda fuera del veredicto algorítmico.</p>
-    <p>Las pausas son distintas <em>a propósito</em>. La matriz de LED del micro:bit tarda en encenderse por completo, y el bloque «mostrar LEDs» lleva una pausa implícita: la documentación oficial dice que, al programar con bloques, el parámetro <code>interval</code> «is set at 400 milliseconds», y el código fuente lo confirma (<code>showLeds(leds, interval = 400)</code>). Protobject dibuja de inmediato. Con una pausa nominal más corta en el micro:bit y más larga en el celular, las dos animaciones se <em>acercan</em> perceptivamente. La constante absorbe un límite de la implementación: es una constante de calibración en el tiempo, como el ÷ 20 y el ÷ 2 del xilófono lo son en el rango del sensor.</p>
+    <p>La actividad n.º 1 del corpus tiene, en las dos plataformas, la misma estructura: un bucle infinito que hace sonar un tono, muestra el corazón grande, espera, corta el sonido y luego repite dos veces una alternancia de dos dibujos, el corazón de contorno y el corazón chico, con una pausa después de cada uno. Los tres corazones son los mismos en las dos: el de Protobject usa el 5 × 5 central de su matriz de 7 × 7. El tono es el mismo Re: la nota 74 en Protobject, 587 Hz en el micro:bit. La pipeline la declara isomorfa. Las pausas son distintas: <strong>500 y 100 ms</strong> en el micro:bit, <strong>900 y 500 ms</strong> en Protobject, verificado en la fuente (<code>microbit/decoded/02.1-heart-beat.ts</code> y <code>protobject/decoded/02.1-heart-beat.txt</code>). Por la regla D, la diferencia queda fuera del veredicto algorítmico.</p>
+    <p>Las pausas son distintas <em>a propósito</em>. La matriz de LED del micro:bit tarda en encenderse por completo, y el bloque «mostrar LEDs» lleva una pausa implícita: la documentación oficial dice que, al programar con bloques, el parámetro <code>interval</code> «is set at 400 milliseconds», y el código fuente lo confirma (<code>showLeds(leds, interval = 400)</code>). El «dibuja» de Protobject no espera: manda el dibujo y pasa a la orden siguiente, verificado en la fuente de la app (19-09-2026). Por eso cada pausa de Protobject es la del micro:bit más 400 ms: 500 + 400 = 900 y 100 + 400 = 500. En lo nominal, el corazón grande y su tono duran 900 ms, y cada dibujo del latido 500 ms, en las dos. La constante absorbe un límite de la implementación: es una constante de calibración en el tiempo, como el ÷ 20 y el ÷ 2 del xilófono lo son en el rango del sensor.</p>
+    <p>Hasta el 18-09-2026 el llavero era otro: un latido doble (tambor en Protobject, tono en el micro:bit) separado por 300 ms, y cuatro vueltas del bucle interno con pausas de <strong>10 ms</strong> en el micro:bit y <strong>100 ms</strong> en Protobject. Esa compensación solo <em>acercaba</em> las dos animaciones. El 18-09-2026 el autor rehízo la actividad con los mismos corazones y los mismos tiempos en las dos plataformas.</p>
     <table class="plan">
-      <thead><tr><th>Bucle interno</th><th>micro:bit</th><th>Protobject</th></tr></thead>
+      <thead><tr><th>Llavero de corazón</th><th>micro:bit</th><th>Protobject</th></tr></thead>
       <tbody>
-        <tr><td>Pausa nominal entre dibujos</td><td>10 ms</td><td>100 ms</td></tr>
-        <tr><td>Intervalo implícito del bloque de dibujo</td><td>400 ms («mostrar LEDs»)</td><td>ninguno conocido (por verificar)</td></tr>
-        <tr><td>Encendido de la matriz</td><td>lento (por medir)</td><td>inmediato</td></tr>
-        <tr><td><strong>Ritmo que se ve</strong></td><td colspan="2"><strong>parecido, por diseño; el ajuste de la compensación se mide</strong></td></tr>
+        <tr><td>Pausa nominal tras el corazón grande</td><td>500 ms</td><td>900 ms</td></tr>
+        <tr><td>Pausa nominal tras cada dibujo del latido</td><td>100 ms</td><td>500 ms</td></tr>
+        <tr><td>Intervalo implícito del bloque de dibujo</td><td>400 ms («mostrar LEDs»)</td><td>ninguno (verificado en la fuente)</td></tr>
+        <tr><td>Encendido de la matriz</td><td>lento (por medir)</td><td>inmediato, más la latencia de red (por medir)</td></tr>
+        <tr><td>Vuelta del bucle</td><td>«para siempre»: 20 ms</td><td>«repetir para siempre»: 33 ms</td></tr>
+        <tr><td><strong>Ritmo que se ve</strong></td><td colspan="2"><strong>el mismo en lo nominal, 900 y 500 ms; falta medirlo en pantalla</strong></td></tr>
       </tbody>
     </table>
     <p>La prueba de normalización, aplicada al tiempo, corre sobre la duración <em>medida</em> en pantalla, porque el ritmo que se ve incluye el tiempo de encendido y los intervalos implícitos. El glosario del panel del Objetivo 2 dice «mostrar LEDs = dibujar + pausa implícita de 400 ms, sobre una matriz lenta», porque el ritmo visible depende de esa pausa implícita. El par es un control natural para el piloto del Objetivo 3: quitar la compensación —las mismas pausas nominales en ambas— produce dos ritmos distintos que el instrumento debe detectar.</p>
     <div class="callout warn">
       <span class="tag">Por medir</span>
-      <p>El intervalo implícito de «mostrar LEDs» está verificado en la documentación y el código de MakeCode. El tiempo de encendido de la matriz y la existencia de una pausa implícita en Protobject quedan por medir. Filmar cuatro vueltas del bucle en las dos plataformas y comparar los ritmos: si coinciden, la compensación está bien ajustada; si difieren, el ajuste es una mejora candidata para el Objetivo 1.</p>
+      <p>El intervalo implícito de «mostrar LEDs» está verificado en la documentación y el código de MakeCode. Que el «dibuja» de Protobject no espera está verificado en la fuente de la app (19-09-2026). El tiempo de encendido de la matriz y la latencia de red de Protobject quedan por medir. Filmar cuatro vueltas del bucle en las dos plataformas y comparar los ritmos: si coinciden, la compensación está bien ajustada; si difieren, el ajuste es una mejora candidata para el Objetivo 1.</p>
     </div>
   </section>
 
   <section class="section" id="unidades">
     <div class="section-marker"><span class="section-num">§ 04</span><span class="section-rule"></span><span class="section-num">CRÍTICA 2</span></div>
-    <h2>El tono, en <span class="it">hercios</span> en las dos plataformas</h2>
+    <h2>El tono que sale del sensor, en <span class="it">hercios</span> en las dos plataformas</h2>
     <p>Esta crítica se acepta y se resuelve en el diseño. Un número de nota y una frecuencia no son la misma escala. Cada unidad de número de nota multiplica la frecuencia por 2<sup>1/12</sup>, un semitono; cada unidad de frecuencia le suma un hercio. Ante la misma inclinación, las dos codificaciones dan funciones de forma distinta, una exponencial y otra lineal en hercios, y los intervalos musicales se perciben como razones de frecuencia. Tratar las dos codificaciones como iguales, como hacía la antigua regla C, igualaría dos cosas que suenan distinto.</p>
     <p>Por eso, en las dos versiones del xilófono, el tono se da en hercios: «tono de timbre (Hz)» en el micro:bit y «tocar frecuencia (Hz)» en Protobject. Con la misma unidad, lo único que queda distinto es la constante, y eso es la crítica 1 (§ 02).</p>
-    <p>Desde el 19-09-2026 todas las actividades suenan con tonos en las dos plataformas: «tono de timbre (Hz)» en el micro:bit, «tocar nota» o «tocar frecuencia» en Protobject, y «detener» en las dos. La altura, en hercios o como nombre de nota, es una constante más (regla D). La regla C, «sonido por intención», se quitó: ya no quedan sonidos de naturaleza distinta que clasificar (clips grabados, golpes de batería).</p>
+    <p>Desde el 19-09-2026 todas las actividades suenan con tonos en las dos plataformas: «tono de timbre (Hz)» en el micro:bit y «tocar nota» o «tocar frecuencia» en Protobject. El sonido se corta con «para todos los sonidos» en el micro:bit y con «detener» en Protobject. La altura, en hercios o como nombre de nota, es una constante más (regla D): las notas fijas van como nota en Protobject y en hercios en el micro:bit (en 02.1, la nota 74 y 587 Hz, el mismo Re). La antigua regla C, «sonido por intención», se quitó: ya no quedan sonidos de naturaleza distinta que clasificar (clips grabados, golpes de batería). La regla C dice ahora solo que todo sonido es un tono: tocar y detener.</p>
   </section>
 
   <section class="section" id="principio">
     <div class="section-marker"><span class="section-num">§ 05</span><span class="section-rule"></span><span class="section-num">PRINCIPIO</span></div>
     <h2>Toda normalización deja una <span class="it">huella</span></h2>
-    <p>Las dos críticas llevan a un principio. Las reglas de normalización de la pipeline (A: sin análogo; B: recursos, donde el eje del sensor sí cuenta; D: aritmética, las constantes no cuentan; E: orden; la regla C, sonido por intención, se quitó el 19-09-2026) deciden la dimensión algorítmica, y cada una <em>borra</em> una diferencia. La pipeline escribe qué borró: que una versión divide por 20 y la otra por 2, que una espera 10 ms y la otra 100. El principio:</p>
+    <p>Las dos críticas llevan a un principio. Las reglas de normalización de la pipeline (A: sin análogo; B: recursos, donde el eje del sensor sí cuenta; C: sonido, que desde el 19-09-2026 es solo tonos y reemplaza a la antigua «sonido por intención»; D: aritmética, las constantes no cuentan; E: orden) deciden la dimensión algorítmica, y cada una <em>borra</em> una diferencia. La pipeline escribe qué borró: que una versión divide por 20 y la otra por 2, que una espera 500 ms y la otra 900. El principio:</p>
     <div class="pullquote">Cada regla que iguala dos cosas distintas deja escrito qué igualó. El veredicto va acompañado de su residuo.</div>
-    <p>La salida de la pipeline es un perfil: «equivalentes en la dimensión algorítmica; residuos: constantes {÷ 20 ↔ ÷ 2, ÷ 450 ↔ ÷ 30}, recursos {eje x ↔ eje y}». El panel lo usa para juzgar, y el instrumento del Objetivo 3 lo usa para saber dónde mirar.</p>
+    <p>La salida de la pipeline es un perfil: «equivalentes en la dimensión algorítmica; residuos: constantes {÷ 20 ↔ ÷ 2, ÷ 450 ↔ ÷ 30}». Hasta el 18-09-2026 el perfil del xilófono llevaba también «recursos {eje x ↔ eje y}»; el 18-09-2026 las dos versiones pasaron a leer el eje y, y desde el 19-09-2026 el eje cuenta (regla B). El panel lo usa para juzgar, y el instrumento del Objetivo 3 lo usa para saber dónde mirar.</p>
   </section>
 
   <section class="section" id="tareas">
     <div class="section-marker"><span class="section-num">§ 06</span><span class="section-rule"></span><span class="section-num">TAREAS</span></div>
     <h2>Tareas <span class="it">concretas</span> para la pipeline</h2>
     <ol class="pasos">
-      <li><strong>T1 · Residuos de constantes.</strong> En la construcción del PDG, cada nodo aritmético conserva sus constantes (el AST fiel las guarda); el motor de cálculo emite en <code>metricas.json</code> una lista <code>residuals</code> con, por cada nodo emparejado, los valores de un lado y del otro. <code>node_match</code> conserva la regla D.</li>
-      <li><strong>T2 · Residuos de unidades.</strong> La ontología marca la unidad de cada salida que la tiene (Hz, ms). Si las dos plataformas usan unidades distintas, el motor lo reporta en <code>residuals</code> como <code>unit</code>. El tono va en Hz en las dos.</li>
-      <li><strong>T3 · Prueba de normalización.</strong> Para los pares donde se conocen los rangos de sensor y de salida, un script normaliza con una transformación afín y compara la forma de la función (misma familia, desviación máxima bajo un umbral escrito de antemano); reporta «calibración» o «forma distinta». Los rangos van en una tabla de plataforma que distingue rango nominal del sensor y rango alcanzable en el gesto de la actividad (medido, con fuente), y documenta el comportamiento fuera de rango de cada salida.</li>
-      <li><strong>T4 · Pausas implícitas.</strong> El decodificador anota los bloques con duración implícita conocida («mostrar LEDs»: 400 ms) y el PDG muestra ese nodo de espera con la marca «implícito», para que el panel vea el residuo temporal. Los tiempos reales de encendido de las dos plataformas se miden en hardware, porque el residuo temporal se calcula sobre lo que se ve.</li>
-      <li><strong>T5 · Dashboard.</strong> El visor muestra los residuos junto a la métrica, con la regla que los produjo.</li>
-      <li><strong>T6 · Runbook.</strong> <code>prompt.md</code> incorpora el principio de § 05 y las salidas nuevas.</li>
+      <li><strong>T1 · Residuos de constantes.</strong> En la construcción del PDG, cada nodo aritmético conserva sus constantes (el AST fiel las guarda); el motor de cálculo emite en <code>metricas.json</code> una lista <code>residuals</code> con, por cada nodo emparejado, los valores de un lado y del otro. <code>node_match</code> conserva la regla D. <em>Al 19-09-2026, pendiente: ningún <code>metricas.json</code> trae <code>residuals</code>.</em></li>
+      <li><strong>T2 · Residuos de unidades.</strong> La ontología marca la unidad de cada salida que la tiene (Hz, ms). Si las dos plataformas usan unidades distintas, el motor lo reporta en <code>residuals</code> como <code>unit</code>. El tono que sale del sensor, en los xilófonos, va en Hz en las dos; las notas fijas van como nota en Protobject y en Hz en el micro:bit (§ 04). <em>Al 19-09-2026, pendiente: la ontología no marca unidades.</em></li>
+      <li><strong>T3 · Prueba de normalización.</strong> Para los pares donde se conocen los rangos de sensor y de salida, un script normaliza con una transformación afín y compara la forma de la función (misma familia, desviación máxima bajo un umbral escrito de antemano); reporta «calibración» o «forma distinta». Los rangos van en una tabla de plataforma que distingue rango nominal del sensor y rango alcanzable en el gesto de la actividad (medido, con fuente), y documenta el comportamiento fuera de rango de cada salida. <em>Al 19-09-2026, pendiente: no hay script de normalización; la tabla de § 02 reúne las principales constantes vigentes.</em></li>
+      <li><strong>T4 · Pausas implícitas.</strong> El decodificador anota los bloques con duración implícita conocida («mostrar LEDs»: 400 ms) y el PDG muestra ese nodo de espera con la marca «implícito», para que el panel vea el residuo temporal. Los tiempos reales de encendido de las dos plataformas se miden en hardware, porque el residuo temporal se calcula sobre lo que se ve. <em>Al 19-09-2026, pendiente: los decodificadores no anotan la pausa implícita. Que el «dibuja» de Protobject no espera ya está verificado en la fuente (§ 03).</em></li>
+      <li><strong>T5 · Dashboard.</strong> El visor muestra los residuos junto a la métrica, con la regla que los produjo. <em>Al 19-09-2026, pendiente.</em></li>
+      <li><strong>T6 · Runbook.</strong> <code>prompt.md</code> incorpora el principio de § 05 y las salidas nuevas. <em>Al 19-09-2026, en parte: <code>prompt.md</code> ya dice que las diferencias de plataforma van en las constantes (unidades de los sensores, los 400 ms de «mostrar LEDs», alturas, umbrales), pero todavía no pide escribir el residuo.</em></li>
     </ol>
   </section>
 
@@ -146,11 +166,11 @@
     <h2>Preguntas <span class="it">abiertas</span></h2>
     <ol class="preguntas">
       <li><strong>¿Suenan igual los dos xilófonos?</strong> Están calibrados para eso: la misma base, 440 Hz, y el mismo recorrido, unos ±50 Hz. Propuesta: confirmarlo con la prueba de discriminación del Objetivo 3, con participantes de la edad de destino.</li>
-      <li><strong>¿Está bien ajustada la compensación temporal del llavero de corazón?</strong> Filmar cuatro vueltas del bucle en las dos plataformas y comparar los ritmos.</li>
-      <li><strong>¿Tiene «dibuja en DibujoLED» de Protobject alguna pausa implícita?</strong> Verificar en la fuente de la plataforma, o medir.</li>
-      <li><strong>¿La regla D se le presenta al panel tal cual, con la marca de disenso?</strong> Ver P3 del Objetivo 2.</li>
+      <li><strong>¿Está bien ajustada la compensación temporal del llavero de corazón?</strong> Desde el 18-09-2026 cada pausa de Protobject es la del micro:bit más 400 ms, así que en lo nominal los ritmos son iguales (§ 03). Falta verlo en pantalla: filmar cuatro vueltas del bucle en las dos plataformas y comparar los ritmos.</li>
+      <li><strong>¿Tiene «dibuja en DibujoLED» de Protobject alguna pausa implícita?</strong> Verificar en la fuente de la plataforma, o medir. Respuesta (19-09-2026): no; el bloque manda el dibujo y pasa a la orden siguiente, verificado en la fuente de la app. Queda por medir la latencia de red.</li>
+      <li><strong>¿La regla D se le presenta al panel tal cual, con la marca de disenso?</strong> Ver P4 del Objetivo 2.</li>
       <li><strong>¿Qué constantes pasan la prueba de normalización en las 17?</strong> T3 produce esa tabla antes de que el panel juzgue.</li>
-      <li><strong>¿Dónde se documentan los rangos de sensores de cada plataforma?</strong> Propuesta: una tabla nueva junto a la ontología, con fuente para cada rango.</li>
+      <li><strong>¿Dónde se documentan los rangos de sensores de cada plataforma?</strong> Propuesta: una tabla nueva junto a la ontología, con fuente para cada rango. Mientras tanto, la tabla de § 02 reúne las principales constantes vigentes al 19-09-2026.</li>
     </ol>
   </section>
 
@@ -171,6 +191,8 @@
 <h3>Sobre Protobject</h3>
 <ul class="refs">
 <li><span class="cite">Protobject (código fuente de la aplicación). <em>Inclinación (SmartphoneOrientation) y Teclado Musical (PlayKeyboard)</em>. <code>src/device/components/accorientation/index.ts</code>, <code>src/device/components/_shared/orientation.ts</code>, <code>src/device/components/playkeyboard/index.ts</code>.</span><span class="why">La inclinación entrega la aceleración con gravedad en m/s² × 10, truncada: 1 g se lee como unos 98. «tocar frecuencia (Hz)» toca cualquier frecuencia positiva; con 0 o menos, silencio.</span><span class="src">verificado en la fuente · 18-09-2026</span></li>
+<li><span class="cite">Protobject (código fuente de la aplicación). <em>Bloques de dispositivo y Dibujo LED (drawled)</em>. <code>src/editor/blocks/device-blocks.ts</code>, <code>src/runtime/worker/api.ts</code>, <code>src/device/components/drawled/index.ts</code>.</span><span class="why">El bloque «dibuja» se traduce en <code>protobject.setProperty</code>, que manda la orden y vuelve sin esperar. El bucle principal, «repetir para siempre», hace una pausa de 33 ms al comienzo de cada vuelta.</span><span class="src">verificado en la fuente · 19-09-2026</span></li>
+<li><span class="cite">Protobject (repositorio de la aplicación). <em>Tilt the phone right for a positive x, as on the micro:bit</em>. Commit 827ef50, 18-09-2026; <code>src/device/components/accorientation/index.ts</code>.</span><span class="why">Desde este cambio la Inclinación entrega x positiva al inclinar a la derecha, como el micro:bit; el eje y ya coincidía.</span><span class="src">verificado en el repositorio · 19-09-2026</span></li>
 </ul>
 <h3>Sobre MIDI y la percepción de intervalos</h3>
 <ul class="refs">
