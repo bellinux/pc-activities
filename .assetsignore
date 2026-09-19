@@ -7,3 +7,4 @@ node_modules
 wrangler.toml
 CLAUDE.md
 protobject/backup
+tools/media-cache

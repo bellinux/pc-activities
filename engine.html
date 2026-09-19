@@ -582,7 +582,7 @@
             
             // Botones (Guía e Info) en posición absoluta arriba a la derecha
             html += `
-            <div class="absolute right-0 top-0 flex gap-2 z-10">
+            <div class="flex flex-wrap justify-end gap-2 mb-4 xl:mb-0 xl:absolute xl:right-0 xl:top-0 z-10">
                 <button onclick="openInfoModal()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-300 font-semibold py-2 px-3 rounded-lg shadow-sm transition-colors flex items-center gap-2 text-sm" title="Mostrar Info Técnica / YAML">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
                     Info
@@ -595,10 +595,19 @@
                     Guía del Profesor
                 </button>`;
             }
+            // Presentación para proyectar en clase (tools/make-slides.py → ppt/<slug>.es.pptx)
+            if (fileName) {
+                const pptx = fileName.replace(/\.md$/, '.pptx');
+                html += `
+                <a href="ppt/${encodeURIComponent(pptx)}" download="${escapeHtml(pptx)}" class="bg-orange-100 hover:bg-orange-200 text-orange-800 border border-orange-300 font-bold py-2 px-4 rounded-lg shadow-sm transition-colors flex items-center gap-2 text-sm" title="Descargar la presentación para la clase (PowerPoint)">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5h16v10H4zM12 15v4m-4 0h8"></path></svg>
+                    Presentación
+                </a>`;
+            }
             html += `</div>`; // Fin de botones
 
             // Badges (evitan el área de los botones)
-            html += `<div class="flex flex-wrap gap-2 mb-4 pr-64">`;
+            html += `<div class="flex flex-wrap gap-2 mb-4 xl:pr-[30rem]">`;
             if (data.level) html += `<span class="bg-slate-800 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Level ${data.level}</span>`;
             if (data.computational_topics) {
                 data.computational_topics.forEach(t => html += `<span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1 rounded-full">${t}</span>`);

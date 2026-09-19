@@ -6,7 +6,7 @@ REPETIR PARA SIEMPRE (bucle principal)
   SI
       ; // Condicional extendido: un condicional simple ejecuta su contenido solo si la condición se cumple, y si no, no hace nada. Aquí hay dos caminos: si la condición se cumple se ejecuta la primera parte; si no, se ejecuta una parte distinta.
     [si (IntensidadLuz1.leer(lightIntensity) > 50)]
-    DibujoLED2_draw_set_1  VAR=drawleds(btmMatrix=1,0,0,1,0,0,1,0,1,0,1,0,1,0,0,0,1,1,1,0,0,1,1,1,1,1,1,1,0,0,1,1,1,0,0,0,1,0,1,0,1,0,1,0,0,1,0,0,1)  VAR2=colour_picker(COLOUR=#ff0000)
+    DibujoLED2_draw_set_1  VAR=drawleds(btmMatrix=0,0,0,0,0,0,0,0,1,0,1,0,1,0,0,0,1,1,1,0,0,0,1,1,1,1,1,0,0,0,1,1,1,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,0)  VAR2=colour_picker(COLOUR=#ff0000)
     TecladoMusical3_play_set_1  VAR=control_note(VAR=74)
     ESPERAR  ms  VAR=200
     TecladoMusical3_play_set_1  VAR=control_note(VAR=78)
