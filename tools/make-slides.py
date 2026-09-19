@@ -311,6 +311,10 @@ SHOT_VERSION = 2
 # is unreadable from the back of a classroom.
 SHOT_SCALE = 2
 
+# Con `--force` la foto del programa se vuelve a tomar: la caché está indexada por URL,
+# y la URL de un programa no cambia cuando se publica una versión nueva.
+RETAKE_SHOTS = '--force' in sys.argv[1:]
+
 
 def take_website_screenshot(url, image_folder):
     """A picture of one program, cropped to the program.
@@ -324,7 +328,7 @@ def take_website_screenshot(url, image_folder):
         url = reveal_hidden_blocks(url)
         url_hash = hashlib.md5(f"{SHOT_VERSION}|{url}".encode()).hexdigest()
         screenshot_path = os.path.join(image_folder, f"screenshot_{url_hash}.png")
-        if os.path.exists(screenshot_path):
+        if os.path.exists(screenshot_path) and not RETAKE_SHOTS:
             return screenshot_path
 
         print(f"  -> Catturando screenshot di {url}...")
