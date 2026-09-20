@@ -44,7 +44,7 @@
 <div id="app">
   <aside>
     <h1>Adaptador micro:bit tamaño celular</h1>
-    <p class="sub">Boceto 5 · 19-09-2026 · paramétrico</p>
+    <p class="sub">Boceto 6 · 19-09-2026 · paramétrico · batería LiPo</p>
 
     <div id="params"></div>
     <p id="warn"></p>
@@ -55,9 +55,9 @@
 
     <h2>Mostrar</h2>
     <label class="t"><input type="checkbox" id="t-body" checked> <span class="sw" style="background:#cfd6e3"></span> Cuerpo</label>
-    <label class="t"><input type="checkbox" id="t-ghost"> Cuerpo transparente</label>
+    <label class="t" style="gap:10px">Transparencia del cuerpo <input type="range" id="ghost" min="0" max="90" step="5" value="0" style="flex:1"><span id="ghostv" style="width:34px;text-align:right">0 %</span></label>
     <label class="t"><input type="checkbox" id="t-mb" checked> <span class="sw" style="background:#2f8f4e"></span> micro:bit V2</label>
-    <label class="t"><input type="checkbox" id="t-bat" checked> <span class="sw" style="background:#3a3f4b"></span> Portapilas 2×AAA</label>
+    <label class="t"><input type="checkbox" id="t-bat" checked> <span class="sw" style="background:#8b98a8"></span> Batería LiPo</label>
     <label class="t"><input type="checkbox" id="t-cable" checked> <span class="sw" style="background:#2fb344"></span> Cable (recorrido aproximado)</label>
     <label class="t"><input type="checkbox" id="t-cap"> <span class="sw" style="background:#f08c3a"></span> Cover de referencia (STL)</label>
 
@@ -96,30 +96,46 @@ const SCHEMA = [
   { group: 'Celular' },
   { key: 'W', label: 'Ancho', min: 60, max: 90, step: 0.5, def: 72 },
   { key: 'H', label: 'Alto', min: 120, max: 180, step: 0.5, def: 150 },
-  { key: 'T', label: 'Grosor', min: 10, max: 30, step: 0.1, def: 15 },
+  { key: 'T', label: 'Grosor', min: 10, max: 30, step: 0.1, def: 10 },
   { key: 'R', label: 'Radio de las esquinas', min: 0, max: 15, step: 0.5, def: 8 },
-  { key: 'plate', label: 'Placa del frente', min: 1, max: 4, step: 0.1, def: 2.5 },
+  { key: 'plate', label: 'Placa del frente', min: 1, max: 4, step: 0.1, def: 2 },
   { group: 'micro:bit (ventana, botones y bolsillo)' },
   { key: 'mbX', label: 'Posición x', min: -20, max: 20, step: 0.5, def: 0 },
   { key: 'mbY', label: 'Posición y', min: -50, max: 50, step: 0.5, def: 0 },
   { group: 'Zona abierta arriba del micro:bit' },
   { key: 'topW', label: 'Ancho', min: 20, max: 80, step: 0.5, def: 54.5 },
-  { key: 'topH', label: 'Alto', min: 0, max: 60, step: 0.5, def: 23.5 },
-  { group: 'Portapilas 2×AAA (52.5 × 25.8 × 15.3)' },
-  { key: 'batX', label: 'Posición x', min: -30, max: 30, step: 0.5, def: -5 },
-  { key: 'batY', label: 'Posición y', min: -75, max: 75, step: 0.5, def: -44 },
+  { key: 'topH', label: 'Alto', min: 0, max: 60, step: 0.5, def: 14.5 },
+  { key: 'topRun', label: 'Pared de arriba: cuánto se tumba (mm)', min: 0, max: 40, step: 0.5, def: 25 },
+  { group: 'Batería LiPo 523450 (52 × 34 × 5.2)' },
+  { key: 'batX', label: 'Posición x', min: -30, max: 30, step: 0.5, def: 0 },
+  { key: 'batY', label: 'Posición y', min: -75, max: 75, step: 0.5, def: -46 },
   { key: 'batRot', label: 'Girado 90°', type: 'check', def: false },
-  { key: 'batFlipX', label: 'Espejado horizontal', type: 'check', def: true },
+  { key: 'batFlipX', label: 'Espejado horizontal', type: 'check', def: false },
   { key: 'batFlipY', label: 'Espejado vertical', type: 'check', def: true },
-  { key: 'batThrough', label: 'Bolsillo pasante (abierto al frente)', type: 'check', def: true },
+  { key: 'batThrough', label: 'Bolsillo pasante (abierto al frente)', type: 'check', def: false },
+  { key: 'batLid', label: 'Cerrada por atrás', type: 'check', def: true },
+  { key: 'batSlot', label: 'Ranura lateral para entrar la batería', type: 'check', def: false },
+  { key: 'edgeClosed', label: 'Cerrar todo el canto (lado del canal)', type: 'check', def: true },
+  { key: 'noDiv', label: 'Sin división entre el micro:bit y la batería', type: 'check', def: true },
+  { key: 'edgeLen', label: 'Borde del celular: cuánto baja', min: -40, max: 40, step: 0.5, def: 10 },
+  { key: 'lidX', label: 'Tapa: recorte desde el canto', min: 0, max: 20, step: 0.5, def: 0 },
+  { key: 'batLidT', label: 'Espesor de esa tapa', min: 0.4, max: 3, step: 0.1, def: 2 },
+  { key: 'cableL', label: 'Largo útil del cable', min: 30, max: 120, step: 1, def: 70 },
+  { group: 'Ranura de abajo (hasta la batería)' },
+  { key: 'slitOn', label: 'Hacerla', type: 'check', def: true },
+  { key: 'slitW', label: 'Ancho', min: 10, max: 90, step: 0.5, def: 60 },
+  { key: 'slitT', label: 'Alto (grosor de la ranura)', min: 0.5, max: 10, step: 0.1, def: 1.8 },
+  { key: 'slitZ', label: 'Dónde va en el grosor (desde atrás)', min: 0, max: 30, step: 0.1, def: 3.5 },
   { group: 'Canal del cable' },
-  { key: 'chSide', label: 'Lado', type: 'select', options: [['-1', 'Izquierda (mirando el frente)'], ['1', 'Derecha (mirando el frente)']], def: '1' },
-  { key: 'chW', label: 'Ancho', min: 2, max: 10, step: 0.5, def: 5.5 },
-  { key: 'chD', label: 'Profundidad', min: 2, max: 15, step: 0.5, def: 8.5 },
+  { key: 'chOn', label: 'Canal por el costado', type: 'check', def: true },
+  { key: 'chSide', label: 'Lado', type: 'select', options: [['-1', 'Izquierda (mirando el frente)'], ['1', 'Derecha (mirando el frente)']], def: '-1' },
+  { key: 'chW', label: 'Ancho', min: 2, max: 10, step: 0.5, def: 5 },
+  { key: 'chD', label: 'Profundidad', min: 2, max: 15, step: 0.5, def: 7 },
+  { key: 'chRoof', label: 'Techo sobre el canal (encima de la batería)', type: 'check', def: true },
   { group: 'Ajuste' },
   { key: 'gap', label: 'Holgura por lado', min: 0, max: 1.5, step: 0.05, def: 1.5 },
 ];
-const STORE = 'adaptador-microbit-parametros-v1';
+const STORE = 'adaptador-microbit-parametros-v2';
 const DEFAULTS = Object.fromEntries(SCHEMA.filter(s => s.key).map(s => [s.key, s.def]));
 let saved = {};
 try { saved = JSON.parse(localStorage.getItem(STORE) || '{}') || {}; } catch (_) { saved = {}; }
@@ -127,7 +143,7 @@ const P = { ...DEFAULTS, ...saved };
 const save = () => { try { localStorage.setItem(STORE, JSON.stringify(P)); } catch (_) {} };
 
 // ---------------------------------------------------------------- datos fijos
-const BAT = [52.5, 25.8, 15.3];
+const BAT = [52, 34, 5.2];                        // LiPo 523450, 1000 mAh, cable con JST PH 2.0
 // Agujeros de la cover (en sus coordenadas): ventana centrada en y = -1, A/B en x = ±19.75, y = -3.75.
 // El centro de la ventana es el punto que se mueve con (mbX, mbY).
 const WIN = { top: [27, 32.5, 3.5], bottom: [23, 28.5, 2.0], bevel: 2.0 };
@@ -149,8 +165,8 @@ function derive(P) {
   D.top = { w: P.topW, h: P.topH, cy: D.mb.top + P.topH / 2 };
   const [bw, bh] = P.batRot ? [BAT[1], BAT[0]] : [BAT[0], BAT[1]];
   D.bat = { w: bw + 2 * P.gap, h: bh + 2 * P.gap, depth: BAT[2] + 2 * P.gap, cx: P.batX, cy: P.batY, bw, bh };
-  // salida del cable del portapilas: en un extremo, cerca de un borde (antes de espejar: extremo izquierdo, arriba)
-  let ex = -BAT[0] / 2, ey = BAT[1] / 2 - 4;
+  // salida del cable: en un lado corto, junto a una esquina (antes de espejar: lado izquierdo, abajo)
+  let ex = -BAT[0] / 2, ey = -BAT[1] / 2 + 3;
   if (P.batFlipX) ex = -ex;
   if (P.batFlipY) ey = -ey;
   if (P.batRot) [ex, ey] = [-ey, ex];
@@ -189,17 +205,59 @@ function buildPart(P, D) {
     ]),
     // bolsillos desde atrás, todos rectos
     box(mbL, mbR, D.mb.bottom, D.mb.top, -e, T - P.plate),
-    box(batL, batR, batB, batT, -e, batZ),
-    // canal vertical por el costado
-    box(chL, chR, Math.min(D.ch.y0, batB), Math.max(D.ch.y1, D.mb.top), -e, D.ch.depth),
+    box(batL, batR, batB, batT, P.batLid && !P.batThrough ? P.batLidT : -e, batZ),
   ];
+  // canal vertical por el costado (opcional)
+  // canal junto al micro:bit: ranura con su pared exterior, del bolsillo hasta la zona abierta
+  if (P.chOn) holes.push(box(chL, chR, D.mb.bottom, Math.max(D.ch.y1, D.mb.top), -e, D.ch.depth));
   // sin pared entre el canal y la zona abierta: la zona abierta llega hasta el borde exterior del canal
-  if (P.topH > 0)
-    holes.push(box(Math.min(D.board.cx - D.top.w / 2, chL), Math.max(D.board.cx + D.top.w / 2, chR),
-                   D.mb.top - 0.01, D.mb.top + D.top.h, -e, T - P.plate));
+  const topX0 = Math.min(D.board.cx - D.top.w / 2, P.chOn ? chL : Infinity);
+  const topX1 = Math.max(D.board.cx + D.top.w / 2, P.chOn ? chR : -Infinity);
+  if (P.topH > 0) {
+    const yT = D.mb.top + D.top.h;                       // la pared de arriba
+    holes.push(box(topX0, topX1, D.mb.top - 0.01, yT, -e, T - P.plate));
+    // rampa: sube desde el fondo hasta la cara de atrás, corriéndose hacia arriba
+    if (P.topRun > 0) {
+      const run = P.topRun;
+      holes.push(hull(box(topX0, topX1, yT - 0.01, yT, T - P.plate - 0.01, T - P.plate),
+                      box(topX0, topX1, yT - 0.01, yT + run, -e, -e + 0.01)));   // cuña: en el fondo nada, atrás todo el corrimiento
+    }
+  }
   // sin pared entre el canal y el portapilas: si están cerca, el bolsillo del portapilas llega hasta el canal
   const gapChBat = Math.max(batL - chR, chL - batR);
-  if (gapChBat < 15) holes.push(box(Math.min(chL, batL), Math.max(chR, batR), batB, batT, -e, batBlind));
+  // costado: ranura de la batería y tramo bajo del canal, abiertos al canto
+  const z0 = P.batLid && !P.batThrough ? P.batLidT : -e;
+  const yEdge = D.mb.bottom + P.edgeLen;                                   // hasta dónde baja el borde del celular
+  // con el canto cerrado, nada llega al borde: el canal se queda como ranura interior
+  const xOut = P.edgeClosed ? (D.ch.side < 0 ? chL : chR) : (D.ch.side < 0 ? -P.W / 2 - e : P.W / 2 + e);
+  const sideBox = (y0, y1, za, zb) => D.ch.side < 0
+    ? box(xOut, Math.max(batL + 0.01, chR), y0, y1, za, zb)
+    : box(Math.min(batR - 0.01, chL), xOut, y0, y1, za, zb);
+  if (P.batSlot && !P.edgeClosed && !P.batThrough && Math.min(batT, yEdge) > batB)
+    holes.push(sideBox(batB, Math.min(batT, yEdge), z0, batZ));
+  // ranura en el canto de abajo, que entra hasta el vano de la batería
+  if (P.slitOn) holes.push(box(-P.slitW / 2, P.slitW / 2, -P.H / 2 - e, batB + 0.01, P.slitZ, P.slitZ + P.slitT));
+  // sin división: se quita la pared entre el bolsillo del micro:bit y el vano de la batería
+  if (P.noDiv && batT < D.mb.bottom)
+    holes.push(box(Math.max(batL, mbL), Math.min(batR, mbR), batT - 0.01, D.mb.bottom + 0.01, z0, batZ));   // solo el paso, la tapa sigue entera
+  // la tapa llega al canto; con lidX se recorta desde el canto hacia adentro
+  if (P.lidX > 0 && P.batLid && !P.batThrough)
+    holes.push(D.ch.side < 0
+      ? box(-P.W / 2 - e, -P.W / 2 + P.lidX, Math.min(batB, D.ch.y0), yEdge, -e, z0)
+      : box(P.W / 2 - P.lidX, P.W / 2 + e, Math.min(batB, D.ch.y0), yEdge, -e, z0));
+  if (P.chOn) {
+    // junto al micro:bit el canal es una ranura con su pared exterior
+    holes.push(box(chL, chR, D.mb.bottom, Math.max(D.ch.y1, D.mb.top), -e, D.ch.depth));
+    // más abajo llega hasta el canto
+    const yLow = Math.min(D.ch.y0, batB);
+    const lo = (y0, y1, za) => D.ch.side < 0 ? box(xOut, chR, y0, y1, za, D.ch.depth)
+                                             : box(chL, xOut, y0, y1, za, D.ch.depth);
+    // sobre la batería el canal está abierto por atrás; encima de ella pasa bajo la tapa
+    if (batT < yEdge) holes.push(lo(Math.min(batT, yEdge), yEdge, P.chRoof ? z0 : -e));
+    if (yLow < batT) holes.push(lo(yLow, Math.min(batT, yEdge), z0));
+  }
+  if (!P.chOn) { /* sin canal */ }
+  else if (gapChBat < 15) holes.push(box(Math.min(chL, batL), Math.max(chR, batR), batB, batT, P.batLid && !P.batThrough ? P.batLidT : -e, batBlind));
   else holes.push(box(Math.min(chL, D.bat.exit.x), Math.max(chR, D.bat.exit.x), D.bat.exit.y - D.ch.w / 2, D.bat.exit.y + D.ch.w / 2, -e, D.ch.depth));
   return subtract(rr(P.W, P.H, P.R, 0, T), union(...holes));
 }
@@ -215,6 +273,9 @@ function toThree(geom) {
   g.computeVertexNormals();
   return g;
 }
+
+// alto libre de la ranura (de la tapa al fondo del bolsillo)
+const batZ0 = (P, D) => Math.min(D.bat.depth, P.T - 0.6) - (P.batLid ? P.batLidT : 0);
 
 // ---------------------------------------------------------------- escena
 const view = document.getElementById('view');
@@ -244,7 +305,7 @@ new STLLoader().load('microbit-v2.stl', g => {
 });
 
 const batGroup = new THREE.Group(); scene.add(batGroup);
-const batMat = new THREE.MeshStandardMaterial({ color: 0x3a3f4b, roughness: 0.7 });
+const batMat = new THREE.MeshStandardMaterial({ color: 0x8b98a8, roughness: 0.35, metalness: 0.35 });
 const batBox = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), batMat); batGroup.add(batBox);
 const exitMark = new THREE.Mesh(new THREE.CylinderGeometry(1.6, 1.6, 4, 16), new THREE.MeshStandardMaterial({ color: 0xd9480f }));
 batGroup.add(exitMark);
@@ -265,14 +326,13 @@ function update() {
   const T = P.T;
   busy.textContent = 'calculando…';
   const warn = [];
-  if (!P.batThrough && T < BAT[2] + 2 * P.gap + 0.6) warn.push('El grosor no alcanza para el portapilas (necesita ' + (BAT[2] + 2 * P.gap + 0.6).toFixed(1) + ' mm).');
+  if (!P.batThrough && T < BAT[2] + 2 * P.gap + 0.6) warn.push('El grosor no alcanza para la batería (necesita ' + (BAT[2] + 2 * P.gap + 0.6).toFixed(1) + ' mm).');
   if (Math.abs(D.board.cx) + D.mb.w / 2 > P.W / 2 - 1) warn.push('El bolsillo del micro:bit toca el borde lateral.');
   if (D.top.cy + D.top.h / 2 > P.H / 2 - 1 || D.mb.bottom < -P.H / 2 + 1) warn.push('El micro:bit o la zona abierta tocan el borde superior o inferior.');
-  if (Math.abs(D.bat.cx) + D.bat.w / 2 > P.W / 2 - 1 || Math.abs(D.bat.cy) + D.bat.h / 2 > P.H / 2 - 1) warn.push('El portapilas toca un borde del celular.');
+  if (Math.abs(D.bat.cx) + D.bat.w / 2 > P.W / 2 - 1 || Math.abs(D.bat.cy) + D.bat.h / 2 > P.H / 2 - 1) warn.push('La batería toca un borde del celular.');
   const overlapY = D.bat.cy + D.bat.h / 2 > D.mb.bottom && D.bat.cy - D.bat.h / 2 < D.top.cy + D.top.h / 2;
   const overlapX = Math.abs(D.bat.cx - D.board.cx) < (D.bat.w + Math.max(D.mb.w, D.top.w)) / 2;
-  if (overlapX && overlapY) warn.push('El portapilas se cruza con el micro:bit o con la zona abierta.');
-  document.getElementById('warn').textContent = warn.join(' ');
+  if (overlapX && overlapY) warn.push('La batería se cruza con el micro:bit o con la zona abierta.');
 
   setTimeout(() => {
     const geo = toThree(buildPart(P, D));
@@ -287,7 +347,8 @@ function update() {
 
   batBox.scale.set(D.bat.bw, D.bat.bh, BAT[2]);
   // pasante: el portapilas al ras del dorso; ciego: apoyado en el fondo del bolsillo
-  const batZc = P.batThrough ? BAT[2] / 2 : Math.min(D.bat.depth, T - 0.6) - BAT[2] / 2;
+  const batZc = P.batThrough ? BAT[2] / 2
+    : (P.batLid ? P.batLidT + BAT[2] / 2 : Math.min(D.bat.depth, T - 0.6) - BAT[2] / 2);
   batBox.position.set(D.bat.cx, D.bat.cy, batZc);
   const ex = D.bat.exit;
   const alongX = !P.batRot;                               // la salida está en un extremo: hacia afuera en x (o en y si está girado)
@@ -295,14 +356,23 @@ function update() {
   const out = alongX ? Math.sign(ex.x - D.bat.cx) : Math.sign(ex.y - D.bat.cy);
   exitMark.position.set(ex.x + (alongX ? out * 2 : 0), ex.y + (alongX ? 0 : out * 2), batZc);
 
-  // cable: conector del micro:bit → zona abierta → canal del costado → salida del portapilas
+  // cable: salida de la batería → (canal del costado) → zona abierta → conector del micro:bit (se enchufa desde arriba)
   const zBack = D.board.front + STL.pcbFront - 1.6 - 3;
-  const zc = Math.min(P.chD / 2, zBack);
+  const zc = P.chOn ? Math.min(P.chD / 2, zBack) : Math.min(zBack, (T - P.plate) / 2);
   const yTop = D.mb.top + Math.max(3, Math.min(8, P.topH / 2));
-  const pts = [
-    [D.jst.x, D.jst.y, zBack], [D.jst.x, yTop, zBack], [D.ch.x, yTop, zc],
-    [D.ch.x, ex.y, zc], [ex.x + (alongX ? out * 4 : 0), ex.y + (alongX ? 0 : out * 4), batZc],
-  ].map(p => new THREE.Vector3(...p));
+  const exOut = [ex.x + (alongX ? out * 4 : 0), ex.y + (alongX ? 0 : out * 4), batZc];
+  // el conector se enchufa desde arriba: el cable llega a unos milímetros sobre él
+  const yPlug = D.jst.y + 6;
+  const route = P.chOn
+    ? (ex.y < D.jst.y                                   // batería abajo: sube por el canal y cruza por detrás de la placa
+        ? [exOut, [D.ch.x, ex.y, zc], [D.ch.x, yPlug, zc], [D.jst.x, yPlug, zBack], [D.jst.x, D.jst.y + 3, zBack]]
+        : [exOut, [D.ch.x, ex.y, zc], [D.ch.x, yTop, zc], [D.jst.x, yTop, zBack], [D.jst.x, D.jst.y + 3, zBack]])
+    : [exOut, [ex.x + (alongX ? out * 4 : 0), yTop, zc], [D.jst.x, yTop, zBack], [D.jst.x, D.jst.y + 3, zBack]];
+  const pts = route.map(p => new THREE.Vector3(...p));
+  let need = 0; for (let i = 1; i < pts.length; i++) need += pts[i].distanceTo(pts[i - 1]);
+  D.cableNeed = need;
+  if (need > P.cableL) warn.push(`El cable no alcanza: el recorrido mide unos ${need.toFixed(0)} mm y el cable ${P.cableL}.`);
+  document.getElementById('warn').textContent = warn.join(' ');
   cable.geometry.dispose();
   cable.geometry = new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts, false, 'catmullrom', 0.15), 160, 1.1, 10, false);
 
@@ -313,11 +383,16 @@ function update() {
     ['Centro de la ventana', `x ${D.win.cx}, y ${D.win.cy}`],
     ['Bolsillo micro:bit', `${D.mb.w.toFixed(1)} × ${D.mb.h.toFixed(1)} × ${(T - P.plate).toFixed(1)}`],
     ['Zona abierta', P.topH > 0 ? `${P.topW} × ${P.topH}` : 'sin zona abierta'],
-    ['Bolsillo portapilas', `${D.bat.w.toFixed(1)} × ${D.bat.h.toFixed(1)} × ` + (P.batThrough ? 'pasante' : Math.min(D.bat.depth, T - 0.6).toFixed(1))],
-    ['El portapilas sobresale', (P.batThrough ? Math.max(0, BAT[2] - T) : Math.max(0, BAT[2] - Math.min(D.bat.depth, T - 0.6))).toFixed(1)],
+    ['Ranura de abajo', P.slitOn ? `${P.slitW} × ${P.slitT}, a ${P.slitZ} del dorso (centrada: ${((P.T - P.slitT) / 2).toFixed(1)})` : 'sin ranura'],
+    ['Rampa de arriba', P.topRun > 0 ? `${P.topRun} mm (${(Math.atan2(P.T - P.plate, P.topRun) * 180 / Math.PI).toFixed(0)}°)` : 'pared recta'],
+    ['Bolsillo batería', `${D.bat.w.toFixed(1)} × ${D.bat.h.toFixed(1)} × ` + (P.batThrough ? 'pasante' : Math.min(D.bat.depth, T - 0.6).toFixed(1))],
+    ['Costado abierto', (D.ch.side < 0 ? 'por la izquierda' : 'por la derecha') + (P.lidX > 0 ? `, a ${P.lidX} del canto` : ', hasta el canto')],
+    ['Tapa de atrás sobre la batería', P.batThrough ? 'sin tapa (pasante)' : (P.batLid ? P.batLidT + ' de espesor' : 'abierta')],
+    ['Cable: recorrido / disponible', `${D.cableNeed.toFixed(0)} / ${P.cableL}`],
+    ['La batería sobresale', (P.batThrough ? Math.max(0, BAT[2] - T) : Math.max(0, BAT[2] - Math.min(D.bat.depth, T - 0.6))).toFixed(1)],
     ['Canal del cable', `${P.chW} × ${P.chD} de profundidad`],
     ['Margen sobre la zona abierta', (P.H / 2 - (D.top.cy + D.top.h / 2)).toFixed(1)],
-    ['Margen bajo el portapilas', (D.bat.cy - D.bat.h / 2 + P.H / 2).toFixed(1)],
+    ['Margen sobre la batería', (P.H / 2 - (D.bat.cy + D.bat.h / 2)).toFixed(1)],
   ];
   document.getElementById('dims').innerHTML = rows.map(([k, v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join('');
 }
@@ -388,7 +463,15 @@ document.getElementById('stl').addEventListener('click', () => {
 // ---------------------------------------------------------------- vistas y capas
 const bind = (id, fn) => { const el = document.getElementById(id); el.addEventListener('change', () => fn(el.checked)); fn(el.checked); };
 bind('t-body', v => bodyMesh.visible = v);
-bind('t-ghost', v => { bodyMat.transparent = v; bodyMat.opacity = v ? 0.35 : 1; bodyMat.depthWrite = !v; bodyMat.needsUpdate = true; });
+const ghost = document.getElementById('ghost');
+function setGhost() {
+  const a = +ghost.value;
+  document.getElementById('ghostv').textContent = a + ' %';
+  bodyMat.transparent = a > 0; bodyMat.opacity = 1 - a / 100; bodyMat.depthWrite = a === 0; bodyMat.needsUpdate = true;
+  try { localStorage.setItem('adaptador-transparencia', a); } catch (_) {}
+}
+try { ghost.value = localStorage.getItem('adaptador-transparencia') ?? 0; } catch (_) {}
+ghost.addEventListener('input', setGhost); setGhost();
 bind('t-mb', v => mbGroup.visible = v);
 bind('t-bat', v => batGroup.visible = v);
 bind('t-cable', v => cable.visible = v);
@@ -411,6 +494,7 @@ new ResizeObserver(resize).observe(view); resize();
 update();
 setView('iso');
 renderer.setAnimationLoop(() => { controls.update(); renderer.render(scene, camera); });
+window.__dbg = { bodyMesh, P, derive };   // para comprobar medidas desde la consola
 window.__ready = true;
 </script>
 </body>
