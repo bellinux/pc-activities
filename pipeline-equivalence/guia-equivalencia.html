@@ -13,6 +13,14 @@
 
 <nav class="toc">
   <div class="toc-title">Plan · contenido</div>
+  <a href="#por-que"><span class="n">★</span> Por qué hacemos esto</a>
+  <div class="sub">
+    <a href="#pq-pregunta"><span class="n">1</span> ¿Actividad o kit?</a>
+    <a href="#pq-importa"><span class="n">2</span> Por qué importa</a>
+    <a href="#pq-experimento"><span class="n">3</span> El estudio que viene</a>
+    <a href="#pq-dificil"><span class="n">4</span> Por qué «la misma» es difícil</a>
+    <a href="#pq-plan"><span class="n">5</span> De ahí salen los tres objetivos</a>
+  </div>
   <a href="#que-es"><span class="n">·</span> Qué es este documento</a>
   <a href="#estado"><span class="n">·</span> Punto de partida</a>
   <a href="#marco"><span class="n">·</span> El marco: seis dimensiones</a>
@@ -53,14 +61,96 @@
     <p><a class="backsite" href="../index.html">← volver al inicio del sitio</a> &nbsp;·&nbsp; <a class="backsite" href="index.html">ver la pipeline en acción →</a></p>
   </section>
 
+  <section class="section" id="por-que">
+    <div class="section-marker"><span class="section-num">★</span><span class="section-rule"></span><span class="section-num">POR QUÉ HACEMOS ESTO</span></div>
+    <h2>Por qué las dos versiones tienen que ser <span class="it">la misma</span> actividad</h2>
+    <p class="lede">El proyecto quiere saber si la computación física necesita un kit dedicado o si basta un celular. Para responderlo hay que comparar la misma actividad hecha con los dos, y antes hay que demostrar que las dos versiones son de verdad la misma actividad. Para demostrarlo usamos un programa que compara los dos códigos bloque por bloque (la <em>pipeline</em>), la revisión de expertos y, para lo que no está en el código, un instrumento que todavía hay que construir.</p>
+
+    <h3 id="pq-pregunta">1. La pregunta: ¿el mérito es de la actividad o del kit?</h3>
+    <p>La <strong>computación física</strong> enseña a programar con objetos que sienten y actúan en el mundo. Por ejemplo, una niña programa un corazón de cartón para que se encienda cuando lo inclina. Varios estudios reportan que estas actividades aumentan la motivación y el aprendizaje.</p>
+    <p>En una actividad así hay dos cosas distintas:</p>
+    <ul>
+      <li><strong>La actividad:</strong> construir el objeto, tomarlo en las manos, moverlo y ver que responde como lo programaste.</li>
+      <li><strong>El kit:</strong> el aparato electrónico dedicado que hace funcionar el objeto (micro:bit, LEGO, Arduino), que el colegio tiene que comprar.</li>
+    </ul>
+    <p>La pregunta es: <strong>cuando la computación física funciona, ¿funciona por la actividad o por el kit?</strong></p>
+    <p>Con los datos de hoy no se puede responder, porque en los estudios la actividad se hizo casi siempre con un kit: las dos cosas estuvieron juntas. Si el resultado es bueno, puede deberse a la actividad, al kit o a las dos. Para saberlo hay que <strong>separarlas</strong>: hacer la misma actividad sin el kit, con otro aparato electrónico que ya existe, el celular, y ver si el resultado cambia.</p>
+    <div class="callout warn">
+      <span class="tag">La misma idea, con pan</span>
+      <p>Una panadería hace un pan rico con una receta y un horno profesional muy caro. ¿El mérito es de la receta o del horno caro? Para saberlo, haces la misma receta en el horno de tu casa. Si el pan sale igual de rico, el horno caro no era necesario. La receta es la actividad; el horno caro es el kit; el horno de la casa es el celular.</p>
+    </div>
+    <figure class="diagram-wrap" style="margin:2rem 0;">
+      <svg viewBox="0 0 720 200" role="img" aria-label="Hoy la actividad y el kit vienen siempre juntos. En el estudio, la actividad y la carcasa de cartón son las mismas y solo cambia el aparato: micro:bit o celular." style="width:100%;height:auto;font-family:'Newsreader',Georgia,serif;">
+        <text x="140" y="22" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" fill="#8B2418" letter-spacing="2">HOY: SIEMPRE JUNTOS</text>
+        <rect x="20" y="36" width="240" height="124" rx="10" fill="#ECE3CF" stroke="#1A1612" stroke-width="2"/>
+        <rect x="40" y="54" width="200" height="40" rx="6" fill="#FBF6EB" stroke="#C9B896"/>
+        <text x="140" y="79" text-anchor="middle" font-size="15" fill="#1A1612">la actividad</text>
+        <rect x="40" y="102" width="200" height="40" rx="6" fill="#B8843A" fill-opacity="0.25" stroke="#B8843A"/>
+        <text x="140" y="127" text-anchor="middle" font-size="15" fill="#1A1612">el kit</text>
+        <line x1="275" y1="98" x2="345" y2="98" stroke="#8B2418" stroke-width="2.5"/>
+        <polygon points="345,91 359,98 345,105" fill="#8B2418"/>
+        <text x="317" y="87" text-anchor="middle" font-size="13" font-style="italic" fill="#8B2418">separar</text>
+        <text x="535" y="22" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" fill="#5A6B3B" letter-spacing="2">EL ESTUDIO: SOLO CAMBIA EL APARATO</text>
+        <rect x="370" y="54" width="330" height="40" rx="6" fill="#FBF6EB" stroke="#5A6B3B" stroke-width="1.5"/>
+        <text x="535" y="79" text-anchor="middle" font-size="15" fill="#1A1612">la misma actividad, la misma carcasa</text>
+        <rect x="370" y="102" width="155" height="40" rx="6" fill="#B8843A" fill-opacity="0.25" stroke="#B8843A"/>
+        <text x="447" y="127" text-anchor="middle" font-size="15" fill="#1A1612">micro:bit</text>
+        <rect x="545" y="102" width="155" height="40" rx="6" fill="#B8843A" fill-opacity="0.25" stroke="#B8843A" stroke-dasharray="5 3"/>
+        <text x="622" y="127" text-anchor="middle" font-size="15" fill="#1A1612">celular</text>
+        <text x="447" y="166" text-anchor="middle" font-size="13" font-style="italic" fill="#4A3F33">grupo A</text>
+        <text x="622" y="166" text-anchor="middle" font-size="13" font-style="italic" fill="#4A3F33">grupo B</text>
+      </svg>
+      <figcaption class="diagram-caption">Hoy la actividad llega siempre con el kit. En el estudio, los dos grupos hacen la misma actividad en la misma carcasa de cartón; solo cambia el aparato que va adentro.</figcaption>
+    </figure>
+
+    <h3 id="pq-importa">2. Por qué importa la respuesta</h3>
+    <p>Un kit hay que comprarlo, cargarlo, guardarlo y repararlo, y el profesorado tiene que aprender a usarlo. Muchos colegios en Chile no tienen presupuesto para eso. En cambio, casi siempre hay celulares a mano (del profesorado o de las familias), y un celular ya trae acelerómetro, micrófono, sensor de luz, pantalla, parlante y vibración. Protobject convierte un celular metido en una carcasa de cartón en el objeto programable.</p>
+    <p>Si el kit no aporta nada que el celular no dé, estas actividades se pueden hacer sin comprar kits. Si aporta algo, conviene usar el kit. La respuesta vale para actividades con sensores, luz y sonido; no para las que necesitan motores, que un celular no tiene.</p>
+
+    <h3 id="pq-experimento">3. El estudio que viene: la misma actividad con dos aparatos</h3>
+    <p>Este estudio se hará más adelante; este plan lo prepara. Un grupo hace la actividad con la micro:bit; otro grupo hace la misma actividad con el celular. Los niños se reparten al azar entre los dos grupos. Si los resultados son iguales (o difieren tan poco que en la sala no importa, con un margen decidido antes de ver los datos), el kit no aporta nada que el celular no dé. Si difieren, la diferencia viene del aparato.</p>
+    <p>Esto funciona solo si entre las dos versiones <strong>cambia el aparato y nada más</strong>. Llamamos aparato a la electrónica: la micro:bit (el kit) o el celular. Todo lo demás tiene que ser igual: el programa (salvo las constantes de calibración, que se explican más abajo), la carcasa, el peso, el tamaño y la cantidad de niños por aparato. Si cambia también otra cosa, volvemos al problema del principio: dos causas juntas que no se pueden separar.</p>
+    <div class="callout bad">
+      <span class="tag">Ejemplo</span>
+      <p>En la versión micro:bit el programa usa el bloque «redondear»; en la versión celular, «redondear al alza». Con 2,3 el primero da 2 y el segundo da 3. Sea cual sea el resultado del estudio, no sabremos si se debe al aparato o al bloque distinto.</p>
+    </div>
+    <p>Diferencias así hay que encontrarlas y eliminarlas antes del estudio. Este plan las busca y las elimina.</p>
+
+    <h3 id="pq-dificil">4. Por qué «la misma actividad» es más difícil de lo que parece</h3>
+    <p>No basta con escribir el mismo programa en las dos plataformas. Dos versiones pueden diferir de muchas maneras, y por eso las comparamos por <a href="#marco">dimensiones</a>. Para cada una, un ejemplo de nuestras 17 actividades:</p>
+    <table class="plan">
+      <thead><tr><th>Dimensión</th><th>Cómo pueden diferir dos versiones y qué hacemos</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Algorítmica</strong> · <span style="font-size:0.85em;">el programa</span></td><td>Una versión usa un bloque «si… si no» y la otra dos bloques «si» separados. En la pantalla puede pasar lo mismo, pero cada grupo practica una estructura distinta. Regla: mismos bloques, en el mismo orden, con los mismos operadores; solo pueden cambiar las constantes de calibración (ver la fila sensoriomotriz). Revisarlo a mano en 17 actividades es lento y se escapan cosas: lo revisa la pipeline.</td></tr>
+        <tr><td><strong>Interactiva</strong> · <span style="font-size:0.85em;">qué capta y qué produce</span></td><td>Las dos versiones tienen que captar lo mismo (inclinación, ruido, luz) y responder con lo mismo (sonido, luz). Un celular no tiene motores: una actividad con un robot que se mueve no tiene versión celular, y por eso no está entre las 17.</td></tr>
+        <tr><td><strong>Material</strong> · <span style="font-size:0.85em;">el objeto</span></td><td>Un celular pesa unos 170 g; una micro:bit sola, unos 9 g. Un corazón de cartón con 9 g adentro se balancea distinto que uno con 170 g. Por eso la micro:bit va dentro de un <a href="../adaptador/index.html">adaptador impreso en 3D</a> del tamaño y el peso de un celular, en la misma carcasa de cartón.</td></tr>
+        <tr><td><strong>Sensoriomotriz</strong> · <span style="font-size:0.85em;">el cuerpo y los sentidos</span></td><td>En el xilófono, inclinar cambia el tono (más agudo o más grave). Los dos sensores miden la inclinación en unidades distintas: para la misma inclinación, la micro:bit entrega un número unas diez veces mayor (1 g son unos 1000 en la micro:bit y unos 98 en Protobject). Con el mismo programa, la micro:bit cambiaría el tono con una inclinación diez veces menor. Por eso Protobject divide por 2, para que el cambio de tono sea cómodo, y la micro:bit divide por 20, diez veces más: la misma inclinación da el mismo tono. Esos números son las constantes de calibración (ver la página <a href="guia/constantes-y-unidades.html">Constantes y unidades</a>). Quedan diferencias propias de la electrónica que ningún programa iguala, como el timbre de cada parlante o la sensibilidad de cada micrófono: esas no se eliminan: se miden (O3), para saber cuánto de una diferencia entre aparatos se debe a ellas.</td></tr>
+        <tr><td><strong>Estética</strong> · <span style="font-size:0.85em;">cómo se ve</span></td><td>Si una versión parece un juguete terminado y la otra un aparato de laboratorio, los niños pueden valorarlas distinto antes de programar nada. Por eso las dos usan la misma carcasa y la misma terminación.</td></tr>
+        <tr><td><strong>Configuración social</strong> · <span style="font-size:0.85em;">la sala</span></td><td>Si en un grupo cada niño tiene su micro:bit y en el otro hay un celular por cada cuatro niños, cambian dos cosas a la vez: el aparato y cuántas manos lo usan. Por eso la cantidad de niños por aparato es la misma en los dos grupos.</td></tr>
+      </tbody>
+    </table>
+    <p>El xilófono muestra que dos programas con números distintos pueden dar la misma experiencia. Y hay diferencias que el código no muestra: el peso, el timbre. Por eso no basta con comparar el código. El programa se compara con la pipeline; la experiencia necesita un método propio, que todavía hay que construir.</p>
+
+    <h3 id="pq-plan">5. De ahí salen los tres objetivos</h3>
+    <table class="plan">
+      <thead><tr><th>Lo que necesitamos</th><th>Por qué</th><th>Objetivo</th></tr></thead>
+      <tbody>
+        <tr><td>Actividades buenas</td><td>Una actividad confusa da resultados bajos en los dos grupos y esconde cualquier efecto del aparato. Hay que probarlas y mejorarlas antes de que lleguen a la escuela, cambiando siempre las dos versiones a la vez para que sigan siendo la misma.</td><td><a href="#obj1">O1</a></td></tr>
+        <tr><td>Confianza en la pipeline</td><td>La pipeline dice que las 17 parejas tienen el mismo programa. Hay que comprobar que su veredicto coincide con el de expertos humanos que aplican las mismas reglas, también en parejas que <em>no</em> son equivalentes (versiones antiguas o modificadas a propósito), para ver que la pipeline sabe decir que no.</td><td><a href="#obj2">O2</a></td></tr>
+        <tr><td>Un instrumento para la experiencia</td><td>Para el peso, el sonido, el gesto y la estética no existe todavía un método. Hay que buscarlo en la literatura, armarlo y probar que detecta diferencias introducidas a propósito y que no ve diferencias donde no las hay.</td><td><a href="#obj3">O3</a></td></tr>
+      </tbody>
+    </table>
+    <p>Este plan <strong>no</strong> es todavía el estudio comparativo con niñas y niños en colegios. Prepara lo que ese estudio necesita: 17 actividades probadas y la evidencia de que en cada pareja cambia solo el aparato.</p>
+  </section>
+
   <section class="section" id="que-es">
     <div class="section-marker"><span class="section-num">◆</span><span class="section-rule"></span><span class="section-num">QUÉ ES ESTE DOCUMENTO</span></div>
     <h2>Un <span class="it">plan</span></h2>
-    <p class="lede">El método algorítmico de equivalencia entre una actividad en Protobject y su versión en micro:bit está implementado, ejecutado y verificado sobre las 17 actividades. Este documento define el trabajo de investigación en tres líneas paralelas.</p>
+    <p>Este documento es el plan de trabajo para lo que la sección anterior pide. El método algorítmico de equivalencia entre una actividad en Protobject y su versión en micro:bit ya está implementado, ejecutado y verificado sobre las 17 actividades. Lo que sigue define el trabajo de investigación en tres líneas paralelas.</p>
     <p>El trabajo se organiza en <strong>tres objetivos</strong>. Cada objetivo se describe con la misma plantilla: pregunta, entregable, método, cuándo, listo cuando. Cada uno tiene su propia página con el protocolo detallado, las preguntas abiertas y los puntos de partida en la literatura. Cada decisión pendiente se marca como pregunta abierta, con una propuesta.</p>
     <div class="callout">
       <span class="tag">Cómo leer el plan</span>
-      <p>Para hacer sesiones con participantes, el punto de entrada es el <a href="#obj1">Objetivo 1</a> y su <a href="guia/objetivo-1-mejorar-actividades.html">página</a>. Para trabajar con la pipeline, el <a href="#obj2">Objetivo 2</a> y la página de <a href="guia/constantes-y-unidades.html">constantes y unidades</a>. Para la revisión de literatura sobre la experiencia, el <a href="#obj3">Objetivo 3</a>. El <a href="#marco">marco</a> y las <a href="#reglas">reglas de trabajo</a> son lectura común.</p>
+      <p>El para qué de todo el plan está en <a href="#por-que">Por qué hacemos esto</a>. Para hacer sesiones con participantes, el punto de entrada es el <a href="#obj1">Objetivo 1</a> y su <a href="guia/objetivo-1-mejorar-actividades.html">página</a>. Para trabajar con la pipeline, el <a href="#obj2">Objetivo 2</a> y la página de <a href="guia/constantes-y-unidades.html">constantes y unidades</a>. Para la revisión de literatura sobre la experiencia, el <a href="#obj3">Objetivo 3</a>. El <a href="#marco">marco</a> y las <a href="#reglas">reglas de trabajo</a> son lectura común.</p>
     </div>
   </section>
 
@@ -198,7 +288,7 @@
 
   <div class="colofon">
     <div class="ornament">❖ ❖ ❖</div>
-    <p>Plan de acción de equivalencia — Protobject ↔ micro:bit · septiembre 2026 · actualizado el 19-09-2026</p>
+    <p>Plan de acción de equivalencia — Protobject ↔ micro:bit · septiembre 2026 · actualizado el 24-10-2026</p>
     <p>Tipografías: Fraunces · Newsreader · JetBrains Mono</p>
   </div>
 
